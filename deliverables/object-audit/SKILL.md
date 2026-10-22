@@ -17,7 +17,7 @@ version: 0.1
 | 专家角色 | `object-build/references/20-expert-role.md`（三栏／权限四类／隔离／升级路径） |
 | 装订（节点×专家×技能×经验） | `object-build/references/15-binding.md`（三层两态／装订链／无命中三态） |
 | 节点／图 | `skyline-graph-constructor`（本器只补期别判据） |
-| 票／批次 | `plan-tickets`（本器只补期别判据） |
+| 票／批次 | `object-build/references/40-ticket.md`（构建真源·本器只补期别判据） |
 | 文档／治理件 | `doc-governance`（载体/分层/修订制/准入判据的真源）。**命名约定表现于本器 §命名约定，落点不对（审计器不持规范），待迁**——迁移前它就是唯一真源，不得再声称在别处 |
 
 > **本器与 `object-build` 的分工**：构建侧写「造：必须 X」（指令式），本器写「审：缺 X 判何态」（问句式）。两器**不互抄正文**，只互指路径。拆件理由：本器 description 只在"审"时触发，构建规范写在这里等于不存在。
@@ -70,7 +70,7 @@ version: 0.1
 | Skill（技能/规范/技法库） | 声明编译期·**挂载运行时** | `references/10-skill.md`（**内含 S0 判型：D 纪律／T 步骤／M 思维／F 查表**） | `skill-contract-audit`（契约闭环）——真源件须自身过五测方可作标准 |
 | 专家角色（专家包/席位定义） | **编译期** | `references/20-expert-role.md` | 无（本器持真源）。**＝D 型 skill 的深化测项**：判型为 D 的 skill 直接走这件的 E 系列，不必两套都跑 |
 | 节点（流程/工序节点） | **编译期** | `references/30-node.md` | 项目图 skill（由项目 profile 指定） |
-| 分票（票卡/批次） | 票卡编译期·执行记录运行时 | `references/40-ticket.md` | `ticket-flow`（INVEST·票卡三行·静默即过） |
+| 分票（票卡/批次） | 票卡编译期·执行记录运行时 | `references/40-ticket.md` | `object-build/references/40-ticket.md`（构建真源：形状·八件·入账·治理防线） |
 | 文档（治理文档/台账/规范） | 规范件编译期·**记录件运行时** | `references/50-document.md` | `doc-governance`（三层域·指针·准入四判据） |
 | 图（整图/拓扑） | **编译期** | `references/60-graph.md` | 项目图 skill（由项目 profile 指定） |
 | **案例库／经验库** | **运行时**（不可穷举·允许"查不到"） | `references/15-binding.md`（判据：**检索有效性＋更新纪律**，不查干净度） | CBR（Aamodt & Plaza 1994）／Soar episodic memory／RAG |
