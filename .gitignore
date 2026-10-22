@@ -12,6 +12,10 @@
 # 负向规则＝防御性声明：将来若有人加 `.collab/*` 之类广域排除，本目录不会被静默吞掉
 !.collab/research/
 
+# 运行流水（过程材料·非判词）：不入 git（裁-19）
+# 判词属史实锚，落 .collab/decisions/ 并入库；两者按性质分治，不得混装
+.collab/evidence/
+
 # 系统杂物
 Thumbs.db
 Desktop.ini
