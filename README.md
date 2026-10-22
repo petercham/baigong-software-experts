@@ -8,7 +8,7 @@
 | 目录 | 性质 | 进 git | 说明 |
 |---|---|---|---|
 | `deliverables/{对象名}/` | **交付件** | ✅ | 每个对象一个目录：skill 包、专家包等最终交付物 |
-| `docs/` | **规范文档** | ✅ | 方法论说明、研究底稿（research/） |
+| `docs/` | **规范文档** | ✅ | **根只放 INDEX.md**，正文住子包：`research/`（研究底稿）、`process/`（过程记录） |
 | `.collab/decisions/` | **治理史实锚** | ✅ | 判词、裁决、呈拍记录——append-only，只增不改 |
 | `.collab/process/` | 过程流水 | ❌（gitignore） | 会话日志、工具输出、临时产物 |
 | `.collab/inbox/` | 席间消息 | ❌（gitignore） | 多 Agent 消息总线，actor 在末级目录 |
