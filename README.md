@@ -17,21 +17,16 @@
 
 ## deliverables 现状
 
-| 对象目录 | 内容 | 状态 |
-|---|---|---|
-| `object-audit/` | 对象审计总入口（骨架＋7 对象判据分件） | v0.1·活跃 |
-| `object-build/` | 对象构建总入口（三问＋六步＋3 分件） | v0.1·草稿 |
-| `tri-collab/` | 四席协作纪律 | v2.4·活跃 |
-
-（plan-tickets / ticket-flow / doc-governance / skill-contract-audit 暂留用户级 skill 库，是否迁入待拍。）
+见 [`deliverables/INDEX.md`](deliverables/INDEX.md)（对象清单真源在索引，本处不复写——指针只指不搬）。
 
 ## 治理约定（本包自指）
 
 1. **单写者**：本包所有 git 写操作由唯一执行通道完成；审计/研究席永无写盘权。
 2. **decisions 只增不改**：判词与裁决落 `.collab/decisions/`，append-only；勘误＝原文后注。
 3. **命名**：目录与文件名 ASCII 小写 kebab-case；文档正文中文自由。
-4. **skill 形态约束**（源自研究裁决，见 docs/research/）：入口少、分件多、**分件平铺一层不嵌套**（官方 spec "one level deep"）。
-5. **引证纪律**：七类引证失效扫描（强词法/弱词法/URL 反查可机检），见 `deliverables/object-audit/references/00-skeleton.md`。
+4. **索引路由**：每个一级子包（`docs/`、`deliverables/`）的**根只放 INDEX.md**，正文一律住子包并在索引登记一行；根目录出现正文＝违例（判据同 doc-governance D5-3：索引只路由不复写）。
+5. **skill 形态约束**（源自研究裁决，见 docs/research/）：入口少、分件多、**分件平铺一层不嵌套**（官方 spec "one level deep"）。
+6. **引证纪律**：七类引证失效扫描（强词法/弱词法/URL 反查可机检），见 `deliverables/object-audit/references/00-skeleton.md`。
 
 ## 本包的两个设计决定（出处见 .collab/decisions/2026-10-22-裁决记录.md）
 
