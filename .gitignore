@@ -1,0 +1,14 @@
+# 治理原则（2026-10-22 皮总拍·按研究裁决执行）：
+# 「是否进 git」由本文件显式声明，不由目录名前缀表达（`.` 前缀只影响 ls/rg 可见性，git 不认）。
+# 分区键＝性质：decisions（判词/裁决/呈拍·史实锚）进 git；process/inbox（过程流水）不进。
+
+# 过程流水：会话日志、工具输出、临时产物——可弃，零门禁
+.collab/process/
+
+# 席间消息总线：运行时消息，actor 在末级目录（Kafka header 惯例），非归档面
+.collab/inbox/
+
+# 系统杂物
+Thumbs.db
+Desktop.ini
+.DS_Store
