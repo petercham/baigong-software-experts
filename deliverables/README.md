@@ -5,7 +5,7 @@
 | 对象目录 | 内容 | 版本·状态 |
 |---|---|---|
 | `object-audit/` | 对象审计总入口（骨架＋7 对象判据分件） | v0.1 · 活跃 |
-| `object-build/` | 对象构建总入口（三问＋六步＋4 分件：skill/装订/角色/**票**） | v0.2 · 草稿（2026-10-22 并入票构建真源 `references/40-ticket.md`） |
+| `object-build/` | 对象构建总入口（三问＋六步＋5 分件：skill/装订/角色/票/目录） | v0.2 · 草稿（2026-10-22 并入票构建真源 `40-ticket.md`＋目录治理 `50-directory.md`） |
 | `tri-collab/` | 四席协作纪律 | v2.4 · 活跃 |
 
 **已退役（2026-10-22·皮总拍·三技能合并）**：`plan-tickets`、`ticket-flow` —— 有效内容全部并入 `object-build/references/40-ticket.md`；原件按 `SKILL.md.retired` 先例改名归档（史实锚保留）。上游 `to-tickets`（matt pocock）**不碰**，仅作只读参照系与细则指针（spec-cross-audit 10 检）。
