@@ -8,6 +8,10 @@
 # 席间消息总线：运行时消息，actor 在末级目录（Kafka header 惯例），非归档面
 .collab/inbox/
 
+# 调研报告（判词依据·非过程流水）：显式声明入 git（裁-17 Q7·皮总「接受建议」）
+# 负向规则＝防御性声明：将来若有人加 `.collab/*` 之类广域排除，本目录不会被静默吞掉
+!.collab/research/
+
 # 系统杂物
 Thumbs.db
 Desktop.ini
