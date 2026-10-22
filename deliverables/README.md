@@ -6,8 +6,8 @@
 |---|---|---|
 | `object-audit/` | 对象审计总入口（骨架＋7 对象判据分件） | v0.1 · 活跃 |
 | `object-build/` | 对象构建总入口（三问＋六步＋5 分件：skill/装订/角色/票/目录） | v0.2 · 草稿（2026-10-22 并入票构建真源 `40-ticket.md`＋目录治理 `50-directory.md`） |
-| `multi-collab/` | 协作纪律（权限分级版：唯一写权＋开放读权席位＋md 交接件机制） | v3.2 · 活跃（2026-10-22 由 tri-collab 改名·主文件＋6 分件） |
+| `multi-collab/` | 协作纪律（权限分级版：唯一写权＋开放读权席位＋md 交接件机制） | v3.4 · 活跃（2026-10-22 由 tri-collab 改名·主文件＋6 分件；v3.3 交接区边界定死为 .collab/**；v3.4 真源归属反转——本器＝协作纪律真源） |
 
 **已退役（2026-10-22·皮总拍·三技能合并）**：`plan-tickets`、`ticket-flow` —— 有效内容全部并入 `object-build/references/40-ticket.md`；原件按 `SKILL.md.retired` 先例改名归档（史实锚保留）。上游 `to-tickets`（matt pocock）**不碰**，仅作只读参照系与细则指针（spec-cross-audit 10 检）。
 
-**未迁入（留用户级 skill 库·是否迁入待拍）**：doc-governance、skill-contract-audit。判据见 `.collab/decisions/2026-10-22-裁决记录.md` 候办第 5 条；迁入时须同步处理原件指向，避免双真源。
+**未迁入（留用户级 skill 库·是否迁入待拍）**：doc-governance、skill-contract-audit、identity-governance。判据见 `.collab/decisions/2026-10-22-裁决记录.md` 候办第 5 条；迁入时须同步处理原件指向，避免双真源。其中 identity-governance 系 2026-10-22 交接核验补登的**暗依赖**——此前三方（交接单/本索引/裁决记录）均漏登记，而 `multi-collab/SKILL.md` 与 `references/50-antipatterns.md` 两处活指针指向它。
