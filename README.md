@@ -1,6 +1,7 @@
 # multi-agent-collab-skillpack · 多 Agent 协作开发技能包
 
 > 归属：皮总（决策者）· 建包：2026-10-22 · 维护：本包独立于 creative_skyline，不与其互写。
+> 远端：https://github.com/petercham/multi-agent-collab-skillpack （private·2026-10-22 建·当前 tag `v0.1.0`）。
 > 本包是「多 Agent 协作开发」方法论的**交付件仓库**：skill 包、专家定义、治理裁决与研究底稿。
 
 ## 目录结构（三层·按性质分区）
