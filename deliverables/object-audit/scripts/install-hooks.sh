@@ -43,17 +43,34 @@ while [ $# -gt 0 ]; do
   esac
 done
 
+# --- 路径归一（修单①·裁-21 复核）---
+# 钩子内容里嵌 REPO_ROOT/RUNNER 字面量；若盘符式 `--root` 与挂载点式 `--root`
+# （或 git rev-parse 返回的盘符式路径）产出不同字面量，钩子就在两种调用方式间
+# 来回"假刷新"——幂等对调用方式敏感。归一口径：**统一成盘符正斜杠式**，
+# 优先 cygpath -m，其次 bash 内建 pwd -W，都没有再退回 pwd。
+# （本注释刻意不写两种路径的字面量——扫描器会把盘符式样例当实体命中。）
+norm_path() {
+  local p="$1" out=""
+  if command -v cygpath >/dev/null 2>&1; then
+    out="$(cygpath -m "$p" 2>/dev/null)" && [ -n "$out" ] && { printf '%s' "$out"; return; }
+  fi
+  out="$(cd "$p" 2>/dev/null && pwd -W 2>/dev/null)" && [ -n "$out" ] && { printf '%s' "$out"; return; }
+  (cd "$p" 2>/dev/null && pwd) || printf '%s' "$p"
+}
+
 # --- 定位 git 仓根 ---
 if [ -n "$ROOT_ARG" ]; then
   [ -d "$ROOT_ARG" ] || die_usage "--root 不存在：$ROOT_ARG"
-  REPO_ROOT="$(cd "$ROOT_ARG" && pwd)"
+  REPO_ROOT="$(norm_path "$ROOT_ARG")"
 elif command -v git >/dev/null 2>&1; then
-  REPO_ROOT="$(git -C "$SELF_DIR" rev-parse --show-toplevel 2>/dev/null)" \
+  REPO_ROOT_RAW="$(git -C "$SELF_DIR" rev-parse --show-toplevel 2>/dev/null)" \
     || die_infra "当前目录不在 git 仓内，无法定位 .git/hooks"
-  [ -n "$REPO_ROOT" ] || die_infra "git rev-parse 未返回仓根"
+  [ -n "$REPO_ROOT_RAW" ] || die_infra "git rev-parse 未返回仓根"
+  REPO_ROOT="$(norm_path "$REPO_ROOT_RAW")"
 else
   die_infra "找不到 git，且未给 --root"
 fi
+RUNNER="$(norm_path "$SELF_DIR")/run-gates.sh"
 
 HOOKS_DIR="$REPO_ROOT/.git/hooks"
 HOOK="$HOOKS_DIR/pre-commit"

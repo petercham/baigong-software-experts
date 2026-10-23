@@ -199,11 +199,11 @@ def main(argv: "list[str]") -> int:
         findings.extend(check_one(root, os.path.join(deliverables, name, "SKILL.md"), names))
 
     if not names:
-        # 项目名子判据未执行 ⇒ 记一条 WATCH 而非静默通过：未执行的判据不得计绿。
-        findings.append(
-            "%s:1: %s OA-S2 项目名清单未注入（--project-name 或 GATE_PROJECT_NAMES），"
-            "「不含项目名」子判据未执行" % ("deliverables/*/SKILL.md", "WATCH")
-        )
+        # 项目名子判据未执行 ⇒ 不静默，但也不是 finding：与 S-03 同口径（裁-21），
+        # 「清单没注入」是**配置问题**不是产物违规，记成 OA-S2 违规＝归属错；
+        # 每次运行打 coverage 行（非 finding 格式，run-gates 原样透传显示）。
+        # 修单②（裁-21 复核）：不再输出字面 glob 位置——coverage 行本就无单件落点。
+        print("coverage: OA-S2「不含项目名」子判据未执行（--project-name 或 GATE_PROJECT_NAMES 未注入）")
 
     for line in findings:
         print(line)

@@ -81,6 +81,9 @@ SKIP_SUBSTR = ("<", ">", " ", "*", "|", "…", "${", "$(", "==", "!=", "->", "=>
 # 解析时先剥掉注解部分，否则每个带注解的活指针都会被误判悬空（假报淹真报）。
 ANNOTATION_RE = re.compile(r"[「（(\[、，,；;：:].*$")
 
+# 外部仓注明串（D6 裁-21 划界：外部仓引用**应在文中注明**，注明者不入悬空判定）。
+EXTERNAL_MARK = "外部仓"
+
 # 这三种写法**语法上就不是仓内相对路径**，不参与悬空判定（与 SKIP_* 同类的形态判定，
 # 不是"猜它是不是外部项目"的语义判断——语义判断脚本无权做，见 60-gates.md §〇 铁律 1）：
 #   `~/.claude/settings.json`            家目录路径，天然在仓外
@@ -252,7 +255,15 @@ def iter_markdown(root: str, scopes: "list[str]") -> "list[str]":
 
 
 def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, int]") -> "list[str]":
-    """OA-D6：反引号路径／file:line 引用目标必须存在。"""
+    """OA-D6：反引号路径／file:line 引用目标必须存在。
+
+    指针 vs 提及（裁-21·判据见 50-document.md「D6 引用完整性」划界条款）：
+      带目录的完整路径＝**指针**，解析不到即悬空，BLOCK；
+      裸基名＝**提及嫌疑**（歧义天然高：泛指产物名／被论证的通用文件名），降 WATCH 不 BLOCK；
+      行内注明「外部仓」的引用＝外部提及，不入悬空判定（条款要求注明，注明即机械可判；
+      未注明者照报——注明的责任在作者，不在脚本猜）。
+    主观部分（论证语气）不留脚本，留人判（条款原文）。
+    """
     findings: "list[str]" = []
     for md in md_files:
         rel_md = os.path.relpath(md, root).replace(os.sep, "/")
@@ -270,11 +281,20 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
             for token in BACKTICK_RE.findall(raw):
                 if not looks_like_path(token):
                     continue
+                tok = token.strip()
+                if EXTERNAL_MARK in raw:
+                    continue  # 已注明外部仓＝外部提及（D6 裁-21 划界）
                 if resolve(token, root, md, basename_index) is not None:
                     continue
-                findings.append(
-                    "%s:%d: %s OA-D6 指针悬空 `%s` → 目标不存在" % (rel_md, lineno, SEV_BLOCK, token.strip())
-                )
+                if "/" in tok:
+                    findings.append(
+                        "%s:%d: %s OA-D6 指针悬空 `%s` → 目标不存在" % (rel_md, lineno, SEV_BLOCK, tok)
+                    )
+                else:
+                    findings.append(
+                        "%s:%d: %s OA-D6 提及嫌疑 `%s` → 仓内无同名件（裸基名不 BLOCK，D6 裁-21 划界）"
+                        % (rel_md, lineno, SEV_WATCH, tok)
+                    )
     return findings
 
 

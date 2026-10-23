@@ -4,18 +4,18 @@
 # spec_id: OA-T1
 # spec_file: deliverables/object-audit/SKILL.md
 # spec_anchor: T1 | 换项目测试
-# spec_clause_sha256: fcc4aa6d86b3a32f4d30e5075241d13f334e9088767bf6ac7ddba3eb70c7c290
-# spec_version: 0.2
-# spec_effective: 2026-10-22
+# spec_clause_sha256: ea64fed5abea01220e61f3f1ae3f5f7017cad865ea92eb9ee35d3b70e74d3d2e
+# spec_version: 0.3
+# spec_effective: 2026-10-23
 # provider: object-audit
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: OA-S1
 # spec_file: deliverables/object-audit/references/10-skill.md
 # spec_anchor: S1 | 项目实体
-# spec_clause_sha256: 826c231fe78212c2667e8ed51bba852d936b4cf458f69adec04abf87ba88b23b
-# spec_version: 0.2
-# spec_effective: 2026-10-22
+# spec_clause_sha256: 5073fa39caffcf9d2d00f16274bf0750569de3651a9c312cf52228bafb4a2569
+# spec_version: 0.3
+# spec_effective: 2026-10-23
 # provider: object-audit
 # --- /spec-provenance ---
 #
@@ -64,6 +64,36 @@ PATTERNS: "list[tuple[str, str, str]]" = [
     ("discipline-no", "纪律号", r"\bM0\d{3}\b"),
     ("ticket-no", "票号", r"\bT-?\d{3}\b"),
 ]
+
+# ---- date 豁免（裁-21·判据见 10-skill.md「S1 项目实体」豁免注／SKILL.md T1 行）----
+# ①`spec-provenance` 块内全部日期（条款列举的是 `spec_effective` 行；机械化口径扩到
+#   **整块**——`ADR-YYYY-MM-DD-NN` 型 spec_id 与指向 `…/2026-10-22-裁决记录.md` 的
+#   spec_file 同为 70-provenance.md §七 协议强制写法，同属「协议强制日期」。
+#   此扩法与「全角括注」口径一样**待皮总追认**，提交信息同步报告）
+# ②changelog 文件全部日期 ③全角括注内的日期。
+# 实现解释（同步报告）：条款说「正文**裸**叙述日期仍算」，故反引号段与 URL 内的
+# 日期不算"裸写于句中"——先遮除再判（遮除保位不缩列）。
+SPECPROV_START_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*spec-provenance v1[ \t]*(?:-{3,})?[ \t]*$")
+SPECPROV_END_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*/spec-provenance[ \t]*(?:-{3,})?[ \t]*$")
+CODE_SPAN_RE = re.compile(r"`[^`\n]*`")
+URL_RE = re.compile(r"https?://\S+")
+
+
+def mask_non_narrative(line: str) -> str:
+    """把反引号段与 URL 遮成等长占位（保位置，供全角括注深度计算）。"""
+    line = CODE_SPAN_RE.sub(lambda m: "\x00" * len(m.group(0)), line)
+    return URL_RE.sub(lambda m: "\x00" * len(m.group(0)), line)
+
+
+def in_fullwidth_paren(text: str, pos: int) -> bool:
+    """pos 是否落在未闭合的（…）内（全角括注＝版本/决策注的机械化口径）。"""
+    depth = 0
+    for ch in text[:pos]:
+        if ch == "（":
+            depth += 1
+        elif ch == "）":
+            depth = max(0, depth - 1)
+    return depth > 0
 
 # 扫描域固定为规范件；不接受 --scope 扩到记录件（扩了就违反划界，误报会吞掉脚本）。
 SCAN_ROOT_DIRS = ("deliverables",)
@@ -138,8 +168,10 @@ def main(argv: "list[str]") -> int:
 
     patterns = build_patterns(projects, persons)
     counts: "dict[str, list[str]]" = {key: [] for key, _, _ in patterns}
+    first_hit: "dict[str, str]" = {}  # 每模式首个命中的 file:line（聚合 finding 的落点）
     for path in files:
         rel = os.path.relpath(path, root).replace(os.sep, "/")
+        is_changelog = "changelog" in os.path.basename(path).lower()
         try:
             with open(path, "r", encoding="utf-8", errors="replace", newline="") as handle:
                 # CRLF 归一：本仓 core.autocrlf=true，检出件本身是 CRLF（与其他三件同口径）
@@ -147,10 +179,29 @@ def main(argv: "list[str]") -> int:
         except OSError as exc:
             sys.stderr.write("infra error: 读取失败 %s: %s\n" % (rel, exc))
             return 4
+        in_prov_block = False
         for lineno, raw in enumerate(lines, 1):
+            # 豁免①（块级）：spec-provenance 块内全部日期不扫（协议强制写法）
+            if SPECPROV_START_RE.match(raw):
+                in_prov_block = True
+            elif SPECPROV_END_RE.match(raw):
+                in_prov_block = False
             for key, _label, pat in patterns:
+                if key == "date":
+                    # 豁免①②：provenance 块内／changelog 文件整行跳过
+                    if is_changelog or in_prov_block:
+                        continue
+                    masked = mask_non_narrative(raw)
+                    for match in re.finditer(pat, masked):
+                        # 豁免③：全角括注内的版本/决策注日期
+                        if in_fullwidth_paren(masked, match.start()):
+                            continue
+                        counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
+                        first_hit.setdefault(key, "%s:%d" % (rel, lineno))
+                    continue
                 for match in re.finditer(pat, raw):
                     counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
+                    first_hit.setdefault(key, "%s:%d" % (rel, lineno))
 
     findings: "list[str]" = []
     label_of = {key: label for key, label, _ in patterns}
@@ -159,21 +210,22 @@ def main(argv: "list[str]") -> int:
         for hit in hits:
             print("  %s" % hit)
         if hits:
+            # 修单②：聚合 finding 的落点必须是**真实路径**（取首个命中处），
+            # 不得输出 `deliverables/` 这类伪位置——机器消费时它是假路径。
             findings.append(
-                "%s:1: %s OA-T1 项目实体命中 pattern=%s count=%d（规范件须换项目仍成立）"
-                % ("deliverables/", SEV_BLOCK, key, len(hits))
+                "%s: %s OA-T1 项目实体命中 pattern=%s count=%d（规范件须换项目仍成立；名单见 pattern 行）"
+                % (first_hit[key], SEV_BLOCK, key, len(hits))
             )
 
+    # 注入类子判据的覆盖度提示：**不是 finding**（OA-T1 在路由表里配 block，把
+    # 「清单没注入」记成 OA-T1 违规＝把**配置问题**记成**产物违规**——正是
+    # 70-provenance.md 记在账上的「归属错」；且注入后本仓 皮总/项目名 命中属待拍项，
+    # 两头一夹门禁永不可满足，永不可满足的门禁＝装饰）。
+    # 但也不静默：每次运行都打 coverage 行（非 finding 格式，run-gates 原样透传显示）。
     if not projects:
-        findings.append(
-            "%s:1: %s OA-T1 项目名清单未注入（--project-name 或 GATE_PROJECT_NAMES），"
-            "「项目名」子判据未执行" % ("deliverables/", SEV_WATCH)
-        )
+        print("coverage: OA-T1「项目名」子判据未执行（--project-name 或 GATE_PROJECT_NAMES 未注入）")
     if not persons:
-        findings.append(
-            "%s:1: %s OA-T1 人名清单未注入（--person-name 或 GATE_PERSON_NAMES），"
-            "「人名」子判据未执行" % ("deliverables/", SEV_WATCH)
-        )
+        print("coverage: OA-T1「人名」子判据未执行（--person-name 或 GATE_PERSON_NAMES 未注入）")
 
     for line in findings:
         print(line)

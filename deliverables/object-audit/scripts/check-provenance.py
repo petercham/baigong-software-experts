@@ -9,6 +9,15 @@
 # spec_effective: 2026-10-22
 # provider: object-audit
 # --- /spec-provenance ---
+# --- spec-provenance v1 ---
+# spec_id: ADR-2026-10-23-01
+# spec_file: .collab/decisions/2026-10-22-裁决记录.md
+# spec_anchor: - **拍板 3（S-04 默认域扩至 .sh·扩判据）**
+# spec_clause_sha256: 3534eeb93e2d4514cf109dce4a00941ec9ada36ed51cba48f3cae83dd1756b66
+# spec_version: 0.3
+# spec_effective: 2026-10-23
+# provider: object-audit
+# --- /spec-provenance ---
 #
 # 条款摘要口径（本件是这条口径的**权威实现**，S-01／S-02／S-03 头注均引此）：
 #   取 spec_anchor 在 spec_file 中命中的那一行 → 去首尾空白 → 连续空白压成单个空格
@@ -260,8 +269,13 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
 
 
 def default_targets(root: str) -> "list[str]":
-    pattern = os.path.join(root, "deliverables", "*", "scripts", "*.py")
-    return sorted(glob.glob(pattern))
+    # 裁-21 拍板 3：默认域由 `*.py` 扩为 `*.py`＋`*.sh`——设计 §2.5 字面只写 .py 是
+    # 当时只有 .py 的产物；现 .sh 亦带七键块，扩后「脚本自身必过 S-04」对全部执行体成立。
+    pattern = os.path.join(root, "deliverables", "*", "scripts", "*")
+    return sorted(
+        p for p in glob.glob(pattern)
+        if p.endswith((".py", ".sh")) and os.path.isfile(p)
+    )
 
 
 def main(argv: "list[str]") -> int:
