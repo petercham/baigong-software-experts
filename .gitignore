@@ -20,3 +20,6 @@
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# 会话工具产物（裁-24 遗留②·批 17 验收 7 收入）
+.workbuddy/
