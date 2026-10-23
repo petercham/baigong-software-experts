@@ -82,7 +82,7 @@ MARKER="generated-by: object-audit/scripts/install-hooks.sh"
 GATE_HOOK_BODY="#!/usr/bin/env bash
 # ${MARKER}
 # 提交前门禁（出口①）。规范来源：设计 v2 §2.5/60-gates。
-# 改判据请改 deliverables/multi-collab/references/60-gates.md 的路由表，不要改本文件。
+# 改判据请改路由表规范件（deliverables/ 或 deliverables/skills/ 下 multi-collab/references/60-gates.md），不要改本文件。
 set -u
 exec bash \"$RUNNER\" --root \"$REPO_ROOT\"
 "

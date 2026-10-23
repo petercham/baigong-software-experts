@@ -82,7 +82,9 @@ else
   done
 fi
 
+# 路由表定位（五类子包·裁-38 Q2=A 路径适配，纯解析零逻辑）：双域探，探到即用
 GATES_MD="$ROOT/deliverables/multi-collab/references/60-gates.md"
+[ -f "$GATES_MD" ] || GATES_MD="$ROOT/deliverables/skills/multi-collab/references/60-gates.md"
 [ -f "$GATES_MD" ] || die_usage "找不到路由表规范件：$GATES_MD"
 
 # --- 解释器：显式探测。钩子环境里 PATH 常不全，找不到就 fail-closed，不得降级为不拦 ---
@@ -252,7 +254,11 @@ def spec_id_resolvable(spec_id):
     pkg = SPEC_ID_HOME.get(prefix)
     if not pkg:
         return False
+    # 五类子包（裁-38 Q2=A 路径适配）：双域探 deliverables/<pkg> 与 deliverables/skills/<pkg>
     pkg_dir = os.path.join(ROOT, "deliverables", pkg.replace("/", os.sep))
+    if not os.path.isdir(pkg_dir):
+        nested = os.path.join(ROOT, "deliverables", "skills", pkg.replace("/", os.sep))
+        pkg_dir = nested if os.path.isdir(nested) else pkg_dir
     if not os.path.isdir(pkg_dir):
         return False
     full_re = re.compile(re.escape(spec_id))

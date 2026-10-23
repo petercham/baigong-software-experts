@@ -210,6 +210,8 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
         os.path.normpath(os.path.join(here, rel)),
         os.path.normpath(os.path.join(root, rel)),
         os.path.normpath(os.path.join(root, "deliverables", rel)),
+        # 五类子包（裁-38 Q2=A 路径适配）：跨包短写法插入 skills/ 层候选
+        os.path.normpath(os.path.join(root, "deliverables", "skills", rel)),
         os.path.normpath(os.path.join(pkg_root, rel)),
         os.path.normpath(os.path.join(here, "references", os.path.basename(rel))),
         os.path.normpath(os.path.join(here, os.path.basename(rel))),
@@ -312,9 +314,18 @@ def check_orphans(root: str) -> "list[str]":
     if not os.path.isdir(deliverables):
         sys.stderr.write("infra error: 找不到 deliverables/，索引对账无扫描域\n")
         raise SystemExit(4)
-    for pkg in sorted(os.listdir(deliverables)):
-        skill_md = os.path.join(deliverables, pkg, "SKILL.md")
-        refs_dir = os.path.join(deliverables, pkg, "references")
+    # 五类子包路径适配：双域枚举（deliverables/ 与 deliverables/skills/）
+    pkg_bases = [deliverables, os.path.join(deliverables, "skills")]
+    seen_pkgs: "set[str]" = set()
+    for base in pkg_bases:
+      if not os.path.isdir(base):
+        continue
+      for pkg in sorted(os.listdir(base)):
+        if pkg in seen_pkgs:
+            continue
+        seen_pkgs.add(pkg)
+        skill_md = os.path.join(base, pkg, "SKILL.md")
+        refs_dir = os.path.join(base, pkg, "references")
         if not os.path.isfile(skill_md) or not os.path.isdir(refs_dir):
             continue
         try:

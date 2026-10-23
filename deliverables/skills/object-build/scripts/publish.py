@@ -142,6 +142,37 @@ def find_root(explicit: "str | None") -> str:
         cur = parent
 
 
+def pkg_dir_of(root: str, pkg: str) -> str:
+    """包目录定位（五类子包·裁-38 Q2=A 路径适配，纯解析零逻辑）：
+    依次探 `deliverables/<pkg>` 与 `deliverables/skills/<pkg>`，探到即用；
+    两处都没有 ⇒ 返回旧式路径（让调用方按既有语义报"不存在"）。"""
+    legacy = os.path.join(root, "deliverables", pkg)
+    if os.path.isdir(legacy):
+        return legacy
+    nested = os.path.join(root, "deliverables", "skills", pkg)
+    if os.path.isdir(nested):
+        return nested
+    return legacy
+
+
+def list_pkgs(root: str) -> "list[str]":
+    """包枚举（双域·同上适配）：deliverables/ 一层与 deliverables/skills/ 一层，
+    以含 SKILL.md 为包判定（与旧口径一致），并集去重排序。"""
+    found: "set[str]" = set()
+    for base in (os.path.join(root, "deliverables"),
+                 os.path.join(root, "deliverables", "skills")):
+        if os.path.isdir(base):
+            for d in os.listdir(base):
+                if os.path.isfile(os.path.join(base, d, "SKILL.md")):
+                    found.add(d)
+    return sorted(found)
+
+
+def rel_from_root(root: str, path: str) -> str:
+    """仓根相对路径（posix 分隔；纯格式化，供账本字段与 --target 参数用）。"""
+    return os.path.relpath(path, root).replace(os.sep, "/")
+
+
 def skills_root(env: "dict[str, str]") -> str:
     """目标根一律由环境变量显式给出（§九：无默认值，未设 ⇒ exit 2，不得猜）。"""
     value = env.get("SKILLS_ROOT", "").strip()
@@ -211,7 +242,7 @@ def manifest_digest(entries: "list[tuple[str, str, str]]", use_copy: bool) -> st
 
 
 def state_path(root: str, pkg: str) -> str:
-    return os.path.join(root, "deliverables", pkg, STATE_FILENAME)
+    return os.path.join(pkg_dir_of(root, pkg), STATE_FILENAME)
 
 
 def load_last_block(root: str, pkg: str) -> "tuple[list[SyncBlock], SyncBlock]":
@@ -344,7 +375,7 @@ def reconcile(root: str, pkg: str, whitelist: "list[str]",
     豁免只按显式清单精确匹配，其余未纳管照报，判据不放宽）。
     返回 finding 行（空＝通过）。"""
     problems: "list[str]" = []
-    pkg_dir = os.path.join(root, "deliverables", pkg)
+    pkg_dir = pkg_dir_of(root, pkg)
     whitelist_set = set(whitelist)
     dirs = sorted({os.path.dirname(rel) or "." for rel in whitelist})
     observed: "set[str]" = set()
@@ -368,7 +399,7 @@ def reconcile(root: str, pkg: str, whitelist: "list[str]",
 # ---------------------------------------------------------------- 准入闸（§六）
 
 def gate_a1(root: str, pkg: str) -> "tuple[bool, str]":
-    path = os.path.join(root, "deliverables", pkg, "SKILL.md")
+    path = os.path.join(pkg_dir_of(root, pkg), "SKILL.md")
     return (os.path.isfile(path), "SKILL.md %s" % ("存在" if os.path.isfile(path) else "不存在（部署面不得成为唯一载体）"))
 
 
@@ -444,13 +475,13 @@ def gate_a3(root: str, pkg: str) -> "tuple[bool, str]":
     """A3 出处齐＝调 S-04（P-1/P-2/P-3 全过）。S-04 默认域＝deliverables/*/scripts/*，
     SKILL.md 的 md 载体块不在其默认域 ⇒ 用 --target 显式指过去（S-04 已支持）。
     exit 1＝产物侧缺件（作者欠账）；exit 3＝提供者欠账。"""
-    script = os.path.join(root, "deliverables", "object-audit", "scripts",
+    script = os.path.join(pkg_dir_of(root, "object-audit"), "scripts",
                           "check-provenance.py")
     if not os.path.isfile(script):
         die_infra("找不到 S-04：%s" % script)
     proc = subprocess.run(
         [sys.executable, script, "--root", root,
-         "--target", "deliverables/%s/SKILL.md" % pkg],
+         "--target", rel_from_root(root, os.path.join(pkg_dir_of(root, pkg), "SKILL.md"))],
         capture_output=True)
     code = proc.returncode if proc.returncode in (0, 1, 2, 3, 4) else 4
     if code == 0:
@@ -474,7 +505,7 @@ def gate_a5(root: str, pkg: str) -> "tuple[bool, str]":
     """A5 形态合规＝调 S-01（体量/触发）＋本器补两条纯机检（name==目录名且小写
     kebab；references/ 平铺一层）——S-01 现不含这两条，A5 条款要求它们，
     在发布器侧补齐属实现条款，不新增判据。"""
-    script = os.path.join(root, "deliverables", "object-audit", "scripts",
+    script = os.path.join(pkg_dir_of(root, "object-audit"), "scripts",
                           "check-skill-meta.py")
     if not os.path.isfile(script):
         die_infra("找不到 S-01：%s" % script)
@@ -486,7 +517,7 @@ def gate_a5(root: str, pkg: str) -> "tuple[bool, str]":
         out = ((proc.stdout or b"") + (proc.stderr or b"")).decode("utf-8", errors="replace")
         first = out.strip().split("\n")[0] if out.strip() else ""
         return False, "S-01 exit %d：%s" % (proc.returncode, first[:120])
-    skill_md = os.path.join(root, "deliverables", pkg, "SKILL.md")
+    skill_md = os.path.join(pkg_dir_of(root, pkg), "SKILL.md")
     fields = {}
     lines = read_text(skill_md).split("\n")
     if lines and lines[0].strip() == "---":
@@ -500,7 +531,7 @@ def gate_a5(root: str, pkg: str) -> "tuple[bool, str]":
         return False, "frontmatter name=%r 与目录名 %r 不一致" % (fields.get("name"), pkg)
     if not KEBAB_RE.match(pkg):
         return False, "包名不是小写 kebab：%s" % pkg
-    refs = os.path.join(root, "deliverables", pkg, "references")
+    refs = os.path.join(pkg_dir_of(root, pkg), "references")
     if os.path.isdir(refs):
         for name in os.listdir(refs):
             if os.path.isdir(os.path.join(refs, name)):
@@ -587,7 +618,7 @@ def append_block(root: str, pkg: str, env: "dict[str, str]", files: "list[str]",
                             tz_offset // 3600, (tz_offset % 3600) // 60)
     lines = [
         "[sync n=%d]" % next_n,
-        "source: deliverables/%s/%s" % (pkg, skill_rel),
+        "source: %s/%s" % (rel_from_root(root, pkg_dir_of(root, pkg)), skill_rel),
         "source_sha256: %s" % manifest_repo,
         "copy: %s/%s/SKILL.md" % (COPY_PREFIX_TOKEN, pkg),
         "copy_sha256_at_sync: %s" % manifest_copy,
@@ -620,7 +651,7 @@ def do_check(root: str, pkg: str, env: "dict[str, str]", verbose: bool) -> int:
     target_dir = os.path.join(env["SKILLS_ROOT"], pkg)
     verdicts = []
     for rel in sorted(last.files, key=str.encode):
-        repo_path = os.path.join(root, "deliverables", pkg, rel)
+        repo_path = os.path.join(pkg_dir_of(root, pkg), rel)
         copy_path = os.path.join(target_dir, rel)
         repo_now = sha256_file(repo_path) if os.path.isfile(repo_path) else None
         copy_now = sha256_file(copy_path) if os.path.isfile(copy_path) else None
@@ -670,7 +701,7 @@ def resolve_bash() -> str:
 def run_gates(root: str) -> int:
     """A2 前置：调 run-gates.sh（它写证据件）。返回其退出码。
     输出按 bytes 捕获再 replace 解码（子进程可能混入非 UTF-8 字节，解码崩＝误报 infra）。"""
-    runner = os.path.join(root, "deliverables", "object-audit", "scripts", "run-gates.sh")
+    runner = os.path.join(pkg_dir_of(root, "object-audit"), "scripts", "run-gates.sh")
     if not os.path.isfile(runner):
         die_infra("找不到 run-gates.sh：%s" % runner)
     bash = resolve_bash()
@@ -687,7 +718,7 @@ def do_publish(root: str, pkg: str, env: "dict[str, str]", init_files: "list[str
                prune_files: "list[str]" = None) -> int:
     """发布（阶段 0 --init / 阶段 n 常规 / 阶段 n --prune 收缩·裁-28）。
     §三-3 顺序：算块→复制→断言→追加。"""
-    pkg_dir = os.path.join(root, "deliverables", pkg)
+    pkg_dir = pkg_dir_of(root, pkg)
     prune_files = prune_files or []
     # 清单项格式校验最先跑（§三-1「给到目录或不存在的文件 ⇒ exit 2」；用法错先于
     # 一切闸——调用方的错不该被闸的错掩盖）。prune 项同格式口径（禁通配/绝对/..）。
@@ -857,15 +888,14 @@ def main(argv: "list[str]") -> int:
     if args.check:
         skills_root(env)
         pkgs = [args.pkg] if args.pkg else sorted(
-            d for d in os.listdir(os.path.join(root, "deliverables"))
-            if os.path.isfile(os.path.join(root, "deliverables", d, "SKILL.md")))
+            list_pkgs(root))
         # 聚合规则（§3.6.2 步 3 闭集 0/1/3）：有 1 即 1（需处置压过未在册）；
         # 否则有 3 报 3；全 0 才 0。4 不经此处（die_infra 直接 SystemExit）。
         codes = set()
         for pkg in pkgs:
             codes.add(do_check(root, pkg, env, args.verbose))
             if args.verbose:
-                skill_md = os.path.join(root, "deliverables", pkg, "SKILL.md")
+                skill_md = os.path.join(pkg_dir_of(root, pkg), "SKILL.md")
                 for line in read_text(skill_md).split("\n")[:10]:
                     m = re.match(r"^version: *(.+)$", line)
                     if m:

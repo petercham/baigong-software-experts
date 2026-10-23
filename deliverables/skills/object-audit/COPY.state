@@ -1,5 +1,5 @@
 [sync n=1]
-source: deliverables/object-audit/SKILL.md
+source: deliverables/skills/object-audit/SKILL.md
 source_sha256: 5e5267f804a5464a8eabd5498a25950ae1d259229b44160205dd4cda0c50eb3b
 copy: ${SKILLS_ROOT}/object-audit/SKILL.md
 copy_sha256_at_sync: 5e5267f804a5464a8eabd5498a25950ae1d259229b44160205dd4cda0c50eb3b

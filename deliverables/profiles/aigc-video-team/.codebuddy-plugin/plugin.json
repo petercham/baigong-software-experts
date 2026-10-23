@@ -1,0 +1,122 @@
+{
+  "name": "aigc-video-team",
+  "version": "1.1.0",
+  "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation (text-to-image / image-to-video) as the production means",
+  "author": {
+    "name": "peter",
+    "email": "petercham@users.noreply.github.com"
+  },
+  "agents": [
+    "./agents/aigc-video-team-lead.md",
+    "./agents/aigc-content-strategist.md",
+    "./agents/aigc-screenwriter.md",
+    "./agents/aigc-production-designer.md",
+    "./agents/aigc-director.md",
+    "./agents/aigc-editor.md",
+    "./agents/aigc-operations.md"
+  ],
+
+  "expertType": "team",
+  "agentName": "aigc-video-team-lead",
+  "teamInfo": {
+    "leadAgent": "aigc-video-team-lead",
+    "memberAgents": [
+      "aigc-content-strategist",
+      "aigc-screenwriter",
+      "aigc-production-designer",
+      "aigc-director",
+      "aigc-editor",
+      "aigc-operations"
+    ]
+  },
+
+  "displayName": {
+    "en": "AIGC Video Team",
+    "zh": "AIGC 视频团队"
+  },
+  "profession": {
+    "en": "AIGC Video Team",
+    "zh": "AIGC 视频团队"
+  },
+  "displayDescription": {
+    "en": "Production-director-led 7-seat team that turns a video request into a published short video using multimodal AI generation (text-to-image, image-to-video) as the production means: topic, script and adaptation, visual generation, edit and composite, compliance and release.",
+    "zh": "制作总监统筹六席，以多模态生成为生产手段，按五档工作流把视频需求从选题推到成片发布。"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "06-ContentCreative",
+  "defaultInitPrompt": {
+    "zh": "我是制作总监齐上线，带内容策划、编剧、美术指导、导演、剪辑、运营六席，以多模态生成为生产手段。说你要做的视频（口播/短剧/混剪/系列片），我先判工作流档位，再定谁上、按什么顺序推。",
+    "en": "I am Qi, Production Director, leading six seats with multimodal generation as our production means. Tell me the video you want (talking-head, short drama, mashup, or series); I will pick the workflow tier, the crew, and the order."
+  },
+  "plugin": "aigc-video-team",
+  "tags": [
+    { "en": "AIGC Video Production", "zh": "AIGC 视频生产" },
+    { "en": "Multi-seat SOP", "zh": "多席位 SOP" },
+    { "en": "Compliance & Release", "zh": "合规与发布" }
+  ],
+  "quickPrompts": [
+    {
+      "en": "I am Qi, Production Director, leading six seats with multimodal generation as our production means. Tell me the video you want (talking-head, short drama, mashup, or series); I will pick the workflow tier, the crew, and the order.",
+      "zh": "我是制作总监齐上线，带内容策划、编剧、美术指导、导演、剪辑、运营六席，以多模态生成为生产手段。说你要做的视频（口播/短剧/混剪/系列片），我先判工作流档位，再定谁上、按什么顺序推。"
+    },
+    {
+      "en": "Adapt this novel chapter / science article into a short-drama script with a confirmed fidelity tier.",
+      "zh": "把这篇小说章节／科普文章改编成短剧剧本：先定忠实度档位，再出可生成剧本。"
+    },
+    {
+      "en": "Review this finished video for compliance, AIGC labeling, quality and platform fit, and give a release strategy.",
+      "zh": "审这条成片：合规、AI 生成内容标识、质量、平台适配逐项过，给发布策略。"
+    }
+  ],
+  "members": [
+    {
+      "id": "aigc-video-team-lead",
+      "displayName": { "en": "Qi Shangxian", "zh": "齐上线" },
+      "profession": { "en": "Production Director", "zh": "制作总监" },
+      "avatar": "avatars/aigc-video-team-lead.png",
+      "role": "lead"
+    },
+    {
+      "id": "aigc-content-strategist",
+      "displayName": { "en": "Xu", "zh": "许爆款" },
+      "profession": { "en": "Content Strategist", "zh": "内容策划" },
+      "avatar": "avatars/aigc-content-strategist.png",
+      "role": "member"
+    },
+    {
+      "id": "aigc-screenwriter",
+      "displayName": { "en": "Ju", "zh": "剧有梗" },
+      "profession": { "en": "Screenwriter", "zh": "编剧" },
+      "avatar": "avatars/aigc-screenwriter.png",
+      "role": "member"
+    },
+    {
+      "id": "aigc-production-designer",
+      "displayName": { "en": "Mei", "zh": "美得很" },
+      "profession": { "en": "Production Designer", "zh": "美术指导" },
+      "avatar": "avatars/aigc-production-designer.png",
+      "role": "member"
+    },
+    {
+      "id": "aigc-director",
+      "displayName": { "en": "Gou", "zh": "构得美" },
+      "profession": { "en": "Director", "zh": "导演" },
+      "avatar": "avatars/aigc-director.png",
+      "role": "member"
+    },
+    {
+      "id": "aigc-editor",
+      "displayName": { "en": "Bian", "zh": "卞得顺" },
+      "profession": { "en": "Video Editor", "zh": "剪辑师" },
+      "avatar": "avatars/aigc-editor.png",
+      "role": "member"
+    },
+    {
+      "id": "aigc-operations",
+      "displayName": { "en": "Yan", "zh": "严过审" },
+      "profession": { "en": "Operations", "zh": "运营（合规与发布）" },
+      "avatar": "avatars/aigc-operations.png",
+      "role": "member"
+    }
+  ]
+}

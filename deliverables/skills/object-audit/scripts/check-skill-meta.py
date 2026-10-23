@@ -180,15 +180,21 @@ def main(argv: "list[str]") -> int:
     if env_names.strip():
         names.extend(n.strip() for n in env_names.split(",") if n.strip())
 
-    deliverables = os.path.join(root, "deliverables")
+    # 五类子包（裁-38 Q2=A 路径适配）：双域枚举 deliverables/ 与 deliverables/skills/
+    pkg_dirs = [os.path.join(root, "deliverables"),
+                os.path.join(root, "deliverables", "skills")]
+    found: "dict[str, str]" = {}
     try:
-        packages = sorted(
-            name for name in os.listdir(deliverables)
-            if os.path.isfile(os.path.join(deliverables, name, "SKILL.md"))
-        )
+        for deliverables in pkg_dirs:
+            if not os.path.isdir(deliverables):
+                continue
+            for name in os.listdir(deliverables):
+                if os.path.isfile(os.path.join(deliverables, name, "SKILL.md")):
+                    found[name] = os.path.join(deliverables, name, "SKILL.md")
     except OSError as exc:
         sys.stderr.write("infra error: 无法列 deliverables/: %s\n" % exc)
         return 4
+    packages = sorted(found)
 
     if not packages:
         sys.stderr.write("infra error: deliverables/ 下没有任何 SKILL.md（扫描域为空）\n")
@@ -196,7 +202,7 @@ def main(argv: "list[str]") -> int:
 
     findings: "list[str]" = []
     for name in packages:
-        findings.extend(check_one(root, os.path.join(deliverables, name, "SKILL.md"), names))
+        findings.extend(check_one(root, found[name], names))
 
     if not names:
         # 项目名子判据未执行 ⇒ 不静默，但也不是 finding：与 S-03 同口径（裁-21），

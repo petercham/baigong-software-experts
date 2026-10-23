@@ -182,13 +182,15 @@ def resolve_anchor(spec_file_abs: str, anchor: str) -> "list[str]":
 
 
 def existing_providers(root: str) -> "set[str]":
-    deliverables = os.path.join(root, "deliverables")
-    if not os.path.isdir(deliverables):
-        return set()
-    return {
-        name for name in os.listdir(deliverables)
-        if os.path.isdir(os.path.join(deliverables, name))
-    }
+    # 五类子包（裁-38 Q2=A 路径适配）：deliverables/ 一层与 deliverables/skills/ 一层并集。
+    providers: "set[str]" = set()
+    for base in (os.path.join(root, "deliverables"),
+                 os.path.join(root, "deliverables", "skills")):
+        if os.path.isdir(base):
+            for name in os.listdir(base):
+                if os.path.isdir(os.path.join(base, name)):
+                    providers.add(name)
+    return providers
 
 
 def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str], int]":
@@ -258,6 +260,14 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
         # ---- P-2：锚可解析且唯一 ----
         spec_file = block["spec_file"]
         spec_abs = os.path.normpath(os.path.join(root, spec_file.replace("/", os.sep)))
+        if not os.path.isfile(spec_abs) and spec_file.startswith("deliverables/") \
+                and not spec_file.startswith("deliverables/skills/"):
+            # 五类子包路径适配：旧式声明 `deliverables/<pkg>/…` 落空时试
+            # `deliverables/skills/<pkg>/…`（纯解析双探，声明文本与 P-3 摘要不受影响）。
+            nested = os.path.join(root, "deliverables", "skills",
+                                  *spec_file.split("/")[1:])
+            if os.path.isfile(os.path.normpath(nested)):
+                spec_abs = os.path.normpath(nested)
         if not os.path.isfile(spec_abs):
             findings.append(
                 "%s:1: %s OA-D1-1 块 %d spec_file 不存在 %s（规范侧失联）"
@@ -290,11 +300,14 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
 def default_targets(root: str) -> "list[str]":
     # 裁-21 拍板 3：默认域由 `*.py` 扩为 `*.py`＋`*.sh`——设计 §2.5 字面只写 .py 是
     # 当时只有 .py 的产物；现 .sh 亦带七键块，扩后「脚本自身必过 S-04」对全部执行体成立。
-    pattern = os.path.join(root, "deliverables", "*", "scripts", "*")
-    return sorted(
-        p for p in glob.glob(pattern)
-        if p.endswith((".py", ".sh")) and os.path.isfile(p)
-    )
+    # 五类子包路径适配：双域（deliverables/*/scripts/* 与 deliverables/skills/*/scripts/*）
+    patterns = [os.path.join(root, "deliverables", "*", "scripts", "*"),
+                os.path.join(root, "deliverables", "skills", "*", "scripts", "*")]
+    hits: "set[str]" = set()
+    for pattern in patterns:
+        hits.update(p for p in glob.glob(pattern)
+                    if p.endswith((".py", ".sh")) and os.path.isfile(p))
+    return sorted(hits)
 
 
 def main(argv: "list[str]") -> int:
