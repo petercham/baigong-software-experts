@@ -1,6 +1,6 @@
 # 部署形态与帽子制
 
-> 出处：席位的隔离强度＝模型的隔离强度（非提示词的隔离强度）——本环境实证；「席位与模型解耦·异质模型路由」＝皮总 2026-10-22 论定＋业界印证（RouteMoA arXiv:2601.18130：15 模型池按任务路由，成本 −89.8%·延迟 −63.6%·准确率反升；generator-and-judge 范式："a model is a poor critic of its own blind spots"——判定方须异模型才成立）。
+> 出处：席位的隔离强度＝模型的隔离强度（非提示词的隔离强度）——本环境实证；「席位与模型解耦·异质模型路由」＝皮总论定（日期见 changelog）＋业界印证（RouteMoA arXiv:2601.18130：15 模型池按任务路由，成本 −89.8%·延迟 −63.6%·准确率反升；generator-and-judge 范式："a model is a poor critic of its own blind spots"——判定方须异模型才成立）。
 
 ## 架构原则（先于形态表）
 
@@ -27,7 +27,7 @@
 
 **决策者在 A 形态下仍需做的一件事**：开窗时把「先跑 inbox」送进新会话。跨后端消除不了这个物理动作——**谁承诺"零人工"，谁就在骗人**。
 
-**参考实现**：`D:/collab-bus/`（bus.py 单文件·post/inbox/ack/read/board/sweep·仓库外跨项目共用）。
+**参考实现**：`<总线目录>`（仓外跨项目共用·bus.py 单文件·post/inbox/ack/read/board/sweep）。
 
 ## 帽子制（仅形态 C 用·独立性打折）
 
