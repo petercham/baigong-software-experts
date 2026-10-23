@@ -15,13 +15,14 @@
 | `video-screenwriter.md` | **全文**（围栏块逐字提取，无乱码） | 源料 29–112 行围栏块 |
 | `video-art-director.md` | **全文**（围栏块逐字提取，无乱码） | 源料 119–217 行围栏块 |
 | `video-team-lead.md` | **全文**（围栏块逐字提取＋乱码修复 14 处，登记见下） | 源料 224–459 行围栏块 |
-| `video-content-strategist.md` | **重建版·无源文本** | 主理人件成员职责表（237–244 行）＋微调点表（462–469 行）＋标准 SOP 第 2 步 |
-| `video-director.md` | **重建版·无源文本** | 同上，SOP 第 5 步 |
-| `video-editor.md` | **重建版·无源文本** | 同上，SOP 第 6 步 |
-| `video-qa-operations.md` | **重建版·无源文本** | 同上，SOP 第 7 步 |
+| `video-content-strategist.md` | **原文替换**（批 23 Commit A：以 `original-5/video-content-strategist.md` 为基底回填，取代重建版；脚本创作按 7 人版分工归编剧席，压缩为衔接句） | original-5 原文 |
+| `video-director.md` | **原文替换**（批 23 Commit A：以 `original-5/video-director.md` 为基底回填，取代重建版；Commit A 态原样保留软件 WBS 话术，Commit B 按裁-33 清） | original-5 原文 |
+| `video-editor.md` | **原文替换**（批 23 Commit A：以 `original-5/video-editor.md` 为基底回填，取代重建版；Commit A 态保留 IS_PASS 原文语义，Commit B 按批 21 口径复核清零） | original-5 原文 |
+| `video-qa-operations.md` | **原文替换**（批 23 Commit A：以 `original-5/video-qa-operations.md` 为基底回填，取代重建版；Commit A 态保留 QA 话术，Commit B 按裁-33 清） | original-5 原文 |
 
-- 4 个重建件头部均有醒目标注 `⚠️ 重建版·无源文本`，结构＝frontmatter（name/description）＋职责＋输入输出＋回传机制五步（与 screenwriter 全文件同构）。**重建件内容系推断，不得当 DeepSeek 原文引用。**
-- 源料中「原有成员需要微调的地方」表格＝这 4 文件**仅有的描述**，无源文本。
+- **原文已到位（裁-31/批 22）**：皮总提供 4 件 DeepSeek 原文，誊录于 `original-5/`（史实锚，零改造）。批 23 Commit A 起，草稿区四席＝**原文基底＋三件套＋回传五步**，原「重建版·无源文本」的推测内容已被原文取代；头部 ⚠️ 重建标注保留（史实），并追加「已按原文替换」行说明基底来源。
+- 源料中「原有成员需要微调的地方」表格＋`original-5/` 4 件＝这 4 文件的**内容事实源**。
+- 誊录边界：`original-5/video-qa-operations.md` 尾部 ` ``` ` 围栏与「落盘建议」段系 5 文件版粘贴件的段外内容，非角色文件本体，回填时未纳入。
 
 ## 乱码修复纪律（裁-30）与处置登记
 
@@ -58,3 +59,7 @@
 ## 修改批完成注（批 21，2026-10-23）
 
 三步路径第 2 步已完成：7 个席位文件按 `00-撞规清单.md` 七点**原地改造**（git 保历史），逐条处置见该清单「修改批处置登记」节。要点：每件加三件套（三栏/权限四类/输入白名单）；剪辑师 IS_PASS 放行语义删除改自检清单（放行判定点＝审核运营，唯一）；审核运营加行业判据出处纪律；主理人件瘦成接口＋路由（成员细则删除只留指针，消除第二真源）＋写权限模型段。重建件「⚠️ 重建版」注保留并追加「已按修改批改造」行；frontmatter 仍仅 name+description；保留清单五项未动。仍留草稿区——第 3 步（过审计转正）候拍。
+
+## 原文替换完成注（批 23 Commit A，2026-10-23）
+
+裁-31 原文到位后：四席（content-strategist/director/editor/qa-operations）已以 `original-5/` 原文为**内容事实源**回填，取代主理人重建版的推测内容；三件套＋回传五步＋「已按修改批改造」注为已验证资产，全部保留。职责边界按 7 人版分工裁决：脚本归编剧席（策划席 Mode 1 的脚本创作相关描述压缩为衔接句，未照搬整节）。**Commit A 态＝忠实基底**：导演的软件 WBS 话术（File List/Mermaid/≤5 任务/T01）、剪辑师的 IS_PASS 原文语义、审核运营的 QA 话术均原样保留，清理由 Commit B（裁-33 四点）执行。四席头部追加「已按原文替换」行并注明基底来源。
