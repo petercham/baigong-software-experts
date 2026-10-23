@@ -14,7 +14,7 @@
 
 | 对象目录 | 内容 | 版本·状态 |
 |---|---|---|
-| `profiles/aigc-video-team/` | AIGC 视频团队（Team 型专家团·7 席位·多模态生成为生产手段·项目圣经人类确认闸：主理人/策划/编剧/美术指导/导演/剪辑/运营） | v1.2.0 · 活跃（源＝my-experts 注册态 `plugins/aigc-video-team/` 只读复制；批 28 AIGC 返工＋批 30 项目圣经机制（裁-41）经 gate-qa 复核后由主理人执行专家包面重装 v1.2.0，本目录为其注册态快照；批 29 入仓） |
+| `profiles/aigc-video-team/` | AIGC 视频团队（Team 型专家团·7 席位·多模态生成为生产手段·项目圣经＋五道人类确认闸 G1–G5：主理人/策划/编剧/美术指导/导演/剪辑/运营） | v1.3.0 · 活跃（源＝my-experts 注册态 `plugins/aigc-video-team/` 只读复制；批 28 AIGC 返工＋批 30 项目圣经（裁-41）＋批 32 五道确认闸（裁-44）经 gate-qa 复核后由主理人执行专家包面重装 v1.3.0，本目录为其注册态快照（运行时产物 .pending-preview-session 不入快照不入 zip）；批 29 入仓） |
 
 ## nodes/ · tickets/ · documents/ — 占位
 

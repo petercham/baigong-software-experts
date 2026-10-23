@@ -1,7 +1,7 @@
 {
   "name": "aigc-video-team",
-  "version": "1.2.0",
-  "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation as the production means; a human-confirmed project bible (style & requirements contract) gates all work",
+  "version": "1.3.0",
+  "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation as the production means; five human confirmation gates (bible, script, prompts, generation budget, final cut) control the pipeline",
   "author": {
     "name": "peter",
     "email": "petercham@users.noreply.github.com"
@@ -37,14 +37,14 @@
     "zh": "AIGC 视频团队"
   },
   "displayDescription": {
-    "en": "Production-director-led 7-seat team gated by a human-confirmed project bible (style and requirements contract): topic, script and adaptation, visual generation, edit and composite, compliance and release, with multimodal AI generation as the production means.",
-    "zh": "制作总监统筹六席，项目圣经经人类确认后开工，以多模态生成为手段按五档工作流把选题推到成片发布。"
+    "en": "Production-director-led 7-seat team with five human confirmation gates (project bible, script, generation prompts, generation budget, final cut) and multimodal AI generation as the production means, from topic to published short video.",
+    "zh": "制作总监统筹六席，以五道人类确认闸控流程，用多模态生成为生产手段，把选题推到成片发布。"
   },
   "avatar": "avatars/team.png",
   "categoryId": "06-ContentCreative",
   "defaultInitPrompt": {
-    "zh": "我是制作总监齐上线，带内容策划、编剧、美术指导、导演、剪辑、运营六席，以多模态生成为生产手段。说你要做的视频，我先起草项目圣经请你确认——确认后团队才开工。",
-    "en": "I am Qi, Production Director, leading six seats with multimodal generation as our production means. Tell me the video you want; I will first draft a project bible for your confirmation — the team starts work only after you confirm it."
+    "zh": "我是制作总监齐上线，带六席以多模态生成为生产手段。说你要做的视频，我按五道确认闸推进：圣经、剧本、提示词、预算、成片，每道都等你确认才走下一步。",
+    "en": "I am Qi, Production Director, leading six seats with multimodal generation. Tell me the video you want; we work through five confirmation gates - bible, script, prompts, budget, final cut - each awaiting your explicit go-ahead."
   },
   "plugin": "aigc-video-team",
   "tags": [
@@ -63,8 +63,8 @@
   ],
   "quickPrompts": [
     {
-      "en": "I am Qi, Production Director, leading six seats with multimodal generation as our production means. Tell me the video you want; I will first draft a project bible for your confirmation — the team starts work only after you confirm it.",
-      "zh": "我是制作总监齐上线，带内容策划、编剧、美术指导、导演、剪辑、运营六席，以多模态生成为生产手段。说你要做的视频，我先起草项目圣经请你确认——确认后团队才开工。"
+      "en": "I am Qi, Production Director, leading six seats with multimodal generation. Tell me the video you want; we work through five confirmation gates - bible, script, prompts, budget, final cut - each awaiting your explicit go-ahead.",
+      "zh": "我是制作总监齐上线，带六席以多模态生成为生产手段。说你要做的视频，我按五道确认闸推进：圣经、剧本、提示词、预算、成片，每道都等你确认才走下一步。"
     },
     {
       "en": "Adapt this novel chapter / science article into a short-drama script with a confirmed fidelity tier.",
