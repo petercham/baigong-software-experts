@@ -336,9 +336,13 @@ def classify_target(root: str, name: str, env: "dict[str, str]") -> "tuple[str, 
 
 # ---------------------------------------------------------------- 集合对账（§八）
 
-def reconcile(root: str, pkg: str, whitelist: "list[str]") -> "list[str]":
+def reconcile(root: str, pkg: str, whitelist: "list[str]",
+              exclude: "frozenset[str] = frozenset()") -> "list[str]":
     """白名单↔磁盘对账：只扫白名单涉及的目录（父目录集合 D），D 内只取一层。
-    不参与对账：COPY.state 自身、`.` 开头条目。返回 finding 行（空＝通过）。"""
+    不参与对账：COPY.state 自身、`.` 开头条目、`exclude`（裁-28 `--prune`：
+    显式声明"不发了"的项——源仍在仓但**有意**不发，与"漏发"语义相反；
+    豁免只按显式清单精确匹配，其余未纳管照报，判据不放宽）。
+    返回 finding 行（空＝通过）。"""
     problems: "list[str]" = []
     pkg_dir = os.path.join(root, "deliverables", pkg)
     whitelist_set = set(whitelist)
@@ -354,7 +358,7 @@ def reconcile(root: str, pkg: str, whitelist: "list[str]") -> "list[str]":
             rel = (d + "/" + name) if d != "." else name
             if os.path.isfile(os.path.join(base, name)):
                 observed.add(rel)
-    for rel in sorted(observed - whitelist_set):
+    for rel in sorted(observed - whitelist_set - exclude):
         problems.append("未纳管: %s" % rel)
     for rel in sorted(whitelist_set - observed):
         problems.append("缺件: %s" % rel)
@@ -385,6 +389,7 @@ def gate_a2(root: str) -> "tuple[bool, str]":
     `【判词】<批次>｜阻塞项：<无|列表>｜判定：<放行|有条件放行|不放行>`；
     机检**只认**「阻塞项：无」＋「判定：放行」的组合，其余组合（含"有条件放行"）
     一律未绿。判词由独立审计席出（发布方不得自写判词自放行）。
+    扫描面＝verdicts.md 唯一文件（裁-28，见函数体注释）。
 
     「当期」的实现＝**当场跑 run-gates**（A2 语义是"当期全绿"，翻旧证据件＝拿
     历史绿当今天绿）。run-gates 是证据件唯一写者且**只写非 0 退出**（GATE PASS
@@ -415,22 +420,23 @@ def gate_a2(root: str) -> "tuple[bool, str]":
             bad.append("%s（%d 条 block 路由）" % (fname, len(blocked)))
     if bad:
         return False, "当期门禁未绿：%s" % "；".join(bad)
-    decisions_dir = os.path.join(root, ".collab", "decisions")
+    # 判词扫描面＝`.collab/decisions/verdicts.md` **唯一文件**（裁-28 拍板 2·
+    # 60-gates §七）：判词史与裁决叙事分账，裁决记录里的说明文字凑出放行组合的
+    # 假绿路径从机制上消除。verdicts.md 缺失＝无判词＝未绿（exit 3 语义不变）。
+    verdicts_path = os.path.join(root, ".collab", "decisions", "verdicts.md")
     VERDICT_RE = re.compile(r"【判词】[^｜|]*[｜|]阻塞项：无[｜|]判定：放行")
+    if not os.path.isfile(verdicts_path):
+        return False, "判词分账文件不存在：.collab/decisions/verdicts.md（裁-28：判词只认本文件）"
     latest_verdict = ""
     any_verdict = False
-    if os.path.isdir(decisions_dir):
-        for fname in sorted(os.listdir(decisions_dir)):
-            if not fname.endswith(".md"):
-                continue
-            for line in read_text(os.path.join(decisions_dir, fname)).split("\n"):
-                if "【判词】" in line:
-                    any_verdict = True
-                    latest_verdict = line  # decisions 按文件名（日期）升序，末条＝最新
+    for line in read_text(verdicts_path).split("\n"):
+        if "【判词】" in line:
+            any_verdict = True
+            latest_verdict = line  # append-only：文件内末条＝最新判词
     if not any_verdict:
-        return False, "decisions 侧无任何【判词】行（裁-25 格式：【判词】<批次>｜阻塞项：…｜判定：…）"
+        return False, "verdicts.md 无任何【判词】行（裁-25 格式：【判词】<批次>｜阻塞项：…｜判定：…）"
     if VERDICT_RE.search(latest_verdict):
-        return True, "最新判词＝阻塞项：无＋判定：放行"
+        return True, "最新判词＝阻塞项：无＋判定：放行（verdicts.md）"
     return False, "最新判词非「阻塞项：无＋判定：放行」组合：%s" % latest_verdict.strip()[:80]
 
 
@@ -677,12 +683,15 @@ def run_gates(root: str) -> int:
 
 
 def do_publish(root: str, pkg: str, env: "dict[str, str]", init_files: "list[str]",
-               extra_files: "list[str]", dry_run: bool) -> int:
-    """发布（阶段 0 --init / 阶段 n 常规）。§三-3 顺序：算块→复制→断言→追加。"""
+               extra_files: "list[str]", dry_run: bool,
+               prune_files: "list[str]" = None) -> int:
+    """发布（阶段 0 --init / 阶段 n 常规 / 阶段 n --prune 收缩·裁-28）。
+    §三-3 顺序：算块→复制→断言→追加。"""
     pkg_dir = os.path.join(root, "deliverables", pkg)
+    prune_files = prune_files or []
     # 清单项格式校验最先跑（§三-1「给到目录或不存在的文件 ⇒ exit 2」；用法错先于
-    # 一切闸——调用方的错不该被闸的错掩盖）。
-    for rel in init_files + extra_files:
+    # 一切闸——调用方的错不该被闸的错掩盖）。prune 项同格式口径（禁通配/绝对/..）。
+    for rel in init_files + extra_files + prune_files:
         if rel.startswith("..") or rel.startswith("/") or "\\" in rel or "*" in rel or "?" in rel:
             die_usage("清单项非法（禁通配/目录/绝对/..）：%s" % rel)
         item = os.path.join(pkg_dir, rel)
@@ -713,7 +722,20 @@ def do_publish(root: str, pkg: str, env: "dict[str, str]", init_files: "list[str
     if last is not None and init_files:
         print("已在册（第 %d 块）——--init 只用于首次；常规发布去掉 --init" % last.n)
         return 2
-    # 白名单（§二：阶段 0＝命令行唯一来源；阶段 n＝最后一块 ∪ --files）
+    # --prune 护栏（裁-28 §二 收缩行）：须在册；目标须在末块 files；不许 prune 到空。
+    if prune_files:
+        if last is None:
+            die_usage("--prune 要求已在册（无 COPY.state 可收缩）")
+        if extra_files or init_files:
+            die_usage("--prune 与 --files/--init 互斥（收缩与扩张不同批，防语义混淆）")
+        for rel in prune_files:
+            if rel not in last.files:
+                die_usage("--prune 目标不在末块 files（第 %d 块）：%s" % (last.n, rel))
+        if set(prune_files) >= set(last.files):
+            die_usage("--prune 会把 files 清空（账本不许空块——在册判定从末块派生，"
+                      "空块使其悬空；要整包退出发行走人工，CLI 不开此门）")
+    # 白名单（§二：阶段 0＝命令行唯一来源；阶段 n＝最后一块 ∪ --files；
+    #          收缩＝最后一块 － --prune·裁-28）
     if last is None:
         whitelist = sorted(set(init_files), key=str.encode)
         for rel in whitelist:
@@ -724,10 +746,14 @@ def do_publish(root: str, pkg: str, env: "dict[str, str]", init_files: "list[str
                 die_usage("清单项是目录（禁目录枚举）：%s" % rel)
             if not os.path.isfile(item):
                 die_usage("清单项不存在：%s" % rel)
+    elif prune_files:
+        whitelist = sorted(set(last.files) - set(prune_files), key=str.encode)
     else:
         whitelist = sorted(set(list(last.files) + extra_files), key=str.encode)
-    # 集合对账（§八）——--init 同样跑（§三-2 同一套断言，无初始化例外）
-    problems = reconcile(root, pkg, whitelist)
+    # 集合对账（§八）——--init 同样跑（§三-2 同一套断言，无初始化例外）。
+    # prune 项显式豁免（exclude）：源仍在仓但有意不发——不豁免则 prune 后必判
+    # 「未纳管」exit 1，§十差集删经 CLI 永不可达（裁-28 缺口①的根因）。
+    problems = reconcile(root, pkg, whitelist, exclude=frozenset(prune_files))
     if problems:
         for line in problems:
             print(line)
@@ -806,6 +832,9 @@ def main(argv: "list[str]") -> int:
     parser.add_argument("--pkg", help="包名（发布/单包核查时必填）")
     parser.add_argument("--files", action="append", default=[],
                         help="清单项（相对 deliverables/<pkg>/，可重复）")
+    parser.add_argument("--prune", action="append", default=[],
+                        help="白名单收缩项（裁-28：末块 files 内的 relpath，可重复；"
+                             "新块＝末块减指定项，部署面对应文件随差集删删除）")
     parser.add_argument("--dry-run", action="store_true", help="只过闸不写")
     parser.add_argument("--verbose", action="store_true",
                         help="人读摘要（版本号只允许出现在这里，且标注描述性）")
@@ -850,8 +879,10 @@ def main(argv: "list[str]") -> int:
         die_usage("包名不是小写 kebab：%s" % args.pkg)
     skills_root(env)
     if args.init:
-        return do_publish(root, args.pkg, env, args.files, [], args.dry_run)
-    return do_publish(root, args.pkg, env, [], args.files, args.dry_run)
+        return do_publish(root, args.pkg, env, args.files, [], args.dry_run,
+                          prune_files=args.prune)
+    return do_publish(root, args.pkg, env, [], args.files, args.dry_run,
+                      prune_files=args.prune)
 
 
 if __name__ == "__main__":
