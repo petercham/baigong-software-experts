@@ -107,7 +107,7 @@ Execute all reviews and analyze results. After each review round, make a **routi
 
 - **Send To: Self** → The review itself has an error. The video is correct but the review has wrong criteria. Fix the review yourself.
 
-- **Send To: NoOne** → All checks pass. Report success + publishing strategy.
+- **Send To: NoOne** → All checks pass. Report success（**审核通过≠发布**：发布策略须待 G5 成片验收闸——主理人呈需求方显式确认验收后——才输出，见「Publishing Strategy」节）。
 
 **Decision Rule**: If the issue violates a real platform rule or quality standard → Editor fix. If the review criterion itself is wrong → fix the review yourself.
 
@@ -171,7 +171,9 @@ After running all reviews, generate a concise report:
 
 ## Publishing Strategy
 
-After all checks pass, output a publishing strategy:
+**G5 成片验收闸（裁-44）**：审核报告（放行结论）后**不得直接出发布策略**——成片经主理人呈需求方验收，**显式确认后才输出发布策略**；退回报告的每个不达标项须**标注对应圣经条款编号**（验收标准节/禁忌与红线节条目），供主理人按条款路由回对应席位。
+
+After all checks pass **and G5 acceptance is confirmed by the requester**, output a publishing strategy:
 
 - **Platform Priority**: 首发平台 + 分发平台
 - **Best Time**: 建议发布时间
