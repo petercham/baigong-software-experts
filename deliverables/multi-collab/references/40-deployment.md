@@ -1,6 +1,6 @@
 # 部署形态与帽子制
 
-> 出处：席位的隔离强度＝模型的隔离强度（非提示词的隔离强度）——本环境实证；「席位与模型解耦·异质模型路由」＝皮总论定（日期见 changelog）＋业界印证（RouteMoA arXiv:2601.18130：15 模型池按任务路由，成本 −89.8%·延迟 −63.6%·准确率反升；generator-and-judge 范式："a model is a poor critic of its own blind spots"——判定方须异模型才成立）。
+> 出处：席位的隔离强度＝模型的隔离强度（非提示词的隔离强度）——本环境实证；「席位与模型解耦·异质模型路由」＝决策者论定（日期见 changelog）＋业界印证（RouteMoA arXiv:2601.18130：15 模型池按任务路由，成本 −89.8%·延迟 −63.6%·准确率反升；generator-and-judge 范式："a model is a poor critic of its own blind spots"——判定方须异模型才成立）。
 
 ## 架构原则（先于形态表）
 
