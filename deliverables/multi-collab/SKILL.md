@@ -2,8 +2,18 @@
 name: multi-collab
 description: 协作纪律（权限分级版）：唯一写权（执行者）＋开放的读权席位（主理人/审计者/顾问/研究席/QA/子代理席）；跨权限协作＝把交接上下文转成自包含 md 交接件；决策权分层 L0/L1/L2、呈拍三律、消息路由、回执矩阵、收口自检。Use when 以多席协作模式工作（角色边界/写盘权/读盘权/交接件/投递/回执/判词/呈拍/收口/帽子制）。触发词：多席协作、席位、主理人、交接件、文档交接、投递、回执矩阵、判词、审计、执行者、决策者、呈拍、收口、单写者、写盘权、读权席位。
 agent_created: true
-version: 4.0
+version: 4.1
 ---
+
+<!-- spec-provenance v1
+spec_id: ADR-2026-10-22-12
+spec_file: .collab/decisions/2026-10-22-裁决记录.md
+spec_anchor: 裁-12 改名 tri-collab → multi-collab
+spec_clause_sha256: d77dc7661dd0fbe65da589fb8da02538e4efdffb82e6ae2c9aff5ac57cfd6912
+spec_version: 4.1
+spec_effective: 2026-10-22
+provider: multi-collab
+-->
 
 # multi-collab · 协作纪律（权限分级版）
 

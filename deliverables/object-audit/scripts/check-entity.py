@@ -4,7 +4,7 @@
 # spec_id: OA-T1
 # spec_file: deliverables/object-audit/SKILL.md
 # spec_anchor: T1 | 换项目测试
-# spec_clause_sha256: 775185225f643b36ffe35c11a816914357f80801a64452de9b97532e7031bead
+# spec_clause_sha256: 7415060b134d9848e21c545c803eee041739aaa69f951801ed33f55f2c534e3c
 # spec_version: 0.4
 # spec_effective: 2026-10-23
 # provider: object-audit
@@ -13,7 +13,7 @@
 # spec_id: OA-S1
 # spec_file: deliverables/object-audit/references/10-skill.md
 # spec_anchor: S1 | 项目实体
-# spec_clause_sha256: f97486f4aec22b494a3b39423d0992b36ac77eb06e7abfb2d7e5ffdb19c3f849
+# spec_clause_sha256: 318bb2af2344fe444afbde85a2a6b93fcc83bacde16098f1e366d008e378dfae
 # spec_version: 0.4
 # spec_effective: 2026-10-23
 # provider: object-audit
@@ -73,8 +73,11 @@ PATTERNS: "list[tuple[str, str, str]]" = [
 # ②changelog 文件全部日期 ③全角括注内的日期。
 # 实现解释（同步报告）：条款说「正文**裸**叙述日期仍算」，故反引号段与 URL 内的
 # 日期不算"裸写于句中"——先遮除再判（遮除保位不缩列）。
-SPECPROV_START_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*spec-provenance v1[ \t]*(?:-{3,})?[ \t]*$")
+# 载体二分（与 S-04 parse_blocks 同口径）：`#` 注释块（.py/.sh）与 HTML 注释块（.md）。
+# 闭标记**不合并**：`-->` 只在 HTML 块打开时才算闭（md 正文普通 `-->` 不得误关块）。
+SPECPROV_START_RE = re.compile(r"^[ \t]*(?:#[ \t]*-{3,}[ \t]*|<!--[ \t]*)spec-provenance v1[ \t]*(?:-{3,})?[ \t]*$")
 SPECPROV_END_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*/spec-provenance[ \t]*(?:-{3,})?[ \t]*$")
+HTML_END_RE = re.compile(r"^[ \t]*-->[ \t]*$")
 CODE_SPAN_RE = re.compile(r"`[^`\n]*`")
 URL_RE = re.compile(r"https?://\S+")
 
@@ -178,7 +181,12 @@ def main(argv: "list[str]") -> int:
     first_hit: "dict[str, str]" = {}  # 每模式首个命中的 file:line（聚合 finding 的落点）
     for path in files:
         rel = os.path.relpath(path, root).replace(os.sep, "/")
-        is_changelog = "changelog" in os.path.basename(path).lower()
+        basename = os.path.basename(path).lower()
+        is_changelog = "changelog" in basename
+        # 裁-25 拍板 1①：账本（COPY.state，文件名**精确匹配**）全部日期豁免——
+        # 机器生成同步流水，与 changelog 同性质（协议强制时间戳）。机械化口径＝
+        # 文件名判定，与 changelog 文件名口径同款；只豁免 date，其余实体照扫。
+        is_ledger = basename == "copy.state"
         try:
             with open(path, "r", encoding="utf-8", errors="replace", newline="") as handle:
                 # CRLF 归一：本仓 core.autocrlf=true，检出件本身是 CRLF（与其他三件同口径）
@@ -187,16 +195,22 @@ def main(argv: "list[str]") -> int:
             sys.stderr.write("infra error: 读取失败 %s: %s\n" % (rel, exc))
             return 4
         in_prov_block = False
+        in_html_block = False
         for lineno, raw in enumerate(lines, 1):
-            # 豁免①（块级）：spec-provenance 块内全部日期不扫（协议强制写法）
+            # 豁免①（块级）：spec-provenance 块内全部日期不扫（协议强制写法）。
+            # 载体二分（与 S-04 parse_blocks 同口径）：`-->` 只在 HTML 块内才是闭标记，
+            # 否则 md 正文里的普通 `-->` 会误关块。
             if SPECPROV_START_RE.match(raw):
                 in_prov_block = True
-            elif SPECPROV_END_RE.match(raw):
+                in_html_block = raw.lstrip().startswith("<!--")
+            elif (in_html_block and HTML_END_RE.match(raw)) or (
+                    not in_html_block and SPECPROV_END_RE.match(raw)):
                 in_prov_block = False
+                in_html_block = False
             for key, _label, pat in patterns:
                 if key == "date":
-                    # 豁免①②：provenance 块内／changelog 文件整行跳过
-                    if is_changelog or in_prov_block:
+                    # 豁免①②④：provenance 块内／changelog 文件／账本 COPY.state 整行跳过
+                    if is_changelog or in_prov_block or is_ledger:
                         continue
                     masked = mask_non_narrative(raw)
                     for match in re.finditer(pat, masked):

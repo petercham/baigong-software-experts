@@ -52,7 +52,7 @@
 [sync n=1]
 source: deliverables/<pkg>/SKILL.md
 source_sha256: <64 hex>                 ← 清单摘要（源侧）
-copy: <SKILLS_ROOT>/<pkg>/SKILL.md
+copy: ${SKILLS_ROOT}/<pkg>/SKILL.md   ← 变量式（裁-25：账本在 S-03 扫描域内，绝对盘符路径必咬 drive-path——消灭实体而非豁免；归属判定②/在册比对时以 env SKILLS_ROOT 展开）
 copy_sha256_at_sync: <64 hex>           ← 清单摘要（副本侧·同步当时实测）
 synced_at: <ISO 8601 带时区偏移>
 source_commit: <40 hex | none>

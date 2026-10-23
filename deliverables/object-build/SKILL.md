@@ -2,9 +2,19 @@
 name: object-build
 description: 对象构建总入口：把一个"要造什么"的模糊想法装配成可验收的规范件（Skill、专家角色、装订、节点、票、文档、图）。Use when 要新建/起草/重写/改造任一交付对象——先判期（编译期固化 vs 运行时挂载）→ 判型 → 套该对象必填字段 → 定判据 → 过自检。触发词：造、建、起草、新建、写一个、重写、改造、装配、定角色、加节点、开票。
 agent_created: true
-version: 0.3
+version: 0.4
 status: 草稿（构建期拆分第一版·待审计器交叉验证）
 ---
+
+<!-- spec-provenance v1
+spec_id: ADR-2026-10-22-09
+spec_file: .collab/decisions/2026-10-22-裁决记录.md
+spec_anchor: - **定形**：构建侧＝统一方法论
+spec_clause_sha256: 238414e88e05dbbc4a4867c2efae0178ac329deae8808c5c6000cb8d1e21e6bb
+spec_version: 0.4
+spec_effective: 2026-10-22
+provider: object-build
+-->
 
 # object-build · 对象构建总入口
 

@@ -128,22 +128,41 @@ def read_text(path: str) -> str:
         raise SystemExit(4)
 
 
+# HTML 注释载体（70-provenance.md §二：`.md` 正文首块 `<!-- spec-provenance v1 … -->`）。
+# 原注释"留待未来扩面"——A3 准入闸要求 SKILL.md 首块七字段（60-publish.md §六），
+# 扩面即落实 §二 自己的话「一种正则三个载体通吃」；键行**不带 `#` 前缀**。
+HTML_START_RE = re.compile(r"^[ \t]*<!--[ \t]*spec-provenance v1[ \t]*$")
+HTML_END_RE = re.compile(r"^[ \t]*-->[ \t]*$")
+HTML_KEY_VALUE_RE = re.compile(r"^[ \t]*([A-Za-z_][A-Za-z0-9_-]*):[ \t]*(.*?)[ \t]*$")
+
+
 def parse_blocks(text: str) -> "list[dict[str, str]]":
-    """取首尾标记之间的 key: value（一种正则通吃注释载体，不引 YAML 依赖）。"""
+    """取首尾标记之间的 key: value（一种正则通吃注释载体，不引 YAML 依赖）。
+    载体二分：`#` 注释块（.py/.sh）与 HTML 注释块（.md）互斥嵌套，逐行判开闭。"""
     blocks: "list[dict[str, str]]" = []
     current: "dict[str, str] | None" = None
+    html_current = False
     # 行分隔已在 read_text 归一（CRLF→LF）；此处再兜一次，防被直接传入原始文本。
     for raw in text.replace("\r\n", "\n").split("\n"):
         if BLOCK_START_RE.match(raw):
             current = {}
+            html_current = False
+            continue
+        if HTML_START_RE.match(raw):
+            current = {}
+            html_current = True
+            continue
+        if current is not None and html_current and HTML_END_RE.match(raw):
+            blocks.append(current)
+            current = None
             continue
         if BLOCK_END_RE.match(raw):
-            if current is not None:
+            if current is not None and not html_current:
                 blocks.append(current)
                 current = None
             continue
         if current is not None:
-            match = KEY_VALUE_RE.match(raw)
+            match = (HTML_KEY_VALUE_RE if html_current else KEY_VALUE_RE).match(raw)
             if match:
                 current[match.group(1)] = match.group(2)
     return blocks
