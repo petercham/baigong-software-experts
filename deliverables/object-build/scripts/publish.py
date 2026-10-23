@@ -381,8 +381,10 @@ def gate_a2(root: str) -> "tuple[bool, str]":
     提及类 WATCH（路由 advisory）恒 exit 1，而裁-24 遗留①已认定该状态合法
     （"GATE PASS 不受影响…维持现状可接受"）。三轴分离（60-gates §三）下"绿"的
     定义权在路由裁决，不在发现计数；按字面实现＝把 advisory 当 block，反而违 §三。
-    判词机检口径（本实现取最机械的一种，待拍板确认）：decisions 侧最新一条含
-    「总判」的行，该行含「阻塞项＝无」或不含「阻塞」者算无阻塞。
+    判词机检口径（**裁-25 最小约定**·60-gates.md §七）：判词行格式
+    `【判词】<批次>｜阻塞项：<无|列表>｜判定：<放行|有条件放行|不放行>`；
+    机检**只认**「阻塞项：无」＋「判定：放行」的组合，其余组合（含"有条件放行"）
+    一律未绿。判词由独立审计席出（发布方不得自写判词自放行）。
 
     「当期」的实现＝**当场跑 run-gates**（A2 语义是"当期全绿"，翻旧证据件＝拿
     历史绿当今天绿）。run-gates 是证据件唯一写者且**只写非 0 退出**（GATE PASS
@@ -414,21 +416,22 @@ def gate_a2(root: str) -> "tuple[bool, str]":
     if bad:
         return False, "当期门禁未绿：%s" % "；".join(bad)
     decisions_dir = os.path.join(root, ".collab", "decisions")
-    latest_line = ""
+    VERDICT_RE = re.compile(r"【判词】[^｜|]*[｜|]阻塞项：无[｜|]判定：放行")
+    latest_verdict = ""
+    any_verdict = False
     if os.path.isdir(decisions_dir):
         for fname in sorted(os.listdir(decisions_dir)):
             if not fname.endswith(".md"):
                 continue
             for line in read_text(os.path.join(decisions_dir, fname)).split("\n"):
-                if "总判" in line:
-                    latest_line = line
-    if not latest_line:
-        return False, "decisions 侧无任何「总判」判词行"
-    if "阻塞项＝无" in latest_line:
-        return True, "判词最新总判行阻塞项＝无"
-    if "阻塞" in latest_line:
-        return False, "判词最新总判行含阻塞：%s" % latest_line.strip()[:60]
-    return True, "判词最新总判行无「阻塞」字样"
+                if "【判词】" in line:
+                    any_verdict = True
+                    latest_verdict = line  # decisions 按文件名（日期）升序，末条＝最新
+    if not any_verdict:
+        return False, "decisions 侧无任何【判词】行（裁-25 格式：【判词】<批次>｜阻塞项：…｜判定：…）"
+    if VERDICT_RE.search(latest_verdict):
+        return True, "最新判词＝阻塞项：无＋判定：放行"
+    return False, "最新判词非「阻塞项：无＋判定：放行」组合：%s" % latest_verdict.strip()[:80]
 
 
 def gate_a3(root: str, pkg: str) -> "tuple[bool, str]":
