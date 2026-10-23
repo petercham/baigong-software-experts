@@ -27,10 +27,8 @@ Team 型（多角色协作团队）
 
 ## 头像
 
-头像未生成（`avatars/` 暂空）。如需自定义头像，要求：
-- 格式：PNG（推荐）或 JPG
-- 尺寸：512×512 px
-- 大小：单张不超过 500KB
+头像为**借用素材**：取自官方 `ai-content-creator-team` 专家团头像（同属 AI 内容创作语境，岗位语义近似映射：主理人←团队主理人、策划←creative-strategist、编剧←copywriter、美术指导←image-creator、导演←video-generator、剪辑←video-editor、运营←content-adapter），统一缩放至 512×512 PNG（≤500KB）。如需替换为定制头像，按以下规格覆盖同名文件即可：
+- 格式：PNG（推荐）或 JPG；尺寸：512×512 px；大小：单张 ≤500KB
 - 文件名对应 plugin.json members[].avatar：team.png / aigc-video-team-lead.png / aigc-content-strategist.png / aigc-screenwriter.png / aigc-production-designer.png / aigc-director.png / aigc-editor.png / aigc-operations.png
 
 ## 安装
