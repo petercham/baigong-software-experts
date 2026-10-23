@@ -4,8 +4,8 @@
 # spec_id: OA-T1
 # spec_file: deliverables/object-audit/SKILL.md
 # spec_anchor: T1 | 换项目测试
-# spec_clause_sha256: ea64fed5abea01220e61f3f1ae3f5f7017cad865ea92eb9ee35d3b70e74d3d2e
-# spec_version: 0.3
+# spec_clause_sha256: 775185225f643b36ffe35c11a816914357f80801a64452de9b97532e7031bead
+# spec_version: 0.4
 # spec_effective: 2026-10-23
 # provider: object-audit
 # --- /spec-provenance ---
@@ -13,8 +13,8 @@
 # spec_id: OA-S1
 # spec_file: deliverables/object-audit/references/10-skill.md
 # spec_anchor: S1 | 项目实体
-# spec_clause_sha256: 5073fa39caffcf9d2d00f16274bf0750569de3651a9c312cf52228bafb4a2569
-# spec_version: 0.3
+# spec_clause_sha256: f97486f4aec22b494a3b39423d0992b36ac77eb06e7abfb2d7e5ffdb19c3f849
+# spec_version: 0.4
 # spec_effective: 2026-10-23
 # provider: object-audit
 # --- /spec-provenance ---
@@ -69,7 +69,7 @@ PATTERNS: "list[tuple[str, str, str]]" = [
 # ①`spec-provenance` 块内全部日期（条款列举的是 `spec_effective` 行；机械化口径扩到
 #   **整块**——`ADR-YYYY-MM-DD-NN` 型 spec_id 与指向 `…/2026-10-22-裁决记录.md` 的
 #   spec_file 同为 70-provenance.md §七 协议强制写法，同属「协议强制日期」。
-#   此扩法与「全角括注」口径一样**待皮总追认**，提交信息同步报告）
+#   此扩法与「全角括注」口径同为**裁-23 拍板 1 已拍口径（L1）**）
 # ②changelog 文件全部日期 ③全角括注内的日期。
 # 实现解释（同步报告）：条款说「正文**裸**叙述日期仍算」，故反引号段与 URL 内的
 # 日期不算"裸写于句中"——先遮除再判（遮除保位不缩列）。
@@ -77,6 +77,13 @@ SPECPROV_START_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*spec-provenance v1[ \t
 SPECPROV_END_RE = re.compile(r"^[ \t]*#[ \t]*-{3,}[ \t]*/spec-provenance[ \t]*(?:-{3,})?[ \t]*$")
 CODE_SPAN_RE = re.compile(r"`[^`\n]*`")
 URL_RE = re.compile(r"https?://\S+")
+
+# ---- 改名/沿革史实句豁免（裁-23 拍板 3·判据见 10-skill.md S1 行／SKILL.md T1 行）----
+# 条款句式：「改名（YYYY-MM-DD…）」「由 X 改名」「旧名作废」。机械化口径：**行内含
+# 史实锚句标记**（改名／旧名作废／沿革）⇒ 该行项目名命中豁免（史实锚不删不改写）。
+# 正文裸项目名（行内无标记）仍算。changelog 文件的项目名**不整体豁免**——
+# 只有史实句式行豁免（90-changelog.md:13 即此例，裁-23 验收点名）。
+HISTORICAL_MARKERS = ("改名", "旧名作废", "沿革")
 
 
 def mask_non_narrative(line: str) -> str:
@@ -199,6 +206,14 @@ def main(argv: "list[str]") -> int:
                         counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
                         first_hit.setdefault(key, "%s:%d" % (rel, lineno))
                     continue
+                if key == "project-name":
+                    # 裁-23 史实句豁免：行内含改名/沿革标记 ⇒ 该行项目名不报
+                    if any(marker in raw for marker in HISTORICAL_MARKERS):
+                        continue
+                    for match in re.finditer(pat, raw):
+                        counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
+                        first_hit.setdefault(key, "%s:%d" % (rel, lineno))
+                    continue
                 for match in re.finditer(pat, raw):
                     counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
                     first_hit.setdefault(key, "%s:%d" % (rel, lineno))
@@ -219,13 +234,15 @@ def main(argv: "list[str]") -> int:
 
     # 注入类子判据的覆盖度提示：**不是 finding**（OA-T1 在路由表里配 block，把
     # 「清单没注入」记成 OA-T1 违规＝把**配置问题**记成**产物违规**——正是
-    # 70-provenance.md 记在账上的「归属错」；且注入后本仓 皮总/项目名 命中属待拍项，
+    # 70-provenance.md 记在账上的「归属错」；且注入后本仓 决策者/项目名 命中属待拍项，
     # 两头一夹门禁永不可满足，永不可满足的门禁＝装饰）。
     # 但也不静默：每次运行都打 coverage 行（非 finding 格式，run-gates 原样透传显示）。
     if not projects:
         print("coverage: OA-T1「项目名」子判据未执行（--project-name 或 GATE_PROJECT_NAMES 未注入）")
     if not persons:
-        print("coverage: OA-T1「人名」子判据未执行（--person-name 或 GATE_PERSON_NAMES 未注入）")
+        # 裁-23 拍板 3：人名清单缺省＝空是**合法配置**（本包规范件经泛指化后不应含
+        # 人名），文案据此从「未执行（欠注入）」改为「未配置（可留空）」——不制造焦虑。
+        print("coverage: OA-T1「人名」子判据未执行——人名清单未配置（如规范件不应含人名可留空）")
 
     for line in findings:
         print(line)

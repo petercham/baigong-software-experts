@@ -47,7 +47,9 @@
 """S-02：扫仓内 md 的反引号路径与 file:line 引用是否悬空（OA-D6），并对账索引↔磁盘（OA-D8-4／OB-DIR-③）。
 
 用法：
-    python check-pointers.py [--root <仓根>] [--scope <相对目录>]...
+    python check-pointers.py [--root <仓根>] [--scope <相对目录>]... [--target <file>]...
+
+默认扫描域＝`deliverables/`（`.collab/` 按裁-23 拍板 2 排除；显式入口见 DEFAULT_SCOPE 处注释）。
 
 退出码（闭集，见 60-gates.md「六、退出码闭集」）：
     0 通过／1 违规（悬空或孤儿）／2 用法错／4 基础设施错
@@ -63,8 +65,13 @@ import sys
 SEV_BLOCK = "BLOCK"
 SEV_WATCH = "WATCH"
 
-# 扫描域：仓内规范文档面（记录件里的指针同样要验——悬空与"是不是记录件"无关）。
-DEFAULT_SCOPE = ("deliverables", ".collab")
+# 扫描域（裁-23 拍板 2）：默认只扫规范文档面 `deliverables/`，**排除 `.collab/`**——
+# 与 S-03 同款划界：记录件 informative、不要求干净（append-only 史实锚里的指针
+# 改不动也不该由门禁拦）。默认排除 ≠ 不能查，显式入口保留：
+#   --scope .collab   追加扫描域（解析锚仍为仓根，指针照常解析）
+#   --root .collab    指过去核查（脚本自动上溯仓根做解析锚，见 main 内注释）
+#   --target <file>   直接指定文件核查
+DEFAULT_SCOPE = ("deliverables",)
 
 # 反引号内联代码：`...`（不跨行）。
 BACKTICK_RE = re.compile(r"`([^`\n]+)`")
@@ -330,23 +337,64 @@ def check_orphans(root: str) -> "list[str]":
 
 def main(argv: "list[str]") -> int:
     parser = argparse.ArgumentParser(add_help=True, description="S-02 指针完整性与索引对账")
-    parser.add_argument("--root", help="仓根（默认自脚本位置向上定位）")
+    parser.add_argument("--root", help="仓根（默认自脚本位置向上定位）；指向仓内子目录（如 .collab）时，"
+                                       "该目录成为扫描域、仓根自动上溯做解析锚（裁-23 拍板 2 显式入口）")
     parser.add_argument(
         "--scope",
         action="append",
         default=None,
-        help="扫描子目录（相对 --root，可重复）；默认 deliverables 与 .collab",
+        help="扫描子目录（相对 --root，可重复）；默认 deliverables（.collab 已按裁-23 拍板 2 排除，"
+             "需要时显式 --scope .collab 加回）",
+    )
+    parser.add_argument(
+        "--target",
+        action="append",
+        default=None,
+        help="只核查指定 .md 文件（可重复；裁-23 拍板 2 显式入口）。"
+             "只做悬空/提及判定，不做索引对账（孤儿是包级判据，与单文件无关）",
     )
     args = parser.parse_args(argv)
     root = find_root(args.root)
-    scopes = args.scope if args.scope else list(DEFAULT_SCOPE)
 
-    md_files = iter_markdown(root, scopes)
-    if not md_files:
-        sys.stderr.write("infra error: 扫描域内没有任何 .md（scope=%s）\n" % ",".join(scopes))
-        return 4
+    # 裁-23 拍板 2 显式入口：--root 指到非仓根（如 .collab）时，指针解析、基名索引、
+    # 孤儿对账都必须以**仓根**为锚（否则相对指针全判悬空＝假报），故自动上溯定位仓根；
+    # 原 --root 目录则退化为默认扫描域——"默认排除≠不能查"。
+    scan_base = None
+    if not os.path.isdir(os.path.join(root, "deliverables")):
+        anchor = os.path.dirname(root)
+        while True:
+            if os.path.isdir(os.path.join(anchor, "deliverables")):
+                break
+            parent = os.path.dirname(anchor)
+            if parent == anchor:
+                die_usage("--root 不在本仓工作区内，无法定位解析锚仓根：%s" % args.root)
+            anchor = parent
+        scan_base = root
+        root = anchor
 
-    findings = check_dangling(root, md_files, build_basename_index(root)) + check_orphans(root)
+    if args.target:
+        md_files = []
+        for tgt in args.target:
+            full = os.path.abspath(tgt)
+            if os.path.isdir(full):
+                die_usage("--target 只收文件，目录请用 --scope：%s" % tgt)
+            if not os.path.isfile(full):
+                die_usage("--target 文件不存在：%s" % tgt)
+            md_files.append(full)
+        findings = check_dangling(root, sorted(md_files), build_basename_index(root))
+    else:
+        if args.scope:
+            scopes = list(args.scope)
+        elif scan_base:
+            scopes = [os.path.relpath(scan_base, root).replace(os.sep, "/")]
+        else:
+            scopes = list(DEFAULT_SCOPE)
+        md_files = iter_markdown(root, scopes)
+        if not md_files:
+            sys.stderr.write("infra error: 扫描域内没有任何 .md（scope=%s）\n" % ",".join(scopes))
+            return 4
+        findings = check_dangling(root, md_files, build_basename_index(root)) + check_orphans(root)
+
     for line in findings:
         print(line)
     return 1 if findings else 0

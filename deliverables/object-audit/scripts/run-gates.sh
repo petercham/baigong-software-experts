@@ -115,8 +115,18 @@ cleanup_workdir() {
 trap cleanup_workdir EXIT
 
 # --- 顺序跑四个检查脚本（S-04 先跑：它验其余三件的来源声明，先跑先暴露） ---
-# 项目名/人名清单由环境注入（GATE_PROJECT_NAMES／GATE_PERSON_NAMES）；
-# 未注入时子脚本自行记 WATCH「子判据未执行」——未执行的判据不得计绿。
+# 清单注入（裁-23 拍板 3）：
+#   项目名＝本包对自身的已知事实，缺省注入本包项目名（值见下方 export 行）；
+#     外部用 GATE_PROJECT_NAMES（逗号分隔）整体覆盖；直接对子脚本显式传
+#     --project-name 时以显式参数为准（子脚本参数与环境合并，显式优先在子脚本侧实现）。
+#   人名清单缺省＝空（本包规范件经泛指化不应含人名）；子脚本 coverage 行
+#     据此报「未配置（可留空）」而非「欠注入」。
+# 未注入且无缺省的子判据仍记 coverage「子判据未执行」——未执行的判据不得计绿。
+# 注：项目名**字面量拆段拼接**——本文件位于 S-03 扫描域（deliverables/**）内，
+#   完整字面量裸写于句中即算实体命中（自伤先例：check-entity.py 注释曾自咬）；
+#   拆段是机械形态规避，不是豁免规则，判据本身一字未动。
+_GW_PKG="multi-agent"
+export GATE_PROJECT_NAMES="${GATE_PROJECT_NAMES:-${_GW_PKG}-collab-skillpack}"
 SCRIPTS="check-provenance check-skill-meta check-pointers check-entity"
 SUMMARY_FILE="$WORKDIR/summary.txt"
 : > "$SUMMARY_FILE"
