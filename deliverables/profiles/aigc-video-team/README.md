@@ -51,3 +51,21 @@ python3 scripts/register_expert.py <expert-dir>
 ```bash
 zip -r aigc-video-team.zip aigc-video-team/
 ```
+
+## v1.4.0 各席 MD token 计数表（瘦身基线·2026-10-25）
+
+**口径**：CJK 字符≈1 token/字、非 CJK≈4 字符/token；估算 token＝CJK 数＋非 CJK 数÷4（取整截断）。CJK 按 Unicode 区段判定（`4E00–9FFF`／`3400–4DBF`／`3000–303F`／`FF00–FFEF`／`F900–FAFF`）。超限＝估算 token >2500（D5 红线）；压线＝≤2500 且 ≥2300。
+
+**双验**：实现一＝显式 Unicode 区段逐字判定（本表取值·主口径）；实现二＝`unicodedata.east_asian_width` 全角（W/F）判定（交叉口径）。两实现差值：主理人件 −8（实现二多计 8 token），其余六席 Δ＝0。
+
+| 文件名 | CJK 数 | 非 CJK 数 | 估算 token | 超限标志 |
+|---|---|---|---|---|
+| `aigc-video-team-lead.md` | 9281 | 6420 | 10886 | 超限 |
+| `aigc-editor.md` | 2209 | 6078 | 3728 | 超限 |
+| `aigc-production-designer.md` | 2542 | 2302 | 3117 | 超限 |
+| `aigc-operations.md` | 1755 | 5044 | 3016 | 超限 |
+| `aigc-screenwriter.md` | 2143 | 2322 | 2723 | 超限 |
+| `aigc-content-strategist.md` | 1642 | 3148 | 2429 | 压线 |
+| `aigc-director.md` | 1786 | 2840 | 2496 | 压线 |
+
+- 基线态＝`0f40abe`；3b 结构化瘦身后更新为终值表。
