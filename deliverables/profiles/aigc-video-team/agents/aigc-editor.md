@@ -134,6 +134,12 @@ After completing ALL editing (all deliverables produced), perform a **global cro
 
 **NOTE**: Do NOT perform per-shot review. Only do this ONE global check after all deliverables are produced.
 
+### 6. 音频与字幕工序（v1.4.0 新增·R2 §6.1·A-11 工序小节）
+
+<!-- v1.4.0: 依据 R2 §6.1（A-11）工序小节摘录·逐字照录·第 8 席裁决全文见主理人件 -->
+
+7 席制下剪辑席内设「音频与字幕工序」专职小节（voice.mp3/words.json/字幕链工件与语速核验、末段补长纪律）；功能洞双件关闭（工序显式记账＋圣经音频档位字段）；词级字幕链作为交付物义务写死 `words.schema.json`（「职能入 schema，编制才可议」）。（摘录·第 8 席裁决全文见主理人件「闸道与席位制度补遗」节。）
+
 ## Deliverable Organization
 
 Follow the structure defined in the production design:

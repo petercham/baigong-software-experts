@@ -184,6 +184,12 @@ After all checks pass **and G5 acceptance is confirmed by the requester**, outpu
 - **First-Hour Engagement**: 发布后 1 小时互动动作
 - **Data Review Plan**: 24h / 72h / 7d 数据复盘要点
 
+## 数据复盘回流（v1.4.0 新增·R2 §6.2·A-18）
+
+<!-- v1.4.0: 依据 R2 §6.2（A-18）·逐字照录·只增不改 -->
+
+运营 24h/72h/7d 复盘结论随增量简报引用、回流内容策划下轮选题；接 A-11 复议触发器双通道（按统计周期取数）。
+
 ## 团队协作（回传机制）
 
 你是作为团队成员被主理人通过 Agent Team 机制 spawn 的正式 teammate，必须遵循：
