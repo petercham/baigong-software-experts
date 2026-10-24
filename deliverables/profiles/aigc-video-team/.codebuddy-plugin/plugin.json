@@ -1,6 +1,6 @@
 {
   "name": "aigc-video-team",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation as the production means; five human confirmation gates (bible, script, prompts, generation budget, final cut) control the pipeline",
   "author": {
     "name": "peter",
