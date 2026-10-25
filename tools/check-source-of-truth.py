@@ -27,22 +27,39 @@
 # spec_effective: 2026-10-25
 # provider: multi-collab
 # --- /spec-provenance ---
+# --- spec-provenance v1 ---
+# spec_id: ADR-SOT-EXEMPT
+# spec_file: .collab/decisions/2026-10-25-皮总拍板.md
+# spec_anchor: - **① 基线豁免＝转正式豁免，豁免键＝「文本＋出现文件集合」（选项 c）**
+# spec_clause_sha256: adb675e9429b2a1bce4d2876241fc50c328b1d6ea80230163f00a8747d47c2f8
+# spec_version: 1.0
+# spec_effective: 2026-10-26
+# provider: multi-collab
+# --- /spec-provenance ---
 #
 # 规范来源（皮总 Q4 令·两问之一）：
 #   N1-SOT-1／N1-SOT-2 ＝ 三守门①「单真源」（同一内容只一处全文、MD 只留骨架行、
 #     细则只在 skill、互引不双写）＋ 2.1 三层拆解案细则 1（骨架/细则切分线）。
 #   N1-SKILL-LINE ＝ 2500 分轨口径（交接件 §二 #4 已决升格：SKILL.md 技能层
 #     ≤5000 token 级）。
-#   出处均＝交接件 §一/§二（provider 填 multi-collab 系因 check-provenance 要求
-#   provider＝deliverables/ 下现存包名；本件规范实体在 .collab 交接件，如实注明）。
+#   ADR-SOT-EXEMPT ＝ 皮总拍板 decisions §九·①（2026-10-26）：基线豁免＝转正式豁免，
+#     豁免键＝「行文本＋出现文件集合」；仅当两者皆匹配才豁免，同文本出现在集合外的
+#     新文件仍照 BLOCK（不取纯文本键，堵住同文本搬家盲区）。
+#   出处：N1-* ＝交接件 §一/§二（provider 填 multi-collab 系因 check-provenance 要求
+#   provider＝deliverables/ 下现存包名；本件规范实体在 .collab 交接件，如实注明）；
+#   ADR-SOT-EXEMPT ＝ .collab/decisions 裁决条目（spec_id 用 ADR- 前缀＝70-provenance.md
+#   规定的「裁决条目临时来源」写法；其上三块 N1-* 为批 4 W2 既有写法，本单未改）。
 #
 # 出口路由（皮总 Q4 令·两问之二）：
 #   退出码照 60-gates.md §六闭集：0 通过／1 违规／2 用法错／4 基础设施错。
-#   发现行照 run-gates.sh FINDING_RE 一行一封格式输出。
+#   发现行照 run-gates.sh FINDING_RE 一行一封格式输出；严重度一律取自路由表
+#   on_severity 已有取值域（BLOCK／WATCH）——基线豁免项转 WATCH，不新造 SEV 词
+#   （新造词在挂入 run-gates 后会撞「未知 SEV」exit 4，属自埋雷，故不取）。
 #   **路由缺口如实报告（不自造路由）**：本脚本未挂 run-gates.sh 的 SCRIPTS 清单，
-#   且 60-gates.md 路由表 per_spec 无 N1-* 条目——若未来挂入，按读表规则 2 走
-#   on_severity 默认（BLOCK→block／WATCH→advisory）；§四 配套规则 1 要求 block
-#   必须有条款级依据，N1-* 的 per_spec 配置候主理人/皮总治理决定，本件不预设。
+#   且 60-gates.md 路由表 per_spec 无 N1-*／ADR-SOT-EXEMPT 条目——若未来挂入，按
+#   读表规则 2 走 on_severity 默认（BLOCK→block／WATCH→advisory）；§四 配套规则 1
+#   要求 block 必须有条款级依据，N1-* 的 per_spec 配置候主理人/皮总治理决定
+#   （decisions §九·②：先 advisory 挂入取信号、豁免落定后再升 block），本件不预设。
 #
 # token 口径（N1-SKILL-LINE 用）：script-v1（tools/count_agent_tokens.py 同款实现：
 #   CJK 区段正则≈1 token/字、非 CJK≈4 字符/token、ceil 上取整）。
@@ -50,7 +67,7 @@
 #   W 属性符号，emoji 按 4 字符≈1 token 计）——约定出处＝批 4 W5a 勘察报告 B3.2
 #   （.collab/research/2026-10-25-批4-W5a-2500分轨复算与技能层口径勘察报告_v1.md）。
 #
-# 本件只读：不写任何文件。
+# 本件只读：不写任何文件（基线快照由外部程序化生成，见 load_baseline 注释）。
 """W2 真源对账：A 骨架-本体对账（单真源守护）＋ B 技能层线检。
 
 用法：
@@ -60,8 +77,10 @@
 
 检查项：
     A1（N1-SOT-1）agents/ 七席 MD 之间、MD 与 skills/ 之间 ≥12 CJK 连续段行级重合
-       ——重合＝第二真源嫌疑，BLOCK 候选；首跑基线既有项以「｜基线既有」标注区分
-       （标注不改 SEV 不改退出码——判据不放宽，红就是红）。
+       ——重合＝第二真源嫌疑。**豁免键＝「行文本＋出现文件集合」**（decisions §九·①）：
+       文本匹配且出现文件 ∈ 该文本既定文件集合 → 转 WATCH 并标「｜基线豁免（文本＋
+       文件集合）」，不计 BLOCK；文本不在基线、或文本在基线但出现在集合外的新文件
+       → 照 BLOCK 并标「｜新命中」（同文本搬家必被抓）。
     A2（N1-SOT-2）agents/ 与 skills/ 内反引号 .md 路径指针可达性——悬空＝BLOCK。
     B （N1-SKILL-LINE）五域 SKILL.md token ≤5000（script-v1/ceil/emoji 非 CJK 池）。
 
@@ -80,22 +99,34 @@ MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
 SKILL_LINE = 5000            # N1-SKILL-LINE：技能层 ≤5000 token 级
 DEFAULT_PKG = 'deliverables/profiles/aigc-video-team'
 
-# 首跑基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
-# 首跑（d23a374＋T2/T3 落地态）实测的七席 MD 结构性模板重合行（三栏/权限/⛓ 节
-# 骨架、共用指针行）。脚本仍按 BLOCK 候选输出，仅加「｜基线既有」标注区分——
-# 标注不改 SEV 不改退出码（判据不放宽）；转正式豁免属治理决定，本件不自行放宽。
+# 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
+#   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合}。
+#   **豁免键＝「文本＋文件集合」**（皮总拍板 decisions §九·①，规范来源见文件头
+#   ADR-SOT-EXEMPT 块）——不取纯文本键，以堵住「同文本搬家被误标基线」的盲区。
+#   判定：仅当「行文本匹配」且「出现文件 ∈ 该文件集合」才豁免（转 WATCH·不计 BLOCK）；
+#   文本不在基线、或出现在集合外的新文件 → 照 BLOCK（标「｜新命中」）。
+#   判据强度（MIN_CJK／SKILL_LINE／OA-D6 裁-21 裸基名→WATCH 划界）不因豁免而变。
 BASELINE_SNAPSHOT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                  'baseline-sot-dup.json')
 
-def load_baseline() -> frozenset:
+
+def load_baseline() -> dict:
+    """读基线快照：返回 {行文本 -> 既定出现文件集合(frozenset)}。
+
+    快照缺失＝无基线（全部按新命中输出，更严不更松）；形态不符或损坏＝exit 4
+    （不猜语义，与 60-gates §六「基础设施错」一致）。
+    """
     if not os.path.isfile(BASELINE_SNAPSHOT):
-        return frozenset()   # 快照缺失＝全部按新命中输出（更严不更松）
+        return {}
     import json
     try:
         with open(BASELINE_SNAPSHOT, 'r', encoding='utf-8') as handle:
-            return frozenset(json.load(handle)['lines'])
-    except (OSError, ValueError, KeyError) as exc:
-        raise SystemExit('infra error: 基线快照损坏 %s: %s' % (BASELINE_SNAPSHOT, exc))
+            data = json.load(handle)
+        items = data['items']
+        return dict((item['text'], frozenset(item['files'])) for item in items)
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise SystemExit('infra error: 基线快照损坏或形态不符 %s: %s'
+                         % (BASELINE_SNAPSHOT, exc))
 
 
 def tokens(text: str) -> int:
@@ -199,7 +230,10 @@ def main() -> int:
     findings = []
 
     # --- A1 骨架-本体对账：≥12 CJK 行级重合（scope＝至少一侧为 agents/） ---
+    # 豁免键＝「行文本＋出现文件集合」：逐「出现处」判定，同一行文本的不同出现处
+    # 各自判——集合内的豁免，集合外的（搬家/新增载体）照 BLOCK。
     baseline = load_baseline()
+    n_exempt = 0
     index = {}   # 行文本 -> [(rel, 行号)]
     for rel in agents + skills:
         for i, line in big_lines(os.path.join(pkg_abs, rel)):
@@ -207,11 +241,23 @@ def main() -> int:
     for line, occ in index.items():
         files = sorted({rel for rel, _ in occ})
         if len(files) > 1 and any(f.startswith('agents/') for f in files):
-            tag = '｜基线既有' if line in baseline else ''
+            allowed = baseline.get(line)
             for rel, i in occ:
-                findings.append((rel, i, 'BLOCK', 'N1-SOT-1',
-                                 '≥%d CJK 行级重合（第二真源嫌疑·共 %d 处：%s）%s'
-                                 % (MIN_CJK, len(files), ' + '.join(files), tag)))
+                if allowed is not None and rel in allowed:
+                    n_exempt += 1
+                    findings.append((rel, i, 'WATCH', 'N1-SOT-1',
+                                     '≥%d CJK 行级重合（基线结构性模板·共 %d 处：%s）'
+                                     '｜基线豁免（文本＋文件集合）'
+                                     % (MIN_CJK, len(files), ' + '.join(files))))
+                else:
+                    if allowed is None:
+                        reason = '行文本不在基线'
+                    else:
+                        reason = '行文本在基线但出现文件不在既定集合（搬家／新增载体）'
+                    findings.append((rel, i, 'BLOCK', 'N1-SOT-1',
+                                     '≥%d CJK 行级重合（第二真源嫌疑·共 %d 处：%s）'
+                                     '｜新命中（豁免键未命中·%s）'
+                                     % (MIN_CJK, len(files), ' + '.join(files), reason)))
 
     # --- A2 ⛓/反引号指针可达性 ---
     findings.extend(check_pointers(pkg_abs, agents + skills))
@@ -232,11 +278,13 @@ def main() -> int:
         print('%s:%d: %s %s %s' % (rel, i, sev, spec, msg))
         if sev == 'BLOCK':
             violations += 1
-    n_watch = sum(1 for f in findings if f[2] == 'WATCH')
-    print('check-source-of-truth: 文件 %d（agents %d＋skills %d）｜BLOCK 候选 %d｜WATCH %d'
+    n_watch_ptr = sum(1 for f in findings if f[2] == 'WATCH' and f[3] != 'N1-SOT-1')
+    exit_code = 1 if violations else 0
+    print('check-source-of-truth: 文件 %d（agents %d＋skills %d）｜BLOCK %d（新命中 %d）'
+          '｜基线豁免 %d（WATCH·键＝文本＋文件集合）｜指针 WATCH %d｜exit %d'
           % (len(agents) + len(skills), len(agents), len(skills),
-             sum(1 for f in findings if f[2] == 'BLOCK'), n_watch))
-    return 1 if violations else 0
+             violations, violations, n_exempt, n_watch_ptr, exit_code))
+    return exit_code
 
 
 if __name__ == '__main__':

@@ -1,18 +1,120 @@
 {
-  "note": "W2 真源对账脚本 A1 基线快照：首跑（d23a374＋T2/T3 落地态）实测的七席 MD 结构性模板重合行。标注不改 SEV 不改退出码——判据不放宽，红就是红；转正式豁免属治理决定。",
+  "note": "W2 真源对账脚本 A1 基线快照（**豁免键＝行文本＋该文本既定出现的文件集合**）。每条 item＝一条基线行文本＋其既定出现文件集合；仅当「文本匹配」且「出现文件 ∈ files」才豁免（转 WATCH），同文本出现在集合外的新文件照 BLOCK（皮总拍板 decisions §九·①，规范来源见脚本头 ADR-SOT-EXEMPT 块）。本件由脚本逻辑程序化生成，禁手抄。",
+  "exemption_key": "文本＋出现文件集合（不是纯文本键）",
   "measured_at_commit": "d23a374（T2 019ff57／T3 962841b 落地后工作树）",
+  "regenerated_at_commit": "a9a235f（仅补文件集合维度·被测树与基线态逐字节一致，未改判据）",
   "measured_by": "b3b-engineer",
-  "lines": [
-    "## ⛓ 必读（行使动作前必读，不读不得执行）",
-    "## 三栏（管什么·不管什么·对谁）",
-    "- 建目录/收资产/转生前：`skills/aigc-video-governance/references/staging-and-assets.md`【v1.4.0 逐字】",
-    "- 落盘任何文件前：`skills/aigc-video-governance/references/write-authority.md`【v1.4.0 逐字】",
-    "| 写盘 | 无（非 A-05 指定生产工件写入者；产出仅 SendMessage 回传）<!-- v1.4.0: 依据 R2 §2.2 --> |",
-    "| 判定 | 无（仅自检，不构成放行） |",
-    "| 外发 | 无（对外交付统一经主理人） |",
-    "| 对谁 | 主理人（Qi）。所有输入输出均经主理人 |",
-    "⛓ 行前必读：`skills/aigc-video-governance/references/teammate-protocol.md`——回传机制唯一真源（六席共用；其中「完成{席位动名词}」按本席职能代入）。",
-    "只接收以下项（经主理人转发）：",
-    "未列明的一律不接收，不自行索要其他成员的过程稿。"
+  "items": [
+    {
+      "text": "## ⛓ 必读（行使动作前必读，不读不得执行）",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md",
+        "agents/aigc-video-team-lead.md"
+      ]
+    },
+    {
+      "text": "## 三栏（管什么·不管什么·对谁）",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md",
+        "agents/aigc-video-team-lead.md"
+      ]
+    },
+    {
+      "text": "- 建目录/收资产/转生前：`skills/aigc-video-governance/references/staging-and-assets.md`【v1.4.0 逐字】",
+      "files": [
+        "agents/aigc-editor.md",
+        "agents/aigc-video-team-lead.md"
+      ]
+    },
+    {
+      "text": "- 落盘任何文件前：`skills/aigc-video-governance/references/write-authority.md`【v1.4.0 逐字】",
+      "files": [
+        "agents/aigc-editor.md",
+        "agents/aigc-video-team-lead.md"
+      ]
+    },
+    {
+      "text": "| 写盘 | 无（非 A-05 指定生产工件写入者；产出仅 SendMessage 回传）<!-- v1.4.0: 依据 R2 §2.2 --> |",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "| 判定 | 无（仅自检，不构成放行） |",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "| 外发 | 无（对外交付统一经主理人） |",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "| 对谁 | 主理人（Qi）。所有输入输出均经主理人 |",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "⛓ 行前必读：`skills/aigc-video-governance/references/teammate-protocol.md`——回传机制唯一真源（六席共用；其中「完成{席位动名词}」按本席职能代入）。",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "只接收以下项（经主理人转发）：",
+      "files": [
+        "agents/aigc-content-strategist.md",
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    },
+    {
+      "text": "未列明的一律不接收，不自行索要其他成员的过程稿。",
+      "files": [
+        "agents/aigc-director.md",
+        "agents/aigc-editor.md",
+        "agents/aigc-operations.md",
+        "agents/aigc-production-designer.md",
+        "agents/aigc-screenwriter.md"
+      ]
+    }
   ]
 }
