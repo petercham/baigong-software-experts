@@ -58,18 +58,19 @@ zip -r aigc-video-team.zip aigc-video-team/
 
 | 席位 MD | 行数 | token | ≤2500? | 口径版本 | 下沉件数 | 下沉 token | 实测人 | 实测 commit |
 |---|---|---|---|---|---|---|---|---|
-| aigc-video-team-lead.md | 119 | 2,287 | 绿 | script-v1 | 12 | 10,774 | b3b-engineer | 6447f76 |
+| aigc-video-team-lead.md | 119 | 2,287 | 绿 | script-v1 | 11 | 9,012 | b3b-engineer | 6447f76 |
 | aigc-editor.md | 112 | 2,333 | 绿 | script-v1 | 7 | 1,703 | b3b-engineer | 6447f76 |
 | aigc-production-designer.md | 101 | 1,985 | 绿 | script-v1 | 2 | 1,367 | b3b-engineer | 6447f76 |
 | aigc-operations.md | 135 | 2,188 | 绿 | script-v1 | 5 | 1,315 | b3b-engineer | 6447f76 |
 | aigc-screenwriter.md | 146 | 2,285 | 绿 | script-v1 | 2 | 614 | b3b-engineer | 6447f76 |
 | aigc-director.md | 108 | 2,300 | 绿 | script-v1 | 3 | 483 | b3b-engineer | 6447f76 |
 | aigc-content-strategist.md | 107 | 1,845 | 绿 | script-v1 | 3 | 883 | b3b-engineer | 6447f76 |
-| **合计** | **828** | **15,223** | — | script-v1 | **34** | **17,139** | b3b-engineer | 6447f76 |
+| **合计** | **828** | **15,223** | — | script-v1 | **33** | **15,377** | b3b-engineer | 6447f76 |
 
-**读法（MD 是 cost center，references 是 asset）**：常驻侧七席合计 15,223 tok（批 2d 后基线 28,398，−46.4%）；资产侧 `skills/` 五域 27 件 references 合计 18,473 tok＋5 件索引 SKILL.md 合计 2,971 tok（治理 662／编排 532／内容 492／视觉 500／发布 785，均 ≤2,500 预防线）。**总量不降**（28,398→36,667，+29.1%）——本次不是减总量，是把成本从「每次会话全付」移到「按需才付」；v1.4.0 硬条款本体在 references 中逐字承载（C3 逐字门保护），席位 MD 以「⛓ 必读」硬读指针直达（确定性通道，不依赖语义匹配）。
+**读法（MD 是 cost center，references 是 asset）**：常驻侧七席合计 15,223 tok（批 2d 后基线 28,398，−46.4%）；资产侧 `skills/` 五域 27 件 references 合计 18,768 tok＋5 件索引 SKILL.md 合计 2,981 tok（治理 662／编排 532／内容 492／视觉 500／发布 795，均 ≤2,500 预防线；资产侧含批 3b 善后回补的主理人席生成侧工具链默认——基线 08a466a 主理人席 MD:438 生成侧半句逐字回补至 release/default-toolchain.md）。**总量不降**（28,398→36,972，+30.2%）——本次不是减总量，是把成本从「每次会话全付」移到「按需才付」；v1.4.0 硬条款本体在 references 中逐字承载（C3 逐字门保护），席位 MD 以「⛓ 必读」硬读指针直达（确定性通道，不依赖语义匹配）。
 
 **计数规则说明**：
 - 「下沉件数」＝承载该席下沉内容的 references 件数（共用件按件各计：`teammate-protocol.md` 为六席回传机制单真源，六席各计 1 件；`default-toolchain.md` 为剪辑席＋导演席共用，两席各计 1 件）。
-- 「下沉 token」＝该席 MD 实际迁出块的 token 合计（逐块实测，P1–P5 累计）；因共用件按席分别计入，合计行含六席各自回传机制块（`08a466a` 逐块实测合计 1,249 tok）对单真源 `teammate-protocol.md`（452 tok）的重复计数（797 tok）——资产侧以去重后 18,473 tok 为准。
+- 「下沉 token」＝该席 MD 实际迁出块的 token 合计（逐块实测，P1–P5 累计）；因共用件按席分别计入，合计行含六席各自回传机制块（`08a466a` 逐块实测合计 1,249 tok）对单真源 `teammate-protocol.md`（452 tok）的重复计数（797 tok）——资产侧以去重后 18,768 tok 为准。
+- **勘误（批 3b 善后）**：lead 行「下沉 token」10,774→**9,012**、「下沉件数」12→**11**（原值系把席内改写当作下沉、并含 `review-report-template.md` 一条 ``` 围栏行假阳性；QA 逐块实测 9,012，本席独立复算区间 [8,895, 9,141] 含该值·逐块推导见批 3b 善后 commit）；合计行随行更正为 33 件／15,377 tok。其余六席下沉账经同尺复算均在「逐行下限～整块上限」带内，无需更动。
 - 基线（批 2d 后·`ef3c66e`·script-v1 复算·7/7 与主理人独立复算 MATCH）：lead 10,886／editor 3,729／PD 3,118／operations 3,016／screenwriter 2,724／director 2,496／strategist 2,429，合计 28,398。此前基线表（非 CJK 取整截断口径）按读数四要素规则退出流通，不再作为判据。

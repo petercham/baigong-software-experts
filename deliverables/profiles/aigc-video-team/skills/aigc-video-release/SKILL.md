@@ -18,7 +18,7 @@ version: 1.0.0
 | `references/self-check.md` | 全局自检清单（运营判定参考·不构成放行） | 全部产出完成后 |
 | `references/deliverable-org.md` | 交付物组织＋增量返工支持（含写权一致性注记） | 组织交付物/返工时 |
 | `references/context-and-issues.md` | 理解上下文＋问题处置 | 开工理解上下文/遇问题时 |
-| `references/default-toolchain.md` | 默认工具链（剪辑席＋导演席） | 工具链未指定时 |
+| `references/default-toolchain.md` | 默认工具链（剪辑席＋导演席＋主理人席生成侧回补） | 工具链未指定时 |
 | `references/review-process.md` | 审核流程明细（审前分析＋合规/质量/平台适配三类明细） | 运营席跑审核前 |
 | `references/report-standards.md` | 审核报告行文标准（结构/覆盖/最佳实践） | 写审核报告前 |
 | `references/review-report-template.md` | 审核报告格式与模板（Summary/未过项/Known Issues） | 套用报告模板前 |
