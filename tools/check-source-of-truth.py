@@ -185,6 +185,7 @@ def main() -> int:
             if parent == cur:
                 sys.stderr.write('infra error: 未能定位仓根；请用 --root 指定\n')
                 return 4
+            cur = parent
     pkg_abs = os.path.join(root, args.pkg)
     if not os.path.isdir(pkg_abs):
         sys.stderr.write('usage error: 包目录不存在：%s\n' % args.pkg)
