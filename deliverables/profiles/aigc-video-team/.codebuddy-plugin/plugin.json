@@ -15,6 +15,13 @@
     "./agents/aigc-editor.md",
     "./agents/aigc-operations.md"
   ],
+  "skills": [
+    "./skills/aigc-video-governance",
+    "./skills/aigc-video-orchestration",
+    "./skills/aigc-video-content",
+    "./skills/aigc-video-visual",
+    "./skills/aigc-video-release"
+  ],
   "expertType": "team",
   "agentName": "aigc-video-team-lead",
   "teamInfo": {

@@ -52,20 +52,24 @@ python3 scripts/register_expert.py <expert-dir>
 zip -r aigc-video-team.zip aigc-video-team/
 ```
 
-## v1.4.0 各席 MD token 计数表（瘦身基线·2026-10-25）
+## Token 计数（终态·批 3b 结构化瘦身后）
 
-**口径**：CJK 字符≈1 token/字、非 CJK≈4 字符/token；估算 token＝CJK 数＋非 CJK 数÷4（取整截断）。CJK 按 Unicode 区段判定（`4E00–9FFF`／`3400–4DBF`／`3000–303F`／`FF00–FFEF`／`F900–FAFF`）。超限＝估算 token >2500（D5 红线）；压线＝≤2500 且 ≥2300。
+**口径四要素**（缺一不计绿）：①口径版本＝`script-v1`（`tools/count_agent_tokens.py`：CJK≈1 token/字、非 CJK≈4 字符/token）；②实测 commit＝`6447f76`（七席 MD 终态所在提交，本表随批 3b-P6 落盘）；③实测人＝b3b-engineer；④取整方式＝**ceil**（`-(-(n) // 4)`）。判据＝每席 ≤2,500（红线），目标 ≤2,350。
 
-**双验**：实现一＝显式 Unicode 区段逐字判定（本表取值·主口径）；实现二＝`unicodedata.east_asian_width` 全角（W/F）判定（交叉口径）。两实现差值：主理人件 −8（实现二多计 8 token），其余六席 Δ＝0。
+| 席位 MD | 行数 | token | ≤2500? | 口径版本 | 下沉件数 | 下沉 token | 实测人 | 实测 commit |
+|---|---|---|---|---|---|---|---|---|
+| aigc-video-team-lead.md | 119 | 2,287 | 绿 | script-v1 | 12 | 10,774 | b3b-engineer | 6447f76 |
+| aigc-editor.md | 112 | 2,333 | 绿 | script-v1 | 7 | 1,703 | b3b-engineer | 6447f76 |
+| aigc-production-designer.md | 101 | 1,985 | 绿 | script-v1 | 2 | 1,367 | b3b-engineer | 6447f76 |
+| aigc-operations.md | 135 | 2,188 | 绿 | script-v1 | 5 | 1,315 | b3b-engineer | 6447f76 |
+| aigc-screenwriter.md | 146 | 2,285 | 绿 | script-v1 | 2 | 614 | b3b-engineer | 6447f76 |
+| aigc-director.md | 108 | 2,300 | 绿 | script-v1 | 3 | 483 | b3b-engineer | 6447f76 |
+| aigc-content-strategist.md | 107 | 1,845 | 绿 | script-v1 | 3 | 883 | b3b-engineer | 6447f76 |
+| **合计** | **828** | **15,223** | — | script-v1 | **34** | **17,139** | b3b-engineer | 6447f76 |
 
-| 文件名 | CJK 数 | 非 CJK 数 | 估算 token | 超限标志 |
-|---|---|---|---|---|
-| `aigc-video-team-lead.md` | 9281 | 6420 | 10886 | 超限 |
-| `aigc-editor.md` | 2209 | 6078 | 3728 | 超限 |
-| `aigc-production-designer.md` | 2542 | 2302 | 3117 | 超限 |
-| `aigc-operations.md` | 1755 | 5044 | 3016 | 超限 |
-| `aigc-screenwriter.md` | 2143 | 2322 | 2723 | 超限 |
-| `aigc-content-strategist.md` | 1642 | 3148 | 2429 | 压线 |
-| `aigc-director.md` | 1786 | 2840 | 2496 | 压线 |
+**读法（MD 是 cost center，references 是 asset）**：常驻侧七席合计 15,223 tok（批 2d 后基线 28,398，−46.4%）；资产侧 `skills/` 五域 27 件 references 合计 18,473 tok＋5 件索引 SKILL.md 合计 2,971 tok（治理 662／编排 532／内容 492／视觉 500／发布 785，均 ≤2,500 预防线）。**总量不降**（28,398→36,667，+29.1%）——本次不是减总量，是把成本从「每次会话全付」移到「按需才付」；v1.4.0 硬条款本体在 references 中逐字承载（C3 逐字门保护），席位 MD 以「⛓ 必读」硬读指针直达（确定性通道，不依赖语义匹配）。
 
-- 基线态＝`0f40abe`；3b 结构化瘦身后更新为终值表。
+**计数规则说明**：
+- 「下沉件数」＝承载该席下沉内容的 references 件数（共用件按件各计：`teammate-protocol.md` 为六席回传机制单真源，六席各计 1 件；`default-toolchain.md` 为剪辑席＋导演席共用，两席各计 1 件）。
+- 「下沉 token」＝该席 MD 实际迁出块的 token 合计（逐块实测，P1–P5 累计）；因共用件按席分别计入，合计行含六席各自回传机制块（`08a466a` 逐块实测合计 1,249 tok）对单真源 `teammate-protocol.md`（452 tok）的重复计数（797 tok）——资产侧以去重后 18,473 tok 为准。
+- 基线（批 2d 后·`ef3c66e`·script-v1 复算·7/7 与主理人独立复算 MATCH）：lead 10,886／editor 3,729／PD 3,118／operations 3,016／screenwriter 2,724／director 2,496／strategist 2,429，合计 28,398。此前基线表（非 CJK 取整截断口径）按读数四要素规则退出流通，不再作为判据。
