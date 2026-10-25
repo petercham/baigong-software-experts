@@ -1,34 +1,34 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
-# spec_id: N1-SOT-1
+# spec_id: MC-SOT-1
 # spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: 2. **三守门**：①单真源
 # spec_clause_sha256: e00ce57d764932edc0bb8a010046cad977bf9e35d02c5485370e59128b9b1a18
-# spec_version: 1
+# spec_version: 1.0
 # spec_effective: 2026-10-25
 # provider: multi-collab
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
-# spec_id: N1-SOT-2
+# spec_id: MC-SOT-2
 # spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: 2. **三守门**：①单真源
 # spec_clause_sha256: e00ce57d764932edc0bb8a010046cad977bf9e35d02c5485370e59128b9b1a18
-# spec_version: 1
+# spec_version: 1.0
 # spec_effective: 2026-10-25
 # provider: multi-collab
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
-# spec_id: N1-SKILL-LINE
+# spec_id: MC-SKILL-LINE
 # spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: ### 2.1 N1 三层拆解案（定稿形态·第四轮三方已认可）
 # spec_clause_sha256: 51fccbbc3d42fbb0756eb698ea12f984dd63f558269df84d0ed74600f6aec882
-# spec_version: 1
+# spec_version: 1.0
 # spec_effective: 2026-10-25
 # provider: multi-collab
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
-# spec_id: ADR-SOT-EXEMPT
+# spec_id: MC-SOT-EXEMPT
 # spec_file: .collab/decisions/2026-10-25-皮总拍板.md
 # spec_anchor: - **① 基线豁免＝转正式豁免，豁免键＝「文本＋出现文件集合」（选项 c）**
 # spec_clause_sha256: adb675e9429b2a1bce4d2876241fc50c328b1d6ea80230163f00a8747d47c2f8
@@ -38,30 +38,42 @@
 # --- /spec-provenance ---
 #
 # 规范来源（皮总 Q4 令·两问之一）：
-#   N1-SOT-1／N1-SOT-2 ＝ 三守门①「单真源」（同一内容只一处全文、MD 只留骨架行、
+#   MC-SOT-1／MC-SOT-2 ＝ 三守门①「单真源」（同一内容只一处全文、MD 只留骨架行、
 #     细则只在 skill、互引不双写）＋ 2.1 三层拆解案细则 1（骨架/细则切分线）。
-#   N1-SKILL-LINE ＝ 2500 分轨口径（交接件 §二 #4 已决升格：SKILL.md 技能层
+#   MC-SKILL-LINE ＝ 2500 分轨口径（交接件 §二 #4 已决升格：SKILL.md 技能层
 #     ≤5000 token 级）。
-#   ADR-SOT-EXEMPT ＝ 皮总拍板 decisions §九·①（2026-10-26）：基线豁免＝转正式豁免，
+#   MC-SOT-EXEMPT ＝ 皮总拍板 decisions §九·①（2026-10-26）：基线豁免＝转正式豁免，
 #     豁免键＝「行文本＋出现文件集合」；仅当两者皆匹配才豁免，同文本出现在集合外的
 #     新文件仍照 BLOCK（不取纯文本键，堵住同文本搬家盲区）。
-#   出处：N1-* ＝交接件 §一/§二（provider 填 multi-collab 系因 check-provenance 要求
-#   provider＝deliverables/ 下现存包名；本件规范实体在 .collab 交接件，如实注明）；
-#   ADR-SOT-EXEMPT ＝ .collab/decisions 裁决条目（spec_id 用 ADR- 前缀＝70-provenance.md
-#   规定的「裁决条目临时来源」写法；其上三块 N1-* 为批 4 W2 既有写法，本单未改）。
+#   出处：MC-SOT-1／2／MC-SKILL-LINE ＝交接件 §一/§二；MC-SOT-EXEMPT ＝ .collab/decisions
+#   裁决条目。二者规范实体均在 .collab（不在 deliverables/ 下），此处如实注明。
+#
+#   **前缀取 MC- 而非 ADR-（批 5-② 定，理由＝机检实测）**：check-provenance 的
+#   SPEC_ID_RE 收 ADR-，但 run-gates.sh 的 SPEC_ID_HOME **无 ADR 映射**
+#   （只有 OA／OB／MC／PUB），故 ADR-* 一旦进 60-gates.md 的 per_spec，读表规则 5
+#   必判「解析不到」→ **exit 3 门禁自锁**；MC- 与 provider＝multi-collab 同族，是
+#   唯一与挂载目标（decisions §九·②）相容的前缀。**注**：MC- 前缀要真正可解析，仍需
+#   这四条在 multi-collab 包规范件里落盘（当前未落，见下方「挂载缺口」）——前缀合规
+#   是必要条件不是充分条件。
 #
 # 出口路由（皮总 Q4 令·两问之二）：
 #   退出码照 60-gates.md §六闭集：0 通过／1 违规／2 用法错／4 基础设施错。
 #   发现行照 run-gates.sh FINDING_RE 一行一封格式输出；严重度一律取自路由表
 #   on_severity 已有取值域（BLOCK／WATCH）——基线豁免项转 WATCH，不新造 SEV 词
 #   （新造词在挂入 run-gates 后会撞「未知 SEV」exit 4，属自埋雷，故不取）。
-#   **路由缺口如实报告（不自造路由）**：本脚本未挂 run-gates.sh 的 SCRIPTS 清单，
-#   且 60-gates.md 路由表 per_spec 无 N1-*／ADR-SOT-EXEMPT 条目——若未来挂入，按
-#   读表规则 2 走 on_severity 默认（BLOCK→block／WATCH→advisory）；§四 配套规则 1
-#   要求 block 必须有条款级依据，N1-* 的 per_spec 配置候主理人/皮总治理决定
-#   （decisions §九·②：先 advisory 挂入取信号、豁免落定后再升 block），本件不预设。
+#   **路由缺口如实报告（不自造路由）**：截至本版，本脚本**未**挂入 run-gates.sh——
+#   两个前置缺口未拍板（详见 W2b／批 5-② 回报，摘要）：
+#     缺口 A：run-gates.sh 的 SCRIPTS 清单按 `$SELF_DIR/<裸名>.py` 解析（清单＝
+#       「check-provenance check-skill-meta check-pointers check-entity」），
+#       **只覆盖 object-audit/scripts 同域**，无法表达 `tools/` 跨域路径；
+#       用 `../../..` 相对段塞进清单＝绕路自造，本件不做。
+#     缺口 B：60-gates.md 读表规则 5 要求 per_spec 的 spec_id 在其 provider 包
+#       规范件里解析得到；本件四条（含 MC- 前缀）在 multi-collab 包内**零落盘**
+#       （实测 `grep -rn SOT deliverables/skills/multi-collab/` 无命中），
+#       写进 per_spec 即 exit 3 自锁（同 60-gates.md §四 末段自警）。
+#   未挂入期间，本脚本由人显式调用，退出码语义不变（见 60-gates.md §六）。
 #
-# token 口径（N1-SKILL-LINE 用）：script-v1（tools/count_agent_tokens.py 同款实现：
+# token 口径（MC-SKILL-LINE 用）：script-v1（tools/count_agent_tokens.py 同款实现：
 #   CJK 区段正则≈1 token/字、非 CJK≈4 字符/token、ceil 上取整）。
 #   **emoji 归属约定＝script-v1 现状：非 CJK 池**（区段正则不含 U+2600–27BF 等
 #   W 属性符号，emoji 按 4 字符≈1 token 计）——约定出处＝批 4 W5a 勘察报告 B3.2
@@ -76,13 +88,13 @@
 默认包＝deliverables/profiles/aigc-video-team/。
 
 检查项：
-    A1（N1-SOT-1）agents/ 七席 MD 之间、MD 与 skills/ 之间 ≥12 CJK 连续段行级重合
+    A1（MC-SOT-1）agents/ 七席 MD 之间、MD 与 skills/ 之间 ≥12 CJK 连续段行级重合
        ——重合＝第二真源嫌疑。**豁免键＝「行文本＋出现文件集合」**（decisions §九·①）：
        文本匹配且出现文件 ∈ 该文本既定文件集合 → 转 WATCH 并标「｜基线豁免（文本＋
        文件集合）」，不计 BLOCK；文本不在基线、或文本在基线但出现在集合外的新文件
        → 照 BLOCK 并标「｜新命中」（同文本搬家必被抓）。
-    A2（N1-SOT-2）agents/ 与 skills/ 内反引号 .md 路径指针可达性——悬空＝BLOCK。
-    B （N1-SKILL-LINE）五域 SKILL.md token ≤5000（script-v1/ceil/emoji 非 CJK 池）。
+    A2（MC-SOT-2）agents/ 与 skills/ 内反引号 .md 路径指针可达性——悬空＝BLOCK。
+    B （MC-SKILL-LINE）五域 SKILL.md token ≤5000（script-v1/ceil/emoji 非 CJK 池）。
 
 退出码（闭集，见 60-gates.md §六）：0 通过／1 违规／2 用法错／4 基础设施错。
 """
@@ -96,13 +108,13 @@ import sys
 
 CJK_RE = re.compile(r'[\u3400-\u4dbf\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]')
 MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
-SKILL_LINE = 5000            # N1-SKILL-LINE：技能层 ≤5000 token 级
+SKILL_LINE = 5000            # MC-SKILL-LINE：技能层 ≤5000 token 级
 DEFAULT_PKG = 'deliverables/profiles/aigc-video-team'
 
 # 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
 #   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合}。
 #   **豁免键＝「文本＋文件集合」**（皮总拍板 decisions §九·①，规范来源见文件头
-#   ADR-SOT-EXEMPT 块）——不取纯文本键，以堵住「同文本搬家被误标基线」的盲区。
+#   MC-SOT-EXEMPT 块）——不取纯文本键，以堵住「同文本搬家被误标基线」的盲区。
 #   判定：仅当「行文本匹配」且「出现文件 ∈ 该文件集合」才豁免（转 WATCH·不计 BLOCK）；
 #   文本不在基线、或出现在集合外的新文件 → 照 BLOCK（标「｜新命中」）。
 #   判据强度（MIN_CJK／SKILL_LINE／OA-D6 裁-21 裸基名→WATCH 划界）不因豁免而变。
@@ -187,13 +199,13 @@ def check_pointers(pkg_abs: str, rel_files):
                 if target.startswith('http'):
                     continue
                 if '/' not in target:
-                    findings.append((rel, i, 'WATCH', 'N1-SOT-2',
+                    findings.append((rel, i, 'WATCH', 'MC-SOT-2',
                                      '指针裸基名 `%s`（不 BLOCK，按 D6 裁-21 划界）' % target))
                     continue
                 cand_root = os.path.normpath(os.path.join(pkg_abs, target))
                 cand_dir = os.path.normpath(os.path.join(os.path.dirname(abs_path), target))
                 if not (os.path.isfile(cand_root) or os.path.isfile(cand_dir)):
-                    findings.append((rel, i, 'BLOCK', 'N1-SOT-2',
+                    findings.append((rel, i, 'BLOCK', 'MC-SOT-2',
                                      '指针悬空 `%s` → 包根与所在目录双探均不存在' % target))
     return findings
 
@@ -245,7 +257,7 @@ def main() -> int:
             for rel, i in occ:
                 if allowed is not None and rel in allowed:
                     n_exempt += 1
-                    findings.append((rel, i, 'WATCH', 'N1-SOT-1',
+                    findings.append((rel, i, 'WATCH', 'MC-SOT-1',
                                      '≥%d CJK 行级重合（基线结构性模板·共 %d 处：%s）'
                                      '｜基线豁免（文本＋文件集合）'
                                      % (MIN_CJK, len(files), ' + '.join(files))))
@@ -254,7 +266,7 @@ def main() -> int:
                         reason = '行文本不在基线'
                     else:
                         reason = '行文本在基线但出现文件不在既定集合（搬家／新增载体）'
-                    findings.append((rel, i, 'BLOCK', 'N1-SOT-1',
+                    findings.append((rel, i, 'BLOCK', 'MC-SOT-1',
                                      '≥%d CJK 行级重合（第二真源嫌疑·共 %d 处：%s）'
                                      '｜新命中（豁免键未命中·%s）'
                                      % (MIN_CJK, len(files), ' + '.join(files), reason)))
@@ -268,7 +280,7 @@ def main() -> int:
             with open(os.path.join(pkg_abs, rel), 'r', encoding='utf-8') as handle:
                 t = tokens(handle.read())
             if t > SKILL_LINE:
-                findings.append((rel, 1, 'BLOCK', 'N1-SKILL-LINE',
+                findings.append((rel, 1, 'BLOCK', 'MC-SKILL-LINE',
                                  'SKILL.md token %d > %d（script-v1/ceil/emoji 非 CJK 池）'
                                  % (t, SKILL_LINE)))
 
@@ -278,7 +290,7 @@ def main() -> int:
         print('%s:%d: %s %s %s' % (rel, i, sev, spec, msg))
         if sev == 'BLOCK':
             violations += 1
-    n_watch_ptr = sum(1 for f in findings if f[2] == 'WATCH' and f[3] != 'N1-SOT-1')
+    n_watch_ptr = sum(1 for f in findings if f[2] == 'WATCH' and f[3] != 'MC-SOT-1')
     exit_code = 1 if violations else 0
     print('check-source-of-truth: 文件 %d（agents %d＋skills %d）｜BLOCK %d（新命中 %d）'
           '｜基线豁免 %d（WATCH·键＝文本＋文件集合）｜指针 WATCH %d｜exit %d'

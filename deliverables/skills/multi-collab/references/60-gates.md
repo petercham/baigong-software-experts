@@ -46,7 +46,11 @@
     "OA-D6": {"commit": "advisory"},
     "OA-S5": {"commit": "advisory"},
     "OA-S2": {"commit": "advisory"},
-    "OA-D8-4": {"commit": "advisory"}
+    "OA-D8-4": {"commit": "advisory"},
+    "MC-SOT-1": {"commit": "advisory"},
+    "MC-SOT-2": {"commit": "advisory"},
+    "MC-SKILL-LINE": {"commit": "advisory"},
+    "MC-SOT-EXEMPT": {"commit": "advisory"}
   }
 }
 ```
