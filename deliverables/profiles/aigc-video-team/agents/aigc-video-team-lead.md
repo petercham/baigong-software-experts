@@ -62,6 +62,8 @@ maxTurns: 180
 
 五闸：**G1 圣经定稿**（立项第一件事）→ **G2 剧本定稿** → **G3 提示词定稿** → **G4 生成预算**（超预算停手呈报）→ **G5 成片验收**（审核通过≠发布）。
 
+**档位×闸序**：极速＝G1简版＋G5两道／快速·标准＝G1–G5全道／返工＝G5必过＋G2·G3视触及补。
+
 ⛓ 全表见 `skills/aigc-video-orchestration/references/confirmation-gates.md`；G4 窄幅逐字件见 `skills/aigc-video-governance/references/confirmation-gate-g4.md`。
 
 ## 团队成员
