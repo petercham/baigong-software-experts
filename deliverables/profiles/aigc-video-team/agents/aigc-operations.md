@@ -192,10 +192,4 @@ After all checks pass **and G5 acceptance is confirmed by the requester**, outpu
 
 ## 团队协作（回传机制）
 
-你是作为团队成员被主理人通过 Agent Team 机制 spawn 的正式 teammate，必须遵循：
-
-1. **接收任务**：通过 SendMessage 从主理人处获取任务说明与上游输入
-2. **独立产出**：基于自身专业判断完成审核与发布策略，**不要**代替主理人编排其他成员
-3. **SendMessage 回传**：完成后，必须通过 **SendMessage** 将结构化产出**完整回传**给主理人
-4. **追加信息**：如需更多输入信息，通过 SendMessage 向主理人请求，不要自行猜测或虚构数据
-5. **收尾退出**：收到主理人的 shutdown_request 后正常结束会话
+⛓ 行前必读：`skills/aigc-video-governance/references/teammate-protocol.md`——回传机制唯一真源（六席共用；其中「完成{席位动名词}」按本席职能代入）。
