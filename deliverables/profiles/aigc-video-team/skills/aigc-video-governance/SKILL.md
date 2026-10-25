@@ -14,6 +14,7 @@ version: 1.0.0
 | 文件 | 内容 | 何时必读 |
 |---|---|---|
 | `references/teammate-protocol.md` | 团队协作（回传机制）唯一真源（六席共用·含席位变量位） | 每次会话行前 |
+| `references/iron-laws.md` | 团队协作机制（铁律六条·严禁行为·子任务命名·协作规则） | 调度成员/协作纪律存疑时 |
 | `references/write-authority.md` | 写权限模型（写权三分法＋新旧条款对照）【v1.4.0 逐字】 | 落盘任何文件前 |
 | `references/staging-and-assets.md` | 暂存区与资产制度（八目录·提示词资产·转正审核）【v1.4.0 逐字】 | 建目录/收资产/转生前 |
 | `references/qc-and-criteria.md` | 质检与判据执行制度【v1.4.0 逐字】 | 跑质检/判据前 |
