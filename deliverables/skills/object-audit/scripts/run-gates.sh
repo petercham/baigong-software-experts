@@ -116,7 +116,7 @@ cleanup_workdir() {
 }
 trap cleanup_workdir EXIT
 
-# --- 顺序跑四个检查脚本（S-04 先跑：它验其余三件的来源声明，先跑先暴露） ---
+# --- 顺序跑检查脚本（四个同域＋一个跨域；S-04 先跑：它验其余各件的来源声明，先跑先暴露） ---
 # 清单注入（裁-23 拍板 3）：
 #   项目名＝本包对自身的已知事实，缺省注入本包项目名（值见下方 export 行）；
 #     外部用 GATE_PROJECT_NAMES（逗号分隔）整体覆盖；直接对子脚本显式传
@@ -129,16 +129,25 @@ trap cleanup_workdir EXIT
 #   拆段是机械形态规避，不是豁免规则，判据本身一字未动。
 _GW_PKG="multi-agent"
 export GATE_PROJECT_NAMES="${GATE_PROJECT_NAMES:-${_GW_PKG}-collab-skillpack}"
-SCRIPTS="check-provenance check-skill-meta check-pointers check-entity"
+# 清单项两种形态（跨域挂载＝批 5-② 甲案：**只加路径解析语义，判据一字未动**）：
+#   ① 同域裸名（既有四项）        → $SELF_DIR/<name>.py
+#   ② 仓根相对路径（跨域脚本）    → 显式前缀 ROOT/ 开头，如 ROOT/tools/check-source-of-truth
+#      → $ROOT/<相对路径>.py。**不收 ../ 相对段**：相对段会让 out 文件随路径逃出临时目录
+#      （实测 exit 4），故用显式前缀表达"从仓根算"，不靠爬目录。
+SCRIPTS="check-provenance check-skill-meta check-pointers check-entity ROOT/tools/check-source-of-truth"
 SUMMARY_FILE="$WORKDIR/summary.txt"
 : > "$SUMMARY_FILE"
 for name in $SCRIPTS; do
-  script_path="$SELF_DIR/$name.py"
+  case "$name" in
+    ROOT/*) script_path="$ROOT/${name#ROOT/}.py" ;;
+    *)      script_path="$SELF_DIR/$name.py" ;;
+  esac
   [ -f "$script_path" ] || die_infra "缺少检查脚本：$script_path"
-  out="$WORKDIR/$name.out"
+  label="${name##*/}"   # 只取末段：摘要键与 out 文件名都不带目录段，路径不得逃出 WORKDIR
+  out="$WORKDIR/$label.out"
   "$PY" "$script_path" --root "$ROOT" > "$out" 2>&1
   code=$?
-  printf '%s\t%s\t%s\n' "$name" "$code" "$out" >> "$SUMMARY_FILE"
+  printf '%s\t%s\t%s\n' "$label" "$code" "$out" >> "$SUMMARY_FILE"
 done
 
 # --- 裁决 ＋ 证据件 ＋ 出口③（全部在 Python 内做：要解析 json 与写 json） ---
