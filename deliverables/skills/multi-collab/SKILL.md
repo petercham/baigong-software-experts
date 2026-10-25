@@ -2,7 +2,7 @@
 name: multi-collab
 description: 协作纪律（权限分级版）：唯一写权（执行者）＋开放的读权席位（主理人/审计者/顾问/研究席/QA/子代理席）；跨权限协作＝把交接上下文转成自包含 md 交接件；决策权分层 L0/L1/L2、呈拍三律、消息路由、回执矩阵、收口自检。Use when 以多席协作模式工作（角色边界/写盘权/读盘权/交接件/投递/回执/判词/呈拍/收口/帽子制）。触发词：多席协作、席位、主理人、交接件、文档交接、投递、回执矩阵、判词、审计、执行者、决策者、呈拍、收口、单写者、写盘权、读权席位。
 agent_created: true
-version: 4.4
+version: 4.5
 ---
 
 <!-- spec-provenance v1
@@ -80,6 +80,7 @@ provider: multi-collab
 | 干净指令七要素·议题包五要素·回执矩阵·报告体例·顾问轮次戳与三档表态·市场事实库与引用治理 | `references/30-formats.md` |
 | 部署形态 A/B/C·帽子制 | `references/40-deployment.md` |
 | 出口路由·退出码闭集·升级判据·门禁接入 | `references/60-gates.md` |
+| 章程候选（C5 原文语境层级判定＋A01 出处具名核验＋三方并集纪律）·单真源／2500 分轨／基线豁免三条条款正文 | `references/70-charter.md` |
 | 反模式表·共通纪律 | `references/50-antipatterns.md` |
 | 沿革 v1.0→v3.0 | `references/90-changelog.md` |
 
