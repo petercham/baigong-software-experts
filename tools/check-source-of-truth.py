@@ -48,30 +48,31 @@
 #   出处：MC-SOT-1／2／MC-SKILL-LINE ＝交接件 §一/§二；MC-SOT-EXEMPT ＝ .collab/decisions
 #   裁决条目。二者规范实体均在 .collab（不在 deliverables/ 下），此处如实注明。
 #
-#   **前缀取 MC- 而非 ADR-（批 5-② 定，理由＝机检实测）**：check-provenance 的
+#   **前缀取 MC- 而非 ADR-（批 5-② 拍定，理由＝机检实测）**：check-provenance 的
 #   SPEC_ID_RE 收 ADR-，但 run-gates.sh 的 SPEC_ID_HOME **无 ADR 映射**
-#   （只有 OA／OB／MC／PUB），故 ADR-* 一旦进 60-gates.md 的 per_spec，读表规则 5
-#   必判「解析不到」→ **exit 3 门禁自锁**；MC- 与 provider＝multi-collab 同族，是
-#   唯一与挂载目标（decisions §九·②）相容的前缀。**注**：MC- 前缀要真正可解析，仍需
-#   这四条在 multi-collab 包规范件里落盘（当前未落，见下方「挂载缺口」）——前缀合规
-#   是必要条件不是充分条件。
+#   （只有 OA／OB／MC／PUB），实测 ADR-* 进 per_spec → 读表规则 5 判「解析不到」
+#   → **exit 3 门禁自锁（逐笔提交全拦）**；MC- 与 provider＝multi-collab 同族，是
+#   唯一与挂载目标（decisions §九·②）相容的前缀。**注**：前缀合规是必要条件不是
+#   充分条件——MC- 要真正「条款级」可解析，仍需三条正文落进 multi-collab 规范件
+#   （当前为自指式满足，归 W6，见下方「挂载状态」）。
 #
 # 出口路由（皮总 Q4 令·两问之二）：
 #   退出码照 60-gates.md §六闭集：0 通过／1 违规／2 用法错／4 基础设施错。
 #   发现行照 run-gates.sh FINDING_RE 一行一封格式输出；严重度一律取自路由表
 #   on_severity 已有取值域（BLOCK／WATCH）——基线豁免项转 WATCH，不新造 SEV 词
 #   （新造词在挂入 run-gates 后会撞「未知 SEV」exit 4，属自埋雷，故不取）。
-#   **路由缺口如实报告（不自造路由）**：截至本版，本脚本**未**挂入 run-gates.sh——
-#   两个前置缺口未拍板（详见 W2b／批 5-② 回报，摘要）：
-#     缺口 A：run-gates.sh 的 SCRIPTS 清单按 `$SELF_DIR/<裸名>.py` 解析（清单＝
-#       「check-provenance check-skill-meta check-pointers check-entity」），
-#       **只覆盖 object-audit/scripts 同域**，无法表达 `tools/` 跨域路径；
-#       用 `../../..` 相对段塞进清单＝绕路自造，本件不做。
-#     缺口 B：60-gates.md 读表规则 5 要求 per_spec 的 spec_id 在其 provider 包
-#       规范件里解析得到；本件四条（含 MC- 前缀）在 multi-collab 包内**零落盘**
-#       （实测 `grep -rn SOT deliverables/skills/multi-collab/` 无命中），
-#       写进 per_spec 即 exit 3 自锁（同 60-gates.md §四 末段自警）。
-#   未挂入期间，本脚本由人显式调用，退出码语义不变（见 60-gates.md §六）。
+#   **挂载状态（批 5-② 甲案已挂·此处如实记态，不夸大不缩小）**：本脚本已挂入
+#   run-gates.sh 的 SCRIPTS 清单，清单项＝`ROOT/tools/check-source-of-truth`
+#   （甲案＝给清单加「显式前缀 ROOT/ ＝仓根相对路径」的解析语义，判据一字未动；
+#   `../../..` 相对段写法实测 exit 4，故不取）。60-gates.md 的 per_spec 已补
+#   本件四条 → 一律 advisory：出提示、**不拦提交**（§九·②「先 advisory 取信号」）。
+#   **遗留（不本单治·归 W6）**：读表规则 5 要求 spec_id 在 provider 包规范件里
+#   解析得到，本件四条现为「id 串出现在 60-gates.md 自身 json 围栏」的**自指式
+#   满足**（实测 `grep -rn SOT deliverables/skills/multi-collab/` 在本件加表前零
+#   命中）；条款正文仍住 .collab（交接件／decisions），待 W6 把三条正文落进
+#   multi-collab 规范件后转真满足。已在 60-gates.md §四 表下同步留痕。
+#   前缀若改 ADR-：run-gates 的 SPEC_ID_HOME 无 ADR 映射 → 逐笔提交 exit 3 自锁
+#   （实测），故维持 MC-（详见 decisions §九·② 与批 5-② 回报）。
 #
 # token 口径（MC-SKILL-LINE 用）：script-v1（tools/count_agent_tokens.py 同款实现：
 #   CJK 区段正则≈1 token/字、非 CJK≈4 字符/token、ceil 上取整）。
