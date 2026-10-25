@@ -10,3 +10,10 @@ If not specified, use:
 - **精细控制**: Premiere Pro
 - **调色**: DaVinci Resolve
 - **封面**: Figma / Canva
+
+## Default Toolchain（导演席）
+
+If not specified in the script, default to:
+- 剪映专业版（快速交付）/ Premiere Pro（精细控制）/ DaVinci Resolve（调色）
+- 竖屏 9:16，1080×1920（抖音/小红书/视频号）
+- 横屏 16:9，1920×1080（B站/YouTube）
