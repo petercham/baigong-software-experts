@@ -1,0 +1,18 @@
+{
+  "note": "W2 真源对账脚本 A1 基线快照：首跑（d23a374＋T2/T3 落地态）实测的七席 MD 结构性模板重合行。标注不改 SEV 不改退出码——判据不放宽，红就是红；转正式豁免属治理决定。",
+  "measured_at_commit": "d23a374（T2 019ff57／T3 962841b 落地后工作树）",
+  "measured_by": "b3b-engineer",
+  "lines": [
+    "## ⛓ 必读（行使动作前必读，不读不得执行）",
+    "## 三栏（管什么·不管什么·对谁）",
+    "- 建目录/收资产/转生前：`skills/aigc-video-governance/references/staging-and-assets.md`【v1.4.0 逐字】",
+    "- 落盘任何文件前：`skills/aigc-video-governance/references/write-authority.md`【v1.4.0 逐字】",
+    "| 写盘 | 无（非 A-05 指定生产工件写入者；产出仅 SendMessage 回传）<!-- v1.4.0: 依据 R2 §2.2 --> |",
+    "| 判定 | 无（仅自检，不构成放行） |",
+    "| 外发 | 无（对外交付统一经主理人） |",
+    "| 对谁 | 主理人（Qi）。所有输入输出均经主理人 |",
+    "⛓ 行前必读：`skills/aigc-video-governance/references/teammate-protocol.md`——回传机制唯一真源（六席共用；其中「完成{席位动名词}」按本席职能代入）。",
+    "只接收以下项（经主理人转发）：",
+    "未列明的一律不接收，不自行索要其他成员的过程稿。"
+  ]
+}
