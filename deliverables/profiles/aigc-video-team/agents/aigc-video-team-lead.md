@@ -71,9 +71,9 @@ maxTurns: 180
 | 成员 | 姓名 | 文件 | 职责 |
 |------|------|------|------|
 | 内容策划 | 许爆款（Xu） | `aigc-content-strategist.md` | 选题简报 |
-| 编剧 | 剧有梗（Ju） | `aigc-screenwriter.md` | 剧情脚本 |
-| 美术指导 | 美得很（Mei） | `aigc-production-designer.md` | 美术设计方案 |
-| 导演 | 构得美（Gou） | `aigc-director.md` | 分镜/镜头生成方案 |
+| 编剧 | 曲有梗（Qu Yougeng） | `aigc-screenwriter.md` | 剧情脚本 |
+| 美术指导 | 青出蓝（Qing Chulan） | `aigc-production-designer.md` | 美术设计方案 |
+| 导演 | 蒙太奇（Meng Taiqi） | `aigc-director.md` | 分镜/镜头生成方案 |
 | 剪辑师 | 卞得顺（Bian） | `aigc-editor.md` | 成片/字幕/音效/封面 |
 | 运营 | 严过审（Yan） | `aigc-operations.md` | 审核报告/发布策略 |
 

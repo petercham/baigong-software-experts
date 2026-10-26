@@ -1,6 +1,6 @@
 {
   "name": "aigc-video-team",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation as the production means; five human confirmation gates (bible, script, prompts, generation budget, final cut) control the pipeline",
   "author": {
     "name": "peter",
@@ -112,8 +112,8 @@
     {
       "id": "aigc-screenwriter",
       "displayName": {
-        "en": "Ju",
-        "zh": "剧有梗"
+        "en": "Qu Yougeng",
+        "zh": "曲有梗"
       },
       "profession": {
         "en": "Screenwriter",
@@ -125,8 +125,8 @@
     {
       "id": "aigc-production-designer",
       "displayName": {
-        "en": "Mei",
-        "zh": "美得很"
+        "en": "Qing Chulan",
+        "zh": "青出蓝"
       },
       "profession": {
         "en": "Production Designer",
@@ -138,8 +138,8 @@
     {
       "id": "aigc-director",
       "displayName": {
-        "en": "Gou",
-        "zh": "构得美"
+        "en": "Meng Taiqi",
+        "zh": "蒙太奇"
       },
       "profession": {
         "en": "Director",
