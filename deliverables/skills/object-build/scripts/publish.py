@@ -219,6 +219,8 @@ def parse_state(text: str) -> "list[SyncBlock]":
             in_files = False
             continue
         if in_files and line.strip():
+            if line.strip().startswith("#"):
+                continue  # 装配块组件账注释行（`# component <名> @ <sha>`）——不参与判据
             quad = FILES_LINE_RE.match(line.strip())
             if not quad:
                 die_infra("COPY.state files 行不合四元组（第 %d 行）：%r" % (lineno, line))
@@ -638,6 +640,295 @@ def append_block(root: str, pkg: str, env: "dict[str, str]", files: "list[str]",
         die_infra("写块失败（副本已新、账本未记；重跑发布可补账）：%s" % exc)
 
 
+# ---------------------------------------------------------------- 装配步（--assemble）
+# T3 装配流水票（拆仓执行批·拍板六⑥）：出池 bundle 的「bundle.lock 索引 → 装配面」编译步。
+# 设计依据＝仓拓扑设计 v1.1 §3（装配模型）＋§3.2 五条纪律＋§3.5（只适用 video bundle）。
+#   纪律③ 消费者锁版本：组件一律按 bundle.lock 的 ref（tag 或 commit）经 `git archive`
+#          取源——取的是 ref 时刻的 blob 字节，不是工作区字节（工作区漂移进不了装配面）。
+#   纪律④ 产物不入库、不可手改：装配面缺省＝<bundle 源仓>-build/<bundle 名>（仓外同级）；
+#          产物内嵌 ASSEMBLY.manifest.json（组件→仓→ref→commit 全账）。
+#   纪律⑤ 发布前源一致性校验：装配前置＝各源仓 clean worktree＋ref 存在；不过＝fail-closed。
+#   漂移停：装配面已有 COPY.state 时，先校验装配面字节 == 末块 copy_sha256（产物被手改＝报错停）。
+#   幂等：源账与装配面账均与末块一致 ⇒ 零写入、不追加空块（与 do_publish 幂等短路同理）。
+# COPY.state 沿用现有体例（六键＋files 四元组＋manifest_digest），账本写在装配面内
+#   （产物不入库纪律：账随产物走，不回流任何仓版本库）。
+
+LOCK_FILENAME = "bundle.lock"
+ASSEMBLY_MANIFEST = "ASSEMBLY.manifest.json"
+
+
+def run_git(repo: str, args: "list[str]") -> subprocess.CompletedProcess:
+    proc = subprocess.run(["git", "-C", repo] + args, capture_output=True)
+    return proc
+
+
+def git_repo_root(path: str) -> str:
+    proc = run_git(path, ["rev-parse", "--show-toplevel"])
+    if proc.returncode != 0:
+        die_usage("不是 git 仓（无法定位源仓根）：%s" % path)
+    return proc.stdout.decode("utf-8", errors="replace").strip()
+
+
+def git_clean_or_die(repo: str, label: str) -> "None":
+    """纪律⑤ 前置①：clean worktree——判定面＝**已跟踪文件零改动**（`-uno`）。
+    理由（实现选择·如实标注）：装配取源走 `git archive <ref>`＝只读 committed blob，
+    未跟踪文件（各仓 .collab/ 治理流水常态）根本不进装配面、也不影响 ref 解析；
+    已跟踪文件有未提交改动才让「source_commit 账」说谎——那才是本闸要拦的。
+    未跟踪文件只报告不拦（信息行）。不过＝exit 3（前提不成立）。"""
+    proc = run_git(repo, ["status", "--porcelain", "-uno"])
+    dirty = proc.stdout.decode("utf-8", errors="replace").strip()
+    if proc.returncode != 0 or dirty:
+        sys.stderr.write("prerequisite failed: %s 已跟踪文件有未提交改动（纪律⑤ 源一致性）：%s\n"
+                         % (label, dirty.split("\n")[0] if dirty else "git status 失败"))
+        raise SystemExit(3)
+    untracked = run_git(repo, ["status", "--porcelain", "-uall"])
+    n_untracked = len([l for l in untracked.stdout.decode("utf-8", errors="replace")
+                       .splitlines() if l.startswith("??")])
+    if n_untracked:
+        print("%s: [信息] 未跟踪文件 %d 个（不进装配面，不参与判定）" % (label, n_untracked))
+
+
+def git_ref_commit_or_die(repo: str, ref: str, kind: str, label: str) -> str:
+    """纪律⑤ 前置②：ref 存在且可解析为 commit，返回其 commit sha。
+    tag 走 refs/tags 精确校验（不可变 tag＝纪律②，tag 被移动过也能按当时指向解析——
+    tag 移动属发布方违纪，装配面只如实记解析结果）；commit 走 cat-file。不过＝exit 3。"""
+    if kind == "tag":
+        proc = run_git(repo, ["rev-list", "-n", "1", "refs/tags/%s" % ref])
+    else:
+        proc = run_git(repo, ["rev-parse", "-q", "--verify", "%s^{commit}" % ref])
+    sha = proc.stdout.decode("utf-8", errors="replace").strip()
+    if proc.returncode != 0 or not sha:
+        sys.stderr.write("prerequisite failed: %s 的 ref 不存在/不可解析：%s（%s）\n"
+                         % (label, ref, kind))
+        raise SystemExit(3)
+    return sha
+
+
+def git_archive_blobs(repo: str, ref: str, prefix: str) -> "dict[str, bytes]":
+    """按 ref 取 <prefix> 子树全部 blob（relpath→bytes）。git archive 输出的是仓内
+    blob 原字节（不经 autocrlf smudge、不经工作区）——逐字零变换的取源形态。"""
+    proc = run_git(repo, ["archive", "--format=tar", ref, prefix])
+    if proc.returncode != 0:
+        sys.stderr.write("prerequisite failed: git archive %s %s 失败：%s\n"
+                         % (ref, prefix,
+                            proc.stderr.decode("utf-8", errors="replace").strip()[:200]))
+        raise SystemExit(3)
+    import io
+    import tarfile
+    result: "dict[str, bytes]" = {}
+    tar = tarfile.open(fileobj=io.BytesIO(proc.stdout))
+    strip = prefix.rstrip("/") + "/"
+    for member in tar.getmembers():
+        if not member.isfile():
+            continue
+        name = member.name
+        rel = name[len(strip):] if name.startswith(strip) else name
+        result[rel.replace("\\", "/")] = tar.extractfile(member).read()
+    if not result:
+        sys.stderr.write("prerequisite failed: %s 在 %s 下无文件（path 写错或该 ref 无此组件）\n"
+                         % (prefix, ref))
+        raise SystemExit(3)
+    return result
+
+
+def write_blob(dst: str, data: bytes) -> "None":
+    """装配面写入＝bytes 口径逐字落盘＋落盘后断言（§五-2 同理：防线不是声明）。
+    断言不过＝exit 4 且不写块。"""
+    os.makedirs(os.path.dirname(dst), exist_ok=True)
+    with open(dst, "wb") as handle:
+        handle.write(data)
+    with open(dst, "rb") as handle:
+        if hashlib.sha256(handle.read()).hexdigest() != hashlib.sha256(data).hexdigest():
+            die_infra("装配断言不过：装配面字节 ≠ 源 blob（半写/磁盘异常）：%s" % dst)
+
+
+def assemble_state_path(out_dir: str) -> str:
+    return os.path.join(out_dir, STATE_FILENAME)
+
+
+def append_assemble_block(out_dir: str, bundle_name: str, bundle_repo_commit: str,
+                          entries: "dict[str, tuple[str, str, str]]", next_n: int,
+                          component_commits: "dict[str, str]") -> "None":
+    """装配账块（沿用 §四 六键＋files 四元组体例；账本在装配面内，不入仓）。
+    source/copy 指向装配包主文件（plugin.json）——与发布器 copy: 指向主文件的样例同构。"""
+    path = assemble_state_path(out_dir)
+    existing = read_text(path) if os.path.isfile(path) else ""
+    ordered = sorted(entries.items(), key=lambda kv: kv[0].encode("utf-8"))
+    manifest_repo = manifest_digest([v for _, v in ordered], use_copy=False)
+    manifest_copy = manifest_digest([v for _, v in ordered], use_copy=True)
+    tz_offset = -time.timezone if time.daylight == 0 else -time.altzone
+    sign = "+" if tz_offset >= 0 else "-"
+    tz_offset = abs(tz_offset)
+    ts = "%s%s%02d:%02d" % (time.strftime("%Y-%m-%dT%H:%M:%S"), sign,
+                            tz_offset // 3600, (tz_offset % 3600) // 60)
+    lines = [
+        "[sync n=%d]" % next_n,
+        "source: %s/.codebuddy-plugin/plugin.json" % bundle_name,
+        "source_sha256: %s" % manifest_repo,
+        "copy: ./.codebuddy-plugin/plugin.json",
+        "copy_sha256_at_sync: %s" % manifest_copy,
+        "synced_at: %s" % ts,
+        "source_commit: %s" % bundle_repo_commit,
+        "files:",
+    ]
+    for rel, (src_sha, copy_sha, mode) in ordered:
+        lines.append("%s %s %s %s" % (src_sha, copy_sha, mode, rel))
+    # 组件级 commit 账（纪律③ 四元组「组件→仓→tag→commit」的装配面落地，注释行不入 files 判据）
+    for comp, sha in sorted(component_commits.items()):
+        lines.append("# component %s @ %s" % (comp, sha))
+    block_text = "\n".join(lines) + "\n"
+    try:
+        if existing and not existing.endswith("\n"):
+            block_text = "\n" + block_text
+        with open(path, "a", encoding="utf-8", newline="\n") as handle:
+            handle.write(block_text)
+    except OSError as exc:
+        die_infra("装配账写块失败（装配面已新、账未记；重跑装配可补账）：%s" % exc)
+
+
+def do_assemble(bundle_dir: str, out_dir: "str | None", verbose: bool) -> int:
+    """--assemble：读 bundle.lock → 源一致性校验 → git archive 按 ref 取源 → 装配面
+    逐字落盘＋断言 → COPY.state 记账 → ASSEMBLY.manifest.json 内嵌全账。
+    退出码沿用闭集：0 成／1 产物侧问题（装配面漂移）／2 用法错／3 前提不成立
+    （lock 缺件、源仓脏、ref 不存在）／4 装配器自身错（断言/写盘）。"""
+    bundle_dir = os.path.abspath(bundle_dir)
+    if not os.path.isdir(bundle_dir):
+        die_usage("--bundle 目录不存在：%s" % bundle_dir)
+    lock_path = os.path.join(bundle_dir, LOCK_FILENAME)
+    if not os.path.isfile(lock_path):
+        die_usage("bundle.lock 不存在：%s（装配输入＝索引件，不得猜组件清单）" % lock_path)
+    try:
+        with open(lock_path, "r", encoding="utf-8") as handle:
+            lock = json.load(handle)
+    except ValueError as exc:
+        die_usage("bundle.lock 不是合法 JSON：%s" % exc)
+    bundle_meta = lock.get("bundle") or {}
+    components = lock.get("components") or []
+    bundle_name = bundle_meta.get("name", "")
+    if not bundle_name or not components:
+        die_usage("bundle.lock 缺 bundle.name 或 components（体例见设计 v1.1 §3.1）")
+    bundle_repo = git_repo_root(bundle_dir)
+    bundle_prefix = rel_from_root(bundle_repo, bundle_dir)
+    # 输出面缺省＝<bundle 源仓>-build/<bundle 名>（仓外同级·纪律④产物不入库）
+    if out_dir:
+        out_dir = os.path.abspath(out_dir)
+    else:
+        out_dir = bundle_repo.rstrip("\\/") + "-build"
+        out_dir = os.path.join(out_dir, bundle_name)
+    if os.path.normcase(out_dir).startswith(os.path.normcase(bundle_repo) + os.sep):
+        die_usage("装配输出不得落在 bundle 源仓内（纪律④产物不入库）：%s" % out_dir)
+    # ---- 纪律⑤ 前置校验（fail-closed，先于任何写）----
+    git_clean_or_die(bundle_repo, "bundle 源仓")
+    bundle_commit = run_git(bundle_repo, ["rev-parse", "HEAD"]).stdout.decode().strip()
+    seen_repos: "dict[str, str]" = {bundle_repo: "bundle 源仓"}
+    component_commits: "dict[str, str]" = {}
+    for comp in components:
+        for key in ("component", "repo", "ref", "path", "target"):
+            if not comp.get(key):
+                die_usage("bundle.lock 组件行缺键 %s：%s" % (key, comp.get("component", "?")))
+        comp_repo = os.path.abspath(os.path.normpath(
+            os.path.join(bundle_repo, comp["repo"])))
+        if not os.path.isdir(comp_repo):
+            die_usage("组件 %s 源仓不存在：%s（三仓并列前提）" % (comp["component"], comp_repo))
+        if comp_repo not in seen_repos:
+            git_clean_or_die(comp_repo, "组件 %s 源仓" % comp["component"])
+            seen_repos[comp_repo] = comp["component"]
+        component_commits[comp["component"]] = git_ref_commit_or_die(
+            comp_repo, comp["ref"], comp.get("ref_kind", "commit"), comp["component"])
+    # ---- 漂移停：装配面既有账 vs 装配面现字节（产物不可手改）----
+    blocks, last = (None, None)
+    state_file = assemble_state_path(out_dir)
+    if os.path.isfile(state_file):
+        blocks = parse_state(read_text(state_file))
+        last = blocks[-1] if blocks else None
+    if last is not None:
+        drifted: "list[str]" = []
+        for rel, (_src_l, copy_l, _mode_l) in last.files.items():
+            cur = os.path.join(out_dir, rel.replace("/", os.sep))
+            now = sha256_file(cur) if os.path.isfile(cur) else None
+            if now != copy_l:
+                drifted.append(rel)
+        if drifted:
+            print("装配面漂移（产物被手改/半写，先删装配面重跑，不得就地覆盖记账）：%d 文件 %s"
+                  % (len(drifted), drifted[0]))
+            return 1
+    # ---- 取源（git archive＝ref 时刻 blob，逐字零变换）----
+    plan: "list[tuple[str, bytes]]" = []          # 装配面 relpath -> bytes
+    # bundle 本体（排除索引件/账本/装配元数据——它们不是注册态包成员）
+    body_exclude = {LOCK_FILENAME, STATE_FILENAME, ASSEMBLY_MANIFEST}
+    for rel, data in git_archive_blobs(bundle_repo, bundle_commit, bundle_prefix).items():
+        if rel in body_exclude or rel.startswith(LOCK_FILENAME + "/"):
+            continue
+        plan.append((rel, data))
+    for comp in components:
+        comp_repo = os.path.abspath(os.path.normpath(
+            os.path.join(bundle_repo, comp["repo"])))
+        ref_commit = component_commits[comp["component"]]
+        target = comp["target"].strip("/")
+        for rel, data in git_archive_blobs(comp_repo, ref_commit, comp["path"]).items():
+            plan.append(("%s/%s" % (target, rel), data))
+    # 装配面路径冲突检测（两个组件写同一目标＝索引写坏，fail-closed）
+    seen_paths: "set[str]" = set()
+    for rel, _ in plan:
+        if rel in seen_paths:
+            die_infra("装配面路径重复（bundle.lock 目标冲突）：%s" % rel)
+        seen_paths.add(rel)
+    # ---- 幂等短路：新账 == 末块账 ⇒ 零写入、不追加空块 ----
+    new_hashes: "dict[str, tuple[str, str, str]]" = {}
+    for rel, data in plan:
+        src_sha = hashlib.sha256(data).hexdigest()
+        dst = os.path.join(out_dir, rel.replace("/", os.sep))
+        copy_sha = sha256_file(dst) if os.path.isfile(dst) else src_sha
+        mode = mode_of(dst) if os.path.isfile(dst) else "0644"
+        new_hashes[rel] = (src_sha, copy_sha, mode)
+    if last is not None and set(new_hashes) == set(last.files):
+        same = all(new_hashes[r][0] == last.files[r][0] and new_hashes[r][1] == last.files[r][1]
+                   for r in new_hashes)
+        if same:
+            print("%s: 装配面已一致（第 %d 块，%d 文件），零写入" % (bundle_name, last.n, len(plan)))
+            return 0
+    # ---- 落盘＋断言（先全部断言过，才记账——§三-3 顺序同理）----
+    os.makedirs(out_dir, exist_ok=True)
+    entries: "dict[str, tuple[str, str, str]]" = {}
+    for rel, data in plan:
+        dst = os.path.join(out_dir, rel.replace("/", os.sep))
+        write_blob(dst, data)
+        entries[rel] = (hashlib.sha256(data).hexdigest(), sha256_file(dst), mode_of(dst))
+    # 块级断言：两侧清单摘要必等（复制实现走歪的兜底）
+    vals = list(entries.values())
+    if manifest_digest(vals, use_copy=False) != manifest_digest(vals, use_copy=True):
+        die_infra("装配块级断言不过：源清单摘要 ≠ 装配面清单摘要")
+    # ---- 记账＋元数据 ----
+    next_n = (blocks[-1].n + 1) if blocks else 1
+    append_assemble_block(out_dir, bundle_name, bundle_commit, entries, next_n,
+                          component_commits)
+    manifest = {
+        "bundle": bundle_name,
+        "bundle_version": bundle_meta.get("version", ""),
+        "assembled_at": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "bundle_source_repo": bundle_repo,
+        "bundle_source_commit": bundle_commit,
+        "components": [
+            {"component": c["component"], "repo": c["repo"], "ref": c["ref"],
+             "ref_kind": c.get("ref_kind", "commit"),
+             "resolved_commit": component_commits[c["component"]],
+             "path": c["path"], "target": c["target"]}
+            for c in components
+        ],
+        "files": len(plan),
+        "note": "装配产物＝注册态 bundle（纪律④：不入仓版本库、不可手改；重装配＝删装配面重跑）",
+    }
+    with open(os.path.join(out_dir, ASSEMBLY_MANIFEST), "w", encoding="utf-8") as handle:
+        json.dump(manifest, handle, ensure_ascii=False, indent=2)
+    if verbose:
+        print("装配面：%s" % out_dir)
+        for c in manifest["components"]:
+            print("  %s @ %s（%s）" % (c["component"], c["resolved_commit"][:7], c["ref_kind"]))
+    print("%s: 已装配（第 %d 块，%d 文件，bundle@%s）"
+          % (bundle_name, next_n, len(plan), bundle_commit[:7]))
+    return 0
+
+
 # ---------------------------------------------------------------- 子命令
 
 def do_check(root: str, pkg: str, env: "dict[str, str]", verbose: bool) -> int:
@@ -871,7 +1162,14 @@ def main(argv: "list[str]") -> int:
                         help="人读摘要（版本号只允许出现在这里，且标注描述性）")
     parser.add_argument("--classify", action="store_true",
                         help="对部署面一级条目跑四步归属判定（只读）")
+    parser.add_argument("--assemble", metavar="BUNDLE_DIR",
+                        help="装配步（T3）：读 <BUNDLE_DIR>/bundle.lock → 源一致性校验 → "
+                             "按 ref 取源装回装配面（缺省 <bundle 源仓>-build/<bundle 名>）")
+    parser.add_argument("--out", help="装配输出目录（仅 --assemble 用；缺省＝仓外同级 -build）")
     args = parser.parse_args(argv)
+    # 装配步不依赖 SKILLS_ROOT（产物面由 lock/--out 决定，不碰部署面）——先于 root 定位分流。
+    if args.assemble:
+        return do_assemble(args.assemble, args.out, args.verbose)
     root = find_root(args.root)
     env = dict(os.environ)
     if args.classify:
