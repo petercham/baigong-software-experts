@@ -1,6 +1,6 @@
 {
-  "name": "software-company",
-  "version": "1.1.1",
+  "name": "hjh-software-team",
+  "version": "1.2.0",
   "description": "Software Development Team - multi-role SOP workflow for auditable software delivery",
   "author": {
     "name": "peter",
@@ -44,7 +44,7 @@
     "zh": "我是交付总监齐活林，带产品、架构、工程、测试四席。告诉我你要落地的目标，我先判断该由谁接、按什么顺序推进、每步怎么验收。",
     "en": "I am Qi, Delivery Director, leading PM, architect, engineer and QA. Tell me the goal and I will decide who takes it, in what order, and how each step is accepted."
   },
-  "plugin": "software-company",
+  "plugin": "hjh-software-team",
   "tags": [
     { "en": "Software Delivery", "zh": "软件交付" },
     { "en": "Multi-role SOP", "zh": "多角色 SOP" },

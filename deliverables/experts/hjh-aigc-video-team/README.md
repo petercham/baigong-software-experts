@@ -24,7 +24,7 @@ Team 型（多角色协作团队）
 
 ## 出身
 
-本专家团由本仓（multi-agent-collab-skillpack）草稿区 `.collab/research/drafts-2026-10-23/aigc-video-team/`（批 32 判词放行态 `42b34bf`/`60d1ea1`）转化而来。沿革：初版误以 skill 形态交付（定性见裁-37④·已撤包除名 `1e16824`）；本体经影视工业岗位体系审计（裁-33）＋AIGC 生产手段全量改造（裁-38 Q3=A）＋项目圣经机制（裁-41）＋五道人类确认闸（裁-44）；前身包 video-company v1.0.0 退役，v1.1.0 更名 aigc-video-team（裁-37⑥ 皮总定名「AIGC 视频团队」），v1.2.0 入项目圣经闸，v1.3.0 入五道确认闸，v1.4.0 入暂存区八目录＋写权三分法＋提示词资产制度＋G4 窄幅（R2 §2.1–2.3/§3.2·条款逐字照录，改动处带 v1.4.0 标记），v1.4.1 三席改名：编剧→曲有梗／美术指导→青出蓝／导演→蒙太奇（皮总拍定 2026-10-26，旧名见对应改名 commit）。
+本专家团由本仓（multi-agent-collab-skillpack）草稿区 `.collab/research/drafts-2026-10-23/aigc-video-team/`（批 32 判词放行态 `42b34bf`/`60d1ea1`）转化而来。沿革：初版误以 skill 形态交付（定性见裁-37④·已撤包除名 `1e16824`）；本体经影视工业岗位体系审计（裁-33）＋AIGC 生产手段全量改造（裁-38 Q3=A）＋项目圣经机制（裁-41）＋五道人类确认闸（裁-44）；前身包 video-company v1.0.0 退役，v1.1.0 更名 aigc-video-team（裁-37⑥ 皮总定名「AIGC 视频团队」），v1.2.0 入项目圣经闸，v1.3.0 入五道确认闸，v1.4.0 入暂存区八目录＋写权三分法＋提示词资产制度＋G4 窄幅（R2 §2.1–2.3/§3.2·条款逐字照录，改动处带 v1.4.0 标记），v1.4.1 三席改名：编剧→曲有梗／美术指导→青出蓝／导演→蒙太奇（皮总拍定 2026-10-26，旧名见对应改名 commit），v1.5.0 包 id 更名 aigc-video-team→hjh-aigc-video-team（皮总拍定 2026-10-26·避免与市场原版混淆·包 id 变更＝破坏性变更升 minor）。
 
 ## 头像
 
@@ -37,7 +37,7 @@ Team 型（多角色协作团队）
 将专家包目录放到专家目录下：
 
 ```
-~/.workbuddy/plugins/marketplaces/my-experts/plugins/aigc-video-team/
+~/.workbuddy/plugins/marketplaces/my-experts/plugins/hjh-aigc-video-team/
 ```
 
 然后运行注册命令使其可见：
@@ -49,7 +49,7 @@ python3 scripts/register_expert.py <expert-dir>
 ## 打包分享
 
 ```bash
-zip -r aigc-video-team.zip aigc-video-team/
+zip -r hjh-aigc-video-team.zip hjh-aigc-video-team/
 ```
 
 ## Token 计数（终态·批 3b 结构化瘦身后）

@@ -86,7 +86,7 @@
 用法：
     python tools/check-source-of-truth.py [--root <仓根>] [--pkg <相对包路径>]
 
-默认包＝deliverables/experts/aigc-video-team/。
+默认包＝deliverables/experts/hjh-aigc-video-team/。
 
 检查项：
     A1（MC-SOT-1）agents/ 七席 MD 之间、MD 与 skills/ 之间 ≥12 CJK 连续段行级重合
@@ -110,7 +110,7 @@ import sys
 CJK_RE = re.compile(r'[\u3400-\u4dbf\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]')
 MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
 SKILL_LINE = 5000            # MC-SKILL-LINE：技能层 ≤5000 token 级
-DEFAULT_PKG = 'deliverables/experts/aigc-video-team'
+DEFAULT_PKG = 'deliverables/experts/hjh-aigc-video-team'
 
 # 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
 #   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合}。

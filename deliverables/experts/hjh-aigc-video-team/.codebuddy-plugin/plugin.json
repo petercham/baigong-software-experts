@@ -1,6 +1,6 @@
 {
-  "name": "aigc-video-team",
-  "version": "1.4.1",
+  "name": "hjh-aigc-video-team",
+  "version": "1.5.0",
   "description": "AIGC Video Team - 7-seat SOP workflow producing short videos with multimodal generation as the production means; five human confirmation gates (bible, script, prompts, generation budget, final cut) control the pipeline",
   "author": {
     "name": "peter",
@@ -53,7 +53,7 @@
     "zh": "我是制作总监齐上线，带六席以多模态生成为生产手段。说你要做的视频，我按五道确认闸推进：圣经、剧本、提示词、预算、成片，每道都等你确认才走下一步。",
     "en": "I am Qi, Production Director, leading six seats with multimodal generation. Tell me the video you want; we work through five confirmation gates - bible, script, prompts, budget, final cut - each awaiting your explicit go-ahead."
   },
-  "plugin": "aigc-video-team",
+  "plugin": "hjh-aigc-video-team",
   "tags": [
     {
       "en": "AIGC Video Production",

@@ -27,6 +27,7 @@ Team 型（多角色协作团队）
   2. **lead 改名**：文件名 `software-team-lead.md`→`software-company-team-lead.md`，内容仅 frontmatter `name:` 一行同步（Q3 拍定差，diff 市场版＝仅此一处）；
   3. **版本升 1.1.1**（Q5 拍定）：版本号变更逼宿主刷新运行缓存，规避「同版本号免刷新」漂移。
 - **上游关系**：fork 自维护，上游后续版本不自动追；需要时人工 diff 市场缓存对账一次（版本账即本节）。
+- **版本账 v1.2.0**（2026-10-26）：包 id 更名 `software-company`→`hjh-software-team`（皮总拍定·避免与市场原版混淆·包 id 变更＝破坏性变更升 minor）；席位 id 与席位 MD 文件名不动。
 - **基线发现数 79→83（+4 OA-D6 advisory，fork 照录区＋出身段文件名，设计内）**（主理人 2026-10-26 拍 A：判据语义＝BLOCK 级新命中 0＋GATE PASS；先例＝批 2d 判词九；供后续批次对账不误报漂移）。
 
 ## 头像
@@ -38,7 +39,7 @@ Team 型（多角色协作团队）
 将专家包目录放到专家目录下：
 
 ```
-~/.workbuddy/plugins/marketplaces/my-experts/plugins/software-company/
+~/.workbuddy/plugins/marketplaces/my-experts/plugins/hjh-software-team/
 ```
 
 然后运行注册命令使其可见：
@@ -64,4 +65,4 @@ python3 scripts/register_expert.py <expert-dir>
 
 ## 维护规则
 
-**改席位定义只改仓内真源（本目录），部署面（`marketplaces/my-experts/plugins/software-company/`）只准从仓内复制生成**；运行缓存（`cache/my-experts/`）为宿主自管可再生副本，不入治理。
+**改席位定义只改仓内真源（本目录），部署面（`marketplaces/my-experts/plugins/hjh-software-team/`）只准从仓内复制生成**；运行缓存（`cache/my-experts/`）为宿主自管可再生副本，不入治理。
