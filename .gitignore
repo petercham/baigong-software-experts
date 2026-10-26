@@ -16,6 +16,30 @@
 # 判词属史实锚，落 .collab/decisions/ 并入库；两者按性质分治，不得混装
 .collab/evidence/
 
+# ── 2026-10-27 增补（皮总拍·依《2026-10-27-devkits仓远端与入库策略建议_v1》）──
+# 判据三条：A 性质（判词/裁决/呈拍→进，过程流水→不进）／B 出处（自产 vs 第三方产物）／C 冗余（能否无损重建）
+
+# 冗余快照：aigc-video-team 已随迁 experts 仓、software-company 在本仓 HEAD 以 workbuddy/hjh-software-team 存活、qa-leadslim＝实验中间态（判据 C）
+# 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\collab-backup-20261027\
+.collab/backup/
+
+# 派工书＝运行时派发指令，性质＝过程流水，非判词/裁决/呈拍（判据 A）
+.collab/dispatch/
+
+# 作者已标 tmp- 前缀＝显式临时件；落 .collab/ 根＝无归属分区（判据 A）
+.collab/tmp-*.txt
+
+# 第三方下载产物（带 .downloaded_at）：入我仓＝真源混淆，违单真源纪律（判据 B）
+# 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\reference-2026-10-24\；来源索引件 REFERENCE-SOURCES.md 入库
+.collab/research/reference-2026-10-24/video-teams/
+.collab/research/reference-2026-10-24/official-cos/
+.collab/research/reference-2026-10-24/summoned-2026-10-24/
+
+# 配套负向规则（沿用 !.collab/research/ 先例·防御性声明）：该目录的判词依据部分仍入库
+!.collab/research/reference-2026-10-24/
+!.collab/research/reference-2026-10-24/.discussion/
+!.collab/research/reference-2026-10-24/REFERENCE-SOURCES.md
+
 # 系统杂物
 Thumbs.db
 Desktop.ini
