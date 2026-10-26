@@ -28,6 +28,7 @@ Team 型（多角色协作团队）
   3. **版本升 1.1.1**（Q5 拍定）：版本号变更逼宿主刷新运行缓存，规避「同版本号免刷新」漂移。
 - **上游关系**：fork 自维护，上游后续版本不自动追；需要时人工 diff 市场缓存对账一次（版本账即本节）。
 - **版本账 v1.2.0**（2026-10-26）：包 id 更名 `software-company`→`hjh-software-team`（皮总拍定·避免与市场原版混淆·包 id 变更＝破坏性变更升 minor）；席位 id 与席位 MD 文件名不动。
+- **版本账 v1.2.1**（2026-10-26）：lead 席位 MD 结构化瘦身（软开 fork lead 瘦身批 T-B1~T-B3）——新建包内 `skills/software-orchestration/` 域（SKILL.md 索引＋references 七件·附录 A 逐字照录），lead MD 沉 7 块 1,874 tok＋⛓ 指针节 343 tok，留后 2,216 tok（≤2,350 目标线）；plugin.json 加 `skills` 数组＋版本升 1.2.1（结构变更＋逼宿主刷新缓存）。主持人小节逐字不动；协作规则 §3 质量关卡留 MD（皮总拍板②）。**fork 已结构性分叉**：与市场 1.1.x 对账基准改＝「市场版 vs 附录 A＋留块合集」重构态（设计件 §2.7 R-2）。
 - **基线发现数 79→83（+4 OA-D6 advisory，fork 照录区＋出身段文件名，设计内）**（主理人 2026-10-26 拍 A：判据语义＝BLOCK 级新命中 0＋GATE PASS；先例＝批 2d 判词九；供后续批次对账不误报漂移）。
 
 ## 头像
@@ -48,20 +49,20 @@ Team 型（多角色协作团队）
 python3 scripts/register_expert.py <expert-dir>
 ```
 
-## Token 基线（收编批登记·Q4=B 暂不设线只登记）
+## Token 计数（终态·软开 fork lead 瘦身批 T-B1~T-B3 后）
 
-**口径四要素**：①口径版本＝`script-v1`（`tools/count_agent_tokens.py`：CJK≈1 token/字、非 CJK≈4 字符/token）；②实测对象＝仓内五席 MD 终态；③实测人＝eng-pkg-ta2；④取整方式＝ceil。收编批**不套 2500 线**（Q4 拍 B），lead 超线事实显式登记为**红线待治理**（超 AIGC 线 43%，治理另案）。
+**口径四要素**（缺一不计绿）：①口径版本＝`script-v1`（`tools/count_agent_tokens.py`：CJK≈1 token/字、非 CJK≈4 字符/token）；②实测 commit＝`8c1c4dd`（五席 MD 终态所在提交，本表随 T-B3 落盘）；③实测人＝eng-leadslim-t1；④取整方式＝**ceil**（`-(-(n) // 4)`）。判据＝每席 ≤2,500（红线），目标 ≤2,350。
 
-| 席位 MD | 行数 | token | 2500 线参照 |
-|---|---|---|---|
-| software-company-team-lead.md | 211 | **3,578** | **OVER（+43%·红线待治理）** |
-| software-product-manager.md | 93 | 1,072 | 绿 |
-| software-architect.md | 142 | 1,475 | 绿 |
-| software-engineer.md | 150 | 1,865 | 绿 |
-| software-qa-engineer.md | 137 | 1,371 | 绿 |
-| **合计** | **733** | **9,361** | — |
+| 席位 MD | 行数 | token | ≤2500? | 口径版本 | 下沉件数 | 下沉 token | 实测人 | 实测 commit |
+|---|---|---|---|---|---|---|---|---|
+| software-company-team-lead.md | 106 | **2,216** | 绿（≤2,350 目标线内） | script-v1 | 7 | 1,874 | eng-leadslim-t1 | 8c1c4dd |
+| software-product-manager.md | 93 | 1,072 | 绿 | script-v1 | 0 | 0 | eng-leadslim-t1 | 8c1c4dd |
+| software-architect.md | 142 | 1,475 | 绿 | script-v1 | 0 | 0 | eng-leadslim-t1 | 8c1c4dd |
+| software-engineer.md | 150 | 1,865 | 绿 | script-v1 | 0 | 0 | eng-leadslim-t1 | 8c1c4dd |
+| software-qa-engineer.md | 137 | 1,371 | 绿 | script-v1 | 0 | 0 | eng-leadslim-t1 | 8c1c4dd |
+| **合计** | **628** | **7,999** | — | script-v1 | **7** | **1,874** | eng-leadslim-t1 | 8c1c4dd |
 
-注：lead 3,578 系 name 行改名后读数（市场版 3,576 净增 2 token，与设计件 §一.1 部署面复算一致）；四成员与市场缓存逐字节一致。
+**读法（MD 是 cost center，references 是 asset）**：lead 瘦身前 3,777（`1b52fad` 实测·收编批旧账 3,578 系更名前基线，此后置）→ 瘦身后 2,216，净降 1,561；资产侧 `skills/software-orchestration/`＝references 七件正文 1,874 tok（附录 A 逐字账）＋SKILL.md 索引 631 tok（≤5,000 技能层线内）。**总量不降反微增**——成本从「每次会话全付」移到「按档触发才付」；下沉内容在 references 中逐字承载（C3 逐字门保护），lead MD 以「⛓ 必读」硬读指针直达（确定性通道，不依赖语义匹配）。四成员席位零改动（token 复算与收编批账一致：1,072／1,475／1,865／1,371）。
 
 ## 维护规则
 

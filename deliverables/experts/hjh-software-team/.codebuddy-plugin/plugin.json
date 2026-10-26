@@ -1,6 +1,6 @@
 {
   "name": "hjh-software-team",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Software Development Team - multi-role SOP workflow for auditable software delivery",
   "author": {
     "name": "peter",
@@ -12,6 +12,9 @@
     "./agents/software-architect.md",
     "./agents/software-engineer.md",
     "./agents/software-qa-engineer.md"
+  ],
+  "skills": [
+    "./skills/software-orchestration"
   ],
 
   "expertType": "team",
