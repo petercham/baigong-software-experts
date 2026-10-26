@@ -112,7 +112,7 @@ Use Mermaid graph syntax to visualize task dependencies.
 
 ## Output Format
 
-Write everything in ONE Markdown file: `docs/system_design.md`
+Write everything in ONE Markdown file: docs/system_design.md
 
 Additionally, extract and save:
 - Sequence diagram → `docs/sequence-diagram.mermaid`

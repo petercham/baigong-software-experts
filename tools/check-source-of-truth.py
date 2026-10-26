@@ -80,24 +80,53 @@
 #   W 属性符号，emoji 按 4 字符≈1 token 计）——约定出处＝批 4 W5a 勘察报告 B3.2
 #   （.collab/research/2026-10-25-批4-W5a-2500分轨复算与技能层口径勘察报告_v1.md）。
 #
-# 本件只读：不写任何文件（基线快照由外部程序化生成，见 load_baseline 注释）。
+# 写动作边界（T2 三仓接线批更新）：默认只读、不写任何文件；唯一例外＝显式
+#   `--regen-baseline` 开关（程序化重生成基线快照，禁手抄的机械化实现）。
+#   不显式带开关时行为与旧版一致（只读）。
 """W2 真源对账：A 骨架-本体对账（单真源守护）＋ B 技能层线检。
 
-用法：
-    python tools/check-source-of-truth.py [--root <仓根>] [--pkg <相对包路径>]
+T2 三仓口径（拆仓执行批·拍板六⑥）：
+    默认＝**双根对账**（dual）：
+      根① bundle 根＝`--pkg`（默认 ../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team，
+        experts 仓 video bundle·skills/ 已出池后其 agents/ 为唯一成员）；
+      根② 技能真源根＝`--skills-root`（默认 ../multi-agent-collab-skills/skills，
+        skills 仓五域·含 references/）。
+      agents（根①的 agents/ 子树）vs skills（根① skills/ 子树＋根②全部 .md）
+      的 A1 重合检测**跨仓跑**；A2 指针解析加「技能真源根」探针（见 check_pointers）。
+    单根口径（single）＝旧行为：只扫 `--pkg` 一个根（包内自包含）。
+      软开 bundle（devkits 仓 workbuddy/hjh-software-team·拍板五①自包含豁免）
+      用第二调项：`--mode single --pkg workbuddy/hjh-software-team --tag softdev`。
 
-默认包＝../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team/
-（2026-10-26 拆仓：专家包本体移入姊妹仓 multi-agent-collab-experts，
-两仓须并列同一父目录；--pkg 可显式覆盖）。
+    **豁免键 files 维度＝跨仓两段式路径口径（T2 定·稳定可机检）**：
+      文件标识＝`<roottag>:<root 内相对路径（正斜杠）>`；
+      roottag 闭集＝{experts（video bundle 根）, skills（技能真源根）, softdev（软开
+      bundle 单根调项·--tag 可覆盖缺省 pkg）}。
+      例：`experts:agents/aigc-director.md` ＋ `skills:aigc-video-content/SKILL.md`。
+      豁免键仍＝「行文本＋出现文件集合」（MC-SOT-EXEMPT 一字未动），只是集合元素
+      换成本口径的两段式标识——跨仓搬家（同文本从 experts 挪进 skills 仓新文件）
+      照样被「集合外新文件→BLOCK」条款咬住。
+
+用法：
+    python tools/check-source-of-truth.py [--root <devkits 仓根>]
+        [--mode dual|single] [--pkg <相对仓根的包路径>] [--skills-root <相对仓根的技能真源根>]
+        [--tag <roottag>] [--regen-baseline]
+
+    --regen-baseline：对**本次扫描面**全对账一次，程序化重生成 tools/baseline-sot-dup.json。
+      合并规则（两扫描面共一份基线文件）：本次扫描 roottag 集合内的旧 items 整体替换，
+      集合外的 items 原样保留（dual 面＝{experts,skills}，single 面＝{<tag>}）。
+      基线快照由本开关生成，禁手抄（旧基线由 git 史留痕）。
 
 检查项：
-    A1（MC-SOT-1）agents/ 七席 MD 之间、MD 与 skills/ 之间 ≥12 CJK 连续段行级重合
+    A1（MC-SOT-1）agents 席 MD 之间、MD 与 skills 之间 ≥12 CJK 连续段行级重合
        ——重合＝第二真源嫌疑。**豁免键＝「行文本＋出现文件集合」**（decisions §九·①）：
        文本匹配且出现文件 ∈ 该文本既定文件集合 → 转 WATCH 并标「｜基线豁免（文本＋
        文件集合）」，不计 BLOCK；文本不在基线、或文本在基线但出现在集合外的新文件
        → 照 BLOCK 并标「｜新命中」（同文本搬家必被抓）。
     A2（MC-SOT-2）agents/ 与 skills/ 内反引号 .md 路径指针可达性——悬空＝BLOCK。
-    B （MC-SKILL-LINE）五域 SKILL.md token ≤5000（script-v1/ceil/emoji 非 CJK 池）。
+       dual 模式解析探针（依序）：① 相对 bundle 根；② 相对所在目录；
+       ③ 相对技能真源根；④ 剥去 `skills/` 前缀后相对技能真源根
+       （出池指针 `skills/<域>/…` 在 skills 仓的落点＝`<域>/…`）。
+    B （MC-SKILL-LINE）SKILL.md token ≤5000（script-v1/ceil/emoji 非 CJK 池）。
 
 退出码（闭集，见 60-gates.md §六）：0 通过／1 违规／2 用法错／4 基础设施错。
 """
@@ -105,6 +134,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import sys
@@ -113,11 +143,15 @@ CJK_RE = re.compile(r'[\u3400-\u4dbf\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]')
 MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
 SKILL_LINE = 5000            # MC-SKILL-LINE：技能层 ≤5000 token 级
 # 拆仓（2026-10-26 皮总拍定）：专家包本体在姊妹仓，默认包＝跨仓相对路径。
-# 前提＝两仓并列于同一父目录（D:\）；不满足时用 --pkg 显式指定。
+# 前提＝三仓并列于同一父目录（D:\）；不满足时用 --pkg / --skills-root 显式指定。
 DEFAULT_PKG = '../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team'
+DEFAULT_SKILLS_ROOT = '../multi-agent-collab-skills/skills'
+DEFAULT_TAG_DUAL_BUNDLE = 'experts'    # 双根口径：bundle 根 roottag
+DEFAULT_TAG_DUAL_SKILLS = 'skills'     # 双根口径：技能真源根 roottag
+DEFAULT_TAG_SINGLE = 'pkg'             # 单根口径缺省 roottag（软开调项传 softdev）
 
 # 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
-#   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合}。
+#   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合（两段式标识）}。
 #   **豁免键＝「文本＋文件集合」**（皮总拍板 decisions §九·①，规范来源见文件头
 #   MC-SOT-EXEMPT 块）——不取纯文本键，以堵住「同文本搬家被误标基线」的盲区。
 #   判定：仅当「行文本匹配」且「出现文件 ∈ 该文件集合」才豁免（转 WATCH·不计 BLOCK）；
@@ -135,7 +169,6 @@ def load_baseline() -> dict:
     """
     if not os.path.isfile(BASELINE_SNAPSHOT):
         return {}
-    import json
     try:
         with open(BASELINE_SNAPSHOT, 'r', encoding='utf-8') as handle:
             data = json.load(handle)
@@ -156,43 +189,51 @@ def norm(p: str) -> str:
     return p.replace(os.sep, '/')
 
 
-def collect_md(pkg_abs: str):
-    """返回包内 md 相对路径列表（统一正斜杠），分 agents/ 与 skills/ 两组。"""
+def collect_md(root_abs: str, tag: str, include_all_non_agents: bool):
+    """一个根的 md 收集：返回 (agents, skills) 两段式标识列表（正斜杠·排序）。
+
+    agents＝`agents/` 子树；skills＝`skills/` 子树（include_all_non_agents＝True 时
+    该根下所有非 agents/ 的 md 都算 skills——技能真源根无 agents/ 子树，五域目录
+    直接为顶层）。根内其余 md（如 bundle README）不入对账面（与旧口径一致）。
+    """
     agents, skills = [], []
-    for root, dirs, files in os.walk(pkg_abs):
+    for cur, dirs, files in os.walk(root_abs):
         dirs[:] = [d for d in dirs if d not in ('.git', '__pycache__')]
         for f in sorted(files):
             if not f.endswith('.md'):
                 continue
-            rel = norm(os.path.relpath(os.path.join(root, f), pkg_abs))
-            (agents if rel.startswith('agents/') else
-             skills if rel.startswith('skills/') else []).append(rel)
+            rel = norm(os.path.relpath(os.path.join(cur, f), root_abs))
+            if rel.startswith('agents/'):
+                agents.append('%s:%s' % (tag, rel))
+            elif rel.startswith('skills/') or include_all_non_agents:
+                skills.append('%s:%s' % (tag, rel))
     return sorted(agents), sorted(skills)
 
 
-def big_lines(path_abs: str):
+def big_lines(abs_path: str):
     """行内 ≥12 CJK 的行：返回 [(行号, 规范化行文本)]。"""
     out = []
     try:
-        with open(path_abs, 'r', encoding='utf-8') as handle:
+        with open(abs_path, 'r', encoding='utf-8') as handle:
             for i, line in enumerate(handle, 1):
                 stripped = line.strip()
                 if len(CJK_RE.findall(stripped)) >= MIN_CJK:
                     out.append((i, stripped))
     except (OSError, UnicodeDecodeError) as exc:
-        raise SystemExit('infra error: 读不到 %s: %s' % (path_abs, exc))
+        raise SystemExit('infra error: 读不到 %s: %s' % (abs_path, exc))
     return out
 
 
 POINTER_RE = re.compile(r'`([A-Za-z0-9][A-Za-z0-9./_-]*\.md)`')
 
 
-def check_pointers(pkg_abs: str, rel_files):
-    """A2：反引号 .md 路径可达性。含 / 的按「相对包根」与「相对所在目录」双探；
-    裸基名（不含 /）＝WATCH（OA-D6 裁-21 同款划界：裸基名不 BLOCK）。"""
+def check_pointers(abs_of: dict, skills_abs: str | None, rel_files):
+    """A2：反引号 .md 路径可达性。含 / 的按多探针解析（口径见模块 docstring）：
+    ①相对 bundle 根 ②相对所在目录 ③相对技能真源根（dual）④剥 `skills/` 前缀后
+    相对技能真源根（dual）。裸基名（不含 /）＝WATCH（OA-D6 裁-21 同款划界）。"""
     findings = []
     for rel in rel_files:
-        abs_path = os.path.join(pkg_abs, rel)
+        abs_path = abs_of[rel]
         try:
             with open(abs_path, 'r', encoding='utf-8') as handle:
                 body = handle.read()
@@ -207,57 +248,43 @@ def check_pointers(pkg_abs: str, rel_files):
                     findings.append((rel, i, 'WATCH', 'MC-SOT-2',
                                      '指针裸基名 `%s`（不 BLOCK，按 D6 裁-21 划界）' % target))
                     continue
-                cand_root = os.path.normpath(os.path.join(pkg_abs, target))
-                cand_dir = os.path.normpath(os.path.join(os.path.dirname(abs_path), target))
-                if not (os.path.isfile(cand_root) or os.path.isfile(cand_dir)):
+                # 多探针：所在目录＋所属根＋（dual）技能真源根两式
+                candidates = [os.path.normpath(os.path.join(os.path.dirname(abs_path), target))]
+                # 所属根探针：tag 段剥掉后还原该文件所属根
+                owner_root = abs_of.get(rel + '#root')
+                if owner_root:
+                    candidates.append(os.path.normpath(os.path.join(owner_root, target)))
+                if skills_abs:
+                    candidates.append(os.path.normpath(os.path.join(skills_abs, target)))
+                    if target.startswith('skills/'):
+                        candidates.append(os.path.normpath(
+                            os.path.join(skills_abs, target[len('skills/'):]))
+                        )
+                if not any(os.path.isfile(c) for c in candidates):
                     findings.append((rel, i, 'BLOCK', 'MC-SOT-2',
-                                     '指针悬空 `%s` → 包根与所在目录双探均不存在' % target))
+                                     '指针悬空 `%s` → 包根/所在目录/技能真源根多探均不存在' % target))
     return findings
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description='W2 真源对账（骨架-本体＋技能层线检）')
-    parser.add_argument('--root', default='', help='仓根（默认自脚本位置向上找 deliverables/）')
-    parser.add_argument('--pkg', default=DEFAULT_PKG, help='被测专家包（相对仓根）')
-    args = parser.parse_args()
+def scan(agents: list, skills: list, abs_of: dict, skills_abs: str | None,
+         baseline: dict):
+    """跑 A1＋A2＋B 三项，返回 (findings, dup_items, n_exempt, n_watch_ptr)。
 
-    # 定位仓根
-    root = args.root
-    if not root:
-        cur = os.path.dirname(os.path.abspath(__file__))
-        while True:
-            if os.path.isdir(os.path.join(cur, 'deliverables')):
-                root = cur
-                break
-            parent = os.path.dirname(cur)
-            if parent == cur:
-                sys.stderr.write('infra error: 未能定位仓根；请用 --root 指定\n')
-                return 4
-            cur = parent
-    pkg_abs = os.path.join(root, args.pkg)
-    if not os.path.isdir(pkg_abs):
-        sys.stderr.write('usage error: 包目录不存在：%s\n' % args.pkg)
-        return 2
-
-    agents, skills = collect_md(pkg_abs)
-    if not agents:
-        sys.stderr.write('usage error: %s 下无 agents/*.md\n' % args.pkg)
-        return 2
-
+    dup_items＝本次扫描面全部 A1 重合文本的基线形态 items（供 --regen-baseline）。
+    """
     findings = []
-
-    # --- A1 骨架-本体对账：≥12 CJK 行级重合（scope＝至少一侧为 agents/） ---
-    # 豁免键＝「行文本＋出现文件集合」：逐「出现处」判定，同一行文本的不同出现处
-    # 各自判——集合内的豁免，集合外的（搬家/新增载体）照 BLOCK。
-    baseline = load_baseline()
     n_exempt = 0
-    index = {}   # 行文本 -> [(rel, 行号)]
+
+    # --- A1 骨架-本体对账：≥12 CJK 行级重合（scope＝至少一侧为 agents） ---
+    index = {}   # 行文本 -> [(标识, 行号)]
     for rel in agents + skills:
-        for i, line in big_lines(os.path.join(pkg_abs, rel)):
+        for i, line in big_lines(abs_of[rel]):
             index.setdefault(line, []).append((rel, i))
+    dup_items = []
     for line, occ in index.items():
         files = sorted({rel for rel, _ in occ})
-        if len(files) > 1 and any(f.startswith('agents/') for f in files):
+        if len(files) > 1 and any(f in agents for f in files):
+            dup_items.append({'text': line, 'files': files})
             allowed = baseline.get(line)
             for rel, i in occ:
                 if allowed is not None and rel in allowed:
@@ -276,18 +303,137 @@ def main() -> int:
                                      '｜新命中（豁免键未命中·%s）'
                                      % (MIN_CJK, len(files), ' + '.join(files), reason)))
 
-    # --- A2 ⛓/反引号指针可达性 ---
-    findings.extend(check_pointers(pkg_abs, agents + skills))
+    # --- A2 反引号指针可达性 ---
+    findings.extend(check_pointers(abs_of, skills_abs, agents + skills))
 
     # --- B 技能层线检：SKILL.md ≤5000（script-v1/ceil/emoji 非 CJK 池） ---
     for rel in skills:
-        if norm(rel).endswith('SKILL.md'):
-            with open(os.path.join(pkg_abs, rel), 'r', encoding='utf-8') as handle:
+        if rel.endswith('SKILL.md'):
+            with open(abs_of[rel], 'r', encoding='utf-8') as handle:
                 t = tokens(handle.read())
             if t > SKILL_LINE:
                 findings.append((rel, 1, 'BLOCK', 'MC-SKILL-LINE',
                                  'SKILL.md token %d > %d（script-v1/ceil/emoji 非 CJK 池）'
                                  % (t, SKILL_LINE)))
+    n_watch_ptr = sum(1 for f in findings if f[2] == 'WATCH' and f[3] != 'MC-SOT-1')
+    return findings, dup_items, n_exempt, n_watch_ptr
+
+
+def regen_baseline(dup_items: list, tags: set) -> None:
+    """--regen-baseline：程序化重生成基线快照（禁手抄的机械化实现）。
+
+    合并规则＝本次扫描 roottag 集合内的旧 items 整体替换、集合外原样保留
+    （dual 面＝{experts, skills}，single 面＝{<tag>}），两扫描面共一份基线文件。
+    旧格式 items（files 无两段式 `:` 标识＝T2 前口径）一律视为被替换对象——
+    两段式口径生效后它们永不命中（files 集合对不上），留着只造噪音；
+    其史实由 git 史留痕（拆仓 T2 票面明示）。
+    """
+    kept = []
+    if os.path.isfile(BASELINE_SNAPSHOT):
+        try:
+            with open(BASELINE_SNAPSHOT, 'r', encoding='utf-8') as handle:
+                old = json.load(handle)
+            for item in old.get('items', []):
+                files = item.get('files', [])
+                if not all(':' in f for f in files):
+                    continue            # 旧格式（无两段式标识）→ 替换
+                item_tags = {f.split(':', 1)[0] for f in files}
+                if not item_tags.issubset(tags):
+                    kept.append(item)   # 本次面之外（另一扫描面）的 items 保留
+        except (OSError, ValueError) as exc:
+            raise SystemExit('infra error: 读旧基线失败（拒绝盲写覆盖）%s: %s'
+                             % (BASELINE_SNAPSHOT, exc))
+    doc = {
+        'note': ('W2 真源对账脚本 A1 基线快照（**豁免键＝行文本＋该文本既定出现的文件集合**）。'
+                 '每条 item＝一条基线行文本＋其既定出现文件集合；仅当「文本匹配」且「出现文件 '
+                 '∈ files」才豁免（转 WATCH），同文本出现在集合外的新文件照 BLOCK（皮总拍板 '
+                 'decisions §九·①，规范来源见脚本头 MC-SOT-EXEMPT 块）。本件由脚本 '
+                 '--regen-baseline 程序化生成，禁手抄。文件标识＝两段式 `<roottag>:<根内相对路径>`'
+                 '（roottag 闭集见脚本 docstring·T2 三仓口径）。'),
+        'exemption_key': '文本＋出现文件集合（不是纯文本键）',
+        'path_key_format': 'roottag:root内相对路径（正斜杠）；roottag∈{experts,skills,softdev}',
+        'items': sorted(kept + dup_items, key=lambda it: (it['files'][0] if it['files'] else '', it['text'])),
+    }
+    try:
+        with open(BASELINE_SNAPSHOT, 'w', encoding='utf-8') as handle:
+            json.dump(doc, handle, ensure_ascii=False, indent=2)
+            handle.write('\n')
+    except OSError as exc:
+        raise SystemExit('infra error: 基线快照写入失败 %s: %s' % (BASELINE_SNAPSHOT, exc))
+    print('regen-baseline: 写入 %d 条 items（本次面 tags=%s·替换旧面 items·其余保留）'
+          % (len(doc['items']), '+'.join(sorted(tags))))
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description='W2 真源对账（骨架-本体＋技能层线检·T2 三仓口径）')
+    parser.add_argument('--root', default='', help='devkits 仓根（默认自脚本位置向上找 deliverables/）')
+    parser.add_argument('--mode', default='dual', choices=('dual', 'single'),
+                        help='dual＝bundle 根＋技能真源根双根对账（缺省）；single＝旧包内单根口径')
+    parser.add_argument('--pkg', default=DEFAULT_PKG, help='被测专家包（相对仓根）')
+    parser.add_argument('--skills-root', default=DEFAULT_SKILLS_ROOT,
+                        help='技能真源根（相对仓根·仅 dual 模式用）')
+    parser.add_argument('--tag', default='', help='single 模式 roottag（缺省 pkg；软开调项用 softdev）')
+    parser.add_argument('--regen-baseline', action='store_true',
+                        help='对本次扫描面全对账并重生成基线快照（程序化·禁手抄）')
+    args = parser.parse_args()
+
+    # 定位仓根
+    root = args.root
+    if not root:
+        cur = os.path.dirname(os.path.abspath(__file__))
+        while True:
+            if os.path.isdir(os.path.join(cur, 'deliverables')):
+                root = cur
+                break
+            parent = os.path.dirname(cur)
+            if parent == cur:
+                sys.stderr.write('infra error: 未能定位仓根；请用 --root 指定\n')
+                return 4
+            cur = parent
+    pkg_abs = os.path.abspath(os.path.join(root, args.pkg))
+    if not os.path.isdir(pkg_abs):
+        sys.stderr.write('usage error: 包目录不存在：%s\n' % args.pkg)
+        return 2
+
+    agents, skills = [], []
+    abs_of = {}
+    skills_abs = None
+    tags = set()
+    if args.mode == 'dual':
+        skills_abs = os.path.abspath(os.path.join(root, args.skills_root))
+        if not os.path.isdir(skills_abs):
+            sys.stderr.write('usage error: 技能真源根不存在：%s\n' % args.skills_root)
+            return 2
+        tag_b, tag_s = DEFAULT_TAG_DUAL_BUNDLE, DEFAULT_TAG_DUAL_SKILLS
+        a1, s1 = collect_md(pkg_abs, tag_b, include_all_non_agents=False)
+        a2, s2 = collect_md(skills_abs, tag_s, include_all_non_agents=True)
+        agents, skills = a1 + a2, s1 + s2
+        tags = {tag_b, tag_s}
+        # 指针探针①「相对 bundle 根」的根目录登记（仅 bundle 根成员适用）
+        for rel in a1 + s1:
+            abs_of[rel + '#root'] = pkg_abs
+        abs_of.update({rel: os.path.join(pkg_abs, rel.split(':', 1)[1]) for rel in a1 + s1})
+        abs_of.update({rel: os.path.join(skills_abs, rel.split(':', 1)[1]) for rel in a2 + s2})
+    else:
+        tag = args.tag or DEFAULT_TAG_SINGLE
+        a, s = collect_md(pkg_abs, tag, include_all_non_agents=False)
+        agents, skills = a, s
+        tags = {tag}
+        abs_of.update({rel: os.path.join(pkg_abs, rel.split(':', 1)[1]) for rel in a + s})
+        abs_of.update({rel + '#root': pkg_abs for rel in a + s})
+
+    if not agents:
+        sys.stderr.write('usage error: %s 下无 agents/ 内 md\n' % args.pkg)
+        return 2
+
+    baseline = load_baseline()
+    findings, dup_items, n_exempt, n_watch_ptr = scan(agents, skills, abs_of, skills_abs, baseline)
+
+    if args.regen_baseline:
+        regen_baseline(dup_items, tags)
+        # 重生成后基线即本次面 → 复跑一次 A1 判定以输出「零新 BLOCK」的验收读数
+        baseline = load_baseline()
+        findings, _dup, n_exempt, n_watch_ptr = scan(agents, skills, abs_of, skills_abs, baseline)
 
     # --- 输出一行一封（run-gates FINDING_RE 兼容）＋计数行 ---
     violations = 0
@@ -295,11 +441,11 @@ def main() -> int:
         print('%s:%d: %s %s %s' % (rel, i, sev, spec, msg))
         if sev == 'BLOCK':
             violations += 1
-    n_watch_ptr = sum(1 for f in findings if f[2] == 'WATCH' and f[3] != 'MC-SOT-1')
     exit_code = 1 if violations else 0
-    print('check-source-of-truth: 文件 %d（agents %d＋skills %d）｜BLOCK %d（新命中 %d）'
-          '｜基线豁免 %d（WATCH·键＝文本＋文件集合）｜指针 WATCH %d｜exit %d'
-          % (len(agents) + len(skills), len(agents), len(skills),
+    print('check-source-of-truth: 模式 %s｜文件 %d（agents %d＋skills %d）'
+          '｜BLOCK %d（新命中 %d）｜基线豁免 %d（WATCH·键＝文本＋文件集合）'
+          '｜指针 WATCH %d｜exit %d'
+          % (args.mode, len(agents) + len(skills), len(agents), len(skills),
              violations, violations, n_exempt, n_watch_ptr, exit_code))
     return exit_code
 
