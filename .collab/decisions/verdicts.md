@@ -83,3 +83,8 @@
 - **判定：放行**。独立验证席 qa-pkg-ta（fresh eyes）八判据全绿：逐字照录门（四成员 diff 零×两口径／lead 仅 name 行）／零越界（主持人小节零命中·aigc 与 multi-collab 零触碰）／plugin 1.1.1／token 基线复算一致（lead 3,578 等五席）／部署面一致（marketplace 仅本条目 1.1.1）／备份完整（9 文件＋bak）／门禁 83 条 GATE PASS exit 0／根索引行同构。
 - **观察项登记（措辞口径）**：执行方申报「BLOCK 级新命中 0」按 severity 口径有 1 条歧义（architect.md:115 severity=BLOCK 但 per_spec OA-D6=advisory 路由放行）；实质治理结果（advisory 路由＋GATE PASS）与主理人拍 A 一致，不判失。**后续账本措辞统一改「BLOCK 级新拦截 0」**（主理人采纳，即日生效）。
 - 主理人汇编：齐活林 · 2026-10-26 17:0x · 判词据 qa-pkg-ta 报告全文。
+
+## 判词·软开包化 T-A4 lead 主持人小节独立批（a3ca0c5）
+- **判定：放行**（9/9 全绿）。独立验证席 qa-pkg-ta4：逐字门（照抄件两口径包含式＋反向 diff 零）／插入位置（路由节后·快速模式节前）／diff 纯净（2 文件单 hunk 零删除）／不复述门（闭集六句 grep 全零）／token 复算（lead 3,578→3,777，小节 198≤200，账目自洽）／指针目标存在／部署面零差＋marketplace 1.1.1／门禁 83＝基线 GATE PASS exit 0（lead MD 零新命中）／越界零。
+- 观察项（不阻塞）：登记文本「7 句」系约数（任务书 6 句口径核验全零）。
+- 主理人汇编：齐活林 · 2026-10-26 17:3x。
