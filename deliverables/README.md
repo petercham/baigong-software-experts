@@ -15,6 +15,7 @@
 | 对象目录 | 内容 | 版本·状态 |
 |---|---|---|
 | `profiles/aigc-video-team/` | AIGC 视频团队（Team 型专家团·7 席位·多模态生成为生产手段·项目圣经＋五道人类确认闸 G1–G5：主理人/策划/编剧/美术指导/导演/剪辑/运营） | v1.4.0 · 活跃（源＝my-experts 注册态 `plugins/aigc-video-team/` 只读复制；批 28 AIGC 返工＋批 30 项目圣经（裁-41）＋批 32 五道确认闸（裁-44）经 gate-qa 复核后由主理人执行专家包面重装 v1.3.0（史实锚不改），批 3a 升 v1.4.0（`2d317c1`）；本目录为其注册态快照（运行时产物 .pending-preview-session 不入快照不入 zip）；批 29 入仓） |
+| `profiles/software-company/` | 软件开发团队专家包（Team 型·5 席位：交付总监/产品经理/架构师/工程师/QA·市场 v1.1.0 fork·自维护） | v1.1.1 · 活跃（源＝市场包 `software-company` v1.1.0 fork（下载戳 2026-10-09）；fork 改动三项＝plugin.json 注册形态适配＋lead 改名 `software-company-team-lead`＋版本升 1.1.1（Q5），五席 MD 逐字照录；收编批 T-A1 落盘，改定义只改仓内真源、部署面只准从仓内复制） |
 
 ## nodes/ · tickets/ · documents/ — 占位
 
