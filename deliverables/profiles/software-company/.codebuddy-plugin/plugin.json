@@ -1,0 +1,104 @@
+{
+  "name": "software-company",
+  "version": "1.1.1",
+  "description": "Software Development Team - multi-role SOP workflow for auditable software delivery",
+  "author": {
+    "name": "peter",
+    "email": "petercham@users.noreply.github.com"
+  },
+  "agents": [
+    "./agents/software-company-team-lead.md",
+    "./agents/software-product-manager.md",
+    "./agents/software-architect.md",
+    "./agents/software-engineer.md",
+    "./agents/software-qa-engineer.md"
+  ],
+
+  "expertType": "team",
+  "agentName": "software-company-team-lead",
+  "teamInfo": {
+    "leadAgent": "software-company-team-lead",
+    "memberAgents": [
+      "software-product-manager",
+      "software-architect",
+      "software-engineer",
+      "software-qa-engineer"
+    ]
+  },
+
+  "displayName": {
+    "en": "Software Company",
+    "zh": "软件开发团队"
+  },
+  "profession": {
+    "en": "Software Company",
+    "zh": "软件开发团队"
+  },
+  "displayDescription": {
+    "en": "Delivery-director-led team of PM, architect, engineer and QA that turns requirements into auditable deliverables through a fixed SOP.",
+    "zh": "交付总监统筹产品、架构、工程、测试四席，按固定 SOP 把需求推到可验收交付，每步留证据与判定级别。"
+  },
+  "avatar": "avatars/team.png",
+  "categoryId": "02-Engineering",
+  "defaultInitPrompt": {
+    "zh": "我是交付总监齐活林，带产品、架构、工程、测试四席。告诉我你要落地的目标，我先判断该由谁接、按什么顺序推进、每步怎么验收。",
+    "en": "I am Qi, Delivery Director, leading PM, architect, engineer and QA. Tell me the goal and I will decide who takes it, in what order, and how each step is accepted."
+  },
+  "plugin": "software-company",
+  "tags": [
+    { "en": "Software Delivery", "zh": "软件交付" },
+    { "en": "Multi-role SOP", "zh": "多角色 SOP" },
+    { "en": "Delivery Audit", "zh": "交付审计" }
+  ],
+  "quickPrompts": [
+    {
+      "en": "I am Qi, Delivery Director, leading PM, architect, engineer and QA. Tell me the goal and I will decide who takes it, in what order, and how each step is accepted.",
+      "zh": "我是交付总监齐活林，带产品、架构、工程、测试四席。告诉我你要落地的目标，我先判断该由谁接、按什么顺序推进、每步怎么验收。"
+    },
+    {
+      "en": "Break this requirement into acceptable tasks, mark dependencies, acceptance criteria and estimated change surface.",
+      "zh": "把这个需求拆成可验收的开发任务，标出依赖、验收判据和预估改动面。"
+    },
+    {
+      "en": "Audit this delivery or governance report and give a four-state verdict with the gaps that must be filled.",
+      "zh": "审这份交付或治理报告，按四态判定给结论，列出必须补的缺口。"
+    }
+  ],
+  "members": [
+    {
+      "id": "software-company-team-lead",
+      "displayName": { "en": "Qi", "zh": "齐活林" },
+      "profession": { "en": "Delivery Director", "zh": "交付总监" },
+      "avatar": "avatars/software-company-team-lead.png",
+      "role": "lead"
+    },
+    {
+      "id": "software-product-manager",
+      "displayName": { "en": "Xu", "zh": "许清楚" },
+      "profession": { "en": "Product Manager", "zh": "产品经理" },
+      "avatar": "avatars/software-product-manager.png",
+      "role": "member"
+    },
+    {
+      "id": "software-architect",
+      "displayName": { "en": "Gao", "zh": "高见远" },
+      "profession": { "en": "Software Architect", "zh": "架构师" },
+      "avatar": "avatars/software-architect.png",
+      "role": "member"
+    },
+    {
+      "id": "software-engineer",
+      "displayName": { "en": "Kou", "zh": "寇豆码" },
+      "profession": { "en": "Software Engineer", "zh": "工程师" },
+      "avatar": "avatars/software-engineer.png",
+      "role": "member"
+    },
+    {
+      "id": "software-qa-engineer",
+      "displayName": { "en": "Yan", "zh": "严过关" },
+      "profession": { "en": "QA Engineer", "zh": "QA工程师" },
+      "avatar": "avatars/software-qa-engineer.png",
+      "role": "member"
+    }
+  ]
+}
