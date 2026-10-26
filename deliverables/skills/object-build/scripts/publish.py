@@ -81,7 +81,7 @@ KEY_LINE_RE = re.compile(r"^([a-z][a-z0-9_]*): ?(.*)$")
 FILES_LINE_RE = re.compile(r"^(\S+) +(\S+) +([0-7]{4}) +(\S+)$")
 KEBAB_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 # 本包项目名（S-03 自伤规避：值拆段，注释不写完整字面量——裁-24 教训第三种形态）。
-_PKG_NAME_PARTS = ("multi-collab", "-agent-skills")
+_PKG_NAME_PARTS = ("multi-agent", "-collab-skills")
 
 
 def die_usage(msg: str) -> "None":

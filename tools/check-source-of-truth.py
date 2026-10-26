@@ -86,8 +86,8 @@
 用法：
     python tools/check-source-of-truth.py [--root <仓根>] [--pkg <相对包路径>]
 
-默认包＝../multi-collab-agent-experts/workbuddy/hjh-aigc-video-team/
-（2026-10-26 拆仓：专家包本体移入姊妹仓 multi-collab-agent-experts，
+默认包＝../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team/
+（2026-10-26 拆仓：专家包本体移入姊妹仓 multi-agent-collab-experts，
 两仓须并列同一父目录；--pkg 可显式覆盖）。
 
 检查项：
@@ -114,7 +114,7 @@ MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
 SKILL_LINE = 5000            # MC-SKILL-LINE：技能层 ≤5000 token 级
 # 拆仓（2026-10-26 皮总拍定）：专家包本体在姊妹仓，默认包＝跨仓相对路径。
 # 前提＝两仓并列于同一父目录（D:\）；不满足时用 --pkg 显式指定。
-DEFAULT_PKG = '../multi-collab-agent-experts/workbuddy/hjh-aigc-video-team'
+DEFAULT_PKG = '../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team'
 
 # 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
 #   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合}。

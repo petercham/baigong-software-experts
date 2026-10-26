@@ -1,8 +1,8 @@
-# multi-collab-agent-skills · 多 Agent 协作技能仓
+# multi-agent-collab-skills · 多 Agent 协作技能仓
 
 > 归属：皮总（决策者）· 建包：2026-10-22 · 维护：本包独立于 creative_skyline，不与其互写。
-> 改名拆仓：2026-10-26（原 multi-agent-collab-skillpack·皮总拍·拍板三见 `.collab/decisions/2026-10-26-皮总拍板.md`）——本仓**只放 skills**；专家团另仓 `D:\multi-collab-agent-experts\`。
-> 远端：https://github.com/petercham/multi-collab-agent-skills （private·待建）；旧远端 https://github.com/petercham/multi-agent-collab-skillpack 保留作归档（tag `v0.1.0`）。
+> 改名拆仓：2026-10-26（原 multi-agent-collab-skillpack·皮总拍·拍板三见 `.collab/decisions/2026-10-26-皮总拍板.md`）——本仓**只放 skills**；专家团另仓 `D:\multi-agent-collab-experts\`。
+> 远端：https://github.com/petercham/multi-agent-collab-skills （private·待建）；旧远端 https://github.com/petercham/multi-agent-collab-skillpack 保留作归档（tag `v0.1.0`）。
 > 本包是「多 Agent 协作开发」方法论的**交付件仓库**：skill 包、治理裁决与研究底稿（专家包在姊妹仓）。
 
 ## 目录结构（三层·按性质分区）
