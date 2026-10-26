@@ -1,6 +1,7 @@
 # deliverables/ 索引
 
 > 规则：本目录根**只放本索引**；对象按类型入五类子包（裁-38 Q2=A：`skills/`、`experts/`、`nodes/`、`tickets/`、`documents/`；`experts/` 原名 `profiles/`，2026-10-26 皮总拍定更名——专家包对象应归 experts）；新增对象先定类型再入对应子包，并在本索引登记一行。
+> **拆仓（2026-10-26·皮总拍·拍板三）**：本仓只放 skills；专家包本体已迁出至姊妹仓 `../multi-collab-agent-experts/`（仓根即平台层 `workbuddy/`·两仓并列同一父目录）。`experts/` 子包除名，下表转指针登记（指针只指不搬）。
 
 ## skills/ — skill 对象
 
@@ -10,14 +11,14 @@
 | `skills/object-build/` | 对象构建总入口（三问＋六步＋6 分件：skill/装订/角色/票/目录/发布） | v0.5 · 草稿（2026-10-22 并入票构建真源 `40-ticket.md`＋目录治理 `50-directory.md`；2026-10-23 增 `60-publish.md` 发布形态真源；裁-25 §四 `copy:` 变量式＋S-05 `object-build/scripts/publish.py` 落地；裁-28 `publish.py --prune` 白名单收缩入口＋§八 prune 项对账豁免；批 29 五类子包路径适配——publish.py 包定位 resolver 双域） |
 | `skills/multi-collab/` | 协作纪律（权限分级版：唯一写权＋开放读权席位＋md 交接件机制） | v4.4 · 活跃（2026-10-22 由 tri-collab 改名·主文件＋7 分件；裁-25 SKILL.md 出生声明块＋判词机检最小约定入 `60-gates.md`；裁-28 判词分账 `verdicts.md`＋G-1 关账登记＋Q5 关账注；v3.3 交接区边界定死为 .collab/**；v3.4 真源归属反转——本器＝协作纪律真源；v3.5 读域隔离强制边界写明（SKILL.md 是声明不是执法）；v3.6 主文件补读域边界指针（最小加载面同步）；v3.7 增 `60-gates.md` 出口路由·退出码·升级；v3.8 评审席须异后端（登记项·同后端判定不计入判定链）；v3.9 判词与流水分治；v4.0 派遣合规判据（A-3·约束行必含「六道硬约束」串·缺＝不合规派遣）；v4.3 R2 顾问提交件三制（A-17 轮次戳·三档表态·讨论轮机制·见沿革 `90-changelog.md` v4.3 条）；v4.4 R2 市场事实库与引用治理（A-15）＋`60-gates.md` 退出码家族注记（见沿革 `90-changelog.md` v4.4 条）。〔注：v4.1–v4.2 沿革已于 2026-10-25 补登记入 `90-changelog.md`「补登记（2026-10-25·主理人令）」节·取证 commit `a2caa4f`／`b8f8dda`〕） |
 
-## experts/ — 专家包对象
+## experts/ — 专家包对象（已迁出·指针登记）
 
-> 平台分层（2026-10-26 皮总拍定·T-R3）：`experts/` 下先按平台分目录，WorkBuddy 平台专家包入 `experts/workbuddy/`；新增其他平台专家包时另立同级平台子目录。
+> **拆仓（2026-10-26·皮总拍·拍板三）**：专家包本体真源移至姊妹仓 `../multi-collab-agent-experts/`（并列同一父目录），本仓不再持有 `experts/` 子包。平台分层（T-R3）随迁：专家仓仓根即 `workbuddy/` 平台层；新增其他平台专家包在专家仓另立同级平台子目录。
 
-| 对象目录 | 内容 | 版本·状态 |
+| 对象 | 现真源（姊妹仓内路径） | 版本·状态 |
 |---|---|---|
-| `experts/workbuddy/hjh-aigc-video-team/` | AIGC 视频团队（Team 型专家团·7 席位·多模态生成为生产手段·项目圣经＋五道人类确认闸 G1–G5：主理人/策划/编剧/美术指导/导演/剪辑/运营） | v1.5.0 · 活跃（源＝my-experts 注册态 `plugins/aigc-video-team/` 只读复制；批 28 AIGC 返工＋批 30 项目圣经（裁-41）＋批 32 五道确认闸（裁-44）经 gate-qa 复核后由主理人执行专家包面重装 v1.3.0（史实锚不改），批 3a 升 v1.4.0（`2d317c1`）；本目录为其注册态快照（运行时产物 .pending-preview-session 不入快照不入 zip）；批 29 入仓；v1.4.1 三席改名（皮总拍定）；v1.5.0 包 id 更名 aigc-video-team→hjh-aigc-video-team（皮总拍定 2026-10-26）） |
-| `experts/workbuddy/hjh-software-team/` | 软件开发团队专家包（Team 型·5 席位：交付总监/产品经理/架构师/工程师/QA·市场 v1.1.0 fork·自维护） | v1.2.1 · 活跃（源＝市场包 `software-company` v1.1.0 fork（下载戳 2026-10-09）；fork 改动三项＝plugin.json 注册形态适配＋lead 改名 `software-company-team-lead`＋版本升 1.1.1（Q5），五席 MD 逐字照录；收编批 T-A1 落盘，改定义只改仓内真源、部署面只准从仓内复制；v1.2.0 包 id 更名 software-company→hjh-software-team（皮总拍定 2026-10-26）） |
+| hjh-aigc-video-team | `../multi-collab-agent-experts/workbuddy/hjh-aigc-video-team/` | v1.5.0 · 活跃（沿革全文见该包 `README.md`；拆仓前历史留本仓 git 史） |
+| hjh-software-team | `../multi-collab-agent-experts/workbuddy/hjh-software-team/` | v1.2.1 · 活跃（沿革全文见该包 `README.md`；「改定义只改仓内真源、部署面只准从仓内复制」规则随迁，真源＝专家仓） |
 
 ## nodes/ · tickets/ · documents/ — 占位
 

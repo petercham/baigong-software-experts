@@ -9,7 +9,8 @@ def tokens(text: str) -> int:
     cjk = len(re.findall(CJK, text))
     return cjk + -(-(len(text) - cjk) // 4)      # ceil(非CJK/4)
 if __name__ == '__main__':
-    pat = sys.argv[1] if len(sys.argv) > 1 else 'deliverables/experts/workbuddy/*/agents/*.md'
+    # 拆仓（2026-10-26）：专家包在姊妹仓 multi-collab-agent-experts（须并列同一父目录）
+    pat = sys.argv[1] if len(sys.argv) > 1 else '../multi-collab-agent-experts/workbuddy/*/agents/*.md'
     bad = 0
     for p in sorted(glob.glob(pat, recursive=True)):
         t = tokens(open(p, encoding='utf-8').read())

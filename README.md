@@ -1,14 +1,15 @@
-# multi-agent-collab-skillpack · 多 Agent 协作开发技能包
+# multi-collab-agent-skills · 多 Agent 协作技能仓
 
 > 归属：皮总（决策者）· 建包：2026-10-22 · 维护：本包独立于 creative_skyline，不与其互写。
-> 远端：https://github.com/petercham/multi-agent-collab-skillpack （private·2026-10-22 建·当前 tag `v0.1.0`）。
-> 本包是「多 Agent 协作开发」方法论的**交付件仓库**：skill 包、专家定义、治理裁决与研究底稿。
+> 改名拆仓：2026-10-26（原 multi-agent-collab-skillpack·皮总拍·拍板三见 `.collab/decisions/2026-10-26-皮总拍板.md`）——本仓**只放 skills**；专家团另仓 `D:\multi-collab-agent-experts\`。
+> 远端：https://github.com/petercham/multi-collab-agent-skills （private·待建）；旧远端 https://github.com/petercham/multi-agent-collab-skillpack 保留作归档（tag `v0.1.0`）。
+> 本包是「多 Agent 协作开发」方法论的**交付件仓库**：skill 包、治理裁决与研究底稿（专家包在姊妹仓）。
 
 ## 目录结构（三层·按性质分区）
 
 | 目录 | 性质 | 进 git | 说明 |
 |---|---|---|---|
-| `deliverables/{对象名}/` | **交付件** | ✅ | 每个对象一个目录：skill 包、专家包等最终交付物 |
+| `deliverables/{对象名}/` | **交付件** | ✅ | 每个对象一个目录：本仓只放 skill 包（`deliverables/skills/` 五域）；专家包已迁出至姊妹仓（指针登记在 deliverables/README） |
 | `docs/` | **规范文档** | ✅ | **根只放 README.md**，正文住子包：`research/`（研究底稿）、`process/`（过程记录） |
 | `.collab/decisions/` | **治理史实锚** | ✅ | 判词、裁决、呈拍记录——append-only，只增不改 |
 | `.collab/process/` | 过程流水 | ❌（gitignore） | 会话日志、工具输出、临时产物 |
