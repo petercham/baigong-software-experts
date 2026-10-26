@@ -14,7 +14,19 @@ D:\multi-agent-collab-archive\reference-2026-10-24\
 合计：972 个文件 / 44M
 ```
 
-## 二、来源与下载时刻（`.downloaded_at` 实测样本）
+## 二、来源链条（2026-10-27 二次实测·已闭环，不再待补）
+
+皮总质疑「来源应该就在本地目录里」——实测结论：**对一半**。可考来源确实在本地可考，但**远端 URL 本地不存在**。三层实测如下：
+
+| 层 | 实测结果 |
+|---|---|
+| ① 包内 `.downloaded_at` | **只有 UTC 时间戳**，无 URL、无 COS key |
+| ② 包内 `plugin.json` | 只有 `name` / `version` / `author.name`（如 `CodeBuddy Teams`、`吟游诗人基德`）；**无** `repository` / `homepage` / `url` 字段 |
+| ③ 平台市场清单 `cb_teams_marketplace/.codebuddy-plugin/marketplace.json` | 命中 2 包：`ai-content-creator-team`、`kidd-content-expert`，`source` 记为**本地相对路径** `./plugins/<包名>`；市场 `owner`＝`Laurent Zhou <laurentzhou@tencent.com>` |
+
+**结论**：来源＝**平台市场 `cb_teams_marketplace`（非公开 URL）**，取回路径只能"经平台市场重新拉取"，**没有可 bookmark 的远端地址**（市场目录本身也不是 git 仓，无 remote）。所以原「来源 URL 待皮总补」一项**撤销**——不是皮总忘了写，是这条信息在链路上根本不存在。
+
+### 下载时刻（`.downloaded_at` 实测，UTC）
 
 | 包 | 下载时刻（UTC） |
 |---|---|
@@ -24,15 +36,15 @@ D:\multi-agent-collab-archive\reference-2026-10-24\
 | summoned-2026-10-24/xiaoyunque-creative-team | 2026-10-24T02:00:51.585Z |
 | summoned-2026-10-24/kidd-content-expert | 2026-10-24T02:03:15.407Z |
 | summoned-2026-10-24/science-video-team | 2026-10-24T02:04:57.039Z |
-| official-cos/* | 待补 |
+| official-cos/* | 无 `.downloaded_at`（该批无下载时间戳） |
 
-> ⚠️ **待皮总补**：来源 URL / COS 对象键 / 获取方式——该信息只在决策者侧，工程师席无法代写。体量、文件数、下载时刻、现址均已代补如上。
+## 三、可重建性（2026-10-27 实测判定）
 
-## 三、可重建性（待皮总判定）
-
-- 是否可从源头（市场/COS）重新下载？→ **待确认**。
-- 若**不可重建**：须在本件标注「本机唯一副本」，并安排冷备（2026-10-27 实测 D 盘剩余约 76G / 已用 95%，冷备盘位需另觅）。
-- 若**可重建**：本索引件即足够，实体丢失不构成史实损失。
+- **可否从远端 URL 重建：否** —— 无 URL、无 COS key（见 §二）。
+- **可否经平台市场重建：有条件成立** —— 只要本机仍装有 `cb_teams_marketplace` 市场，同名包可重新拉取（`source`＝`./plugins/<包名>` 在本地仍存在）。但该市场是**平台侧托管快照**，市场本身下线/换版后同名包不可复现。
+- **判定**：按「**不可重建**」口径处理（保守档）——本批归档实体按「本机唯一副本」对待。
+- **冷备**：2026-10-27 实测 D 盘剩余约 76G / 已用 95%，**冷备盘位需另觅**（该项不随本件闭环，仍待皮总安排）。
+- **价值保底**：该目录承载判词依据的部分（顶层 21 件自有 md ＋ `.discussion/` 31 件）**全部在 git 内**，实体丢失不影响史实链，只影响第三方素材本身的可复现性。
 
 ## 四、支撑 / 被引用处（仓内实测）
 
