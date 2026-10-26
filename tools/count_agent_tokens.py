@@ -9,7 +9,7 @@ def tokens(text: str) -> int:
     cjk = len(re.findall(CJK, text))
     return cjk + -(-(len(text) - cjk) // 4)      # ceil(非CJK/4)
 if __name__ == '__main__':
-    pat = sys.argv[1] if len(sys.argv) > 1 else 'deliverables/profiles/*/agents/*.md'
+    pat = sys.argv[1] if len(sys.argv) > 1 else 'deliverables/experts/*/agents/*.md'
     bad = 0
     for p in sorted(glob.glob(pat, recursive=True)):
         t = tokens(open(p, encoding='utf-8').read())
