@@ -128,7 +128,7 @@ trap cleanup_workdir EXIT
 #   完整字面量裸写于句中即算实体命中（自伤先例：check-entity.py 注释曾自咬）；
 #   拆段是机械形态规避，不是豁免规则，判据本身一字未动。
 _GW_PKG="multi-agent"
-export GATE_PROJECT_NAMES="${GATE_PROJECT_NAMES:-${_GW_PKG}-collab-skills}"
+export GATE_PROJECT_NAMES="${GATE_PROJECT_NAMES:-${_GW_PKG}-collab-devkits}"
 # 清单项两种形态（跨域挂载＝批 5-② 甲案：**只加路径解析语义，判据一字未动**）：
 #   ① 同域裸名（既有四项）        → $SELF_DIR/<name>.py
 #   ② 仓根相对路径（跨域脚本）    → 显式前缀 ROOT/ 开头，如 ROOT/tools/check-source-of-truth

@@ -1,9 +1,10 @@
-# multi-agent-collab-skills · 多 Agent 协作技能仓
+# multi-agent-collab-devkits · 多 Agent 协作开发工具包仓
 
 > 归属：皮总（决策者）· 建包：2026-10-22 · 维护：本包独立于 creative_skyline，不与其互写。
-> 改名拆仓：2026-10-26（原 multi-agent-collab-skillpack·皮总拍·拍板三见 `.collab/decisions/2026-10-26-皮总拍板.md`）——本仓**只放 skills**；专家团另仓 `D:\multi-agent-collab-experts\`。
-> 远端：https://github.com/petercham/multi-agent-collab-skills （private·待建）；旧远端 https://github.com/petercham/multi-agent-collab-skillpack 保留作归档（tag `v0.1.0`）。
-> 本包是「多 Agent 协作开发」方法论的**交付件仓库**：skill 包、治理裁决与研究底稿（专家包在姊妹仓）。
+> 沿革：2026-10-26 拆仓（原 multi-agent-collab-skillpack·拍板三）→ 同日升格 **devkits 开发工具包仓**（拍板四 G-1／拍板五①／拍板六⑥·目录改名候皮总侧关会话执行）。本仓＝各维度**整合打包的可用开发工具**，内部豁免正交切分（拍板五①）。
+> 姊妹仓：`../multi-agent-collab-experts`（video bundle＝定义＋角色＋图＋索引）；`../multi-agent-collab-skills`（被开发对象业务技能真源·video 五域）。三仓并列同一父目录为运行前提。
+> 远端：https://github.com/petercham/multi-agent-collab-devkits （private·待建）；旧远端 https://github.com/petercham/multi-agent-collab-skillpack 保留作归档（tag `v0.1.0`）。
+> knowledge 独立领域边界已登记（G-5·K2·拍板六①）：内容出生时按出池条件建仓，本轮不建。
 
 ## 目录结构（三层·按性质分区）
 

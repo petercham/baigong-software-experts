@@ -1,7 +1,7 @@
 # deliverables/ 索引
 
 > 规则：本目录根**只放本索引**；对象按类型入五类子包（裁-38 Q2=A：`skills/`、`experts/`、`nodes/`、`tickets/`、`documents/`；`experts/` 原名 `profiles/`，2026-10-26 皮总拍定更名——专家包对象应归 experts）；新增对象先定类型再入对应子包，并在本索引登记一行。
-> **拆仓（2026-10-26·皮总拍·拍板三）**：本仓只放 skills；专家包本体已迁出至姊妹仓 `../multi-agent-collab-experts/`（仓根即平台层 `workbuddy/`·两仓并列同一父目录）。`experts/` 子包除名，下表转指针登记（指针只指不搬）。
+> **拆仓沿革（2026-10-26·皮总拍·拍板三→四→五→六）**：本仓升格 **devkits 开发工具包仓**（拍板四 G-1／拍板五①·内部豁免正交切分）：协作技能四域＋软开 bundle（含随包技能·快照收编）＋tools/ 门禁＋.collab 治理史同仓；业务专家 bundle 住姊妹仓 `../multi-agent-collab-experts/`、被开发对象业务技能真源住 `../multi-agent-collab-skills/`（三仓并列同一父目录）。`experts/` 子包除名，下表转指针登记（指针只指不搬）。
 
 ## skills/ — skill 对象
 
@@ -15,10 +15,10 @@
 
 > **拆仓（2026-10-26·皮总拍·拍板三）**：专家包本体真源移至姊妹仓 `../multi-agent-collab-experts/`（并列同一父目录），本仓不再持有 `experts/` 子包。平台分层（T-R3）随迁：专家仓仓根即 `workbuddy/` 平台层；新增其他平台专家包在专家仓另立同级平台子目录。
 
-| 对象 | 现真源（姊妹仓内路径） | 版本·状态 |
+| 对象 | 现真源 | 版本·状态 |
 |---|---|---|
-| hjh-aigc-video-team | `../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team/` | v1.5.0 · 活跃（沿革全文见该包 `README.md`；拆仓前历史留本仓 git 史） |
-| hjh-software-team | `../multi-agent-collab-experts/workbuddy/hjh-software-team/` | v1.2.1 · 活跃（沿革全文见该包 `README.md`；「改定义只改仓内真源、部署面只准从仓内复制」规则随迁，真源＝专家仓） |
+| hjh-aigc-video-team | bundle＝`../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team/`；五域技能真源＝`../multi-agent-collab-skills/skills/`（出池·装配按 bundle.lock 索引装回·T3 票） | v1.5.0 · 活跃（沿革全文见该包 `README.md`；拆仓前历史留本仓 git 史） |
+| hjh-software-team | 本仓 `workbuddy/hjh-software-team/`（devkits 升格收编·拍板五①豁免正交切分·随包技能 software-orchestration 不出池） | v1.2.1 · 活跃（快照迁入·历史留 experts 仓 git 史；「改定义只改仓内真源、部署面只准从仓内复制」规则不变，真源＝本仓） |
 
 ## nodes/ · tickets/ · documents/ — 占位
 
