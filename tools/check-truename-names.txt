@@ -1,0 +1,65 @@
+# check-truename-names.txt · V8 真名残留机检词典（audit-h08·2026-10-28）
+# 词典本体落工具侧不入真源（设计稿 §⑤-4/§⑤四节·D-13）。
+# 构成＝真名＋常见旧译变体＋拼音/拉丁化全拼＋艺名别名（映射表闭集＝设计稿 §⑤二节 9 件的来源面）。
+# 强关联化名（周星星）不入词典（本身是允许主名）；我方化名（黑择名字/姑不理客/徐磕巴/李安全/皮亚睫/喂鸽茨基/斯皮尔饱嗝）不入词典。
+# 候名（黑泊明/理桉/许勊/库布瑞奇/咕布瑞奇/徐可客/鲤安/黑择铭等）非真名·不入词典（V5r 已改名·残留另按旧化名残留检查）。
+# 格式：每行一词；# 注释。CJK 词按子串匹配后由脚本按"化名包裹"分账两态；拉丁词按词边界匹配。
+# 〔T1 周星驰系〕
+周星驰
+周星池
+星仔
+zhouxingchi
+# 〔T2 斯皮尔伯格〕
+斯皮尔伯格
+史蒂文·斯皮尔伯格
+史匹柏
+斯皮尔拜格
+Spielberg
+Steven Spielberg
+# 〔P1 黑泽明〕
+黑泽明
+黑澤明
+Kurosawa
+Akira Kurosawa
+kurosawa
+# 〔P2 库布里克〕
+库布里克
+斯坦利·库布里克
+库布利克
+古布里克
+Kubrick
+Stanley Kubrick
+kubrick
+# 〔P3 徐克〕
+徐克
+Tsui Hark
+xuke
+# 〔P4 李安〕
+李安
+Ang Lee
+li an
+# 〔P5 皮亚杰〕
+皮亚杰
+让·皮亚杰
+皮亚启
+Piaget
+Jean Piaget
+piaget
+# 〔P6 维果茨基〕
+维果茨基
+维果斯基
+列夫·维果茨基
+韦果茨基
+Vygotsky
+Vygotsky, Lev
+Lev Vygotsky
+vygotsky
+# 〔旧化名/旧基名残留检查词（V5r 改判前形态·非真名·单列分账）〕
+黑择铭
+heizeming-lens
+咕布瑞奇
+guburuiqi
+徐可客
+xukeke-lens
+鲤安
+lian-lens
