@@ -1,0 +1,12 @@
+# sot-external-provenance.txt · MC-SOT-2 外部产地注记白名单（audit-h08b·V8 批·2026-10-28）
+# 用途：content 域 V1/V2 五件件头「来源标注：源＝drama-script-team 包 …」产地注记行中的
+#   反引号路径＝外部市场包（drama-script-team）路径，非我方消费指针——多探针天然不可达，
+#   非悬空债。V8 终审 BLOCK 7 移交案裁定 a＝工具侧豁免（不动真源）。
+# 纪律：逐行一条目标路径（精确匹配反引号内字符串）；仅当「目标命中白名单」且「该行含
+#   『来源标注』或『源＝』」才降级 WATCH；白名单外悬空照 BLOCK。新产地注记目标须走票增行。
+drama-craft/references/beat-templates.md
+drama-craft/references/hook-library.md
+drama-craft/references/continuity-checklist.md
+drama-craft/references/twist-library.md
+agents/story-architect.md
+agents/continuity-editor.md

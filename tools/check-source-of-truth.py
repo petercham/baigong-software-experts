@@ -160,6 +160,24 @@ DEFAULT_TAG_SINGLE = 'pkg'             # 单根口径缺省 roottag（软开调�
 BASELINE_SNAPSHOT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                  'baseline-sot-dup.json')
 
+# MC-SOT-2 外部产地注记白名单（V8 批 BLOCK 7 裁定 a·audit-h08b·2026-10-28）：
+#   content 域 V1/V2 五件件头「来源标注：源＝drama-script-team 包 …」中的反引号路径
+#   ＝外部市场包产地注记（非我方消费指针），多探针天然不可达。仅当「目标命中白名单」
+#   且「该行含『来源标注』或『源＝』」才降级 WATCH；白名单外悬空照 BLOCK。
+EXTERNAL_PROVENANCE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                   'sot-external-provenance.txt')
+
+
+def load_external_provenance() -> set:
+    if not os.path.isfile(EXTERNAL_PROVENANCE):
+        return set()
+    try:
+        with open(EXTERNAL_PROVENANCE, 'r', encoding='utf-8') as handle:
+            return {ln.split('#', 1)[0].strip() for ln in handle
+                    if ln.split('#', 1)[0].strip()}
+    except (OSError, UnicodeDecodeError) as exc:
+        raise SystemExit('infra error: 白名单读取失败 %s: %s' % (EXTERNAL_PROVENANCE, exc))
+
 
 def load_baseline() -> dict:
     """读基线快照：返回 {行文本 -> 既定出现文件集合(frozenset)}。
@@ -227,10 +245,11 @@ def big_lines(abs_path: str):
 POINTER_RE = re.compile(r'`([A-Za-z0-9][A-Za-z0-9./_-]*\.md)`')
 
 
-def check_pointers(abs_of: dict, skills_abs: str | None, rel_files):
+def check_pointers(abs_of: dict, skills_abs: str | None, rel_files, provenance: set):
     """A2：反引号 .md 路径可达性。含 / 的按多探针解析（口径见模块 docstring）：
     ①相对 bundle 根 ②相对所在目录 ③相对技能真源根（dual）④剥 `skills/` 前缀后
-    相对技能真源根（dual）。裸基名（不含 /）＝WATCH（OA-D6 裁-21 同款划界）。"""
+    相对技能真源根（dual）。裸基名（不含 /）＝WATCH（OA-D6 裁-21 同款划界）。
+    外部产地注记白名单（V8 BLOCK 7 裁定 a）：目标命中白名单且该行含产地标志＝WATCH。"""
     findings = []
     for rel in rel_files:
         abs_path = abs_of[rel]
@@ -261,6 +280,10 @@ def check_pointers(abs_of: dict, skills_abs: str | None, rel_files):
                             os.path.join(skills_abs, target[len('skills/'):]))
                         )
                 if not any(os.path.isfile(c) for c in candidates):
+                    if target in provenance and ('来源标注' in line or '源＝' in line):
+                        findings.append((rel, i, 'WATCH', 'MC-SOT-2',
+                                         '外部产地注记 `%s` → 白名单豁免（外部包路径·非我方消费指针）' % target))
+                        continue
                     findings.append((rel, i, 'BLOCK', 'MC-SOT-2',
                                      '指针悬空 `%s` → 包根/所在目录/技能真源根多探均不存在' % target))
     return findings
@@ -304,7 +327,7 @@ def scan(agents: list, skills: list, abs_of: dict, skills_abs: str | None,
                                      % (MIN_CJK, len(files), ' + '.join(files), reason)))
 
     # --- A2 反引号指针可达性 ---
-    findings.extend(check_pointers(abs_of, skills_abs, agents + skills))
+    findings.extend(check_pointers(abs_of, skills_abs, agents + skills, load_external_provenance()))
 
     # --- B 技能层线检：SKILL.md ≤5000（script-v1/ceil/emoji 非 CJK 池） ---
     for rel in skills:
