@@ -12,10 +12,10 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-STRUCT-2
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
-# spec_anchor: > **MC-FX-STRUCT-2**（闸门二·帽面）：包内逐件（SKILL.md＋references 全部）≤2500（script-v1/ceil）→超限＝BLOCK；本帽补 MC-SKILL-LINE（≤5000 只覆 SKILL.md）覆盖不到的 V3⑥-1 逐件帽 ⛓ V3:243、260。fuxi-skill 自身包同纳入帽检面（自身吃自家狗粮）。
-# spec_clause_sha256: 6428536e9e62d39a9401020d3b1886265411380d74676ed7c35a9d3205c38a09
-# spec_version: 1.0
-# spec_effective: 2026-10-28
+# spec_anchor: > **MC-FX-STRUCT-2**（闸门二·帽面）：包内逐件（SKILL.md＋references 全部）≤2500（script-v1/ceil）→超限＝BLOCK；本帽补 MC-SKILL-LINE（≤5000 只覆 SKILL.md）覆盖不到的 V3⑥-1 逐件帽 ⛓ V3:243、260。fuxi-skill 自身包同纳入帽检面（自身吃自家狗粮）。帽面豁免＝料源登记件（判定同 V8-1 豁免面②文件类型面）不受逐件帽——sources＝料源、不进运行时，类比开发文档自包含（皮总拍板⑧长度豁免）。
+# spec_clause_sha256: b9ee064140339c1e6c53251f6c65bb2c2ac7ca0e5d94ffaa92c5c256216473b6
+# spec_version: 1.1
+# spec_effective: 2026-10-29
 # provider: multi-collab
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
@@ -111,6 +111,18 @@ def read(path: str) -> str:
 
 def section_titles(text: str):
     return [ln for ln in text.splitlines() if ln.startswith('## ')]
+
+
+# 料源登记件判定（T-fuxi-srcexempt-01·皮总拍板⑧ sources 双豁免·与 check-truename 豁免面②同判据）：
+#   文件类型面＝基名 sources-ledger*.md，或首三行出现【类型：料源存档】注记；不靠段落名硬撑。
+SRC_LEDGER_NAME_RE = re.compile(r'^sources-ledger.*\.md$')
+SRC_LEDGER_TAG = '【类型：料源存档】'
+
+
+def is_source_ledger(path: str, text: str) -> bool:
+    if SRC_LEDGER_NAME_RE.match(os.path.basename(path)):
+        return True
+    return SRC_LEDGER_TAG in '\n'.join(text.splitlines()[:3])
 
 
 def check_fact_tags(rel: str, text: str, tags):
@@ -278,9 +290,13 @@ def check_pack(pack_abs: str):
             for f in fs:
                 if f.endswith('.md'):
                     ref_files.append(os.path.join(cur, f))
-    # --- 帽面 MC-FX-STRUCT-2：逐件 ≤2500（SKILL.md＋references 全部·README 不入装载面不检）---
+    # --- 帽面 MC-FX-STRUCT-2：逐件 ≤2500（SKILL.md＋references 全部·README 不入装载面不检）
+    #     帽面豁免（拍板⑧长度豁免）＝料源登记件整件不受逐件帽 ---
     for p in ([skill_md] if skill_text else []) + ref_files:
-        t = tokens(read(p))
+        txt = read(p)
+        if is_source_ledger(p, txt):
+            continue  # sources＝料源、不进运行时→帽面豁免（STRUCT-2 帽面豁免条款）
+        t = tokens(txt)
         rel = os.path.relpath(p, 'D:/')
         if t > CAP:
             findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-2',

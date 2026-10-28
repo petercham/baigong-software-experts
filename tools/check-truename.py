@@ -3,17 +3,20 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-V8-1
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
-# spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面（唯一）＝各件 `## meta`…含「来源标注」的节（节名定位闭集）。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
-# spec_clause_sha256: c92d14e07ef4c93a37d8e85f928d72c0872b599b27dbecc452ef80b4b87bbad0
-# spec_version: 1.0
-# spec_effective: 2026-10-28
+# spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面＝①各件 `## meta`…含「来源标注」的节（节名定位闭集）＋②料源登记件整件（文件类型面判定＝基名 `sources-ledger*.md` 或首三行含【类型：料源存档】注记；sources＝skill 料源、不进程序运行时，蒸馏全程真名作锚＝三节真名纪律所定，真名豁免·皮总拍板⑧ sources 双豁免）；无「来源标注」要求的料源登记件内真名不视为镜片显示面残留。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
+# spec_clause_sha256: ae667fa18c2c88a5948ef3198caba72e104d2012d8360924eb716f53205cd205
+# spec_version: 1.1
+# spec_effective: 2026-10-29
 # provider: multi-collab
 # --- /spec-provenance ---
 # 泛化改造（T-zhulong-02·Z04·结构案 §四-1）：新增 --pack/--pseudonyms/--root，**默认行为不变**
 #   （默认扫描面与 audit-h08 版逐字一致：perspective 包全真源＋genre-library/条目表＋两壳 ⛓ 注记行；
 #    化名词典从硬编码闭集外置为 check-truename-pseudonyms.txt，词典内容与旧硬编码等值）。
 # 扫描面闭集：perspective 类产物包全部真源（含 frontmatter）＋genre-library 挂载列（主件注记行＋配方条目表挂载列及其注记＝genre-recipe-entries.md 四节区）＋两壳 ⛓ 挂载指针注记行。
-# 豁免面（唯一）：各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）。
+# 豁免面（T-fuxi-srcexempt-01·皮总拍板⑧ sources 真名豁免）：
+#   ①各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）——行为不变；
+#   ②料源登记件整件豁免（按**文件类型面**判定，不靠段落名硬撑：基名匹配 sources-ledger*.md，
+#     或首三行出现【类型：料源存档】注记）——料源台账整件命中记 EXEMPT(料源登记件)。
 # 词典：真名＝check-truename-names.txt（同目录）；化名包裹＝check-truename-pseudonyms.txt（同目录）。
 #   CJK 词＝子串匹配；拉丁词＝词边界匹配；`#` 注释段不算词典命中面（旧化名留注释段·E3）。
 # 命中三态分账（spec 条款正文＝skills 仓 fuxi-skill 包 references/contract-anchors MC-FX-V8-1·自指式初挂）：
@@ -58,8 +61,21 @@ def load_words(path):
     return cjk, lat
 
 
+SRC_LEDGER_NAME_RE = re.compile(r'^sources-ledger.*\.md$')
+SRC_LEDGER_TAG = '【类型：料源存档】'
+
+
+def is_source_ledger(path, text):
+    """料源登记件判定（文件类型面·不靠段落名硬撑）：
+    基名＝sources-ledger*.md，或首三行出现【类型：料源存档】注记。"""
+    if SRC_LEDGER_NAME_RE.match(os.path.basename(path)):
+        return True
+    head = '\n'.join(text.splitlines()[:3])
+    return SRC_LEDGER_TAG in head
+
+
 def exempt_spans(text):
-    """豁免面＝含「来源标注」的 meta 节（## meta 标题起，至下一 ## 标题或 EOF）。"""
+    """豁免面①＝含「来源标注」的 meta 节（## meta 标题起，至下一 ## 标题或 EOF）。"""
     spans = []
     lines = text.splitlines(keepends=True)
     pos = [0]
@@ -101,6 +117,7 @@ def wrapped_pseudonym(text, start, end, pseudonyms):
 def scan_file(path, cjk, lat, label, pseudonyms):
     text = io.open(path, encoding='utf-8').read()
     spans = exempt_spans(text)
+    whole_exempt = is_source_ledger(path, text)  # 豁免面②＝料源登记件整件（拍板⑧真名豁免）
     hits = []
     for w in cjk:
         i = 0
@@ -109,7 +126,9 @@ def scan_file(path, cjk, lat, label, pseudonyms):
             if i < 0:
                 break
             line = text.count('\n', 0, i) + 1
-            if in_exempt(i, spans):
+            if whole_exempt:
+                st = 'EXEMPT(料源登记件·豁免面②)'
+            elif in_exempt(i, spans):
                 st = 'EXEMPT'
             else:
                 p = wrapped_pseudonym(text, i, i + len(w), pseudonyms)
@@ -120,7 +139,9 @@ def scan_file(path, cjk, lat, label, pseudonyms):
         pat = re.compile(r'(?<![A-Za-z])' + re.escape(w) + r'(?![A-Za-z])', re.IGNORECASE)
         for m in pat.finditer(text):
             line = text.count('\n', 0, m.start()) + 1
-            if in_exempt(m.start(), spans):
+            if whole_exempt:
+                st = 'EXEMPT(料源登记件·豁免面②)'
+            elif in_exempt(m.start(), spans):
                 st = 'EXEMPT'
             else:
                 st = 'VIOLATION'
@@ -182,7 +203,7 @@ def main():
         if not hits:
             continue
         for line, w, st in sorted(hits):
-            tag = 'E' if st == 'EXEMPT' else ('S' if st.startswith('SUBSTR') else 'V')
+            tag = 'E' if st.startswith('EXEMPT') else ('S' if st.startswith('SUBSTR') else 'V')
             if tag == 'E':
                 total_e += 1
             elif tag == 'S':
