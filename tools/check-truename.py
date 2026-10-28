@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # tools/check-truename.py · 闸门一 V8 真名残留机检（audit-h08·2026-10-28·设计稿 §⑤-4 口径）
 # --- spec-provenance v1 ---
-# spec_id: MC-ZL-V8-1
-# spec_file: ../multi-agent-collab-skills/skills/zhulong/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-ZL-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面（唯一）＝各件 `## meta`…含「来源标注」的节（节名定位闭集）。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
-# spec_clause_sha256: bcbc80c36516e1095f648c6cfb25803dd993070b6b5f4177949df77822456a8d
+# spec_id: MC-FX-V8-1
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面（唯一）＝各件 `## meta`…含「来源标注」的节（节名定位闭集）。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
+# spec_clause_sha256: c92d14e07ef4c93a37d8e85f928d72c0872b599b27dbecc452ef80b4b87bbad0
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
@@ -16,10 +16,10 @@
 # 豁免面（唯一）：各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）。
 # 词典：真名＝check-truename-names.txt（同目录）；化名包裹＝check-truename-pseudonyms.txt（同目录）。
 #   CJK 词＝子串匹配；拉丁词＝词边界匹配；`#` 注释段不算词典命中面（旧化名留注释段·E3）。
-# 命中三态分账（spec 条款正文＝skills 仓 zhulong 包 references/R8 MC-ZL-V8-1·自指式初挂）：
+# 命中三态分账（spec 条款正文＝skills 仓 fuxi-skill 包 references/R8 MC-FX-V8-1·自指式初挂）：
 #   EXEMPT   ＝命中落于豁免面节内（判绿）
 #   SUBSTR   ＝命中被已知化名包裹（子串误触·人工复核口径自动预分账，如「李安」⊂「李安全」）
-#   VIOLATION＝扫描面真名直书（未绿）→ 另输出 FINDING_RE 行（BLOCK MC-ZL-V8-1）
+#   VIOLATION＝扫描面真名直书（未绿）→ 另输出 FINDING_RE 行（BLOCK MC-FX-V8-1）
 # 退出码闭集（60-gates §六）：0＝扫描面零 VIOLATION／1＝有 VIOLATION／2＝用法错／4＝基础设施错。
 import argparse
 import io
@@ -129,7 +129,7 @@ def scan_file(path, cjk, lat, label, pseudonyms):
 
 
 def main():
-    ap = argparse.ArgumentParser(description='V8 真名残留机检（闸门一·MC-ZL-V8-1）')
+    ap = argparse.ArgumentParser(description='V8 真名残留机检（闸门一·MC-FX-V8-1）')
     ap.add_argument('--root', default='', help='devkits 仓根（缺省自脚本位置向上找 deliverables/；用于姊妹仓相对定位）')
     ap.add_argument('--pack', default='', help='产物包目录（绝对或相对仓根）。给出＝只扫该包真源（新产物包票用）；缺省＝audit-h08 全默认扫描面（行为不变）')
     ap.add_argument('--pseudonyms', default='', help='化名词典路径（缺省＝同目录 check-truename-pseudonyms.txt）')
@@ -189,7 +189,7 @@ def main():
                 total_s += 1
             else:
                 total_v += 1
-                finding_lines.append('%s:%d: BLOCK MC-ZL-V8-1 扫描面真名直书「%s」(%s)' % (rel, line, w, label))
+                finding_lines.append('%s:%d: BLOCK MC-FX-V8-1 扫描面真名直书「%s」(%s)' % (rel, line, w, label))
             print(f'[{tag}] {rel}:{line}  「{w}」  {st}')
     # 两壳注记行
     for path, kw in shell_marks.items():
@@ -209,7 +209,7 @@ def main():
                     print(f'[{"S" if st.startswith("SUBSTR") else "V"}] {rel}:{n}  「{w}」  {st} (壳⛓注记行)')
                     if st == 'VIOLATION':
                         total_v += 1
-                        finding_lines.append('%s:%d: BLOCK MC-ZL-V8-1 壳⛓注记行真名直书「%s」' % (rel, n, w))
+                        finding_lines.append('%s:%d: BLOCK MC-FX-V8-1 壳⛓注记行真名直书「%s」' % (rel, n, w))
                     else:
                         total_s += 1
     print(f'—— 分账：EXEMPT(豁免面命中·绿)={total_e}  SUBSTR(子串误触·判非残留)={total_s}  VIOLATION(扫描面真名直书)={total_v}')

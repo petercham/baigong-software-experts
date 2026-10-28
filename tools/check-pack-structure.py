@@ -1,33 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
-# spec_id: MC-ZL-STRUCT-1
-# spec_file: ../multi-agent-collab-skills/skills/zhulong/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-ZL-STRUCT-1**（闸门二 check-pack-structure·结构面）：①persona 镜片件必填节在位（identity/stance/traits/taboos/audience_contract/performance/exemplars〔含按需半〕/meta）＋件内禁项反查（词汇清单/强制勾选框/传记/名场面口号）→缺＝BLOCK ⛓ V3:29-42；②技法镜片节序闭集 I/R/A1/A2/E/B＋挂接＋meta，A2＋B 缺任一＝BLOCK ⛓ V3:117；④索引完备＝SKILL.md 逐件登记＋"何时必读"列＋"按需装载·默认不读"注记，缺登记＝BLOCK、裸基名互指＝WATCH ⛓ V3:255、262；⑤类型注记闭集＝【类型：方法论】【类型：判据】【类型：技法镜片】【类型：persona 镜片】，注记缺失＝WATCH、闭集外造词＝BLOCK ⛓ V3:113。
-# spec_clause_sha256: c87d3e493a33bddd5e59c85510c4a64fab19f7afa7cb472c3f217ad3004e590f
+# spec_id: MC-FX-STRUCT-1
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_anchor: > **MC-FX-STRUCT-1**（闸门二 check-pack-structure·结构面）：①persona 镜片件必填节在位（identity/stance/traits/taboos/audience_contract/performance/exemplars〔含按需半〕/meta）＋件内禁项反查（词汇清单/强制勾选框/传记/名场面口号）→缺＝BLOCK ⛓ V3:29-42；②技法镜片节序闭集 I/R/A1/A2/E/B＋挂接＋meta，A2＋B 缺任一＝BLOCK ⛓ V3:117；④索引完备＝SKILL.md 逐件登记＋"何时必读"列＋"按需装载·默认不读"注记，缺登记＝BLOCK、裸基名互指＝WATCH ⛓ V3:255、262；⑤类型注记闭集＝【类型：方法论】【类型：判据】【类型：技法镜片】【类型：persona 镜片】，注记缺失＝WATCH、闭集外造词＝BLOCK ⛓ V3:113。
+# spec_clause_sha256: 048cd753f48bc12ad366edb3bb7a6cde0e3f7e20848bc782cfabcd3599626e5e
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
-# spec_id: MC-ZL-STRUCT-2
-# spec_file: ../multi-agent-collab-skills/skills/zhulong/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-ZL-STRUCT-2**（闸门二·帽面）：包内逐件（SKILL.md＋references 全部）≤2500（script-v1/ceil）→超限＝BLOCK；本帽补 MC-SKILL-LINE（≤5000 只覆 SKILL.md）覆盖不到的 V3⑥-1 逐件帽 ⛓ V3:243、260。zhulong 自身包同纳入帽检面（自身吃自家狗粮）。
-# spec_clause_sha256: 9f16bfaa0254146c089532f7fd85be3cc15538029b1b6d5334abb79230b4cc73
+# spec_id: MC-FX-STRUCT-2
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_anchor: > **MC-FX-STRUCT-2**（闸门二·帽面）：包内逐件（SKILL.md＋references 全部）≤2500（script-v1/ceil）→超限＝BLOCK；本帽补 MC-SKILL-LINE（≤5000 只覆 SKILL.md）覆盖不到的 V3⑥-1 逐件帽 ⛓ V3:243、260。fuxi-skill 自身包同纳入帽检面（自身吃自家狗粮）。
+# spec_clause_sha256: 6428536e9e62d39a9401020d3b1886265411380d74676ed7c35a9d3205c38a09
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
 # --- /spec-provenance ---
 #
 # 闸门二 · 六维/字段结构＋体量帽机检（T-zhulong-02·Z04·结构案 §四-2）。
-# 条款正文＝skills 仓 zhulong 包 R8 卷（MC-ZL-* 自指式初挂·E1）；挂载初期按 MC-SOT-* 先例如实登记。
+# 条款正文＝skills 仓 fuxi-skill 包 R8 卷（MC-FX-* 自指式初挂·E1）；挂载初期按 MC-SOT-* 先例如实登记。
 # 输入面：--pack <path>（绝对或相对仓根）指定产物包；缺省＝默认双包面
-#   {skills仓 skills/aigc-video-perspective（产物示例）, skills仓 skills/zhulong（builder 自身·E5）}。
-# 判据闭集（MC-ZL-STRUCT-1 结构面＋MC-ZL-STRUCT-2 帽面）：见上 spec_anchor。
+#   {skills仓 skills/aigc-video-perspective（产物示例）, skills仓 skills/fuxi-skill（builder 自身·E5）}。
+# 判据闭集（MC-FX-STRUCT-1 结构面＋MC-FX-STRUCT-2 帽面）：见上 spec_anchor。
 # 通用口径：只读；--root 由 run-gates 注入；发现行照 FINDING_RE 一行一封；
 #   严重度闭集＝BLOCK／WATCH（不新造词）；退出码闭集 0/1/2/4（60-gates §六）。
 #   "绿"＝零 BLOCK（WATCH 计数如实出）。
-"""check-pack-structure：perspective 类产物包＋zhulong 自身包的字段/节序闭集与逐件 2500 帽机检。
+"""check-pack-structure：perspective 类产物包＋fuxi-skill 自身包的字段/节序闭集与逐件 2500 帽机检。
 
 用法：
     python check-pack-structure.py [--root <devkits仓根>] [--pack <包目录>]...
@@ -89,7 +89,7 @@ def check_lens_piece(rel: str, text: str, pack_abs: str, base_name: str, tags):
         joined = '\n'.join(titles)
         for sec in PERSONA_SECTIONS:
             if not re.search(r'^## .*' + re.escape(sec), joined, re.M):
-                findings.append((rel, 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+                findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-1',
                                  'persona 镜片必填节缺 `## %s`' % sec))
         # exemplars 允许落按需半（同基名 -deep）
         deep_ok = False
@@ -103,20 +103,20 @@ def check_lens_piece(rel: str, text: str, pack_abs: str, base_name: str, tags):
                                      '\n'.join(section_titles(read(os.path.join(cur, f)))), re.M):
                             deep_ok = True
             if not deep_ok:
-                findings.append((rel, 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+                findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-1',
                                  '必填节 `%s` 主件与同基名按需半均未见' % sec))
         body_wo_meta = re.split(r'^## meta', text, flags=re.M)[0]
         for pat, why in PERSONA_FORBIDDEN:
             if pat in body_wo_meta:
                 line = next((i for i, ln in enumerate(text.splitlines(), 1)
                              if pat in ln and not ln.startswith('## meta')), 1)
-                findings.append((rel, line, 'BLOCK', 'MC-ZL-STRUCT-1', why))
+                findings.append((rel, line, 'BLOCK', 'MC-FX-STRUCT-1', why))
     elif '技法镜片' in ''.join(tags):
         titles = '\n'.join(section_titles(text))
         for sec, hard in TECH_SECTIONS:
             if not re.search(r'^## ' + re.escape(sec), titles, re.M):
                 sev = 'BLOCK' if hard else 'WATCH'
-                findings.append((rel, 1, sev, 'MC-ZL-STRUCT-1',
+                findings.append((rel, 1, sev, 'MC-FX-STRUCT-1',
                                  '技法镜片节序缺 `## %s`%s'
                                  % (sec, '（A2/B 缺＝未绿·②-1）' if hard else '（沿编缺节·候裁）')))
     return findings
@@ -150,7 +150,7 @@ def check_pack(pack_abs: str):
         raise SystemExit(2)
     skill_md = os.path.join(pack_abs, 'SKILL.md')
     if not os.path.isfile(skill_md):
-        findings.append((os.path.relpath(pack_abs, 'D:/'), 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+        findings.append((os.path.relpath(pack_abs, 'D:/'), 1, 'BLOCK', 'MC-FX-STRUCT-1',
                          '包缺 SKILL.md 主件（索引完备无从检起）'))
         skill_text = ''
     else:
@@ -162,12 +162,12 @@ def check_pack(pack_abs: str):
             for f in fs:
                 if f.endswith('.md'):
                     ref_files.append(os.path.join(cur, f))
-    # --- 帽面 MC-ZL-STRUCT-2：逐件 ≤2500（SKILL.md＋references 全部·README 不入装载面不检）---
+    # --- 帽面 MC-FX-STRUCT-2：逐件 ≤2500（SKILL.md＋references 全部·README 不入装载面不检）---
     for p in ([skill_md] if skill_text else []) + ref_files:
         t = tokens(read(p))
         rel = os.path.relpath(p, 'D:/')
         if t > CAP:
-            findings.append((rel, 1, 'BLOCK', 'MC-ZL-STRUCT-2',
+            findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-2',
                              '件 token %d > %d（script-v1/ceil·⑥-1 逐件帽）' % (t, CAP)))
     # --- 索引完备：references 逐件在 SKILL.md 登记 ---
     if skill_text:
@@ -175,13 +175,13 @@ def check_pack(pack_abs: str):
             base = os.path.basename(p)
             rel_in_pack = norm_rel(os.path.relpath(p, pack_abs))
             if not index_registers(skill_text, rel_in_pack, base):
-                findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+                findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'BLOCK', 'MC-FX-STRUCT-1',
                                  'references 件 `%s` 未在 SKILL.md 索引登记（缺登记）' % base))
         if '何时必读' not in skill_text:
-            findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+            findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'BLOCK', 'MC-FX-STRUCT-1',
                              'SKILL.md 索引缺"何时必读"列'))
         if '按需装载' not in skill_text:
-            findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'WATCH', 'MC-ZL-STRUCT-1',
+            findings.append((os.path.relpath(skill_md, 'D:/'), 1, 'WATCH', 'MC-FX-STRUCT-1',
                              'SKILL.md 索引未见"按需装载·默认不读"注记'))
     # --- 镜片件判定：类型注记＝件标题行∪SKILL 索引行并集（在位体例：有的件注记在索引行）---
     ref_texts = {p: read(p) for p in ref_files}
@@ -209,19 +209,19 @@ def check_pack(pack_abs: str):
         for tg in tags:
             core = tg.split('·')[0].strip()
             if core not in TYPE_CLOSE:
-                findings.append((rel, 1, 'BLOCK', 'MC-ZL-STRUCT-1',
+                findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-1',
                                  '类型注记闭集外造词【类型：%s】' % tg))
         if is_lens_pack and not tags:
-            findings.append((rel, 1, 'WATCH', 'MC-ZL-STRUCT-1',
+            findings.append((rel, 1, 'WATCH', 'MC-FX-STRUCT-1',
                              '镜片包件缺类型注记（`%s`）' % base))
     return findings
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description='闸门二 六维/字段结构＋体量帽机检（MC-ZL-STRUCT-1/2）')
+    ap = argparse.ArgumentParser(description='闸门二 六维/字段结构＋体量帽机检（MC-FX-STRUCT-1/2）')
     ap.add_argument('--root', default='', help='devkits 仓根（run-gates 注入；用于姊妹仓相对定位）')
     ap.add_argument('--pack', action='append', default=[],
-                    help='产物包目录（绝对或相对仓根），可重复；缺省＝默认双包面 perspective＋zhulong')
+                    help='产物包目录（绝对或相对仓根），可重复；缺省＝默认双包面 perspective＋fuxi-skill')
     args = ap.parse_args()
 
     here = os.path.dirname(os.path.abspath(__file__))
@@ -244,7 +244,7 @@ def main() -> int:
         packs = [p if os.path.isabs(p) else os.path.join(root, p) for p in args.pack]
     else:
         packs = [os.path.join(skl, 'skills', 'aigc-video-perspective'),
-                 os.path.join(skl, 'skills', 'zhulong')]
+                 os.path.join(skl, 'skills', 'fuxi-skill')]
 
     n_block = n_watch = 0
     for pack in packs:

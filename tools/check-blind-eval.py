@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
-# spec_id: MC-ZL-BLIND-1
-# spec_file: ../multi-agent-collab-skills/skills/zhulong/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-ZL-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态（成片段落＝分镜文本＋镜头参数 vs 真成片帧）不在本票定死，按当期在产项目实取 ⛓ V3:272。
-# spec_clause_sha256: 92216556f7cac94d68bfae8cc0a155d65edc8d47174aaabfc2a5a9f360e280c6
+# spec_id: MC-FX-BLIND-1
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_anchor: > **MC-FX-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态（成片段落＝分镜文本＋镜头参数 vs 真成片帧）不在本票定死，按当期在产项目实取 ⛓ V3:272。
+# spec_clause_sha256: 8f3e836518a5e99d91e66cfee5acb39a3966d6fafaf44e5cb51907ed77ad2993
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
@@ -12,14 +12,14 @@
 #
 # 闸门三 · 双 agent 盲评台账机检（T-zhulong-02·Z04·结构案 §四-3）。
 # **只验台账不跑评**：评分须双 agent 真人/真席分离执行（R5 卷跑批规程），脚本不代办（防自评自证）。
-# 跑批规程本体＝skills 仓 zhulong 包 references/R5 卷；本脚本＝台账机检接口。
+# 跑批规程本体＝skills 仓 fuxi-skill 包 references/R5 卷；本脚本＝台账机检接口。
 # E4（主理人裁定）：盲评取数形态不在本票定死——本件只留接口与规程文本，不验取数形态。
 # 台账落点：devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json（证据面·不入 git）。
 # 输入面：--pack <pack>@<tag> 产物包 tag 名（判"每镜片件必有台账条目"）；缺省＝接口模式
 #   （只校在盘台账 schema＋无台账出 WATCH——未执行判据不得计绿，但缺判据面本身按接口模式分账）。
 # 通用口径：只读；--root 由 run-gates 注入；发现行照 FINDING_RE；SEV 闭集 BLOCK/WATCH；
 #   退出码闭集 0/1/2/4（60-gates §六）；"绿"＝零 BLOCK。
-"""check-blind-eval：盲评台账 schema/反作弊/等级闸机检（MC-ZL-BLIND-1）。
+"""check-blind-eval：盲评台账 schema/反作弊/等级闸机检（MC-FX-BLIND-1）。
 
 用法：
     python check-blind-eval.py [--root <devkits仓根>] [--pack <pack>@<tag>]
@@ -67,38 +67,38 @@ def check_entry(fname: str, entry: dict):
     findings = []
     missing = [k for k in LEDGER_SCHEMA if k not in entry]
     if missing:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          '台账条目缺 schema 字段 %s' % ','.join(missing)))
         return findings
     typ = entry['type']
     if typ not in TYPE_CLOSE:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          'type 闭集外取值 %r（persona|technique）' % typ))
         return findings
     ds = entry['dim_scores']
     if not isinstance(ds, list) or sorted(ds, reverse=True) != DIM_CLOSE[typ]:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          'dim_scores 不等于 %s 型闭集分值 %s' % (typ, DIM_CLOSE[typ])))
     if entry['grade'] not in GRADE_CLOSE:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          'grade 闭集外取值 %r' % entry['grade']))
     elif entry['grade'] in GRADE_FAIL:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          'grade=%s <B → 回炉件不得入库（④-1/④-2）' % entry['grade']))
     if entry['answer_agent_id'] == entry['score_agent_id']:
-        findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+        findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          '答题 agent＝评分 agent（反作弊②违例）'))
     if typ == 'technique':
         if entry['decoy_result'] in (None, '', 'fail', 'FAIL', False):
-            findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+            findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                              '技法件缺 decoy_result 或诱饵未通过（②-2/④-2）'))
     else:
         notes = str(entry.get('notes', ''))
         if '库内' in notes and ('替代' in notes or 'FIDELITY' in notes.upper()):
-            findings.append((fname, 'BLOCK', 'MC-ZL-BLIND-1',
+            findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                              'persona 件引库内自评分替代复跑（④-3 违例）'))
         if '红线' not in notes and '伪装成本人断言' not in notes:
-            findings.append((fname, 'WATCH', 'MC-ZL-BLIND-1',
+            findings.append((fname, 'WATCH', 'MC-FX-BLIND-1',
                              '红线题"伪装成本人断言"得分记录未见（notes 应含红线读数）'))
     return findings
 
@@ -124,7 +124,7 @@ def lens_pieces_of_pack(root: str, pack_name: str):
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description='闸门三 盲评台账机检（MC-ZL-BLIND-1·只验不跑）')
+    ap = argparse.ArgumentParser(description='闸门三 盲评台账机检（MC-FX-BLIND-1·只验不跑）')
     ap.add_argument('--root', default='', help='devkits 仓根（run-gates 注入）')
     ap.add_argument('--pack', default='', help='产物包 tag 名（如 aigc-video-perspective@v1.2.0）：判每镜片件必有台账条目；缺省＝接口模式')
     args = ap.parse_args()
@@ -160,15 +160,15 @@ def main() -> int:
     entries_by_pack = {}
     for fname, doc in ledgers:
         if doc is None:
-            emit(fname, 'BLOCK', 'MC-ZL-BLIND-1', '台账件 JSON 损坏（不删不猜·须重跑落盘）')
+            emit(fname, 'BLOCK', 'MC-FX-BLIND-1', '台账件 JSON 损坏（不删不猜·须重跑落盘）')
             continue
         entries = doc.get('entries') if isinstance(doc, dict) else None
         if not isinstance(entries, list):
-            emit(fname, 'BLOCK', 'MC-ZL-BLIND-1', '台账顶层缺 entries[]')
+            emit(fname, 'BLOCK', 'MC-FX-BLIND-1', '台账顶层缺 entries[]')
             continue
         for i, entry in enumerate(entries):
             if not isinstance(entry, dict):
-                emit(fname, 'BLOCK', 'MC-ZL-BLIND-1', 'entries[%d] 非对象' % i)
+                emit(fname, 'BLOCK', 'MC-FX-BLIND-1', 'entries[%d] 非对象' % i)
                 continue
             for rel, sev, spec, msg in check_entry(fname, entry):
                 emit(rel, sev, spec, msg)
@@ -184,10 +184,10 @@ def main() -> int:
         have = entries_by_pack.get((pack_name, tag), set())
         for piece, _typ in lens_pieces_of_pack(root, pack_name):
             if piece not in have:
-                emit(args.pack, 'BLOCK', 'MC-ZL-BLIND-1',
+                emit(args.pack, 'BLOCK', 'MC-FX-BLIND-1',
                      '镜片件 `%s` 无盲评台账条目（未执行不得计绿·R5 跑批四步）' % piece)
     elif not ledgers:
-        emit('.collab/evidence/blind-eval/', 'WATCH', 'MC-ZL-BLIND-1',
+        emit('.collab/evidence/blind-eval/', 'WATCH', 'MC-FX-BLIND-1',
              '盲评台账零在盘＝接口模式（产物票 --pack 判定"缺台账＝BLOCK"；规程见 R5 卷）')
 
     print('—— check-blind-eval 计数：BLOCK=%d WATCH=%d（绿＝零 BLOCK）' % (n_block, n_watch))
