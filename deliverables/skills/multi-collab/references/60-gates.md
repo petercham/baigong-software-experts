@@ -50,7 +50,11 @@
     "MC-SOT-1": {"commit": "advisory"},
     "MC-SOT-2": {"commit": "advisory"},
     "MC-SKILL-LINE": {"commit": "advisory"},
-    "MC-SOT-EXEMPT": {"commit": "advisory"}
+    "MC-SOT-EXEMPT": {"commit": "advisory"},
+    "MC-ZL-V8-1": {"commit": "advisory"},
+    "MC-ZL-STRUCT-1": {"commit": "advisory"},
+    "MC-ZL-STRUCT-2": {"commit": "advisory"},
+    "MC-ZL-BLIND-1": {"commit": "advisory"}
   }
 }
 ```
@@ -89,6 +93,10 @@
 | `MC-SOT-2` 反引号 .md 指针可达性 | `advisory` | `70-charter.md「4.1 三守门①单真源」`（同上） | **足**（同上） |
 | `MC-SKILL-LINE` 技能层 ≤5000 | `advisory` | `70-charter.md「4.2 2500 分轨」`（本包规范件·正文已落盘） | **足**（同上） |
 | `MC-SOT-EXEMPT` 基线豁免形态 | `advisory` | `70-charter.md「4.3 基线豁免形态」`（本包规范件·正文已落盘；拍板＝皮总拍板 §九·①） | **足**（同上） |
+| `MC-ZL-V8-1` V8 真名残留扫描 | `advisory` | 外部仓 skills 仓 `skills/zhulong/references/R8-契约锚与改判账.md`（MC-ZL-* 条款正文＝zhulong 包内自指式初挂·循 MC-SOT-* 先例归 W6；判据本体＝V3 契约⑤-4/D-13） | **足**（首挂 advisory 取信号·§九·② 先例；升 block 须先补本表条款级依据） |
+| `MC-ZL-STRUCT-1` 镜片结构闭集 | `advisory` | 同上（外部仓 skills 仓 zhulong 包 R8 卷·判据本体＝V3 契约①-1/②-1/⑤ 与 D-07） | **足**（同上） |
+| `MC-ZL-STRUCT-2` 逐件 ≤2500 帽 | `advisory` | 同上（外部仓 skills 仓 zhulong 包 R8 卷·判据本体＝V3 契约⑥-1） | **足**（同上） |
+| `MC-ZL-BLIND-1` 盲评台账机检 | `advisory` | 同上（外部仓 skills 仓 zhulong 包 R8 卷·判据本体＝V3 契约④ 条款闭集） | **足**（同上） |
 
 > 注（批 5-③ W6 留痕·覆盖批 5-② 同处留痕）：上表四条规范依据的**正文已落本包** `70-charter.md` §四（4.1／4.2／4.3），读表规则 5 由「id 串出现在本件 json 围栏内」的**自指式满足**转为**条款级真满足**（四条 id 均可在 `70-charter.md` 解析到，非仅在本件 json 围栏内出现）。`mode` 一律维持 `advisory` 不变——依 decisions §九·②「先挂 advisory 取信号」；升 block 须先有条款级依据再由治理改本表（配套规则 2）。
 
