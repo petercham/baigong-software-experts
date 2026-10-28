@@ -22,11 +22,11 @@
       "component": "deep-research",
       "repo": "../multi-agent-collab-skills",
       "roottag": "skills",
-      "ref": "deep-research@v1.0",
+      "ref": "deep-research@v1.0.1",
       "ref_kind": "tag",
       "path": "skills/deep-research",
       "target": "skills/deep-research",
-      "note": "跨仓组件（票 T-deepresearch-01·皮总 R-1 fork 登记）：真源＝skills 仓 skills/deep-research（MIT 派生自 staruhub/ClaudeSkills deep-research V8.1.2·克隆 hash 66e02d23642f0c63ccb07b46a88104eade402d44·登记见该技能 README）；解耦口径＝R-6：席位与编排零变化，本行为组件新增＋平台刷新载体（宿主缓存按包版本刷新），调研起手式自动路由靠技能 description 触发词，不动席位"
+      "note": "跨仓组件（票 T-deepresearch-01·皮总 R-1 fork 登记）：真源＝skills 仓 skills/deep-research（MIT 派生自 staruhub/ClaudeSkills deep-research V8.1.2·克隆 hash 66e02d23642f0c63ccb07b46a88104eade402d44·登记见该技能 README）；解耦口径＝R-6：席位与编排零变化，本行为组件新增＋平台刷新载体（宿主缓存按包版本刷新），调研起手式自动路由靠技能 description 触发词，不动席位；v1.0→v1.0.1 修因＝QA-deepresearch-01 minor-a/b/c 收口（SKILL.md 四件套句删近逐字摘要改纯指针＋补 .md 后缀、methodology 中英混排修·票 T-deepresearch-02）"
     }
   ],
   "conventions": {
