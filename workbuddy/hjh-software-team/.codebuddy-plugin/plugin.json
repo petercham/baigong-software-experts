@@ -15,7 +15,8 @@
   ],
   "skills": [
     "./skills/software-orchestration",
-    "./skills/external-advisor-collab"
+    "./skills/external-advisor-collab",
+    "./skills/deep-research"
   ],
 
   "expertType": "team",
