@@ -219,7 +219,7 @@ def main() -> int:
                      '镜片件 `%s` 无盲评台账条目（未执行不得计绿·R5 跑批四步）' % piece)
     elif not ledgers:
         emit('.collab/evidence/blind-eval/', 'WATCH', 'MC-FX-BLIND-1',
-             '盲评台账零在盘＝接口模式（产物票 --pack 判定"缺台账＝BLOCK"；规程见 R5 卷）')
+             '盲评台账零在盘＝接口模式（产物票 --pack 判定"缺台账＝BLOCK"；规程见 acceptance-blind-eval 卷）')
 
     print('—— check-blind-eval 计数：BLOCK=%d WATCH=%d（绿＝零 BLOCK）' % (n_block, n_watch))
     return 1 if n_block or n_watch else 0

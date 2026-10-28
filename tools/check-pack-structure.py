@@ -136,7 +136,7 @@ def check_fact_tags(rel: str, text: str, tags):
             hits.append(i)
     for i in hits[:5]:
         findings.append((rel, i, 'WATCH', 'MC-FX-FACT-1',
-                         '事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·R9 卷）'))
+                         '事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）'))
     if len(hits) > 5:
         findings.append((rel, hits[-1], 'WATCH', 'MC-FX-FACT-1',
                          '同类未标注事实行共 %d 行（前 5 行已列）' % len(hits)))
@@ -190,7 +190,7 @@ def norm_rel(p: str) -> str:
 
 
 # --- MC-FX-FACT-1 增检（T-fuxi-fix-05·A3·最轻形态）：devkits 试产区采集账表头须含
-#     "独立原始载体"列（证据独立性计数 R9 四节 7 款）。只验列在位，不验列值真假。
+#     "独立原始载体"列（证据独立性计数 self-distillation 四节 7 款）。只验列在位，不验列值真假。
 #     扫描面＝<root>/.collab/research/distill-*/ 下 md 的「…采集账」标题节；
 #     该节内首张表的表头行须含关键词，缺＝WATCH（无表节不算发现·申报时人工核）。---
 LEDGER_HEAD_RE = re.compile(r'^#{1,6} .*采集账')
@@ -238,7 +238,7 @@ def check_ledger_carrier(root: str):
                         in_ledger = False                # 只看表头，即断即走
             if header_seen and not ok:
                 findings.append((rel, 1, 'WATCH', 'MC-FX-FACT-1',
-                                 '采集账表头缺"独立原始载体 ID"列（R9 四节 7 款·A3·fix-05）'))
+                                 '采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）'))
     return findings
 
 
