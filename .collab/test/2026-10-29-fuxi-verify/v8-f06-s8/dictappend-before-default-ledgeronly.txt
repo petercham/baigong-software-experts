@@ -1,0 +1,60 @@
+== F-06 对拍·词典真追加后（T-fuxi-s8-01）·2026-10-29T04:19:10+08:00 ==
+--- A) ledger-only 三台账（基名豁免面②）---
+pack-dir=v8-f06/ledger-only 只扫该目录:
+pack-dir=v8-f06/ledger-only 只扫该目录:
+pack-dir=v8-f06/ledger-only 只扫该目录:
+词典：CJK 30 词／拉丁 33 词（词边界）
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:1  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:1  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:12  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:14  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:1  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「Jimmy Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:5  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:21  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+—— 分账：EXEMPT(豁免面命中·绿)=45  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=0
+exit=0
+
+--- B) 默认扫描面（perspective 旧包＋content 挂载列＋两壳·落包前）---
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「Tsui Hark」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐可客」  EXEMPT
+—— 分账：EXEMPT(豁免面命中·绿)=39  SUBSTR(子串误触·判非残留)=8  VIOLATION(扫描面真名直书)=0
+exit_default=0

@@ -1,0 +1,621 @@
+[sot-dual] /d/multi-agent-collab-devkits/tools/check-source-of-truth.py
+experts:agents/aigc-content-strategist.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:36: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:39: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-editor.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:50: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-content-strategist.md:54: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-content-strategist.md:108: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:54: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-director.md:57: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-director.md:59: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-director.md:74: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-director.md:105: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:39: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-editor.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:53: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:55: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:57: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 2 处：experts:agents/aigc-editor.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:58: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 2 处：experts:agents/aigc-editor.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-editor.md:64: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-editor.md:93: WATCH MC-SOT-2 指针裸基名 `context-and-issues.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-editor.md:93: WATCH MC-SOT-2 指针裸基名 `default-toolchain.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-editor.md:93: WATCH MC-SOT-2 指针裸基名 `deliverable-org.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-editor.md:113: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:36: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:52: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:61: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-operations.md:67: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-operations.md:138: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:36: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:39: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-editor.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:48: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:52: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-production-designer.md:56: WATCH MC-SOT-2 指针裸基名 `asset-preflight-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-production-designer.md:57: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-production-designer.md:57: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-production-designer.md:103: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:24: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:30: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:36: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:38: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:39: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-editor.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:43: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:50: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 4 处：experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:56: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-screenwriter.md:59: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-screenwriter.md:60: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-screenwriter.md:61: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-screenwriter.md:62: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-screenwriter.md:99: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-screenwriter.md:150: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 6 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-video-team-lead.md:20: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-video-team-lead.md:46: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 7 处：experts:agents/aigc-content-strategist.md + experts:agents/aigc-director.md + experts:agents/aigc-editor.md + experts:agents/aigc-operations.md + experts:agents/aigc-production-designer.md + experts:agents/aigc-screenwriter.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-video-team-lead.md:51: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 2 处：experts:agents/aigc-editor.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-video-team-lead.md:52: WATCH MC-SOT-1 ≥12 CJK 行级重合（基线结构性模板·共 2 处：experts:agents/aigc-editor.md + experts:agents/aigc-video-team-lead.md）｜基线豁免（文本＋文件集合）
+experts:agents/aigc-video-team-lead.md:67: WATCH MC-SOT-2 指针裸基名 `confirmation-protocol.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:67: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:71: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:71: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:72: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:78: WATCH MC-SOT-2 指针裸基名 `aigc-content-strategist.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:79: WATCH MC-SOT-2 指针裸基名 `aigc-screenwriter.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:80: WATCH MC-SOT-2 指针裸基名 `aigc-production-designer.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:81: WATCH MC-SOT-2 指针裸基名 `aigc-director.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:82: WATCH MC-SOT-2 指针裸基名 `aigc-editor.md`（不 BLOCK，按 D6 裁-21 划界）
+experts:agents/aigc-video-team-lead.md:83: WATCH MC-SOT-2 指针裸基名 `aigc-operations.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:19: WATCH MC-SOT-2 指针裸基名 `script-chain-per-artifact.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:21: WATCH MC-SOT-2 指针裸基名 `genre-recipe-entries.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:22: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:23: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:26: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:26: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/SKILL.md:27: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:4: WATCH MC-SOT-2 外部产地注记 `agents/story-architect.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/episode-beat-templates.md:4: WATCH MC-SOT-2 外部产地注记 `drama-craft/references/beat-templates.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/episode-beat-templates.md:5: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:16: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:21: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:45: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:57: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:65: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:69: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:81: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:81: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:82: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:82: WATCH MC-SOT-2 指针裸基名 `script-chain-per-artifact.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/episode-beat-templates.md:82: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-library.md:3: WATCH MC-SOT-2 指针裸基名 `iron-laws.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-library.md:3: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-library.md:7: WATCH MC-SOT-2 指针裸基名 `iron-laws.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-library.md:48: WATCH MC-SOT-2 指针裸基名 `genre-recipe-entries.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-library.md:53: WATCH MC-SOT-2 指针裸基名 `genre-recipe-entries.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:3: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:24: WATCH MC-SOT-2 指针裸基名 `iron-laws.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:30: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:34: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:38: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:38: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-recipe-entries.md:39: WATCH MC-SOT-2 指针裸基名 `iron-laws.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:4: WATCH MC-SOT-2 外部产地注记 `drama-craft/references/beat-templates.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/genre-rhythm-variants.md:5: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:22: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:23: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:27: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:28: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/genre-rhythm-variants.md:29: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:4: WATCH MC-SOT-2 外部产地注记 `drama-craft/references/hook-library.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/hook-taxonomy.md:5: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:11: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:11: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:61: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:61: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:62: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/hook-taxonomy.md:63: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:3: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:4: WATCH MC-SOT-2 指针裸基名 `asset-preflight-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:5: WATCH MC-SOT-2 外部产地注记 `agents/continuity-editor.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:5: WATCH MC-SOT-2 外部产地注记 `drama-craft/references/continuity-checklist.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:21: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:35: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:44: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:48: WATCH MC-SOT-2 指针裸基名 `script-chain-per-artifact.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:53: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:53: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:69: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:73: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:74: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/narrative-continuity-criteria.md:74: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:3: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:9: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:10: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:18: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:27: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:39: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/screenplay-craft.md:58: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:3: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:10: WATCH MC-SOT-2 指针裸基名 `bible-reconciliation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:11: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:11: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:18: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:18: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:28: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:34: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:36: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain-per-artifact.md:40: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:3: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:3: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:3: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:27: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:37: WATCH MC-SOT-2 指针裸基名 `staging-and-assets.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/script-chain.md:47: WATCH MC-SOT-2 指针裸基名 `script-chain-per-artifact.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/topic-brief.md:19: WATCH MC-SOT-2 指针裸基名 `genre-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:3: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:4: WATCH MC-SOT-2 指针裸基名 `asset-preflight-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:5: WATCH MC-SOT-2 外部产地注记 `drama-craft/references/twist-library.md` → 白名单豁免（外部包路径·非我方消费指针）
+skills:aigc-video-content/references/twist-criteria.md:5: WATCH MC-SOT-2 指针裸基名 `hook-library.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:9: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:56: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:60: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:60: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:61: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:62: WATCH MC-SOT-2 指针裸基名 `narrative-continuity-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-content/references/twist-criteria.md:62: WATCH MC-SOT-2 指针裸基名 `screenplay-craft.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/asset-registry.md:76: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/confirmation-protocol.md:17: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:3: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:31: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:45: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:46: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:47: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/handoff-ledger.md:47: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/staging-and-assets.md:46: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-governance/references/staging-and-assets.md:50: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/bible.md:16: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/bible.md:35: WATCH MC-SOT-2 指针裸基名 `bible-reconciliation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:21: WATCH MC-SOT-2 指针裸基名 `confirmation-protocol.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:36: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:46: WATCH MC-SOT-2 指针裸基名 `confirmation-gate-g4.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:50: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:52: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:53: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:53: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:53: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:53: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/confirmation-gates.md:55: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:3: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:9: WATCH MC-SOT-2 指针裸基名 `confirmation-gate-g4.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:24: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:46: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:60: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:61: WATCH MC-SOT-2 指针裸基名 `confirmation-protocol.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:62: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/g4-and-production-fingerprint.md:63: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:13: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:17: WATCH MC-SOT-2 指针裸基名 `bible-reconciliation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:17: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:19: WATCH MC-SOT-2 指针裸基名 `aigc-content-strategist.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:19: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:19: WATCH MC-SOT-2 指针裸基名 `topic-brief.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:21: WATCH MC-SOT-2 指针裸基名 `aigc-screenwriter.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:21: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:25: WATCH MC-SOT-2 指针裸基名 `aigc-production-designer.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:27: WATCH MC-SOT-2 指针裸基名 `aigc-director.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:31: WATCH MC-SOT-2 指针裸基名 `aigc-editor.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:40: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:42: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:44: WATCH MC-SOT-2 指针裸基名 `aigc-operations.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:46: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:52: WATCH MC-SOT-2 指针裸基名 `README.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:60: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/orchestration-steps.md:60: WATCH MC-SOT-2 指针裸基名 `narrative-continuity-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/workflow-gears.md:5: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/workflow-gears.md:5: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/workflow-gears.md:18: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/workflow-gears.md:39: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-orchestration/references/workflow-gears.md:63: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:20: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:33: WATCH MC-SOT-2 指针裸基名 `daweifenqi-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:35: WATCH MC-SOT-2 指针裸基名 `yeshouxiansheng-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:37: WATCH MC-SOT-2 指针裸基名 `gongqijin-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:45: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:45: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:45: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/SKILL.md:45: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/chase-staging-cards.md:49: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/chase-staging-cards.md:49: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/chase-staging-cards.md:49: WATCH MC-SOT-2 指针裸基名 `tragic-comic-pivot-method.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/daweifenqi-lens-deep.md:9: WATCH MC-SOT-2 指针裸基名 `daweifenqi-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/daweifenqi-lens.md:11: WATCH MC-SOT-2 指针裸基名 `daweifenqi-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/daweifenqi-lens.md:54: WATCH MC-SOT-2 指针裸基名 `daweifenqi-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/daweifenqi-lens.md:55: WATCH MC-SOT-2 指针裸基名 `sources-ledger-daweifenqi.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gongqijin-lens-deep.md:9: WATCH MC-SOT-2 指针裸基名 `gongqijin-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gongqijin-lens.md:11: WATCH MC-SOT-2 指针裸基名 `gongqijin-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gongqijin-lens.md:54: WATCH MC-SOT-2 指针裸基名 `gongqijin-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gongqijin-lens.md:55: WATCH MC-SOT-2 指针裸基名 `sources-ledger-gongqijin.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gubulike-lens-deep.md:3: WATCH MC-SOT-2 指针裸基名 `gubulike-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gubulike-lens.md:10: WATCH MC-SOT-2 指针裸基名 `gubulike-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/gubulike-lens.md:56: WATCH MC-SOT-2 指针裸基名 `gubulike-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/heizemingzi-lens-deep.md:3: WATCH MC-SOT-2 指针裸基名 `heizemingzi-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/heizemingzi-lens.md:10: WATCH MC-SOT-2 指针裸基名 `heizemingzi-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/heizemingzi-lens.md:55: WATCH MC-SOT-2 指针裸基名 `heizemingzi-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/lianquan-lens-deep.md:3: WATCH MC-SOT-2 指针裸基名 `lianquan-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/lianquan-lens.md:10: WATCH MC-SOT-2 指针裸基名 `lianquan-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/lianquan-lens.md:56: WATCH MC-SOT-2 指针裸基名 `lianquan-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:3: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:14: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:33: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:46: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:46: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:46: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:46: WATCH MC-SOT-2 指针裸基名 `text-adaptation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/narrative-framework-selector.md:46: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-dna.md:3: WATCH MC-SOT-2 指针裸基名 `piyajie-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-lineage.md:3: WATCH MC-SOT-2 指针裸基名 `piyajie-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-models.md:3: WATCH MC-SOT-2 指针裸基名 `piyajie-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-sources.md:3: WATCH MC-SOT-2 指针裸基名 `piyajie-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-sources.md:26: WATCH MC-SOT-2 指针裸基名 `narrative-framework-selector.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens-deep-values.md:3: WATCH MC-SOT-2 指针裸基名 `piyajie-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens.md:52: WATCH MC-SOT-2 指针裸基名 `piyajie-lens-deep-dna.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens.md:52: WATCH MC-SOT-2 指针裸基名 `piyajie-lens-deep-lineage.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens.md:52: WATCH MC-SOT-2 指针裸基名 `piyajie-lens-deep-models.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens.md:52: WATCH MC-SOT-2 指针裸基名 `piyajie-lens-deep-sources.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/piyajie-lens.md:52: WATCH MC-SOT-2 指针裸基名 `piyajie-lens-deep-values.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:40: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:42: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:47: WATCH MC-SOT-2 指针裸基名 `episode-beat-templates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:47: WATCH MC-SOT-2 指针裸基名 `genre-rhythm-variants.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:47: WATCH MC-SOT-2 指针裸基名 `hook-taxonomy.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/tragic-comic-pivot-method.md:47: WATCH MC-SOT-2 指针裸基名 `twist-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-dna.md:3: WATCH MC-SOT-2 指针裸基名 `weigeici-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-lineage.md:3: WATCH MC-SOT-2 指针裸基名 `weigeici-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-models.md:3: WATCH MC-SOT-2 指针裸基名 `weigeici-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-sources.md:3: WATCH MC-SOT-2 指针裸基名 `weigeici-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-sources.md:26: WATCH MC-SOT-2 指针裸基名 `narrative-framework-selector.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens-deep-values.md:3: WATCH MC-SOT-2 指针裸基名 `weigeici-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens.md:55: WATCH MC-SOT-2 指针裸基名 `weigeici-lens-deep-dna.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens.md:55: WATCH MC-SOT-2 指针裸基名 `weigeici-lens-deep-lineage.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens.md:55: WATCH MC-SOT-2 指针裸基名 `weigeici-lens-deep-models.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens.md:55: WATCH MC-SOT-2 指针裸基名 `weigeici-lens-deep-sources.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/weigeici-lens.md:55: WATCH MC-SOT-2 指针裸基名 `weigeici-lens-deep-values.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/xukeba-lens-deep.md:3: WATCH MC-SOT-2 指针裸基名 `xukeba-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/xukeba-lens.md:10: WATCH MC-SOT-2 指针裸基名 `xukeba-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/xukeba-lens.md:57: WATCH MC-SOT-2 指针裸基名 `xukeba-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/yeshouxiansheng-lens-deep.md:9: WATCH MC-SOT-2 指针裸基名 `yeshouxiansheng-lens.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/yeshouxiansheng-lens.md:11: WATCH MC-SOT-2 指针裸基名 `yeshouxiansheng-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/yeshouxiansheng-lens.md:53: WATCH MC-SOT-2 指针裸基名 `yeshouxiansheng-lens-deep.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-perspective/references/yeshouxiansheng-lens.md:54: WATCH MC-SOT-2 指针裸基名 `sources-ledger-yeshouxiansheng.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:17: WATCH MC-SOT-2 指针裸基名 `editing-craft-details.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:18: WATCH MC-SOT-2 指针裸基名 `editing-standards.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:19: WATCH MC-SOT-2 指针裸基名 `storyboard-script-annotations.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:20: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:21: WATCH MC-SOT-2 指针裸基名 `consistency-gate-checks.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/SKILL.md:22: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-checks.md:3: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-checks.md:34: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-checks.md:40: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-checks.md:57: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-checks.md:57: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:4: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:4: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:4: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:8: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:8: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:9: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:18: WATCH MC-SOT-2 指针裸基名 `editing-standards.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:25: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:33: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/consistency-gate-criteria.md:45: WATCH MC-SOT-2 指针裸基名 `consistency-gate-checks.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-craft-details.md:3: WATCH MC-SOT-2 指针裸基名 `editing-standards.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-craft-details.md:19: WATCH MC-SOT-2 指针裸基名 `default-toolchain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-craft-details.md:39: WATCH MC-SOT-2 指针裸基名 `deliverable-org.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-craft-details.md:44: WATCH MC-SOT-2 指针裸基名 `deliverable-org.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-craft-details.md:63: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:5: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:5: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:32: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:32: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:34: WATCH MC-SOT-2 指针裸基名 `default-toolchain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:39: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:50: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:58: WATCH MC-SOT-2 指针裸基名 `self-check.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/editing-standards.md:63: WATCH MC-SOT-2 指针裸基名 `editing-craft-details.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/self-check.md:27: WATCH MC-SOT-2 指针裸基名 `editing-standards.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/self-check.md:31: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-annotations.md:3: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-annotations.md:19: WATCH MC-SOT-2 指针裸基名 `consistency-gate-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-annotations.md:20: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-annotations.md:27: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-annotations.md:27: WATCH MC-SOT-2 指针裸基名 `script-chain-per-artifact.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:3: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:3: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:3: WATCH MC-SOT-2 指针裸基名 `script-chain.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:4: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:11: WATCH MC-SOT-2 指针裸基名 `staging-and-assets.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:34: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:46: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:47: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:50: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-release/references/storyboard-script-spec.md:58: WATCH MC-SOT-2 指针裸基名 `storyboard-script-annotations.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/SKILL.md:20: WATCH MC-SOT-2 指针裸基名 `shot-generation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/SKILL.md:21: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/SKILL.md:22: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/SKILL.md:25: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/SKILL.md:25: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:9: WATCH MC-SOT-2 指针裸基名 `confirmation-protocol.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:10: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:17: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:20: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:22: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-preflight-criteria.md:33: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:3: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:11: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:25: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:32: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:41: WATCH MC-SOT-2 指针裸基名 `asset-preflight-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:42: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:47: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:53: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/asset-subtype-spec.md:75: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/design-brief.md:46: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/design-brief.md:46: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:3: WATCH MC-SOT-2 指针裸基名 `self-check.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:4: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:5: WATCH MC-SOT-2 指针裸基名 `confirmation-gates.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:9: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:11: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:16: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:27: WATCH MC-SOT-2 指针裸基名 `handoff-ledger.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:31: WATCH MC-SOT-2 指针裸基名 `qc-and-criteria.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/director-self-check.md:32: WATCH MC-SOT-2 指针裸基名 `self-check.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:3: WATCH MC-SOT-2 指针裸基名 `orchestration-steps.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:4: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:9: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:9: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:15: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:16: WATCH MC-SOT-2 指针裸基名 `asset-subtype-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:19: WATCH MC-SOT-2 指针裸基名 `asset-registry.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:32: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:32: WATCH MC-SOT-2 指针裸基名 `shot-generation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:36: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-execution-spec.md:50: WATCH MC-SOT-2 指针裸基名 `generation-materials-and-degradation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-materials-and-degradation.md:3: WATCH MC-SOT-2 指针裸基名 `generation-execution-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-materials-and-degradation.md:23: WATCH MC-SOT-2 指针裸基名 `storyboard-script-spec.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/generation-materials-and-degradation.md:29: WATCH MC-SOT-2 指针裸基名 `g4-and-production-fingerprint.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/shot-plan-approach.md:3: WATCH MC-SOT-2 指针裸基名 `shot-generation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:aigc-video-visual/references/shot-plan-approach.md:16: WATCH MC-SOT-2 指针裸基名 `shot-generation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:36: WATCH MC-SOT-2 指针裸基名 `persona-lens-fields.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:37: WATCH MC-SOT-2 指针裸基名 `import-mapping.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:38: WATCH MC-SOT-2 指针裸基名 `technique-lens-card.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:39: WATCH MC-SOT-2 指针裸基名 `pack-boundary.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:40: WATCH MC-SOT-2 指针裸基名 `acceptance-blind-eval.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:41: WATCH MC-SOT-2 指针裸基名 `alias-naming.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:42: WATCH MC-SOT-2 指针裸基名 `token-cap-splitting.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:43: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/SKILL.md:44: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/acceptance-blind-eval.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/acceptance-blind-eval.md:3: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/acceptance-blind-eval.md:21: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/acceptance-blind-eval.md:47: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/alias-naming.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/contract-anchors.md:47: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/import-mapping.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/import-mapping.md:7: WATCH MC-SOT-2 指针裸基名 `persona-lens-fields.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/import-mapping.md:27: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/import-mapping.md:34: WATCH MC-SOT-2 指针裸基名 `alias-naming.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/import-mapping.md:51: WATCH MC-SOT-2 指针裸基名 `acceptance-blind-eval.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/pack-boundary.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/pack-boundary.md:22: WATCH MC-SOT-2 指针裸基名 `persona-lens-fields.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/pack-boundary.md:22: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/pack-boundary.md:22: WATCH MC-SOT-2 指针裸基名 `technique-lens-card.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/pack-boundary.md:37: WATCH MC-SOT-2 指针裸基名 `alias-naming.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/persona-lens-fields.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/persona-lens-fields.md:16: WATCH MC-SOT-2 指针裸基名 `import-mapping.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/persona-lens-fields.md:17: WATCH MC-SOT-2 指针裸基名 `self-distillation.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/persona-lens-fields.md:20: WATCH MC-SOT-2 指针裸基名 `alias-naming.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/persona-lens-fields.md:43: WATCH MC-SOT-2 指针裸基名 `import-mapping.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/self-distillation.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/self-distillation.md:10: WATCH MC-SOT-2 指针裸基名 `import-mapping.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/self-distillation.md:37: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/self-distillation.md:49: WATCH MC-SOT-2 指针裸基名 `import-mapping.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/technique-lens-card.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/technique-lens-card.md:29: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/token-cap-splitting.md:3: WATCH MC-SOT-2 指针裸基名 `SKILL.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/token-cap-splitting.md:3: WATCH MC-SOT-2 指针裸基名 `contract-anchors.md`（不 BLOCK，按 D6 裁-21 划界）
+skills:fuxi-skill/references/token-cap-splitting.md:17: WATCH MC-SOT-2 指针裸基名 `persona-lens-fields.md`（不 BLOCK，按 D6 裁-21 划界）
+check-source-of-truth: 模式 dual｜文件 118（agents 7＋skills 111）｜BLOCK 0（新命中 0）｜基线豁免 54（WATCH·键＝文本＋文件集合）｜指针 WATCH 387｜exit 0
+[zl-v8] /d/multi-agent-collab-devkits/tools/check-truename.py
+词典：CJK 30 词／拉丁 33 词（词边界）
+[S] multi-agent-collab-skills\skills\aigc-video-content\references\genre-recipe-entries.md:12  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-content\references\genre-recipe-entries.md:19  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\SKILL.md:27  「李安」  SUBSTR(包裹化名:李安全)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「Spielberg」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「Steven Spielberg」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「斯皮尔伯格」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「David Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「大卫·芬奇」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Hayao Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「宫崎骏」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Stanley Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「咕布瑞奇」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「库布里克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「斯坦利·库布里克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Akira Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑择铭」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑泽明」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑泽明」  EXEMPT
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens-deep.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:7  「李安」  SUBSTR(包裹化名:李安全)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「Ang Lee」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「李安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「李安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「鲤安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Jean Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「皮亚杰」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:1  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:1  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:12  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:14  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:1  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「Jimmy Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:5  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:21  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:51  「周星驰」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Lev Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「维果茨基」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「Tsui Hark」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐可客」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「Donaldson」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「Jimmy Donaldson」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「MrBeast」  EXEMPT
+—— 分账：EXEMPT(豁免面命中·绿)=95  SUBSTR(子串误触·判非残留)=7  VIOLATION(扫描面真名直书)=0
+[zl-struct] /d/multi-agent-collab-devkits/tools/check-pack-structure.py
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:12: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:13: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:35: WATCH MC-FX-FACT-1 同类未标注事实行共 13 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:19: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:20: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:42: WATCH MC-FX-FACT-1 同类未标注事实行共 15 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:15: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:19: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:20: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:21: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:44: WATCH MC-FX-FACT-1 同类未标注事实行共 18 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:33: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:50: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:49: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:9: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:22: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:33: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:51: WATCH MC-FX-FACT-1 同类未标注事实行共 9 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:12: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:13: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:19: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\narrative-framework-selector.md:32: WATCH MC-FX-FACT-1 同类未标注事实行共 8 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:8: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:9: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:38: WATCH MC-FX-FACT-1 同类未标注事实行共 9 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:12: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:13: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:31: WATCH MC-FX-FACT-1 同类未标注事实行共 10 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:8: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:9: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:15: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:46: WATCH MC-FX-FACT-1 同类未标注事实行共 9 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:7: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:9: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:35: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:43: WATCH MC-FX-FACT-1 同类未标注事实行共 6 行（前 5 行已列）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:11: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:14: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:18: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:19: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:20: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:44: WATCH MC-FX-FACT-1 同类未标注事实行共 15 行（前 5 行已列）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\davidfenqi-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\gongqijin-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\yeshouxiansheng-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+—— check-pack-structure 计数：BLOCK=0 WATCH=70（绿＝零 BLOCK）
+run-gates(skills 仓薄启动器)：适用项 3（SOT 双根对账＋闸门一 V8＋闸门二结构帽）｜exit 0（SOT=0 V8=0 STRUCT=0）

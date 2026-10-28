@@ -1,0 +1,104 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[S] multi-agent-collab-skills\skills\aigc-video-content\references\genre-recipe-entries.md:12  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-content\references\genre-recipe-entries.md:19  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\SKILL.md:27  「李安」  SUBSTR(包裹化名:李安全)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「Spielberg」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「Steven Spielberg」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\chase-staging-cards.md:53  「斯皮尔伯格」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「David Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\daweifenqi-lens.md:48  「大卫·芬奇」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Hayao Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gongqijin-lens.md:48  「宫崎骏」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「Stanley Kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「kubrick」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「咕布瑞奇」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「库布里克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\gubulike-lens.md:60  「斯坦利·库布里克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Akira Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「Kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「kurosawa」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑择铭」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑泽明」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\heizemingzi-lens.md:59  「黑泽明」  EXEMPT
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens-deep.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:1  「李安」  SUBSTR(包裹化名:李安全)
+[S] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:7  「李安」  SUBSTR(包裹化名:李安全)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「Ang Lee」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「李安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「李安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\lianquan-lens.md:60  「鲤安」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Jean Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「Piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「piaget」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\piyajie-lens.md:56  「皮亚杰」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:1  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:3  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-daweifenqi.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:1  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:3  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:12  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:14  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-gongqijin.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:1  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「Jimmy Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:3  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:5  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\sources-ledger-yeshouxiansheng.md:21  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\tragic-comic-pivot-method.md:51  「周星驰」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Lev Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「Vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「vygotsky」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\weigeici-lens.md:59  「维果茨基」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「Tsui Hark」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐克」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\xukeba-lens.md:61  「徐可客」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「Donaldson」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「Jimmy Donaldson」  EXEMPT
+[E] multi-agent-collab-skills\skills\aigc-video-perspective\references\yeshouxiansheng-lens.md:47  「MrBeast」  EXEMPT
+—— 分账：EXEMPT(豁免面命中·绿)=95  SUBSTR(子串误触·判非残留)=7  VIOLATION(扫描面真名直书)=0
