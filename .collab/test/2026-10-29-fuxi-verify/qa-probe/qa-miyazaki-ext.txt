@@ -1,0 +1,20 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9  「miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9  「miyazaki」  VIOLATION
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\gongqijin-lens.md:48  「Hayao Miyazaki」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\gongqijin-lens.md:48  「Miyazaki」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\gongqijin-lens.md:48  「宫崎骏」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:1  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:3  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:3  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:3  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:12  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:14  「宫崎骏」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:21  「Hayao Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\sources-ledger.md:21  「Miyazaki」  EXEMPT(料源登记件·豁免面②)
+—— 分账：EXEMPT(豁免面命中·绿)=14  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=2
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「miyazaki」(产物包真源)

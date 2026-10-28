@@ -1,0 +1,19 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\SKILL.md:9  「mrbeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:1  「MrBeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「Donaldson」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「Jimmy Donaldson」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「MrBeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:5  「mrbeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:21  「mrbeast」  VIOLATION
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「Donaldson」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「Jimmy Donaldson」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「MrBeast」  EXEMPT
+—— 分账：EXEMPT(豁免面命中·绿)=3  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=7
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:1: BLOCK MC-FX-V8-1 扫描面真名直书「MrBeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Donaldson」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Jimmy Donaldson」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「MrBeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:5: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:21: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)

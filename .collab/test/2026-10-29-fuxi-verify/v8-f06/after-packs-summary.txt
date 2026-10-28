@@ -1,0 +1,15 @@
+== AFTER 改闸后对拍（脚本＝T-fuxi-srcexempt-01 新版·词典＝同款 S8模拟追加段）==
+--- pack=david-fincher ---
+exit=1
+—— 分账：EXEMPT(豁免面命中·绿)=33  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=2
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9  「fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9  「fincher」  VIOLATION
+--- pack=mrbeast ---
+exit=1
+—— 分账：EXEMPT(豁免面命中·绿)=9  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=1
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\SKILL.md:9  「mrbeast」  VIOLATION
+--- pack=miyazaki ---
+exit=1
+—— 分账：EXEMPT(豁免面命中·绿)=14  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=2
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9  「miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\miyazaki\SKILL.md:9  「miyazaki」  VIOLATION

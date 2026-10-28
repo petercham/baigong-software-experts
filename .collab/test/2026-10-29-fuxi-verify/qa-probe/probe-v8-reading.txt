@@ -1,0 +1,13 @@
+词典：CJK 26 词／拉丁 24 词（词边界）
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\dual-tag-lens.md:3  「Spielberg」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\dual-tag-lens.md:3  「周星驰」  EXEMPT(料源登记件·豁免面②)
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\method-notes.md:3  「Spielberg」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\method-notes.md:3  「周星驰」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\real-lens-lens.md:3  「Spielberg」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\real-lens-lens.md:3  「周星驰」  VIOLATION
+—— 分账：EXEMPT(豁免面命中·绿)=2  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=4
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\method-notes.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Spielberg」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\method-notes.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「周星驰」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\real-lens-lens.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Spielberg」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\real-lens-lens.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「周星驰」(产物包真源)
+exit=1

@@ -1,0 +1,13 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\SKILL.md:9  「mrbeast」  VIOLATION
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:1  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「Jimmy Donaldson」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:3  「MrBeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:5  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\sources-ledger.md:21  「mrbeast」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「Donaldson」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「Jimmy Donaldson」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\yeshouxiansheng-lens.md:47  「MrBeast」  EXEMPT
+—— 分账：EXEMPT(豁免面命中·绿)=9  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=1
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\mrbeast\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)

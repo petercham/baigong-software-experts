@@ -1,0 +1,92 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:1  「大卫·芬奇」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3  「大卫·芬奇」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20  「fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20  「fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「David Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22  「Fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:1  「宫崎骏」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Hayao Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3  「宫崎骏」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:12  「宫崎骏」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:14  「宫崎骏」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Hayao Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21  「Miyazaki」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:1  「MrBeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「Donaldson」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「Jimmy Donaldson」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3  「MrBeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:5  「mrbeast」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:21  「mrbeast」  VIOLATION
+—— 分账：EXEMPT(豁免面命中·绿)=0  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=45
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:1: BLOCK MC-FX-V8-1 扫描面真名直书「大卫·芬奇」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「大卫·芬奇」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:10: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:11: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:12: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:14: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:16: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:17: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20: BLOCK MC-FX-V8-1 扫描面真名直书「fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:20: BLOCK MC-FX-V8-1 扫描面真名直书「fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22: BLOCK MC-FX-V8-1 扫描面真名直书「David Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-david-fincher.md:22: BLOCK MC-FX-V8-1 扫描面真名直书「Fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:1: BLOCK MC-FX-V8-1 扫描面真名直书「宫崎骏」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Hayao Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「宫崎骏」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:12: BLOCK MC-FX-V8-1 扫描面真名直书「宫崎骏」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:14: BLOCK MC-FX-V8-1 扫描面真名直书「宫崎骏」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21: BLOCK MC-FX-V8-1 扫描面真名直书「Hayao Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21: BLOCK MC-FX-V8-1 扫描面真名直书「Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-miyazaki.md:21: BLOCK MC-FX-V8-1 扫描面真名直书「Miyazaki」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:1: BLOCK MC-FX-V8-1 扫描面真名直书「MrBeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Donaldson」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「Jimmy Donaldson」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:3: BLOCK MC-FX-V8-1 扫描面真名直书「MrBeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:5: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\v8-f06\ledger-only\sources-ledger-mrbeast.md:21: BLOCK MC-FX-V8-1 扫描面真名直书「mrbeast」(产物包真源)

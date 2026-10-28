@@ -1,0 +1,16 @@
+# names-ext-S8sim.txt · F-06 对拍专用词典扩展快照＝模拟 S8 落包词典追加（三主体真名段）
+# 用法：改闸前＝临时并入库工具词典跑默认扫描；改闸后＝check-truename --names 直接注入。本件＝证据面，不入工具词典。
+# 〔S8 模拟·T-fuxi-srcexempt-01 对拍〕
+大卫·芬奇
+大卫芬奇
+大卫 芬奇
+Fincher
+David Fincher
+fincher
+MrBeast
+Jimmy Donaldson
+Donaldson
+宫崎骏
+Hayao Miyazaki
+Miyazaki
+miyazaki

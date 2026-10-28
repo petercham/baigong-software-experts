@@ -1,0 +1,7 @@
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\method-notes.md:1: BLOCK MC-FX-STRUCT-2 件 token 3388 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-pack\references\real-lens-lens.md:3: WATCH MC-FX-FACT-1 事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·self-distillation 卷）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\davidfenqi-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\gongqijin-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\yeshouxiansheng-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+—— check-pack-structure 计数：BLOCK=1 WATCH=4（绿＝零 BLOCK）
+exit=1

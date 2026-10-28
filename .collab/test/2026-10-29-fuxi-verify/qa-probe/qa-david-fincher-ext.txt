@@ -1,0 +1,39 @@
+词典：CJK 30 词／拉丁 33 词（词边界）
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9  「fincher」  VIOLATION
+[V] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9  「fincher」  VIOLATION
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\daweifenqi-lens.md:48  「David Fincher」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\daweifenqi-lens.md:48  「Fincher」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\daweifenqi-lens.md:48  「大卫·芬奇」  EXEMPT
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:1  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:3  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:3  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:3  「大卫·芬奇」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:10  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:10  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:11  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:11  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:12  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:12  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:14  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:16  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:16  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:17  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:17  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:20  「fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:22  「David Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+[E] multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\sources-ledger.md:22  「Fincher」  EXEMPT(料源登记件·豁免面②)
+—— 分账：EXEMPT(豁免面命中·绿)=33  SUBSTR(子串误触·判非残留)=0  VIOLATION(扫描面真名直书)=2
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「fincher」(产物包真源)
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\packs\david-fincher\SKILL.md:9: BLOCK MC-FX-V8-1 扫描面真名直书「fincher」(产物包真源)

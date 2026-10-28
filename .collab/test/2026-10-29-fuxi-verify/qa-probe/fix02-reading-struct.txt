@@ -1,0 +1,31 @@
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-2 件 token 4828 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-forged-fm.md:1: BLOCK MC-FX-STRUCT-2 件 token 4839 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-forged-note-lens.md:1: BLOCK MC-FX-STRUCT-2 件 token 4830 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## stance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## traits`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## taboos`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## audience_contract`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## performance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## meta`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-cn-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 必填节 `exemplars` 主件与同基名按需半均未见
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## identity`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## stance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## traits`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## taboos`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## audience_contract`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## performance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## meta`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-dual-tag.md:1: BLOCK MC-FX-STRUCT-1 必填节 `exemplars` 主件与同基名按需半均未见
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## stance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## traits`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## taboos`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## audience_contract`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## performance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## meta`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\fix02-en-lens-missing.md:1: BLOCK MC-FX-STRUCT-1 必填节 `exemplars` 主件与同基名按需半均未见
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\sources-ledger-disguise.md:1: WATCH MC-FX-STRUCT-1 镜片包件缺类型注记（`sources-ledger-disguise.md`）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\fix02-probe-pack\references\sources-ledger-fix02.md:1: WATCH MC-FX-STRUCT-1 镜片包件缺类型注记（`sources-ledger-fix02.md`）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\davidfenqi-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\gongqijin-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\yeshouxiansheng-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+—— check-pack-structure 计数：BLOCK=25 WATCH=5（绿＝零 BLOCK）
