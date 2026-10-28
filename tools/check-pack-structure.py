@@ -21,8 +21,8 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-FACT-1
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-FX-FACT-1**（闸门二 check-pack-structure·事实行三态标注面·T-fuxi-fix-01 增检）：perspective 类镜片件（含按需半）正文内带年份/数字/引文的事实行无三态标注〔已核实〕〔存疑待核〕〔核验失败〕任一→WATCH（advisory 起·升 block 须先补 60-gates §四对账行条款级依据）；三态闭集与候核账规程＝R9 卷四节（⛓ `R9-自主蒸馏工序.md`）；豁免面＝SKILL 索引行/frontmatter/meta「来源标注」节/料源存档件（非镜片件不检）。机检只验标注在位，不验事实真假——真假归 S0.5 候核账人工规程，机器不代办。
-# spec_clause_sha256: 06e91d0dd1a7e45051a33b21bc556b319db1a18dcc0837dcf958352e41ee63a3
+# spec_anchor: > **MC-FX-FACT-1**（闸门二 check-pack-structure·事实行三态标注面·T-fuxi-fix-01 增检）：perspective 类镜片件（含按需半）正文内带年份/数字/引文的事实行无三态标注〔已核实〕〔存疑待核〕〔核验失败〕任一→WATCH（advisory 起·升 block 须先补 60-gates §四对账行条款级依据）；三态闭集与候核账规程＝R9 卷四节（⛓ `R9-自主蒸馏工序.md`）；豁免面＝SKILL 索引行/frontmatter/meta「来源标注」节/料源存档件（非镜片件不检）。增检（fix-05）：devkits 试产区采集账表头缺独立原始载体 ID 列→WATCH。机检只验标注/列在位不验真假——真假归 S0.5 候核账人工规程。
+# spec_clause_sha256: a2225d37f385a419b2290007ea08645115affe6ee443d1149791819f4a71a413
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
@@ -174,6 +174,59 @@ def norm_rel(p: str) -> str:
     return p.replace(os.sep, '/')
 
 
+# --- MC-FX-FACT-1 增检（T-fuxi-fix-05·A3·最轻形态）：devkits 试产区采集账表头须含
+#     "独立原始载体"列（证据独立性计数 R9 四节 7 款）。只验列在位，不验列值真假。
+#     扫描面＝<root>/.collab/research/distill-*/ 下 md 的「…采集账」标题节；
+#     该节内首张表的表头行须含关键词，缺＝WATCH（无表节不算发现·申报时人工核）。---
+LEDGER_HEAD_RE = re.compile(r'^#{1,6} .*采集账')
+CARRIER_COL_RE = re.compile(r'独立原始载体|载体\s*ID|载体ID')
+
+
+def check_ledger_carrier(root: str):
+    """A3 最轻存在性检查：试产区采集账节有表但表头缺"独立原始载体"列→WATCH。"""
+    findings = []
+    research = os.path.join(root, '.collab', 'research')
+    if not os.path.isdir(research):
+        return findings
+    for cur, dirs, files in os.walk(research):
+        if cur == research:
+            dirs[:] = [d for d in dirs if d.startswith('distill-')]
+        else:
+            dirs[:] = []
+        for f in sorted(files):
+            if not f.endswith('.md'):
+                continue
+            path = os.path.join(cur, f)
+            try:
+                with open(path, 'r', encoding='utf-8') as handle:
+                    lines = handle.read().splitlines()
+            except (OSError, UnicodeDecodeError):
+                continue  # 证据面只读不猜
+            rel = os.path.relpath(path, 'D:/')
+            in_ledger = False
+            header_seen = False
+            ok = False
+            for ln in lines:
+                if LEDGER_HEAD_RE.match(ln):
+                    in_ledger = True
+                    header_seen = False
+                    continue
+                if ln.startswith('#'):
+                    in_ledger = False
+                    continue
+                if in_ledger and ln.strip().startswith('|'):
+                    if set(ln.strip()) <= set('|-: '):   # 分隔行跳过
+                        continue
+                    if not header_seen:                  # 节内首张表的表头行
+                        header_seen = True
+                        ok = bool(CARRIER_COL_RE.search(ln))
+                        in_ledger = False                # 只看表头，即断即走
+            if header_seen and not ok:
+                findings.append((rel, 1, 'WATCH', 'MC-FX-FACT-1',
+                                 '采集账表头缺"独立原始载体 ID"列（R9 四节 7 款·A3·fix-05）'))
+    return findings
+
+
 def index_registers(skill_text: str, rel_in_pack: str, base: str) -> bool:
     """SKILL.md 是否登记该件：字面基名/包内相对路径命中，或花括号分组形态（`x-{a,b}.md` 展开）命中。"""
     if base in skill_text or rel_in_pack in skill_text:
@@ -306,6 +359,13 @@ def main() -> int:
                 n_block += 1
             else:
                 n_watch += 1
+    # MC-FX-FACT-1 增检（fix-05·A3）：试产区采集账载体列存在性（最轻形态）
+    for rel, line, sev, spec, msg in check_ledger_carrier(root):
+        print('%s:%d: %s %s %s' % (rel, line, sev, spec, msg))
+        if sev == 'BLOCK':
+            n_block += 1
+        else:
+            n_watch += 1
     print('—— check-pack-structure 计数：BLOCK=%d WATCH=%d（绿＝零 BLOCK）' % (n_block, n_watch))
     # 退出码语义对齐件头"绿＝零 BLOCK"：WATCH＝advisory 取信号（MC-FX-* 首挂口径），不计违规码；
     # 拦不拦由 run-gates 路由表裁决（三轴分离·60-gates §三），本件不自带处置。

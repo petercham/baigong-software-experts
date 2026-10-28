@@ -3,8 +3,8 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-BLIND-1
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-FX-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态（成片段落＝分镜文本＋镜头参数 vs 真成片帧）不在本票定死，按当期在产项目实取 ⛓ V3:272。
-# spec_clause_sha256: 8f3e836518a5e99d91e66cfee5acb39a3966d6fafaf44e5cb51907ed77ad2993
+# spec_anchor: > **MC-FX-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填；persona 亦必填·fix-05）/missing_samples_count（分母纪律：缺席样本入分母⛓ R5 ④-5）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 缺 decoy 或诱饵失败→WATCH、缺 missing_samples_count→WATCH（fix-05）；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态按当期在产项目实取 ⛓ V3:272。
+# spec_clause_sha256: fe91a501be87800459476f5a1fda575f380d4012e60773b3311ef5b74b60e704
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
@@ -37,7 +37,16 @@ import re
 import sys
 
 LEDGER_SCHEMA = ('pack', 'tag', 'piece', 'type', 'dim_scores',
-                 'answer_agent_id', 'score_agent_id', 'decoy_result', 'grade', 'notes')
+                 'answer_agent_id', 'score_agent_id', 'decoy_result',
+                 'missing_samples_count', 'grade', 'notes')
+# T-fuxi-fix-05（皮总拍板⑦·审计件 A9）：schema 增 missing_samples_count（分母纪律：
+#   缺席样本计入分母不得剔除）；decoy_result 对 persona 亦必填。
+#   分级（条款＝R8 §五 MC-FX-BLIND-1）：核心 8 字段缺＝BLOCK（既有语义不变）；
+#   decoy_result 缺/失败——technique＝BLOCK（既有）、persona＝WATCH（新）；
+#   missing_samples_count 缺＝WATCH（新，不分型）。
+SCHEMA_CORE = ('pack', 'tag', 'piece', 'type', 'dim_scores',
+               'answer_agent_id', 'score_agent_id', 'grade', 'notes')
+DECOY_FAIL = (None, '', 'fail', 'FAIL', False)
 DIM_CLOSE = {'persona': [30, 20, 20, 15, 15], 'technique': [30, 25, 25, 20]}
 GRADE_CLOSE = ('A', 'B', 'C', 'D')
 GRADE_FAIL = ('C', 'D')
@@ -63,9 +72,13 @@ def load_ledgers(evidence_dir: str):
 
 
 def check_entry(fname: str, entry: dict):
-    """单条目 schema＋反作弊＋等级闸。返回 findings [(标识,SEV,spec,msg)]。"""
+    """单条目 schema＋反作弊＋等级闸。返回 findings [(标识,SEV,spec,msg)]。
+
+    分级（MC-FX-BLIND-1·fix-05）：核心字段缺＝BLOCK；decoy_result 缺/失败按型分档
+    （technique＝BLOCK 既有语义／persona＝WATCH 新增）；missing_samples_count 缺＝WATCH。
+    """
     findings = []
-    missing = [k for k in LEDGER_SCHEMA if k not in entry]
+    missing = [k for k in SCHEMA_CORE if k not in entry]
     if missing:
         findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          '台账条目缺 schema 字段 %s' % ','.join(missing)))
@@ -88,11 +101,29 @@ def check_entry(fname: str, entry: dict):
     if entry['answer_agent_id'] == entry['score_agent_id']:
         findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
                          '答题 agent＝评分 agent（反作弊②违例）'))
-    if typ == 'technique':
-        if entry['decoy_result'] in (None, '', 'fail', 'FAIL', False):
+    # decoy_result 按型分档（fix-05：persona 亦必填，缺/失败＝WATCH 起）
+    if 'decoy_result' not in entry:
+        if typ == 'technique':
             findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
-                             '技法件缺 decoy_result 或诱饵未通过（②-2/④-2）'))
-    else:
+                             '技法件缺 decoy_result（②-2/④-2）'))
+        else:
+            findings.append((fname, 'WATCH', 'MC-FX-BLIND-1',
+                             'persona 件缺 decoy_result（近邻负例题未登记·④-5/A9）'))
+    elif entry['decoy_result'] in DECOY_FAIL:
+        if typ == 'technique':
+            findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
+                             '技法件诱饵未通过（②-2/④-2）'))
+        else:
+            findings.append((fname, 'WATCH', 'MC-FX-BLIND-1',
+                             'persona 件诱饵/近邻负例未通过（④-5/A9）'))
+    # 分母纪律字段（fix-05·A9）：缺席样本计入分母不得剔除；缺＝WATCH（不分型）
+    if 'missing_samples_count' not in entry:
+        findings.append((fname, 'WATCH', 'MC-FX-BLIND-1',
+                         '缺 missing_samples_count（分母纪律④-5：缺席样本入分母·不得剔除）'))
+    elif not isinstance(entry['missing_samples_count'], int) or entry['missing_samples_count'] < 0:
+        findings.append((fname, 'WATCH', 'MC-FX-BLIND-1',
+                         'missing_samples_count 应为非负整数（读数不可信）'))
+    if typ == 'persona':
         notes = str(entry.get('notes', ''))
         if '库内' in notes and ('替代' in notes or 'FIDELITY' in notes.upper()):
             findings.append((fname, 'BLOCK', 'MC-FX-BLIND-1',
