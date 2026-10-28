@@ -2,7 +2,7 @@
 # tools/check-truename.py · 闸门一 V8 真名残留机检（audit-h08·2026-10-28·设计稿 §⑤-4 口径）
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-V8-1
-# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
 # spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面（唯一）＝各件 `## meta`…含「来源标注」的节（节名定位闭集）。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
 # spec_clause_sha256: c92d14e07ef4c93a37d8e85f928d72c0872b599b27dbecc452ef80b4b87bbad0
 # spec_version: 1.0
@@ -16,7 +16,7 @@
 # 豁免面（唯一）：各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）。
 # 词典：真名＝check-truename-names.txt（同目录）；化名包裹＝check-truename-pseudonyms.txt（同目录）。
 #   CJK 词＝子串匹配；拉丁词＝词边界匹配；`#` 注释段不算词典命中面（旧化名留注释段·E3）。
-# 命中三态分账（spec 条款正文＝skills 仓 fuxi-skill 包 references/R8 MC-FX-V8-1·自指式初挂）：
+# 命中三态分账（spec 条款正文＝skills 仓 fuxi-skill 包 references/contract-anchors MC-FX-V8-1·自指式初挂）：
 #   EXEMPT   ＝命中落于豁免面节内（判绿）
 #   SUBSTR   ＝命中被已知化名包裹（子串误触·人工复核口径自动预分账，如「李安」⊂「李安全」）
 #   VIOLATION＝扫描面真名直书（未绿）→ 另输出 FINDING_RE 行（BLOCK MC-FX-V8-1）

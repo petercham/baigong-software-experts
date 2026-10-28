@@ -2,17 +2,17 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-BLIND-1
-# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-FX-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填；persona 亦必填·fix-05）/missing_samples_count（分母纪律：缺席样本入分母⛓ R5 ④-5）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 缺 decoy 或诱饵失败→WATCH、缺 missing_samples_count→WATCH（fix-05）；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态按当期在产项目实取 ⛓ V3:272。
-# spec_clause_sha256: fe91a501be87800459476f5a1fda575f380d4012e60773b3311ef5b74b60e704
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
+# spec_anchor: > **MC-FX-BLIND-1**（闸门三 check-blind-eval·只验台账不跑评）：台账落 devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json；schema 闭集字段＝pack/tag/piece/type(persona|technique)/dim_scores（persona {30,20,20,15,15}／技法 {30,25,25,20}）/answer_agent_id≠score_agent_id/decoy_result（技法必填；persona 亦必填·fix-05）/missing_samples_count（分母纪律：缺席样本入分母⛓ `acceptance-blind-eval` ④-5）/grade(A|B|C|D)/notes。判据：每镜片件必有台账条目（未执行不得计绿）＝缺→BLOCK；grade<B→BLOCK；答题＝评分同 agent→BLOCK；技法缺 decoy 或诱饵失败→BLOCK；persona 缺 decoy 或诱饵失败→WATCH、缺 missing_samples_count→WATCH（fix-05）；persona 引库内自评分替代复跑→BLOCK；红线题得分 0 记录缺失→WATCH ⛓ V3:159-183。取数形态按当期在产项目实取 ⛓ V3:272。
+# spec_clause_sha256: 20881258b20a76abf7d65618b0660854400b1120f09f6b8cb2d2fa56b5b940f3
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
 # --- /spec-provenance ---
 #
 # 闸门三 · 双 agent 盲评台账机检（T-zhulong-02·Z04·结构案 §四-3）。
-# **只验台账不跑评**：评分须双 agent 真人/真席分离执行（R5 卷跑批规程），脚本不代办（防自评自证）。
-# 跑批规程本体＝skills 仓 fuxi-skill 包 references/R5 卷；本脚本＝台账机检接口。
+# **只验台账不跑评**：评分须双 agent 真人/真席分离执行（acceptance-blind-eval 卷跑批规程），脚本不代办（防自评自证）。
+# 跑批规程本体＝skills 仓 fuxi-skill 包 references/acceptance-blind-eval 卷；本脚本＝台账机检接口。
 # E4（主理人裁定）：盲评取数形态不在本票定死——本件只留接口与规程文本，不验取数形态。
 # 台账落点：devkits .collab/evidence/blind-eval/<pack>@<tag>-<date>.json（证据面·不入 git）。
 # 输入面：--pack <pack>@<tag> 产物包 tag 名（判"每镜片件必有台账条目"）；缺省＝接口模式

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-STRUCT-1
-# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
 # spec_anchor: > **MC-FX-STRUCT-1**（闸门二 check-pack-structure·结构面）：①人格镜片件必填节在位（identity/stance/traits/taboos/audience_contract/performance/exemplars〔含按需半〕/meta）＋件内禁项反查（词汇清单/强制勾选框/传记/名场面口号）→缺＝BLOCK ⛓ V3:29-42；②技法镜片节序闭集 I/R/A1/A2/E/B＋挂接＋meta，A2＋B 缺任一＝BLOCK ⛓ V3:117；④索引完备＝SKILL.md 逐件登记＋"何时必读"列＋"按需装载·默认不读"注记，缺登记＝BLOCK、裸基名互指＝WATCH ⛓ V3:255、262；⑤类型注记闭集＝【类型：方法论】【类型：判据】【类型：技法镜片】【类型：persona 镜片】【类型：人格镜片】【类型：料源存档】（persona 镜片＝历史注记兼容位·中文新注记一律"人格镜片"；料源存档＝登记非镜片件·T-fuxi-fix-01），注记缺失＝WATCH、闭集外造词＝BLOCK ⛓ V3:113。
 # spec_clause_sha256: 1b0b27485847b91b48b4efb151da638df265572eb97ec98401431ae36bf3f498
 # spec_version: 1.0
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-STRUCT-2
-# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
 # spec_anchor: > **MC-FX-STRUCT-2**（闸门二·帽面）：包内逐件（SKILL.md＋references 全部）≤2500（script-v1/ceil）→超限＝BLOCK；本帽补 MC-SKILL-LINE（≤5000 只覆 SKILL.md）覆盖不到的 V3⑥-1 逐件帽 ⛓ V3:243、260。fuxi-skill 自身包同纳入帽检面（自身吃自家狗粮）。
 # spec_clause_sha256: 6428536e9e62d39a9401020d3b1886265411380d74676ed7c35a9d3205c38a09
 # spec_version: 1.0
@@ -20,16 +20,25 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-FACT-1
-# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-FX-FACT-1**（闸门二 check-pack-structure·事实行三态标注面·T-fuxi-fix-01 增检）：perspective 类镜片件（含按需半）正文内带年份/数字/引文的事实行无三态标注〔已核实〕〔存疑待核〕〔核验失败〕任一→WATCH（advisory 起·升 block 须先补 60-gates §四对账行条款级依据）；三态闭集与候核账规程＝R9 卷四节（⛓ `R9-自主蒸馏工序.md`）；豁免面＝SKILL 索引行/frontmatter/meta「来源标注」节/料源存档件（非镜片件不检）。增检（fix-05）：devkits 试产区采集账表头缺独立原始载体 ID 列→WATCH。机检只验标注/列在位不验真假——真假归 S0.5 候核账人工规程。
-# spec_clause_sha256: a2225d37f385a419b2290007ea08645115affe6ee443d1149791819f4a71a413
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
+# spec_anchor: > **MC-FX-FACT-1**（闸门二 check-pack-structure·事实行三态标注面·T-fuxi-fix-01 增检）：perspective 类镜片件（含按需半）正文内带年份/数字/引文的事实行无三态标注〔已核实〕〔存疑待核〕〔核验失败〕任一→WATCH（advisory 起·升 block 须先补 60-gates §四对账行条款级依据）；三态闭集与候核账规程＝`self-distillation` 卷四节（⛓ `self-distillation.md`）；豁免面＝SKILL 索引行/frontmatter/meta「来源标注」节/料源存档件（非镜片件不检）。增检（fix-05）：devkits 试产区采集账表头缺独立原始载体 ID 列→WATCH。机检只验标注/列在位不验真假——真假归 S0.5 候核账人工规程。
+# spec_clause_sha256: 799061d58e39cb9aa3e4a7ae3fb6732156697bed706ea184905b31c2cfe937e8
+# spec_version: 1.0
+# spec_effective: 2026-10-28
+# provider: multi-collab
+# --- /spec-provenance ---
+# --- spec-provenance v1 ---
+# spec_id: MC-FX-NAME-1
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
+# spec_anchor: > **MC-FX-NAME-1**（闸门二 check-pack-structure·命名面）：装载面包（SKILL.md＋references/*.md）文件名一律小写 kebab（^[a-z0-9]+(-[a-z0-9]+)*\.md$）→含大写/中文/下划线/空格＝BLOCK（本项＝纪律入包批 kebab lint 在 fuxi 宿主侧的落点，与彼脚本二一共存时以先挂者为准，不双跑双报）；装载面正文出现 `R[1-9]-` 式旧卷名字面＝WATCH（改名残留探针，改名批收口后可升 BLOCK＝另拍）。
+# spec_clause_sha256: 2d459a2bdb14b9c92ebd35b1b56b61c160fb5fa35587b6bf2b37898b08750411
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
 # --- /spec-provenance ---
 #
 # 闸门二 · 六维/字段结构＋体量帽机检（T-zhulong-02·Z04·结构案 §四-2）。
-# 条款正文＝skills 仓 fuxi-skill 包 R8 卷（MC-FX-* 自指式初挂·E1）；挂载初期按 MC-SOT-* 先例如实登记。
+# 条款正文＝skills 仓 fuxi-skill 包 contract-anchors 卷（MC-FX-* 自指式初挂·E1）；挂载初期按 MC-SOT-* 先例如实登记。
 # 输入面：--pack <path>（绝对或相对仓根）指定产物包；缺省＝默认双包面
 #   {skills仓 skills/aigc-video-perspective（产物示例）, skills仓 skills/fuxi-skill（builder 自身·E5）}。
 # 判据闭集（MC-FX-STRUCT-1 结构面＋MC-FX-STRUCT-2 帽面）：见上 spec_anchor。
@@ -69,6 +78,12 @@ TECH_SECTIONS = (('I 技法定义', False), ('R 出处引证', False), ('A1 ', F
                  ('挂接', False), ('meta', False))
 TYPE_TAG_RE = re.compile(r'【类型：([^】]+)】')
 TYPE_CLOSE = ('方法论', '判据', '技法镜片', 'persona 镜片', '人格镜片', '料源存档')
+
+# MC-FX-NAME-1（T-fuxi-rename-01·命名面·advisory 首挂）：
+#   装载面文件名小写 kebab 闭集；正文旧卷名字面探针（只匹 `R<数字>-` 具体形态，
+#   不匹条款文本里写的 `R[1-9]-` 正则字面）。
+KEBAB_NAME_RE = re.compile(r'^[a-z0-9]+(-[a-z0-9]+)*\.md$')
+OLDVOL_RE = re.compile(r'\bR[1-9]-')
 
 # MC-FX-FACT-1（T-fuxi-fix-01 增检·advisory 起）：镜片件正文事实行三态标注检查
 # 事实行＝带年份／带数量读数／带引文的正文行；三态标注闭集＝〔已核实〕〔存疑待核〕〔核验失败〕
@@ -244,7 +259,7 @@ def index_registers(skill_text: str, rel_in_pack: str, base: str) -> bool:
 
 
 def check_pack(pack_abs: str):
-    """单包六维/结构＋帽检。返回 findings（相对盘根路径标识）。"""
+    """单包六维/结构＋帽检＋命名面。返回 findings（相对盘根路径标识）。"""
     findings = []
     if not os.path.isdir(pack_abs):
         sys.stderr.write('usage error: 包目录不存在：%s\n' % pack_abs)
@@ -270,6 +285,26 @@ def check_pack(pack_abs: str):
         if t > CAP:
             findings.append((rel, 1, 'BLOCK', 'MC-FX-STRUCT-2',
                              '件 token %d > %d（script-v1/ceil·⑥-1 逐件帽）' % (t, CAP)))
+    # --- 命名面 MC-FX-NAME-1（T-fuxi-rename-01 初挂·路由 advisory）：
+    #     装载面（SKILL.md＋references/*.md）文件名小写 kebab 闭集→违例＝BLOCK；
+    #     装载面正文 `R[1-9]-` 式旧卷名字面＝WATCH（改名残留探针）。---
+    kebab_files = ( ([skill_md] if skill_text else []) + ref_files )
+    for p in kebab_files:
+        base = os.path.basename(p)
+        if base == 'SKILL.md':
+            continue  # 入口主件名＝技能协议固定名（MC-SKILL-LINE 等全生态同一约定），
+            # 按字面 kebab 正则对其永不可满足＝永假 BLOCK 闸；lint 对象＝references 卷名。
+            # 该实现级豁免登记入 T-fuxi-rename-01 回执候追认（条款文本未动）。
+        if not KEBAB_NAME_RE.match(base):
+            findings.append((os.path.relpath(p, 'D:/'), 1, 'BLOCK', 'MC-FX-NAME-1',
+                             '装载面文件名违小写 kebab 闭集：%s' % base))
+    for p in kebab_files:
+        text0 = read(p)
+        for i, ln in enumerate(text0.splitlines(), 1):
+            if OLDVOL_RE.search(ln):
+                findings.append((os.path.relpath(p, 'D:/'), i, 'WATCH', 'MC-FX-NAME-1',
+                                 '正文出现旧卷名字面 `R#-` 式（改名残留探针）'))
+                break
     # --- 索引完备：references 逐件在 SKILL.md 登记 ---
     if skill_text:
         for p in ref_files:
