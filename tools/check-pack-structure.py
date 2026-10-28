@@ -3,8 +3,8 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-STRUCT-1
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
-# spec_anchor: > **MC-FX-STRUCT-1**（闸门二 check-pack-structure·结构面）：①persona 镜片件必填节在位（identity/stance/traits/taboos/audience_contract/performance/exemplars〔含按需半〕/meta）＋件内禁项反查（词汇清单/强制勾选框/传记/名场面口号）→缺＝BLOCK ⛓ V3:29-42；②技法镜片节序闭集 I/R/A1/A2/E/B＋挂接＋meta，A2＋B 缺任一＝BLOCK ⛓ V3:117；④索引完备＝SKILL.md 逐件登记＋"何时必读"列＋"按需装载·默认不读"注记，缺登记＝BLOCK、裸基名互指＝WATCH ⛓ V3:255、262；⑤类型注记闭集＝【类型：方法论】【类型：判据】【类型：技法镜片】【类型：persona 镜片】，注记缺失＝WATCH、闭集外造词＝BLOCK ⛓ V3:113。
-# spec_clause_sha256: 048cd753f48bc12ad366edb3bb7a6cde0e3f7e20848bc782cfabcd3599626e5e
+# spec_anchor: > **MC-FX-STRUCT-1**（闸门二 check-pack-structure·结构面）：①人格镜片件必填节在位（identity/stance/traits/taboos/audience_contract/performance/exemplars〔含按需半〕/meta）＋件内禁项反查（词汇清单/强制勾选框/传记/名场面口号）→缺＝BLOCK ⛓ V3:29-42；②技法镜片节序闭集 I/R/A1/A2/E/B＋挂接＋meta，A2＋B 缺任一＝BLOCK ⛓ V3:117；④索引完备＝SKILL.md 逐件登记＋"何时必读"列＋"按需装载·默认不读"注记，缺登记＝BLOCK、裸基名互指＝WATCH ⛓ V3:255、262；⑤类型注记闭集＝【类型：方法论】【类型：判据】【类型：技法镜片】【类型：persona 镜片】【类型：人格镜片】【类型：料源存档】（persona 镜片＝历史注记兼容位·中文新注记一律"人格镜片"；料源存档＝登记非镜片件·T-fuxi-fix-01），注记缺失＝WATCH、闭集外造词＝BLOCK ⛓ V3:113。
+# spec_clause_sha256: 1b0b27485847b91b48b4efb151da638df265572eb97ec98401431ae36bf3f498
 # spec_version: 1.0
 # spec_effective: 2026-10-28
 # provider: multi-collab
@@ -18,6 +18,15 @@
 # spec_effective: 2026-10-28
 # provider: multi-collab
 # --- /spec-provenance ---
+# --- spec-provenance v1 ---
+# spec_id: MC-FX-FACT-1
+# spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/R8-契约锚与改判账.md
+# spec_anchor: > **MC-FX-FACT-1**（闸门二 check-pack-structure·事实行三态标注面·T-fuxi-fix-01 增检）：perspective 类镜片件（含按需半）正文内带年份/数字/引文的事实行无三态标注〔已核实〕〔存疑待核〕〔核验失败〕任一→WATCH（advisory 起·升 block 须先补 60-gates §四对账行条款级依据）；三态闭集与候核账规程＝R9 卷四节（⛓ `R9-自主蒸馏工序.md`）；豁免面＝SKILL 索引行/frontmatter/meta「来源标注」节/料源存档件（非镜片件不检）。机检只验标注在位，不验事实真假——真假归 S0.5 候核账人工规程，机器不代办。
+# spec_clause_sha256: 06e91d0dd1a7e45051a33b21bc556b319db1a18dcc0837dcf958352e41ee63a3
+# spec_version: 1.0
+# spec_effective: 2026-10-28
+# provider: multi-collab
+# --- /spec-provenance ---
 #
 # 闸门二 · 六维/字段结构＋体量帽机检（T-zhulong-02·Z04·结构案 §四-2）。
 # 条款正文＝skills 仓 fuxi-skill 包 R8 卷（MC-FX-* 自指式初挂·E1）；挂载初期按 MC-SOT-* 先例如实登记。
@@ -26,7 +35,8 @@
 # 判据闭集（MC-FX-STRUCT-1 结构面＋MC-FX-STRUCT-2 帽面）：见上 spec_anchor。
 # 通用口径：只读；--root 由 run-gates 注入；发现行照 FINDING_RE 一行一封；
 #   严重度闭集＝BLOCK／WATCH（不新造词）；退出码闭集 0/1/2/4（60-gates §六）。
-#   "绿"＝零 BLOCK（WATCH 计数如实出）。
+#   "绿"＝零 BLOCK（WATCH 计数如实出·不计违规码——MC-FX-* 首挂 advisory 取信号口径，
+#   T-fuxi-fix-01 起与本件"绿"定义对齐；拦不拦仍由 run-gates 路由表裁决·三轴分离）。
 """check-pack-structure：perspective 类产物包＋fuxi-skill 自身包的字段/节序闭集与逐件 2500 帽机检。
 
 用法：
@@ -58,7 +68,15 @@ TECH_SECTIONS = (('I 技法定义', False), ('R 出处引证', False), ('A1 ', F
                  ('A2 ', True), ('E 怎么做', False), ('B 何时别用', True),
                  ('挂接', False), ('meta', False))
 TYPE_TAG_RE = re.compile(r'【类型：([^】]+)】')
-TYPE_CLOSE = ('方法论', '判据', '技法镜片', 'persona 镜片')
+TYPE_CLOSE = ('方法论', '判据', '技法镜片', 'persona 镜片', '人格镜片', '料源存档')
+
+# MC-FX-FACT-1（T-fuxi-fix-01 增检·advisory 起）：镜片件正文事实行三态标注检查
+# 事实行＝带年份／带数量读数／带引文的正文行；三态标注闭集＝〔已核实〕〔存疑待核〕〔核验失败〕
+FACT_YEAR_RE = re.compile(r'(?:1[89]|20)\d{2}\s*年|(?:1[89]|20)\d{2}(?![\d%])')
+FACT_NUM_RE = re.compile(r'\d+(?:\.\d+)?\s*(?:%|万|亿|分钟|秒|小时|岁|届|部片|部)')
+FACT_CITE_RE = re.compile(r'「[^」]{2,}」|"[^"]{8,}"')
+FACT_TAG_RE = re.compile(r'〔已核实〕|〔存疑待核〕|〔核验失败〕')
+LENS_TAGS = ('persona 镜片', '人格镜片', '技法镜片')
 
 
 def tokens(text: str) -> int:
@@ -78,6 +96,36 @@ def read(path: str) -> str:
 
 def section_titles(text: str):
     return [ln for ln in text.splitlines() if ln.startswith('## ')]
+
+
+def check_fact_tags(rel: str, text: str, tags):
+    """MC-FX-FACT-1：镜片件正文事实行（年份/数字/引文）无三态标注→WATCH（advisory 起）。
+    豁免面＝frontmatter／## meta 节／料源存档件与非镜片件（不检）；只验标注在位不验真假。"""
+    if not any(t in ''.join(tags) for t in LENS_TAGS):
+        return []
+    lines = text.splitlines()
+    findings = []
+    in_meta = False
+    hits = []
+    for i, ln in enumerate(lines, 1):
+        if ln.startswith('# '):
+            continue
+        if ln.startswith('## '):
+            in_meta = 'meta' in ln
+            continue
+        if in_meta or not ln.strip():
+            continue
+        has_fact = bool(FACT_YEAR_RE.search(ln) or FACT_NUM_RE.search(ln)
+                        or FACT_CITE_RE.search(ln))
+        if has_fact and not FACT_TAG_RE.search(ln):
+            hits.append(i)
+    for i in hits[:5]:
+        findings.append((rel, i, 'WATCH', 'MC-FX-FACT-1',
+                         '事实行无三态标注〔已核实/存疑待核/核验失败〕（S0.5 候核账规程·R9 卷）'))
+    if len(hits) > 5:
+        findings.append((rel, hits[-1], 'WATCH', 'MC-FX-FACT-1',
+                         '同类未标注事实行共 %d 行（前 5 行已列）' % len(hits)))
+    return findings
 
 
 def check_lens_piece(rel: str, text: str, pack_abs: str, base_name: str, tags):
@@ -206,6 +254,7 @@ def check_pack(pack_abs: str):
         tags = piece_tags(base, text)
         if is_lens_pack:
             findings.extend(check_lens_piece(rel, text, pack_abs, os.path.splitext(base)[0], tags))
+        findings.extend(check_fact_tags(rel, text, tags))
         for tg in tags:
             core = tg.split('·')[0].strip()
             if core not in TYPE_CLOSE:
@@ -258,7 +307,9 @@ def main() -> int:
             else:
                 n_watch += 1
     print('—— check-pack-structure 计数：BLOCK=%d WATCH=%d（绿＝零 BLOCK）' % (n_block, n_watch))
-    return 1 if n_block or n_watch else 0
+    # 退出码语义对齐件头"绿＝零 BLOCK"：WATCH＝advisory 取信号（MC-FX-* 首挂口径），不计违规码；
+    # 拦不拦由 run-gates 路由表裁决（三轴分离·60-gates §三），本件不自带处置。
+    return 1 if n_block else 0
 
 
 if __name__ == '__main__':
