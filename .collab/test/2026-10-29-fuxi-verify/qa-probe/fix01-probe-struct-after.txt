@@ -1,0 +1,21 @@
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-2 件 token 4557 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\forged-tag-lens.md:1: BLOCK MC-FX-STRUCT-2 件 token 4558 > 2500（script-v1/ceil·⑥-1 逐件帽）
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## identity`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## stance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## traits`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## taboos`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## audience_contract`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## performance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## meta`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\dual-tag-lens.md:1: BLOCK MC-FX-STRUCT-1 必填节 `exemplars` 主件与同基名按需半均未见
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## stance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## traits`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## taboos`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## audience_contract`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## performance`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 persona 镜片必填节缺 `## meta`
+multi-agent-collab-devkits\.collab\test\2026-10-29-fuxi-verify\qa-probe\probe-fix-pack\references\real-lens-lens.md:1: BLOCK MC-FX-STRUCT-1 必填节 `exemplars` 主件与同基名按需半均未见
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\davidfenqi-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\gongqijin-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+multi-agent-collab-devkits\.collab\research\distill-real-2026-10-28\yeshouxiansheng-research.md:1: WATCH MC-FX-FACT-1 采集账表头缺"独立原始载体 ID"列（self-distillation 四节 7 款·A3·fix-05）
+—— check-pack-structure 计数：BLOCK=17 WATCH=3（绿＝零 BLOCK）

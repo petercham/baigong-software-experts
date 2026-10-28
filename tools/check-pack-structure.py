@@ -113,16 +113,41 @@ def section_titles(text: str):
     return [ln for ln in text.splitlines() if ln.startswith('## ')]
 
 
-# 料源登记件判定（T-fuxi-srcexempt-01·皮总拍板⑧ sources 双豁免·与 check-truename 豁免面②同判据）：
-#   文件类型面＝基名 sources-ledger*.md，或首三行出现【类型：料源存档】注记；不靠段落名硬撑。
+# 料源登记件判定（T-fuxi-srcexempt-01·皮总拍板⑧ sources 双豁免·与 check-truename 豁免面②同判据；
+#   T-fuxi-pres8-fix-01 黄-2：注记式加镜片互斥机检）：
+#   文件类型面＝基名 sources-ledger*.md（主判定闭集），或首三行【类型：料源存档】注记；
+#   注记式对同时挂镜片类注记/呈镜片形态的件不生效（防伪造豁免）。
 SRC_LEDGER_NAME_RE = re.compile(r'^sources-ledger.*\.md$')
 SRC_LEDGER_TAG = '【类型：料源存档】'
+LENS_TAG_MARKS = ('人格镜片', 'persona 镜片', '技法镜片')
+LENS_FORM_RE = re.compile(r'lens|镜片', re.I)
+
+
+def is_lens_piece_form(path: str, text: str) -> bool:
+    """镜片形态判定（互斥机检面·与 check-truename 同口径）：
+    件名含 lens/镜片／首三行挂镜片类类型注记／frontmatter 块内出现「镜片」。"""
+    if LENS_FORM_RE.search(os.path.basename(path)):
+        return True
+    lines = text.splitlines()
+    if lines and lines[0].strip() == '---':
+        for ln in lines[1:20]:
+            s = ln.strip()
+            if s == '---':
+                break
+            if '镜片' in s:
+                return True
+    for tg in TYPE_TAG_RE.findall('\n'.join(lines[:3])):
+        if any(m in tg for m in LENS_TAG_MARKS):
+            return True
+    return False
 
 
 def is_source_ledger(path: str, text: str) -> bool:
     if SRC_LEDGER_NAME_RE.match(os.path.basename(path)):
         return True
-    return SRC_LEDGER_TAG in '\n'.join(text.splitlines()[:3])
+    if SRC_LEDGER_TAG not in '\n'.join(text.splitlines()[:3]):
+        return False
+    return not is_lens_piece_form(path, text)
 
 
 def check_fact_tags(rel: str, text: str, tags):
@@ -159,7 +184,8 @@ def check_lens_piece(rel: str, text: str, pack_abs: str, base_name: str, tags):
     """按类型注记路由结构检（tags＝件标题注记∪索引行注记）。返回 findings [(rel,line,SEV,spec,msg)]。"""
     findings = []
     tagstr = ''.join(tags)
-    if 'persona 镜片' in tagstr:
+    # 路由（T-fuxi-pres8-fix-01·黄-4）：中文新注记【类型：人格镜片】与历史注记 persona 镜片同路进必填节机检
+    if 'persona 镜片' in tagstr or '人格镜片' in tagstr:
         titles = section_titles(text)
         joined = '\n'.join(titles)
         for sec in PERSONA_SECTIONS:

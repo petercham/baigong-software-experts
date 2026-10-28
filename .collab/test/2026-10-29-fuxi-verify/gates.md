@@ -45,9 +45,9 @@ WATCH×3＝旧试产区 `research/distill-real-2026-10-28/` 三件采集账缺"�
 
 ## 六、闸门三盲评台账（check-blind-eval.py）
 
-接口模式读数＝`WATCH 盲评台账零在盘` exit=0（预期内：本票＝生产者席，只产盲评包不自评不跑评；台账由 QA 盲评席跑批后落 `.collab/evidence/blind-eval/`）。
+接口模式读数＝`WATCH 盲评台账零在盘` exit=1〔勘误·T-pres8-fix-01 N-02：原判登记 exit=0 系登记失实；脚本实跑 BLOCK=0 WATCH=1 → exit=1（有 WATCH 即 1），2026-10-29 复跑实测；run-gates 路由表对其走②advisory 不拦提交，故全量门禁仍 PASS，与本条 exit 读数不矛盾〕（预期内：本票＝生产者席，只产盲评包不自评不跑评；台账由 QA 盲评席跑批后落 `.collab/evidence/blind-eval/`）。
 `--pack fuxi-verify-test@...` 尝试 exit=2（脚本按 skills 仓包目录定位 SKILL.md＝测试区包不在 skills 仓，机检接口对"测试区假想 pack 名"不适配——登记为工具摩擦 F-05，不修）。
 
 ## 七、事实三态（MC-FX-FACT-1 面）
 
-三包镜片正文事实行 100% 带三态标签（起草即挂）；候核账合计：fincher 14 行（已核实 5/存疑 9）、mrbeast 8 行（已核实 2/存疑 5/降级 1）、miyazaki 21 行（已核实 9/存疑 12）。〔存疑待核-降级〕子态（A3）使用＝fincher K1/K2/K3/K7/K11/K13/K14、mrbeast K-B5、无遗漏旗入复审账（复审帽 2026-11-29）。
+三包镜片正文事实行 100% 带三态标签（起草即挂）；候核账合计〔分账拆分勘误·T-pres8-fix-01 N-06：行级复算（每行取首标为该行三态，K12/K-B7/K-M5/K-M12 双值行注明）——总数 14/8/21 不变，拆分修正〕：fincher 14 行（已核实 3＋双值 1〔K12：148 已核实/127 存疑〕/存疑 3〔K4/K5/K6〕/降级 7〔K1/K2/K3/K7/K11/K13/K14〕）、mrbeast 8 行（已核实 2〔K-B6/K-B7〕/存疑 4〔K-B1..B4〕/降级 1〔K-B5〕/料降级不标三态 1〔K-B8〕）、miyazaki 21 行（已核实 10〔K-M1/M3/M4/M5/M6/M9/M11/M12/M17/M20〕/存疑 8〔K-M7/M8/M10/M13/M14/M15/M16/M18〕/降级 3〔K-M2/M19/M21〕）。〔存疑待核-降级〕子态（A3）使用＝fincher K1/K2/K3/K7/K11/K13/K14、mrbeast K-B5、miyazaki K-M2/K-M19/K-M21（原判枚举漏 miyazaki 三行＝同项级联修正）、无遗漏旗入复审账（复审帽 2026-11-29）。

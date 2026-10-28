@@ -1,0 +1,12 @@
+.collab/test/2026-10-29-fuxi-verify/packs/david-fincher/SKILL.md 325 OK
+.collab/test/2026-10-29-fuxi-verify/packs/david-fincher/daweifenqi-lens-deep.md 1292 OK
+.collab/test/2026-10-29-fuxi-verify/packs/david-fincher/daweifenqi-lens.md 1647 OK
+.collab/test/2026-10-29-fuxi-verify/packs/david-fincher/sources-ledger.md 1998 OK
+.collab/test/2026-10-29-fuxi-verify/packs/miyazaki/SKILL.md 318 OK
+.collab/test/2026-10-29-fuxi-verify/packs/miyazaki/gongqijin-lens-deep.md 1332 OK
+.collab/test/2026-10-29-fuxi-verify/packs/miyazaki/gongqijin-lens.md 1701 OK
+.collab/test/2026-10-29-fuxi-verify/packs/miyazaki/sources-ledger.md 2395 OK
+.collab/test/2026-10-29-fuxi-verify/packs/mrbeast/SKILL.md 323 OK
+.collab/test/2026-10-29-fuxi-verify/packs/mrbeast/sources-ledger.md 1559 OK
+.collab/test/2026-10-29-fuxi-verify/packs/mrbeast/yeshouxiansheng-lens-deep.md 1193 OK
+.collab/test/2026-10-29-fuxi-verify/packs/mrbeast/yeshouxiansheng-lens.md 1601 OK

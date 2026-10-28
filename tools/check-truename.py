@@ -3,9 +3,9 @@
 # --- spec-provenance v1 ---
 # spec_id: MC-FX-V8-1
 # spec_file: ../multi-agent-collab-skills/skills/fuxi-skill/references/contract-anchors.md
-# spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面＝①各件 `## meta`…含「来源标注」的节（节名定位闭集）＋②料源登记件整件（文件类型面判定＝基名 `sources-ledger*.md` 或首三行含【类型：料源存档】注记；sources＝skill 料源、不进程序运行时，蒸馏全程真名作锚＝三节真名纪律所定，真名豁免·皮总拍板⑧ sources 双豁免）；无「来源标注」要求的料源登记件内真名不视为镜片显示面残留。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
-# spec_clause_sha256: ae667fa18c2c88a5948ef3198caba72e104d2012d8360924eb716f53205cd205
-# spec_version: 1.1
+# spec_anchor: > **MC-FX-V8-1**（闸门一 check-truename）：V8 真名残留扫描——扫描面＝perspective 类产物包全部真源（SKILL.md＋references/*.md＋frontmatter 全字段）＋content 域 genre-library 挂载列＋条目表注记区＋消费壳 ⛓ 挂载注记行；豁免面＝①各件 `## meta`…含「来源标注」的节（节名定位闭集）＋②料源登记件整件（文件类型面判定＝基名 `sources-ledger*.md`（主判定·基名闭集）或首三行含【类型：料源存档】注记（注记式·带互斥机检：凡件挂镜片类类型注记〔【类型：人格镜片】【类型：persona 镜片】【类型：技法镜片】含后缀形态〕或呈镜片形态〔件名含 lens/镜片 或 frontmatter description 含「镜片」〕的，注记式豁免不生效＝豁免伪造防线·T-fuxi-pres8-fix-01）；sources＝skill 料源、不进程序运行时，蒸馏全程真名作锚＝三节真名纪律所定，真名豁免·皮总拍板⑧ sources 双豁免）；无「来源标注」要求的料源登记件内真名不视为镜片显示面残留。词典＝工具侧 names（真名面）＋pseudonyms（化名包裹面）两件事前分段；旧化名留注释段不算命中面。命中三态＝EXEMPT（豁免面·绿）／SUBSTR（化名包裹子串误触·预分账）／VIOLATION（扫描面真名直书→BLOCK）。判绿＝零 VIOLATION ⛓ V3:225-228、235。
+# spec_clause_sha256: 8f64e1a1664291f150159a4dcaaf08c4b45d791e8ed099ef461d63062de30e03
+# spec_version: 1.2
 # spec_effective: 2026-10-29
 # provider: multi-collab
 # --- /spec-provenance ---
@@ -15,8 +15,9 @@
 # 扫描面闭集：perspective 类产物包全部真源（含 frontmatter）＋genre-library 挂载列（主件注记行＋配方条目表挂载列及其注记＝genre-recipe-entries.md 四节区）＋两壳 ⛓ 挂载指针注记行。
 # 豁免面（T-fuxi-srcexempt-01·皮总拍板⑧ sources 真名豁免）：
 #   ①各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）——行为不变；
-#   ②料源登记件整件豁免（按**文件类型面**判定，不靠段落名硬撑：基名匹配 sources-ledger*.md，
-#     或首三行出现【类型：料源存档】注记）——料源台账整件命中记 EXEMPT(料源登记件)。
+#   ②料源登记件整件豁免（按**文件类型面**判定，不靠段落名硬撑：基名匹配 sources-ledger*.md＝主判定闭集，
+#     或首三行出现【类型：料源存档】注记——注记式带互斥机检：同时挂镜片类注记/呈镜片形态的注记豁免不生效，
+#     T-fuxi-pres8-fix-01 黄-2）——料源台账整件命中记 EXEMPT(料源登记件)。
 # 词典：真名＝check-truename-names.txt（同目录）；化名包裹＝check-truename-pseudonyms.txt（同目录）。
 #   CJK 词＝子串匹配；拉丁词＝词边界匹配；`#` 注释段不算词典命中面（旧化名留注释段·E3）。
 # 命中三态分账（spec 条款正文＝skills 仓 fuxi-skill 包 references/contract-anchors MC-FX-V8-1·自指式初挂）：
@@ -63,15 +64,44 @@ def load_words(path):
 
 SRC_LEDGER_NAME_RE = re.compile(r'^sources-ledger.*\.md$')
 SRC_LEDGER_TAG = '【类型：料源存档】'
+# 豁免伪造防线（T-fuxi-pres8-fix-01·黄-2）：注记式豁免与镜片形态互斥。
+# 镜片类类型注记（含后缀形态如「persona 镜片·理论透镜」）：
+LENS_TAG_MARKS = ('人格镜片', 'persona 镜片', '技法镜片')
+TYPE_TAG_RE = re.compile(r'【类型：([^】]+)】')
+LENS_FORM_RE = re.compile(r'lens|镜片', re.I)
+
+
+def is_lens_piece(path, text):
+    """镜片形态判定（互斥机检面）：件名含 lens/镜片／首三行挂镜片类类型注记／
+    frontmatter 块内出现「镜片」字样（description 自述）。"""
+    if LENS_FORM_RE.search(os.path.basename(path)):
+        return True
+    lines = text.splitlines()
+    if lines and lines[0].strip() == '---':
+        for ln in lines[1:20]:
+            s = ln.strip()
+            if s == '---':
+                break
+            if '镜片' in s:
+                return True
+    for tg in TYPE_TAG_RE.findall('\n'.join(lines[:3])):
+        if any(m in tg for m in LENS_TAG_MARKS):
+            return True
+    return False
 
 
 def is_source_ledger(path, text):
-    """料源登记件判定（文件类型面·不靠段落名硬撑）：
-    基名＝sources-ledger*.md，或首三行出现【类型：料源存档】注记。"""
+    """料源登记件判定（文件类型面·基名闭集为主判定）：
+    ①基名＝sources-ledger*.md（主判定·闭集）→ 豁免；
+    ②首三行出现【类型：料源存档】注记（注记式）→ 豁免，但带互斥机检：
+      凡同时挂镜片类类型注记或呈镜片形态（件名 lens/镜片、frontmatter 自述镜片）的，
+      注记豁免不生效＝防镜片件挂注记伪造豁免（黄-2）。"""
     if SRC_LEDGER_NAME_RE.match(os.path.basename(path)):
         return True
     head = '\n'.join(text.splitlines()[:3])
-    return SRC_LEDGER_TAG in head
+    if SRC_LEDGER_TAG not in head:
+        return False
+    return not is_lens_piece(path, text)
 
 
 def exempt_spans(text):
