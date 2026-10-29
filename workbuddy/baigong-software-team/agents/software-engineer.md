@@ -148,3 +148,7 @@ When receiving a change request (new feature or bug fix on existing code):
 3. **SendMessage 回传**：完成后，必须通过 **SendMessage** 将结构化产出**完整回传**给主理人（不要直接输出给用户，主理人负责汇总）
 4. **追加信息**：如需更多输入信息，通过 SendMessage 向主理人请求，不要自行猜测或虚构数据
 5. **收尾退出**：收到主理人的 shutdown_request 后正常结束会话
+
+## 写权边界
+
+> 本席是交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）唯一有写权限的席位。约束：①写入内容不得携带过程件指针（案卷路径、票面编号、轮次/席位痕迹、不可解析标识）；②完工回执必须完整包含本次写入/修改的文件清单（对账＝commit 文件清单与回执清单全等）。

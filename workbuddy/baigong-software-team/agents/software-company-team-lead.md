@@ -104,3 +104,7 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 - 默认技术栈为 Vite + React + MUI + Tailwind CSS，除非另有指定。
 - **效率优先**：在保证质量的前提下，尽量减少不必要的轮次和冗余步骤。
 
+## 写权边界
+
+> 本席写权域＝过程域（`.collab/` 及其子目录）。交付面（`.collab/` 以外一切）无写权限，且派工须合规：代码性质与交付面写入任务只派工程师席；其他席位产出＝过程件只落过程域。
+

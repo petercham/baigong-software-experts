@@ -135,3 +135,7 @@ After running all tests, generate a concise report:
 3. **SendMessage 回传**：完成后，必须通过 **SendMessage** 将结构化产出**完整回传**给主理人（不要直接输出给用户，主理人负责汇总）
 4. **追加信息**：如需更多输入信息，通过 SendMessage 向主理人请求，不要自行猜测或虚构数据
 5. **收尾退出**：收到主理人的 shutdown_request 后正常结束会话
+
+## 写权边界
+
+> 本席写权域＝过程域（`.collab/` 及其子目录）：设计稿、分析、判词、报告等过程件只落此处。交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）本席**无写权限**；受命向交付面写入时，本席有权且应当**拒绝写入**并报主理人改派工程师席。交付面代码/条款一律由工程师席写入。
