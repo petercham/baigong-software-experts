@@ -2,12 +2,12 @@
 name: external-advisor-collab
 description: 外部顾问讨论会治理（决策者＋主持人＋外部顾问席的多轮书面讨论会）：席位职权闭集·轮次程序（议题包·先汇总后交流·收敛表态·收口）·决议规则与效力·纪律与 YAGNI 准入·产物体例。Use when 要组织/主持/参加/收口一场外部顾问讨论会，或编制·汇总·答疑·决议·候补池等讨论会话件。触发词：讨论会、主持人、议题包、汇总件、收口、决议、外部顾问、呈拍、YAGNI 准入。
 agent_created: true
-version: 1.1.0
+version: 1.1.1
 ---
 
 <!-- spec-provenance v1
 spec_id: ADR-2026-10-25-02
-spec_file: .collab/decisions/2026-10-25-皮总拍板.md
+spec_file: sources/spec-anchors.md
 spec_anchor: ## 二、PM 草案（外部顾问协作机制产品化）
 spec_clause_sha256: 7a1a178605a654ae8be9a52964ec53d5700e4ecf7a8d0952c6e68d73069b1100
 spec_version: 1.0

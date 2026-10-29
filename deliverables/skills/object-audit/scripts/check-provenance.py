@@ -268,6 +268,15 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
                                   *spec_file.split("/")[1:])
             if os.path.isfile(os.path.normpath(nested)):
                 spec_abs = os.path.normpath(nested)
+        # 交付物包内闭环尝试（EAC-CLN·拍板㊺配套·票内预授权小改）：spec_file 为**包内
+        # 相对路径**时从块所在文件的目录解析——纯解析语义扩展，P-1/P-2/P-3 判据一字未动。
+        # 理由：交付物（专家/技能包）内的 provenance spec_file 只准指向包内文件
+        # （指针闭集㊺）；装配面/部署面没有仓根结构，仓根语义在交付态必悬空。
+        if not os.path.isfile(spec_abs):
+            local = os.path.normpath(os.path.join(
+                os.path.dirname(os.path.abspath(path)), spec_file.replace("/", os.sep)))
+            if os.path.isfile(local):
+                spec_abs = local
         if not os.path.isfile(spec_abs):
             findings.append(
                 "%s:1: %s OA-D1-1 块 %d spec_file 不存在 %s（规范侧失联）"
