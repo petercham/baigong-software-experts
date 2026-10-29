@@ -19,7 +19,7 @@
 # ── 2026-10-27 增补（皮总拍·依《2026-10-27-devkits仓远端与入库策略建议_v1》）──
 # 判据三条：A 性质（判词/裁决/呈拍→进，过程流水→不进）／B 出处（自产 vs 第三方产物）／C 冗余（能否无损重建）
 
-# 冗余快照：aigc-video-team 已随迁 experts 仓、software-company 在本仓 HEAD 以 workbuddy/hjh-software-team 存活、qa-leadslim＝实验中间态（判据 C）
+# 冗余快照：aigc-video-team 已随迁 experts 仓、software-company 在本仓 HEAD 以 workbuddy/baigong-software-team 存活、qa-leadslim＝实验中间态（判据 C）
 # 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\collab-backup-20261027\
 .collab/backup/
 

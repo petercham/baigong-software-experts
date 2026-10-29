@@ -1,10 +1,10 @@
 {
   "lock_version": 1,
   "bundle": {
-    "name": "hjh-software-team",
-    "version": "1.3.3",
+    "name": "baigong-software-team",
+    "version": "2.0.0",
     "repo": ".",
-    "path": "workbuddy/hjh-software-team",
+    "path": "workbuddy/baigong-software-team",
     "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）"
   },
   "components": [
@@ -12,11 +12,11 @@
       "component": "external-advisor-collab",
       "repo": ".",
       "roottag": "softdev",
-      "ref": "external-advisor-collab@v1.0",
+      "ref": "external-advisor-collab@v1.0.1",
       "ref_kind": "tag",
       "path": "deliverables/skills/external-advisor-collab",
       "target": "skills/external-advisor-collab",
-      "note": "软开 bundle 首个装配组件（皮总 2026-10-28 口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 deliverables/skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.0；tag 打于 2026-10-28·v1.3.0 批。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含·D 项收口）"
+      "note": "软开 bundle 首个装配组件（皮总 2026-10-28 口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 deliverables/skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.0.1；tag 打于 2026-10-28·v1.3.0 批；v2.0.0 改名批（T-team-rename-01）换 ref @v1.0→@v1.0.1（10-roles :25/:48 中文显示名随改＋:49 豁免注）·tag→commit 映射＝external-advisor-collab@v1.0.1→6d80232。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含·D 项收口）"
     },
     {
       "component": "deep-research",
@@ -34,6 +34,6 @@
     "roottag": "对齐 T2 门禁闭集（check-source-of-truth.py roottag∈{experts,skills,softdev}）",
     "ref": "消费者锁版本＝纪律②③：一律锁不可变 tag 或 commit，不用 HEAD/分支名；tag 命名＝<组件名>@vX.Y.Z",
     "target": "装配面 bundle 内相对路径（注册态 skills/<域>/·与 plugin.json skills[] 引用对齐）",
-    "output": "装配产物不入任何仓版本库＝纪律④；缺省输出＝<bundle 源仓>-build/<bundle名>＝D:\\multi-agent-collab-devkits-build\\hjh-software-team（预览面·部署先行纪律 deploy-gate.md §五：只入预览候人类真实验证，进部署面＝验证后独立指示）"
+    "output": "装配产物不入任何仓版本库＝纪律④；缺省输出＝<bundle 源仓>-build/<bundle名>＝D:\\multi-agent-collab-devkits-build\\baigong-software-team（预览面·部署先行纪律 deploy-gate.md §五：只入预览候人类真实验证，进部署面＝验证后独立指示）"
   }
 }

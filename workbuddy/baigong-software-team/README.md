@@ -1,6 +1,6 @@
-# Software Company（软件开发团队）
+# Baigong Software Team（百工软件团队）
 
-软件开发团队专家团：交付总监统筹产品经理、架构师、工程师、QA 四席，按固定 SOP 把需求推到可验收交付，每步留证据与判定级别。
+百工软件团队专家团：交付总监统筹产品经理、架构师、工程师、QA 四席，按固定 SOP 把需求推到可验收交付，每步留证据与判定级别。
 
 ## 类型
 
@@ -31,6 +31,8 @@ Team 型（多角色协作团队）
 - **版本账 v1.3.3**（2026-10-28）：`bundle.lock` components 增跨仓组件行 `deep-research`（repo `../multi-agent-collab-skills`·roottag `skills`·锁不可变 tag `deep-research@v1.0`·target `skills/deep-research`）——新技能 deep-research 真源在 skills 仓（MIT 派生 fork 登记见该技能 README·票 T-deepresearch-01）。**仅组件新增＋平台刷新载体（宿主缓存按包版本刷新），席位与编排零变化**（解耦纪律 R-6：本次例外经皮总授权打 patch——新技能自动路由实际改变团内调研行为；调研起手式自动路由＝靠技能 description 触发词工程化，不动席位）。plugin.json＋bundle.lock 双 1.3.3。同批回修（票 T-deepresearch-02·QA-deepresearch-01 判词收口）：组件 `deep-research` 锁 tag v1.0→v1.0.1（QA minor-a/b/c 收口·skills 仓新不可变 tag·旧 tag v1.0 保留）＋plugin.json `skills[]` 补登 `./skills/deep-research` 提交入库（QA major-1 收口·一行注册行·随 b0c1163 同票）。
 - **版本账 v1.3.2**（2026-10-28）：`deploy-gate.md` §五 由「预览先行」升格为**四段部署流程**成文（皮总定口径「装配→预览→人类闸→部署」·四段闸口链·禁跳段）。要点：预览的成文抓手＝复制本地市场源＋`register_expert.py --session-id` 挂预览卡（非 `-build` 目录本身）；人类闸不可由代理代跑；获批范围按段界定。SKILL.md 索引行/description/触发词同步，技能版本 1.0.1→1.0.2；plugin.json＋bundle.lock 双 1.3.2。
 - **版本账 v1.3.1**（2026-10-28）：补齐 `avatars/` 六件（五席位＋team）——此前仅 `.gitkeep`、图片从未入库（fork 遗留缺口，官方规范要求 512×512 PNG）。样式＝纯色异色底＋白色姓氏大字＋职业名小字：齐＝深蓝／许＝青绿／高＝紫／寇＝琥珀／严＝砖红，五色互不相同（皮总拍「头像用姓可以，背景色必须区分开」）；team＝深板岩底＋五色姓氏方块。版本升 1.3.1。同批补正：`bundle.lock` bundle 版本行 1.3.0→1.3.1（该行为 plugin.json version 的同源镜像·纪律①每变必 bump——v1.2.x 各 bump 批无 lock 行属先行态，v1.3.0 起此行为 bump 必改项）。
+
+- **版本账 v2.0.0**（2026-10-29·票 T-team-rename-01·皮总拍板㉑）：两团全层改名——包 id 更名 `hjh-software-team`→`baigong-software-team`（bundle 目录 git mv·`.gitignore:22` 注释活引用随行）；中文显示名「软件开发团队」→「百工软件团队」（拍板⑰⑲）；英文显示名「Software Company」→「Baigong Software Team」（拍板⑳ A3 案）；plugin.json name/plugin/displayName/profession/description＋lead MD :3/:6/:9＋四席位 MD:8 英文自述＋software-orchestration SKILL:3（1.0.2→1.0.3）随行；external-advisor-collab 组件 10-roles :25/:48 改＋:49 豁免注＋@v1.0.1 换 ref（devkits 6d80232）。**id 更名升 major＝拍板⑳口径，覆前例**（v1.2.0 前例按破坏性升 minor 记账）。
 - **版本账 v1.2.4**（2026-10-28）：`deploy-gate.md` 新增 §五「预览先行」（皮总直拍·跨项目纪律：批收口后装配产物只入仓外 `-build` 预览面候人类真实验证，进部署面＝验证后独立指示含路径明示批准；主理人收口总结禁把刷新部署面作默认推荐）。补记：本行系 v1.3.0 批发现上批漏登记版本账，据 commit `a18df51` 回补。
 - **版本账 v1.2.0**（2026-10-26）：包 id 更名 `software-company`→`hjh-software-team`（皮总拍定·避免与市场原版混淆·包 id 变更＝破坏性变更升 minor）；席位 id 与席位 MD 文件名不动。
 - **版本账 v1.2.3**（2026-10-28）：四成员席位 MD 的 persona 名由市场原版英文名改为**中文同名拼音全拼**——许清楚→Xu Qingchu（PM）／高见远→Gao Jianyuan（架构）／寇豆码→Kou Douma（工程）／严过关→Yan Guoguan（QA），共 19 处（含标题行、`You are` 句、`Name` 字段、他席交叉引用括注），旧名零残留。依据＝皮总（2026-10-28）拍（中文名与 plugin.json `displayName.zh`／lead 席位表三者同名同指）。席位 id 与文件名不动；plugin.json 版本升 1.2.3。
@@ -47,7 +49,7 @@ Team 型（多角色协作团队）
 将专家包目录放到专家目录下：
 
 ```
-~/.workbuddy/plugins/marketplaces/my-experts/plugins/hjh-software-team/
+~/.workbuddy/plugins/marketplaces/my-experts/plugins/baigong-software-team/
 ```
 
 然后运行注册命令使其可见：
@@ -73,4 +75,4 @@ python3 scripts/register_expert.py <expert-dir>
 
 ## 维护规则
 
-**改席位定义只改仓内真源（本目录），部署面（`marketplaces/my-experts/plugins/hjh-software-team/`）只准从仓内复制生成**；运行缓存（`cache/my-experts/`）为宿主自管可再生副本，不入治理。
+**改席位定义只改仓内真源（本目录），部署面（`marketplaces/my-experts/plugins/baigong-software-team/`）只准从仓内复制生成**；运行缓存（`cache/my-experts/`）为宿主自管可再生副本，不入治理。
