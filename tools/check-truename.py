@@ -217,8 +217,8 @@ def main():
 
     # 两壳 ⛓ 注记行（仅注记行入扫描面·默认面专属）
     shell_marks = {} if args.pack else {
-        os.path.join(exp, 'workbuddy', 'hjh-aigc-video-team', 'agents', 'aigc-screenwriter.md'): '挂载',
-        os.path.join(exp, 'workbuddy', 'hjh-aigc-video-team', 'agents', 'aigc-operations.md'): '挂载',
+        os.path.join(exp, 'workbuddy', 'baigong-video-team', 'agents', 'aigc-screenwriter.md'): '挂载',
+        os.path.join(exp, 'workbuddy', 'baigong-video-team', 'agents', 'aigc-operations.md'): '挂载',
     }
     total_v = total_s = total_e = 0
     finding_lines = []
