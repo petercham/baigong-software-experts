@@ -19,8 +19,10 @@
 | `.discussion/20261099-003-round3-议题包.md` | EAC-L1 正例 | 收敛类＋该节在位＝0 条 |
 | `handoff-sample.md` | EAC-L2 | VIOLATION 3＋EXEMPT 3＋SUBSTR 3 |
 | `plain-normal-doc.md` | 全检 | 不在任何扫描面＝0 条（扫描面收窄＝主豁免实证） |
+| `fence-sample.md` | EAC-L2（EAC-SK5-F 增补） | 围栏两行示例＝SUBSTR＋2；`GPT-4` 泄漏反例（修后判违规）＋CJK 紧邻提案编号（编号前无空格）钉死＝VIOLATION＋2；日期文件名钉死＝0 |
+| `tickets/dir-scan-sample.md` | EAC-L2（EAC-SK5-F 增补） | 无声明行、靠 tickets 目录分支入面＝VIOLATION＋1（目录扫描分支 selftest 执行钉死） |
 
-合计预期：EAC-L1＝3／EAC-L2（VIOLATION）＝3／EAC-L3＝2；三态分账 EXEMPT＝3／SUBSTR＝3／VIOLATION＝3。
+合计预期：EAC-L1＝3／EAC-L2（VIOLATION）＝6／EAC-L3＝2；三态分账 EXEMPT＝3／SUBSTR＝5／VIOLATION＝6。
 
 ## 自咬反例说明
 

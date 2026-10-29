@@ -75,11 +75,14 @@ PROPOSAL_KEY = "新提议"
 PROPOSAL_ZERO_RE = re.compile(r"新提议[^。\n|]{0,16}?(?:[＝=][^。\n|]{0,6}?(?:无|零)|无新增)")
 
 # ---- EAC-L2：交接件禁模式（五组·初版·照票面字面）----
+# EAC-SK5-F 修正（报告黄-1/黄-3）：提案编号与案卷行号补边界前查——
+# `\b` 在 CJK（\w）紧邻处失效（`依据P-12` 漏报），改字母负向前查；
+# 案卷行号加数字前后查，`2026.md` 不再咬出 `026.md` 假命中。
 L2_PATTERNS = [
     ("轮次引用", r"见第\s*\d+\s*轮"),
     ("席轮注源", r"〔[^〕]*·轮〕"),
-    ("提案编号", r"\bP-\d+\b"),
-    ("案卷行号", r"\d{3}\.(?:txt|md)"),
+    ("提案编号", r"(?<![A-Za-z0-9])P-\d+"),
+    ("案卷行号", r"(?<!\d)\d{3}\.(?:txt|md)(?![A-Za-z0-9])"),
     ("汇总件节引", r"汇总件\s*§"),
 ]
 # 扫描面定位判据＝件性声明行（40-artifacts.md §四之二 立该体例；此行为机检锚）
@@ -89,13 +92,17 @@ L2_DIR_SEGS = ("/decisions/", "/tickets/")
 # 行级豁免标记（循 check-entity.py L85-89 史实锚范式）：行内含即该行判绿。
 # 注：豁免注格式只认「`T-` ＋段中至少含一数字」的标记（如 `T-team-rename-01` 先例），
 # 纯字母段（如提案编号 `P-1`／`T-alpha`）不算豁免注——否则豁免面吞掉禁模式自身。
-EXEMPT_MARK_RE = re.compile(r"〔史实锚〕|〔豁免注|T-[A-Za-z0-9-]*\d[A-Za-z0-9-]*")
+# EAC-SK5-F 修正（报告红-1）：`T-` 加字母数字负向前查（check-entity:64 drive-path 同款
+# 教训）——否则 `GPT-4`／`PT-1`／`QT-2024` 这类无关词触发整行豁免，吞掉该行全部禁模式。
+EXEMPT_MARK_RE = re.compile(r"〔史实锚〕|〔豁免注|(?<![A-Za-z0-9])T-[A-Za-z0-9-]*\d[A-Za-z0-9-]*")
 CODE_SPAN_RE = re.compile(r"`[^`\n]*`")
 FENCE_RE = re.compile(r"^[ \t]*```")
 
 # ---- EAC-L3：.discussion/ 内议题包编号唯一性＋同轮 v2 提示 ----
-PKG_NO_RE = re.compile(r"^(2026\d{4})-(\d{3})[.-]")
-PKG_NO_RE_CASED = re.compile(r"^(2026\d{4}[a-z]?)-(\d{3})[.-]")  # 案名带字母后缀形态（票面初版未列，见回报）
+# EAC-SK5-F 修正（报告红-2）：年份前缀去硬编码（原 `2026` 使 2027 起新包静默脱离
+# 唯一性分组＝fail-open 时间炸弹），改 `20\d{6}` 八年式闭形态。
+PKG_NO_RE = re.compile(r"^(20\d{6})-(\d{3})[.-]")
+PKG_NO_RE_CASED = re.compile(r"^(20\d{6}[a-z]?)-(\d{3})[.-]")  # 案名带字母后缀形态（票面初版未列，见回报）
 SAME_ROUND_V2_RE = re.compile(r"-0\d\d-.*-v[2-9]")
 # 附加件不进唯一性分组：同轮 `NNN.txt`（分发主件）＋`NNN-议题包.md`（同包另一载体）
 # 属正常双承载，不是「同编号多包」——不进分组否则每轮都假红（扫描面收窄主豁免口径）。
@@ -180,7 +187,10 @@ def check_l1(rel: str, lines: "list[str]") -> "list[str]":
 
 def check_l2(rel: str, lines: "list[str]") -> "tuple[list[str], dict[str, int]]":
     """交接件禁模式：只扫带件性声明行的件＋decisions/tickets 目录件（扫描面收窄＝主豁免）。"""
-    in_scope = bool(DECLARATION_RE.search("\n".join(lines[:HEAD_WINDOW]))) or any(s in rel for s in L2_DIR_SEGS)
+    # EAC-SK5-F（T6 配套）：`/` 前置口径——rel 首段即目录段时（--selftest 以 fixture 根
+    # 为 root：rel＝`tickets/…`）也能命中段判据；与 iter_files 的 FIXTURE_MARK 段判定
+    # （`"/" + rel_dir + "/"`）及 DISCUSSION_RE 的 `(^|/)` 同款。真仓 rel 恒带前导段，行为不变。
+    in_scope = bool(DECLARATION_RE.search("\n".join(lines[:HEAD_WINDOW]))) or any(s in "/" + rel for s in L2_DIR_SEGS)
     findings: "list[str]" = []
     tally = {"EXEMPT": 0, "SUBSTR": 0, "VIOLATION": 0}
     if not in_scope:
@@ -190,6 +200,9 @@ def check_l2(rel: str, lines: "list[str]") -> "tuple[list[str], dict[str, int]]"
         if FENCE_RE.match(raw):
             in_fence = not in_fence
             continue
+        # EAC-SK5-F 修正（报告黄-11）：反引号遮除提至行级一次算
+        # （照 check-entity.mask_non_narrative 口径·原先在 match×pattern 内重复算整行）
+        masked = CODE_SPAN_RE.sub(lambda m: "\x00" * len(m.group(0)), raw)
         for label, pat in L2_PATTERNS:
             for match in re.finditer(pat, raw):
                 # 豁免②行级标记 → EXEMPT（绿）
@@ -197,7 +210,6 @@ def check_l2(rel: str, lines: "list[str]") -> "tuple[list[str], dict[str, int]]"
                     tally["EXEMPT"] += 1
                     continue
                 # 豁免③遮除口径：反引号段／代码围栏内的示例段 → SUBSTR（判非违例·绿）
-                masked = CODE_SPAN_RE.sub(lambda m: "\x00" * len(m.group(0)), raw)
                 if in_fence or match.group(0) not in masked:
                     tally["SUBSTR"] += 1
                     continue
@@ -207,8 +219,11 @@ def check_l2(rel: str, lines: "list[str]") -> "tuple[list[str], dict[str, int]]"
     return findings, tally
 
 
-def check_l3(root: str, files: "list[str]", rel_map: "dict[str, str]") -> "list[str]":
-    """编号唯一性＋同轮 v2 提示（按目录分组，目录级检查）。"""
+def check_l3(files: "list[str]", rel_map: "dict[str, str]") -> "list[str]":
+    """编号唯一性＋同轮 v2 提示（按目录分组，目录级检查）。
+
+    EAC-SK5-F：未用形参 `root` 清理（原实现从未读它）。
+    """
     findings: "list[str]" = []
     by_dir: "dict[str, dict[str, list[str]]]" = {}
     v2_seen: "set[str]" = set()
@@ -249,13 +264,15 @@ def scan(root: str, skip_fixtures: bool) -> "tuple[list[str], dict[str, int]]":
         findings.extend(f2)
         for k in tally:
             tally[k] += t2[k]
-    findings.extend(check_l3(root, files, rel_map))
+    findings.extend(check_l3(files, rel_map))
     return findings, tally
 
 
 # 对拍预期（--selftest 与内嵌预期比对；改 fixture 必须同步改这里，否则对拍红）
-EXPECTED = {"EAC-L1": 3, "EAC-L2": 3, "EAC-L3": 2,
-            "EXEMPT": 3, "SUBSTR": 3, "VIOLATION": 3}
+# EAC-SK5-F：四新样件入账——fence-sample（SUBSTR+2·VIOLATION+2：GPT-4 泄漏反例＋CJK 紧邻钉死）
+# ＋tickets/dir-scan-sample（VIOLATION+1·目录扫描分支钉死）；日期文件名钉死＝零新增。
+EXPECTED = {"EAC-L1": 3, "EAC-L2": 6, "EAC-L3": 2,
+            "EXEMPT": 3, "SUBSTR": 5, "VIOLATION": 6}
 
 
 def selftest(root: str) -> int:
