@@ -723,7 +723,10 @@ def git_archive_blobs(repo: str, ref: str, prefix: str) -> "dict[str, bytes]":
             continue
         name = member.name
         rel = name[len(strip):] if name.startswith(strip) else name
-        result[rel.replace("\\", "/")] = tar.extractfile(member).read()
+        rel = rel.replace("\\", "/")
+        if "__pycache__/" in rel or rel.endswith(".pyc"):
+            continue  # 编译缓存件不入装配面
+        result[rel] = tar.extractfile(member).read()
     if not result:
         sys.stderr.write("prerequisite failed: %s 在 %s 下无文件（path 写错或该 ref 无此组件）\n"
                          % (prefix, ref))
