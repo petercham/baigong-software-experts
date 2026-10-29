@@ -87,6 +87,7 @@ provider: object-audit
 | 图（整图/拓扑） | **编译期** | `references/60-graph.md` | 项目图 skill（由项目 profile 指定） |
 | **规范来源（`spec-provenance` 块）** | **编译期** | `references/70-provenance.md`（P-1 块与七键闭集／P-2 锚唯一／P-3 条款摘要·缺则判 exit 1） | 无（本器持真源） |
 | **案例库／经验库** | **运行时**（不可穷举·允许"查不到"） | `references/15-binding.md`（判据：**检索有效性＋更新纪律**，不查干净度） | CBR（Aamodt & Plaza 1994）／Soar episodic memory／RAG |
+| **版本沿革（本器自身）** | **记录件**（append-only 史实锚） | `references/90-changelog.md`（v0.6 起立件·每版一条只增不改） | 无（本器持登记面） |
 
 **编译期 vs 运行时的判据差异（审前必读·否则会用错尺子）**：编译期对象**必须过六测、可以且应当穷举、封闭稳定**，审契约＋负样本；运行时对象**不要求干净（脏是职责）、不可穷举、开放增长**，审**检索有效性**（该命中时命中吗）＋**更新纪律**（过期案例淘汰吗）。完整模型与出处见 `references/15-binding.md`。
 

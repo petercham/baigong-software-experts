@@ -53,7 +53,9 @@
     "MC-SOT-EXEMPT": {"commit": "advisory"},
     "EAC-L1": {"commit": "advisory"},
     "EAC-L2": {"commit": "advisory"},
-    "EAC-L3": {"commit": "advisory"}
+    "EAC-L3": {"commit": "advisory"},
+    "OA-D6-3": {"commit": "advisory"},
+    "OA-D6-4": {"commit": "advisory"}
   }
 }
 ```
@@ -95,6 +97,8 @@
 | `EAC-L1` 议题包/汇总体裁 | `advisory` | `external-advisor-collab/references/20-rounds.md` §二/§三（收敛类必含「合流与分歧清单」节）＋`40-artifacts.md` §一 收敛类注/§二 新提议登记（条款正文已落 provider 包·EAC-SK1/SK2） | **足**（首挂 advisory＝EAC-SK5 票面 T3；升 block 候条款实跑零误报读数入 evidence 后另拍） |
 | `EAC-L2` 交接件禁模式 | `advisory` | `external-advisor-collab/references/40-artifacts.md` §四之二（件性声明行＝扫描面定位判据·讨论会特有禁列）＋本包 `20-handoff.md` §二（三正面判据·通用侧·EAC-SK4） | **足**（同上） |
 | `EAC-L3` 议题包编号唯一性 | `advisory` | `external-advisor-collab/references/20-rounds.md` §一.5 编号纪律闭集（一包一轮·已分发禁 v2·EAC-SK1） | **足**（同上） |
+| `OA-D6-3` 交付包指针闭集 | `advisory` | `object-audit/references/50-document.md` D6 表 D6-3 行（条款正文已落 provider 包·ENG-G2 WP-2） | **足**（首挂 advisory＝ENG-G2 裁②；升 block 候实跑零误报读数入 evidence 后另拍） |
+| `OA-D6-4` 交付包内指针可达性 | `advisory` | 同上 D6-4 行（同上） | **足**（同上·首跑读数见交付回执，跨技能引用面命中属另案候裁项信号） |
 
 > 注（批 5-③ W6 留痕·覆盖批 5-② 同处留痕）：上表四条规范依据的**正文已落本包** `70-charter.md` §四（4.1／4.2／4.3），读表规则 5 由「id 串出现在本件 json 围栏内」的**自指式满足**转为**条款级真满足**（四条 id 均可在 `70-charter.md` 解析到，非仅在本件 json 围栏内出现）。`mode` 一律维持 `advisory` 不变——依 decisions §九·②「先挂 advisory 取信号」；升 block 须先有条款级依据再由治理改本表（配套规则 2）。
 
