@@ -211,6 +211,7 @@ SPEC_ID_HOME = {
     "OB": "object-build",
     "MC": "multi-collab",
     "PUB": "object-build",
+    "EAC": "external-advisor-collab",
 }
 
 
