@@ -87,15 +87,15 @@
 
 T2 三仓口径（拆仓执行批·拍板六⑥）：
     默认＝**双根对账**（dual）：
-      根① bundle 根＝`--pkg`（默认 ../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team，
+      根① bundle 根＝`--pkg`（默认 ../multi-agent-collab-experts/workbuddy/baigong-video-team，
         experts 仓 video bundle·skills/ 已出池后其 agents/ 为唯一成员）；
       根② 技能真源根＝`--skills-root`（默认 ../multi-agent-collab-skills/skills，
         skills 仓五域·含 references/）。
       agents（根①的 agents/ 子树）vs skills（根① skills/ 子树＋根②全部 .md）
       的 A1 重合检测**跨仓跑**；A2 指针解析加「技能真源根」探针（见 check_pointers）。
     单根口径（single）＝旧行为：只扫 `--pkg` 一个根（包内自包含）。
-      软开 bundle（devkits 仓 workbuddy/hjh-software-team·拍板五①自包含豁免）
-      用第二调项：`--mode single --pkg workbuddy/hjh-software-team --tag softdev`。
+      软开 bundle（devkits 仓 workbuddy/baigong-software-team·拍板五①自包含豁免）
+      用第二调项：`--mode single --pkg workbuddy/baigong-software-team --tag softdev`。
 
     **豁免键 files 维度＝跨仓两段式路径口径（T2 定·稳定可机检）**：
       文件标识＝`<roottag>:<root 内相对路径（正斜杠）>`；
@@ -144,7 +144,7 @@ MIN_CJK = 12                 # 重合判定阈值：行内 ≥12 个 CJK 字符
 SKILL_LINE = 5000            # MC-SKILL-LINE：技能层 ≤5000 token 级
 # 拆仓（2026-10-26 皮总拍定）：专家包本体在姊妹仓，默认包＝跨仓相对路径。
 # 前提＝三仓并列于同一父目录（D:\）；不满足时用 --pkg / --skills-root 显式指定。
-DEFAULT_PKG = '../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team'
+DEFAULT_PKG = '../multi-agent-collab-experts/workbuddy/baigong-video-team'
 DEFAULT_SKILLS_ROOT = '../multi-agent-collab-skills/skills'
 DEFAULT_TAG_DUAL_BUNDLE = 'experts'    # 双根口径：bundle 根 roottag
 DEFAULT_TAG_DUAL_SKILLS = 'skills'     # 双根口径：技能真源根 roottag

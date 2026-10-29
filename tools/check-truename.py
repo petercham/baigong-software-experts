@@ -105,8 +105,8 @@ def main():
     files.append((os.path.join(SKL, 'skills', 'aigc-video-content', 'references', 'genre-recipe-entries.md'), '挂载列·条目表+注记(全文全扫)'))
     # 两壳 ⛓ 注记行（仅注记行入扫描面）
     shell_marks = {
-        os.path.join(EXP, 'workbuddy', 'hjh-aigc-video-team', 'agents', 'aigc-screenwriter.md'): '挂载',
-        os.path.join(EXP, 'workbuddy', 'hjh-aigc-video-team', 'agents', 'aigc-operations.md'): '挂载',
+        os.path.join(EXP, 'workbuddy', 'baigong-video-team', 'agents', 'aigc-screenwriter.md'): '挂载',
+        os.path.join(EXP, 'workbuddy', 'baigong-video-team', 'agents', 'aigc-operations.md'): '挂载',
     }
     total_v = total_s = total_e = 0
     print(f'词典：CJK {len(cjk)} 词／拉丁 {len(lat)} 词（词边界）')

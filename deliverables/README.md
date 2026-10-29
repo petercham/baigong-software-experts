@@ -18,8 +18,8 @@
 
 | 对象 | 现真源 | 版本·状态 |
 |---|---|---|
-| hjh-aigc-video-team | bundle＝`../multi-agent-collab-experts/workbuddy/hjh-aigc-video-team/`；五域技能真源＝`../multi-agent-collab-skills/skills/`（出池·装配按 bundle.lock 索引装回·T3 票） | v1.5.0 · 活跃（沿革全文见该包 `README.md`；拆仓前历史留本仓 git 史） |
-| hjh-software-team | 本仓 `workbuddy/hjh-software-team/`（devkits 升格收编·拍板五①豁免正交切分·随包技能 software-orchestration 不出池） | v1.2.1 · 活跃（快照迁入·历史留 experts 仓 git 史；「改定义只改仓内真源、部署面只准从仓内复制」规则不变，真源＝本仓） |
+| baigong-video-team | bundle＝`../multi-agent-collab-experts/workbuddy/baigong-video-team/`；五域技能真源＝`../multi-agent-collab-skills/skills/`（出池·装配按 bundle.lock 索引装回·T3 票） | v2.0.0 · 活跃（沿革全文见该包 `README.md`；拆仓前历史留本仓 git 史） |
+| baigong-software-team | 本仓 `workbuddy/baigong-software-team/`（devkits 升格收编·拍板五①豁免正交切分·随包技能 software-orchestration 不出池） | v2.0.0 · 活跃（快照迁入·历史留 experts 仓 git 史；「改定义只改仓内真源、部署面只准从仓内复制」规则不变，真源＝本仓） |
 
 ## nodes/ · tickets/ · documents/ — 占位
 
