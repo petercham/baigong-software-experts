@@ -3,7 +3,7 @@
 """fuxi-skill · public-anchor validator（person 轨软门·S3 建）。
 
 性质＝交付件本体。层结构（顺序执行，前层 fail 不进后层；层名即 gate_source 注册词）：
-    L0 格式检查表 → L1 盲评rubric → L2 绝对线 → L3 decoy → L4 泄漏检查 → L5 人工锚点卡
+    L1 格式检查表 → L2 盲评rubric → L3 绝对线 → L4 decoy → L5 泄漏检查 → L6 人工锚点卡
 门禁资格两制（当期）：
     - `格式检查表`＝当期唯一门禁位（D2 嫁接机械位；S0b 元组未交付态下放行仅依机械断言，R7/R24）；
       `泄漏检查`＝门禁位（确定性判定，不依赖 judge）。
@@ -22,7 +22,7 @@
 
 与 assert-tool 的关系＝分立脚本：不从 assert-tool import 判据函数，仅以纯数据常量取
 词表/闭集（词表本体单源在 assert-tool 注册位）；GS-4 κ 对账读数面留 assert-tool，
-本件 L5 只做元组在场检＋同款口径薄封装（不扩判据）。
+本件 L6 只做元组在场检＋同款口径薄封装（不扩判据）。
 
 用法：
     python validator-public-anchor.py <batch_dir>   # 判分段：对批次工件目录出六层读数
@@ -90,7 +90,7 @@ TEST_PROMPT_FIELDS = AT.TEST_PROMPT_FIELDS
 LEAKAGE_OK = "已检-不在语料内"
 LEAKAGE_HIT = "已检-在语料内"
 CALIBRATION_DEFAULT = "待校准"
-KAPPA_THRESHOLD = 0.6        # GS-4 同款口径（读数面单源＝assert-tool gs_4，本件 L5 薄封装同值）
+KAPPA_THRESHOLD = 0.6        # GS-4 同款口径（读数面单源＝assert-tool gs_4，本件 L6 薄封装同值）
 
 
 def _read_batch_file(batch_dir: str, key: str):
@@ -128,7 +128,7 @@ def _judge_family_line(blind, decoy) -> "tuple[str, str]":
 # ============================================================
 
 def layer_l0_format_checklist(artifact, prompts) -> "tuple[str, str, dict]":
-    """L0 格式检查表（D2 嫁接机械位·当期唯一门禁位）：先判后盲评，L0 fail 不进盲评层。
+    """L1 格式检查表（D2 嫁接机械位·当期唯一门禁位）：先判后盲评，L1 fail 不进盲评层。
 
     检项：五层节闭集 diff＝∅（ST-3 perspective 侧）＋禁用词（BW-1 角色扮演禁语＋BW-2
     无据断言词）命中＝0＋test-prompts 回归件在场可解析且条目字段 ⊆ ST-4 闭集＋
@@ -192,7 +192,7 @@ def _dim_means(blind) -> "dict[str, float]":
 
 
 def layer_l1_blind_rubric(blind) -> "tuple[str, str, dict]":
-    """L1 盲评rubric（参考位）：judge 跨 ≥2 家族＋位置对调双跑；分数只作参考位不作门禁位。
+    """L2 盲评rubric（参考位）：judge 跨 ≥2 家族＋位置对调双跑；分数只作参考位不作门禁位。
 
     当期判定恒记「未验」（无 judge-人类一致率数据＝无门禁资格，B12/R24；
     S0b 元组交付并 κ 达标后复位）；读数行强制并列 calibration_state（调用方保证）。
@@ -217,9 +217,9 @@ def layer_l1_blind_rubric(blind) -> "tuple[str, str, dict]":
 
 
 def layer_l2_absolute_line(blind) -> "tuple[str, str, dict]":
-    """L2 绝对线（参考位）：四维各自均值 ≥3.0（五级量表·C-1 裁值预注册锁定）＋必附三值报告。
+    """L3 绝对线（参考位）：四维各自均值 ≥3.0（五级量表·C-1 裁值预注册锁定）＋必附三值报告。
 
-    判定恒记「未验」（同 L1 参考位口径）；三值报告缺一行记未验（R10）。
+    判定恒记「未验」（同 L2 参考位口径）；三值报告缺一行记未验（R10）。
     """
     if blind is None:
         return (READ_UNVERIFIED, "盲评工件不在场（规程在场待数据·参考位）", {})
@@ -241,7 +241,7 @@ def layer_l2_absolute_line(blind) -> "tuple[str, str, dict]":
 
 
 def layer_l3_decoy_2afc(decoy) -> "tuple[str, str, dict]":
-    """L3 decoy（参考位）：近邻人物盲辨二选一（2AFC）；读数＝辨认正确率＝D12 独立报告行读数源。
+    """L4 decoy（参考位）：近邻人物盲辨二选一（2AFC）；读数＝辨认正确率＝D12 独立报告行读数源。
 
     该行与 D12 排他性正确率独立报告行同源**不并分**（报表无聚合总分字段）；
     规程行本身属验收行；裁判判定同受 R24 约束→当期判定记未验（参考位）。
@@ -263,7 +263,7 @@ def layer_l3_decoy_2afc(decoy) -> "tuple[str, str, dict]":
 
 
 def layer_l4_leakage(prereg, corpus) -> "tuple[str, str, dict]":
-    """L4 泄漏检查（门禁位·确定性判定不依赖 judge）：规程同 source-anchor §1.3。
+    """L5 泄漏检查（门禁位·确定性判定不依赖 judge）：规程同 source-anchor §1.3。
 
     哈希两式＋题库指纹防改校验；锚点题取语料截止日之后（R13/§9.6 person 轨 T 定义照引）；
     命中→FM-P-04 阻断（fail）；缺预注册件/缺工件→未验（fail-closed）。
@@ -317,10 +317,10 @@ def kappa_consistent_thin(calibration_state: str, kappa_report) -> bool:
 
 
 def layer_l5_anchor_card(tuple_obj) -> "tuple[str, str, dict]":
-    """L5 人工锚点卡：消费 S0b 交付元组（κ 点值/区间/实做题数/补题题记录/受限登记，R9）。
+    """L6 人工锚点卡：消费 S0b 交付元组（κ 点值/区间/实做题数/补题题记录/受限登记，R9）。
 
     当期 S0b 未交付（盘上无预注册件、无元组）→显式记「未验」，不记绿；
-    元组交付前 L1-L3 分数一律参考位（DeepSeek 改写句口径：不阻塞＝工程推进不等待，放行判据不降低）。
+    元组交付前 L2-L4 分数一律参考位（DeepSeek 改写句口径：不阻塞＝工程推进不等待，放行判据不降低）。
     """
     if tuple_obj is None:
         return (READ_UNVERIFIED,
@@ -382,7 +382,7 @@ def run_batch(batch_dir: str, write_records: bool = True) -> int:
             continue
         verdict, reading, extra = fn()
         results.append((layer_name, verdict, reading, extra))
-        # L0 格式检查表 fail＝不进盲评层；L4 泄漏 fail＝FM-P-04 阻断后续锚点层
+        # L1 格式检查表 fail＝不进盲评层；L5 泄漏 fail＝FM-P-04 阻断后续锚点层
         if verdict == READ_FAIL and layer_name in ("格式检查表",):
             blocked = True
 
@@ -417,7 +417,7 @@ def run_batch(batch_dir: str, write_records: bool = True) -> int:
             if key not in ("裁判家族", "位置对调两跑"):
                 rec[key] = val
         records.append(rec)
-    # D12 排他性辨认正确率独立报告行（与 L3 decoy 同源不并分；报表无聚合总分字段）
+    # D12 排他性辨认正确率独立报告行（与 L4 decoy 同源不并分；报表无聚合总分字段）
     d12_reading = "读数不在场"
     d12_verdict = READ_UNVERIFIED
     if inputs["decoy"] is not None:
@@ -554,9 +554,9 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
 
     # 合成批次：全绿批次 exit 0（judge 层未验不拉码）
     cases.append(("BATCH_green_exit0", _run_in_temp("green") == EXIT_GREEN, True))
-    # 咬放配对：坏产物（缺节＋禁语＋要素不成对）→L0 fail→后续未验→exit 1
+    # 咬放配对：坏产物（缺节＋禁语＋要素不成对）→L1 fail→后续未验→exit 1
     cases.append(("BATCH_badartifact_exit1", _run_in_temp("badart", bad_artifact=True) == EXIT_FAIL, True))
-    # 回归件缺位咬（L0 fail）
+    # 回归件缺位咬（L1 fail）
     cases.append(("BATCH_noprompts_exit1", _run_in_temp("noprompt", no_prompts=True) == EXIT_FAIL, True))
     # 泄漏咬（门禁位·题面＝语料分块原文）
     cases.append(("BATCH_leak_exit1", _run_in_temp("leak", leak=True) == EXIT_FAIL, True))
