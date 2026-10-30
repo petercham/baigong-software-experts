@@ -22,8 +22,8 @@ S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空�
     adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）；
     specs/＝两输出规范表文件（ST-8 基面）；包 README.md（BW-6 基面）；
     deliverables/products/＝active 生效池注册路径（FC-6 池计数基面＝池根直接条目）；
-    产物级扫描面（ST-3／BW-1／BW-2／BW-5(b) 消费）＝池根直接条目＋archive/ 一层下产物目录，
-    两口径分离：归档区条目入结构检与词表实扫、不计入池计数。
+    产物级扫描面（ST-3／BW-1／BW-2／BW-5(b) 消费）＝池根直接条目＋pending/（待确认暂存区）一层下产物目录，
+    两口径分离：暂存区条目入结构检与词表实扫、不计入池计数；archive/＝历史记录区，免产物级机检、不入扫描面。
 
 退出码闭集（三值，无其他取值）：
     0 全绿（无 fail；PENDING_STAGE 不拉码）
@@ -234,7 +234,7 @@ _H2_SEC_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
 _SEG_HEAD_RE = re.compile(r"^([RIAB][12]?|E)(?:\s+(\S.*?))?\s*$")
 _PRODUCT_DIR_SUFFIXES = ("-perspective", "-technique", "-bundle")
 _PRODUCT_BODY_FILE = "SKILL.md"   # 产物本体件名：节结构 diff 只消费本体件（随件入词表面不入节 diff 面）
-_ARCHIVE_SUBDIR = "archive"       # 生效池根下归档区子目录（产物级扫描面扩一层；条目不计池计数）
+_PENDING_SUBDIR = "pending"       # 生效池根下待确认暂存区子目录（产物级扫描面扩一层；条目不计池计数）
 _FM_ROW_RE = re.compile(r"^FM-[SPM]-\d{2}$")
 _BOARD_NAME_RE = re.compile(r"^board-(\d{4})-(\d{2})-(\d{2})\.md$")
 _BACKTICK_TOKEN_RE = re.compile(r"`([^`\n]+)`")
@@ -737,16 +737,17 @@ def _product_entries() -> "list[tuple[str, str]]":
 
 
 def _product_scan_entries() -> "list[tuple[str, str]]":
-    """产物级扫描面枚举 (目录名, 路径)＝生效池根直接条目＋archive/ 一层下产物目录。
+    """产物级扫描面枚举 (目录名, 路径)＝生效池根直接条目＋pending/ 一层下产物目录。
 
     两口径分离：本枚举供产物级判据（ST-3 节结构／BW-1／BW-2／BW-5(b) 词表实扫）消费；
-    active 池计数（FC-6）只消费 `_product_entries()`（池根直接条目），归档区条目不计入池。
+    active 池计数（FC-6）只消费 `_product_entries()`（池根直接条目），暂存区条目不计入池。
+    pending/ 不存在＝空扫描合法态（同扩面前口径）；历史记录区目录不入本构造（免产物级机检）。
     """
     out = _product_entries()
-    archive_dir = os.path.join(_active_pool_dir(), _ARCHIVE_SUBDIR)
-    if os.path.isdir(archive_dir):
-        for name in sorted(os.listdir(archive_dir)):
-            path = os.path.join(archive_dir, name)
+    pending_dir = os.path.join(_active_pool_dir(), _PENDING_SUBDIR)
+    if os.path.isdir(pending_dir):
+        for name in sorted(os.listdir(pending_dir)):
+            path = os.path.join(pending_dir, name)
             if os.path.isdir(path) and name.endswith(_PRODUCT_DIR_SUFFIXES):
                 out.append((name, path))
     return out
@@ -819,7 +820,7 @@ def st_2_three_kernel_files() -> "tuple[str, str]":
 def st_3_section_closed_diff() -> "tuple[str, str]":
     """ST-3 perspective 五层节／technique 六段卡＋五字段闭集 diff＝∅——〔S0a 建／S4 实装〕。
 
-    实装基面＝产物级扫描面枚举（生效池根直接条目＋archive/ 一层下产物目录）内的产物本体件
+    实装基面＝产物级扫描面枚举（生效池根直接条目＋pending/ 一层下产物目录）内的产物本体件
     （`SKILL.md`；随件件不入节结构 diff 面——节闭集只钉本体节形）：
     perspective 产物 H2 节名去空白归一后与五层闭集 diff＝∅；technique 产物节头按
     段名前缀归一化口径 diff＝∅（描述名改名＝咬）；卡体 json 块五字段闭集 ⊆ 检。
@@ -934,7 +935,7 @@ def st_7_method_ir_exclusion() -> "tuple[str, str]":
 def bw_1_roleplay_vocab() -> "tuple[str, str]":
     """BW-1 角色扮演禁语词表本体落盘＋产物正文实跑位——〔S0a〕词表本体在场类。
 
-    产物正文实跑位＝产物级扫描面枚举（生效池根＋archive/ 一层下产物目录）逐正文件禁语命中，
+    产物正文实跑位＝产物级扫描面枚举（生效池根＋pending/ 一层下产物目录）逐正文件禁语命中，
     命中数＝0 才绿（词表消费接到产物枚举＝门禁实跑，无产物＝空扫描 0 命中平凡真）。
     """
     ok = vocab_body_present(ROLEPLAY_BANNED_WORDS)
@@ -1240,7 +1241,7 @@ def bw_5_contradiction_smoothing() -> "tuple[str, str]":
     (a) 声明面：`adapters/person.md` 含「内部矛盾不平滑」条款行＋「矛盾是深度的重要信号」
         措辞行在场（当期可绿）；
     (b) 产物面：平滑句式启发式预注册词表本体在场（BW-1/BW-2 同制）＋perspective 产物正文
-        命中＝坏信号④咬（产物级扫描面枚举＝生效池根＋archive/ 一层下产物目录，无实例＝空扫描合法态）。
+        命中＝坏信号④咬（产物级扫描面枚举＝生效池根＋pending/ 一层下产物目录，无实例＝空扫描合法态）。
     """
     ok_vocab = vocab_body_present(SMOOTH_PHRASE_VOCAB) and len(set(SMOOTH_PHRASE_VOCAB)) == 4
     texts = _adapter_texts()
@@ -1627,14 +1628,14 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("BW5b_bite_hit", blunt_hits("该人物思想毫无矛盾、自洽无冲突。", SMOOTH_PHRASE_VOCAB) != [], True))
     cases.append(("BW5b_pass_nohit", blunt_hits("其早期与晚期立场存在张力，按原样入档。", SMOOTH_PHRASE_VOCAB) == [], True))
 
-    # 产物正文门禁实跑位（BW-1/BW-2 词表消费接产物枚举）：合成条目正文 放／咬 配对
+    # 产物正文门禁实跑位（BW-1/BW-2 词表消费接产物枚举＝根条目＋pending/ 一层口径）：合成条目正文 放／咬 配对
     body_clean = {"obj-a-perspective": {"SKILL.md": "他用这套框架分析决策；证据不足维度写证据不足。",
                                         "registration.md": "注册记录：语料门槛登记。"},
-                  "obj-b-perspective": {"SKILL.md": "其立场张力按原样入档，来源态逐条标注。"}}
+                  "pending/obj-b-perspective": {"SKILL.md": "其立场张力按原样入档，来源态逐条标注。"}}
     body_dirty1 = {"obj-a-perspective": {"SKILL.md": "接下来我以他的名义作答，给出结论。"},
-                   "obj-b-perspective": {"SKILL.md": "正常正文。"}}
+                   "pending/obj-b-perspective": {"SKILL.md": "正常正文。"}}
     body_dirty2 = {"obj-a-perspective": {"SKILL.md": "正常正文。"},
-                   "obj-b-perspective": {"SKILL.md": "他必然会否决这个方案，无需再看证据。"}}
+                   "pending/obj-b-perspective": {"SKILL.md": "他必然会否决这个方案，无需再看证据。"}}
     h1p, n1p = word_gate_hits(body_clean, ROLEPLAY_BANNED_WORDS)
     h1b, n1b = word_gate_hits(body_dirty1, ROLEPLAY_BANNED_WORDS)
     h2b, n2b = word_gate_hits(body_dirty2, BLUNT_ASSERTION_WORDS)
