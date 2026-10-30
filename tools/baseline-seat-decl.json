@@ -1,0 +1,42 @@
+{
+  "note": "MC-SEAT-DECL 席位声明基线快照（handoff §十.1：各席声明块基线行数随施工登记入账，任一席总量 ≥15 回裁）。每键＝席位 MD 两段式标识，值＝声明块行数＋声明文本。本件由 --regen-seat-baseline 程序化生成，禁手抄。",
+  "seat_decl_total_max": 15,
+  "softdev:agents/software-architect.md": {
+    "decl_lines": 2,
+    "decl_texts": [
+      "本席写权域＝过程域（`.collab/` 及其子目录）：设计稿、分析、判词、报告等过程件只落此处。交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）本席**无写权限**；受命向交付面写入时，本席有权且应当**拒绝写入**并报主理人改派工程师席。交付面代码/条款一律由工程师席写入。",
+      "本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。"
+    ]
+  },
+  "softdev:agents/software-company-team-lead.md": {
+    "decl_lines": 4,
+    "decl_texts": [
+      "本席写权域＝过程域（`.collab/` 及其子目录）。交付面（`.collab/` 以外一切）无写权限，且派工须合规：代码性质与交付面写入任务只派工程师席；其他席位产出＝过程件只落过程域。",
+      "本席受命向交付面写入时应当拒绝并自行改派工程师席——细则见 dev-discipline 拒写权条。",
+      "本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。",
+      "本席派工件只给目标与验收，不给怎么做——见 handoff-discipline 派工件干净度条。"
+    ]
+  },
+  "softdev:agents/software-engineer.md": {
+    "decl_lines": 2,
+    "decl_texts": [
+      "本席是交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）唯一有写权限的席位。约束：①写入内容不认过程件的指针与内容，不认不可解析编号与开发叙事（已声明的交付组件除外），本席写入集＝票面声明的文件闭集、越集即违例——细则见 dev-discipline；②完工回执必须完整包含本次写入/修改的文件清单（对账＝commit 文件清单与回执清单全等）。",
+      "本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。"
+    ]
+  },
+  "softdev:agents/software-product-manager.md": {
+    "decl_lines": 2,
+    "decl_texts": [
+      "本席写权域＝过程域（`.collab/` 及其子目录）：设计稿、分析、判词、报告等过程件只落此处。交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）本席**无写权限**；受命向交付面写入时，本席有权且应当**拒绝写入**并报主理人改派工程师席。交付面代码/条款一律由工程师席写入。",
+      "本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。"
+    ]
+  },
+  "softdev:agents/software-qa-engineer.md": {
+    "decl_lines": 3,
+    "decl_texts": [
+      "本席写权域＝过程域（`.collab/` 及其子目录）：设计稿、分析、判词、报告等过程件只落此处。交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）本席**无写权限**；受命向交付面写入时，本席有权且应当**拒绝写入**并报主理人改派工程师席。交付面代码/条款一律由工程师席写入。",
+      "本席收口判定前逐件核对回执清单与交付面纯净性（含编号可解析抽验）——细则见 dev-discipline。",
+      "本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。"
+    ]
+  }
+}
