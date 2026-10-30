@@ -21,7 +21,9 @@ S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空�
     contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
     adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）；
     specs/＝两输出规范表文件（ST-8 基面）；包 README.md（BW-6 基面）；
-    deliverables/products/＝active 生效池注册路径（ST-3 产物实例侧＋FC-6 基面）。
+    deliverables/products/＝active 生效池注册路径（FC-6 池计数基面＝池根直接条目）；
+    产物级扫描面（ST-3／BW-1／BW-2／BW-5(b) 消费）＝池根直接条目＋archive/ 一层下产物目录，
+    两口径分离：归档区条目入结构检与词表实扫、不计入池计数。
 
 退出码闭集（三值，无其他取值）：
     0 全绿（无 fail；PENDING_STAGE 不拉码）
@@ -231,6 +233,8 @@ _H2_SEC_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
 # ST-3 段头形态（归一化口径）：`<段名> [<段描述名>]`（裸段名与全形态两写法同判合法）。
 _SEG_HEAD_RE = re.compile(r"^([RIAB][12]?|E)(?:\s+(\S.*?))?\s*$")
 _PRODUCT_DIR_SUFFIXES = ("-perspective", "-technique", "-bundle")
+_PRODUCT_BODY_FILE = "SKILL.md"   # 产物本体件名：节结构 diff 只消费本体件（随件入词表面不入节 diff 面）
+_ARCHIVE_SUBDIR = "archive"       # 生效池根下归档区子目录（产物级扫描面扩一层；条目不计池计数）
 _FM_ROW_RE = re.compile(r"^FM-[SPM]-\d{2}$")
 _BOARD_NAME_RE = re.compile(r"^board-(\d{4})-(\d{2})-(\d{2})\.md$")
 _BACKTICK_TOKEN_RE = re.compile(r"`([^`\n]+)`")
@@ -720,7 +724,7 @@ def _active_pool_dir() -> str:
 
 
 def _product_entries() -> "list[tuple[str, str]]":
-    """active 池条目列表 (目录名, 路径)：目录名须落 `<对象名kebab>-<perspective|technique|bundle>`。"""
+    """active 池条目列表 (目录名, 路径)：仅生效池根直接条目——池计数口径（FC-6 消费）。"""
     pool = _active_pool_dir()
     if not os.path.isdir(pool):
         return []
@@ -730,6 +734,40 @@ def _product_entries() -> "list[tuple[str, str]]":
         if os.path.isdir(path) and name.endswith(_PRODUCT_DIR_SUFFIXES):
             out.append((name, path))
     return out
+
+
+def _product_scan_entries() -> "list[tuple[str, str]]":
+    """产物级扫描面枚举 (目录名, 路径)＝生效池根直接条目＋archive/ 一层下产物目录。
+
+    两口径分离：本枚举供产物级判据（ST-3 节结构／BW-1／BW-2／BW-5(b) 词表实扫）消费；
+    active 池计数（FC-6）只消费 `_product_entries()`（池根直接条目），归档区条目不计入池。
+    """
+    out = _product_entries()
+    archive_dir = os.path.join(_active_pool_dir(), _ARCHIVE_SUBDIR)
+    if os.path.isdir(archive_dir):
+        for name in sorted(os.listdir(archive_dir)):
+            path = os.path.join(archive_dir, name)
+            if os.path.isdir(path) and name.endswith(_PRODUCT_DIR_SUFFIXES):
+                out.append((name, path))
+    return out
+
+
+def _entry_texts(entries: "list[tuple[str, str]]") -> "dict[str, dict[str, str]]":
+    """扫描枚举 → 逐条目 {文件名: 文本} 映射（纯内存形态，词表实扫判据的自证样本可注入）。"""
+    return {name: _product_md_texts(path) for name, path in entries}
+
+
+def word_gate_hits(entry_texts: "dict[str, dict[str, str]]",
+                   banned: "tuple[str, ...]") -> "tuple[list[str], int]":
+    """词表门禁产物正文实跑位：逐条目逐正文件跑禁语命中，返回 (命中列表, 扫描件数)。空列表＝放。"""
+    hits: "list[str]" = []
+    scanned = 0
+    for name in sorted(entry_texts):
+        for fname in sorted(entry_texts[name]):
+            scanned += 1
+            for w in banned_phrase_hits(entry_texts[name][fname], banned):
+                hits.append("%s/%s:%s" % (name, fname, w))
+    return hits, scanned
 
 
 def _product_md_texts(dirpath: str) -> "dict[str, str]":
@@ -781,17 +819,20 @@ def st_2_three_kernel_files() -> "tuple[str, str]":
 def st_3_section_closed_diff() -> "tuple[str, str]":
     """ST-3 perspective 五层节／technique 六段卡＋五字段闭集 diff＝∅——〔S0a 建／S4 实装〕。
 
-    实装基面＝active 生效池注册路径（`deliverables/products/`）内全量产物文件：
+    实装基面＝产物级扫描面枚举（生效池根直接条目＋archive/ 一层下产物目录）内的产物本体件
+    （`SKILL.md`；随件件不入节结构 diff 面——节闭集只钉本体节形）：
     perspective 产物 H2 节名去空白归一后与五层闭集 diff＝∅；technique 产物节头按
     段名前缀归一化口径 diff＝∅（描述名改名＝咬）；卡体 json 块五字段闭集 ⊆ 检。
     无实例＝空扫描合法态判绿（FC-5/GS 同款），判据活性由 selftest 节闭集咬放配对实证。
     """
-    entries = _product_entries()
+    entries = _product_scan_entries()
     problems: "list[str]" = []
     checked = 0
     for name, path in entries:
         texts = _product_md_texts(path)
         for fname, text in texts.items():
+            if fname != _PRODUCT_BODY_FILE:
+                continue
             checked += 1
             if name.endswith("-perspective"):
                 heads = perspective_head_sections(text)
@@ -891,17 +932,36 @@ def st_7_method_ir_exclusion() -> "tuple[str, str]":
 
 
 def bw_1_roleplay_vocab() -> "tuple[str, str]":
-    """BW-1 角色扮演禁语词表本体落盘——〔S0a〕当期可执行（词表本体在场类）。"""
+    """BW-1 角色扮演禁语词表本体落盘＋产物正文实跑位——〔S0a〕词表本体在场类。
+
+    产物正文实跑位＝产物级扫描面枚举（生效池根＋archive/ 一层下产物目录）逐正文件禁语命中，
+    命中数＝0 才绿（词表消费接到产物枚举＝门禁实跑，无产物＝空扫描 0 命中平凡真）。
+    """
     ok = vocab_body_present(ROLEPLAY_BANNED_WORDS)
-    return (READ_PASS if ok else READ_FAIL, "词表条目 %d" % len(ROLEPLAY_BANNED_WORDS))
+    if not ok:
+        return (READ_FAIL, "词表本体不在场/条目格式非法（条目 %d）" % len(ROLEPLAY_BANNED_WORDS))
+    hits, scanned = word_gate_hits(_entry_texts(_product_scan_entries()), ROLEPLAY_BANNED_WORDS)
+    if hits:
+        return (READ_FAIL, "产物正文角色扮演禁语命中%s（产物违规·风险档跳档复核）" % hits)
+    return (READ_PASS, "词表条目 %d·产物正文实跑命中=0（扫描 %d 件）" % (len(ROLEPLAY_BANNED_WORDS), scanned))
 
 
 def bw_2_blunt_vocab_tiers() -> "tuple[str, str]":
-    """BW-2 无据斩钉截铁词表＋四档口径标注位——〔S0a〕当期可执行（词表本体在场类）。"""
+    """BW-2 无据斩钉截铁词表＋四档口径标注位＋产物正文实跑位——〔S0a〕词表本体在场类。
+
+    产物正文实跑位同 BW-1（同一扫描面枚举，触发词命中数＝0 才绿）。
+    """
     ok = (vocab_body_present(BLUNT_ASSERTION_WORDS)
           and len(set(ABSTAIN_TIERS)) == 4
           and vocab_body_present(ABSTAIN_TIERS))
-    return (READ_PASS if ok else READ_FAIL, "触发词 %d·档位 %d" % (len(BLUNT_ASSERTION_WORDS), len(ABSTAIN_TIERS)))
+    if not ok:
+        return (READ_FAIL, "词表或四档标注位不在场（触发词 %d·档位 %d）"
+                % (len(BLUNT_ASSERTION_WORDS), len(ABSTAIN_TIERS)))
+    hits, scanned = word_gate_hits(_entry_texts(_product_scan_entries()), BLUNT_ASSERTION_WORDS)
+    if hits:
+        return (READ_FAIL, "产物正文无据斩钉截铁触发命中%s（应落弃权四档其一）" % hits)
+    return (READ_PASS, "触发词 %d·档位 %d·产物正文实跑命中=0（扫描 %d 件）"
+            % (len(BLUNT_ASSERTION_WORDS), len(ABSTAIN_TIERS), scanned))
 
 
 def bw_3_bare_number_rule() -> "tuple[str, str]":
@@ -1180,7 +1240,7 @@ def bw_5_contradiction_smoothing() -> "tuple[str, str]":
     (a) 声明面：`adapters/person.md` 含「内部矛盾不平滑」条款行＋「矛盾是深度的重要信号」
         措辞行在场（当期可绿）；
     (b) 产物面：平滑句式启发式预注册词表本体在场（BW-1/BW-2 同制）＋perspective 产物正文
-        命中＝坏信号④咬（active 池产物实例扫描，无实例＝空扫描合法态）。
+        命中＝坏信号④咬（产物级扫描面枚举＝生效池根＋archive/ 一层下产物目录，无实例＝空扫描合法态）。
     """
     ok_vocab = vocab_body_present(SMOOTH_PHRASE_VOCAB) and len(set(SMOOTH_PHRASE_VOCAB)) == 4
     texts = _adapter_texts()
@@ -1193,7 +1253,7 @@ def bw_5_contradiction_smoothing() -> "tuple[str, str]":
         return (READ_FAIL, "平滑句式词表本体不在场/基数越线（应＝4 值预注册）")
     hits: "list[str]" = []
     scanned = 0
-    for name, path in _product_entries():
+    for name, path in _product_scan_entries():
         if not name.endswith(("-perspective", "-bundle")):
             continue
         for fname, text in _product_md_texts(path).items():
@@ -1566,6 +1626,23 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("BW5b_vocab_pass", vocab_body_present(SMOOTH_PHRASE_VOCAB) and len(set(SMOOTH_PHRASE_VOCAB)) == 4, True))
     cases.append(("BW5b_bite_hit", blunt_hits("该人物思想毫无矛盾、自洽无冲突。", SMOOTH_PHRASE_VOCAB) != [], True))
     cases.append(("BW5b_pass_nohit", blunt_hits("其早期与晚期立场存在张力，按原样入档。", SMOOTH_PHRASE_VOCAB) == [], True))
+
+    # 产物正文门禁实跑位（BW-1/BW-2 词表消费接产物枚举）：合成条目正文 放／咬 配对
+    body_clean = {"obj-a-perspective": {"SKILL.md": "他用这套框架分析决策；证据不足维度写证据不足。",
+                                        "registration.md": "注册记录：语料门槛登记。"},
+                  "obj-b-perspective": {"SKILL.md": "其立场张力按原样入档，来源态逐条标注。"}}
+    body_dirty1 = {"obj-a-perspective": {"SKILL.md": "接下来我以他的名义作答，给出结论。"},
+                   "obj-b-perspective": {"SKILL.md": "正常正文。"}}
+    body_dirty2 = {"obj-a-perspective": {"SKILL.md": "正常正文。"},
+                   "obj-b-perspective": {"SKILL.md": "他必然会否决这个方案，无需再看证据。"}}
+    h1p, n1p = word_gate_hits(body_clean, ROLEPLAY_BANNED_WORDS)
+    h1b, n1b = word_gate_hits(body_dirty1, ROLEPLAY_BANNED_WORDS)
+    h2b, n2b = word_gate_hits(body_dirty2, BLUNT_ASSERTION_WORDS)
+    cases.append(("BW1body_pass", h1p == [], True))
+    cases.append(("BW1body_bite", h1b != [], True))
+    cases.append(("BW2body_pass", word_gate_hits(body_clean, BLUNT_ASSERTION_WORDS)[0] == [], True))
+    cases.append(("BW2body_bite", h2b != [], True))
+    cases.append(("BODY_scan_count", n1p == 3 and n1b == 2 and n2b == 2, True))
 
     # BW-6 README 置顶：置顶齐备放／表在 H2 后咬／缺声明行咬／缺行名咬／声明重复咬
     bw6_good = ("# t\n\n| 维度 | fuxi-skill | nuwa-skill | cangjie-skill |\n|---|---|---|---|\n"
