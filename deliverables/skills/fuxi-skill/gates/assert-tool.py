@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """fuxi-skill 结构层门禁断言工具（机械断言，不依赖人工校准）。S0a 建骨架，S1 实装共享内核 L0 执行位，S2 实装 adapter 互斥＋FC-5。
 
-断言目录＝同目录 `assertion-catalog.md`（25 项：ST-1..8／BW-1..6／FC-1..6／GS-1..5）。
+断言目录＝同目录 `assertion-catalog.md`（26 项：ST-1..9／BW-1..6／FC-1..6／GS-1..5）。
 本件与目录一一对应：每项目录断言有对应函数（当期可执行项＝实装；
 〔Sx 执行〕项＝桩＋显式 PENDING_STAGE 读数，不算 fail 不算 pass，汇总单列）。
 
@@ -17,6 +17,7 @@ S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/
 S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空扫描合法态＋段名前缀归一化口径）
     ＋新增 ST-8／BW-5／BW-6／FC-6／GS-5（两规范表文件节闭集＋矛盾平滑检出＋README 置顶判据
     ＋active 池人工确认存在＋门禁不退化基线对照）。
+T11 实装位：ST-9（产物条目 registration 随件四节节闭集 diff＝∅·classifier §二 注册落点行机械化）。
 S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位；无元组＝PENDING_STAGE
     「S0b 元组未交付」如实态；在场＝逐元组挂接既有纯函数 calibration_consistent() 对账，
     判据本体零改动；κ 达标线常量 KAPPA_THRESHOLD 注册于本件供 s0b-kappa.py import 不复制）。
@@ -37,7 +38,7 @@ S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位
 同输入连跑两次退出码与逐项读数全等。
 
 用法：
-    python assert-tool.py            # 仓内执行模式：跑 25 项，当期实装项出读数，余者 PENDING_STAGE
+    python assert-tool.py            # 仓内执行模式：跑 26 项，当期实装项出读数，余者 PENDING_STAGE
     python assert-tool.py selftest   # 自证模式：内存构造正负样本，逐类断言「能咬能放」
 """
 
@@ -120,6 +121,12 @@ SPEC_KEY_REFS = {
     "technique-spec": ("AC-2", "VA-S-01"),
 }
 
+# ST-9 registration 随件四节节闭集（T11 建·注册常量单源＝classifier §二 注册落点行四值逐字，
+# 不复制第二份词表；catalog 侧引用同文本）。随件必在场＝classifier「随件」声明＋池 README 条目清单行。
+REGISTRATION_FILE_NAME = "registration.md"
+REGISTRATION_SECTION_CLOSEDSET = ("注册三元组", "分类器四问决策记录",
+                                  "采集与蒸馏声明（六节规程逐节执行读数）", "语料门槛登记（EG-6）")
+
 # BW-5 矛盾平滑检出（S4 建·坏信号④机械位）：(a) person adapter 防编护栏节条款声明行；
 # (b) 平滑句式启发式预注册词表本体（随批锁定值；中途变更走门禁面重交付程序，BW-1/BW-2 同制）。
 PERSON_CONTRADICTION_DECL_ROWS = ("内部矛盾不平滑", "矛盾是深度的重要信号")
@@ -139,7 +146,7 @@ POOL_CONFIRM_FIELDS = ("产物id", "人工确认引用", "提案件引用", "版
 # GS-5 门禁不退化基线（S4 建·坏信号③机械位）：三组注册位对基线只增不减，任一缩水＝咬。
 VALIDATOR_LAYER_NAMES = ("机械断言", "三臂对照", "诱饵测试", "留出集", "泄漏检查", "边缘诚实度",
                          "格式检查表", "盲评rubric", "绝对线", "decoy", "人工锚点卡")
-GS5_BASELINE = {"层名基数": 11, "person白名单基数": 6, "method白名单基数": 6, "断言编号基数": 25}
+GS5_BASELINE = {"层名基数": 11, "person白名单基数": 6, "method白名单基数": 6, "断言编号基数": 26}
 
 # 契约文件节闭集（EG 六节／FM 五节／AC 五节；多节/缺节/改名＝diff 非空即 fail）。
 EG_SECTIONS = ("适用范围", "三级标注", "来源三态", "三问可答口径", "候选单元记录", "语料门槛登记")
@@ -702,6 +709,11 @@ def spec_sections(text: str) -> "tuple[str, ...]":
     return tuple(m.group(1) for m in _H2_SEC_RE.finditer(text))
 
 
+def registration_head_sections(text: str) -> "tuple[str, ...]":
+    """ST-9：抽 registration 随件 H2 节名并去空白归一（同 ST-3 perspective 侧口径，防连写/带空格两形态误咬）。"""
+    return tuple(re.sub(r"\s+", "", m.group(1)) for m in _H2_SEC_RE.finditer(text))
+
+
 def spec_missing_key_refs(text: str, refs: "tuple[str, ...]") -> "list[str]":
     """ST-8 关键引用行在场：逐引用串扫描，返回缺失列表（空＝放）。"""
     return [r for r in refs if r not in text]
@@ -826,8 +838,8 @@ def _product_md_texts(dirpath: str) -> "dict[str, str]":
 
 
 # ============================================================
-# 25 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；
-# S3 实装：GS-1/GS-2/GS-3；S4 实装：ST-3/ST-8/BW-5/BW-6/FC-6/GS-5；余者桩）
+# 26 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；
+# S3 实装：GS-1/GS-2/GS-3；S4 实装：ST-3/ST-8/BW-5/BW-6/FC-6/GS-5；T11 实装：ST-9；余者桩）
 # ============================================================
 
 def st_1_contract_file() -> "tuple[str, str]":
@@ -1411,6 +1423,48 @@ def st_8_spec_tables_closed() -> "tuple[str, str]":
     return (READ_PASS, "两规范表在场·四节闭集 diff=∅·关键引用行（AC-1/总则声明行/AC-2/VA-S-01）在场")
 
 
+def registration_problems(name: str, texts: "dict[str, str]") -> "list[str]":
+    """ST-9 单条目判据纯函数：registration 随件在场＋四节节闭集 diff；返回问题列表（空＝放）。
+
+    随件缺失＝fail（classifier §二 注册落点行「随件」声明＋池约定件暂存区条目清单行随件三件套）；
+    节 diff 非空（缺节／改名／多出节）＝fail 列明细——四节＝内容闭集，非「至少四节」。
+    """
+    if REGISTRATION_FILE_NAME not in texts:
+        return ["%s 缺随件 %s（注册记录实体落点＝条目目录根，随件必在场）"
+                % (name, REGISTRATION_FILE_NAME)]
+    extra, missing = section_diff(
+        registration_head_sections(texts[REGISTRATION_FILE_NAME]), REGISTRATION_SECTION_CLOSEDSET)
+    if extra or missing:
+        return ["%s 四节节diff 多出%s 缺失%s" % (name, sorted(extra) or "∅", sorted(missing) or "∅")]
+    return []
+
+
+def registrations_problems(entry_texts: "dict[str, dict[str, str]]") -> "list[str]":
+    """ST-9 扫描面判据纯函数：逐条目（键序稳定）跑 registration_problems，汇总问题列表（空＝放）。"""
+    problems: "list[str]" = []
+    for name in sorted(entry_texts):
+        problems.extend(registration_problems(name, entry_texts[name]))
+    return problems
+
+
+def st_9_registration_section_diff() -> "tuple[str, str]":
+    """ST-9 registration 随件四节节闭集 diff＝∅——〔S4 建／T11 实装〕。
+
+    实装基面＝`_product_scan_entries()` 既有产物级扫描面枚举（生效池根直接条目＋pending/ 一层；
+    archive 免检自动继承）；逐条目消费 `registration.md` 随件，H2 节名集（去空白归一＝ST-3
+    perspective 侧同款口径）对 `REGISTRATION_SECTION_CLOSEDSET` 四节注册闭集 diff＝∅。
+    三态：扫描面空＝空扫描合法态判绿（FC-5/GS/ST-3 同款口径）；缺随件＝fail；
+    节 diff 非空（含多节）＝fail 列明细；全等＝PASS（读数含条目数）。
+    """
+    entries = _product_scan_entries()
+    problems = registrations_problems(_entry_texts(entries))
+    if problems:
+        return (READ_FAIL, "registration 随件违例：%s" % "；".join(problems))
+    if not entries:
+        return (READ_PASS, "产物级扫描面 0 条目·空扫描合法态（FC-5/GS/ST-3 同款口径）")
+    return (READ_PASS, "产物实例 registration 随件 %d 条目·节闭集 diff=∅" % len(entries))
+
+
 def bw_5_contradiction_smoothing() -> "tuple[str, str]":
     """BW-5 矛盾平滑检出（坏信号④机械位）——〔S4 建／S4 实装〕。
 
@@ -1488,7 +1542,7 @@ def gs_5_gate_non_regression() -> "tuple[str, str]":
     """GS-5 门禁不退化断言（坏信号③机械位）——〔S4 建／S4 实装〕。
 
     三组注册位对基线只增不减：validator 层名注册闭集（11 值）／两 gate_source 白名单
-    （各六值）／断言编号基数（25 项）；机械断言层名（`机械断言`／`格式检查表`）在各自
+    （各六值）／断言编号基数（26 项）；机械断言层名（`机械断言`／`格式检查表`）在各自
     白名单在场。任一缩水＝咬。声明↔代码双向 diff＝validator-catalog §二 层名值注册
     与本注册常量互检（FC-1 同款手法）。
     """
@@ -1533,6 +1587,7 @@ ASSERTIONS: "list[tuple[str, str]]" = [
     ("ST-6", "st_6_person_ir_exclusion"),
     ("ST-7", "st_7_method_ir_exclusion"),
     ("ST-8", "st_8_spec_tables_closed"),
+    ("ST-9", "st_9_registration_section_diff"),
     ("BW-1", "bw_1_roleplay_vocab"),
     ("BW-2", "bw_2_blunt_vocab_tiers"),
     ("BW-3", "bw_3_bare_number_rule"),
@@ -1892,6 +1947,26 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("FC3P_bite_noloc", product_element_pair_hits(el_noloc)[0] != [], True))
     cases.append(("FC3P_sentinel_pass", product_element_pair_hits(el_sentinel)[0] == [], True))
     cases.append(("FC3P_empty_pass", product_element_pair_hits(el_nonelem) == ([], 0), True))
+
+    # ===== T11 批配对咬放（FUXI-T11：ST-9 registration 随件四节节闭集·内存注入不落仓） =====
+    # 四节全等放／节头改名咬／缺文件咬／空扫描放
+    reg_good = {"obj-a-perspective": {
+        "SKILL.md": "本体件正文。",
+        "registration.md": ("# reg\n\n## 注册三元组\nx\n## 分类器四问决策记录\nx\n"
+                            "## 采集与蒸馏声明（六节规程逐节执行读数）\nx\n## 语料门槛登记（EG-6）\nx")}}
+    reg_rename = {"obj-a-perspective": {
+        "registration.md": ("# reg\n\n## 注册三元组\nx\n## 分类器四问决策记录\nx\n"
+                            "## 采集与蒸馏声明（六节执行读数）\nx\n## 语料门槛登记（EG-6）\nx")}}
+    reg_missing = {"obj-a-perspective": {"SKILL.md": "本体件正文。无注册随件。"}}
+    reg_extra = {"obj-a-perspective": {
+        "registration.md": ("# reg\n\n## 注册三元组\nx\n## 分类器四问决策记录\nx\n"
+                            "## 采集与蒸馏声明（六节规程逐节执行读数）\nx\n## 语料门槛登记（EG-6）\nx\n## 自造第五节\nx")}}
+    cases.append(("ST9I_pass", registrations_problems(reg_good) == [], True))
+    cases.append(("ST9I_bite_rename", registrations_problems(reg_rename) != [], True))
+    cases.append(("ST9I_bite_missing", registrations_problems(reg_missing) != [], True))
+    cases.append(("ST9I_empty_scan_pass", registrations_problems({}) == [], True))
+    cases.append(("ST9I_bite_extra_section", registrations_problems(reg_extra) != [], True))
+    cases.append(("ST9I_closedset_4", len(set(REGISTRATION_SECTION_CLOSEDSET)) == 4, True))
 
     return cases
 
