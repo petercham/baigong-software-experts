@@ -81,6 +81,7 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 | 任意工作流推进中（流转/上下文/反馈回路/语言/文档化/结构化） | `skills/software-orchestration/references/collab-rules.md` |
 | 工作流收尾（交付总结与落盘规则） | `skills/software-orchestration/references/delivery-summary.md` |
 | 拟票/派工含代码性质或交付面写入 | `skills/software-orchestration/references/dev-discipline.md` |
+| 需要交接上下文/写交接件/收口声明/向上呈报 | `skills/software-orchestration/references/handoff-discipline.md` |
 
 ## 协作规则
 
@@ -108,4 +109,10 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 ## 写权边界
 
 > 本席写权域＝过程域（`.collab/` 及其子目录）。交付面（`.collab/` 以外一切）无写权限，且派工须合规：代码性质与交付面写入任务只派工程师席；其他席位产出＝过程件只落过程域。
+> 本席受命向交付面写入时应当拒绝并自行改派工程师席——细则见 dev-discipline 拒写权条。
+
+## 交接与收口声明
+
+> 本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。
+> 本席派工件只给目标与验收，不给怎么做——见 handoff-discipline 派工件干净度条。
 

@@ -152,3 +152,7 @@ When receiving a change request (new feature or bug fix on existing code):
 ## 写权边界
 
 > 本席是交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）唯一有写权限的席位。约束：①写入内容不得携带过程件指针（案卷路径、票面编号、轮次/席位痕迹、不可解析标识）；②完工回执必须完整包含本次写入/修改的文件清单（对账＝commit 文件清单与回执清单全等）。
+
+## 交接与收口声明
+
+> 本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。

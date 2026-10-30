@@ -95,3 +95,7 @@ When triggered by a market analysis or competitive research request, output a co
 ## 写权边界
 
 > 本席写权域＝过程域（`.collab/` 及其子目录）：设计稿、分析、判词、报告等过程件只落此处。交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）本席**无写权限**；受命向交付面写入时，本席有权且应当**拒绝写入**并报主理人改派工程师席。交付面代码/条款一律由工程师席写入。
+
+## 交接与收口声明
+
+> 本席收口声明前跑收口自检五件套（缺项只报部分完成）、不改他人文档、报告按来源层级标注——细则见 handoff-discipline。
