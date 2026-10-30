@@ -91,14 +91,18 @@ ANNOTATION_RE = re.compile(r"[「（(\[、，,；;：:].*$")
 # 外部仓注明串（D6 裁-21 划界：外部仓引用**应在文中注明**，注明者不入悬空判定）。
 EXTERNAL_MARK = "外部仓"
 
-# 这三种写法**语法上就不是仓内相对路径**，不参与悬空判定（与 SKIP_* 同类的形态判定，
+# 这四种写法**语法上就不是仓内相对路径**，不参与悬空判定（与 SKIP_* 同类的形态判定，
 # 不是"猜它是不是外部项目"的语义判断——语义判断脚本无权做，见 60-gates.md §〇 铁律 1）：
 #   `~/.claude/settings.json`            家目录路径，天然在仓外
 #   `raw.githubusercontent.com/a/b/c.md` 带域名的 URL（首段含点且像域名）
 #   `pingcap/tidb@master:PLANS.md`       git 引用（`repo@ref:path`）
+#   `https://example.com/a/b/`           scheme 前缀 URL（带 `://`，`https:` 段含冒号不匹配 URL_PATH_RE）
 HOME_PATH_RE = re.compile(r"^~(/|$)")
 URL_PATH_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9.-]*\.[A-Za-z]{2,}/")
 GIT_REF_RE = re.compile(r"@")
+# scheme 前缀 URL（T9 复跑实证漏网形态：`https://…/` 带尾斜杠曾误入目录路径放行分支）。
+# 与 HOME_PATH_RE/URL_PATH_RE/GIT_REF_RE 同族＝语法形态判定，非语义判断（铁律 1）。
+SCHEME_PREFIXES = ("http://", "https://", "ftp://")
 
 
 def die_usage(msg: str) -> "None":
@@ -127,6 +131,8 @@ def looks_like_path(token: str) -> bool:
     if not tok or tok in SKIP_EXACT:
         return False
     if tok.startswith("#") or tok.startswith("@"):
+        return False
+    if tok.startswith(SCHEME_PREFIXES):
         return False
     if tok.endswith(":"):
         return False
