@@ -2,7 +2,7 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.10",
+    "version": "0.1.11",
     "repo": ".",
     "path": "workbuddy/baigong-software-team",
     "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）"
