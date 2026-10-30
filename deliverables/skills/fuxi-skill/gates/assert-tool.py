@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""fuxi-skill 结构层门禁断言工具（机械断言，不依赖人工校准）。S0a 建骨架，S1 实装共享内核 L0 执行位。
+"""fuxi-skill 结构层门禁断言工具（机械断言，不依赖人工校准）。S0a 建骨架，S1 实装共享内核 L0 执行位，S2 实装 adapter 互斥＋FC-5。
 
-断言目录＝同目录 `assertion-catalog.md`（18 项：ST-1..5／BW-1..4／FC-1..5／GS-1..4）。
+断言目录＝同目录 `assertion-catalog.md`（20 项：ST-1..7／BW-1..4／FC-1..5／GS-1..4）。
 本件与目录一一对应：每项目录断言有对应函数（当期可执行项＝实装；
 〔Sx 执行〕项＝桩＋显式 PENDING_STAGE 读数，不算 fail 不算 pass，汇总单列）。
 
 S1 实装位（共享内核 L0 落盘后）：ST-1／ST-2／ST-5／FC-1／FC-2／FC-3／FC-4。
+S2 实装位：ST-6／ST-7（两 adapter 互斥 IR 字段互检）＋FC-5（bundle 两层命名空间互借检出）
+    ＋FC-4 黄-2 收口扩展（看板实例正文状态 token 扫描＋AC-5 词表声明句私扩扫描）。
 判据基面（固定路径静态定位，契约与工具互不嵌套）：
-    contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）。
+    contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
+    adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）。
 
 退出码闭集（三值，无其他取值）：
     0 全绿（无 fail；PENDING_STAGE 不拉码）
@@ -19,7 +22,7 @@ S1 实装位（共享内核 L0 落盘后）：ST-1／ST-2／ST-5／FC-1／FC-2�
 同输入连跑两次退出码与逐项读数全等。
 
 用法：
-    python assert-tool.py            # 仓内执行模式：跑 18 项，当期实装项出读数，余者 PENDING_STAGE
+    python assert-tool.py            # 仓内执行模式：跑 20 项，当期实装项出读数，余者 PENDING_STAGE
     python assert-tool.py selftest   # 自证模式：内存构造正负样本，逐类断言「能咬能放」
 """
 
@@ -124,6 +127,15 @@ STATE_WORDS = ("needs_review", "active", "归档区", "待校准", "未验")
 BOARD_COLUMNS = ("本轮改动", "触发的坏信号", "人工闸结论")
 BOARD_HEADER_DECL = "性质＝记录件·人工触发填写·非控制器"
 BOARD_PERIOD_MAX_DAYS = 14  # 相邻板文件名日期间隔上限（周期兜底，AC-5 定稿值）
+# 黄-2 收口（S2）：状态 token 扫描两扫描位——①看板正文含「状态」关键词行的反引号 token；
+# ②契约 AC-5 词表声明句（含「基线闭集」短语行）反引号 token。两路 token 均须 ⊆ 状态词表闭集。
+BOARD_STATE_LINE_KEY = "状态"
+VOCAB_LINE_KEY = "基线闭集"
+
+# ST-6／ST-7（S2 建）：两 adapter 互斥 IR 字段互检——
+# person.md 禁 technique 轨 IR 段名字样；method.md 禁 persona 轨 IR 节名字样。
+PERSON_FORBIDDEN_IR_TERMS = ("执行步骤",)
+METHOD_FORBIDDEN_IR_TERMS = ("表达DNA", "表达 DNA")
 
 # GS-1/GS-2 gate_source 白名单（person 软门类／method 硬门类；互斥＝双向断言基面）。
 PERSON_GATE_WHITELIST = ("盲评rubric", "绝对线", "decoy", "泄漏检查", "人工锚点卡")
@@ -131,6 +143,9 @@ METHOD_GATE_WHITELIST = ("机械断言", "三臂对照", "诱饵测试", "留出
 
 # 共享内核三文件名（ST-2 对象；S1 落点＝contracts/ 子目录）。
 KERNEL_THREE_FILES = ("evidence-grading", "failure-modes", "artifact-contract")
+
+# S2 adapter 面三文件名（ST-6／ST-7 对象；落点＝adapters/ 子目录）。
+ADAPTER_FILES = ("person", "method", "classifier")
 
 # FM 条目纪律参数（五元组表结构＋分流语义）。
 FM_PREFIX_TRACK = {"S": "共享", "P": "person", "M": "method"}
@@ -160,6 +175,7 @@ _JSON_FENCE_RE = re.compile(r"```json[ \t]*\n(.*?)\n```", re.S)
 _SECTION_RE = re.compile(r"^##\s+(EG|FM|AC)-\d+\s+(.+?)\s*$", re.M)
 _FM_ROW_RE = re.compile(r"^FM-[SPM]-\d{2}$")
 _BOARD_NAME_RE = re.compile(r"^board-(\d{4})-(\d{2})-(\d{2})\.md$")
+_BACKTICK_TOKEN_RE = re.compile(r"`([^`\n]+)`")
 
 _PERCENT_RE = re.compile(r"\d+(?:\.\d+)?\s*%")
 _NUMBER_METRIC_RE = re.compile(r"(?:通过率|一致率|占比)[^\d]{0,8}\d+(?:\.\d+)?")
@@ -429,6 +445,48 @@ def ns_borrow_hits(bundle: "dict[str, dict[str, str]]") -> "list[str]":
     return hits
 
 
+def bundle_layers(record: "dict") -> "bool":
+    """bundle 实例记录识别：json 块顶层同时含 persona／technique 两键＝bundle 两层实例。"""
+    return "persona" in record and "technique" in record
+
+
+def state_token_scan(text: str, line_key: str, allowed: "tuple[str, ...]", exact: bool) -> "list[str]":
+    """黄-2 收口（S2）：状态 token 扫描（确定性行粒度）。
+
+    只扫含 line_key 关键词的行，取行内反引号 token（路径形态 token——含
+    `/`、`\\`、`:` 或 `.md`/`.py` 后缀者＝指针非状态词，不入扫描）：
+    - exact=False（看板正文侧）：token 须 ⊆ 状态词表 ∪ 字段注册表 ∪ 看板三栏名（豁免面），
+      越集 token＝词表私扩，逐行检出。
+    - exact=True（契约词表声明句侧）：token 集合须与状态词表全集逐字全等（多一值少一值都检出）。
+    """
+    allowed_set = set(allowed)
+    exempt = allowed_set | set(KERNEL_FIELD_REGISTRY) | set(BOARD_COLUMNS)
+    hits: "list[str]" = []
+    for lineno, line in enumerate(text.split("\n"), 1):
+        if line_key not in line:
+            continue
+        tokens = {t for t in _BACKTICK_TOKEN_RE.findall(line)
+                  if not any(ch in t for ch in "/\\:") and not t.endswith((".md", ".py"))}
+        if not tokens:
+            continue
+        if exact:
+            extra = tokens - allowed_set
+            missing = allowed_set - tokens
+            if extra or missing:
+                hits.append("line%d 词表句 diff 多出%s 缺失%s"
+                            % (lineno, sorted(extra) or "∅", sorted(missing) or "∅"))
+        else:
+            extra = tokens - exempt
+            if extra:
+                hits.append("line%d 状态token越词表%s" % (lineno, sorted(extra)))
+    return hits
+
+
+def ir_term_hits(text: str, forbidden: "tuple[str, ...]") -> "list[str]":
+    """ST-6／ST-7 互斥 IR 字段字样命中计数（每字样命中数，空列表＝零命中＝放）。"""
+    return [t for t in forbidden if t in text]
+
+
 def gate_source_hits(track: str, gate_source: str) -> "list[str]":
     """GS-1/GS-2 轨白名单命中：返回越轨判据命中列表（空＝放）。
 
@@ -486,8 +544,19 @@ def _all_blocks(texts: "dict[str, str]") -> "tuple[list[dict], int]":
     return blocks, bad
 
 
+def _adapter_texts() -> "dict[str, str]":
+    """读 adapters/ 面件文本（S2 结构断言基面；缺键＝缺文件）。"""
+    texts: "dict[str, str]" = {}
+    adapters_dir = os.path.join(_SKILL_ROOT, "adapters")
+    for name in ADAPTER_FILES:
+        path = os.path.join(adapters_dir, name + ".md")
+        if os.path.isfile(path):
+            texts["adapter-" + name] = _read_text(path)
+    return texts
+
+
 # ============================================================
-# 18 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；余者桩）
+# 20 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；余者桩）
 # ============================================================
 
 def st_1_contract_file() -> "tuple[str, str]":
@@ -572,6 +641,28 @@ def st_5_rejected_coverage() -> "tuple[str, str]":
     if problems:
         return (READ_FAIL, "；".join(problems))
     return (READ_PASS, "批次 %d·审计件 %d·条目 %d（空 listing 合法）" % (len(batches), audited, entries_checked))
+
+
+def st_6_person_ir_exclusion() -> "tuple[str, str]":
+    """ST-6 person adapter 无 technique 轨 IR 段名（「执行步骤」段字样命中＝0）——〔S2 建／S2 实装〕。"""
+    texts = _adapter_texts()
+    if "adapter-person" not in texts:
+        return (READ_FAIL, "adapters/person.md 缺失（无互检基面）")
+    hits = ir_term_hits(texts["adapter-person"], PERSON_FORBIDDEN_IR_TERMS)
+    if hits:
+        return (READ_FAIL, "person 面命中 technique 轨 IR 段名%s（IR 串味·坏信号①）" % hits)
+    return (READ_PASS, "person 面无「执行步骤」段字样·命中=0")
+
+
+def st_7_method_ir_exclusion() -> "tuple[str, str]":
+    """ST-7 method adapter 无 persona 轨 IR 节名（「表达 DNA」段字样命中＝0）——〔S2 建／S2 实装〕。"""
+    texts = _adapter_texts()
+    if "adapter-method" not in texts:
+        return (READ_FAIL, "adapters/method.md 缺失（无互检基面）")
+    hits = ir_term_hits(texts["adapter-method"], METHOD_FORBIDDEN_IR_TERMS)
+    if hits:
+        return (READ_FAIL, "method 面命中 persona 轨 IR 节名%s（IR 串味·坏信号①）" % hits)
+    return (READ_PASS, "method 面无「表达 DNA」段字样·命中=0")
 
 
 def bw_1_roleplay_vocab() -> "tuple[str, str]":
@@ -672,10 +763,12 @@ def fc_3_paired_source_location() -> "tuple[str, str]":
 
 
 def fc_4_state_vocab_board() -> "tuple[str, str]":
-    """FC-4 状态词表取值闭集＋看板三栏字段名闭集——〔S0a 建／S1 实装〕。
+    """FC-4 状态词表取值闭集＋看板三栏字段名闭集——〔S0a 建／S1 实装／S2 黄-2 收口扩展〕。
 
     词表本体在场（不扩＝五值闭集锁定）＋看板契约节声明行在 AC-5 节＋
-    看板实例（如在场）三栏标题∈注册三栏、性质声明行在场、相邻板日期间隔 ≤14 天。
+    看板实例（如在场）三栏标题∈注册三栏、性质声明行在场、相邻板日期间隔 ≤14 天＋
+    黄-2 收口两扫描：看板正文「状态」关键词行反引号 token ⊆ 词表∪字段注册表（私扩必咬）；
+    AC-5「基线闭集」声明句反引号 token 与词表全集逐字全等（私扩/缺值必咬）。
     """
     ok_vocab = vocab_body_present(STATE_WORDS) and len(set(STATE_WORDS)) == 5
     texts = _contract_texts()
@@ -684,17 +777,45 @@ def fc_4_state_vocab_board() -> "tuple[str, str]":
     header_ok = BOARD_HEADER_DECL in ac_text
     if not (ok_vocab and decl_in_ac5 and header_ok):
         return (READ_FAIL, "词表在场=%s 三栏声明在AC-5=%s 性质声明行=%s" % (ok_vocab, decl_in_ac5, header_ok))
+    vocab_hits = state_token_scan(ac_text, VOCAB_LINE_KEY, STATE_WORDS, exact=True)
+    if vocab_hits:
+        return (READ_FAIL, "AC-5 词表声明句私扩/缺值：%s" % "；".join(vocab_hits))
     repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
     board_dir = os.path.normpath(os.path.join(repo_root, ".collab", "board"))
     ok_board, detail = board_files_ok(board_dir)
     if not ok_board:
         return (READ_FAIL, detail)
-    return (READ_PASS, "词表五值·三栏名声明 AC-5·%s" % detail)
+    token_hits: "list[str]" = []
+    if os.path.isdir(board_dir):
+        for name in sorted(n for n in os.listdir(board_dir) if _BOARD_NAME_RE.match(n)):
+            body = _read_text(os.path.join(board_dir, name))
+            token_hits.extend("%s:%s" % (name, h)
+                              for h in state_token_scan(body, BOARD_STATE_LINE_KEY, STATE_WORDS, exact=False))
+    if token_hits:
+        return (READ_FAIL, "看板正文状态token越词表：%s" % "；".join(token_hits))
+    return (READ_PASS, "词表五值·三栏名声明 AC-5·词表声明句逐字全等·%s·看板状态token扫描判绿" % detail)
 
 
 def fc_5_bundle_ns_isolation() -> "tuple[str, str]":
-    """FC-5 bundle 两层验证状态命名空间隔离互借检出＝0——〔S0a 建／S2 执行〕。"""
-    return (READ_PENDING, "S2")
+    """FC-5 bundle 两层验证状态命名空间隔离互借检出＝0——〔S0a 建／S2 实装〕。
+
+    扫描基面＝contracts/＋adapters/ 全部 json 块中的 bundle 实例记录
+    （顶层同时含 persona／technique 两键）；逐条跑互借检出，全量命中数＝0 才算过。
+    当期无 bundle 实例＝空扫描合法态（互借检出 0），配对咬放交 selftest 实证判据活性。
+    """
+    texts = _contract_texts()
+    texts.update(_adapter_texts())
+    blocks, bad = _all_blocks(texts)
+    if bad:
+        return (READ_FAIL, "json 块解析失败 %d 处" % bad)
+    bundles = [b for b in blocks if bundle_layers(b)]
+    hits: "list[str]" = []
+    for rec in bundles:
+        hits.extend(ns_borrow_hits({"persona": rec.get("persona", {}),
+                                    "technique": rec.get("technique", {})}))
+    if hits:
+        return (READ_FAIL, "跨层互借字段检出%s（应＝0）" % hits)
+    return (READ_PASS, "bundle 实例 %d 条·命名空间互借检出=0（配对咬放实证见 selftest）" % len(bundles))
 
 
 def gs_1_person_gate_source() -> "tuple[str, str]":
@@ -723,6 +844,8 @@ ASSERTIONS: "list[tuple[str, str]]" = [
     ("ST-3", "st_3_section_closed_diff"),
     ("ST-4", "st_4_test_prompts"),
     ("ST-5", "st_5_rejected_coverage"),
+    ("ST-6", "st_6_person_ir_exclusion"),
+    ("ST-7", "st_7_method_ir_exclusion"),
     ("BW-1", "bw_1_roleplay_vocab"),
     ("BW-2", "bw_2_blunt_vocab_tiers"),
     ("BW-3", "bw_3_bare_number_rule"),
@@ -887,6 +1010,27 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     borrow = {"persona": {"分数": "借technique层借用机械断言分"}, "technique": {}}
     cases.append(("FC5_pass", ns_borrow_hits(iso) == [], True))
     cases.append(("FC5_bite", ns_borrow_hits(borrow) != [], True))
+    # FC-5 实装层：bundle 实例识别（两键在场＝bundle 记录；单层记录不入扫描）
+    cases.append(("FC5L_bundle_detect", bundle_layers(iso) and not bundle_layers({"persona": {}}), True))
+
+    # 黄-2 收口：看板正文状态 token 扫描（词表内/字段名放／私扩咬）
+    board_good = "## 人工闸结论\n\n- 状态迁移到 `active`，产物级 `needs_review` 清零；字段 `证据等级` 随动。\n"
+    board_bad = "## 人工闸结论\n\n- 主理人裁定：S1 产物面全部 `彻底完成`，状态迁移到 `已核`。\n"
+    cases.append(("Y2_board_pass", state_token_scan(board_good, BOARD_STATE_LINE_KEY, STATE_WORDS, False) == [], True))
+    cases.append(("Y2_board_bite", state_token_scan(board_bad, BOARD_STATE_LINE_KEY, STATE_WORDS, False) != [], True))
+    # 黄-2 收口：AC-5 词表声明句扫描（全等放／私扩「已核」咬／缺值咬）
+    vocab_good = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`／`未验`。"
+    vocab_bad = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`／`未验`／`已核`。"
+    vocab_short = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`。"
+    cases.append(("Y2_vocab_pass", state_token_scan(vocab_good, VOCAB_LINE_KEY, STATE_WORDS, True) == [], True))
+    cases.append(("Y2_vocab_bite_extra", state_token_scan(vocab_bad, VOCAB_LINE_KEY, STATE_WORDS, True) != [], True))
+    cases.append(("Y2_vocab_bite_missing", state_token_scan(vocab_short, VOCAB_LINE_KEY, STATE_WORDS, True) != [], True))
+
+    # ST-6／ST-7 互斥 IR 字段互检：无对方字样放／串味咬
+    cases.append(("ST6_pass", ir_term_hits("## persona-IR 五层\n表达DNA／心智模型／决策启发式／反模式／诚实边界", PERSON_FORBIDDEN_IR_TERMS) == [], True))
+    cases.append(("ST6_bite", ir_term_hits("## persona-IR 五层\n第六节 执行步骤：1/2/3", PERSON_FORBIDDEN_IR_TERMS) != [], True))
+    cases.append(("ST7_pass", ir_term_hits("## technique-IR RIA++ 六段\nR 原文／I 诠释／A1 案例／A2 触发场景／E 执行步骤／B 边界", METHOD_FORBIDDEN_IR_TERMS) == [], True))
+    cases.append(("ST7_bite", ir_term_hits("## technique-IR 六段\n补一节 表达 DNA 摘录", METHOD_FORBIDDEN_IR_TERMS) != [], True))
 
     # GS-1/GS-2 gate_source：白名单放／互套咬（双向）
     cases.append(("GS1_pass", gate_source_hits("person", "盲评rubric") == [], True))
@@ -924,7 +1068,7 @@ def run_selftest() -> int:
 
 
 def run_assertions() -> int:
-    """仓内执行模式：18 项逐项读数＋汇总单列（PASS／FAIL／PENDING_STAGE）。"""
+    """仓内执行模式：20 项逐项读数＋汇总单列（PASS／FAIL／PENDING_STAGE）。"""
     counts = {READ_PASS: 0, READ_FAIL: 0, READ_PENDING: 0}
     namespace = globals()
     for assert_id, fn_name in ASSERTIONS:
