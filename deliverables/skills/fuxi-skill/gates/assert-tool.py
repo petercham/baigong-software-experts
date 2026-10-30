@@ -168,7 +168,7 @@ KERNEL_FIELD_REGISTRY = (
 )
 
 # FC-4 状态词表取值闭集＋看板三栏字段名闭集。
-STATE_WORDS = ("needs_review", "active", "归档区", "待校准", "未验")
+STATE_WORDS = ("needs_review", "active", "归档区", "待校准", "未验", "受限")
 BOARD_COLUMNS = ("本轮改动", "触发的坏信号", "人工闸结论")
 BOARD_HEADER_DECL = "性质＝记录件·人工触发填写·非控制器"
 BOARD_PERIOD_MAX_DAYS = 14  # 相邻板文件名日期间隔上限（周期兜底，AC-5 定稿值）
@@ -1167,12 +1167,12 @@ def fc_3_paired_source_location() -> "tuple[str, str]":
 def fc_4_state_vocab_board() -> "tuple[str, str]":
     """FC-4 状态词表取值闭集＋看板三栏字段名闭集——〔S0a 建／S1 实装／S2 黄-2 收口扩展〕。
 
-    词表本体在场（不扩＝五值闭集锁定）＋看板契约节声明行在 AC-5 节＋
+    词表本体在场（六值闭集锁定·T6 扩「受限」）＋看板契约节声明行在 AC-5 节＋
     看板实例（如在场）三栏标题∈注册三栏、性质声明行在场、相邻板日期间隔 ≤14 天＋
     黄-2 收口两扫描：看板正文「状态」关键词行反引号 token ⊆ 词表∪字段注册表（私扩必咬）；
     AC-5「基线闭集」声明句反引号 token 与词表全集逐字全等（私扩/缺值必咬）。
     """
-    ok_vocab = vocab_body_present(STATE_WORDS) and len(set(STATE_WORDS)) == 5
+    ok_vocab = vocab_body_present(STATE_WORDS) and len(set(STATE_WORDS)) == 6
     texts = _contract_texts()
     ac_text = texts.get("artifact-contract", "")
     decl_in_ac5 = all(("`%s`" % c) in ac_text for c in BOARD_COLUMNS)
@@ -1195,7 +1195,7 @@ def fc_4_state_vocab_board() -> "tuple[str, str]":
                               for h in state_token_scan(body, BOARD_STATE_LINE_KEY, STATE_WORDS, exact=False))
     if token_hits:
         return (READ_FAIL, "看板正文状态token越词表：%s" % "；".join(token_hits))
-    return (READ_PASS, "词表五值·三栏名声明 AC-5·词表声明句逐字全等·%s·看板状态token扫描判绿" % detail)
+    return (READ_PASS, "词表六值·三栏名声明 AC-5·词表声明句逐字全等·%s·看板状态token扫描判绿" % detail)
 
 
 def fc_5_bundle_ns_isolation() -> "tuple[str, str]":
@@ -1650,9 +1650,9 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("Y2_board_pass", state_token_scan(board_good, BOARD_STATE_LINE_KEY, STATE_WORDS, False) == [], True))
     cases.append(("Y2_board_bite", state_token_scan(board_bad, BOARD_STATE_LINE_KEY, STATE_WORDS, False) != [], True))
     # 黄-2 收口：AC-5 词表声明句扫描（全等放／私扩「已核」咬／缺值咬）
-    vocab_good = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`／`未验`。"
-    vocab_bad = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`／`未验`／`已核`。"
-    vocab_short = "基线闭集（与 FC-4 注册位逐字全等，不扩）：`needs_review`／`active`／`归档区`／`待校准`。"
+    vocab_good = "基线闭集（与 FC-4 注册位逐字全等）：`needs_review`／`active`／`归档区`／`待校准`／`未验`／`受限`。"
+    vocab_bad = "基线闭集（与 FC-4 注册位逐字全等）：`needs_review`／`active`／`归档区`／`待校准`／`未验`／`受限`／`已核`。"
+    vocab_short = "基线闭集（与 FC-4 注册位逐字全等）：`needs_review`／`active`／`归档区`／`待校准`／`未验`。"
     cases.append(("Y2_vocab_pass", state_token_scan(vocab_good, VOCAB_LINE_KEY, STATE_WORDS, True) == [], True))
     cases.append(("Y2_vocab_bite_extra", state_token_scan(vocab_bad, VOCAB_LINE_KEY, STATE_WORDS, True) != [], True))
     cases.append(("Y2_vocab_bite_missing", state_token_scan(vocab_short, VOCAB_LINE_KEY, STATE_WORDS, True) != [], True))
