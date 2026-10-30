@@ -247,10 +247,41 @@ def default_tickets(root: str) -> "list[str]":
     return out
 
 
+# 回执指针两形态（ENG-S7 扩认·工具向票面体例三律②「含盘符完整路径」对齐）：
+#   ① 相对仓根 `<COLLAB>.md` 正斜杠反引号路径（现行形态保持）；
+#   ② 绝对盘符路径反引号包裹（`[A-Za-z]:[\\/]…`，反斜杠/正斜杠皆收）——
+#      归一化（反斜杠→斜杠、仓根前缀大小写不敏感比对）后落在本仓过程域内
+#      ＝合法回执指针；仓外绝对路径＝不算回执指针（现状保持）。
+ABS_RECEIPT_PTR_RE = re.compile(r"`([A-Za-z]:[^\s`]*回执[^\s`]*\.md)`")
+
+
+def abs_ptr_to_rel(root: str, raw: str) -> "str | None":
+    """绝对盘符路径回执指针 → 仓内相对路径（正斜杠）。
+    仅当归一后落在 <仓根>\\<过程域>/ 内才算；仓外＝None（不算回执指针）。"""
+    norm = raw.replace("\\", "/")
+    root_norm = root.replace("\\", "/").rstrip("/").lower()
+    norm_lower = norm.lower()
+    if not norm_lower.startswith(root_norm + "/"):
+        return None
+    rel = norm[len(root_norm) + 1:]
+    if not rel.lower().startswith(COLLAB_PREFIX):
+        return None
+    return rel
+
+
 def find_receipt(root: str, ticket_text: str, ticket_rel: str) -> "str | None":
-    """配对键＝票内回执指针行（反引号包裹的过程域回执件路径）。缺＝None（未绿项）。"""
+    """配对键＝票内回执指针行（反引号包裹的过程域回执件路径·两形态见
+    ABS_RECEIPT_PTR_RE 注）。缺＝None（未绿项）。"""
     cand = re.findall(r"`(" + re.escape(COLLAB_PREFIX) + r"[^\s`]*回执[^\s`]*\.md)`", ticket_text)
     for rel in cand:
+        full = os.path.normpath(os.path.join(root, rel.replace("/", os.sep)))
+        if os.path.isfile(full):
+            return rel
+    # ENG-S7 形态②：绝对盘符路径指针，归一落仓内过程域＝合法，仓外不算。
+    for raw in ABS_RECEIPT_PTR_RE.findall(ticket_text):
+        rel = abs_ptr_to_rel(root, raw)
+        if rel is None:
+            continue
         full = os.path.normpath(os.path.join(root, rel.replace("/", os.sep)))
         if os.path.isfile(full):
             return rel
@@ -335,8 +366,13 @@ def check_pair(root: str, ticket_rel: str) -> "tuple[list[str], int]":
 #   case6_multiline_ok（ENG-S6）：多行列表形态票面（「声明闭集：」行＋`- 路径` 列表行）
 #     → 解析成功、三段对账执行且全绿 → 0 发现
 #   case7_nodecllist_skip（ENG-S6）：「声明闭集：」行后无列表行 → 无条目＝仍 SKIP 1
+#   case8_absdrive_ok（ENG-S7）：票面回执指针＝仓内绝对盘符路径（反斜杠·真实票体例形态）
+#     → 归一解析成功、三段对账执行全绿 → 0 发现
+#   case9_absout_notptr（ENG-S7）：回执指针＝仓外绝对盘符路径 → 不算回执指针
+#     → 「回执指针解析不到」WATCH 1（现状语义保持）
 SELFTEST_EXPECTED = {"S1": 0, "S2": 1, "S3": 1, "S4": 1, "S5_skip": 1,
-                     "case6_multiline_ok": 0, "case7_nodecllist_skip": 1}
+                     "case6_multiline_ok": 0, "case7_nodecllist_skip": 1,
+                     "case8_absdrive_ok": 0, "case9_absout_notptr": 1}
 
 
 def selftest(root: str) -> int:
@@ -344,11 +380,16 @@ def selftest(root: str) -> int:
     try:
         def case(name: str, files: "list[str]", declared: "list[str]",
                  receipt_list: "list[str]", receipt_extra: "list[str]" = (),
-                 decl_mode: str = "single") -> "tuple[int, int]":
+                 decl_mode: str = "single", ptr_mode: str = "relative") -> "tuple[int, int]":
             """建一个合成票/回执＋commit，跑 check_pair，返回 (发现数, SKIP数)。
             decl_mode：single＝单行「声明闭集：a、b」；multiline＝模板 v2 多行列表
             （「声明闭集：」行＋`- 路径` 列表行）；header_only＝仅声明行无条目。
-            每用例独立临时仓（用例间零污染——同仓复用会让前案文件混进后案 commit 并集）。"""
+            ptr_mode（ENG-S7）：relative＝相对过程域正斜杠指针（现行体例）；
+            abs_inrepo＝仓内绝对盘符路径指针（反斜杠·真实票面形态·盘符大小写故意
+            与仓根不一致以验证大小写不敏感）；abs_outrepo＝仓外绝对盘符路径指针
+            （回执件在仓外真实落盘，验证不算回执指针）。
+            每用例独立临时仓（用例间零污染——同仓复用会让前案文件混进后案 commit 并集）。
+            注：abs_* 两案依赖临时仓绝对路径带盘符（Windows 面·票面体例同源）。"""
             repo = os.path.join(tmp, "repo-" + name)
             os.makedirs(repo)
 
@@ -379,16 +420,33 @@ def selftest(root: str) -> int:
                 ticket_lines.append("")
             elif declared:
                 ticket_lines.append("声明闭集：%s" % "、".join(declared))
-            ticket_lines.append("回执：`%sresearch/%s-回执.md`" % (COLLAB_PREFIX, name))
+            # 回执指针形态（ENG-S7 ptr_mode）
+            receipt_fname = "%s-回执.md" % name
+            if ptr_mode == "abs_inrepo":
+                # 仓内绝对盘符路径（反斜杠）＋盘符大小写翻转＝验证大小写不敏感归一
+                p = os.path.join(repo, ".collab", "research", receipt_fname)
+                p = p[0].swapcase() + p[1:]
+                ticket_lines.append("回执：`%s`" % p)
+            elif ptr_mode == "abs_outrepo":
+                # 仓外绝对盘符路径：回执件真实落盘于仓外，仍不算回执指针
+                p = os.path.join(tmp, "outside-" + name, "research", receipt_fname)
+                ticket_lines.append("回执：`%s`" % p)
+            else:
+                ticket_lines.append("回执：`%sresearch/%s`" % (COLLAB_PREFIX, receipt_fname))
             with open(os.path.join(repo, ".collab", "tickets", "%s.md" % name),
                       "w", encoding="utf-8") as handle:
                 handle.write("\n".join(ticket_lines) + "\n")
             rl = ["# synthetic receipt %s" % name,
                   "- commit `%s` 记录" % head, "", "| # | 文件 | 标记 |", "|---|---|---|"]
-            for p in receipt_list + list(receipt_extra):
-                rl.append("| 1 | `%s` | 修改 |" % p)
-            with open(os.path.join(repo, ".collab", "research", "%s-回执.md" % name),
-                      "w", encoding="utf-8") as handle:
+            for p2 in receipt_list + list(receipt_extra):
+                rl.append("| 1 | `%s` | 修改 |" % p2)
+            if ptr_mode == "abs_outrepo":
+                outdir = os.path.join(tmp, "outside-" + name, "research")
+                os.makedirs(outdir, exist_ok=True)
+                rpath = os.path.join(outdir, receipt_fname)
+            else:
+                rpath = os.path.join(repo, ".collab", "research", receipt_fname)
+            with open(rpath, "w", encoding="utf-8") as handle:
                 handle.write("\n".join(rl) + "\n")
             findings, skips = check_pair(repo, "%stickets/%s.md" % (COLLAB_PREFIX, name))
             return len(findings), skips
@@ -421,13 +479,23 @@ def selftest(root: str) -> int:
         results["case7_nodecllist_skip"] = case(
             "case7", ["deliverables/a.md"], ["deliverables/a.md"],
             ["deliverables/a.md"], decl_mode="header_only")
+        # case8 仓内绝对盘符路径回执指针（反斜杠·盘符大小写翻转）：归一解析成功对账全绿 → 0 发现
+        results["case8_absdrive_ok"] = case(
+            "case8", ["deliverables/a.md"], ["deliverables/a.md"],
+            ["deliverables/a.md"], ptr_mode="abs_inrepo")
+        # case9 仓外绝对盘符路径回执指针（回执件仓外真实落盘）：不算回执指针 → WATCH 1
+        results["case9_absout_notptr"] = case(
+            "case9", ["deliverables/a.md"], ["deliverables/a.md"],
+            ["deliverables/a.md"], ptr_mode="abs_outrepo")
 
         ok = True
         got = {"S1": results["S1"][0], "S2": results["S2"][0],
                "S3": results["S3"][0], "S4": results["S4"][0],
                "S5_skip": results["S5"][1],
                "case6_multiline_ok": results["case6_multiline_ok"][0],
-               "case7_nodecllist_skip": results["case7_nodecllist_skip"][1]}
+               "case7_nodecllist_skip": results["case7_nodecllist_skip"][1],
+               "case8_absdrive_ok": results["case8_absdrive_ok"][0],
+               "case9_absout_notptr": results["case9_absout_notptr"][0]}
         for k, want in sorted(SELFTEST_EXPECTED.items()):
             mark = "OK" if got[k] == want else "MISMATCH"
             if got[k] != want:
