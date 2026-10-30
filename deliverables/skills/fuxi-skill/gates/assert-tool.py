@@ -9,6 +9,11 @@
 S1 实装位（共享内核 L0 落盘后）：ST-1／ST-2／ST-5／FC-1／FC-2／FC-3／FC-4。
 S2 实装位：ST-6／ST-7（两 adapter 互斥 IR 字段互检）＋FC-5（bundle 两层命名空间互借检出）
     ＋FC-4 黄-2 收口扩展（看板实例正文状态 token 扫描＋AC-5 词表声明句私扩扫描）。
+S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/evidence/harness/` 内
+    *.jsonl 全部记录的 所属轨×gate_source 白名单双向 diff，不匹配数＝0 才绿；
+    记录目录由两 validator 判分段写出，字段注册表＝`validator-catalog.md` §二）。
+    S3 白名单扩值：PERSON_GATE_WHITELIST 扩「格式检查表」六值（门禁面重交付·AC-5 扩词程序同族），
+    与 METHOD_GATE_WHITELIST 互斥集合同步维护于本注册位。
 判据基面（固定路径静态定位，契约与工具互不嵌套）：
     contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
     adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）。
@@ -138,8 +143,19 @@ PERSON_FORBIDDEN_IR_TERMS = ("执行步骤",)
 METHOD_FORBIDDEN_IR_TERMS = ("表达DNA", "表达 DNA")
 
 # GS-1/GS-2 gate_source 白名单（person 软门类／method 硬门类；互斥＝双向断言基面）。
-PERSON_GATE_WHITELIST = ("盲评rubric", "绝对线", "decoy", "泄漏检查", "人工锚点卡")
-METHOD_GATE_WHITELIST = ("机械断言", "三臂对照", "诱饵测试", "留出集")
+# S3 扩值（候裁 C-3 照扩·门禁面重交付程序＝AC-5 扩词程序同族）：person 白名单六值，
+# 增「格式检查表」＝D2 嫁接机械层唯一合法记账词，与 method 白名单「机械断言」刻意异名
+# （异名即 B3 不互套的词表体现）。
+# method 白名单随 D3 嫁接层同步补齐＝六值（层名即 gate_source 注册词：泄漏检查／边缘诚实度
+# 入 method 侧记账；「泄漏检查」为两轨共有的确定性判据词，两轨各自在场不违互斥——互斥性
+# 由专属词承载：机械断言/三臂对照/诱饵测试/留出集/边缘诚实度 入 person 记录必咬，
+# 盲评rubric/绝对线/decoy/人工锚点卡/格式检查表 入 method 记录必咬）。
+PERSON_GATE_WHITELIST = ("盲评rubric", "绝对线", "decoy", "泄漏检查", "人工锚点卡", "格式检查表")
+METHOD_GATE_WHITELIST = ("机械断言", "三臂对照", "诱饵测试", "留出集", "泄漏检查", "边缘诚实度")
+
+# 验证记录落盘路径注册（validator-catalog 顶部注册同源：过程域证据子域；
+# 路径拼接行＝FC-4 看板路径同款代码位，非文档过程域指针）
+_HARNESS_SUBPATH = (".collab", "evidence", "harness")
 
 # 共享内核三文件名（ST-2 对象；S1 落点＝contracts/ 子目录）。
 KERNEL_THREE_FILES = ("evidence-grading", "failure-modes", "artifact-contract")
@@ -818,19 +834,105 @@ def fc_5_bundle_ns_isolation() -> "tuple[str, str]":
     return (READ_PASS, "bundle 实例 %d 条·命名空间互借检出=0（配对咬放实证见 selftest）" % len(bundles))
 
 
+def _verification_records() -> "tuple[list[dict], list[str]]":
+    """读验证记录目录（validator-catalog 顶部注册落盘路径＝.collab/evidence/harness/ 递归 *.jsonl）。
+
+    返回 (记录列表, 读取问题列表)；目录不在场＝空扫描合法态（读取问题空）。
+    """
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
+    records: "list[dict]" = []
+    problems: "list[str]" = []
+    if not os.path.isdir(rec_dir):
+        return (records, problems)
+    for dirpath, _dirnames, filenames in os.walk(rec_dir):
+        for name in sorted(filenames):
+            if not name.endswith(".jsonl"):
+                continue
+            path = os.path.join(dirpath, name)
+            with open(path, "r", encoding="utf-8", errors="replace", newline="") as handle:
+                for lineno, line in enumerate(handle, 1):
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        obj = json.loads(line)
+                    except ValueError:
+                        problems.append("%s:%d json 解析失败" % (name, lineno))
+                        continue
+                    if isinstance(obj, dict):
+                        records.append(obj)
+                    else:
+                        problems.append("%s:%d 非对象记录" % (name, lineno))
+    return (records, problems)
+
+
 def gs_1_person_gate_source() -> "tuple[str, str]":
-    """GS-1 person 轨 gate_source 白名单（调 method 硬门判据命中＝0）——〔S0a 建／S3 执行〕。"""
-    return (READ_PENDING, "S3")
+    """GS-1 person 轨 gate_source 白名单（调 method 硬门判据命中＝0）——〔S0a 建／S3 实装〕。
+
+    实装基面＝验证记录目录（validator-catalog 注册落盘路径）内全部 person 记录；
+    无记录＝空扫描合法态（不匹配数 0，配对咬放交 selftest 实证判据活性）。
+    """
+    records, read_problems = _verification_records()
+    if read_problems:
+        return (READ_FAIL, "验证记录读取问题：%s" % "；".join(read_problems))
+    hits: "list[str]" = []
+    person_count = 0
+    for rec in records:
+        track = str(rec.get("所属轨", ""))
+        if track != "person":
+            continue
+        person_count += 1
+        gate = str(rec.get("gate_source", ""))
+        hits.extend("%s:%s" % (str(rec.get("记录id", "?")), h) for h in gate_source_hits(track, gate))
+    if hits:
+        return (READ_FAIL, "person 轨 gate_source 越白名单命中%s（应＝0）" % hits)
+    return (READ_PASS, "person 记录 %d 条·越白名单命中=0（%s）" % (person_count, "实记录判绿" if person_count else "空扫描合法态·配对咬放见 selftest"))
 
 
 def gs_2_method_gate_source() -> "tuple[str, str]":
-    """GS-2 method 轨 gate_source 对称白名单——〔S0a 建／S3 执行〕。"""
-    return (READ_PENDING, "S3")
+    """GS-2 method 轨 gate_source 对称白名单——〔S0a 建／S3 实装〕（R18 双向之反向）。"""
+    records, read_problems = _verification_records()
+    if read_problems:
+        return (READ_FAIL, "验证记录读取问题：%s" % "；".join(read_problems))
+    hits: "list[str]" = []
+    method_count = 0
+    for rec in records:
+        track = str(rec.get("所属轨", ""))
+        if track != "method":
+            continue
+        method_count += 1
+        gate = str(rec.get("gate_source", ""))
+        hits.extend("%s:%s" % (str(rec.get("记录id", "?")), h) for h in gate_source_hits(track, gate))
+    if hits:
+        return (READ_FAIL, "method 轨 gate_source 越白名单命中%s（应＝0）" % hits)
+    return (READ_PASS, "method 记录 %d 条·越白名单命中=0（%s）" % (method_count, "实记录判绿" if method_count else "空扫描合法态·配对咬放见 selftest"))
 
 
 def gs_3_bidirectional_zero_mismatch() -> "tuple[str, str]":
-    """GS-3 双向断言不匹配数＝0（S3 硬验收位不变，当期只建工具）——〔S0a 建／S3 执行〕。"""
-    return (READ_PENDING, "S3")
+    """GS-3 双向断言不匹配数＝0（S3 硬验收位）——〔S0a 建／S3 实装〕。
+
+    GS-1＋GS-2 合成双向：全量验证记录（含未知轨记录）的不匹配数＝0 才算过；
+    validator 写记录时自检同表（双保险，两处同一注册表）。
+    """
+    records, read_problems = _verification_records()
+    if read_problems:
+        return (READ_FAIL, "验证记录读取问题：%s" % "；".join(read_problems))
+    mismatch = 0
+    unknown_track: "list[str]" = []
+    for rec in records:
+        track = str(rec.get("所属轨", ""))
+        gate = str(rec.get("gate_source", ""))
+        hits = gate_source_hits(track, gate)
+        if any(h.startswith("未知轨") for h in hits):
+            unknown_track.append(str(rec.get("记录id", "?")))
+        mismatch += len(hits)
+    if unknown_track:
+        return (READ_FAIL, "未知轨记录%s（白名单 diff 不可判）" % unknown_track)
+    if mismatch:
+        return (READ_FAIL, "双向不匹配数=%d（应＝0·S3 硬验收不过）" % mismatch)
+    return (READ_PASS, "全量记录 %d 条·双向不匹配数=0（%s）" % (len(records),
+            "实记录硬验收判绿" if records else "空扫描合法态·硬验收读数随当批实记录在场"))
 
 
 def gs_4_calibration_kappa() -> "tuple[str, str]":
@@ -1037,6 +1139,19 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("GS1_bite", gate_source_hits("person", "机械断言") != [], True))
     cases.append(("GS2_pass", gate_source_hits("method", "留出集") == [], True))
     cases.append(("GS2_bite", gate_source_hits("method", "人工锚点卡") != [], True))
+
+    # GS S3 批配对咬放：person 扩值「格式检查表」放／method 侧咬；method 补齐「边缘诚实度」放／person 侧咬；
+    # 「泄漏检查」两轨共有词两侧均放（互斥性由专属词承载）
+    cases.append(("GS1x_pass_fmt", gate_source_hits("person", "格式检查表") == [], True))
+    cases.append(("GS2x_bite_fmt", gate_source_hits("method", "格式检查表") != [], True))
+    cases.append(("GS2x_pass_edge", gate_source_hits("method", "边缘诚实度") == [], True))
+    cases.append(("GS1x_bite_edge", gate_source_hits("person", "边缘诚实度") != [], True))
+    cases.append(("GS_shared_leak_both_ok",
+                  gate_source_hits("person", "泄漏检查") == [] and gate_source_hits("method", "泄漏检查") == [], True))
+    # GS 词表在场性（扩值后闭集基数：person 六值／method 六值·均无重复）
+    cases.append(("GS_vocab_sizes", len(set(PERSON_GATE_WHITELIST)) == 6 and len(set(METHOD_GATE_WHITELIST)) == 6, True))
+    # GS 实装读取部件（内存空基面＝空扫描合法态；实例记录配对咬放经 _verification_records 读盘侧由仓内模式承载）
+    cases.append(("GS3_unknown_track_bite", any(h.startswith("未知轨") for h in gate_source_hits("bundle", "盲评rubric")), True))
 
     # GS-4 校准一致性：κ 达标＋校准态放／缺 κ 仍校准态咬／不一致咬
     good_kappa = {"点值": 0.7, "区间下界": 0.62}

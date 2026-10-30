@@ -9,7 +9,7 @@
 | 目录 | 职能 | 在册件 |
 |---|---|---|
 | `contracts/` | 共享内核 L0（三契约·声明面） | `contracts/evidence-grading.md`（证据三级标注 EG-1..6）／`contracts/failure-modes.md`（失败模式 if-then 表 FM-1..5＋条目）／`contracts/artifact-contract.md`（产物契约 AC-1..5·状态词表与看板契约） |
-| `gates/` | 结构层门禁（机械断言） | `gates/assertion-catalog.md`（断言目录）／`gates/assert-tool.py`（断言工具·退出码闭集 0/1/2·内置 selftest） |
+| `gates/` | 结构层门禁（机械断言）＋交叉加固 validator（S3） | `gates/assertion-catalog.md`（断言目录）／`gates/assert-tool.py`（断言工具·退出码闭集 0/1/2·内置 selftest）／`gates/validator-source-anchor.py`（method 轨硬门 validator·六层·生成/判分分离·退出码闭集 0/1/2）／`gates/validator-public-anchor.py`（person 轨软门 validator·六层·格式检查表＝当期唯一门禁位·judge 分数只作参考位）／`gates/harness-common.py`（harness 非判据共用件·无判据无阈值）／`gates/validator-catalog.md`（validator 断言目录＋验证记录字段注册表＝同源定义面·harness 单 owner 声明·阈值预注册表） |
 | `adapters/` | 双轨填料＋对象分类器（S2 建） | `adapters/person.md`（persona 轨 adapter·六节闭集）／`adapters/method.md`（technique 轨 adapter·六节闭集）／`adapters/classifier.md`（对象分类器·四值闭集＋决策序＋判例表＋混淆表规程） |
 | `rejected/` | 淘汰留档区（可枚举基面） | `rejected/README.md`（留档约定＋coverage-audit 三问口径） |
 
