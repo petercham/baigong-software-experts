@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """fuxi-skill 结构层门禁断言工具（机械断言，不依赖人工校准）。S0a 建骨架，S1 实装共享内核 L0 执行位，S2 实装 adapter 互斥＋FC-5。
 
-断言目录＝同目录 `assertion-catalog.md`（20 项：ST-1..7／BW-1..4／FC-1..5／GS-1..4）。
+断言目录＝同目录 `assertion-catalog.md`（25 项：ST-1..8／BW-1..6／FC-1..6／GS-1..5）。
 本件与目录一一对应：每项目录断言有对应函数（当期可执行项＝实装；
 〔Sx 执行〕项＝桩＋显式 PENDING_STAGE 读数，不算 fail 不算 pass，汇总单列）。
 
@@ -14,9 +14,14 @@ S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/
     记录目录由两 validator 判分段写出，字段注册表＝`validator-catalog.md` §二）。
     S3 白名单扩值：PERSON_GATE_WHITELIST 扩「格式检查表」六值（门禁面重交付·AC-5 扩词程序同族），
     与 METHOD_GATE_WHITELIST 互斥集合同步维护于本注册位。
+S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空扫描合法态＋段名前缀归一化口径）
+    ＋新增 ST-8／BW-5／BW-6／FC-6／GS-5（两规范表文件节闭集＋矛盾平滑检出＋README 置顶判据
+    ＋active 池人工确认存在＋门禁不退化基线对照）。
 判据基面（固定路径静态定位，契约与工具互不嵌套）：
     contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
-    adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）。
+    adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）；
+    specs/＝两输出规范表文件（ST-8 基面）；包 README.md（BW-6 基面）；
+    deliverables/products/＝active 生效池注册路径（ST-3 产物实例侧＋FC-6 基面）。
 
 退出码闭集（三值，无其他取值）：
     0 全绿（无 fail；PENDING_STAGE 不拉码）
@@ -27,7 +32,7 @@ S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/
 同输入连跑两次退出码与逐项读数全等。
 
 用法：
-    python assert-tool.py            # 仓内执行模式：跑 20 项，当期实装项出读数，余者 PENDING_STAGE
+    python assert-tool.py            # 仓内执行模式：跑 25 项，当期实装项出读数，余者 PENDING_STAGE
     python assert-tool.py selftest   # 自证模式：内存构造正负样本，逐类断言「能咬能放」
 """
 
@@ -97,6 +102,39 @@ SIDE_TRACKS = ("person", "method", "bundle")
 PERSPECTIVE_SECTIONS = ("表达DNA", "心智模型", "决策启发式", "反模式", "诚实边界")
 TECHNIQUE_CARD_SECTIONS = ("R", "I", "A1", "A2", "E", "B")
 TECHNIQUE_CARD_FIELDS = ("出处", "触发", "步骤", "边界", "验证状态")
+# ST-3 段名前缀归一化口径（S4 钉死）：产物节头书写形态＝`<段名> <段描述名>`（如「R 原文」）；
+# 机检 diff 基面＝段名前缀 token；描述名不参与段名 diff，但须与注册描述名逐字全等（改名＝咬）；
+# 裸段名形态（「R」）与全形态两写法同判合法——杜绝「R」vs「R 原文」两套写法引发的假咬。
+TECHNIQUE_SEGMENT_DESCS = ("原文", "诠释", "案例", "触发场景", "执行步骤", "边界")
+
+# ST-8 两规范表文件本体节闭集（恰四节）＋关键引用行在场对象（S4 建）。
+SPEC_FOUR_SECTIONS = ("适用范围", "节闭集表", "声明措例", "量纲与机检落点")
+SPEC_FILES = ("perspective-spec", "technique-spec")
+SPEC_KEY_REFS = {
+    "perspective-spec": ("AC-1", "宁可生成一个诚实标注局限的 60 分产物，也不要一个看似完美的 90 分造假产物"),
+    "technique-spec": ("AC-2", "VA-S-01"),
+}
+
+# BW-5 矛盾平滑检出（S4 建·坏信号④机械位）：(a) person adapter 防编护栏节条款声明行；
+# (b) 平滑句式启发式预注册词表本体（随批锁定值；中途变更走门禁面重交付程序，BW-1/BW-2 同制）。
+PERSON_CONTRADICTION_DECL_ROWS = ("内部矛盾不平滑", "矛盾是深度的重要信号")
+SMOOTH_PHRASE_VOCAB = ("毫无矛盾", "观点完全一致", "前后一贯无张力", "自洽无冲突")
+
+# BW-6 README 相近工具对照表置顶判据（S4 建·§八 命名硬性要求登记位机检化）。
+COMPARISON_TABLE_TOOL_NAMES = ("nuwa-skill", "cangjie-skill")
+COMPARISON_TABLE_OWN_NAME = "fuxi-skill"
+COMPARISON_NO_INHERIT_DECL = "与前序同名旧物无继承关系"
+COMPARISON_ROW_NAMES = ("对象", "产物", "验证")
+
+# FC-6 active 生效池（S4 建·R16 验收机检位）：注册路径＋条目确认件四字段闭集。
+_PRODUCTS_SUBPATH = ("deliverables", "products")
+CONFIRM_FILE_NAME = "confirmation.md"
+POOL_CONFIRM_FIELDS = ("产物id", "人工确认引用", "提案件引用", "版本审计引用")
+
+# GS-5 门禁不退化基线（S4 建·坏信号③机械位）：三组注册位对基线只增不减，任一缩水＝咬。
+VALIDATOR_LAYER_NAMES = ("机械断言", "三臂对照", "诱饵测试", "留出集", "泄漏检查", "边缘诚实度",
+                         "格式检查表", "盲评rubric", "绝对线", "decoy", "人工锚点卡")
+GS5_BASELINE = {"层名基数": 11, "person白名单基数": 6, "method白名单基数": 6, "断言编号基数": 25}
 
 # 契约文件节闭集（EG 六节／FM 五节／AC 五节；多节/缺节/改名＝diff 非空即 fail）。
 EG_SECTIONS = ("适用范围", "三级标注", "来源三态", "三问可答口径", "候选单元记录", "语料门槛登记")
@@ -143,7 +181,7 @@ PERSON_FORBIDDEN_IR_TERMS = ("执行步骤",)
 METHOD_FORBIDDEN_IR_TERMS = ("表达DNA", "表达 DNA")
 
 # GS-1/GS-2 gate_source 白名单（person 软门类／method 硬门类；互斥＝双向断言基面）。
-# S3 扩值（候裁 C-3 照扩·门禁面重交付程序＝AC-5 扩词程序同族）：person 白名单六值，
+# S3 扩值（扩值依据与审计轨迹见版本受控记录与断言目录修订注记·门禁面重交付程序＝AC-5 扩词程序同族）：person 白名单六值，
 # 增「格式检查表」＝D2 嫁接机械层唯一合法记账词，与 method 白名单「机械断言」刻意异名
 # （异名即 B3 不互套的词表体现）。
 # method 白名单随 D3 嫁接层同步补齐＝六值（层名即 gate_source 注册词：泄漏检查／边缘诚实度
@@ -189,6 +227,10 @@ ENTRY_QUESTION_FIELDS = ("证据等级", "control_arm", "leakage_check")
 
 _JSON_FENCE_RE = re.compile(r"```json[ \t]*\n(.*?)\n```", re.S)
 _SECTION_RE = re.compile(r"^##\s+(EG|FM|AC)-\d+\s+(.+?)\s*$", re.M)
+_H2_SEC_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
+# ST-3 段头形态（归一化口径）：`<段名> [<段描述名>]`（裸段名与全形态两写法同判合法）。
+_SEG_HEAD_RE = re.compile(r"^([RIAB][12]?|E)(?:\s+(\S.*?))?\s*$")
+_PRODUCT_DIR_SUFFIXES = ("-perspective", "-technique", "-bundle")
 _FM_ROW_RE = re.compile(r"^FM-[SPM]-\d{2}$")
 _BOARD_NAME_RE = re.compile(r"^board-(\d{4})-(\d{2})-(\d{2})\.md$")
 _BACKTICK_TOKEN_RE = re.compile(r"`([^`\n]+)`")
@@ -571,8 +613,137 @@ def _adapter_texts() -> "dict[str, str]":
     return texts
 
 
+def perspective_head_sections(text: str) -> "tuple[str, ...]":
+    """ST-3 perspective 侧：抽产物 H2 节名并去空白归一（连写／带空格两形态同判合法）。"""
+    return tuple(re.sub(r"\s+", "", m.group(1)) for m in _H2_SEC_RE.finditer(text))
+
+
+def technique_segment_normalize(heads: "tuple[str, ...]") -> "tuple[set, set, list[str]]":
+    """ST-3 technique 侧段名前缀归一化：返回 (多出段名集, 缺失段名集, 非法描述名命中列表)。
+
+    节头两写法同判合法：裸段名「R」／全形态「R 原文」；描述名在场则须与注册描述名逐字全等
+    （「R 原文X」改名＝咬）；节头不属段头形态＝非法记入第三集。
+    """
+    got: "set[str]" = set()
+    bad: "list[str]" = []
+    for head in heads:
+        m = _SEG_HEAD_RE.match(head.strip())
+        if not m:
+            bad.append(head)
+            continue
+        seg, desc = m.group(1), (m.group(2) or "").strip()
+        got.add(seg)
+        if desc and seg in TECHNIQUE_CARD_SECTIONS:
+            idx = TECHNIQUE_CARD_SECTIONS.index(seg)
+            if desc != TECHNIQUE_SEGMENT_DESCS[idx]:
+                bad.append(head)
+    return (got - set(TECHNIQUE_CARD_SECTIONS), set(TECHNIQUE_CARD_SECTIONS) - got, bad)
+
+
+def card_fields_closed_ok(block: "dict") -> bool:
+    """ST-3 卡体五字段闭集：json 卡块含任一注册字段则其键集须 ⊆ 五字段闭集。"""
+    keys = {str(k) for k in block}
+    if not (keys & set(TECHNIQUE_CARD_FIELDS)):
+        return True
+    return keys <= set(TECHNIQUE_CARD_FIELDS)
+
+
+def spec_sections(text: str) -> "tuple[str, ...]":
+    """ST-8：抽规范表文件本体 H2 节名（四节节闭集对象）。"""
+    return tuple(m.group(1) for m in _H2_SEC_RE.finditer(text))
+
+
+def spec_missing_key_refs(text: str, refs: "tuple[str, ...]") -> "list[str]":
+    """ST-8 关键引用行在场：逐引用串扫描，返回缺失列表（空＝放）。"""
+    return [r for r in refs if r not in text]
+
+
+def decl_rows_missing(text: str, rows: "tuple[str, ...]") -> "list[str]":
+    """BW-5(a)：条款声明行在场扫描，返回缺失声明行列表（空＝放）。"""
+    return [r for r in rows if r not in text]
+
+
+def readme_table_problems(text: str) -> "list[str]":
+    """BW-6 README 置顶判据（纯文本判据）：返回问题列表（空＝放）。
+
+    ①首个二级标题行之前出现的首个 markdown 表格含两对照工具名（本产品线列名另检）；
+    ②「无继承关系」声明行命中＝恰 1；③对照表三维度行名齐备。任一违＝问题。
+    """
+    problems: "list[str]" = []
+    lines = text.split("\n")
+    h2_idx = next((i for i, ln in enumerate(lines) if ln.startswith("## ")), len(lines))
+    table_start = next((i for i, ln in enumerate(lines) if ln.lstrip().startswith("|")), None)
+    if table_start is None:
+        return ["无 markdown 表格（对照表缺位）"]
+    if table_start >= h2_idx:
+        problems.append("首个 markdown 表格不在首个二级标题之前（未置顶）")
+    table_end = table_start
+    while table_end < len(lines) and lines[table_end].lstrip().startswith("|"):
+        table_end += 1
+    table_lines = lines[table_start:table_end]
+    joined = "\n".join(table_lines)
+    for name in COMPARISON_TABLE_TOOL_NAMES:
+        if name not in joined:
+            problems.append("对照表缺工具名 %s" % name)
+    if COMPARISON_TABLE_OWN_NAME not in joined:
+        problems.append("对照表缺本产品线列名 %s" % COMPARISON_TABLE_OWN_NAME)
+    row_first_cells = [ln.strip().strip("|").split("|")[0].strip() for ln in table_lines]
+    missing_rows = [r for r in COMPARISON_ROW_NAMES if r not in row_first_cells]
+    if missing_rows:
+        problems.append("对照表缺维度行名%s" % "、".join(missing_rows))
+    decl_count = text.count(COMPARISON_NO_INHERIT_DECL)
+    if decl_count != 1:
+        problems.append("无继承声明行命中=%d（应＝1）" % decl_count)
+    return problems
+
+
+def pool_entry_confirmed(block: "dict", dir_name: str) -> bool:
+    """FC-6 条目确认块判据：四字段恰备非空＋产物id 与目录名逐字全等。"""
+    return (set(str(k) for k in block) == set(POOL_CONFIRM_FIELDS)
+            and all(str(v).strip() for v in block.values())
+            and str(block.get("产物id", "")).strip() == dir_name)
+
+
+def non_regression_shrunk(current: "tuple[str, ...] | int", baseline: "tuple[str, ...] | int") -> "list[str]":
+    """GS-5 只增不减判据：集合基线返回被删值列表；基数基线越线返回越线标记列表。"""
+    if isinstance(baseline, tuple):
+        return [b for b in baseline if b not in set(current)]
+    return [] if int(current) >= int(baseline) else ["基数%s＜基线%s" % (current, baseline)]
+
+
+def _repo_root() -> str:
+    return os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+
+
+def _active_pool_dir() -> str:
+    return os.path.join(_repo_root(), *_PRODUCTS_SUBPATH)
+
+
+def _product_entries() -> "list[tuple[str, str]]":
+    """active 池条目列表 (目录名, 路径)：目录名须落 `<对象名kebab>-<perspective|technique|bundle>`。"""
+    pool = _active_pool_dir()
+    if not os.path.isdir(pool):
+        return []
+    out: "list[tuple[str, str]]" = []
+    for name in sorted(os.listdir(pool)):
+        path = os.path.join(pool, name)
+        if os.path.isdir(path) and name.endswith(_PRODUCT_DIR_SUFFIXES):
+            out.append((name, path))
+    return out
+
+
+def _product_md_texts(dirpath: str) -> "dict[str, str]":
+    """产物目录内 .md 件文本（确认件除外——确认件属入池规程面，非产物正文）。"""
+    texts: "dict[str, str]" = {}
+    for name in sorted(os.listdir(dirpath)):
+        if name.endswith(".md") and name != CONFIRM_FILE_NAME:
+            texts[name] = _read_text(os.path.join(dirpath, name))
+    return texts
+
+
 # ============================================================
-# 20 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；余者桩）
+# 25 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；
+# S3 实装：GS-1/GS-2/GS-3；S4 实装：ST-3/ST-8/BW-5/BW-6/FC-6/GS-5；余者桩）
 # ============================================================
 
 def st_1_contract_file() -> "tuple[str, str]":
@@ -608,8 +779,46 @@ def st_2_three_kernel_files() -> "tuple[str, str]":
 
 
 def st_3_section_closed_diff() -> "tuple[str, str]":
-    """ST-3 perspective 五层节／technique 六段卡＋五字段闭集 diff＝∅——〔S0a 建／S1 执行〕。"""
-    return (READ_PENDING, "S1")
+    """ST-3 perspective 五层节／technique 六段卡＋五字段闭集 diff＝∅——〔S0a 建／S4 实装〕。
+
+    实装基面＝active 生效池注册路径（`deliverables/products/`）内全量产物文件：
+    perspective 产物 H2 节名去空白归一后与五层闭集 diff＝∅；technique 产物节头按
+    段名前缀归一化口径 diff＝∅（描述名改名＝咬）；卡体 json 块五字段闭集 ⊆ 检。
+    无实例＝空扫描合法态判绿（FC-5/GS 同款），判据活性由 selftest 节闭集咬放配对实证。
+    """
+    entries = _product_entries()
+    problems: "list[str]" = []
+    checked = 0
+    for name, path in entries:
+        texts = _product_md_texts(path)
+        for fname, text in texts.items():
+            checked += 1
+            if name.endswith("-perspective"):
+                heads = perspective_head_sections(text)
+                extra, missing = section_diff(heads, PERSPECTIVE_SECTIONS)
+                if extra or missing:
+                    problems.append("%s/%s 五层节diff 多出%s 缺失%s"
+                                    % (name, fname, sorted(extra) or "∅", sorted(missing) or "∅"))
+            if name.endswith("-technique"):
+                heads = tuple(m.group(1) for m in _H2_SEC_RE.finditer(text))
+                card_heads = tuple(h for h in heads if _SEG_HEAD_RE.match(h.strip()))
+                if card_heads:
+                    extra, missing, bad = technique_segment_normalize(card_heads)
+                    if extra or missing:
+                        problems.append("%s/%s 六段diff 多出%s 缺失%s"
+                                        % (name, fname, sorted(extra) or "∅", sorted(missing) or "∅"))
+                    if bad:
+                        problems.append("%s/%s 段头描述名改名/形态非法%s" % (name, fname, bad))
+                blocks, _bad = md_json_blocks(text)
+                for block in blocks:
+                    if not card_fields_closed_ok(block):
+                        problems.append("%s/%s 卡体五字段越闭集" % (name, fname))
+            # bundle 条目：两命名空间隔离判据归 FC-5（跨层互借检出）；bundle 内部两层
+            # 各自结构检随首个 bundle 产物接入时按两轨口径分别展开（扫描面已含条目文件）。
+    if problems:
+        return (READ_FAIL, "产物实例节结构 diff 非∅：%s" % "；".join(problems))
+    return (READ_PASS, "产物实例 %d 条目·文件 %d·节结构 diff=∅（%s）"
+            % (len(entries), checked, "实产物判绿" if entries else "空扫描合法态·配对咬放见 selftest"))
 
 
 def st_4_test_prompts() -> "tuple[str, str]":
@@ -940,6 +1149,144 @@ def gs_4_calibration_kappa() -> "tuple[str, str]":
     return (READ_PENDING, "S0b")
 
 
+def st_8_spec_tables_closed() -> "tuple[str, str]":
+    """ST-8 两规范表文件存在＋自身四节节闭集 diff＝∅＋关键引用行在场——〔S4 建／S4 实装〕。
+
+    固定路径静态扫描 `specs/` 两规范表文件；未建齐＝PENDING（ST-5 先例），建齐后当期即绿。
+    """
+    specs_dir = os.path.join(_SKILL_ROOT, "specs")
+    missing_files = [n for n in SPEC_FILES
+                     if not os.path.isfile(os.path.join(specs_dir, n + ".md"))]
+    if missing_files:
+        return (READ_PENDING, "规范表未建齐（缺%s）" % "、".join(missing_files))
+    problems: "list[str]" = []
+    for name in SPEC_FILES:
+        text = _read_text(os.path.join(specs_dir, name + ".md"))
+        extra, missing = section_diff(spec_sections(text), SPEC_FOUR_SECTIONS)
+        if extra or missing:
+            problems.append("%s 四节节diff 多出%s 缺失%s"
+                            % (name, sorted(extra) or "∅", sorted(missing) or "∅"))
+        miss_refs = spec_missing_key_refs(text, SPEC_KEY_REFS[name])
+        if miss_refs:
+            problems.append("%s 关键引用行缺失%s" % (name, "、".join(miss_refs)))
+    if problems:
+        return (READ_FAIL, "；".join(problems))
+    return (READ_PASS, "两规范表在场·四节闭集 diff=∅·关键引用行（AC-1/总则声明行/AC-2/VA-S-01）在场")
+
+
+def bw_5_contradiction_smoothing() -> "tuple[str, str]":
+    """BW-5 矛盾平滑检出（坏信号④机械位）——〔S4 建／S4 实装〕。
+
+    (a) 声明面：`adapters/person.md` 含「内部矛盾不平滑」条款行＋「矛盾是深度的重要信号」
+        措辞行在场（当期可绿）；
+    (b) 产物面：平滑句式启发式预注册词表本体在场（BW-1/BW-2 同制）＋perspective 产物正文
+        命中＝坏信号④咬（active 池产物实例扫描，无实例＝空扫描合法态）。
+    """
+    ok_vocab = vocab_body_present(SMOOTH_PHRASE_VOCAB) and len(set(SMOOTH_PHRASE_VOCAB)) == 4
+    texts = _adapter_texts()
+    if "adapter-person" not in texts:
+        return (READ_FAIL, "adapters/person.md 缺失（无声明基面）")
+    missing_rows = decl_rows_missing(texts["adapter-person"], PERSON_CONTRADICTION_DECL_ROWS)
+    if missing_rows:
+        return (READ_FAIL, "person 面矛盾条款声明行缺失%s（坏信号④声明面失守）" % missing_rows)
+    if not ok_vocab:
+        return (READ_FAIL, "平滑句式词表本体不在场/基数越线（应＝4 值预注册）")
+    hits: "list[str]" = []
+    scanned = 0
+    for name, path in _product_entries():
+        if not name.endswith(("-perspective", "-bundle")):
+            continue
+        for fname, text in _product_md_texts(path).items():
+            scanned += 1
+            for w in blunt_hits(text, SMOOTH_PHRASE_VOCAB):
+                hits.append("%s/%s:%s" % (name, fname, w))
+    if hits:
+        return (READ_FAIL, "产物正文平滑句式命中%s（内部矛盾消失·坏信号④）" % hits)
+    return (READ_PASS, "(a) 声明行两行在场·(b) 词表 4 值本体在场·产物面命中=0（扫描 %d 件·%s）"
+            % (scanned, "空扫描合法态" if not scanned else "实扫描判绿"))
+
+
+def bw_6_readme_comparison_top() -> "tuple[str, str]":
+    """BW-6 README 相近工具对照表置顶——〔S4 建／S4 实装〕。
+
+    判据①首个二级标题前首个 markdown 表格含两对照工具名（本产品线列名另检）
+    ＋②「无继承关系」声明行命中＝1＋③三维度行名齐备；任一违＝fail。
+    """
+    readme = os.path.join(_SKILL_ROOT, "README.md")
+    if not os.path.isfile(readme):
+        return (READ_FAIL, "包 README.md 缺失（无判据基面）")
+    problems = readme_table_problems(_read_text(readme))
+    if problems:
+        return (READ_FAIL, "；".join(problems))
+    return (READ_PASS, "对照表先于首个二级标题·两工具名＋本线列名命中·声明行命中=1·三维度行名齐备")
+
+
+def fc_6_active_pool_confirmation() -> "tuple[str, str]":
+    """FC-6 active 池人工确认存在断言（R16 验收）——〔S4 建／S4 实装〕。
+
+    active 池目录内每一产物条目须可指向一条人工确认记录（条目根部确认件四字段引用行）；
+    无确认记录的 active 条目数＝0。目录不存在＝PENDING（ST-5 先例）；目录在场且空＝
+    空扫描合法态判绿（当期 0 属空池平凡真＝规程级实证，非产物级实证）。
+    """
+    pool = _active_pool_dir()
+    if not os.path.isdir(pool):
+        return (READ_PENDING, "active 池目录未建（生效池约定未落盘）")
+    entries = _product_entries()
+    unconfirmed: "list[str]" = []
+    for name, path in entries:
+        confirm_path = os.path.join(path, CONFIRM_FILE_NAME)
+        if not os.path.isfile(confirm_path):
+            unconfirmed.append(name)
+            continue
+        blocks, bad = md_json_blocks(_read_text(confirm_path))
+        if bad or not blocks or not any(pool_entry_confirmed(b, name) for b in blocks):
+            unconfirmed.append(name)
+    if unconfirmed:
+        return (READ_FAIL, "无人工确认来源条目数=%d（应＝0）：%s" % (len(unconfirmed), unconfirmed))
+    return (READ_PASS, "active 池条目 %d·无人工确认来源条目数=0（%s）"
+            % (len(entries), "空池平凡真·规程级实证非产物级" if not entries else "实条目确认引用行判绿"))
+
+
+def gs_5_gate_non_regression() -> "tuple[str, str]":
+    """GS-5 门禁不退化断言（坏信号③机械位）——〔S4 建／S4 实装〕。
+
+    三组注册位对基线只增不减：validator 层名注册闭集（11 值）／两 gate_source 白名单
+    （各六值）／断言编号基数（25 项）；机械断言层名（`机械断言`／`格式检查表`）在各自
+    白名单在场。任一缩水＝咬。声明↔代码双向 diff＝validator-catalog §二 层名值注册
+    与本注册常量互检（FC-1 同款手法）。
+    """
+    problems: "list[str]" = []
+    shrunk = non_regression_shrunk(len(VALIDATOR_LAYER_NAMES), GS5_BASELINE["层名基数"])
+    if shrunk:
+        problems.extend("层名%s" % s for s in shrunk)
+    problems.extend("person白名单%s" % s for s in non_regression_shrunk(len(set(PERSON_GATE_WHITELIST)), GS5_BASELINE["person白名单基数"]))
+    problems.extend("method白名单%s" % s for s in non_regression_shrunk(len(set(METHOD_GATE_WHITELIST)), GS5_BASELINE["method白名单基数"]))
+    problems.extend("断言基数%s" % s for s in non_regression_shrunk(len(ASSERTIONS), GS5_BASELINE["断言编号基数"]))
+    if "机械断言" not in METHOD_GATE_WHITELIST:
+        problems.append("机械断言层名越出 method 白名单（机械层被移除嫌疑）")
+    if "格式检查表" not in PERSON_GATE_WHITELIST:
+        problems.append("格式检查表层名越出 person 白名单（机械层被移除嫌疑）")
+    catalog = os.path.join(os.path.dirname(os.path.abspath(__file__)), "validator-catalog.md")
+    if os.path.isfile(catalog):
+        blocks, _bad = md_json_blocks(_read_text(catalog))
+        declared: "set[str]" = set()
+        for block in blocks:
+            vals = block.get("值注册")
+            if isinstance(vals, dict) and isinstance(vals.get("层名"), list):
+                declared.update(str(v) for v in vals["层名"])
+        if declared:
+            missing_decl = [v for v in VALIDATOR_LAYER_NAMES if v not in declared]
+            extra_decl = sorted(declared - set(VALIDATOR_LAYER_NAMES))
+            if missing_decl or extra_decl:
+                problems.append("层名声明↔代码 diff 声明缺%s 多出%s" % (missing_decl or "∅", extra_decl or "∅"))
+    else:
+        problems.append("validator-catalog 缺失（层名声明基面不可得）")
+    if problems:
+        return (READ_FAIL, "门禁注册位退化/分叉：%s" % "；".join(problems))
+    return (READ_PASS, "层名11·白名单6+6·断言基数%d·机械层名两白名单在场·层名声明↔代码 diff=∅（只增不减）"
+            % len(ASSERTIONS))
+
+
 ASSERTIONS: "list[tuple[str, str]]" = [
     ("ST-1", "st_1_contract_file"),
     ("ST-2", "st_2_three_kernel_files"),
@@ -948,19 +1295,24 @@ ASSERTIONS: "list[tuple[str, str]]" = [
     ("ST-5", "st_5_rejected_coverage"),
     ("ST-6", "st_6_person_ir_exclusion"),
     ("ST-7", "st_7_method_ir_exclusion"),
+    ("ST-8", "st_8_spec_tables_closed"),
     ("BW-1", "bw_1_roleplay_vocab"),
     ("BW-2", "bw_2_blunt_vocab_tiers"),
     ("BW-3", "bw_3_bare_number_rule"),
     ("BW-4", "bw_4_b_segment_decl"),
+    ("BW-5", "bw_5_contradiction_smoothing"),
+    ("BW-6", "bw_6_readme_comparison_top"),
     ("FC-1", "fc_1_two_field_closedset"),
     ("FC-2", "fc_2_kernel_fields_diff"),
     ("FC-3", "fc_3_paired_source_location"),
     ("FC-4", "fc_4_state_vocab_board"),
     ("FC-5", "fc_5_bundle_ns_isolation"),
+    ("FC-6", "fc_6_active_pool_confirmation"),
     ("GS-1", "gs_1_person_gate_source"),
     ("GS-2", "gs_2_method_gate_source"),
     ("GS-3", "gs_3_bidirectional_zero_mismatch"),
     ("GS-4", "gs_4_calibration_kappa"),
+    ("GS-5", "gs_5_gate_non_regression"),
 ]
 
 
@@ -1117,7 +1469,7 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
 
     # 黄-2 收口：看板正文状态 token 扫描（词表内/字段名放／私扩咬）
     board_good = "## 人工闸结论\n\n- 状态迁移到 `active`，产物级 `needs_review` 清零；字段 `证据等级` 随动。\n"
-    board_bad = "## 人工闸结论\n\n- 主理人裁定：S1 产物面全部 `彻底完成`，状态迁移到 `已核`。\n"
+    board_bad = "## 人工闸结论\n\n- 人工闸记录：S1 产物面全部 `彻底完成`，状态迁移到 `已核`。\n"
     cases.append(("Y2_board_pass", state_token_scan(board_good, BOARD_STATE_LINE_KEY, STATE_WORDS, False) == [], True))
     cases.append(("Y2_board_bite", state_token_scan(board_bad, BOARD_STATE_LINE_KEY, STATE_WORDS, False) != [], True))
     # 黄-2 收口：AC-5 词表声明句扫描（全等放／私扩「已核」咬／缺值咬）
@@ -1165,6 +1517,83 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("VOCAB_pass", vocab_body_present(ROLEPLAY_BANNED_WORDS), True))
     cases.append(("VOCAB_bite_empty", vocab_body_present(()), False))
     cases.append(("VOCAB_bite_blank", vocab_body_present(("  ",)), False))
+
+    # ===== S4 批配对咬放 =====
+
+    # ST-8 规范表四节闭集：齐备放／缺节咬／改名咬＋关键引用行缺失咬
+    s8_good = ("## 适用范围\nx\n## 节闭集表\nx\n## 声明措例\n"
+               "宁可生成一个诚实标注局限的 60 分产物，也不要一个看似完美的 90 分造假产物\n"
+               "## 量纲与机检落点\nAC-1 AC-2 VA-S-01")
+    s8_missing = "## 适用范围\nx\n## 节闭集表\nx\n## 声明措例\nx"
+    s8_rename = "## 适用范围\nx\n## 节闭集表\nx\n## 声明措辞\nx\n## 量纲与机检落点\nx"
+    cases.append(("ST8_pass", section_diff(spec_sections(s8_good), SPEC_FOUR_SECTIONS) == (set(), set()), True))
+    cases.append(("ST8_bite_missing", section_diff(spec_sections(s8_missing), SPEC_FOUR_SECTIONS) != (set(), set()), True))
+    cases.append(("ST8_bite_rename", section_diff(spec_sections(s8_rename), SPEC_FOUR_SECTIONS) != (set(), set()), True))
+    cases.append(("ST8refs_pass", spec_missing_key_refs(s8_good, SPEC_KEY_REFS["perspective-spec"]) == [], True))
+    cases.append(("ST8refs_bite", spec_missing_key_refs("## 适用范围\n无引用", SPEC_KEY_REFS["perspective-spec"]) != [], True))
+
+    # ST-3 转实装层：perspective 节头去空白归一放／带空格形态同判放／缺层咬／串层咬
+    p_good = "## 表达DNA\nx\n## 心智模型\nx\n## 决策启发式\nx\n## 反模式\nx\n## 诚实边界\nx"
+    p_space = "## 表达 DNA\nx\n## 心智模型\nx\n## 决策启发式\nx\n## 反模式\nx\n## 诚实边界\nx"
+    p_short = "## 表达DNA\nx\n## 心智模型\nx\n## 反模式\nx\n## 诚实边界\nx"
+    p_mix = p_good + "\n## 执行步骤\nx"
+    cases.append(("ST3I_pass", section_diff(perspective_head_sections(p_good), PERSPECTIVE_SECTIONS) == (set(), set()), True))
+    cases.append(("ST3I_space_pass", section_diff(perspective_head_sections(p_space), PERSPECTIVE_SECTIONS) == (set(), set()), True))
+    cases.append(("ST3I_bite_missing", section_diff(perspective_head_sections(p_short), PERSPECTIVE_SECTIONS) != (set(), set()), True))
+    cases.append(("ST3I_bite_mix", section_diff(perspective_head_sections(p_mix), PERSPECTIVE_SECTIONS) != (set(), set()), True))
+
+    # ST-3 technique 归一化口径：「R 原文」全形态放／裸段名「R」放／「R 原文X」改名咬／缺段咬／非法头咬
+    t_full = ("R 原文", "I 诠释", "A1 案例", "A2 触发场景", "E 执行步骤", "B 边界")
+    t_bare = ("R", "I", "A1", "A2", "E", "B")
+    t_rename = ("R 原文X", "I 诠释", "A1 案例", "A2 触发场景", "E 执行步骤", "B 边界")
+    t_missing = ("R 原文", "I 诠释", "A1 案例", "A2 触发场景", "E 执行步骤")
+    ex1 = technique_segment_normalize(t_full)
+    ex2 = technique_segment_normalize(t_bare)
+    ex3 = technique_segment_normalize(t_rename)
+    ex4 = technique_segment_normalize(t_missing)
+    cases.append(("ST3T_norm_pass", ex1 == (set(), set(), []), True))
+    cases.append(("ST3T_bare_pass", ex2 == (set(), set(), []), True))
+    cases.append(("ST3T_rename_bite", ex3[2] != [], True))
+    cases.append(("ST3T_missing_bite", ex4[1] != set(), True))
+    cases.append(("ST3T_fields_pass",
+                  card_fields_closed_ok({"出处": "s1", "触发": "t", "步骤": "p", "边界": "b", "验证状态": "未验"}), True))
+    cases.append(("ST3T_fields_bite",
+                  card_fields_closed_ok({"出处": "s1", "自造字段": "x"}), False))
+
+    # BW-5 矛盾平滑：声明行两行放／缺行咬；词表本体放／空咬；产物命中咬／无命中放
+    cases.append(("BW5a_pass", decl_rows_missing("内部矛盾不平滑：矛盾是深度的重要信号", PERSON_CONTRADICTION_DECL_ROWS) == [], True))
+    cases.append(("BW5a_bite", decl_rows_missing("防编护栏节（无条款）", PERSON_CONTRADICTION_DECL_ROWS) != [], True))
+    cases.append(("BW5b_vocab_pass", vocab_body_present(SMOOTH_PHRASE_VOCAB) and len(set(SMOOTH_PHRASE_VOCAB)) == 4, True))
+    cases.append(("BW5b_bite_hit", blunt_hits("该人物思想毫无矛盾、自洽无冲突。", SMOOTH_PHRASE_VOCAB) != [], True))
+    cases.append(("BW5b_pass_nohit", blunt_hits("其早期与晚期立场存在张力，按原样入档。", SMOOTH_PHRASE_VOCAB) == [], True))
+
+    # BW-6 README 置顶：置顶齐备放／表在 H2 后咬／缺声明行咬／缺行名咬／声明重复咬
+    bw6_good = ("# t\n\n| 维度 | fuxi-skill | nuwa-skill | cangjie-skill |\n|---|---|---|---|\n"
+                "| 对象 | a | b | c |\n| 产物 | d | e | f |\n| 验证 | g | h | i |\n\n"
+                "与前序同名旧物无继承关系。\n\n## 目录地图\nx")
+    bw6_after_h2 = "# t\n\n## 目录地图\nx\n\n| 对象 | nuwa-skill | cangjie-skill |\n|---|---|---|\n| 产物 | fuxi-skill | y |\n\n与前序同名旧物无继承关系。"
+    bw6_nodecl = bw6_good.replace(COMPARISON_NO_INHERIT_DECL, "（无声明）")
+    bw6_norows = bw6_good.replace("| 对象 | a | b | c |\n", "").replace("| 产物 | d | e | f |\n", "")
+    cases.append(("BW6_pass", readme_table_problems(bw6_good) == [], True))
+    cases.append(("BW6_bite_after_h2", any("未置顶" in p for p in readme_table_problems(bw6_after_h2)), True))
+    cases.append(("BW6_bite_nodecl", any("声明行命中" in p for p in readme_table_problems(bw6_nodecl)), True))
+    cases.append(("BW6_bite_norows", any("维度行名" in p for p in readme_table_problems(bw6_norows)), True))
+    cases.append(("BW6_bite_decl2", any("声明行命中" in p for p in readme_table_problems(bw6_good + "\n" + COMPARISON_NO_INHERIT_DECL)), True))
+
+    # FC-6 active 池条目确认：四字段齐放／缺块咬／产物id 不匹配咬／空字段咬
+    conf_ok = {"产物id": "obj-a-perspective", "人工确认引用": "board-x", "提案件引用": "prop-1", "版本审计引用": "commit-1"}
+    cases.append(("FC6_pass", pool_entry_confirmed(conf_ok, "obj-a-perspective"), True))
+    cases.append(("FC6_bite_id", pool_entry_confirmed(conf_ok, "obj-b-perspective"), False))
+    cases.append(("FC6_bite_missing_field", pool_entry_confirmed({"产物id": "obj-a-perspective"}, "obj-a-perspective"), False))
+    cases.append(("FC6_bite_blank", pool_entry_confirmed(dict(conf_ok, 人工确认引用="  "), "obj-a-perspective"), False))
+
+    # GS-5 不退化：层名基数达标放／删层咬；基数达标放／缩水咬
+    cases.append(("GS5_layers_pass", non_regression_shrunk(len(VALIDATOR_LAYER_NAMES), GS5_BASELINE["层名基数"]) == [], True))
+    cases.append(("GS5_layers_bite", non_regression_shrunk(len(VALIDATOR_LAYER_NAMES) - 1, GS5_BASELINE["层名基数"]) != [], True))
+    cases.append(("GS5_count_pass", non_regression_shrunk(25, 25) == [], True))
+    cases.append(("GS5_count_bite", non_regression_shrunk(24, 25) != [], True))
+    cases.append(("GS5_mech_present", "机械断言" in METHOD_GATE_WHITELIST and "格式检查表" in PERSON_GATE_WHITELIST, True))
+    cases.append(("GS5_assert基数", len(ASSERTIONS) == GS5_BASELINE["断言编号基数"], True))
 
     return cases
 
