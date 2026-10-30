@@ -3,7 +3,7 @@
 > 票号＝FUXI-S2｜开票＝主理人｜日期＝2026-10-30｜被派＝工程师席
 > ANCHOR＝开工前取当轮 HEAD 实测读数（回执开端必附）
 > 施工输入真源（直读照做）：
-> ①`.collab\design\2026-10-30-FUXI-S2-票面前置定义-v1.md`——对象分类器（四问决策序·四值闭集 {person,method,mixed,out-of-scope}·11 判例表·混淆表规程 n=48/硬下限 40·总体一致率 ≥85%＋mixed 召回 ≥75% 已锁定）＋hold-out 两轴（轴一＝时间轴照 v2.1 P-7；轴二＝近邻对象/主题配平轴·写死）＋§三 S2 骨架（adapters 章节闭集·编译形态）。主理人已裁：C-1 采四值＋分层消歧／C-2 轴二定名照准／C-3 预注册值锁定／C-4 `adapters/` 子目录落点照准。
+> ①`.collab\design\2026-10-30-FUXI-S2-票面前置定义-v1.md`——对象分类器（四问决策序·四值闭集 {person,method,mixed,out-of-scope}·11 判例表·混淆表规程 n=48/硬下限 40·总体一致率 ≥85%＋mixed 召回 ≥75% 已锁定）＋hold-out 两轴（轴一＝时间轴照 v2.1 person 轨语料截止日定义句；轴二＝近邻对象/主题配平轴·写死）＋§三 S2 骨架（adapters 章节闭集·编译形态）。主理人已裁：C-1 采四值＋分层消歧／C-2 轴二定名照准／C-3 预注册值锁定／C-4 `adapters/` 子目录落点照准。
 > ②设计真源（只读）＝`.collab\design\2026-10-30-fuxi-skill-merge-boundary-design-v2.md` §十一 S2 行＋§三 分轨 schema＋R19/R23/B5/B10/D10。
 > 派票口径＝S2 不以 S1 验收为硬门（按序派发不互锁·S1 已 PASS 在案）。
 
