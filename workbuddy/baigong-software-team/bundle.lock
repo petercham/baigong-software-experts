@@ -2,7 +2,7 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "repo": ".",
     "path": "workbuddy/baigong-software-team",
     "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）"
@@ -30,10 +30,10 @@
     }
   ],
   "conventions": {
-    "repo": "相对 bundle 源仓根的并列目录路径（同仓组件取 \".\"＝仓根，publish.py:829 join 解析）",
+    "repo": "相对 bundle 源仓根的并列目录路径（同仓组件取 \".\"＝仓根，由装配器解析）",
     "roottag": "对齐 T2 门禁闭集（check-source-of-truth.py roottag∈{experts,skills,softdev}）",
     "ref": "消费者锁版本＝纪律②③：一律锁不可变 tag 或 commit，不用 HEAD/分支名；tag 命名＝<组件名>@vX.Y.Z",
     "target": "装配面 bundle 内相对路径（注册态 skills/<域>/·与 plugin.json skills[] 引用对齐）",
-    "output": "装配产物不入任何仓版本库＝纪律④；缺省输出＝<bundle 源仓>-build/<bundle名>＝D:\\multi-agent-collab-devkits-build\\baigong-software-team（预览面·部署先行纪律 deploy-gate.md §五：只入预览候人类真实验证，进部署面＝验证后独立指示）"
+    "output": "装配产物不入任何仓版本库＝纪律④；缺省输出＝与 bundle 源仓同级的「<bundle 源仓名>-build/<bundle 名>」预览面（不写绝对路径；预览面·部署先行纪律 deploy-gate.md §五：只入预览候人类真实验证，进部署面＝验证后独立指示）"
   }
 }
