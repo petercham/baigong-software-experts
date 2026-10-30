@@ -24,7 +24,17 @@
 #   两形态皆认（ENG-S6 解析修正·票面形态不改，多行列表为模板 v2 现行约定）：
 #   ① 单行 `声明闭集：<路径>[、<路径>]…`；
 #   ② 多行列表：`声明闭集：` 行（正文空）＋紧随 `- 路径` 列表行，至空行/非列表行止。
+#   ENG-S8 T3 收紧（只作用于形态②，形态①口径不动）：列表条目仅**路径形态**入集
+#     （含 `/` 或 `\`、或以已知扩展名 .md/.py/.sh/.json/.lock/.txt 结尾），
+#     紧随的叙述行（`- 背景…`／`- HOLD…`）不入集（段三杂项误收直修）。
 #   缺声明行（或声明行后无任何条目）＝SKIP 并计数、不算绿（D6-5 条款明文）。
+#
+# ENG-S8 口径三连修（三源均系工具口径缺陷·三段/基面分段/SKIP/退出码框架零动）：
+#   T1 git 面取清单一律 `-c core.quotepath=false`：中文名 name-only 不再走八进制
+#      转义，与回执清单 UTF-8 明文全等可比（段一缺项×3 直修）；
+#   T2 receipt_commits 只收**交付笔**指针（行含交付/代码笔/实装标记＋hex）；
+#      「开端 HEAD」「票面」「回执」行不入集（开票笔非交付笔·段一必不中）；
+#   T3 声明列表条目路径形态收紧（见上）。
 #
 # 严重度：全部 WATCH（首挂 advisory·整合清单 §六；升 block 同 D6-3 通道）。
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
@@ -60,10 +70,19 @@ SPEC = "OA-D6-5"
 DECL_LINE_RE = re.compile(r"^\s*(?:[-*>\s]*)声明闭集[：:](.*)$")
 # 多行列表形态的条目行：`- ` 起的列表行（ENG-S6 解析扩展）
 DECL_LIST_ITEM_RE = re.compile(r"^\s*-\s+(.+)$")
-# 回执「commit 记录」节内的 commit 指针行：`commit <hash>` 或含 commit 的行＋反引号 hash
+# ENG-S8 T3：声明列表条目的已知路径扩展名闭集（路径形态判据之一）
+KNOWN_DECL_EXTS = (".md", ".py", ".sh", ".json", ".lock", ".txt")
+# 回执 commit 指针行内的反引号包裹 hash（7-40 位十六进制）
 COMMIT_HASH_RE = re.compile(r"`([0-9a-f]{7,40})`")
-# 回执清单行：markdown 表格行内含反引号包裹的仓内路径（相对仓根正斜杠）
-RECEIPT_PATH_RE = re.compile(r"`([A-Za-z0-9][A-Za-z0-9._/\-]*\.[A-Za-z0-9]+)`")
+# ENG-S8 T2：交付笔标记（行含其一＋hash 才入对账集）与排除标记（行含其一即不入集）。
+# 「开端 HEAD」「票面」「回执」＝开端快照笔／开票笔／回执笔，均非交付笔，不入集；
+# 回执笔自对账另循既有渠道（无则保持现状，不新增渠道）。
+COMMIT_MARKER_RE = re.compile(r"交付|代码笔|实装|commit")
+COMMIT_EXCLUDE_RE = re.compile(r"开端 ?HEAD|票面|回执")
+# 回执清单行：markdown 表格行内含反引号包裹的仓内路径（相对仓根正斜杠）。
+# ENG-S8 T1 配套（比较口径）：字符集含 CJK 基本域——中文名交付件的清单行须可收，
+# 否则 quotepath 解转义后 git 面明文与回执面仍不可比（段一缺项假阳不消）。
+RECEIPT_PATH_RE = re.compile(r"`([A-Za-z0-9一-鿿][A-Za-z0-9._/\-一-鿿]*\.[A-Za-z0-9]+)`")
 # 票/回执首行状态标记
 HOLD_RE = re.compile(r"HOLD[：:]")
 CLOSED_RE = re.compile(r"已结案")
@@ -123,10 +142,29 @@ def _is_list_item(line: str) -> bool:
     return bool(DECL_LIST_ITEM_RE.match(line))
 
 
+def _is_path_form(entry: str) -> bool:
+    """ENG-S8 T3：声明列表条目的路径形态判据（只作用于多行列表形态②）。
+
+    入集条件＝整条目为**单一 token**（无空白、无全角标点/引号：字符闭集＝
+    ASCII 字母数字 + `._/-\\` + CJK 基本域），且（含 `/` 或 `\\`，
+    或以 KNOWN_DECL_EXTS 已知扩展名结尾）。
+    纯叙述行（`- 背景…`／`- HOLD…`）＝含空白/标点或无路径特征＝不入集。
+    """
+    if not entry or any(c.isspace() for c in entry):
+        return False
+    if not re.fullmatch(r"[A-Za-z0-9._/\\\-一-鿿]+", entry):
+        return False
+    if "/" in entry or "\\" in entry:
+        return True
+    return entry.lower().endswith(KNOWN_DECL_EXTS)
+
+
 def ticket_declared_set(ticket_text: str) -> "list[str]":
     """票内全部 `声明闭集：` 声明块（WP 各一块则并集）。两形态（ENG-S6）：
       ① 单行 `声明闭集：<路径>[、<路径>]…`（正文非空）——既有形态保持兼容；
       ② 多行列表 `声明闭集：`（正文空）＋紧随 `- 路径` 列表行，至空行/非列表行止。
+    ENG-S8 T3（只收紧形态②，形态①口径不动）：列表条目仅**路径形态**入集
+    （判据见 _is_path_form）；叙述行仍终止条件不变（仍是列表行→继续扫描）但不入集。
     无任何声明块、或声明块均无条目＝[]（＝SKIP 信号）。"""
     paths: "list[str]" = []
     lines = ticket_text.split("\n")
@@ -138,23 +176,37 @@ def ticket_declared_set(ticket_text: str) -> "list[str]":
             continue
         body = m.group(1).strip()
         if body:
-            # 形态①：单行正文即闭集条目
+            # 形态①：单行正文即闭集条目（口径不动）
             paths.extend(split_paths(body))
             i += 1
             continue
-        # 形态②：正文空＝多行列表头，随后贪心收 `- ` 列表行至空行/非列表行止
+        # 形态②：正文空＝多行列表头，随后收 `- ` 列表行至空行/非列表行止；
+        # ENG-S8 T3：条目逐条过路径形态判据，叙述行扫过不入集。
         i += 1
         while i < len(lines) and _is_list_item(lines[i]):
-            paths.extend(split_paths(DECL_LIST_ITEM_RE.match(lines[i]).group(1)))
+            raw = DECL_LIST_ITEM_RE.match(lines[i]).group(1)
+            for p in split_paths(raw):
+                if _is_path_form(p):
+                    paths.append(p)
             i += 1
     return paths
 
 
 def receipt_commits(receipt_text: str) -> "list[str]":
-    """回执内 commit 指针行的 hash 集（去重·保序）。"""
+    """回执内**交付笔** commit 指针的 hash 集（去重·保序）。
+
+    ENG-S8 T2 口径（写进 docstring＝票面要求）：只收交付笔指针——行内含
+    交付标记（「交付」/「代码笔」/「实装」/「commit」，见 COMMIT_MARKER_RE）
+    且含反引号包裹 hash（7-40 hex）者入集；行内含「开端 HEAD」「票面」
+    「回执」标记（COMMIT_EXCLUDE_RE）者整行不入集——开端快照笔／开票笔／
+    回执笔均非交付笔，混入则段一基面必不中（开票笔 name-only＝中文名票面件）。
+    回执笔自对账另循既有渠道（现状无独立渠道＝保持现状，不新增）。
+    """
     hashes: "list[str]" = []
     for line in receipt_text.split("\n"):
-        if "commit" not in line:
+        if not COMMIT_MARKER_RE.search(line):
+            continue
+        if COMMIT_EXCLUDE_RE.search(line):
             continue
         for m in COMMIT_HASH_RE.finditer(line):
             h = m.group(1)
@@ -180,11 +232,14 @@ def git_name_only(root: str, commit: str) -> "list[str] | None":
     """段一基面＝git name-only（基面分段刚性：此函数体只用 git 面，
     **不出现任何文件系统 listing**——walk/listdir 均禁，单面统摄在结构上封死）。
 
+    ENG-S8 T1：取清单走 `git -c core.quotepath=false`——中文名件 name-only
+    不再输出八进制转义引号形态，与回执清单（UTF-8 明文）全等可比。
     返回 None＝该 commit 解析不到（＝「证据缺」，WATCH 不算 SKIP 绿）。
     """
     try:
         proc = subprocess.run(
-            ["git", "-C", root, "show", "--name-only", "--format=", commit],
+            ["git", "-c", "core.quotepath=false", "-C", root,
+             "show", "--name-only", "--format=", commit],
             capture_output=True, text=True, encoding="utf-8",
         )
     except OSError:
@@ -212,10 +267,14 @@ def delivery_listing(root: str) -> "set[str]":
 
 
 def git_dirty_paths(root: str) -> "set[str]":
-    """`git status --porcelain` 的交付面路径集（未声明生成件检出的 git 侧信号）。"""
+    """`git status --porcelain` 的交付面路径集（未声明生成件检出的 git 侧信号）。
+
+    ENG-S8 T1 同源口径：名面类调用一律 `-c core.quotepath=false`
+    （中文名脏路径不解八进制转义则与声明面永不相等＝假阳未声明生成件）。
+    """
     try:
         proc = subprocess.run(
-            ["git", "-C", root, "status", "--porcelain"],
+            ["git", "-c", "core.quotepath=false", "-C", root, "status", "--porcelain"],
             capture_output=True, text=True, encoding="utf-8",
         )
     except OSError:
@@ -370,9 +429,20 @@ def check_pair(root: str, ticket_rel: str) -> "tuple[list[str], int]":
 #     → 归一解析成功、三段对账执行全绿 → 0 发现
 #   case9_absout_notptr（ENG-S7）：回执指针＝仓外绝对盘符路径 → 不算回执指针
 #     → 「回执指针解析不到」WATCH 1（现状语义保持）
+#   case10_cnname_quotepath_ok（ENG-S8 T1）：交付件中文名（git core.quotepath 场景）
+#     → name-only 解转义与回执 UTF-8 明文可比 → 段一匹配成功 → 0 发现
+#     （修前＝转义形态段一缺项假阳 1）
+#   case11_ticketface_notcommit（ENG-S8 T2）：回执含「票面（开票 commit hash）」
+#     「开端 HEAD（票 commit）」行 → 非交付笔不入对账集、不误报「解析不到」 → 0 发现
+#     （修前＝开票笔 hash 被收→段一证据缺假阳 1）
+#   case12_declnarr_pathonly（ENG-S8 T3）：声明列表夹叙述行（`- 背景…`／`- HOLD…`）
+#     → 声明集只收路径形态条目、叙述行不入（不误入段三） → 0 发现
+#     （修前＝叙述行入声明集→段三「声明与交付面对不上」假阳 2）
 SELFTEST_EXPECTED = {"S1": 0, "S2": 1, "S3": 1, "S4": 1, "S5_skip": 1,
                      "case6_multiline_ok": 0, "case7_nodecllist_skip": 1,
-                     "case8_absdrive_ok": 0, "case9_absout_notptr": 1}
+                     "case8_absdrive_ok": 0, "case9_absout_notptr": 1,
+                     "case10_cnname_quotepath_ok": 0, "case11_ticketface_notcommit": 0,
+                     "case12_declnarr_pathonly": 0}
 
 
 def selftest(root: str) -> int:
@@ -380,7 +450,9 @@ def selftest(root: str) -> int:
     try:
         def case(name: str, files: "list[str]", declared: "list[str]",
                  receipt_list: "list[str]", receipt_extra: "list[str]" = (),
-                 decl_mode: str = "single", ptr_mode: str = "relative") -> "tuple[int, int]":
+                 decl_mode: str = "single", ptr_mode: str = "relative",
+                 decl_extra: "list[str]" = (),
+                 receipt_extra_lines: "list[str]" = ()) -> "tuple[int, int]":
             """建一个合成票/回执＋commit，跑 check_pair，返回 (发现数, SKIP数)。
             decl_mode：single＝单行「声明闭集：a、b」；multiline＝模板 v2 多行列表
             （「声明闭集：」行＋`- 路径` 列表行）；header_only＝仅声明行无条目。
@@ -388,6 +460,10 @@ def selftest(root: str) -> int:
             abs_inrepo＝仓内绝对盘符路径指针（反斜杠·真实票面形态·盘符大小写故意
             与仓根不一致以验证大小写不敏感）；abs_outrepo＝仓外绝对盘符路径指针
             （回执件在仓外真实落盘，验证不算回执指针）。
+            decl_extra（ENG-S8 T3）：追加在声明列表条目之后的 `- ` 叙述行原文
+            （`- 背景…`／`- HOLD…` 形态·验证只收路径形态不入叙述行）。
+            receipt_extra_lines（ENG-S8 T2）：回执追加行原文（「票面（开票笔 hash）」
+            「开端 HEAD」形态·验证非交付笔不入对账集）。
             每用例独立临时仓（用例间零污染——同仓复用会让前案文件混进后案 commit 并集）。
             注：abs_* 两案依赖临时仓绝对路径带盘符（Windows 面·票面体例同源）。"""
             repo = os.path.join(tmp, "repo-" + name)
@@ -415,6 +491,7 @@ def selftest(root: str) -> int:
             if decl_mode == "multiline":
                 ticket_lines.append("- 声明闭集：")
                 ticket_lines.extend("  - `%s`" % p for p in declared)
+                ticket_lines.extend(decl_extra)
             elif decl_mode == "header_only":
                 ticket_lines.append("- 声明闭集：")
                 ticket_lines.append("")
@@ -440,6 +517,7 @@ def selftest(root: str) -> int:
                   "- commit `%s` 记录" % head, "", "| # | 文件 | 标记 |", "|---|---|---|"]
             for p2 in receipt_list + list(receipt_extra):
                 rl.append("| 1 | `%s` | 修改 |" % p2)
+            rl.extend(receipt_extra_lines)
             if ptr_mode == "abs_outrepo":
                 outdir = os.path.join(tmp, "outside-" + name, "research")
                 os.makedirs(outdir, exist_ok=True)
@@ -487,6 +565,29 @@ def selftest(root: str) -> int:
         results["case9_absout_notptr"] = case(
             "case9", ["deliverables/a.md"], ["deliverables/a.md"],
             ["deliverables/a.md"], ptr_mode="abs_outrepo")
+        # case10 中文名交付件（git core.quotepath 场景）：name-only 解转义与回执
+        # UTF-8 明文可比 → 段一匹配全绿 → 0 发现（修前＝转义形态缺项＋多项假阳）
+        results["case10_cnname_quotepath_ok"] = case(
+            "case10", ["deliverables/收尾微票.md", "deliverables/a.md"],
+            ["deliverables/收尾微票.md", "deliverables/a.md"],
+            ["deliverables/收尾微票.md", "deliverables/a.md"])
+        # case11 回执含「票面（开票笔 hash）」＋「开端 HEAD（票 commit）」行：
+        # 非交付笔不入对账集 → 不为其对账、不误报证据缺 → 0 发现
+        # （修前＝两 hash 被收成 commit 指针→git 面解析不到→证据缺 WATCH 2）
+        results["case11_ticketface_notcommit"] = case(
+            "case11", ["deliverables/a.md"], ["deliverables/a.md"],
+            ["deliverables/a.md"], receipt_extra_lines=[
+                "- 票面：`.collab/tickets/case11.md`（开票笔 `72c0a97`）。",
+                "- 开端 HEAD：`1fb47f45ed36ee8297c2316a9ad52660cd630dd2`（票 commit，开工实测）。",
+            ])
+        # case12 声明列表夹叙述行（`- 背景…`／`- HOLD…`）：声明集只收路径形态条目
+        # → 叙述行不入段三不误报 → 0 发现（修前＝叙述行入声明集→段三对不上 WATCH 2）
+        results["case12_declnarr_pathonly"] = case(
+            "case12", ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"], decl_mode="multiline",
+            decl_extra=["- 背景（自包含）：合成叙述行，含空白与（全角标点）。",
+                        "- HOLD：无。"])
 
         ok = True
         got = {"S1": results["S1"][0], "S2": results["S2"][0],
@@ -495,7 +596,10 @@ def selftest(root: str) -> int:
                "case6_multiline_ok": results["case6_multiline_ok"][0],
                "case7_nodecllist_skip": results["case7_nodecllist_skip"][1],
                "case8_absdrive_ok": results["case8_absdrive_ok"][0],
-               "case9_absout_notptr": results["case9_absout_notptr"][0]}
+               "case9_absout_notptr": results["case9_absout_notptr"][0],
+               "case10_cnname_quotepath_ok": results["case10_cnname_quotepath_ok"][0],
+               "case11_ticketface_notcommit": results["case11_ticketface_notcommit"][0],
+               "case12_declnarr_pathonly": results["case12_declnarr_pathonly"][0]}
         for k, want in sorted(SELFTEST_EXPECTED.items()):
             mark = "OK" if got[k] == want else "MISMATCH"
             if got[k] != want:
