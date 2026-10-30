@@ -30,7 +30,7 @@
 - 当期唯一门禁位＝`格式检查表`（VA-P-01：结构〔ST-3 本轨侧〕＋禁用词〔BW-1/BW-2〕＋格式〔ST-4／FC-3〕）；judge 层（盲评rubric／绝对线／decoy）当期恒参考位（B12/R24），读数与 `calibration_state` 并列行（VA-P-02）。
 - 指标行引用制：rubric 四维五级／绝对线／D12 独立报告行等均**引用** `gates/validator-catalog.md` §四预注册表与 VA-P-03/04，本表不复制数值（单源纪律）。
 - 元数据面＝`contracts/artifact-contract.md` AC-1..3（产物 id／状态字段／准入证据卡三栏逐字引用，不重定义；轨别取值 `person`）。
-- 随附件＝test-prompts 回归件（ST-4 字段闭集；期望档位取值与 AC-1 `abstain_tier` 同一词表零分叉）。
+- 随附件＝test-prompts 回归件（ST-4 字段闭集；期望档位取值与 AC-1 `abstain_tier` 同一词表零分叉）。（锚点题构造口径＝引用 `gates/validator-catalog.md` VA-P-05：锚点题取语料截止日之后（R13 时序）；对照臂=`未测` 态下 `是否锚点题`=false＋如实注＝合规读数，不得虚构锚点题凑数。）
 - 泄漏检查＝person 轨门禁位（VA-P-05）；人工锚点卡消费位未验不记绿（VA-P-06）。
 - 机检汇总：本规范表文件本体四节节闭集＋关键引用行在场＝ST-8；产物实例侧＝ST-3／BW-1／BW-2／BW-3／BW-5(b)／FC-3／FC-6（入池侧）。
 

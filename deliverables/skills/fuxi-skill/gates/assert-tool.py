@@ -234,6 +234,7 @@ _H2_SEC_RE = re.compile(r"^##\s+(.+?)\s*$", re.M)
 _SEG_HEAD_RE = re.compile(r"^([RIAB][12]?|E)(?:\s+(\S.*?))?\s*$")
 _PRODUCT_DIR_SUFFIXES = ("-perspective", "-technique", "-bundle")
 _PRODUCT_BODY_FILE = "SKILL.md"   # 产物本体件名：节结构 diff 只消费本体件（随件入词表面不入节 diff 面）
+_TEST_PROMPTS_FILE = "test-prompts.md"  # 产物随件回归资产件名（ST-4 消费位·T5 建）
 _PENDING_SUBDIR = "pending"       # 生效池根下待确认暂存区子目录（产物级扫描面扩一层；条目不计池计数）
 _FM_ROW_RE = re.compile(r"^FM-[SPM]-\d{2}$")
 _BOARD_NAME_RE = re.compile(r"^board-(\d{4})-(\d{2})-(\d{2})\.md$")
@@ -450,6 +451,16 @@ def test_prompt_entries_ok(entries: "list[dict[str, str]]") -> bool:
     return True
 
 
+def test_prompt_values_ok(entries: "list[dict[str, str]]") -> bool:
+    """ST-4 条目取值闭集（T5 建）：`期望档位` ∈ ABSTAIN_TIERS、`所属轨` ∈ SIDE_TRACKS（字段缺省不在此咬，归字段面判据）。"""
+    registry = {"期望档位": ABSTAIN_TIERS, "所属轨": SIDE_TRACKS}
+    for entry in entries:
+        for field, allowed in registry.items():
+            if field in entry and str(entry[field]) not in allowed:
+                return False
+    return True
+
+
 def coverage_audit_ok(rejected_listing: "list[str]", audit: "dict[str, str]") -> bool:
     """ST-5 rejected/ 可枚举（listing 可为空表＝可枚举态）＋audit 三问字段齐备非空。"""
     if rejected_listing is None:
@@ -487,6 +498,32 @@ def paired_fields_ok(records: "list[dict[str, str]]") -> bool:
         if has_id != has_loc:
             return False
     return True
+
+
+def product_element_pair_hits(entry_texts: "dict[str, dict[str, str]]") -> "tuple[list[str], int]":
+    """FC-3 产物要素行级成对检（T5 建·行级判据·确定性）。
+
+    逐条目本体件（`_PRODUCT_BODY_FILE`）逐行扫描：行内同时含 `` `证据等级` ``＋`` `来源态` ``
+    两个反引号闭集字段名 token＝要素标注行；要素标注行须同时含子串 `source_id` 与子串 `位置`，
+    只有其一＝不成对＝命中（逐行列明细）。返回 (命中列表, 要素行数)；无要素行＝空扫描合法态。
+    模型推断态哨兵取值（EG-3）形式满足本判据（哨兵值含两子串即成对）。
+    """
+    hits: "list[str]" = []
+    marked = 0
+    for name in sorted(entry_texts):
+        for fname in sorted(entry_texts[name]):
+            if fname != _PRODUCT_BODY_FILE:
+                continue
+            for lineno, line in enumerate(entry_texts[name][fname].split("\n"), 1):
+                if "`证据等级`" not in line or "`来源态`" not in line:
+                    continue
+                marked += 1
+                has_id = "source_id" in line
+                has_loc = "位置" in line
+                if has_id != has_loc:
+                    missing = "位置" if has_id else "source_id"
+                    hits.append("%s/%s line%d 不成对（缺%s）" % (name, fname, lineno, missing))
+    return hits, marked
 
 
 def state_vocab_closed_ok(used_states: "tuple[str, ...]", used_columns: "tuple[str, ...]") -> bool:
@@ -863,9 +900,79 @@ def st_3_section_closed_diff() -> "tuple[str, str]":
             % (len(entries), checked, "实产物判绿" if entries else "空扫描合法态·配对咬放见 selftest"))
 
 
+def test_prompts_list_blocks(text: str) -> "tuple[list[list[dict]], int]":
+    """ST-4 实装层（T5 建）：抽 markdown 内顶层为 list 的 fenced json 块。
+
+    `md_json_blocks` 只收 dict 块，list 块须单独解析（防误判缺块）。
+    返回 (非空 list 块列表, 解析失败数)；空 list 块不入首列（空 list＝无条目，由调用侧咬）。
+    """
+    lists: "list[list[dict]]" = []
+    bad = 0
+    for raw in _JSON_FENCE_RE.findall(text):
+        try:
+            parsed = json.loads(raw)
+        except ValueError:
+            bad += 1
+            continue
+        if isinstance(parsed, list) and parsed:
+            lists.append(parsed)
+    return lists, bad
+
+
 def st_4_test_prompts() -> "tuple[str, str]":
-    """ST-4 test-prompts 存在可解析＋条目字段闭集——〔S0a 建／S1 执行〕。"""
-    return (READ_PENDING, "S1")
+    """ST-4 test-prompts 存在可解析＋条目字段闭集——〔S0a 建／T5 实装〕。
+
+    实装基面＝产物级扫描面枚举（同 ST-3＝生效池根直接条目＋pending/ 一层下产物目录），
+    消费条目随件 `test-prompts.md`：件存在＋至少一个顶层非空 json list 块＋
+    每条目字段集合 ⊆ TEST_PROMPT_FIELDS＋`期望档位` ∈ ABSTAIN_TIERS＋`所属轨` ∈ SIDE_TRACKS；
+    无条目＝空扫描合法态判绿（ST-3/FC-5 同款口径）；判据本体复用 test_prompt_entries_ok()。
+    `是否锚点题` 构造口径引用 validator-catalog VA-P-05（R13 时序），本断言只查字段闭集不查锚点题真实性。
+    """
+    entries = _product_scan_entries()
+    targets = [(n, p) for n, p in entries if n.endswith(("-perspective", "-technique"))]
+    problems: "list[str]" = []
+    per_entry_counts: "list[str]" = []
+    entries_total = 0
+    for name, path in targets:
+        prompts_path = os.path.join(path, _TEST_PROMPTS_FILE)
+        if not os.path.isfile(prompts_path):
+            problems.append("%s 随件 %s 缺失（回归资产缺位）" % (name, _TEST_PROMPTS_FILE))
+            continue
+        lists, bad = test_prompts_list_blocks(_read_text(prompts_path))
+        if bad:
+            problems.append("%s/%s json 解析失败 %d 处" % (name, _TEST_PROMPTS_FILE, bad))
+            continue
+        if not lists:
+            problems.append("%s/%s 无顶层非空 json list 块（缺块或空 list）" % (name, _TEST_PROMPTS_FILE))
+            continue
+        all_entries: "list[dict]" = []
+        for lst in lists:
+            all_entries.extend(e for e in lst if isinstance(e, dict))
+        non_dict = sum(len(lst) for lst in lists) - len(all_entries)
+        if non_dict:
+            problems.append("%s/%s list 块含非对象条目 %d 条" % (name, _TEST_PROMPTS_FILE, non_dict))
+            continue
+        entries_total += len(all_entries)
+        per_entry_counts.append("%s=%d" % (name, len(all_entries)))
+        if not test_prompt_entries_ok(all_entries) or not test_prompt_values_ok(all_entries):
+            details: "list[str]" = []
+            allowed = set(TEST_PROMPT_FIELDS)
+            for i, entry in enumerate(all_entries, 1):
+                unknown = {str(k) for k in entry} - allowed
+                if unknown:
+                    details.append("条目%d 未注册字段%s" % (i, sorted(unknown)))
+                tier = entry.get("期望档位")
+                if tier is not None and str(tier) not in ABSTAIN_TIERS:
+                    details.append("条目%d 期望档位%s越四档闭集" % (i, tier))
+                track = entry.get("所属轨")
+                if track is not None and str(track) not in SIDE_TRACKS:
+                    details.append("条目%d 所属轨%s越轨闭集" % (i, track))
+            problems.append("%s/%s 条目越闭集：%s" % (name, _TEST_PROMPTS_FILE, "；".join(details) or "条目集合非法"))
+    if problems:
+        return (READ_FAIL, "test-prompts 回归件判据违例：%s" % "；".join(problems))
+    return (READ_PASS, "产物条目 %d·回归条目 %d（逐条目 %s）·字段闭集＋档位/轨取值判绿（%s）"
+            % (len(targets), entries_total, "／".join(per_entry_counts) or "无",
+               "实产物判绿" if targets else "空扫描合法态·配对咬放见 selftest"))
 
 
 def st_5_rejected_coverage() -> "tuple[str, str]":
@@ -1034,7 +1141,12 @@ def fc_2_kernel_fields_diff() -> "tuple[str, str]":
 
 
 def fc_3_paired_source_location() -> "tuple[str, str]":
-    """FC-3 source_id＋位置双形态字段成对——〔S0a 建／S1 实装〕（契约实例记录实读）。"""
+    """FC-3 source_id＋位置双形态字段成对——〔S0a 建／S1 实装／T5 产物要素侧扩展〕。
+
+    契约实例侧判据零动（contracts/ json 实例逐条成对）；T5 追加产物要素侧＝
+    产物级扫描面（同 ST-3）逐条目本体件行级成对检（要素标注行缺 source_id 或 位置 任一＝咬）；
+    模型推断态哨兵取值见 EG-3（哨兵形态形式满足成对判据）。
+    """
     texts = _contract_texts()
     records: "list[dict]" = []
     for text in texts.values():
@@ -1044,8 +1156,12 @@ def fc_3_paired_source_location() -> "tuple[str, str]":
                 continue
             records.append(block)
     if not paired_fields_ok(records):
-        return (READ_FAIL, "实例记录 source_id/位置 不成对")
-    return (READ_PASS, "契约 json 实例 %d 条成对判绿" % len(records))
+        return (READ_FAIL, "契约 json 实例 source_id/位置 不成对")
+    hits, marked = product_element_pair_hits(_entry_texts(_product_scan_entries()))
+    if hits:
+        return (READ_FAIL, "产物要素行 source_id/位置 不成对：%s" % "；".join(hits))
+    return (READ_PASS, "契约 json 实例 %d 条成对判绿·产物要素侧要素行 %d 行成对判绿（%s）"
+            % (len(records), marked, "无要素行＝空扫描合法态" if not marked else "实要素行判绿"))
 
 
 def fc_4_state_vocab_board() -> "tuple[str, str]":
@@ -1672,6 +1788,36 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("GS5_count_bite", non_regression_shrunk(24, 25) != [], True))
     cases.append(("GS5_mech_present", "机械断言" in METHOD_GATE_WHITELIST and "格式检查表" in PERSON_GATE_WHITELIST, True))
     cases.append(("GS5_assert基数", len(ASSERTIONS) == GS5_BASELINE["断言编号基数"], True))
+
+    # ===== T5 批配对咬放（FUXI-T5：ST-4 转实装层＋FC-3 产物要素行级侧·内存注入不落仓） =====
+
+    # ST-4 实装层：合法条目 list 块放／未注册字段咬／空 list 咬／随件缺失咬
+    tp_good_md = '# t\n\n```json\n[{"用例id": "tp-01", "题面": "q", "期望档位": "有限定", "所属轨": "person", "是否锚点题": false}]\n```\n'
+    tp_unknown_md = '# t\n\n```json\n[{"用例id": "tp-02", "自造字段": "x"}]\n```\n'
+    tp_empty_md = '# t\n\n```json\n[]\n```\n'
+    tp_dict_md = '# t\n\n```json\n{"用例id": "tp-03"}\n```\n'
+    good_lists, good_bad = test_prompts_list_blocks(tp_good_md)
+    cases.append(("ST4I_pass", good_lists and test_prompt_entries_ok(good_lists[0]), True))
+    unknown_lists, _ub = test_prompts_list_blocks(tp_unknown_md)
+    cases.append(("ST4I_bite_unknown", unknown_lists and not test_prompt_entries_ok(unknown_lists[0]), True))
+    cases.append(("ST4I_bite_emptylist", test_prompts_list_blocks(tp_empty_md)[0] == [], True))
+    cases.append(("ST4I_dict_notlist", test_prompts_list_blocks(tp_dict_md)[0] == [], True))
+    cases.append(("ST4I_bite_missing", _TEST_PROMPTS_FILE not in {"SKILL.md": "本体件", "registration.md": "注册件"}, True))
+    cases.append(("ST4I_tier_bite", not test_prompt_values_ok([{"用例id": "tp-04", "期望档位": "斩钉截铁", "所属轨": "person"}]), True))
+    cases.append(("ST4I_track_bite", not test_prompt_values_ok([{"用例id": "tp-05", "期望档位": "有限定", "所属轨": "persona"}]), True))
+    cases.append(("ST4I_values_pass", test_prompt_values_ok([{"用例id": "tp-06", "期望档位": "有支持", "所属轨": "method"}]), True))
+
+    # FC-3 产物要素行级侧：内联成对放／去 source_id 咬／去 位置 咬／哨兵形态放
+    el_good = {"obj-a-perspective": {"SKILL.md": "- 要素行。`证据等级`=`跨文本推断`·`来源态`=`本人原文`·source_id=`src-01`·位置＝「第三章」\n"}}
+    el_noid = {"obj-a-perspective": {"SKILL.md": "- 要素行。`证据等级`=`跨文本推断`·`来源态`=`本人原文`·位置＝「第三章」\n"}}
+    el_noloc = {"obj-a-perspective": {"SKILL.md": "- 要素行。`证据等级`=`跨文本推断`·`来源态`=`本人原文`·source_id=`src-01`\n"}}
+    el_sentinel = {"obj-a-perspective": {"SKILL.md": "- 要素行。`证据等级`=`模型补全`·`来源态`=`模型推断`·source_id=`model-knowledge`·位置＝「模型内部既有知识，无外部回查位置」\n"}}
+    el_nonelem = {"obj-a-perspective": {"SKILL.md": "- 普通正文行，无要素标注字段 token。\n", "test-prompts.md": "`证据等级`=`跨文本推断`·`来源态`=`本人原文`\n"}}
+    cases.append(("FC3P_pass", product_element_pair_hits(el_good)[0] == [] and product_element_pair_hits(el_good)[1] == 1, True))
+    cases.append(("FC3P_bite_noid", product_element_pair_hits(el_noid)[0] != [], True))
+    cases.append(("FC3P_bite_noloc", product_element_pair_hits(el_noloc)[0] != [], True))
+    cases.append(("FC3P_sentinel_pass", product_element_pair_hits(el_sentinel)[0] == [], True))
+    cases.append(("FC3P_empty_pass", product_element_pair_hits(el_nonelem) == ([], 0), True))
 
     return cases
 
