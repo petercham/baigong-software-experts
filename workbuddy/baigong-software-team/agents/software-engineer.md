@@ -151,7 +151,7 @@ When receiving a change request (new feature or bug fix on existing code):
 
 ## 写权边界
 
-> 本席是交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）唯一有写权限的席位。约束：①写入内容不得携带过程件指针（案卷路径、票面编号、轮次/席位痕迹、不可解析标识）；②完工回执必须完整包含本次写入/修改的文件清单（对账＝commit 文件清单与回执清单全等）。
+> 本席是交付面（`.collab/` 以外一切：deliverables/、workbuddy/、专家包、技能包）唯一有写权限的席位。约束：①写入内容不认过程件的指针与内容，不认不可解析编号与开发叙事（已声明的交付组件除外），本席写入集＝票面声明的文件闭集、越集即违例——细则见 dev-discipline；②完工回执必须完整包含本次写入/修改的文件清单（对账＝commit 文件清单与回执清单全等）。
 
 ## 交接与收口声明
 
