@@ -491,12 +491,10 @@ def regen_seat_baseline(agents: list, abs_of: dict, tags: set) -> None:
 
 # --- C 段自咬（--selftest-seatdecl·内嵌合成件对拍，不新建仓内 fixture 面·设计件 §3.4） ---
 # 预期数内嵌（pointer-closure EXPECTED 的自比对版）；对拍不符 exit 1。
-# 用例1 真实面读数＝5（非设计预演的 0）：d 条缺项 4（arch/product/QA/lead 写权边界行缺卷名·
-#   §十.4 真命中）＋ c 条复写嫌疑 1（engineer 写权边界行②句对 DD §三.1 真实重合 ≥12）——
-#   设计件 §3.4「真实五席→零发现」系设计侧口径疏漏（§二 J6 预演只对 DD 新 §二 四句未对全卷），
-#   已按 N4 上报回执；真命中走 WATCH＋E-4 呈拍通道，不放宽判据。
+# 用例1 真实面读数＝0（ENG-S4 席位声明行整改清零后的现态·原快照 5＝d 条缺项 4＋c 条复写 1，
+#   整改落地后实跑 0，本预期随现态同步·非判据改动·ENG-S5）。
 SEATDECL_EXPECTED = {
-    'case1_real_seats': 5,      # 真实五席声明块 → 现态读数 5（4 缺项＋1 复写·见上注）
+    'case1_real_seats': 0,      # 真实五席声明块 → 现态读数 0（ENG-S4 整改后清零同步）
     'case2_copy_clause': 1,     # 复写咬合：原样拷贝 handoff §十.3 条文句 → 必命中
     'case3_laundering': 1,      # 洗白反例（P28 同构）：引号括 §十.3 长段（超限不豁免）→ 必命中
     'case4_term_ok': 0,         # 真词条不误伤：「收口自检五件套」7 CJK 括注＋词条外正文 → 零发现
