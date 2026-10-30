@@ -80,6 +80,7 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 | 判定走 📋 部分工作流 | `skills/software-orchestration/references/partial-workflows.md` |
 | 任意工作流推进中（流转/上下文/反馈回路/语言/文档化/结构化） | `skills/software-orchestration/references/collab-rules.md` |
 | 工作流收尾（交付总结与落盘规则） | `skills/software-orchestration/references/delivery-summary.md` |
+| 拟票/派工含代码性质或交付面写入 | `skills/software-orchestration/references/dev-discipline.md` |
 
 ## 协作规则
 
