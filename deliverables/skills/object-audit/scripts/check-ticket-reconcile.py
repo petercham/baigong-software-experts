@@ -21,8 +21,10 @@
 #   （「照单面统摄实现即第一段对不上账」＝验收判据，函数级注释逐段断言）。
 #
 # 票面声明源＝`声明闭集：` 显式行约定（票三候裁点③已裁·随票模板 v2 增补）：
-#   一行 `声明闭集：<路径>[、<路径>]…`，路径相对仓根、正斜杠。
-#   缺声明行＝SKIP 并计数、不算绿（D6-5 条款明文）。
+#   两形态皆认（ENG-S6 解析修正·票面形态不改，多行列表为模板 v2 现行约定）：
+#   ① 单行 `声明闭集：<路径>[、<路径>]…`；
+#   ② 多行列表：`声明闭集：` 行（正文空）＋紧随 `- 路径` 列表行，至空行/非列表行止。
+#   缺声明行（或声明行后无任何条目）＝SKIP 并计数、不算绿（D6-5 条款明文）。
 #
 # 严重度：全部 WATCH（首挂 advisory·整合清单 §六；升 block 同 D6-3 通道）。
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
@@ -52,8 +54,12 @@ import shutil
 SEV_WATCH = "WATCH"
 SPEC = "OA-D6-5"
 
-# 票面声明行（闭集源·显式约定）：`声明闭集：<路径>[、<路径>]…`
-DECL_LINE_RE = re.compile(r"^\s*(?:[-*>\s]*)声明闭集[：:](.+)$")
+# 票面声明行（闭集源·显式约定·ENG-S6 两形态）：
+#   单行 `声明闭集：<路径>[、<路径>]…`（正文非空）＝既有形态保持兼容；
+#   多行列表 `声明闭集：`（正文空）＋紧随 `- 路径` 列表行（至空行/非列表行止）。
+DECL_LINE_RE = re.compile(r"^\s*(?:[-*>\s]*)声明闭集[：:](.*)$")
+# 多行列表形态的条目行：`- ` 起的列表行（ENG-S6 解析扩展）
+DECL_LIST_ITEM_RE = re.compile(r"^\s*-\s+(.+)$")
 # 回执「commit 记录」节内的 commit 指针行：`commit <hash>` 或含 commit 的行＋反引号 hash
 COMMIT_HASH_RE = re.compile(r"`([0-9a-f]{7,40})`")
 # 回执清单行：markdown 表格行内含反引号包裹的仓内路径（相对仓根正斜杠）
@@ -112,13 +118,35 @@ def split_paths(raw: str) -> "list[str]":
     return out
 
 
+def _is_list_item(line: str) -> bool:
+    """多行列表形态的条目行判定：`- ` 起的列表行（`*`/`>` 形态不采·票面模板 v2 用 `- `）。"""
+    return bool(DECL_LIST_ITEM_RE.match(line))
+
+
 def ticket_declared_set(ticket_text: str) -> "list[str]":
-    """票内全部 `声明闭集：` 行（WP 各一行则并集）。缺行＝[]（＝SKIP 信号）。"""
+    """票内全部 `声明闭集：` 声明块（WP 各一块则并集）。两形态（ENG-S6）：
+      ① 单行 `声明闭集：<路径>[、<路径>]…`（正文非空）——既有形态保持兼容；
+      ② 多行列表 `声明闭集：`（正文空）＋紧随 `- 路径` 列表行，至空行/非列表行止。
+    无任何声明块、或声明块均无条目＝[]（＝SKIP 信号）。"""
     paths: "list[str]" = []
-    for line in ticket_text.split("\n"):
-        m = DECL_LINE_RE.match(line)
-        if m:
-            paths.extend(split_paths(m.group(1)))
+    lines = ticket_text.split("\n")
+    i = 0
+    while i < len(lines):
+        m = DECL_LINE_RE.match(lines[i])
+        if not m:
+            i += 1
+            continue
+        body = m.group(1).strip()
+        if body:
+            # 形态①：单行正文即闭集条目
+            paths.extend(split_paths(body))
+            i += 1
+            continue
+        # 形态②：正文空＝多行列表头，随后贪心收 `- ` 列表行至空行/非列表行止
+        i += 1
+        while i < len(lines) and _is_list_item(lines[i]):
+            paths.extend(split_paths(DECL_LIST_ITEM_RE.match(lines[i]).group(1)))
+            i += 1
     return paths
 
 
@@ -304,15 +332,22 @@ def check_pair(root: str, ticket_rel: str) -> "tuple[list[str], int]":
 #   S3 段二咬：回执含声明闭集外路径（越集）→ WATCH 1
 #   S4 段三咬：声明路径未落盘（声明与交付面对不上）→ WATCH 1
 #   S5 缺声明行：票无 `声明闭集：` 行 → SKIP 计数 1、0 发现
-SELFTEST_EXPECTED = {"S1": 0, "S2": 1, "S3": 1, "S4": 1, "S5_skip": 1}
+#   case6_multiline_ok（ENG-S6）：多行列表形态票面（「声明闭集：」行＋`- 路径` 列表行）
+#     → 解析成功、三段对账执行且全绿 → 0 发现
+#   case7_nodecllist_skip（ENG-S6）：「声明闭集：」行后无列表行 → 无条目＝仍 SKIP 1
+SELFTEST_EXPECTED = {"S1": 0, "S2": 1, "S3": 1, "S4": 1, "S5_skip": 1,
+                     "case6_multiline_ok": 0, "case7_nodecllist_skip": 1}
 
 
 def selftest(root: str) -> int:
     tmp = tempfile.mkdtemp(prefix="oa-reconcile-selftest-")
     try:
         def case(name: str, files: "list[str]", declared: "list[str]",
-                 receipt_list: "list[str]", receipt_extra: "list[str]" = ()) -> "tuple[int, int]":
+                 receipt_list: "list[str]", receipt_extra: "list[str]" = (),
+                 decl_mode: str = "single") -> "tuple[int, int]":
             """建一个合成票/回执＋commit，跑 check_pair，返回 (发现数, SKIP数)。
+            decl_mode：single＝单行「声明闭集：a、b」；multiline＝模板 v2 多行列表
+            （「声明闭集：」行＋`- 路径` 列表行）；header_only＝仅声明行无条目。
             每用例独立临时仓（用例间零污染——同仓复用会让前案文件混进后案 commit 并集）。"""
             repo = os.path.join(tmp, "repo-" + name)
             os.makedirs(repo)
@@ -336,7 +371,13 @@ def selftest(root: str) -> int:
             os.makedirs(os.path.join(repo, ".collab", "tickets"), exist_ok=True)
             os.makedirs(os.path.join(repo, ".collab", "research"), exist_ok=True)
             ticket_lines = ["# synthetic ticket %s" % name]
-            if declared:
+            if decl_mode == "multiline":
+                ticket_lines.append("- 声明闭集：")
+                ticket_lines.extend("  - `%s`" % p for p in declared)
+            elif decl_mode == "header_only":
+                ticket_lines.append("- 声明闭集：")
+                ticket_lines.append("")
+            elif declared:
                 ticket_lines.append("声明闭集：%s" % "、".join(declared))
             ticket_lines.append("回执：`%sresearch/%s-回执.md`" % (COLLAB_PREFIX, name))
             with open(os.path.join(repo, ".collab", "tickets", "%s.md" % name),
@@ -371,11 +412,22 @@ def selftest(root: str) -> int:
                              ["deliverables/a.md"])
         # S5 缺声明行：SKIP 计数 1、0 发现
         results["S5"] = case("S5", ["deliverables/a.md"], [], ["deliverables/a.md"])
+        # case6 多行列表形态（模板 v2 现行票面）：解析成功、三段对账全绿 → 0 发现
+        results["case6_multiline_ok"] = case(
+            "case6", ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"], decl_mode="multiline")
+        # case7 声明行后无列表行：无条目＝仍 SKIP 1、0 发现
+        results["case7_nodecllist_skip"] = case(
+            "case7", ["deliverables/a.md"], ["deliverables/a.md"],
+            ["deliverables/a.md"], decl_mode="header_only")
 
         ok = True
         got = {"S1": results["S1"][0], "S2": results["S2"][0],
                "S3": results["S3"][0], "S4": results["S4"][0],
-               "S5_skip": results["S5"][1]}
+               "S5_skip": results["S5"][1],
+               "case6_multiline_ok": results["case6_multiline_ok"][0],
+               "case7_nodecllist_skip": results["case7_nodecllist_skip"][1]}
         for k, want in sorted(SELFTEST_EXPECTED.items()):
             mark = "OK" if got[k] == want else "MISMATCH"
             if got[k] != want:
