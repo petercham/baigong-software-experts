@@ -83,6 +83,15 @@ COMMIT_EXCLUDE_RE = re.compile(r"开端 ?HEAD|票面|回执")
 # ENG-S8 T1 配套（比较口径）：字符集含 CJK 基本域——中文名交付件的清单行须可收，
 # 否则 quotepath 解转义后 git 面明文与回执面仍不可比（段一缺项假阳不消）。
 RECEIPT_PATH_RE = re.compile(r"`([A-Za-z0-9一-鿿][A-Za-z0-9._/\-一-鿿]*\.[A-Za-z0-9]+)`")
+# ENG-S9 T1：清单行两形态判据——① `|` 表格行（既有口径零动，行内任意反引号路径 token）；
+# ② 编号列表（`1. `）／项目符号列表（`- `）的**清单条目行**：marker 后紧跟反引号路径
+#   token＋行尾可选方括注/括注（如「（修改）」在反引号外＝不并入路径）＋行终。
+#   锚定到行尾的目的＝非清单叙述性列表行（「- 票面：…」「- `path`：改前…」等）
+#   不入清单集（真实面 S4 回执§六／selftest case11 同源防误收）。
+RECEIPT_TABLE_LINE_RE = re.compile(r"^\s*\|")
+RECEIPT_LIST_ENTRY_RE = re.compile(
+    r"^\s*(?:\d+\.\s+|-\s+)`([A-Za-z0-9一-鿿][A-Za-z0-9._/\-一-鿿]*\.[A-Za-z0-9]+)`"
+    r"\s*(?:[(（][^)）]*[)）])?\s*$")
 # 票/回执首行状态标记
 HOLD_RE = re.compile(r"HOLD[：:]")
 CLOSED_RE = re.compile(r"已结案")
@@ -216,13 +225,27 @@ def receipt_commits(receipt_text: str) -> "list[str]":
 
 
 def receipt_paths(receipt_text: str) -> "list[str]":
-    """回执清单节的反引号路径集（去重·保序·只收含路径形态的表行）。"""
+    """回执清单节的反引号路径集（去重·保序·只收已认行形态）。
+
+    ENG-S9 T1 清单行形态扩认：① `|` 表格行——既有口径零动（行内任意反引号路径 token）；
+    ② 编号列表（marker「1. 」＋反引号路径＋括注「（修改）」）与项目符号列表（marker
+      「- 」＋反引号路径）的清单条目行——marker 后紧跟反引号路径 token＋行尾可选括注
+      （行内括号注记在反引号外＝不并入路径），整式锚定行尾＝叙述性列表行
+      （「- 票面：…」「- 反引号路径：改前…」）不入清单集
+      （防「回执有而 commit 全无」多项假阳，真实面 S4 回执§六同源）。
+    其余行形态（正文行/标题行）仍不收。去重·保序语义不变。
+    """
     paths: "list[str]" = []
     for line in receipt_text.split("\n"):
-        if not line.strip().startswith("|"):
-            continue
-        for m in RECEIPT_PATH_RE.finditer(line):
-            p = m.group(1).replace("\\", "/")
+        if RECEIPT_TABLE_LINE_RE.match(line):
+            found = [m.group(1) for m in RECEIPT_PATH_RE.finditer(line)]
+        else:
+            m = RECEIPT_LIST_ENTRY_RE.match(line)
+            if not m:
+                continue
+            found = [m.group(1)]
+        for raw in found:
+            p = raw.replace("\\", "/")
             if "/" in p and p not in paths:
                 paths.append(p)
     return paths
@@ -438,11 +461,17 @@ def check_pair(root: str, ticket_rel: str) -> "tuple[list[str], int]":
 #   case12_declnarr_pathonly（ENG-S8 T3）：声明列表夹叙述行（`- 背景…`／`- HOLD…`）
 #     → 声明集只收路径形态条目、叙述行不入（不误入段三） → 0 发现
 #     （修前＝叙述行入声明集→段三「声明与交付面对不上」假阳 2）
+#   case13_numlist_ok（ENG-S9 T1）：回执清单＝编号列表形态（`1. \`路径\`（修改）`）
+#     → 清单行扩认后段二/段三解析成功对账全绿 → 0 发现
+#     （修前＝只收 `|` 表格行→清单解析空→段一缺项假阳）
+#   case14_tableform_regression（ENG-S9 T2）：表格形态回执清单回归（既有用例口径零动）
+#     → 对账全绿 0 发现；表格＋编号＋项目符号混排去重保序语义不变亦 0 发现
 SELFTEST_EXPECTED = {"S1": 0, "S2": 1, "S3": 1, "S4": 1, "S5_skip": 1,
                      "case6_multiline_ok": 0, "case7_nodecllist_skip": 1,
                      "case8_absdrive_ok": 0, "case9_absout_notptr": 1,
                      "case10_cnname_quotepath_ok": 0, "case11_ticketface_notcommit": 0,
-                     "case12_declnarr_pathonly": 0}
+                     "case12_declnarr_pathonly": 0,
+                     "case13_numlist_ok": 0, "case14_tableform_regression": 0}
 
 
 def selftest(root: str) -> int:
@@ -452,7 +481,9 @@ def selftest(root: str) -> int:
                  receipt_list: "list[str]", receipt_extra: "list[str]" = (),
                  decl_mode: str = "single", ptr_mode: str = "relative",
                  decl_extra: "list[str]" = (),
-                 receipt_extra_lines: "list[str]" = ()) -> "tuple[int, int]":
+                 receipt_extra_lines: "list[str]" = (),
+                 receipt_form: str = "table",
+                 receipt_plain: "list[str]" = ()) -> "tuple[int, int]":
             """建一个合成票/回执＋commit，跑 check_pair，返回 (发现数, SKIP数)。
             decl_mode：single＝单行「声明闭集：a、b」；multiline＝模板 v2 多行列表
             （「声明闭集：」行＋`- 路径` 列表行）；header_only＝仅声明行无条目。
@@ -464,6 +495,13 @@ def selftest(root: str) -> int:
             （`- 背景…`／`- HOLD…` 形态·验证只收路径形态不入叙述行）。
             receipt_extra_lines（ENG-S8 T2）：回执追加行原文（「票面（开票笔 hash）」
             「开端 HEAD」形态·验证非交付笔不入对账集）。
+            receipt_form（ENG-S9 T1/T2）：清单节行形态——table＝表格行
+            「| 1 | 反引号路径 | 修改 |」（现行默认·零动）；numlist＝编号列表
+            「1. 反引号路径（修改）」；bullet＝项目符号列表「- 反引号路径」；
+            mixed＝表格＋编号＋项目符号混排（去重语义验证：每件各以
+            不同形态出现一次＋首件双形态重复出现＝应去重不重复计）。
+            receipt_plain：追加在清单节后的非清单列表行原文（「- 反引号路径：改前…改后…」
+            叙述形态·验证不入清单集）。
             每用例独立临时仓（用例间零污染——同仓复用会让前案文件混进后案 commit 并集）。
             注：abs_* 两案依赖临时仓绝对路径带盘符（Windows 面·票面体例同源）。"""
             repo = os.path.join(tmp, "repo-" + name)
@@ -514,9 +552,27 @@ def selftest(root: str) -> int:
                       "w", encoding="utf-8") as handle:
                 handle.write("\n".join(ticket_lines) + "\n")
             rl = ["# synthetic receipt %s" % name,
-                  "- commit `%s` 记录" % head, "", "| # | 文件 | 标记 |", "|---|---|---|"]
-            for p2 in receipt_list + list(receipt_extra):
-                rl.append("| 1 | `%s` | 修改 |" % p2)
+                  "- commit `%s` 记录" % head, ""]
+            entries = receipt_list + list(receipt_extra)
+            if receipt_form == "numlist":
+                rl.extend("%d. `%s`（修改）" % (i + 1, p2)
+                          for i, p2 in enumerate(entries))
+            elif receipt_form == "bullet":
+                rl.extend("- `%s`" % p2 for p2 in entries)
+            elif receipt_form == "mixed":
+                # 每件各以一种形态出现一次＋首件表格/编号双形态各一次＝去重语义验证
+                rl.extend(["| # | 文件 | 标记 |", "|---|---|---|"])
+                rl.append("| 1 | `%s` | 修改 |" % entries[0])
+                for i, p2 in enumerate(entries):
+                    if i % 2 == 0:
+                        rl.append("%d. `%s`（修改）" % (i + 1, p2))
+                    else:
+                        rl.append("- `%s`" % p2)
+            else:
+                rl.extend(["| # | 文件 | 标记 |", "|---|---|---|"])
+                for p2 in entries:
+                    rl.append("| 1 | `%s` | 修改 |" % p2)
+            rl.extend(receipt_plain)
             rl.extend(receipt_extra_lines)
             if ptr_mode == "abs_outrepo":
                 outdir = os.path.join(tmp, "outside-" + name, "research")
@@ -588,6 +644,25 @@ def selftest(root: str) -> int:
             ["deliverables/a.md", "deliverables/b.md"], decl_mode="multiline",
             decl_extra=["- 背景（自包含）：合成叙述行，含空白与（全角标点）。",
                         "- HOLD：无。"])
+        # case13 回执清单＝编号列表形态（`1. \`路径\`（修改）`·S4 回执真实体例）：
+        # 清单行扩认→段一/段二/段三解析成功对账全绿 → 0 发现
+        # （修前＝只收 `|` 表格行→清单解析空→段一缺项假阳）；
+        # 附叙述性列表行（「- \`p\`：改前…」）验证不入清单集不致多项假阳。
+        results["case13_numlist_ok"] = case(
+            "case13", ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"],
+            ["deliverables/a.md", "deliverables/b.md"], receipt_form="numlist",
+            receipt_plain=["- `deliverables/a.md`：改前 `\"version\": \"0.1.9\"` → 改后 `0.1.10`。",
+                           "- 工作区核验：commit 前改动面恰此二件，无未声明生成件逃逸。"])
+        # case14 表格形态回归＋混排去重：表格形态（case14a）口径零动对账全绿；
+        # 表格＋编号＋项目符号混排、首件双形态重复出现（case14b）→ 去重语义不变全绿
+        f14a, _ = case("case14a", ["deliverables/a.md", "deliverables/b.md"],
+                       ["deliverables/a.md", "deliverables/b.md"],
+                       ["deliverables/a.md", "deliverables/b.md"])
+        f14b, _ = case("case14b", ["deliverables/a.md", "deliverables/b.md"],
+                       ["deliverables/a.md", "deliverables/b.md"],
+                       ["deliverables/a.md", "deliverables/b.md"], receipt_form="mixed")
+        results["case14_tableform_regression"] = (f14a + f14b, 0)
 
         ok = True
         got = {"S1": results["S1"][0], "S2": results["S2"][0],
@@ -599,7 +674,9 @@ def selftest(root: str) -> int:
                "case9_absout_notptr": results["case9_absout_notptr"][0],
                "case10_cnname_quotepath_ok": results["case10_cnname_quotepath_ok"][0],
                "case11_ticketface_notcommit": results["case11_ticketface_notcommit"][0],
-               "case12_declnarr_pathonly": results["case12_declnarr_pathonly"][0]}
+               "case12_declnarr_pathonly": results["case12_declnarr_pathonly"][0],
+               "case13_numlist_ok": results["case13_numlist_ok"][0],
+               "case14_tableform_regression": results["case14_tableform_regression"][0]}
         for k, want in sorted(SELFTEST_EXPECTED.items()):
             mark = "OK" if got[k] == want else "MISMATCH"
             if got[k] != want:
