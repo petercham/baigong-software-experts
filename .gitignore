@@ -29,6 +29,9 @@
 # 作者已标 tmp- 前缀＝显式临时件；落 .collab/ 根＝无归属分区（判据 A）
 .collab/tmp-*.txt
 
+# 第三方引擎/技能仓整体快照（外部参照件·判据 B：入我仓＝真源混淆）：不入 git
+.collab/refs/
+
 # 第三方下载产物（带 .downloaded_at）：入我仓＝真源混淆，违单真源纪律（判据 B）
 # 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\reference-2026-10-24\；来源索引件 REFERENCE-SOURCES.md 入库
 .collab/research/reference-2026-10-24/video-teams/
