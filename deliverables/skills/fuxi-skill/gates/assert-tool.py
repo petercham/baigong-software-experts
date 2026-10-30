@@ -17,6 +17,9 @@ S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/
 S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空扫描合法态＋段名前缀归一化口径）
     ＋新增 ST-8／BW-5／BW-6／FC-6／GS-5（两规范表文件节闭集＋矛盾平滑检出＋README 置顶判据
     ＋active 池人工确认存在＋门禁不退化基线对照）。
+S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位；无元组＝PENDING_STAGE
+    「S0b 元组未交付」如实态；在场＝逐元组挂接既有纯函数 calibration_consistent() 对账，
+    判据本体零改动；κ 达标线常量 KAPPA_THRESHOLD 注册于本件供 s0b-kappa.py import 不复制）。
 判据基面（固定路径静态定位，契约与工具互不嵌套）：
     contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
     adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）；
@@ -596,6 +599,11 @@ def gate_source_hits(track: str, gate_source: str) -> "list[str]":
     if track == "method":
         return [gate_source] if gate_source in PERSON_GATE_WHITELIST and gate_source not in METHOD_GATE_WHITELIST else []
     return ["未知轨:%s" % track]
+
+
+# GS-4 κ 达标线（S0b 建·预注册数值＝validator-catalog §四表 S0b 行「达标线」行同源；
+# 消费面 s0b-kappa.py import 本常量不复制——读数面单源在本注册位）。
+KAPPA_THRESHOLD = 0.6
 
 
 def calibration_consistent(calibration_state: str, kappa_report: "dict[str, float] | None") -> bool:
@@ -1321,9 +1329,61 @@ def gs_3_bidirectional_zero_mismatch() -> "tuple[str, str]":
             "实记录硬验收判绿" if records else "空扫描合法态·硬验收读数随当批实记录在场"))
 
 
+def _gs4_tuple_obj_problems(name: str, obj: "dict") -> "list[str]":
+    """GS-4 逐元组对账挂接层（判据本体＝calibration_consistent() 零改动，本层只装配读数）。
+
+    κ 字段缺失/置 null＝按「无 κ 报告」入同一判据（受限元组只能待校准，fail-closed）；
+    calibration_state 越闭集＝直接咬。返回问题列表（空＝一致）。
+    """
+    state = str(obj.get("calibration_state", ""))
+    if state not in CALIBRATION_STATES:
+        return ["%s calibration_state=%r 越两值闭集（fail-closed）" % (name, state)]
+    point = obj.get("κ点值", None)
+    lower = obj.get("κ区间下界", None)
+    kappa = None if (point is None or lower is None) else {"点值": point, "区间下界": lower}
+    if not calibration_consistent(state, kappa):
+        return ["%s κ报告与 calibration_state=%s 不一致（κ点值=%s·区间下界=%s）"
+                % (name, state, point, lower)]
+    return []
+
+
 def gs_4_calibration_kappa() -> "tuple[str, str]":
-    """GS-4 calibration_state 与 κ 报告一致性校验器（κ 读数待 S0b）——〔S0a 建／S0b·S1 执行〕。"""
-    return (READ_PENDING, "S0b")
+    """GS-4 calibration_state 与 κ 报告一致性校验器——〔S0a 建／S0b 实装〕。
+
+    实装基面＝validator-catalog 注册落盘路径（`.collab/evidence/harness/` 递归）内全部
+    `anchor-tuple*.json`（复用 `_HARNESS_SUBPATH` 注册路径）：
+    无元组＝PENDING_STAGE「S0b 元组未交付」（当期如实态，不算 fail 不算 pass）；
+    元组在场＝逐元组跑既有纯函数 calibration_consistent()（判据零改动，仅挂接）
+    对账 κ 点值/区间下界 ↔ calibration_state；任一不一致＝FAIL 逐条列明细；
+    全对＝PASS（读数含元组数）。
+    """
+    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
+    tuple_paths: "list[str]" = []
+    if os.path.isdir(rec_dir):
+        for dirpath, _dirnames, filenames in os.walk(rec_dir):
+            for fname in sorted(filenames):
+                if fname.startswith("anchor-tuple") and fname.endswith(".json"):
+                    tuple_paths.append(os.path.join(dirpath, fname))
+    if not tuple_paths:
+        return (READ_PENDING, "S0b 元组未交付")
+    problems: "list[str]" = []
+    for path in sorted(tuple_paths):
+        name = os.path.relpath(path, rec_dir).replace("\\", "/")
+        try:
+            with open(path, "r", encoding="utf-8") as handle:
+                obj = json.load(handle)
+        except ValueError:
+            problems.append("%s json 解析失败（fail-closed）" % name)
+            continue
+        if not isinstance(obj, dict):
+            problems.append("%s 非对象元组" % name)
+            continue
+        problems.extend(_gs4_tuple_obj_problems(name, obj))
+    if problems:
+        return (READ_FAIL, "元组在场·对账不一致：%s" % "；".join(problems))
+    return (READ_PASS, "元组 %d 个在场·κ 报告与 calibration_state 逐元组对账全一致（判据本体零改动）"
+            % len(tuple_paths))
 
 
 def st_8_spec_tables_closed() -> "tuple[str, str]":
@@ -1689,6 +1749,20 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("GS4_pass_pending", calibration_consistent("待校准", None), True))
     cases.append(("GS4_bite_missing", calibration_consistent("校准态", None), False))
     cases.append(("GS4_bite_inconsistent", calibration_consistent("校准态", weak_kappa), False))
+
+    # GS-4 S0b 转实装挂接层配对咬放（判据本体＝既有 calibration_consistent 样本复用，不重复造判据）：
+    # 在场一致放／在场不一致咬／κ 置 null 受限元组待校准放／κ 置 null 仍校准态咬／状态越闭集咬
+    cases.append(("GS4I_pass", _gs4_tuple_obj_problems("t.json", {"κ点值": 0.7, "κ区间下界": 0.62,
+                  "calibration_state": "校准态"}) == [], True))
+    cases.append(("GS4I_bite_inconsistent", _gs4_tuple_obj_problems("t.json", {"κ点值": 0.65,
+                  "κ区间下界": 0.55, "calibration_state": "校准态"}) != [], True))
+    cases.append(("GS4I_nullkappa_pending_pass", _gs4_tuple_obj_problems("t.json", {"κ点值": None,
+                  "κ区间下界": None, "calibration_state": "待校准"}) == [], True))
+    cases.append(("GS4I_nullkappa_calibrated_bite", _gs4_tuple_obj_problems("t.json", {"κ点值": None,
+                  "κ区间下界": None, "calibration_state": "校准态"}) != [], True))
+    cases.append(("GS4I_state_outside_bite", _gs4_tuple_obj_problems("t.json", {"κ点值": 0.7,
+                  "κ区间下界": 0.62, "calibration_state": "已校准"}) != [], True))
+    cases.append(("GS4I_threshold_registered", KAPPA_THRESHOLD == 0.6, True))
 
     # 词表本体在场（BW-1/BW-2 当期实装判据）：正咬反放自证
     cases.append(("VOCAB_pass", vocab_body_present(ROLEPLAY_BANNED_WORDS), True))
