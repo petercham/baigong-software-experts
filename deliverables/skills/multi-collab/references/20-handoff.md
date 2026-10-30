@@ -21,7 +21,7 @@
 
 **干净指令类交接件的附加判据**：正文是「审计者 → 执行者」的干净指令时，`约束：` 行必含「六道硬约束」串（路径不能替代该串）；缺者与「没自包含」同待遇——**退回补正文再投**（判据原文见 `30-formats.md` §一「派遣合规判据」）。
 
-**决策/设计类交接件的附加判据（三正面判据·可判）**：全文真源见 devkits 仓软件团内部卷 `workbuddy/baigong-software-team/skills/software-orchestration/references/handoff-discipline.md` §三；本文所载为沿革快照，以真源为准。
+**决策/设计类交接件的附加判据（三正面判据·可判）**：本节原载三正面判据全文与保护句，现已删除——全文真源＝devkits 仓软件团内部卷 `workbuddy/baigong-software-team/skills/software-orchestration/references/handoff-discipline.md` §三；原三条与保护句的快照及迁移沿革见本包 `references/90-changelog.md` v4.6／v4.8 行，以真源为准。
 
 **append-only**：交接件落定后只追加勘误注，不改原文（史实锚）；**不改他人文档**——要驳就另立一件回投。
 
