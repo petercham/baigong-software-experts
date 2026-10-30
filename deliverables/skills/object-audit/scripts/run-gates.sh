@@ -134,7 +134,7 @@ export GATE_PROJECT_NAMES="${GATE_PROJECT_NAMES:-${_GW_PKG}-collab-devkits}"
 #   ② 仓根相对路径（跨域脚本）    → 显式前缀 ROOT/ 开头，如 ROOT/tools/check-source-of-truth
 #      → $ROOT/<相对路径>.py。**不收 ../ 相对段**：相对段会让 out 文件随路径逃出临时目录
 #      （实测 exit 4），故用显式前缀表达"从仓根算"，不靠爬目录。
-SCRIPTS="check-provenance check-skill-meta check-pointers check-entity check-collab-lint check-pointer-closure ROOT/tools/check-source-of-truth"
+SCRIPTS="check-provenance check-skill-meta check-pointers check-entity check-collab-lint check-pointer-closure ROOT/tools/check-source-of-truth check-ticket-reconcile"
 SUMMARY_FILE="$WORKDIR/summary.txt"
 : > "$SUMMARY_FILE"
 for name in $SCRIPTS; do
