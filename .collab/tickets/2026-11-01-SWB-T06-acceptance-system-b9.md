@@ -46,7 +46,7 @@
 - `drill-runner.sh`：依序执行六脚本→全绿 exit 0 输出 `SIX_DRILLS_GREEN`；任一红→exit≠0 并指名红链。
 
 ### T06-E equivalence-sampling-log-template.md（人工等效性抽检·双臂之二）
-- 模板字段：抽样行清单（≥20% 验收行，附各行所属票号）、判定结论（验收全绿是否等价于条款达成）、签字栏（产品席或设计权威）、日期；签字入册路径注＝`.collab/human/reviews/`（v2.7 表2-1 人类行；本票只产模板，不产入册动作）。
+- 模板字段：抽样行清单（≥20% 验收行，附各行所属票号）、判定结论（验收全绿是否等价于条款达成）、签字栏（产品席或 QA 席）、日期；签字入册路径注＝`.collab/human/reviews/`（v2.7 表2-1 人类行；本票只产模板，不产入册动作）。
 
 ## 验收判据（全部机械可判）
 1. `python -c "import json;t=json.load(open('software-team/config/thresholds.json'));assert t['diff_rate_threshold']==0.02 and t['deny_freeze_max_s']==60 and t['stable_def_chains']==10"` 退出 0；
