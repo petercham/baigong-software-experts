@@ -7,17 +7,17 @@
 
 ## 声明闭集（11 件·本票唯一可写面）
 - 声明闭集：
-- software-team/tests/acceptance/metrics-gate.py
-- software-team/tests/acceptance/count-assert.py
-- software-team/tests/acceptance/drill-runner.sh
-- software-team/tests/acceptance/drills/drill-01-transcription-routing.sh
-- software-team/tests/acceptance/drills/drill-02-dispatch-exec-return.sh
-- software-team/tests/acceptance/drills/drill-03-write-side-intercept.sh
-- software-team/tests/acceptance/drills/drill-04-decision-pack-escalation.sh
-- software-team/tests/acceptance/drills/drill-05-freeze-recover.sh
-- software-team/tests/acceptance/drills/drill-06-replay-reconcile.sh
-- software-team/config/thresholds.json
-- software-team/tests/acceptance/equivalence-sampling-log-template.md
+- deliverables/experts/baigong-software-team/tests/acceptance/metrics-gate.py
+- deliverables/experts/baigong-software-team/tests/acceptance/count-assert.py
+- deliverables/experts/baigong-software-team/tests/acceptance/drill-runner.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-01-transcription-routing.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-02-dispatch-exec-return.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-03-write-side-intercept.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-04-decision-pack-escalation.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-05-freeze-recover.sh
+- deliverables/experts/baigong-software-team/tests/acceptance/drills/drill-06-replay-reconcile.sh
+- deliverables/experts/baigong-software-team/config/thresholds.json
+- deliverables/experts/baigong-software-team/tests/acceptance/equivalence-sampling-log-template.md
 
 ## 逐条施工规格
 
@@ -49,12 +49,12 @@
 - 模板字段：抽样行清单（≥20% 验收行，附各行所属票号）、判定结论（验收全绿是否等价于条款达成）、签字栏（产品席或 QA 席）、日期；签字入册路径注＝`.collab/human/reviews/`（v2.7 表2-1 人类行；本票只产模板，不产入册动作）。
 
 ## 验收判据（全部机械可判）
-1. `python -c "import json;t=json.load(open('software-team/config/thresholds.json'));assert t['diff_rate_threshold']==0.02 and t['deny_freeze_max_s']==60 and t['stable_def_chains']==10"` 退出 0；
-2. `python software-team/tests/acceptance/metrics-gate.py --selftest` 退出 0，且读数含 `route_correction_rate: manual_observation` 行（grep 命中）；
+1. `python -c "import json;t=json.load(open('deliverables/experts/baigong-software-team/config/thresholds.json'));assert t['diff_rate_threshold']==0.02 and t['deny_freeze_max_s']==60 and t['stable_def_chains']==10"` 退出 0；
+2. `python deliverables/experts/baigong-software-team/tests/acceptance/metrics-gate.py --selftest` 退出 0，且读数含 `route_correction_rate: manual_observation` 行（grep 命中）；
 3. 混用隔离断言：metrics-gate 自测样区内差异率超限样本 → 输出「指标异常」路径读数且**无**熔断码；熔断样区 → 输出熔断呈报码且无手拼禁用码（两读数互斥，回执附对照）；
-4. `bash software-team/tests/acceptance/drill-runner.sh` 退出 0 且输出 `SIX_DRILLS_GREEN`；
-5. `ls software-team/tests/acceptance/drills/*.sh | wc -l` ＝6；
-6. count-assert 自咬：`python software-team/tests/acceptance/count-assert.py --mode1 .collab/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md` 对本票跑模式1（锚行解析）→ 申报 11＝实数 11，exit 0（读数入回执）；
+4. `bash deliverables/experts/baigong-software-team/tests/acceptance/drill-runner.sh` 退出 0 且输出 `SIX_DRILLS_GREEN`；
+5. `ls deliverables/experts/baigong-software-team/tests/acceptance/drills/*.sh | wc -l` ＝6；
+6. count-assert 自咬：`python deliverables/experts/baigong-software-team/tests/acceptance/count-assert.py --mode1 .collab/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md` 对本票跑模式1（锚行解析）→ 申报 11＝实数 11，exit 0（读数入回执）；
 7. 差异率分子三分量各一构造样例 → metrics-gate 计数各 +1（三分量读数）。
 
 ## 票间关系

@@ -8,19 +8,19 @@
 
 ## 声明闭集（13 件·本票唯一可写面）
 - 声明闭集：
-- software-team/tests/probes/run-probes.sh
-- software-team/tests/probes/p1-cross-seat-shared-state.sh
-- software-team/tests/probes/p2-lead-md-injection.sh
-- software-team/tests/probes/p3-tools-declaration-scope.sh
-- software-team/tests/probes/p4-pretooluse-stdin-fields.sh
-- software-team/tests/probes/p5-event-concurrency-timing.sh
-- software-team/tests/probes/p6-deny-cross-seat-consistency.sh
-- software-team/tests/probes/p7-git-standalone-service.sh
-- software-team/tests/probes/p8-mcp-auth-shape.sh
-- software-team/tests/probes/p9-dispatch-record-export.sh
-- software-team/tests/probes/p10-thirdparty-hooks-parity.sh
-- software-team/tests/probes/results/probe-results.json
-- software-team/tests/probes/results/probe-report.md
+- deliverables/experts/baigong-software-team/tests/probes/run-probes.sh
+- deliverables/experts/baigong-software-team/tests/probes/p1-cross-seat-shared-state.sh
+- deliverables/experts/baigong-software-team/tests/probes/p2-lead-md-injection.sh
+- deliverables/experts/baigong-software-team/tests/probes/p3-tools-declaration-scope.sh
+- deliverables/experts/baigong-software-team/tests/probes/p4-pretooluse-stdin-fields.sh
+- deliverables/experts/baigong-software-team/tests/probes/p5-event-concurrency-timing.sh
+- deliverables/experts/baigong-software-team/tests/probes/p6-deny-cross-seat-consistency.sh
+- deliverables/experts/baigong-software-team/tests/probes/p7-git-standalone-service.sh
+- deliverables/experts/baigong-software-team/tests/probes/p8-mcp-auth-shape.sh
+- deliverables/experts/baigong-software-team/tests/probes/p9-dispatch-record-export.sh
+- deliverables/experts/baigong-software-team/tests/probes/p10-thirdparty-hooks-parity.sh
+- deliverables/experts/baigong-software-team/tests/probes/results/probe-results.json
+- deliverables/experts/baigong-software-team/tests/probes/results/probe-report.md
 
 ## 逐条施工规格
 
@@ -36,11 +36,11 @@
 - `probe-report.md`：十节（每 P 一节），每节含实测命令、读数摘录、QA 复核结论栏（QA 席填写，工程师只留空栏——§14 行2「装配工程师实测＋QA 复核」）。
 
 ## 验收判据（全部机械可判）
-1. `bash software-team/tests/probes/run-probes.sh; echo $?` ＝0；
-2. `python -c "import json;d=json.load(open('software-team/tests/probes/results/probe-results.json'));assert sorted(d)==['P'+str(i) for i in range(1,11)];assert all(v['status'] in ('pass','negative','inconclusive') for v in d.values())"` 退出 0；
-3. `ls software-team/tests/probes/*.sh | wc -l` ＝11（十实测＋runner）；
+1. `bash deliverables/experts/baigong-software-team/tests/probes/run-probes.sh; echo $?` ＝0；
+2. `python -c "import json;d=json.load(open('deliverables/experts/baigong-software-team/tests/probes/results/probe-results.json'));assert sorted(d)==['P'+str(i) for i in range(1,11)];assert all(v['status'] in ('pass','negative','inconclusive') for v in d.values())"` 退出 0；
+3. `ls deliverables/experts/baigong-software-team/tests/probes/*.sh | wc -l` ＝11（十实测＋runner）；
 4. p4 脚本回执含 `executePreToolUseHooks` grep 命中读数与 stdin 字段回显两块证据（回执内嵌原文，grep 可定位）；
-5. probe-report.md 节数：`grep -c '^## P' software-team/tests/probes/results/probe-report.md` ＝10；
+5. probe-report.md 节数：`grep -c '^## P' deliverables/experts/baigong-software-team/tests/probes/results/probe-report.md` ＝10；
 6. P8 节结论栏只含观测不含预设：人工抽检项移交 QA（不机械化，因 §10「问句，无预设」）。
 
 ## 票间关系
@@ -48,7 +48,7 @@
 - 本票不依赖任何票。
 
 ## 禁动面（零触碰）
-- 两基线登记件（v2.7 件 V10 文件本体）、`.collab/` 全域（回执除外）、`docs/`、其余各票声明闭集文件、`software-team/` 下非本票闭集路径（目录首建者以先开工票为准，见总览 Q-01）。
+- 两基线登记件（v2.7 件 V10 文件本体）、`.collab/` 全域（回执除外）、`docs/`、其余各票声明闭集文件、`deliverables/experts/baigong-software-team/` 下非本票闭集路径（目录首建者以先开工票为准，见总览 Q-01）。
 - 工程师不得改本票票体四字段（§7 工程师席位纪律）。
 
 ## 候裁点（单列·不自行拍）

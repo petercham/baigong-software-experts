@@ -7,13 +7,13 @@
 
 ## 声明闭集（7 件·本票唯一可写面）
 - 声明闭集：
-- software-team/skills/sop/scripts/dispatch-builder.py
-- software-team/skills/sop/scripts/serial-gate.py
-- software-team/skills/sop/scripts/decision-pack.py
-- software-team/config/dispatch-spec.json
-- software-team/config/ticket-authors.json
-- software-team/tests/s3/test_dispatch_gate.py
-- software-team/tests/s3/test_decision_pack.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/dispatch-builder.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/serial-gate.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/decision-pack.py
+- deliverables/experts/baigong-software-team/config/dispatch-spec.json
+- deliverables/experts/baigong-software-team/config/ticket-authors.json
+- deliverables/experts/baigong-software-team/tests/s3/test_dispatch_gate.py
+- deliverables/experts/baigong-software-team/tests/s3/test_decision_pack.py
 
 ## 逐条施工规格
 
@@ -38,12 +38,12 @@
 - 转录表注（V10 L104）五映射：开发票→架构修｜缺陷票→QA 修｜部署票三字段→工程师部署域重写｜生产票目标字段→状态机依放行记录机械派生｜规则票→提案席位；票类清单∈ticket-types.json 同一集合。
 
 ## 验收判据（全部机械可判）
-1. `python -c "import json;d=json.load(open('software-team/config/dispatch-spec.json'));assert len(d['nodes'])==6;assert all(len(n['signoffs'])>0 for n in d['nodes'])"` 退出 0（六节点签字集合非空）；
-2. 同源断言：`python -c "import json;a=set(x['id'] for x in json.load(open('software-team/config/ticket-types.json'))['types']);b=set(json.load(open('software-team/config/ticket-authors.json'))['authors']);assert a==b"` 退出 0；
+1. `python -c "import json;d=json.load(open('deliverables/experts/baigong-software-team/config/dispatch-spec.json'));assert len(d['nodes'])==6;assert all(len(n['signoffs'])>0 for n in d['nodes'])"` 退出 0（六节点签字集合非空）；
+2. 同源断言：`python -c "import json;a=set(x['id'] for x in json.load(open('deliverables/experts/baigong-software-team/config/ticket-types.json'))['types']);b=set(json.load(open('deliverables/experts/baigong-software-team/config/ticket-authors.json'))['authors']);assert a==b"` 退出 0；
 3. 串行闸冒烟：账本预置 1 张活跃票后调 dispatch-builder → exit≠0 且账本新增「呈报」记录恰 1 条（读数入回执）；
 4. 超集冒烟：样例票注入面超出 spec 声明 → dispatch-builder exit≠0，回显差异集；
-5. `python software-team/tests/s3/test_dispatch_gate.py software-team/tests/s3/test_decision_pack.py` 退出 0；
-6. 触发源六码枚举齐备：`grep -c 'TRIG_' software-team/skills/sop/scripts/decision-pack.py` ≥6 且六码名与 §4 六项一一对应（回执附 grep 读数对照表）。
+5. `python deliverables/experts/baigong-software-team/tests/s3/test_dispatch_gate.py deliverables/experts/baigong-software-team/tests/s3/test_decision_pack.py` 退出 0；
+6. 触发源六码枚举齐备：`grep -c 'TRIG_' deliverables/experts/baigong-software-team/skills/sop/scripts/decision-pack.py` ≥6 且六码名与 §4 六项一一对应（回执附 grep 读数对照表）。
 
 ## 票间关系
 - 前置：T02。后置：T04（B5 拦 force-push 时经账本活跃票口径）、T06（六条演练中「派发-执行-回流」链消费 B3/B4）、T05（席位卡「脚本调用点」行引用本票实体名）。

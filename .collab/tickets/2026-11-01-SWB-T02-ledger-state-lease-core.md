@@ -7,17 +7,17 @@
 
 ## 声明闭集（11 件·本票唯一可写面）
 - 声明闭集：
-- software-team/skills/sop/scripts/ledger-init.sh
-- software-team/skills/sop/scripts/intake-register.py
-- software-team/skills/sop/scripts/state-transition.py
-- software-team/skills/sop/scripts/lease-issuer.py
-- software-team/skills/sop/scripts/reconcile-daily.py
-- software-team/skills/sop/scripts/baseline-backfill-demo.py
-- software-team/skills/sop/scripts/promote-manifest.py
-- software-team/config/seat-permissions.json
-- software-team/config/ticket-types.json
-- software-team/tests/s2/test_ledger_core.py
-- software-team/tests/s2/test_lease_instantiation.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/ledger-init.sh
+- deliverables/experts/baigong-software-team/skills/sop/scripts/intake-register.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/state-transition.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/lease-issuer.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/reconcile-daily.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/baseline-backfill-demo.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/promote-manifest.py
+- deliverables/experts/baigong-software-team/config/seat-permissions.json
+- deliverables/experts/baigong-software-team/config/ticket-types.json
+- deliverables/experts/baigong-software-team/tests/s2/test_ledger_core.py
+- deliverables/experts/baigong-software-team/tests/s2/test_lease_instantiation.py
 
 ## 逐条施工规格
 
@@ -51,12 +51,12 @@
 - manifest 文件由账本域保管（表2-1 主理人可写域）；脚本校验草稿哈希＝manifest 声明哈希后方复制，不符 exit≠0。
 
 ## 验收判据（全部机械可判）
-1. `bash software-team/skills/sop/scripts/ledger-init.sh && echo INIT_OK` 输出含 `INIT_OK` 且非快进/保护分支配置读数回显；
-2. `python -c "import json;d=json.load(open('software-team/config/seat-permissions.json'));assert len(d['seats'])==6"` 退出 0（六席位行＝表2-1 行数）；
-3. `python -c "import json;t=json.load(open('software-team/config/ticket-types.json'));assert len(t['types'])==7"` 退出 0（票型七类）；
+1. `bash deliverables/experts/baigong-software-team/skills/sop/scripts/ledger-init.sh && echo INIT_OK` 输出含 `INIT_OK` 且非快进/保护分支配置读数回显；
+2. `python -c "import json;d=json.load(open('deliverables/experts/baigong-software-team/config/seat-permissions.json'));assert len(d['seats'])==6"` 退出 0（六席位行＝表2-1 行数）；
+3. `python -c "import json;t=json.load(open('deliverables/experts/baigong-software-team/config/ticket-types.json'));assert len(t['types'])==7"` 退出 0（票型七类）；
 4. lease-issuer 冒烟：签一张样例租约，`python` 断言输出四键恰为 `ticket_id,path_globs,seat_id,hash`；重复签发未签注件 exit≠0；
-5. `python software-team/tests/s2/test_ledger_core.py software-team/tests/s2/test_lease_instantiation.py` 退出 0（工程师写脚本、CI 机械执行、QA 出结论——三段式，本票回执只附执行读数）；
-6. `python software-team/skills/sop/scripts/baseline-backfill-demo.py` 退出 0，账本中两基线条目哈希与 v2.7 登记段实测值（2b3675e1…／1a9febe8…）逐字等（回执附两读数）；
+5. `python deliverables/experts/baigong-software-team/tests/s2/test_ledger_core.py deliverables/experts/baigong-software-team/tests/s2/test_lease_instantiation.py` 退出 0（工程师写脚本、CI 机械执行、QA 出结论——三段式，本票回执只附执行读数）；
+6. `python deliverables/experts/baigong-software-team/skills/sop/scripts/baseline-backfill-demo.py` 退出 0，账本中两基线条目哈希与 v2.7 登记段实测值（2b3675e1…／1a9febe8…）逐字等（回执附两读数）；
 7. 非法迁移冒烟：state-transition 对「4 执行→1 需求」请求 exit≠0 且产生「呈报」类记录一条（读数入回执）；
 8. promote-manifest 冒烟：样例草稿哈希与 manifest 声明一致→复制入 `docs/` 成功并附来源哈希读数；篡改样例→exit≠0 且 `docs/` 无新增（两读数）。
 
@@ -64,7 +64,7 @@
 - 前置：T01（P7）。后置：T03（消费账本记录类＋seat-permissions 同源）、T04（消费 `deny_globs`＋租约台账）、T05（席位卡脚本调用清单引用本票实体名）。
 
 ## 禁动面（零触碰）
-- 两基线登记件本体、`.collab/` 全域（回执除外）、`docs/`、`software-team/` 下非本票闭集路径、T01/T03/T04/T05 声明闭集全部文件。
+- 两基线登记件本体、`.collab/` 全域（回执除外）、`docs/`、`deliverables/experts/baigong-software-team/` 下非本票闭集路径、T01/T03/T04/T05 声明闭集全部文件。
 - 工程师不得改本票票体四字段；账本历史 append-only 不回改。
 
 ## 候裁点（单列·不自行拍）

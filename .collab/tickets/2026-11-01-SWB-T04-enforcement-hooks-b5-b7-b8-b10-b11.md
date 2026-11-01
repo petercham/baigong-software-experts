@@ -7,16 +7,16 @@
 
 ## 声明闭集（10 件·本票唯一可写面）
 - 声明闭集：
-- software-team/hooks/hooks.json
-- software-team/skills/sop/scripts/write-guard.py
-- software-team/skills/sop/scripts/commit-audit.py
-- software-team/skills/sop/scripts/liveness-selfcheck.py
-- software-team/skills/sop/scripts/freeze-unfreeze.py
-- software-team/skills/sop/scripts/memory-neutralize.py
-- software-team/skills/sop/scripts/shadow-replay.py
-- software-team/skills/sop/scripts/sign-verify.py
-- software-team/config/seat-permissions-hooks-map.json
-- software-team/tests/s4/test_enforcement.py
+- deliverables/experts/baigong-software-team/hooks/hooks.json
+- deliverables/experts/baigong-software-team/skills/sop/scripts/write-guard.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/commit-audit.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/liveness-selfcheck.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/freeze-unfreeze.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/memory-neutralize.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/shadow-replay.py
+- deliverables/experts/baigong-software-team/skills/sop/scripts/sign-verify.py
+- deliverables/experts/baigong-software-team/config/seat-permissions-hooks-map.json
+- deliverables/experts/baigong-software-team/tests/s4/test_enforcement.py
 
 ## 逐条施工规格
 
@@ -60,14 +60,14 @@
 - 由 T02 `seat-permissions.json` 派生 `deny_globs` 的 hooks 消费形态（表2-1「明确不可写」列）；头部注 `derived_from: seat-permissions.json (表2-1)`；与源件一致性断言在测试内。
 
 ## 验收判据（全部机械可判）
-1. `python -c "import json;h=json.load(open('software-team/hooks/hooks.json'));assert h"` 退出 0 且文件含 PreToolUse/PostToolUse 两键（grep 读数）；
+1. `python -c "import json;h=json.load(open('deliverables/experts/baigong-software-team/hooks/hooks.json'));assert h"` 退出 0 且文件含 PreToolUse/PostToolUse 两键（grep 读数）；
 2. deny 冒烟：无租约状态下样例写请求经 write-guard → 输出含 `"permissionDecision":"deny"`（读数入回执）；
 3. orphan 提交冒烟：构造无票 trailer 样例提交描述 → commit-audit exit＝2；amend/rebase 样例各 exit＝2（三读数）；
-4. `python software-team/skills/sop/scripts/liveness-selfcheck.py` 退出 0 且账本「呈报」类无「活性自检失败」新增；停用 hooks 后重跑 → exit≠0 且新增该呈报码恰 1 条（双向读数，§17 活性自检定义的正反两态）；
+4. `python deliverables/experts/baigong-software-team/skills/sop/scripts/liveness-selfcheck.py` 退出 0 且账本「呈报」类无「活性自检失败」新增；停用 hooks 后重跑 → exit≠0 且新增该呈报码恰 1 条（双向读数，§17 活性自检定义的正反两态）；
 5. freeze 冒烟：触发 freeze → 断言链「租约清空→全写 deny→实例终止」三步读数齐且耗时 ≤60s（脚本自计时回显）；
 6. B11 冒烟：样例下游件含记忆路径引用 → memory-neutralize 命中码回显；
 7. sign-verify 对伪造签名 exit≠0、对 gpg 缺失环境 exit≠0（fail-closed 两读数）；
-8. `python software-team/tests/s4/test_enforcement.py` 退出 0；
+8. `python deliverables/experts/baigong-software-team/tests/s4/test_enforcement.py` 退出 0；
 9. 派生一致性断言：seat-permissions-hooks-map.json 的 deny_globs 席位集 ⊆ seat-permissions.json 席位集且每席位非空（测试内断言，读数入回执）。
 
 ## 票间关系

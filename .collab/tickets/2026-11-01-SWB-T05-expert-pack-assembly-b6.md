@@ -7,19 +7,19 @@
 
 ## 声明闭集（13 件·本票唯一可写面）
 - 声明闭集：
-- software-team/plugin.json
-- software-team/settings.json
-- software-team/agents/software-team-lead.md
-- software-team/agents/software-team-product.md
-- software-team/agents/software-team-architect.md
-- software-team/agents/software-team-qa.md
-- software-team/agents/software-team-engineer.md
-- software-team/skills/sop/SKILL.md
-- software-team/skills/sop/references/architecture-v2.7-copy.md
-- software-team/skills/sop/references/product-v2.7-copy.md
-- software-team/skills/sop/templates/ticket-template.md
-- software-team/skills/sop/templates/decision-pack-template.md
-- software-team/skills/sop/templates/return-template.md
+- deliverables/experts/baigong-software-team/plugin.json
+- deliverables/experts/baigong-software-team/settings.json
+- deliverables/experts/baigong-software-team/agents/software-team-lead.md
+- deliverables/experts/baigong-software-team/agents/software-team-product.md
+- deliverables/experts/baigong-software-team/agents/software-team-architect.md
+- deliverables/experts/baigong-software-team/agents/software-team-qa.md
+- deliverables/experts/baigong-software-team/agents/software-team-engineer.md
+- deliverables/experts/baigong-software-team/skills/sop/SKILL.md
+- deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.7-copy.md
+- deliverables/experts/baigong-software-team/skills/sop/references/product-v2.7-copy.md
+- deliverables/experts/baigong-software-team/skills/sop/templates/ticket-template.md
+- deliverables/experts/baigong-software-team/skills/sop/templates/decision-pack-template.md
+- deliverables/experts/baigong-software-team/skills/sop/templates/return-template.md
 
 ## 逐条施工规格（逐行对位 §8 表 V10 L158–168）
 
@@ -50,15 +50,15 @@
 - 席位卡脚本调用点只可引用 T02/T03/T04 声明闭集实体名（缺席引用＝红项，§16 对照源铁律）；本票不写 hooks.json（属 T04 闭集）、不写 config/*.json（属 T02/T03 闭集）。
 
 ## 验收判据（全部机械可判）
-1. `python -c "import json;p=json.load(open('software-team/plugin.json'));assert p['name']=='software-team' and p['expertType']=='team'"` 退出 0；
-2. `python -c "import json;s=json.load(open('software-team/settings.json'));assert 'agent' in s"` 退出 0；
-3. `ls software-team/agents/*.md | wc -l` ＝5；
-4. 无裸纪律断言：对五卡逐行扫描纪律条目行，每行必含 `G[1-5]` 标注——`python software-team/tests/acceptance/count-assert.py --bare-discipline` 退出 0（消费面⑦联动，本票交付时 T06 该子件未落则本判据以同式内联脚本执行，读数入回执）；
-5. 副本哈希：`sha256sum software-team/skills/sop/references/architecture-v2.7-copy.md` 对位架构基线本体哈希 1a9febe8…（副本含来源头注行故整件哈希允许不同，断言＝头注声明哈希＝登记哈希＋去头注后体哈希逐字等；去注命令读数入回执）；product 副本同理对位 2b3675e1…；
-6. maxTurns 断言对位装填面（L35/L42 同源）：`grep -l '^maxTurns: 200' software-team/agents/software-team-lead.md | wc -l` ＝1 且 `grep -l '^maxTurns: 50' software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；反向断言防双源漂移：`grep -c 'maxTurns' software-team/plugin.json` ＝0（plugin.json 实证锚无该字段）；
-7. 四卡无 `tools:` 字段：`grep -L '^tools:' software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；
-8. 路由判定表五通道行齐：`grep -cE 'C1|产品票|规则票|技能票|施工票' software-team/agents/software-team-lead.md` ≥5；
-9. `ls software-team/skills/sop/templates/*.md | wc -l` ＝3。
+1. `python -c "import json;p=json.load(open('deliverables/experts/baigong-software-team/plugin.json'));assert p['name']=='software-team' and p['expertType']=='team'"` 退出 0；
+2. `python -c "import json;s=json.load(open('deliverables/experts/baigong-software-team/settings.json'));assert 'agent' in s"` 退出 0；
+3. `ls deliverables/experts/baigong-software-team/agents/*.md | wc -l` ＝5；
+4. 无裸纪律断言：对五卡逐行扫描纪律条目行，每行必含 `G[1-5]` 标注——`python deliverables/experts/baigong-software-team/tests/acceptance/count-assert.py --bare-discipline` 退出 0（消费面⑦联动，本票交付时 T06 该子件未落则本判据以同式内联脚本执行，读数入回执）；
+5. 副本哈希：`sha256sum deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.7-copy.md` 对位架构基线本体哈希 1a9febe8…（副本含来源头注行故整件哈希允许不同，断言＝头注声明哈希＝登记哈希＋去头注后体哈希逐字等；去注命令读数入回执）；product 副本同理对位 2b3675e1…；
+6. maxTurns 断言对位装填面（L35/L42 同源）：`grep -l '^maxTurns: 200' deliverables/experts/baigong-software-team/agents/software-team-lead.md | wc -l` ＝1 且 `grep -l '^maxTurns: 50' deliverables/experts/baigong-software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；反向断言防双源漂移：`grep -c 'maxTurns' deliverables/experts/baigong-software-team/plugin.json` ＝0（plugin.json 实证锚无该字段）；
+7. 四卡无 `tools:` 字段：`grep -L '^tools:' deliverables/experts/baigong-software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；
+8. 路由判定表五通道行齐：`grep -cE 'C1|产品票|规则票|技能票|施工票' deliverables/experts/baigong-software-team/agents/software-team-lead.md` ≥5；
+9. `ls deliverables/experts/baigong-software-team/skills/sop/templates/*.md | wc -l` ＝3。
 
 ## 票间关系
 - 前置：T02、T03、T04。后置：T06（验收双臂对装配面全量核验）。
@@ -68,7 +68,7 @@
 - 工程师不得改本票票体四字段。
 
 ## 候裁点（单列·不自行拍）
-- Q-01：交付根路径实例化——设计真源以专家包相对路径表述（`agents/…`、`skills/sop/…`），落盘至本仓的根（本票暂按 `software-team/` 顶层）属落盘约定，呈决策者追认。
+- Q-01：交付根路径实例化——设计真源以专家包相对路径表述（`agents/…`、`skills/sop/…`），落盘至本仓的根（本票暂按 `deliverables/experts/baigong-software-team/` 顶层）属落盘约定，呈决策者追认。
 - Q-03：`.mcp.json` 三 server（ledger/CI/签名）auth 形态按 P8 求证后填（§8 行6 [未验证:P8]）——P8 读数未出前本票**不装配 .mcp.json**，装配与否随 P8 呈拍。
 - Q-06：disallowedTools 装填条件＝P3 实测 pass（§8 行3 [未验证:P3]）；P3 阴性/不定 → 不装配，席位感知备选退化走人类拍板（§14 行3）。
 
