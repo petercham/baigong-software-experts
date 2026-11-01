@@ -10,14 +10,14 @@ def tokens(text: str) -> int:
     return cjk + -(-(len(text) - cjk) // 4)      # ceil(非CJK/4)
 if __name__ == '__main__':
     # 拆仓（2026-10-26）＋ T2 三仓口径：默认扫三仓 agents——
-    #   experts 仓（video bundle）＋ devkits 仓（workbuddy/ 下软开 bundle）；
+    #   experts 仓（video bundle）＋ devkits 仓（deliverables/experts/ 下软开 bundle）；
     #   skills 仓无 agents，不入 glob。三仓须并列同一父目录（D:\）。
     # 显式传 argv[1] 时按单 glob 覆盖（旧行为不变）。
     if len(sys.argv) > 1:
         pats = [sys.argv[1]]
     else:
         pats = ['../multi-agent-collab-experts/workbuddy/*/agents/*.md',
-                'workbuddy/*/agents/*.md']
+                'deliverables/experts/*/agents/*.md']
     bad = 0
     seen = set()
     for pat in pats:

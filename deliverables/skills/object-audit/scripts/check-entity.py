@@ -25,14 +25,14 @@
 #
 # S-03 项目实体扫描（OA-T1／OA-S1）。
 #
-# **只扫规范件＋收编 bundle**（`deliverables/**`＋`workbuddy/**`·后者＝待拍⑥·
-# 拍板六③已拍扩域）：`object-audit/SKILL.md「审计范围：只审规范件」`
+# **只扫规范件＋收编 bundle**（`deliverables/**`·bundle 现居 `deliverables/experts/`
+# 内＝收编域已在其中·DIRRELOC 路径换代随动）：`object-audit/SKILL.md「审计范围：只审规范件」`
 # 明确记录件（informative）「不要求干净——它们是项目史，脏是正常形态」。若不划界，
 # 裁决记录/台账里的日期与项目名会全部命中，误报会吞掉这个脚本（门禁死法之一）。
 #
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
 # 本件不含策略判断：只输出 SEV＋spec_id＋逐模式计数（含命中名单）。
-"""S-03：扫规范件＋收编 bundle（deliverables/**＋workbuddy/**）的项目实体命中（OA-T1／OA-S1），逐模式计数并附命中名单。
+"""S-03：扫规范件＋收编 bundle（deliverables/**·bundle＝deliverables/experts/ 子树）的项目实体命中（OA-T1／OA-S1），逐模式计数并附命中名单。
 
 用法：
     python check-entity.py [--root <仓根>] [--project-name <名>]... [--person-name <名>]...
@@ -106,10 +106,10 @@ def in_fullwidth_paren(text: str, pos: int) -> bool:
             depth = max(0, depth - 1)
     return depth > 0
 
-# 扫描域＝规范件＋收编 bundle（待拍⑥·拍板六③已拍：扩到 `workbuddy/**`——
-# devkits 仓内软开 bundle 快照属交付件，也受实体检；bundle 内 MD 有红项须保守修）。
+# 扫描域＝规范件＋收编 bundle（收编 bundle 现居 `deliverables/experts/` 子树＝已在
+# `deliverables/**` 域内·DIRRELOC 路径换代随动，域覆盖不减）。
 # 仍不接受扩到记录件（.collab/** 等）——扩了就违反划界，误报会吞掉脚本。
-SCAN_ROOT_DIRS = ("deliverables", "workbuddy")
+SCAN_ROOT_DIRS = ("deliverables",)
 SCAN_EXTS = (".md", ".py", ".sh", ".json", ".state", ".txt")
 
 

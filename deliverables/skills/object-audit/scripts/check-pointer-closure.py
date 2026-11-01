@@ -25,7 +25,7 @@
 #   OA-D6-3 → object-audit/references/50-document.md D6 表 D6-3 行（交付包指针闭集）
 #   OA-D6-4 → 同上 D6-4 行（包内反引号相对指针以包根解析可达）
 #
-# 扫描面（缺省＝两包面，裁③）：deliverables/skills/external-advisor-collab/ ＋ workbuddy/。
+# 扫描面（缺省＝两包面，裁③）：deliverables/skills/external-advisor-collab/ ＋ deliverables/experts/（软开 bundle·DIRRELOC 路径换代随动）。
 # `--pkg <dir>`（可重复）＝显式指入其他交付态包面（跨仓组件包/装配预览面），给出即取代缺省。
 # `.collab/**` 与其余规范件不进扫描面（扫描面收窄＝主豁免）。
 #
@@ -74,7 +74,7 @@ FENCE_RE = re.compile(r"^[ \t]*```")
 POINTER_RE = re.compile(r"`([A-Za-z0-9_\-./\u4e00-\u9fff]+\.(?:md|py))`")
 
 # 缺省扫描面＝两包面（裁③：其余包 `--pkg` 逐包扩面）
-DEFAULT_PKG_FACES = ("deliverables/skills/external-advisor-collab", "workbuddy")
+DEFAULT_PKG_FACES = ("deliverables/skills/external-advisor-collab", "deliverables/experts")
 SCAN_EXTS = (".md", ".txt", ".py", ".sh", ".json", ".lock", ".state")
 
 

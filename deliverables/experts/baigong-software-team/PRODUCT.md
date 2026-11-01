@@ -72,7 +72,7 @@
 
 本包的产品形态＝一条"真源→装配→部署"链条加一条版本账纪律：
 
-- **包面真源**：仓内 `workbuddy/baigong-software-team/` 目录是席位定义与流程域的唯一真源；改席位定义只改真源。
+- **包面真源**：仓内 `deliverables/experts/baigong-software-team/` 目录是席位定义与流程域的唯一真源；改席位定义只改真源。
 - **装配面派生**：`bundle.lock` 声明组件与版本锁，装配器把包本体＋锁定的外部组件拼成注册态 bundle；装配产物不入任何版本库，缺省输出为与源仓同级的 `<仓名>-build/<bundle名>` 预览面——派生产物，非第二真源。
 - **部署四段闸**：装配→预览→人类闸→部署，段段须上游收口；预览态抓手＝本地市场注册挂预览卡，人类真实验证明示通过后部署面才转正（`skills/software-orchestration/references/deploy-gate.md` §五）。
 - **版本账纪律**：包版本号在 `.codebuddy-plugin/plugin.json` 与 `bundle.lock` 同源镜像、每变必 bump；组件一律锁不可变 tag；历次变更逐版记账于 `README.md`「出身」节版本账——版本号同时是宿主刷新运行缓存的载体。
