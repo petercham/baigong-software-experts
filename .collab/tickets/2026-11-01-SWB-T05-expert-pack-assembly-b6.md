@@ -55,7 +55,7 @@
 3. `ls software-team/agents/*.md | wc -l` ＝5；
 4. 无裸纪律断言：对五卡逐行扫描纪律条目行，每行必含 `G[1-5]` 标注——`python software-team/tests/acceptance/count-assert.py --bare-discipline` 退出 0（消费面⑦联动，本票交付时 T06 该子件未落则本判据以同式内联脚本执行，读数入回执）；
 5. 副本哈希：`sha256sum software-team/skills/sop/references/architecture-v2.7-copy.md` 对位架构基线本体哈希 1a9febe8…（副本含来源头注行故整件哈希允许不同，断言＝头注声明哈希＝登记哈希＋去头注后体哈希逐字等；去注命令读数入回执）；product 副本同理对位 2b3675e1…；
-6. `grep -c 'maxTurns' software-team/plugin.json` 等装配读数：plugin.json 内 lead maxTurns＝200、成员＝50（JSON 路径断言脚本退出 0）；
+6. maxTurns 断言对位装填面（L35/L42 同源）：`grep -l '^maxTurns: 200' software-team/agents/software-team-lead.md | wc -l` ＝1 且 `grep -l '^maxTurns: 50' software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；反向断言防双源漂移：`grep -c 'maxTurns' software-team/plugin.json` ＝0（plugin.json 实证锚无该字段）；
 7. 四卡无 `tools:` 字段：`grep -L '^tools:' software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；
 8. 路由判定表五通道行齐：`grep -cE 'C1|产品票|规则票|技能票|施工票' software-team/agents/software-team-lead.md` ≥5；
 9. `ls software-team/skills/sop/templates/*.md | wc -l` ＝3。
