@@ -1,8 +1,8 @@
 # SWB-T05 专家包装配（B6 职能承载票）：席位卡装填＋变更通道装载（施工票·L3·架构席起草）
 
 - 开端读数：ANCHOR＝08fc5ee（见总览件）；开工时实测 HEAD 附回执。
-- 设计真源：`.collab/refs/external/SWB-交接件v2.8-产品设计与架构设计-2026-11-02.md`（现行基线＝v2.8 三方收口（PM-R10 `cd5d959`＋QA-R10 `5e30e50`）·MERGE-V11 正式登记回执 `3fb8c47`；V11 行号前缀（V11 n＝落盘物理 n−27）；产品本体 V11 L26–80 sha256=20a96da5…；架构本体 V11 L81–253 sha256=66aab921…；纯 LF）。
-- 背景（自包含）：§9 声明「B6＝装配施工票，编号空缺刻意」——本票即 B6 职能的显式并入声明票。承接消费面声明第③项「席位卡装填←§5/§7」（V11 L233；§5 工件矩阵 V11 L143–151，§7 纪律编目 V11 L154–166）与第⑧项「变更通道←§12」（V11 L200–201）。同时装配面逐行落实 §8 专家包装配表（V11 L167–177）。违纪模式表承接：行 3「上游席位代写下游产出→红线②＋U4＋G4」的装填面在本票（席位卡纪律行）；行 8「裸纪律入卡→'无裸纪律'验收（§7）」的装填面在本票、验收断言在 T06。
+- 设计真源：`.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-02.md`（现行基线＝v2.9 登记生效（PM-R9 `8e63df6`＋QA-R9 `90b7da8`＋主理人登记记录 `ba3fbb6`）；V12 行号前缀（V12 n＝落盘物理 n−27）；产品本体 V12 L1–56 sha256=14605e18…；架构本体 V12 L57–230 sha256=17f4843a…；纯 LF）。
+- 背景（自包含）：§9 声明「B6＝装配施工票，编号空缺刻意」——本票即 B6 职能的显式并入声明票。承接消费面声明第③项「席位卡装填←§5/§7」（V12 L211；§5 工件矩阵 V12 L117–125，§7 纪律编目 V12 L128–140）与第⑧项「变更通道←§12」（V12 L175–176）。同时装配面逐行落实 §8 专家包装配表（V12 L141–151）。违纪模式表承接：行 3「上游席位代写下游产出→红线②＋U4＋G4」的装填面在本票（席位卡纪律行）；行 8「裸纪律入卡→'无裸纪律'验收（§7）」的装填面在本票、验收断言在 T06。
 - 前置票：T02、T03、T04（席位卡「脚本调用点」行必须引用三票已落盘实体名，引用不得指向缺席件）。P3 读数（T01）决定 disallowedTools 装填（见候裁 Q-06）。
 
 ## 声明闭集（13 件·本票唯一可写面）
@@ -15,13 +15,13 @@
 - deliverables/experts/baigong-software-team/agents/software-team-qa.md
 - deliverables/experts/baigong-software-team/agents/software-team-engineer.md
 - deliverables/experts/baigong-software-team/skills/sop/SKILL.md
-- deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.8-copy.md
-- deliverables/experts/baigong-software-team/skills/sop/references/product-v2.8-copy.md
+- deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.9-copy.md
+- deliverables/experts/baigong-software-team/skills/sop/references/product-v2.9-copy.md
 - deliverables/experts/baigong-software-team/skills/sop/templates/ticket-template.md
 - deliverables/experts/baigong-software-team/skills/sop/templates/decision-pack-template.md
 - deliverables/experts/baigong-software-team/skills/sop/templates/return-template.md
 
-## 逐条施工规格（逐行对位 §8 表 V11 L167–177）
+## 逐条施工规格（逐行对位 §8 表 V12 L141–151）
 
 ### T05-A plugin.json
 - `name=software-team`；`expertType=team`；`teamInfo{leadAgent, memberAgents}`；members 五席（lead＋product/architect/qa/engineer）。锚 [实证: plugin-json-spec:24-26,53-57]（核验按 §19 持盘者直读，回执附核对结论行）。
@@ -30,21 +30,21 @@
 - 键名 `"agent"`（[实证: spec-team:110-120]）。
 
 ### T05-C agents/software-team-lead.md（主理人接口卡）
-- 内容闭集＝红线五条＋铁律四条摘要＋路由判定表＋脚本调用清单＋句「一切流程状态以账本为准」＋纪律行「呈拍须过三类准入；技术判断类、无锚候裁点一律退回原席」（§8 行2）；红线/铁律摘要锚点＝spec-team:62-66 / spec-agent:122-136（§19）。
-- 路由判定表必须列五类变更通道路由（§12 V11 L200–201：C1／产品票／规则票／技能票／施工票＝L3 载体非 L2 通道·通道五类口径不变，维护票走施工票载体）——消费面⑧的主落点。
+- 内容闭集＝红线五条＋铁律四条摘要＋路由判定表＋脚本调用清单＋句「一切流程状态以账本为准」＋纪律行「签字两门制——门间零签字、呈报须过保险丝或托管（异常/紧急直通三通道除外，仍直达决策者）；技术判断类、无锚候裁点一律退回原席；外部输入件四选一（未申报不猜、内容不解析、转正前不外发）」（§8 行2）；红线/铁律摘要锚点＝spec-team:62-66 / spec-agent:122-136（§19）。
+- 路由判定表必须列五类变更通道路由（§12 V12 L175–176：C1／产品票／规则票／技能票／施工票＝L3 载体非 L2 通道·通道五类口径不变，维护票走施工票载体）——消费面⑧的主落点。
 - maxTurns＝200（§8 行7 [实证: spec-agent:21,93]）。
 
 ### T05-D 四席位卡（§5 恒常工件·消费面③落点）
 - 每卡结构＝§5 行1 逐字：**身份一句＋权限四行＋席位纪律≤10 条（各带保证类别标注 G1–G5）＋脚本调用点**；「装什么/不装什么」执行：不装技法正文、流程全文。
-- 权限四行源＝表2-1 对应席位行（写域/可写/不可写/载体）转录；席位纪律源＝§7 席位纪律段（V11 L165）逐席：工程师——一票一新鲜实例、回流四型、不改票体四字段；QA——判词归签字席、审计以任务实体承载；产品——解析件只引 intake、范围签两层判据；架构——租约签注唯一生产权、灰度判据不得现场裁量；主理人卡另加「零业务写、路由不做业务解析」。
-- 通用纪律 U1–U7 按席位相关性入卡，**每行带主保证标注**（§7 落盘为纪律标注列）；U7 行标注逐字含「P3[未验证:P3·能力面]＋G5 辅助面」（§7 V11 L164 诚实申报，不得改写成已保证形态）。
+- 权限四行源＝表2-1 对应席位行（写域/可写/不可写/载体）转录；席位纪律源＝§7 席位纪律段（V12 L139）逐席：工程师——一票一新鲜实例、回流四型、不改票体四字段；QA——判词归签字席、审计以任务实体承载；产品——解析件只引 intake、范围签两层判据；架构——租约签注唯一生产权、灰度判据不得现场裁量；主理人卡另加「零业务写、路由不做业务解析」。
+- 通用纪律 U1–U7 按席位相关性入卡，**每行带主保证标注**（§7 落盘为纪律标注列）；U7 行标注逐字含「P3[未验证:P3·能力面]＋G5 辅助面」（§7 V12 L138 诚实申报，不得改写成已保证形态）。
 - frontmatter 标准字段；**不声明 tools 字段**（[实证: spec-agent:5-7]）；disallowedTools 仅 P3 实测 pass 才装配（候裁 Q-06，P3 未过时四卡缺省不含该字段）。
 - 成员卡 maxTurns＝50（§8 行7）。
 
 ### T05-E skills/sop/
 - `SKILL.md`：按需拉取技法正文、模板、正反例；**不装纪律**（§5 行2「纪律不按需」）。
-- `references/architecture-v2.8-copy.md`＋`references/product-v2.8-copy.md`：两基线（v2.8）整件副本（§5 行3「本架构＋产品设计副本」/§8 行5）；副本头部注来源 sha256 与源路径；验收断言副本哈希与基线登记哈希一致。
-- `templates/` 三件＝票模板/决策包模板/回流件模板（§8 行5「templates＝票/决策包/回流件」）；票模板含票型八类清单（产品需求/开发/缺陷/部署/规则/流程变更/验收/维护，§3·V11 L137 同源）与票体四字段自包含结构（§3）；回流件模板含回流四型（完成/部分完成/受阻/异常，§3）。
+- `references/architecture-v2.9-copy.md`＋`references/product-v2.9-copy.md`：两基线（v2.9）整件副本（§5 行3「本架构＋产品设计副本」/§8 行5）；副本头部注来源 sha256 与源路径；验收断言副本哈希与基线登记哈希一致。
+- `templates/` 三件＝票模板/决策包模板/回流件模板（§8 行5「templates＝票/决策包/回流件」）；票模板含票型八类清单（产品需求/开发/缺陷/部署/规则/流程变更/验收/维护，§3·V12 L112 同源）与票体四字段自包含结构（§3）；回流件模板含回流四型（完成/部分完成/受阻/异常，§3）。
 
 ### T05-F 同源与引用纪律
 - 席位卡脚本调用点只可引用 T02/T03/T04 声明闭集实体名（缺席引用＝红项，§16 对照源铁律）；本票不写 hooks.json（属 T04 闭集）、不写 config/*.json（属 T02/T03 闭集）。
@@ -54,7 +54,7 @@
 2. `python -c "import json;s=json.load(open('deliverables/experts/baigong-software-team/settings.json'));assert 'agent' in s"` 退出 0；
 3. `ls deliverables/experts/baigong-software-team/agents/*.md | wc -l` ＝5；
 4. 无裸纪律断言：对五卡逐行扫描纪律条目行，每行必含 `G[1-5]` 标注——`python deliverables/experts/baigong-software-team/tests/acceptance/count-assert.py --bare-discipline` 退出 0（消费面⑦联动，本票交付时 T06 该子件未落则本判据以同式内联脚本执行，读数入回执）；
-5. 副本哈希：`sha256sum deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.8-copy.md` 对位架构基线本体哈希 66aab921…（副本含来源头注行故整件哈希允许不同，断言＝头注声明哈希＝登记哈希＋去头注后体哈希逐字等；去注命令读数入回执）；product 副本同理对位 20a96da5…；
+5. 副本哈希：`sha256sum deliverables/experts/baigong-software-team/skills/sop/references/architecture-v2.9-copy.md` 对位架构基线本体哈希 17f4843a…（副本含来源头注行故整件哈希允许不同，断言＝头注声明哈希＝登记哈希＋去头注后体哈希逐字等；去注命令读数入回执）；product 副本同理对位 14605e18…；
 6. maxTurns 断言对位装填面（L35/L42 同源）：`grep -l '^maxTurns: 200' deliverables/experts/baigong-software-team/agents/software-team-lead.md | wc -l` ＝1 且 `grep -l '^maxTurns: 50' deliverables/experts/baigong-software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；反向断言防双源漂移：`grep -c 'maxTurns' deliverables/experts/baigong-software-team/plugin.json` ＝0（plugin.json 实证锚无该字段）；
 7. 四卡无 `tools:` 字段：`grep -L '^tools:' deliverables/experts/baigong-software-team/agents/software-team-{product,architect,qa,engineer}.md | wc -l` ＝4；
 8. 路由判定表五通道行齐：`grep -cE 'C1|产品票|规则票|技能票|施工票' deliverables/experts/baigong-software-team/agents/software-team-lead.md` ≥5；
