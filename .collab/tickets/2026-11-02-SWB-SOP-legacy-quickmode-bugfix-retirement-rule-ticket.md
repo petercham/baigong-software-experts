@@ -39,18 +39,18 @@
 
 ### S-C §20.1①–⑥ 所涉卷内条款同票处置（过渡口径标注·20.2④ 体例·加性不删原文）
 
-统一模板行（各落点插于指名行/节之后一行）：`> **过渡口径（v2.8 §20.1·X）**：<替代形态句>（旧条款保留为技法面，验收结论一律以 SWB v2.8 基线为准）`。**落位程序条款（双席审计 Y-1·循 TKT36 文本锚定法先例）**：下表行位＝起草实测行号，仅作定位参考；执行落位**一律以该行「落点」列逐字文本锚为准**（锚句在盘上定位后插于其后一行），同文件多落点（qa MD×3、standard-sop×2）按**行号降序落笔**（先深后浅，先落者不使后落者锚位移）。逐落点（X＝条款号）：
+统一模板行（各落点插于指名行/节之后一行）：`> **过渡口径（v2.8 §20.1·X）**：<替代形态句>（旧条款保留为技法面，验收结论一律以 SWB v2.8 基线为准）`。**落位程序条款**：下表行位＝起草实测行号，仅作定位参考；执行落位**一律以该行「落点」列逐字文本锚为准**（锚句在盘上定位后插于其后一行），同文件多落点（qa MD×3、standard-sop×2）按**行号降序落笔**（先深后浅，先落者不使后落者锚位移）。逐落点（X＝条款号）：
 
 | 条款 | 落点（路径:行·起草实测） | 替代形态句（逐字） |
 |---|---|---|
 | ① | `agents/software-qa-engineer.md` L71 节头后 | QA 两轮上限→三段式机械判绿＋缺陷票回流 |
-| ② | `agents/software-engineer.md` L87（「No duplicate implementations across files」行）之后一行（＝L88 前·双席审计 Y-3 统一为模板"之后一行"口径） | IS_PASS 自审出口→制度③＋三段式 |
+| ② | `agents/software-engineer.md` L87（「No duplicate implementations across files」行）之后一行（＝L88 前） | IS_PASS 自审出口→制度③＋三段式 |
 | ② | `skills/.../references/standard-sop.md` L33 后 | 同② |
 | ④ | `agents/software-qa-engineer.md` L57 节头后 | 智能路由三态分派→回流四型＋B2 状态机迁移 |
 | ④ | `agents/software-company-team-lead.md` L90 后 | 同④ |
 | ⑤ | `skills/.../references/deploy-gate.md` L32 节头后 | 独立 deploy-gate 四段卷→发布硬门禁二＋灰度机械门禁＋转正代写（四段流程保留为装配运维面） |
 | ⑥ | `skills/.../references/dev-discipline.md` L42 后 | 人工回执全等对账→B2/B5 账本（回执保留为申报载体） |
-| ①④ 汇总 | `skills/software-orchestration/references/standard-sop.md` L43 后 | ①＋④（同①④句合并一行·双席审计 Y-2 择"改列标"案：该落点实况仅涉①④，⑤⑥ 无此落点已各自行处置，原列标误标） |
+| ①④ 汇总 | `skills/software-orchestration/references/standard-sop.md` L43 后 | （①＋④合并一行） |
 
 - **③ 落点说明（起草裁量·登记不候裁）**：③「QA 自写自判测试链」在两卷/席位 MD 无直接成文句（qa MD L53–90 为写测试跑测试技法，非结论权条款）——处置面选 qa MD「## Test Writing Standards」节头（实测 L90）后插③句：`工程师写脚本/CI 机械执行/QA 出结论（存量测试资产保留为技术面，不作验收结论源）`。
 
@@ -69,7 +69,7 @@
 
 1. `grep -c '快捷路径除外' deliverables/experts/baigong-software-team/agents/software-company-team-lead.md` ＝**0**。
 2. 两卷退役头注命中各＝1（`grep -c '退役声明（v2.8 §20.1⑦）'`）；两卷行数＝**29→31／20→22**（各＋2·加性）。
-3. 过渡口径标注行全落：`grep -rc '过渡口径（v2.8 §20.1' <qa MD／engineer MD／standard-sop／deploy-gate／dev-discipline／lead 卡>` 逐文件＝**3/1/2/1/1/1**（qa MD＝①L71＋④L57＋③节头后三行；合计＝**9 落点**·双席审计 R-1 更正：原误计 qa 2／总 8；具名对账表九行含③行入回执）。
+3. 过渡口径标注行全落：`grep -rc '过渡口径（v2.8 §20.1' <qa MD／engineer MD／standard-sop／deploy-gate／dev-discipline／lead 卡>` 逐文件＝**3/1/2/1/1/1**（qa MD＝①L71＋④L57＋③节头后三行；合计＝**9 落点**；具名对账表九行含③行入回执）。
 4. 版本三同源：plugin.json L3＝bundle.lock L5＝`0.1.14`；SKILL.md `version: 1.1.3`；README `版本账 v0.1.14` 行在位——四 grep 各命中 1。
 5. 闭集对账：`git show --name-only <执行笔>` 与声明闭集 12 件＋回执全等（dev-discipline §三 回执口径）；闭集外 `git status deliverables/` 零改动。
 6. 禁动面复核：software-orchestration 其余五卷（collab-rules/delivery-summary/handoff-discipline/incremental-dev/partial-workflows）＋PRODUCT.md/ARCHITECTURE.md/avatars／`deliverables/skills/` 三包／票包七件／`.collab/` 全域（回执除外）——git 状态零改动。
