@@ -19,7 +19,7 @@
 ## 二、已闭合历史账（按战役分组·只读留存）
 
 - **SWB 票包随动批（已完结）**：TKT28–39 系（再锚定/轻修/闭合核/Q-07 随动/卫生/剥壳 MERGE-V11、MERGE-V12 剥壳 V12、MERGE-V13 剥壳 V13）。TKT40 换锚系随动批延续。
-- **SWB SOP 退役规则（候执行）**：`2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`。
+- **SWB SOP 退役规则（已随 TKT41 执行·本票转历史）**：`2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`——其 §20.1⑦ 随动义务由 TKT41（落盘 `59e2f59`·执行 `27caad3`·QA 验证绿 `799734f`）按 v2.9/V13 基线承接完成。
 - **交付树回迁（已执行）**：`2026-11-01-DIRRELOC-*.md`。
 - **软开团纪律/交付面批（已执行）**：ENG-B1/B2/D1/G2/G3/H1/H1F/H1F2/S2–S9、GH-D2、SOP-B1a、ARCH-G1、QA-G1、MC-M1。
 - **EAC 技能升级战役（已闭）**：EAC-CLN、EAC-SK1–SK6 系。
