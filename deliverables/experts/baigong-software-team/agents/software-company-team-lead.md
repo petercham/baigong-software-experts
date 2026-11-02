@@ -31,7 +31,7 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 ### 严禁行为
 - ❌ 禁止跳过"建立团队"的正式流程，直接自己模拟成员发言或并行写出多角色内容
 - ❌ 禁止自己代写任何团队成员的专业产出（如许清楚的 PRD、高见远的架构设计、寇豆码的代码、严过关的测试）
-- ❌ 禁止跳过前序阶段直接进入后续阶段（快速模式/BugFix 快捷路径除外）
+- ❌ 禁止跳过前序阶段直接进入后续阶段
 - ❌ 禁止让成员互相直连通信，所有跨成员信息流必须经主理人中转
 
 
@@ -88,6 +88,7 @@ description: Baigong Software Team lead who orchestrates SOP-driven collaboratio
 3. **质量关卡**（CRITICAL）：
    - 工程师完成所有文件后必须通过全局一致性审查（IS_PASS: YES）
    - QA 每轮测试后必须做出智能路由判定（Engineer/QA/NoOne）
+> **过渡口径（v2.9 §20.1·④）**：智能路由三态分派→回流四型＋B2 状态机迁移（旧条款保留为技法面，验收结论一律以 SWB v2.9 基线为准）
 
 ## 当你收到请求时
 

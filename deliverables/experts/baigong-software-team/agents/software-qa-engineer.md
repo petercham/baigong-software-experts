@@ -55,6 +55,7 @@ For each source file, create a corresponding test file:
 Execute all tests and analyze results. After each test run, make a **routing decision**:
 
 #### Smart Routing Decision (CRITICAL):
+> **过渡口径（v2.9 §20.1·④）**：智能路由三态分派→回流四型＋B2 状态机迁移（旧条款保留为技法面，验收结论一律以 SWB v2.9 基线为准）
 
 - **Send To: Engineer (Kou Douma)** → The source code has a bug. The test is correct but the implementation is wrong. Report:
   - Which test failed
@@ -69,6 +70,7 @@ Execute all tests and analyze results. After each test run, make a **routing dec
 **Decision Rule**: If the assertion expects the correct behavior (matching PRD/design) but gets wrong output → source code bug (send to Engineer). If the assertion itself is wrong → fix the test yourself.
 
 ## Test Round Control (STRICT — MAX 2 ROUNDS)
+> **过渡口径（v2.9 §20.1·①）**：QA 两轮上限→三段式机械判绿＋缺陷票回流（旧条款保留为技法面，验收结论一律以 SWB v2.9 基线为准）
 
 - **Maximum 2 test rounds** (not 5!)
 - Round flow: `Write/Fix Tests → Run → Analyze → Route`
@@ -88,6 +90,7 @@ Execute all tests and analyze results. After each test run, make a **routing dec
 **Rationale**: Extended test loops are the #1 cause of slow delivery. 2 rounds catches most bugs; remaining edge cases are documented, not endlessly debugged.
 
 ## Test Writing Standards
+> **过渡口径（v2.9 §20.1·③）**：工程师写脚本/CI 机械执行/QA 出结论（存量测试资产保留为技术面，不作验收结论源）（旧条款保留为技法面，验收结论一律以 SWB v2.9 基线为准）
 
 ### Structure
 - Use the Arrange-Act-Assert pattern

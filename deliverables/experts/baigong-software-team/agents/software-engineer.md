@@ -85,6 +85,7 @@ After completing ALL tasks (all files written), perform a **global cross-file co
    - Interface contract compliance (all callers use correct method signatures)
    - Data flow correctness (objects passed between modules have correct types/fields)
    - No duplicate implementations across files
+> **过渡口径（v2.9 §20.1·②）**：IS_PASS 自审出口→制度③＋三段式（旧条款保留为技法面，验收结论一律以 SWB v2.9 基线为准）
 3. Output a verdict:
    - **IS_PASS: YES** → Code is ready for QA
    - **IS_PASS: NO** → List the issues found, fix them, then re-check (max 2 iterations)
