@@ -50,7 +50,9 @@
 - 文本面＝扫描面闭集内 101 件 162 occurrence：具名引用 108 处→`<所属项目>/.scratch/tickets/<基名>`（分账函数）；泛引用/命令片段 54 处→`.scratch/tickets/` 项目中性新位（B4 缺省票目录语义）。
 - spec_file 锚改写 8 处＋先行 mv 5 件（Y-7 闭环化·clause_sha256 零动·锚＝条款文本非路径）：check-collab-lint L5/L14/L23→`agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md`；check-provenance L14＋multi-collab/object-audit/object-build SKILL.md→百工 decisions 裁决记录；tools/check-source-of-truth L5/L14/L23/L32→百工 research 交接件＋百工 decisions 皮总拍板 10-25；bundle-assembly-registration SKILL.md→百工 decisions 皮总拍板 10-26。改后 check-provenance exit 3→**0**、check-source-of-truth exit **0**。
 - B2 收口路由并入项（主理人裁·候裁②③）：check-collab-lint L131 `find_root` deliverables→`tools`＋三分类候选；L279 selftest fixture 旧路径→新树（`--selftest` 六键对拍全 MATCH 复绿）；B1 壳 README 预登记行 collab-fixed-structure 悬空 ×7→`agent-experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md`（新位实存）。
-- **候裁①先行项（超票面闭集·请主理人追认·开工已回报在册）**：`check-entity.py iter_scan_files` 目录剪枝增 `.collab`/`.scratch` 两段（一行）。依据＝该脚本自注「扫描域＝规范件…仍不接受扩到记录件（.collab/** 等）」＋check-pointers 裁-23 排除 .collab 先例；实证＝不剪则搬家件入三分类目录即触发 **OA-T1 BLOCK 新族**（开工基线该族零实例＝新族红）→pre-commit 真拦→B3b 起全批锁死。剪后 entity 四模式全 0·exit 0。归 B4 方案在过渡窗内机械不可行（commit 不可达）＝本席按①先行·候裁队列单列不自行拍板。
+- **B3a 门禁随动行（主理人批准①入册·`b29bc20` 在笔）**：`check-entity.py iter_scan_files` 目录剪枝增 `.collab`/`.scratch` 两段（一行）。依据＝该脚本自注「扫描域＝规范件…仍不接受扩到记录件（.collab/** 等）」＋check-pointers 裁-23 排除 .collab 先例；目录重整＝既有语义物理化，非门禁语义变更（主理人裁定用语）。
+  - 对照读数（随动条件⑴）：**开工基线＝OA-T1 族零实例（GATE PASS 648 内该族零出现）**；不剪则搬家件入三分类目录即触发 OA-T1 BLOCK 新族（date×10＋drive-path×15＋ticket-no×2 实测＝新族红→pre-commit 真拦→B3b 起机械锁死）；**剪后 B3b 起各批复跑＝四模式（date/drive-path/discipline-no/ticket-no）全 count 0·entity exit 0·门禁输出内 OA-T1 findings＝0（仅 coverage 行非发现）**——收口复跑读数在册（GATE PASS 8689 笔内 OA-T1 零发现）。
+  - **B4 收账登记（随动条件⑵）**：该行＝**B3a 已落·B4 收账**（B4 票面门禁机件闭集含 check-entity 同族议题时按已落登记防双治）。
 
 ## 五、erratum 两笔照引（rev2 销账表文本）
 
