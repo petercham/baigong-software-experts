@@ -244,7 +244,7 @@ def main(argv: "list[str]") -> int:
             print("  %s" % hit)
         if hits:
             # 修单②：聚合 finding 的落点必须是**真实路径**（取首个命中处），
-            # 不得输出 `deliverables/` 这类伪位置——机器消费时它是假路径。
+            # 不得输出旧域前缀这类伪位置——机器消费时它是假路径。
             findings.append(
                 "%s: %s OA-T1 项目实体命中 pattern=%s count=%d（规范件须换项目仍成立；名单见 pattern 行）"
                 % (first_hit[key], SEV_BLOCK, key, len(hits))
