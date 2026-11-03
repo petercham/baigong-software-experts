@@ -1,0 +1,56 @@
+{
+  "_spec": "SWB-T04-A · hooks.json（平台事件强制·§5 工件矩阵 V13 L118–126）",
+  "_anchors": {
+    "工件矩阵": "§5「hooks.json｜平台事件强制｜装拦截规则｜不装业务逻辑」——本文件只登记事件→脚本路由，零业务判据；判定逻辑全在 scripts/ 内",
+    "决策词表锚点": "§19 V13 L224「PreToolUse 决策词表：permissionDecision deny/ask；exit 2→blocking」——本文件只用该词表既有值，不自造决策词",
+    "B11": "§9 B11 行：Read/Grep matcher 扫描记忆文件读取（memory-neutralize.py）",
+    "B5": "§9 B5 行：PreToolUse 写侧查租约拦截＋PostToolUse 记账＋对账＋活性自检",
+    "P4镜像": "P4 运行时读数＝inconclusive（tests/probes/results/probe-results.json）——write-guard 主路（stdin 直读）与退路（SubagentStart 状态文件）双形并列同交付、缺省不启用退路（择路由候裁 Q-04，不在本文件拍板）"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Write to file|Modify a file",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"../skills/sop/scripts/write-guard.py\"",
+            "_note": "B5 主路：PreToolUse stdin 直读 agent_id/agent_type→查租约台账＋deny_globs→deny（U2/G1）；exit 2→blocking"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"../skills/sop/scripts/memory-neutralize.py\" prehook",
+            "_note": "B11 读侧扫描：记忆文件读取→引用记忆作流程状态即拦/标（诚实边界：只实现读侧检出面，不声明阻断性能力面保证·§7 V13 L139）"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"../skills/sop/scripts/commit-audit.py\" prehook",
+            "_note": "B5 提交审计拦三形态（amend/rebase/orphan）＋B0 退路补位 force-push 拦截；exit 2→blocking"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"../skills/sop/scripts/commit-audit.py\" posthook",
+            "_note": "B5 PostToolUse 记账：提交哈希/票 ID/席位归因入「写入」记录类（§9 B5 行）"
+          }
+        ]
+      }
+    ]
+  }
+}
