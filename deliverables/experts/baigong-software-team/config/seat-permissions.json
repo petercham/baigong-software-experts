@@ -1,0 +1,67 @@
+{
+  "derived_from": "表2-1",
+  "source": "架构 v2.9 表2-1 写盘权限总表（V13 L70–79·v2.9 版六席位行逐行转录）",
+  "table_notes": {
+    "路径锚定": "本表各行裸路径一律读作仓根字面（git 仓根起算）；交付树内路径（deliverables/**）不受『不可写』列约束，其写入经当票租约 path_globs 授权（表2-2）。",
+    "判据真源双层双址": "仓根 tests/＝跨发布验收判据真源域——架构/QA 共写、经 C1 变更；交付树内 deliverables/**/tests/**＝当期施工与验收测试实体——工程师按表2-2 三段式经租约写入；二者各有职守、互不替代。",
+    "枚举款六类": "顶层只余六类＝交付树（deliverables/）＋docs/＋.archive/＋.collab/＋.git/＋tests/（判据真源域）。"
+  },
+  "seats": [
+    {
+      "seat_id": "host",
+      "seat": "主理人",
+      "write_globs": [".collab/ledger/", ".collab/signatures/", ".collab/dlq/", ".collab/commitments/", ".collab/human/{intake,reviews}/", ".collab/tickets/{id}/仅生命周期字段", ".collab/release-record/", ".collab/manifest/", "docs/转正代写", ".archive/退役定稿落位", ".collab/config/", ".collab/inbox/engineer/", ".collab/archive/"],
+      "writable": "账本、登记、状态迁移、配置、派发存档、呈报",
+      "explicitly_not_writable": ["一切业务产出"],
+      "deny_globs": ["deliverables/**", "tests/**", "docs/*（除转正代写通道）"],
+      "carrier": "全经脚本，LLM 仅誊录与路由"
+    },
+    {
+      "seat_id": "product",
+      "seat": "产品",
+      "write_globs": [".collab/drafts/prd/", ".collab/product/", ".collab/drafts/proposals/"],
+      "writable": "PRD、解析件（只引 intake 禁复制改写）、范围意见",
+      "explicitly_not_writable": ["docs/", ".archive/", "代码域", "他人 drafts", ".collab/未授权子域"],
+      "deny_globs": ["docs/**", ".archive/**", "deliverables/**", "tests/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", ".collab/audits/**"],
+      "carrier": "租约段＋B5"
+    },
+    {
+      "seat_id": "architect",
+      "seat": "架构",
+      "write_globs": [".collab/drafts/{design,adr}/", ".collab/architect/", ".collab/drafts/proposals/", ".collab/tickets/票面文档（起草与按修票权修订）", "开发票四字段", "tests/共写（增删改走 C1）", "租约段签注与灰度判据（票内）"],
+      "writable": "设计、ADR、开发票、边界约束",
+      "explicitly_not_writable": ["docs/", ".archive/", "代码域", ".collab/未授权子域", "audits/"],
+      "deny_globs": ["docs/**", ".archive/**", "deliverables/**", ".collab/audits/**"],
+      "carrier": "租约段＋B5"
+    },
+    {
+      "seat_id": "qa",
+      "seat": "QA",
+      "write_globs": [".collab/audits/", ".collab/tickets/缺陷票（修票权）", "tests/共写", ".collab/drafts/proposals/"],
+      "writable": "审计结论、集成验收结论、缺陷票与定级",
+      "explicitly_not_writable": ["代码域", "docs/", ".archive/", ".collab/未授权子域", "prd/design drafts"],
+      "deny_globs": ["deliverables/**", "docs/**", ".archive/**", ".collab/drafts/prd/**", ".collab/drafts/design/**", ".collab/drafts/adr/**"],
+      "carrier": "租约段＋B5"
+    },
+    {
+      "seat_id": "engineer",
+      "seat": "工程师",
+      "write_globs": ["（工作空间根∪部署路径）−受保护区", ".collab/inbox/engineer/", ".collab/returns/engineer/", ".collab/drafts/deploy/", "限定当票租约路径集"],
+      "writable": "代码、回流件、预发部署票起草",
+      "explicitly_not_writable": ["docs/", ".archive/", ".collab/其余", "仓根 tests/（跨发布验收判据真源·架构/QA 共写域）", "他票票体"],
+      "deny_globs": ["docs/**", ".archive/**", ".collab/**", "tests/**"],
+      "deny_globs_note": "仓根 tests/ 的 deny 按判据真源双层双址条款仅指仓根真源域；交付树内 deliverables/**/tests/**＝施工与验收测试实体，经当票租约 path_globs 授权可写（不受『不可写』列约束）。deny_globs 数组供 T04 B5 消费（消费面②数据源在本票埋设，校验实体在 T04）。",
+      "carrier": "租约＋B5 deny"
+    },
+    {
+      "seat_id": "human",
+      "seat": "人类",
+      "write_globs": [".collab/human/deliberations/", "签名经主理人落 .collab/human/reviews/"],
+      "writable": "裁量记录、密码学签名",
+      "explicitly_not_writable": [],
+      "deny_globs": [],
+      "carrier": "平台外签名工具"
+    }
+  ],
+  "same_origin_declaration": "本文件与 T03 dispatch-spec、T05 ticket-authors 及 config/ticket-types.json 同一票类清单派生（§3 席位-票-租约同源配置）；同源校验断言在 T03 验收。"
+}
