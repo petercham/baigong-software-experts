@@ -35,7 +35,7 @@
 ## 三、判据逐条读数（全部实测落盘）
 
 1. **B3a 跑绿＝mv 前置断言（rev2 补丁三换代式·扫描面闭集 for 式）**：`for d in .collab/receipts .collab/qa .collab/design .collab/decisions .collab/dispatch docs README.md deliverables; do grep -rno "\.collab/tickets/" "$d"; done`＝**0**（换锚前同式实测＝174 occurrence/104 件）。史述豁免（逐处登记·形态保持改写非删除）：皮总裁定-票面落位件 L12／v3 基线件 L60＋L96／PM-SWBRELOC 审票 L28＝4 处（旧前缀字面→无歧义形态词·语义零改）。票面原式（全仓 grep＋两豁免）按 rev2 作废。
-2. **tracked 总数守恒（rev2 补丁五之 2·双侧同域口径）**：开工 621（旧域）＋7（项目侧壳）＝**628** → 收口 38（旧域残）＋600（项目侧）＝**638**＝628＋2（TKT 两支入库）＋8（docs 侧迁入）✓ 精确全等。docs 侧另账独立断言：开工 `git ls-files docs/`＝**8** → 收口＝**0** ✓。逐桶相等核：tickets 85＝Σ项目 `.scratch/tickets` **85**✓；qa 165＋2＝**167**✓；receipts 53＋21 根散件＝**76**（Σ项目 74＋旧域 `.scratch/tickets` B 批票 12 另计·见注）✓；design **24**✓；decisions **16**✓；research 242＝Σ项目 222＋era 留置 20（留置件明细见判据 5 注）✓；board **1**✓。
+2. **tracked 总数守恒（rev2 补丁五之 2·双侧同域口径）**：开工 621（旧域）＋7（项目侧壳）＝**628** → 收口 38（旧域残）＋600（项目侧）＝**638**＝628＋2（TKT 两支入库）＋8（docs 侧迁入）✓ 精确全等。docs 侧另账独立断言：开工 `git ls-files docs/`＝**8** → 收口＝**0** ✓。逐桶相等核：tickets 85＝Σ项目 `.scratch/tickets` **85**✓；qa 165＋2＝**167**✓；receipts 53＋21 根散件＝**76**（Σ项目 74＋旧域 `.scratch/tickets` B 批票 12 另计·见注）✓；design **24**✓；decisions **16**✓；research 现位 248＝Σ项目 222＋era 留置 26＝开工 242＋docs research 迁入 6 ✓（留置件明细见判据 5 注·随正笔 `QA-B3` 黄目①：原表述「242＝Σ222＋era 20」系分解式误写，正解即本式）。board **1**✓。
    - 注：根散件 21 全归 receipts（票面归桶定标：收口报告/登记/呈报/处置注记→receipts·裁决本体零存在根面）；receipts 桶 74 项目侧＝53＋21。
 3. **字节一致**：`git log --name-status -M 5b5bcf2..HEAD` 全 593 笔搬家目＝**R100 占比 100%**·例外＝无。
 4. **untracked 面守恒（以开工实测栏为基）**：refs **8835＝8835** ✓（百工 external 26＋eac engine-snapshots 530＋skills-research 8279）；evidence 开工 4017 → 项目侧 138＋仓根残 3927＝4065＝4017＋48（漂移全数＝`gates/` 出口②随本票门禁六跑续写·续写面在册）＋era 留置 1 计入对账 ✓；inbox 9＝3（eac）＋6（仓根 `主理人/` 留置）✓；dispatch 10＝7（百工）＋3（era 派工书留置）✓；process 0✓。
@@ -70,11 +70,11 @@
 
 | 出处分账 | 件 | 处置 |
 |---|---|---|
-| 第三方外部快照（移交候选） | `drafts-2026-10-23/aigc-video-team.zip`＋`aigc-video-team/`（9 件）＋`video-team/` 源料族（15 件·含 original-5）＝**25 件** | **ESC1 移交候选**（件头有源料说明/返工说明在位） |
+| 第三方外部快照（移交候选） | `drafts-2026-10-23/aigc-video-team.zip`（1 件）＋`aigc-video-team/`（**8 件**·实测＝zip 解包件不含目录重复）＋`video-team/` 源料族（15 件·含 original-5）＝**24 件** | **ESC1 移交候选**（件头有源料说明/返工说明在位·随正笔 `QA-B3` 黄目②：原「aigc-video-team/（9 件）＝25 件」计数误，正解 8 件＝第三方 24·总 26 不变） |
 | 本仓自产（判词依据） | `2026-10-23-视频团队本体审计_v1.md`＝**1 件** | **不外移·留项目桶**（百工·判词依据件） |
 | 外部参照（reference 族·另账） | `reference-2026-10-24/全能AIGC视频创作团队-架构与五维优化方案.md`＝1 件（正则命中计入 26 内） | 参照件·随 reference 族 ESC1 候选 |
 
-（25＋1 列示合计 26 内；reference 那件在列 26 条内，按 REFERENCE-SOURCES.md 出处声明＝外部参照＝ESC1 候选。）
+（24＋1＋1＝26 合计全等；reference 那件在列 26 条内，按 REFERENCE-SOURCES.md 出处声明＝外部参照＝ESC1 候选。）
 **era 族留置（research 外·B3e 二次分账）**：`dispatch/` 派工书 3（R6视频团/R7短剧编剧团/R8导演）＋`evidence/` 施工回执 1（2026-10-28-T-video-research-gate-01）＝4 支留旧仓根同名桶·ESC1 并入消费。
 era 计数口径钉＝`git -c core.quotepath=off ls-files .collab/research | grep -cE '视频|video|短剧|导演|编剧'`＝**26**。
 
