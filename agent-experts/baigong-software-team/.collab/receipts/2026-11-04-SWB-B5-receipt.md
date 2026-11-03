@@ -58,7 +58,16 @@
 ## 四、判据 1–7 读数
 
 1. **顶层终态白名单**：`ls -d */`＝{agent-experts, agent-skills, softwares, tools}；`deliverables|docs` 出现＝无（exit 0 正·负例构造＝出现即 exit 1 在判据脚本内）。点目录=find 面见判据 1 补。
-1 补. **rev2 补丁二仓根 `.collab` find 两断言**（口径＝主理人裁「B 批施工新残留＝0」）：`find .collab -type f`＝4159（门禁续写漂移在册）；era research 正则＝**26** ✓；逐桶＝qa 3（QA-B3×2＋QA-B4·主理人登记面）／receipts 0／tickets 0／decisions 2（11-04 皮总裁定并发两支·主理人登记面）／design 0／refs 0／process 0／board 0／inbox 6（`主理人/` 活写面出口③）／dispatch 3（era 派工书·ESC1 并入消费）；**B5 施工新增仓根残留＝0**（`find -newer` 排除 evidence/gates 续写面＝0）✓。14 命中逐条归因＝主理人登记面 7＋era 面 3＋活写面 4（见桶读数）＝非违例·仓根登记散件归置＝B 批收口后治理目（主理人裁在册不入本票闭集）。
+1 补. **rev2 补丁二仓根 `.collab` find 两断言**（口径＝主理人裁「B 批施工新残留＝0」）：`find .collab -type f`＝4159（门禁续写漂移在册）；era research 正则＝**26** ✓；逐桶＝qa 3（QA-B3×2＋QA-B4·主理人登记面）／receipts 0／tickets 0／decisions 2（11-04 皮总裁定并发两支·主理人登记面）／design 0／refs 0／process 0／board 0／inbox 6（`主理人/` 活写面出口③）／dispatch 3（era 派工书·ESC1 并入消费）；**B5 施工新增仓根残留＝0**（`find -newer` 排除 evidence/gates 续写面＝0）✓。14 命中逐条归因表（主理人续批指令要求逐条枚举·收口笔复点＝14 全等）＝
+
+| # | 文件 | 定性 |
+|---|---|---|
+| 1–3 | `.collab/qa/2026-11-03-QA-B3-独立验证-v1/v2.md`＋`.collab/qa/2026-11-04-QA-B4-独立验证-v1.md` | 主理人登记面（B3/B4 QA 核验件·B4 收口登记笔落仓根＝归置候收口后治理目·非 B5 残留） |
+| 4–5 | `.collab/decisions/2026-11-04-皮总裁定-主理人永不并发派席.md`＋`并发口径修正-禁同席多实例.md` | 主理人登记面（B4 收口期皮总裁定链·tracked 在册·归置候裁） |
+| 6–8 | `.collab/dispatch/2026-10-28-R6视频团/R7短剧编剧团/R8导演-派工书.md` | era 留置面（B3 回执 §七「era 族留置 dispatch 3」原班·ESC1 并入消费） |
+| 9–14 | `.collab/inbox/主理人/2026-10-23/24/26/28/29/30-呈拍-gates.md` | 仓根活写面留置（run-gates 出口③硬编码仓根＝B1 随注承接 B4/B5 过渡态·B3 回执在册） |
+
+＝主理人登记面 5＋era 面 3＋活写面 6＝**非 B 批施工新残留**（B5 施工新增仓根残留＝0 断言独立复跑成立）·仓根登记散件归置＝B 批收口后治理目（主理人裁在册不入本票闭集）。era 留置数两栏（B3 rev2 回执口径）＝开工 26（research tracked 正则）→收口 26 ✓；era 族 research 外＝dispatch 3＋evidence 1（`2026-10-28-T-video-research-gate-01-施工回执.md` 复点在位）＝4 支全等。仓根 `.collab` 根面另存登记散件 2（B3/B4 收口登记 v1·tracked）＋`tmp-w7-msg.txt`（ignore 面）＝均随判在册非违例。
 2. **check-ignore 矩阵（≥12·实跑 24 形态）**：IGNORE 组（12）＝仓根 evidence/gates、refs、inbox、process、dispatch、backup、tmp-w7-msg、三桶 video-teams/official-cos/summoned、项目级 `.collab/refs/y`、项目级 `fuxi …/evidence/gates/x.json`、multi-collab `.collab/process/x`；TRACKOK 组（12）＝REFERENCE-SOURCES.md（负向行）、`.discussion/`、era 审计件、仓根 decisions/qa、项目 decisions、`.scratch/tickets/z.md`、仓根 docs/PRODUCT.md、项目 docs/PRODUCT.md、multi-collab SKILL.md、tools/*.py。rev2 四探针全中（evidence 仓根＝ignore／refs＝ignore／video-teams＝ignore／REFERENCE-SOURCES＝≠ignore）。
 3. **D7 字节一致**＝§三全链 ✓。
 4. **旧路径引用清零**：全仓 `.md` 出现＝60 occurrence——逐面分解＝**交付面活引用（skills/config/agents/bundle.lock/plugin.json 域）＝0** ✓；其余 60＝票面/回执/QA 史述登记面（append-only 史述豁免·票判据 4 括注口径）＋`.workbuddy/memory`（ignore 面）。逐文件分布＝`.scratch/tickets` B 批票 2＋百工 `.scratch/tickets` 票包 13 文件＋qa/receipts 史述 11＋design inventory 1＋两 copy（已改）＝改前后对照在册。
@@ -76,5 +85,14 @@
 ## 六、红项史述（B5-C 曾拦·候裁后放行）
 
 D7 入库首跑 pre-commit `GATE BLOCK OA-T1`（登记件 L3 裸登记日期首次入 check-entity 扫面＝B3 时住 refs 排除面物理不可扫）＝票面预案缺位如实报红→候裁呈报（A/B/C/D 四选项）→主理人**裁 A**（名册豁免·三条件随动）→§三门禁随动行落地→`0df8bef` 绿笔入库。fail-closed 闸未破·无一次 bypass。
+
+## 七、收口复跑段（主理人续批指令·回执修订笔）
+
+- 开工续批实测＝HEAD `0df8bef`（主理人侧给值全等复核✓）·工作区 clean·staged 空✓。
+- **B5-D 灭壳断言现势读数**：`ls -a` 顶层集＝{agent-experts, agent-skills, softwares, tools}＋点目录（.collab/.git/.gitignore/.scratch/.workbuddy）；`ls -d deliverables docs`＝均不存在＝exit 1 断言反向成立✓（＝灭壳自然自灭·零 git 操作＝§一 B5-D 行登记口径再证）。
+- **收口门禁族集复跑**＝`GATE PASS`（发现 8757·与回执笔时点读数同态＝差 12＝回执/证据件续写面·族集对开工基线 8745 **NEW 族 0**＝零回归✓；reconcile 票 96/对账 34/SKIP 62 全 WATCH exit 1 恒定）。
+- **六演练收口跑**＝DRILL01–06 逐卷 `DRILLnn_GREEN`＋`SIX_DRILLS_GREEN` ✓。
+- **判据 3 新位复算再证**＝docs 新位整件 sha256 `3fda41e6…cda4`＋三哈希 `3f335333…ccb9b`/`7214ad14…91f3`/`efb4f765…78c4` 收口时点复算逐字等✓（§三链再证）。
+- 本节＝回执修订随批笔（仅含本回执件·append 于 §六 后＋§一 归因表补全＝前笔 `b357d1e` 后唯一合法修订面＝主理人续批指令点名目）。
 
 ——engineer-b5 · SWB-B5 回执（gitignore/README＝新建创作类·D7＝字节级复制＋删源＝誊写禁令辖域内自察）。
