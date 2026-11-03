@@ -63,3 +63,10 @@ B0 本方案裁定冻结 → B1 空壳（三分类＋八项目固定 .collab＋�
 3. SWB 归属：甲（装配注入·推荐）还是乙（并入软开团）；
 4. 视频团 era 研究件移交 experts 仓：可否。
 （D5 不换锚／D6 git mv 保留打 tag／D7 正式登记件入库——v1 建议未在 §二点七 被推翻，视您"照准"即冻结。）
+
+## 勘误（19:17 皮总指正·HEAD `2771512` 后追加）
+
+- **§一 softwares\swb 行作废（主理人造概念违例·同「公共区」同族）**：多席位协作系统不是独立项目——baigong-software-team 就是 SWB 的本体与交付载体，SWB 票包产出的机制面（config/hooks/tests/skills.sop）已在该包内＝其自己的家。§三「SWB 归属甲/乙」伪题撤销。
+- 分类名录维持 agent-experts／agent-skills／softwares 三类（§二点七原裁定），但**当下 softwares 类为空**（无传统软件项目，届时再有项目再入）；项目名录收缩为 7 个：软开团×1＋技能×6。
+- SWB 全部过程账（T 系票包/审件/回执/交接件 v2.9 登记件）→ 归 `agent-experts/baigong-software-team/.collab|docs`。
+- 待裁清单随之收敛为三项：拼写（agent-experts vs agent-expers）、票面落位（.scratch/tickets vs .collab/tickets）、视频团研究件移交 experts 仓。
