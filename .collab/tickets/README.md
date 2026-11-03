@@ -10,8 +10,8 @@
 | `2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md` | 施工票 T01（**已收口**：放行 `e6f3647`·执行 `c38d77c`·QA 验证绿 `.collab/qa/2026-11-03-QA-T01-独立验证-v1.md`·判据 2 语义判据为准） |
 | `2026-11-01-SWB-T02-ledger-state-lease-core.md` | 施工票 T02（**已收口**：执行 `ba0c785`·QA 验证绿 `.collab/qa/2026-11-03-QA-T02-独立验证-v1.md`·首派席别错挂已改派 expert 工程师席） |
 | `2026-11-01-SWB-T03-injection-dispatch-gate.md` | 施工票 T03（**已收口**：执行 `d88bf2f`·QA 验证绿 `.collab/qa/2026-11-03-QA-T03-独立验证-v1.md`·票面判据 2 定性票面文字缺陷入旧账池＝后续票消费 ticket-types.json 一律按字符串数组现行形态） |
-| `2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md` | 施工票 T04（候开工：消费面＝T02 seat-permissions `deny_globs`＋租约台账＋T03 账本活跃票口径·B5 拦 force-push 经账本活跃票口径） |
-| `2026-11-01-SWB-T05-expert-pack-assembly-b6.md` | 施工票 T05 |
+| `2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md` | 施工票 T04（**已收口**：执行 `804e303`·QA 验证绿 `.collab/qa/2026-11-03-QA-T04-独立验证-v1.md`·判据 4 票面文字缺陷第三例入候补池·cleared 行跨票差口入旧账池候 T06 后微票） |
+| `2026-11-01-SWB-T05-expert-pack-assembly-b6.md` | 施工票 T05（候开工·开工前须先呈报 P4/P5 inconclusive 对 B5/B0 定型条款影响分析） |
 | `2026-11-01-SWB-T06-acceptance-system-b9.md` | 施工票 T06 |
 
 基线＝`.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-03.md`（260 行·V13 n＝物理 n−28·头块三哈希 3f335333/7214ad14/efb4f765 落定）。
