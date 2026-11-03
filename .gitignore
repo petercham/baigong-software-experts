@@ -1,49 +1,59 @@
-# 治理原则（2026-10-22 皮总拍·按研究裁决执行）：
+# ============================================================
+# .gitignore · SWB-B5 全量重写（两制：入库面／排除面）
+# 真源＝.scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket.md（8f5efa9）
+#      ＋ rev2 定点增补 …-ticket-rev2.md（cccc0b7·冲突以 rev2 为准）
+# 旧行全废重立（重写非誊写＝创作类·誊写禁令 f5a0d96 辖域外自察）；
+# 新旧条款映射表＝B5 回执附页（防防护静默丢失·逐条 check-ignore 双向验证）。
+# ============================================================
+# 治理原则（2026-10-22 皮总拍·按研究裁决执行·随迁）：
 # 「是否进 git」由本文件显式声明，不由目录名前缀表达（`.` 前缀只影响 ls/rg 可见性，git 不认）。
-# 分区键＝性质：decisions（判词/裁决/呈拍·史实锚）进 git；process/inbox（过程流水）不进。
+# 分区键＝性质：判词/裁决/史实锚进 git；过程流水/证据/临时不进。
 
-# 过程流水：会话日志、工具输出、临时产物——可弃，零门禁
-.collab/process/
+# ── 制①：入库面（史实锚·默认不 ignore·无需正向声明）──────────────
+# 各项目 .collab/{decisions,qa,receipts,board,research}/＋项目 docs/＋项目 .scratch/tickets/
+# ＋交付面（agent-experts/ agent-skills/ softwares/ 项目壳）＋仓根 README＋tools/
+# ＝不列入本文件排除面即默认入库；负向防御条款见制②尾。
 
-# 席间消息总线：运行时消息，actor 在末级目录（Kafka header 惯例），非归档面
-.collab/inbox/
+# ── 制②：排除面（过程流水／证据／运行时／第三方快照·不进 git）────
+# 任意层级（嵌套项目）.collab 运行流水桶（B1 过渡增补形态转正·旧 L59–L65 承接）
+/**/.collab/refs/
+/**/.collab/evidence/
+/**/.collab/inbox/
+/**/.collab/process/
+/**/.collab/dispatch/
+/**/.collab/backup/
+/**/.collab/tmp-*.txt
 
-# 调研报告（判词依据·非过程流水）：显式声明入 git（裁-17 Q7·皮总「接受建议」）
-# 负向规则＝防御性声明：将来若有人加 `.collab/*` 之类广域排除，本目录不会被静默吞掉
-!.collab/research/
+# 仓根层级运行流水面显式防护行（rev2 补丁一 A2-补1·B5 新增）
+# 依据：run-gates EVIDENCE_DIR 现仍写仓根 $ROOT/.collab/evidence/gates（B4 未改）；
+# 旧仓根行（原 L6/L9/L17/L24/L27/L30/L33）退役后由本组 `/`-锚定行同批顶替。
+/.collab/evidence/
+/.collab/refs/
+/.collab/inbox/
+/.collab/process/
+/.collab/dispatch/
+/.collab/backup/
+/.collab/tmp-*.txt
 
-# 运行流水（过程材料·非判词）：不入 git（裁-19）
-# 判词属史实锚，落 .collab/decisions/ 并入库；两者按性质分治，不得混装
-.collab/evidence/
+# 负向防御条款（旧 L13 `!.collab/research/` 先例换代·防御性声明）：
+# 史实锚 research 桶永不被将来广域排除静默吞掉；
+# 仓根 .collab/research/＝era 留置面暂住位（ESC1 移交前不入库排除·注记行）。
+!/**/.collab/research/
+!/.collab/research/
 
-# ── 2026-10-27 增补（皮总拍·依《2026-10-27-devkits仓远端与入库策略建议_v1》）──
-# 判据三条：A 性质（判词/裁决/呈拍→进，过程流水→不进）／B 出处（自产 vs 第三方产物）／C 冗余（能否无损重建）
+# 第三方外部快照三桶（rev2 补丁一 A2-补2·旧 L37–L39 先例随迁仓根留置位；
+# ESC1 先于本票执行则随 era 留置面去向重算——实测 ESC1 未执行·仓根行在位维持）
+# 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\reference-2026-10-24\；来源索引件 REFERENCE-SOURCES.md 入库。
+/.collab/research/reference-2026-10-24/video-teams/
+/.collab/research/reference-2026-10-24/official-cos/
+/.collab/research/reference-2026-10-24/summoned-2026-10-24/
 
-# 冗余快照：aigc-video-team 已随迁 experts 仓、software-company 在本仓 HEAD 以 workbuddy/baigong-software-team 存活、qa-leadslim＝实验中间态（判据 C）
-# 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\collab-backup-20261027\
-.collab/backup/
+# 配套负向规则（旧 L42–L44 先例随迁·判词依据部分仍入库）
+!/.collab/research/reference-2026-10-24/
+!/.collab/research/reference-2026-10-24/.discussion/
+!/.collab/research/reference-2026-10-24/REFERENCE-SOURCES.md
 
-# 派工书＝运行时派发指令，性质＝过程流水，非判词/裁决/呈拍（判据 A）
-.collab/dispatch/
-
-# 作者已标 tmp- 前缀＝显式临时件；落 .collab/ 根＝无归属分区（判据 A）
-.collab/tmp-*.txt
-
-# 第三方引擎/技能仓整体快照（外部参照件·判据 B：入我仓＝真源混淆）：不入 git
-.collab/refs/
-
-# 第三方下载产物（带 .downloaded_at）：入我仓＝真源混淆，违单真源纪律（判据 B）
-# 实体已于 2026-10-27 移出至 D:\multi-agent-collab-archive\reference-2026-10-24\；来源索引件 REFERENCE-SOURCES.md 入库
-.collab/research/reference-2026-10-24/video-teams/
-.collab/research/reference-2026-10-24/official-cos/
-.collab/research/reference-2026-10-24/summoned-2026-10-24/
-
-# 配套负向规则（沿用 !.collab/research/ 先例·防御性声明）：该目录的判词依据部分仍入库
-!.collab/research/reference-2026-10-24/
-!.collab/research/reference-2026-10-24/.discussion/
-!.collab/research/reference-2026-10-24/REFERENCE-SOURCES.md
-
-# 系统杂物
+# ── 系统杂物／工具产物（旧 L47–L56 随迁）────────────────────────
 Thumbs.db
 Desktop.ini
 .DS_Store
@@ -54,12 +64,3 @@ Desktop.ini
 # Python 字节码缓存（编译检查产物）
 __pycache__/
 *.pyc
-
-# B1 过渡增补（B5 全重写前）：任意层级项目 .collab 排除桶
-/**/.collab/refs/
-/**/.collab/evidence/
-/**/.collab/inbox/
-/**/.collab/process/
-/**/.collab/dispatch/
-/**/.collab/backup/
-/**/.collab/tmp-*.txt
