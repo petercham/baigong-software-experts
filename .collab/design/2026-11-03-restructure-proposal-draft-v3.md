@@ -23,7 +23,7 @@ D:\multi-agent-collab-devkits\
 └── softwares\                      ← 传统软件项目分类（当下为空，届时再入）
 ```
 
-- 名录拼写按 `agent-experts`（皮总原话 "agent-expers" 的拼写更正，若驳回即改回）。
+- 名录拼写＝`agent-experts`（已决·拼写候裁项由主理人按裁定件㊺ L46 名录明文判定销账，2026-11-03）。
 - 项目总数＝7。每项目自包含完整工作空间（拷走即完整）、物理隔离、无特例。
 
 ## 二、每个项目内部的标准结构（规范闭集三段式）
@@ -87,10 +87,11 @@ D:\multi-agent-collab-devkits\
 
 每批单独 commit＋可机械验证判据（对账清零/计数相等/门禁零回归对拍）。
 
-## 六、待裁清单（终版·三项）
+## 六、待裁清单（终版·两项·拼写项已销账）
 
-1. 拼写：`agent-experts`（推荐）vs 原话 `agent-expers`；
-2. 票面落位：`.scratch/tickets`（推荐·高频迭代语义）vs `.collab/tickets`（现行·机检改造量小）；
-3. 视频团 era 研究件移交 experts 仓：可否。
+1. 票面落位：`.scratch/tickets`（推荐·高频迭代语义）vs `.collab/tickets`（现行·机检改造量小）；
+2. 视频团 era 研究件移交 experts 仓：可否。
+
+> 清残注记（2026-11-03·主理人指令）：原第 1 项「拼写：agent-experts vs 原话 agent-expers」＝无效候裁项，按裁定件㊺（`.collab/decisions/2026-11-03-皮总裁定-项目自由分层与collab固定结构及docs约定md.md` L46 名录明文＝agent-experts／agent-skills／softwares）判定销账＝拼写定夺 `agent-experts`，无待裁语义；B1+ 迁移票闭集目录名一律 `agent-experts`。
 
 （版本线 0.1.14 续 bump 已裁；排程序列＝T07 放行→T08R 施工→B0→B1+ 不变。）
