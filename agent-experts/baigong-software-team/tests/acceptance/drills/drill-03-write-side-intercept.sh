@@ -25,11 +25,12 @@ say "sign-verify 调用 exit=$SV_RC（密钥缺位＝fail-closed 硬失败为预
 grep -q 'verify_fail' "$LED" || fail "验签失败记录未入账（签字记录类）"
 
 # 1) 无租约状态样例写请求 → deny 读数
-python "$SCRIPTS/write-guard.py" --path "deliverables/experts/baigong-software-team/x.md" \
+#（SWB-B4 补丁五：探针路径随两级锚换代＝项目根相对新字面，仓根字面 deliverables/** 已随 B2 灭）
+python "$SCRIPTS/write-guard.py" --path "agents/x.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$TMP/freeze-state.json" \
   <<'JSON' >"$TMP/wg.txt" 2>&1
 {"agent_type": "software-engineer", "agent_id": "engineer-drill03",
- "tool_input": {"file_path": "deliverables/experts/baigong-software-team/x.md"}}
+ "tool_input": {"file_path": "agents/x.md"}}
 JSON
 say "write-guard 输出: $(cat "$TMP/wg.txt")"
 grep -q '"permissionDecision":"deny"' "$TMP/wg.txt" || fail "deny 读数缺席"

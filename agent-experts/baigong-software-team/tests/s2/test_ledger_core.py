@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """S2 施工测试实体 · 账本核心（B0/B1/B2/对账）——工程师写、CI 机械执行、QA 出结论（三段式·表2-2）。
 
-本件居交付树 tests（deliverables/**/tests/**＝施工与验收测试实体·判据真源双层双址条款）。
+本件居交付树 tests（项目根字面 tests/**＝施工与验收测试实体·判据真源双层双址条款·SWB-B4 两级锚换代）。
 argv 面：额外文件路径参数＝待一并机械执行的兄弟测试件（票面判据 5 调用形制
 `python test_ledger_core.py test_lease_instantiation.py`）。
 """

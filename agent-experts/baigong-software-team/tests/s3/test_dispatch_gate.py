@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """S3 施工测试实体 · 注入构造与派发闸（B3：dispatch-spec/dispatch-builder/serial-gate）——三段式（表2-2）。
 
-本件居交付树 tests（deliverables/**/tests/**＝施工与验收测试实体·判据真源双层双址条款）。
+本件居交付树 tests（项目根字面 tests/**＝施工与验收测试实体·判据真源双层双址条款·SWB-B4 两级锚换代）。
 argv 面：额外文件路径参数＝待一并机械执行的兄弟测试件（票面判据 5 调用形制
 `python test_dispatch_gate.py test_decision_pack.py`）。
 

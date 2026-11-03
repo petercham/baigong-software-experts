@@ -79,7 +79,7 @@ def t05_engineer_row_transcription(tmp: str) -> None:
     assert isinstance(eng["deny_globs"], list) and len(eng["deny_globs"]) >= 1  # T04 B5 消费面数据源
     # 双层双址条款在头部表注
     assert "判据真源双层双址" in d["table_notes"]
-    assert "deliverables/**/tests/**" in d["table_notes"]["判据真源双层双址"]
+    assert "tests/" in d["table_notes"]["判据真源双层双址"]  # SWB-B4 两级锚换代：交付面 tests/ 桶语义（旧 deliverables/**/tests/** 字面随 B2 灭）
 
 
 def t06_path_subset_gate(tmp: str) -> None:

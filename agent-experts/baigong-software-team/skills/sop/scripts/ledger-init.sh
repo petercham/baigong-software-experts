@@ -8,7 +8,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACK_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"                      # deliverables/experts/baigong-software-team
+PACK_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"                      # agent-experts/baigong-software-team（项目根＝含 docs/STRUCTURE.md 探针锚·SWB-B4 两级锚）
 PROBE_RESULTS="$PACK_ROOT/tests/probes/results/probe-results.json"  # P7 读数源（票面：默认取数走主路）
 
 # 账本根：缺省＝仓根 .collab/ledger/（§9 B0 行「仓内镜像居 .collab/ledger/」）；测试可经环境变量重定向

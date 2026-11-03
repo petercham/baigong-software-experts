@@ -40,7 +40,7 @@ for n in 1 2 3 4 5 6 7 8 9 10; do
   printf 'P%s -> %s\n' "$n" "$st"
 done
 
-ts=$(date -u +%Y%m%dT%H%M%SZ)   # ISO 8601 基本格式（仓闸 OA-T1 裸日期模式豁免随动；扩展格式 20xx-xx-xx 属 deliverables/** 禁面）
+ts=$(date -u +%Y%m%dT%H%M%SZ)   # ISO 8601 基本格式（仓闸 OA-T1 裸日期模式豁免随动；扩展格式 20xx-xx-xx 属交付面禁面·SWB-B4 随动注）
 evid_fwd="${EVID_DIR//\\//}"   # JSON 字符串内反斜杠转义防护（Windows Temp 路径转正斜杠）
 {
   printf '{\n'

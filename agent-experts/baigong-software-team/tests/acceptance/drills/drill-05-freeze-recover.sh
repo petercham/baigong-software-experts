@@ -16,7 +16,7 @@ fail(){ say "RED: $*"; exit 1; }
 # 0) 预置活跃租约（架构签注经 lease-issuer 正常签发），供 freeze 清租约读数。
 #    席位取 product（写域行含机械 glob `.collab/drafts/prd/`，可经 lease-issuer 零裁量子集校验；
 #    该路径亦不在 product deny_globs 行内）。呈核注记（不修他票文件）：engineer 写域首行
-#    「（工作空间根∪部署路径）−受保护区」＝非机械描述行，lease-issuer 无法对 deliverables/**
+#    「（工作空间根∪部署路径）−受保护区」＝非机械描述行，lease-issuer 无法对交付面旧字面 deliverables/**
 #    类请求经子集校验实例化（实测读数入回执呈核段）。
 python "$SCRIPTS/lease-issuer.py" --ticket DRILL05 --seat product --countersign architect:drill05 \
   --path-glob ".collab/drafts/prd/tmp-drill05.md" \

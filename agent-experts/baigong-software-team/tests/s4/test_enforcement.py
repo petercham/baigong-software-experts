@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """S4 施工测试实体 · 强制机制群（B5/B7/B8/B10/B11）——三段式（表2-2）。
 
-本件居交付树 tests（deliverables/**/tests/**＝施工与验收测试实体·判据真源双层双址条款）。
+本件居交付树 tests（项目根字面 tests/**＝施工与验收测试实体·判据真源双层双址条款·SWB-B4 两级锚换代）。
 覆盖票面判据：1 hooks 两键结构；2 deny 冒烟（无租约写→permissionDecision deny）；
 3 orphan/amend/rebase 三形态 exit=2；4 活性自检正反两态；5 freeze 动作链三步＋≤60s；
 6 B11 引用扫描命中；7 sign-verify fail-closed 两读数；9 派生一致性断言
@@ -80,19 +80,19 @@ def t03_lease_allow_and_deny_globs(tmp: str) -> None:
     os.makedirs(os.path.dirname(leases), exist_ok=True)
     with open(leases, "w", encoding="utf-8") as f:
         f.write(json.dumps({"ts": "t", "lease": {"ticket_id": "SWB-T99", "seat_id": "engineer",
-                                                 "path_globs": ["deliverables/**"], "hash": "h"}},
+                                                 "path_globs": ["agents/**"], "hash": "h"}},
                             ensure_ascii=False) + "\n")
     env_in = json.dumps({"agent_type": "software-engineer", "agent_id": "eng-x"})
     r_allow = subprocess.run(
         [sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
-         "--path", "deliverables/experts/baigong-software-team/x.py",
+         "--path", "agents/x.py",
          "--ledger", led, "--leases", leases,
          "--freeze-state", os.path.join(tmp, "freeze-state.json")],
         input=env_in, capture_output=True, text=True)
     assert '"permissionDecision"' not in r_allow.stdout  # 放行＝不干预
     r_deny = subprocess.run(
         [sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
-         "--path", "tests/root-judgement-truth.py",  # 仓根 tests/∈engineer deny_globs
+         "--path", "tests/root-judgement-truth.py",  # 路径∉当席租约 path_globs（agents/**）→deny
          "--ledger", led, "--leases", leases,
          "--freeze-state", os.path.join(tmp, "freeze-state.json")],
         input=env_in, capture_output=True, text=True)
@@ -164,7 +164,7 @@ def t08_freeze_chain_within_60s(tmp: str) -> None:
     fs = os.path.join(tmp, "freeze-state.json")
     with open(leases, "w", encoding="utf-8") as f:
         f.write(json.dumps({"lease": {"ticket_id": "SWB-T99", "seat_id": "engineer",
-                                      "path_globs": ["deliverables/**"], "hash": "h"}}, ensure_ascii=False) + "\n")
+                                      "path_globs": ["agents/**"], "hash": "h"}}, ensure_ascii=False) + "\n")
     r = subprocess.run([sys.executable, os.path.join(SCRIPTS, "freeze-unfreeze.py"), "freeze",
                         "--ledger", led, "--leases", leases, "--freeze-state", fs],
                        capture_output=True, text=True)
@@ -177,7 +177,7 @@ def t08_freeze_chain_within_60s(tmp: str) -> None:
     assert any(c.get("cleared") for c in cleared)  # ①清租约
     # freeze 联动：写侧全 deny
     w = subprocess.run([sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
-                        "--path", "deliverables/experts/baigong-software-team/a.py",
+                        "--path", "agents/a.py",
                         "--ledger", led, "--leases", leases, "--freeze-state", fs],
                        input=json.dumps({"agent_type": "software-engineer"}),
                        capture_output=True, text=True)
