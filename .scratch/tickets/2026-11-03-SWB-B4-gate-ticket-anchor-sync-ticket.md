@@ -5,7 +5,7 @@
 - **开工附注三项（B0 登记照录）**：①誊写禁令 `f5a0d96`（本票＝原位代码文本随动批非搬家批·照注自察）；②票面落位 `.scratch/tickets`；③era 跨仓口径（不在本票＝ESC1）。
 - 计数口径＝occurrence；判据自带落盘；负例 exit≠0。行号锚 HEAD=`d584d7b`（现盘旧位实测·开工若位移以逐字文本锚定位）。
 
-## 声明闭集（12 件·本批唯一可写面）
+## 声明闭集（16 件展开口径·目录级简写申报·本批唯一可写面）
 - 声明闭集：
 - agent-skills/object-audit/scripts/check-ticket-reconcile.py
 - agent-skills/object-audit/scripts/check-collab-lint.py
@@ -20,7 +20,7 @@
 - agent-skills/bundle-assembly-registration/SKILL.md
 - agent-experts/baigong-software-team/bundle.lock／bundle 版本三同源＋README append（见 B4-F）
 
-（注：第三行组＝版本三同源三件＋README 四件计入闭集展开＝实际 16 件，回执 name-only 全等口径以展开名录为准。）
+（注：末两行展开＝bundle.lock＋plugin.json＋.codebuddy-plugin/plugin.json＋README 四件；回执 name-only 全等口径＝16 件展开名录：所列 11 行＋版本三同源＋README＋run-gates／check-collab-lint 已含行内＝回执首节固定展开表。）
 
 ## 逐条施工规格
 
