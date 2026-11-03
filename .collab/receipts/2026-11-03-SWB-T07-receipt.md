@@ -131,7 +131,7 @@ T06_TMP="D:/t07-swb-tmp/drills" bash deliverables/experts/baigong-software-team/
 
 | 文件 | 基线读数 | 完工读数 | 处置 |
 |---|---|---|---|
-| `README.md`（L27 沿革／L60 头像规格列举／L72–76 token 账表五行等） | 11 | 11 | 史述面·零触碰 ✓ |
+| `README.md`（L27 沿革／L60 头像规格列举／L72–76 token 账表五行等） | 11 | 16（差值构成＝本票甲账随动条款强制的 v0.1.15 版本账 append 行含旧五名各 1；基线 11 不变、既有行零回改属实） | 史述面·零触碰 ✓ |
 | `skills/software-orchestration/references/quick-mode.md`（L3 产地注记） | 1 | 1 | 零触碰 ✓ |
 | `references/bugfix-path.md` | 1 | 1 | 零触碰 ✓ |
 | `references/collab-rules.md` | 1 | 1 | 零触碰 ✓ |
