@@ -1,0 +1,40 @@
+{
+  "_spec": "SWB-T06-A · §13 成值集中登记（消费面声明⑨「触发判据←§13」落点·V13 L186 逐值转录）",
+  "_anchors": {
+    "source": "架构 v2.9 §13「指标口径」段（V13 L186＝登记件落盘物理 L214）逐值转录；本文件不新增成值",
+    "消费面声明": "票包总览映射表行9＝触发判据←§13｜主承接 T06（thresholds.json＋metrics-gate.py）｜次级 T03（呈报触发源六码枚举）",
+    "可调性": "标注 C1 可调项的调整走架构§12 C1 通道；本文件为缺省成值登记面"
+  },
+  "diff_rate_threshold": 0.02,
+  "_diff_rate_source": "§13 逐字：差异率阈值 2%",
+  "diff_rate_formula": {
+    "numerator_set": ["agent_id_mismatch", "pack_hash_mismatch", "whitelist_superset"],
+    "_numerator_source": "§13 逐字：分子＝｛Agent ID 不符∨包哈希不符∨白名单超集｝（三闭集分量字段化）",
+    "denominator": "completed_dispatch_count",
+    "_denominator_source": "§13 逐字：分母＝｛实际完成派发次数｝"
+  },
+  "metric_anomaly_set": {
+    "diff_rate_gt": 0.02,
+    "liveness_selfcheck_fail": true,
+    "dispatch_crosscheck_consecutive_inconsistent": 3,
+    "_source": "§13 逐字：指标异常＝闭集｛差异率>2%∨活性自检失败∨派发互验连续 3 次不一致｝",
+    "_handling": "§13/§14：指标异常→停用手拼强制 B3＋呈报人类；不与熔断混用（两判定路径代码分离＝metrics-gate.py 双函数互斥）",
+    "not_mixed_with_fuse": true
+  },
+  "fuse_set": {
+    "consecutive_rounds_fail": 2,
+    "rollback_rate_gt": 0.30,
+    "adjustable_by": "C1",
+    "_source": "§13 逐字：熔断＝连续两轮不通过∨退回率>30%（C1 可调）",
+    "_handling": "命中→metrics-gate.py 只输出冻结呈报码；冻结发起权＝人类直通触点（表2-2 V13 L98），脚本不得自触发（§9 B10）"
+  },
+  "deny_freeze_max_s": 60,
+  "_deny_freeze_source": "§13 逐字：停刀时限＝deny−freeze≤60s（缺省，C1 可调）；freeze-unfreeze.py 自计时消费",
+  "timeouts": {
+    "engineer_ticket_h": 48,
+    "escalation_h": 24,
+    "_source": "§13 逐字：timeouts 缺省＝工程师票 48h／呈报 24h（未配置项＝不适用）"
+  },
+  "stable_def_chains": 10,
+  "_stable_def_chains_source": "§13 逐字：\"稳定后\"＝连续 10 链抽样零差异"
+}
