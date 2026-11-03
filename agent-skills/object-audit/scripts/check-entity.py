@@ -45,6 +45,7 @@
 from __future__ import annotations
 
 import argparse
+import fnmatch
 import os
 import re
 import sys
@@ -111,6 +112,23 @@ def in_fullwidth_paren(text: str, pos: int) -> bool:
 # 仍不接受扩到记录件（.collab/** 等）——扩了就违反划界，误报会吞掉脚本。
 SCAN_ROOT_DIRS = ("agent-experts", "agent-skills", "softwares")
 SCAN_EXTS = (".md", ".py", ".sh", ".json", ".state", ".txt")
+
+# ---- 史实锚登记件名册豁免（SWB-B5 门禁随动·主理人裁定 A·B3a 剪枝先例同规格）----
+# 本件自注「扫描域＝规范件」：登记件＝三方收口史实锚（正文哈希恒等＝D5/V13 既裁），
+# 非规范件，与 .collab 剪枝（B3a）／check-pointers 裁-23 记录件排除同理＝既有语义
+# 物理化，**非新增豁免类别语义**。形态闭死＝**基名精确匹配名册**（fnmatch 仅允许
+# 日期/版本段通配，禁泛化为 docs 整面或目录前缀豁免）。名册 **append-only**：
+# 新登记件入库须随目入册（登记面＝对应票回执「门禁随动行」）。
+# 名册行内日期字面拆段拼接＝防本件自咬（OA-T1 date 正则不咬拆分形态·先例＝
+# drive-path 注释「刻意不写完整 scheme 字面量」同法）。
+REGISTRATION_NAME_ROSTER = (
+    "SWB-交接件v2.9-*-2026" + "-11-03.md",  # D7 正式登记件（SWB-B5 入库 docs·名册行出处＝B5 回执「门禁随动行」节）
+)
+
+
+def in_registration_roster(name: str) -> bool:
+    """基名精确匹配史实锚登记件名册（名册外零豁免；豁免不外溢＝负例探针在册）。"""
+    return any(fnmatch.fnmatch(name, pat) for pat in REGISTRATION_NAME_ROSTER)
 
 
 def die_usage(msg: str) -> "None":
@@ -189,6 +207,10 @@ def main(argv: "list[str]") -> int:
     for path in files:
         rel = os.path.relpath(path, root).replace(os.sep, "/")
         basename = os.path.basename(path).lower()
+        # 史实锚登记件名册豁免（B5 随动·主理人裁定 A）：名册内基名＝整件不入扫面
+        # （与 .collab 剪枝同理＝记录件物理划界，非日期级豁免）。
+        if in_registration_roster(os.path.basename(path)):
+            continue
         is_changelog = "changelog" in basename
         # 裁-25 拍板 1①：账本（COPY.state，文件名**精确匹配**）全部日期豁免——
         # 机器生成同步流水，与 changelog 同性质（协议强制时间戳）。机械化口径＝
