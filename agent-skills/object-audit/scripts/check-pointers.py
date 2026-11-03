@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: OA-D6
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D6 引用完整性
 # spec_clause_sha256: f120944580b54d49028ebe020584cdabfd644ebc0a5535bf930d4ec890db0751
 # spec_version: 0.2
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: OA-D8-4
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D8-4 | 索引对账
 # spec_clause_sha256: ab73896dfbdadb735a6dd003b52382241b43bc7f67afc65d609ed4ddc5035953
 # spec_version: 0.2
@@ -20,7 +20,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: OB-DIR-3
-# spec_file: deliverables/object-build/references/50-directory.md
+# spec_file: agent-skills/object-build/references/50-directory.md
 # spec_anchor: ①工具契约目录名零自造
 # spec_clause_sha256: cb4060880c8ff325eef4fd0ebb35d931c47e74bb16b4b7c692a0f378285f851f
 # spec_version: 0.3
@@ -49,7 +49,8 @@
 用法：
     python check-pointers.py [--root <仓根>] [--scope <相对目录>]... [--target <file>]...
 
-默认扫描域＝`deliverables/`（`.collab/` 按裁-23 拍板 2 排除；显式入口见 DEFAULT_SCOPE 处注释）。
+默认扫描域＝三分类目录（`agent-experts/`＋`agent-skills/`＋`softwares/`，SWB-B2 换代；
+`.collab/` 按裁-23 拍板 2 排除；显式入口见 DEFAULT_SCOPE 处注释）。
 
 退出码（闭集，见 60-gates.md「六、退出码闭集」）：
     0 通过／1 违规（悬空或孤儿）／2 用法错／4 基础设施错
@@ -65,13 +66,13 @@ import sys
 SEV_BLOCK = "BLOCK"
 SEV_WATCH = "WATCH"
 
-# 扫描域（裁-23 拍板 2）：默认只扫规范文档面 `deliverables/`，**排除 `.collab/`**——
+# 扫描域（裁-23 拍板 2＋SWB-B2 换代）：默认只扫规范文档面三分类目录，**排除 `.collab/`**——
 # 与 S-03 同款划界：记录件 informative、不要求干净（append-only 史实锚里的指针
 # 改不动也不该由门禁拦）。默认排除 ≠ 不能查，显式入口保留：
 #   --scope .collab   追加扫描域（解析锚仍为仓根，指针照常解析）
 #   --root .collab    指过去核查（脚本自动上溯仓根做解析锚，见 main 内注释）
 #   --target <file>   直接指定文件核查
-DEFAULT_SCOPE = ("deliverables",)
+DEFAULT_SCOPE = ("agent-experts", "agent-skills", "softwares")
 
 # 反引号内联代码：`...`（不跨行）。
 BACKTICK_RE = re.compile(r"`([^`\n]+)`")
@@ -117,7 +118,9 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c))
+                for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
@@ -192,8 +195,8 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
 
     候选顺序按本仓既有指针写法（**只解析路径，不复写规范、不猜外部路径**）：
       1. 相对本文件（同目录引用，如 `40-deployment.md`）
-      2. 相对仓根（全路径写法，如 `deliverables/multi-collab/references/40-deployment.md`）
-      3. 相对 `deliverables/`（**跨包短写法**，如 `object-audit/references/70-provenance.md`；
+      2. 相对仓根（全路径写法，如 `agent-skills/multi-collab/references/40-deployment.md`）
+      3. 相对三分类分类目录（**跨包短写法**，如 `object-audit/references/70-provenance.md`；
          60-gates.md §四对账表与 60-publish.md 均用此式，不认它会把活指针全判悬空）
       4. 相对本文件所在包根（包内跨目录引用，如 `references/20-handoff.md`）
       5. 本文件同级的 `references/`（SKILL.md 只写基名指分件）
@@ -215,9 +218,10 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
     candidates = [
         os.path.normpath(os.path.join(here, rel)),
         os.path.normpath(os.path.join(root, rel)),
-        os.path.normpath(os.path.join(root, "deliverables", rel)),
-        # 五类子包（裁-38 Q2=A 路径适配）：跨包短写法插入 skills/ 层候选
-        os.path.normpath(os.path.join(root, "deliverables", "skills", rel)),
+        # 三分类目录（SWB-B2 换代）：跨包短写法按分类目录候选
+        os.path.normpath(os.path.join(root, "agent-experts", rel)),
+        os.path.normpath(os.path.join(root, "agent-skills", rel)),
+        os.path.normpath(os.path.join(root, "softwares", rel)),
         os.path.normpath(os.path.join(pkg_root, rel)),
         os.path.normpath(os.path.join(here, "references", os.path.basename(rel))),
         os.path.normpath(os.path.join(here, os.path.basename(rel))),
@@ -316,12 +320,12 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
 def check_orphans(root: str) -> "list[str]":
     """OA-D8-4／OB-DIR-③：包内 references/ 的每个文件须被该包 SKILL.md 指到，否则＝孤儿。"""
     findings: "list[str]" = []
-    deliverables = os.path.join(root, "deliverables")
-    if not os.path.isdir(deliverables):
-        sys.stderr.write("infra error: 找不到 deliverables/，索引对账无扫描域\n")
+    # 三分类目录（SWB-B2 换代）：三域枚举
+    cat_bases = [os.path.join(root, c) for c in ("agent-experts", "agent-skills", "softwares")]
+    if not any(os.path.isdir(b) for b in cat_bases):
+        sys.stderr.write("infra error: 找不到三分类目录，索引对账无扫描域\n")
         raise SystemExit(4)
-    # 五类子包路径适配：双域枚举（deliverables/ 与 deliverables/skills/）
-    pkg_bases = [deliverables, os.path.join(deliverables, "skills")]
+    pkg_bases = [b for b in cat_bases if os.path.isdir(b)]
     seen_pkgs: "set[str]" = set()
     for base in pkg_bases:
       if not os.path.isdir(base):
@@ -347,7 +351,7 @@ def check_orphans(root: str) -> "list[str]":
             if name not in index_text:
                 findings.append(
                     "%s:1: %s OA-D8-4 孤儿：`references/%s` 未被本包 SKILL.md 指到（索引无它）"
-                    % ("deliverables/%s/SKILL.md" % pkg, SEV_WATCH, name)
+                    % (os.path.relpath(skill_md, root).replace(os.sep, "/"), SEV_WATCH, name)
                 )
     return findings
 
@@ -360,7 +364,7 @@ def main(argv: "list[str]") -> int:
         "--scope",
         action="append",
         default=None,
-        help="扫描子目录（相对 --root，可重复）；默认 deliverables（.collab 已按裁-23 拍板 2 排除，"
+        help="扫描子目录（相对 --root，可重复）；默认三分类目录（.collab 已按裁-23 拍板 2 排除，"
              "需要时显式 --scope .collab 加回）",
     )
     parser.add_argument(
@@ -377,10 +381,13 @@ def main(argv: "list[str]") -> int:
     # 孤儿对账都必须以**仓根**为锚（否则相对指针全判悬空＝假报），故自动上溯定位仓根；
     # 原 --root 目录则退化为默认扫描域——"默认排除≠不能查"。
     scan_base = None
-    if not os.path.isdir(os.path.join(root, "deliverables")):
+    if not any(os.path.isdir(os.path.join(root, c))
+               for c in ("agent-experts", "agent-skills", "softwares")):
         anchor = os.path.dirname(root)
         while True:
-            if os.path.isdir(os.path.join(anchor, "deliverables")):
+            if os.path.isdir(os.path.join(anchor, "tools")) and any(
+                    os.path.isdir(os.path.join(anchor, c))
+                    for c in ("agent-experts", "agent-skills", "softwares")):
                 break
             parent = os.path.dirname(anchor)
             if parent == anchor:

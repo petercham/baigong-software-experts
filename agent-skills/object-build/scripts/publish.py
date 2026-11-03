@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: PUB-DEF-1
-# spec_file: deliverables/object-build/references/60-publish.md
+# spec_file: agent-skills/object-build/references/60-publish.md
 # spec_anchor: 〇、三条定义性约束
 # spec_clause_sha256: 170ecb3566ec5df192d49850b45c37419e5f793b4ed8d0dac027d1247456a0a4
 # spec_version: 0.3
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: PUB-STATE-4
-# spec_file: deliverables/object-build/references/60-publish.md
+# spec_file: agent-skills/object-build/references/60-publish.md
 # spec_anchor: 四、`COPY.state`
 # spec_clause_sha256: 533f5a1cbe7c631818ee6f00a40c1c4d0c6b77b27763ca354c9cf5dcf6df5a5e
 # spec_version: 0.3
@@ -20,7 +20,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: PUB-CHECK-7
-# spec_file: deliverables/object-build/references/60-publish.md
+# spec_file: agent-skills/object-build/references/60-publish.md
 # spec_anchor: 七、`--check`：五态
 # spec_clause_sha256: 97195dd3bde4c1a52580211818c1e142ded3fe479ddc2ece1520a429b56a75e4
 # spec_version: 0.3
@@ -134,7 +134,8 @@ def find_root(explicit: "str | None") -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
@@ -144,23 +145,22 @@ def find_root(explicit: "str | None") -> str:
 
 def pkg_dir_of(root: str, pkg: str) -> str:
     """包目录定位（五类子包·裁-38 Q2=A 路径适配，纯解析零逻辑）：
-    依次探 `deliverables/<pkg>` 与 `deliverables/skills/<pkg>`，探到即用；
-    两处都没有 ⇒ 返回旧式路径（让调用方按既有语义报"不存在"）。"""
-    legacy = os.path.join(root, "deliverables", pkg)
-    if os.path.isdir(legacy):
-        return legacy
-    nested = os.path.join(root, "deliverables", "skills", pkg)
-    if os.path.isdir(nested):
-        return nested
-    return legacy
+    依次探 `agent-experts/<pkg>`／`agent-skills/<pkg>`／`softwares/<pkg>`，探到即用；
+    三处都没有 ⇒ 返回缺省路径（让调用方按既有语义报"不存在"）。"""
+    for cat in ("agent-experts", "agent-skills", "softwares"):
+        cand = os.path.join(root, cat, pkg)
+        if os.path.isdir(cand):
+            return cand
+    return os.path.join(root, "agent-skills", pkg)
 
 
 def list_pkgs(root: str) -> "list[str]":
-    """包枚举（双域·同上适配）：deliverables/ 一层与 deliverables/skills/ 一层，
+    """包枚举（三分类目录·同上适配）：agent-experts/agent-skills/softwares 一层，
     以含 SKILL.md 为包判定（与旧口径一致），并集去重排序。"""
     found: "set[str]" = set()
-    for base in (os.path.join(root, "deliverables"),
-                 os.path.join(root, "deliverables", "skills")):
+    for base in (os.path.join(root, "agent-experts"),
+                 os.path.join(root, "agent-skills"),
+                 os.path.join(root, "softwares")):
         if os.path.isdir(base):
             for d in os.listdir(base):
                 if os.path.isfile(os.path.join(base, d, "SKILL.md")):
@@ -337,9 +337,9 @@ def classify_target(root: str, name: str, env: "dict[str, str]") -> "tuple[str, 
     registered, why = is_registered(root, name, env)
     if registered:
         return "P-在册", "②" + why
-    # ③ 仓内文本痕迹（decisions/ deliverables/ README.md；docs/ 本仓无，跳过）
-    needles = [os.path.join(root, ".collab", "decisions"),
-               os.path.join(root, "deliverables")]
+    # ③ 仓内文本痕迹（decisions/ 三分类目录 README.md；docs/ 本仓无，跳过）
+    needles = [os.path.join(root, ".collab", "decisions")] + \
+              [os.path.join(root, c) for c in ("agent-experts", "agent-skills", "softwares")]
     readme = os.path.join(root, "README.md")
     try:
         for base in needles:
@@ -474,7 +474,7 @@ def gate_a2(root: str) -> "tuple[bool, str]":
 
 
 def gate_a3(root: str, pkg: str) -> "tuple[bool, str]":
-    """A3 出处齐＝调 S-04（P-1/P-2/P-3 全过）。S-04 默认域＝deliverables/*/scripts/*，
+    """A3 出处齐＝调 S-04（P-1/P-2/P-3 全过）。S-04 默认域＝<分类目录>/*/scripts/*，
     SKILL.md 的 md 载体块不在其默认域 ⇒ 用 --target 显式指过去（S-04 已支持）。
     exit 1＝产物侧缺件（作者欠账）；exit 3＝提供者欠账。"""
     script = os.path.join(pkg_dir_of(root, "object-audit"), "scripts",
@@ -1156,7 +1156,7 @@ def main(argv: "list[str]") -> int:
                         help="阶段 0：首次入库（清单必须显式给，禁目录枚举）")
     parser.add_argument("--pkg", help="包名（发布/单包核查时必填）")
     parser.add_argument("--files", action="append", default=[],
-                        help="清单项（相对 deliverables/<pkg>/，可重复）")
+                        help="清单项（相对 <分类目录>/<pkg>/，可重复）")
     parser.add_argument("--prune", action="append", default=[],
                         help="白名单收缩项（裁-28：末块 files 内的 relpath，可重复；"
                              "新块＝末块减指定项，部署面对应文件随差集删删除）")

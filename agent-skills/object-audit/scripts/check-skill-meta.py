@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: OA-S5
-# spec_file: deliverables/object-audit/references/10-skill.md
+# spec_file: agent-skills/object-audit/references/10-skill.md
 # spec_anchor: S5 | 体量披露
 # spec_clause_sha256: 6ab4da3d1a7775d1eef09829901e6311338b256f81993aed433c9a3c019778ed
 # spec_version: 0.2
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: OA-S2
-# spec_file: deliverables/object-audit/references/10-skill.md
+# spec_file: agent-skills/object-audit/references/10-skill.md
 # spec_anchor: S2 | 触发描述
 # spec_clause_sha256: 76738ff6d8b9386b3554e9586baff96f4369e11d04114a28386327f64a647cef
 # spec_version: 0.2
@@ -26,18 +26,18 @@
 # S-01 体量披露与触发描述检查（OA-S5／OA-S2）。
 #
 # 判据来源（不复写正文，只指路径）：
-#   OA-S5 → deliverables/object-audit/references/10-skill.md「S5 体量披露」
-#   OA-S2 → deliverables/object-audit/references/10-skill.md「S2 触发描述」
+#   OA-S5 → agent-skills/object-audit/references/10-skill.md「S5 体量披露」
+#   OA-S2 → agent-skills/object-audit/references/10-skill.md「S2 触发描述」
 # 严重度照抄规范：S1–S5 属「问净」，「问净」不合格＝阻断（同文件「判定要点」）。
 #
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
 # 本件不含策略判断：只输出 SEV＋spec_id＋退出码；拦不拦由 run-gates.sh 按路由表决定。
-"""S-01：扫 deliverables/*/SKILL.md 的体量披露（OA-S5）与触发描述（OA-S2）。
+"""S-01：扫三分类目录下一层包的 SKILL.md 体量披露（OA-S5）与触发描述（OA-S2）。
 
 用法：
     python check-skill-meta.py [--root <仓根>] [--project-name <名>]...
 
-退出码（闭集，见 deliverables/multi-collab/references/60-gates.md「六、退出码闭集」）：
+退出码（闭集，见 agent-skills/multi-collab/references/60-gates.md「六、退出码闭集」）：
     0 通过（零 finding）／1 违规／2 用法错／4 基础设施错
 """
 
@@ -65,20 +65,24 @@ def die_usage(msg: str) -> "None":
 
 
 def find_root(explicit: str | None) -> str:
-    """定位仓根：显式 --root 优先，否则自本文件向上找含 deliverables/ 的目录。"""
+    """定位仓根：显式 --root 优先，否则自本文件向上找「tools/ ＋三分类目录任一」的目录。"""
     if explicit:
         if not os.path.isdir(explicit):
             die_usage("--root 不存在：%s" % explicit)
-        if not os.path.isdir(os.path.join(explicit, "deliverables")):
-            die_usage("--root 下找不到 deliverables/：%s" % explicit)
+        if not (os.path.isdir(os.path.join(explicit, "tools")) and any(
+                os.path.isdir(os.path.join(explicit, c))
+                for c in ("agent-experts", "agent-skills", "softwares"))):
+            die_usage("--root 下找不到 tools/＋三分类目录：%s" % explicit)
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c))
+                for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
-            die_usage("未能自脚本位置向上定位到含 deliverables/ 的仓根；请用 --root 指定")
+            die_usage("未能自脚本位置向上定位到含 tools/＋三分类目录的仓根；请用 --root 指定")
         cur = parent
 
 
@@ -180,24 +184,24 @@ def main(argv: "list[str]") -> int:
     if env_names.strip():
         names.extend(n.strip() for n in env_names.split(",") if n.strip())
 
-    # 五类子包（裁-38 Q2=A 路径适配）：双域枚举 deliverables/ 与 deliverables/skills/
-    pkg_dirs = [os.path.join(root, "deliverables"),
-                os.path.join(root, "deliverables", "skills")]
+    # 三分类目录（SWB-B2 换代）：agent-experts/agent-skills/softwares 一层枚举
+    pkg_dirs = [os.path.join(root, c)
+                for c in ("agent-experts", "agent-skills", "softwares")]
     found: "dict[str, str]" = {}
     try:
-        for deliverables in pkg_dirs:
-            if not os.path.isdir(deliverables):
+        for base in pkg_dirs:
+            if not os.path.isdir(base):
                 continue
-            for name in os.listdir(deliverables):
-                if os.path.isfile(os.path.join(deliverables, name, "SKILL.md")):
-                    found[name] = os.path.join(deliverables, name, "SKILL.md")
+            for name in os.listdir(base):
+                if os.path.isfile(os.path.join(base, name, "SKILL.md")):
+                    found[name] = os.path.join(base, name, "SKILL.md")
     except OSError as exc:
-        sys.stderr.write("infra error: 无法列 deliverables/: %s\n" % exc)
+        sys.stderr.write("infra error: 无法列三分类目录: %s\n" % exc)
         return 4
     packages = sorted(found)
 
     if not packages:
-        sys.stderr.write("infra error: deliverables/ 下没有任何 SKILL.md（扫描域为空）\n")
+        sys.stderr.write("infra error: 三分类目录下没有任何 SKILL.md（扫描域为空）\n")
         return 4
 
     findings: "list[str]" = []

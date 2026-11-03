@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: OA-T1
-# spec_file: deliverables/object-audit/SKILL.md
+# spec_file: agent-skills/object-audit/SKILL.md
 # spec_anchor: T1 | 换项目测试
 # spec_clause_sha256: 7415060b134d9848e21c545c803eee041739aaa69f951801ed33f55f2c534e3c
 # spec_version: 0.4
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: OA-S1
-# spec_file: deliverables/object-audit/references/10-skill.md
+# spec_file: agent-skills/object-audit/references/10-skill.md
 # spec_anchor: S1 | 项目实体
 # spec_clause_sha256: 318bb2af2344fe444afbde85a2a6b93fcc83bacde16098f1e366d008e378dfae
 # spec_version: 0.4
@@ -25,14 +25,14 @@
 #
 # S-03 项目实体扫描（OA-T1／OA-S1）。
 #
-# **只扫规范件＋收编 bundle**（`deliverables/**`·bundle 现居 `deliverables/experts/`
+# **只扫规范件＋收编 bundle**（三分类目录面 `agent-*/**`＋`softwares/**`·bundle 现居
 # 内＝收编域已在其中·DIRRELOC 路径换代随动）：`object-audit/SKILL.md「审计范围：只审规范件」`
 # 明确记录件（informative）「不要求干净——它们是项目史，脏是正常形态」。若不划界，
 # 裁决记录/台账里的日期与项目名会全部命中，误报会吞掉这个脚本（门禁死法之一）。
 #
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
 # 本件不含策略判断：只输出 SEV＋spec_id＋逐模式计数（含命中名单）。
-"""S-03：扫规范件＋收编 bundle（deliverables/**·bundle＝deliverables/experts/ 子树）的项目实体命中（OA-T1／OA-S1），逐模式计数并附命中名单。
+"""S-03：扫规范件＋收编 bundle（三分类目录面·bundle＝agent-experts/ 子树）的项目实体命中（OA-T1／OA-S1），逐模式计数并附命中名单。
 
 用法：
     python check-entity.py [--root <仓根>] [--project-name <名>]... [--person-name <名>]...
@@ -106,10 +106,10 @@ def in_fullwidth_paren(text: str, pos: int) -> bool:
             depth = max(0, depth - 1)
     return depth > 0
 
-# 扫描域＝规范件＋收编 bundle（收编 bundle 现居 `deliverables/experts/` 子树＝已在
-# `deliverables/**` 域内·DIRRELOC 路径换代随动，域覆盖不减）。
+# 扫描域＝规范件＋收编 bundle（收编 bundle 现居 `agent-experts/` 子树＝已在
+# 三分类目录域内·SWB-B2 路径换代随动，域覆盖不减）。
 # 仍不接受扩到记录件（.collab/** 等）——扩了就违反划界，误报会吞掉脚本。
-SCAN_ROOT_DIRS = ("deliverables",)
+SCAN_ROOT_DIRS = ("agent-experts", "agent-skills", "softwares")
 SCAN_EXTS = (".md", ".py", ".sh", ".json", ".state", ".txt")
 
 
@@ -125,7 +125,8 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
@@ -176,7 +177,7 @@ def main(argv: "list[str]") -> int:
 
     files = iter_scan_files(root)
     if not files:
-        sys.stderr.write("infra error: 规范件扫描域为空（deliverables/ 不存在或无待扫文件）\n")
+        sys.stderr.write("infra error: 规范件扫描域为空（三分类目录不存在或无待扫文件）\n")
         return 4
 
     patterns = build_patterns(projects, persons)

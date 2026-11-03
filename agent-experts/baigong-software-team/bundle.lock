@@ -2,9 +2,9 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.16",
+    "version": "0.1.17",
     "repo": ".",
-    "path": "deliverables/experts/baigong-software-team",
+    "path": "agent-experts/baigong-software-team",
     "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）"
   },
   "components": [
@@ -14,9 +14,9 @@
       "roottag": "softdev",
       "ref": "external-advisor-collab@v1.1.1",
       "ref_kind": "tag",
-      "path": "deliverables/skills/external-advisor-collab",
+      "path": "agent-skills/external-advisor-collab",
       "target": "skills/external-advisor-collab",
-      "note": "软开 bundle 首个装配组件（皮总 2026-10-28 口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 deliverables/skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.1.1；沿革：tag v1.0（2026-10-25 决议批）→v1.0.1（改名批·→6d80232）→v1.1.0（20261029a 案技能升级批·十落点条款＋版本 bump SK-3·锁版本 bump＋bundle 重装配＝皮总 2026-10-30 04:11 指令授权）→v1.1.1（2026-10-30 EAC-CLN 指针闭集整改·皮总拍板㊺·程序条款语义零动）。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含·D 项收口）"
+      "note": "软开 bundle 首个装配组件（皮总 2026-10-28 口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 agent-skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.1.1；沿革：tag v1.0（2026-10-25 决议批）→v1.0.1（改名批·→6d80232）→v1.1.0（20261029a 案技能升级批·十落点条款＋版本 bump SK-3·锁版本 bump＋bundle 重装配＝皮总 2026-10-30 04:11 指令授权）→v1.1.1（2026-10-30 EAC-CLN 指针闭集整改·皮总拍板㊺·程序条款语义零动）。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含·D 项收口）"
     },
     {
       "component": "deep-research",

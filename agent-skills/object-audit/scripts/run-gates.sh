@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # --- spec-provenance v1 ---
 # spec_id: MC-GATE-1
-# spec_file: deliverables/multi-collab/references/60-gates.md
+# spec_file: agent-skills/multi-collab/references/60-gates.md
 # spec_anchor: 3. **本件正文的 json 围栏是唯一机器源**
 # spec_clause_sha256: 0ff571c0416a3d11ecf37b415909aea3c571e8c6ce5e2a3849fe7e23869f1985
 # spec_version: 3.9
@@ -10,7 +10,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-GATE-2
-# spec_file: deliverables/multi-collab/references/60-gates.md
+# spec_file: agent-skills/multi-collab/references/60-gates.md
 # spec_anchor: - **门禁脚本只读**
 # spec_clause_sha256: 64e5d90d4b01dab23f6039122e06d95741030551666d9a0c2c723f17666c2def
 # spec_version: 3.9
@@ -19,7 +19,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-GATE-3
-# spec_file: deliverables/multi-collab/references/60-gates.md
+# spec_file: agent-skills/multi-collab/references/60-gates.md
 # spec_anchor: 4. **显式留痕的绕过**
 # spec_clause_sha256: ce35d4529dbc0b0a819d464fdb759fdca573c016255d38eeb6c54f1d22eec8d9
 # spec_version: 3.9
@@ -31,7 +31,7 @@
 #
 # 三条硬约束（照抄规范，不复写正文）：
 #   路由表**运行时从 60-gates.md 的 ```json 围栏解析**——本件不另存配置、不硬编码路由
-#     → deliverables/multi-collab/references/60-gates.md §〇 铁律 3
+#     → agent-skills/multi-collab/references/60-gates.md §〇 铁律 3
 #   本件是**唯一写动作**所在（证据件），各检查脚本只读
 #     → 同上「七、接入」第 3 条
 #   ALLOW_GATE_DOWN=1 可绕过，但**必须**向证据件写 bypass 记录（不得静默）
@@ -67,7 +67,7 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-# --- 定位仓根（--root 优先；否则自脚本位置向上找 deliverables/） ---
+# --- 定位仓根（--root 优先；否则自脚本位置向上找「tools/ ＋三分类目录任一」） ---
 if [ -n "$ROOT_ARG" ]; then
   [ -d "$ROOT_ARG" ] || die_usage "--root 不存在：$ROOT_ARG"
   ROOT="$(cd "$ROOT_ARG" && pwd)"
@@ -75,16 +75,15 @@ else
   cur="$SELF_DIR"
   ROOT=""
   while :; do
-    if [ -d "$cur/deliverables" ]; then ROOT="$cur"; break; fi
+    if [ -d "$cur/tools" ] && { [ -d "$cur/agent-experts" ] || [ -d "$cur/agent-skills" ] || [ -d "$cur/softwares" ]; }; then ROOT="$cur"; break; fi
     parent="$(dirname "$cur")"
     [ "$parent" = "$cur" ] && die_infra "未能定位仓根；请用 --root 指定"
     cur="$parent"
   done
 fi
 
-# 路由表定位（五类子包·裁-38 Q2=A 路径适配，纯解析零逻辑）：双域探，探到即用
-GATES_MD="$ROOT/deliverables/multi-collab/references/60-gates.md"
-[ -f "$GATES_MD" ] || GATES_MD="$ROOT/deliverables/skills/multi-collab/references/60-gates.md"
+# 路由表定位（B2 三分类目录换代·SWB-B2 B2-C3）：分类目录候选，探到即用
+GATES_MD="$ROOT/agent-skills/multi-collab/references/60-gates.md"
 [ -f "$GATES_MD" ] || die_usage "找不到路由表规范件：$GATES_MD"
 
 # --- 解释器：显式探测。钩子环境里 PATH 常不全，找不到就 fail-closed，不得降级为不拦 ---
@@ -124,7 +123,7 @@ trap cleanup_workdir EXIT
 #   人名清单缺省＝空（本包规范件经泛指化不应含人名）；子脚本 coverage 行
 #     据此报「未配置（可留空）」而非「欠注入」。
 # 未注入且无缺省的子判据仍记 coverage「子判据未执行」——未执行的判据不得计绿。
-# 注：项目名**字面量拆段拼接**——本文件位于 S-03 扫描域（deliverables/**）内，
+# 注：项目名**字面量拆段拼接**——本文件位于 S-03 扫描域（agent-*/**）内，
 #   完整字面量裸写于句中即算实体命中（自伤先例：check-entity.py 注释曾自咬）；
 #   拆段是机械形态规避，不是豁免规则，判据本身一字未动。
 _GW_PKG="multi-agent"
@@ -264,12 +263,14 @@ def spec_id_resolvable(spec_id):
     pkg = SPEC_ID_HOME.get(prefix)
     if not pkg:
         return False
-    # 五类子包（裁-38 Q2=A 路径适配）：双域探 deliverables/<pkg> 与 deliverables/skills/<pkg>
-    pkg_dir = os.path.join(ROOT, "deliverables", pkg.replace("/", os.sep))
-    if not os.path.isdir(pkg_dir):
-        nested = os.path.join(ROOT, "deliverables", "skills", pkg.replace("/", os.sep))
-        pkg_dir = nested if os.path.isdir(nested) else pkg_dir
-    if not os.path.isdir(pkg_dir):
+    # 三分类目录（SWB-B2 B2-C3 换代）：agent-*/softwares 一层候选
+    pkg_dir = ""
+    for _cat in ("agent-experts", "agent-skills", "softwares"):
+        cand = os.path.join(ROOT, _cat, pkg.replace("/", os.sep))
+        if os.path.isdir(cand):
+            pkg_dir = cand
+            break
+    if not pkg_dir:
         return False
     full_re = re.compile(re.escape(spec_id))
     local_re = re.compile(r"(?<![A-Za-z0-9])" + re.escape(local) + r"(?![A-Za-z0-9])")

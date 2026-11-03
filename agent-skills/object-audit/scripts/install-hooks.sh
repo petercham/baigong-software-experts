@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # --- spec-provenance v1 ---
 # spec_id: MC-HOOK-1
-# spec_file: deliverables/multi-collab/references/60-gates.md
+# spec_file: agent-skills/multi-collab/references/60-gates.md
 # spec_anchor: - 安装器**幂等**
 # spec_clause_sha256: 9e568722577b7ca9b2d6cb5dae54f6115c468bfc102157e9e5d04efc0f74f797
 # spec_version: 3.9
@@ -12,7 +12,7 @@
 # 钩子安装器（幂等装 .git/hooks/pre-commit）。规范来源：设计 v2 §2.5/60-gates。
 #
 # 三条照抄规范的行为约束（不复写正文，只指路径）：
-#   幂等／不覆盖已有钩子 → deliverables/multi-collab/references/60-gates.md「七、接入」
+#   幂等／不覆盖已有钩子 → agent-skills/multi-collab/references/60-gates.md「七、接入」
 #   钩子文件本身不入仓（入仓的是本安装器） → 同上「一、三个出口」段末
 #   钩子内用显式解释器调用（不依赖可执行位） → 同上「七、接入」第 2 条
 #
@@ -82,7 +82,7 @@ MARKER="generated-by: object-audit/scripts/install-hooks.sh"
 GATE_HOOK_BODY="#!/usr/bin/env bash
 # ${MARKER}
 # 提交前门禁（出口①）。规范来源：设计 v2 §2.5/60-gates。
-# 改判据请改路由表规范件（deliverables/ 或 deliverables/skills/ 下 multi-collab/references/60-gates.md），不要改本文件。
+# 改判据请改路由表规范件（agent-skills/multi-collab/references/60-gates.md），不要改本文件。
 set -u
 exec bash \"$RUNNER\" --root \"$REPO_ROOT\"
 "

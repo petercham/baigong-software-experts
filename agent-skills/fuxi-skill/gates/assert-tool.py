@@ -25,7 +25,7 @@ S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位
     contracts/＝三契约文件（声明面）；rejected/＝淘汰留档区（可枚举基面）；
     adapters/＝两 adapter 件＋分类器件（S2 结构断言基面）；
     specs/＝两输出规范表文件（ST-8 基面）；包 README.md（BW-6 基面）；
-    deliverables/products/＝active 生效池注册路径（FC-6 池计数基面＝池根直接条目）；
+    本技能目录内 products/＝active 生效池注册路径（FC-6 池计数基面＝池根直接条目）；
     产物级扫描面（ST-3／BW-1／BW-2／BW-5(b) 消费）＝池根直接条目＋pending/（待确认暂存区）一层下产物目录，
     两口径分离：暂存区条目入结构检与词表实扫、不计入池计数；archive/＝历史记录区，免产物级机检、不入扫描面。
 
@@ -139,7 +139,8 @@ COMPARISON_NO_INHERIT_DECL = "与前序同名旧物无继承关系"
 COMPARISON_ROW_NAMES = ("对象", "产物", "验证")
 
 # FC-6 active 生效池（S4 建·R16 验收机检位）：注册路径＋条目确认件四字段闭集。
-_PRODUCTS_SUBPATH = ("deliverables", "products")
+# 生效池注册路径＝本技能目录内 `products/`（STRUCTURE delivery_paths 既载·SWB-B2 B2-C9 换代）
+_PRODUCTS_SUBPATH = ("products",)
 CONFIRM_FILE_NAME = "confirmation.md"
 POOL_CONFIRM_FIELDS = ("产物id", "人工确认引用", "提案件引用", "版本审计引用")
 

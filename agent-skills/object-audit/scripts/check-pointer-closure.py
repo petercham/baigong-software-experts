@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-04
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D6-3 | 交付包指针闭集
 # spec_clause_sha256: 2ffcbacb3c9b07b60576f0d99409eb5c889f81ce88ac3f3607422d66a010dee2
 # spec_version: 0.6
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-05
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D6-4 | 交付包内指针可达性
 # spec_clause_sha256: 7baa37b870148da0b90f21093fd1431346c88984fb71dd30672a830a10a07892
 # spec_version: 0.6
@@ -25,7 +25,7 @@
 #   OA-D6-3 → object-audit/references/50-document.md D6 表 D6-3 行（交付包指针闭集）
 #   OA-D6-4 → 同上 D6-4 行（包内反引号相对指针以包根解析可达）
 #
-# 扫描面（缺省＝两包面，裁③）：deliverables/skills/external-advisor-collab/ ＋ deliverables/experts/（软开 bundle·DIRRELOC 路径换代随动）。
+# 扫描面（缺省＝两包面，裁③＋SWB-B2 换代）：agent-skills/external-advisor-collab/ ＋ agent-experts/（软开 bundle）。
 # `--pkg <dir>`（可重复）＝显式指入其他交付态包面（跨仓组件包/装配预览面），给出即取代缺省。
 # `.collab/**` 与其余规范件不进扫描面（扫描面收窄＝主豁免）。
 #
@@ -74,7 +74,7 @@ FENCE_RE = re.compile(r"^[ \t]*```")
 POINTER_RE = re.compile(r"`([A-Za-z0-9_\-./\u4e00-\u9fff]+\.(?:md|py))`")
 
 # 缺省扫描面＝两包面（裁③：其余包 `--pkg` 逐包扩面）
-DEFAULT_PKG_FACES = ("deliverables/skills/external-advisor-collab", "deliverables/experts")
+DEFAULT_PKG_FACES = ("agent-skills/external-advisor-collab", "agent-experts")
 SCAN_EXTS = (".md", ".txt", ".py", ".sh", ".json", ".lock", ".state")
 
 
@@ -90,7 +90,8 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:

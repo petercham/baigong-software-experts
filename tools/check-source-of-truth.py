@@ -38,7 +38,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-SEAT-DECL
-# spec_file: deliverables/experts/baigong-software-team/skills/software-orchestration/references/handoff-discipline.md
+# spec_file: agent-experts/baigong-software-team/skills/software-orchestration/references/handoff-discipline.md
 # spec_anchor: ## 十 席位自指短声明形式约束
 # spec_clause_sha256: dab85e5b3fb28e57fa0417be9878e9ff3983ed08a81cbb0a93a522120a95bd90
 # spec_version: 1.1
@@ -103,8 +103,8 @@ T2 三仓口径（拆仓执行批·拍板六⑥）：
       agents（根①的 agents/ 子树）vs skills（根① skills/ 子树＋根②全部 .md）
       的 A1 重合检测**跨仓跑**；A2 指针解析加「技能真源根」探针（见 check_pointers）。
     单根口径（single）＝旧行为：只扫 `--pkg` 一个根（包内自包含）。
-      软开 bundle（devkits 仓 deliverables/experts/baigong-software-team·拍板五①自包含豁免）
-      用第二调项：`--mode single --pkg deliverables/experts/baigong-software-team --tag softdev`。
+      软开 bundle（devkits 仓 agent-experts/baigong-software-team·拍板五①自包含豁免）
+      用第二调项：`--mode single --pkg agent-experts/baigong-software-team --tag softdev`。
 
     **豁免键 files 维度＝跨仓两段式路径口径（T2 定·稳定可机检）**：
       文件标识＝`<roottag>:<root 内相对路径（正斜杠）>`；
@@ -504,7 +504,7 @@ SEATDECL_EXPECTED = {
 
 def selftest_seatdecl(root: str) -> int:
     """五用例自咬：合成声明行 × 真实两卷池＋真实五席声明块面（软开 bundle）。"""
-    pkg = os.path.join(root, 'deliverables', 'experts', 'baigong-software-team')
+    pkg = os.path.join(root, 'agent-experts', 'baigong-software-team')
     pool_files = {
         'dev-discipline.md': os.path.join(
             pkg, 'skills', 'software-orchestration', 'references', 'dev-discipline.md'),
@@ -731,7 +731,7 @@ def regen_baseline(dup_items: list, tags: set) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='W2 真源对账（骨架-本体＋技能层线检·T2 三仓口径）')
-    parser.add_argument('--root', default='', help='devkits 仓根（默认自脚本位置向上找 deliverables/）')
+    parser.add_argument('--root', default='', help='devkits 仓根（默认自脚本位置向上找 tools/＋三分类目录）')
     parser.add_argument('--mode', default='dual', choices=('dual', 'single'),
                         help='dual＝bundle 根＋技能真源根双根对账（缺省）；single＝旧包内单根口径')
     parser.add_argument('--pkg', default=DEFAULT_PKG, help='被测专家包（相对仓根）')
@@ -751,7 +751,9 @@ def main() -> int:
     if not root:
         cur = os.path.dirname(os.path.abspath(__file__))
         while True:
-            if os.path.isdir(os.path.join(cur, 'deliverables')):
+            if os.path.isdir(os.path.join(cur, 'tools')) and any(
+                    os.path.isdir(os.path.join(cur, c))
+                    for c in ('agent-experts', 'agent-skills', 'softwares')):
                 root = cur
                 break
             parent = os.path.dirname(cur)

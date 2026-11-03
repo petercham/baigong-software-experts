@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: OA-D1-1
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D1-1 | 归属声明随身
 # spec_clause_sha256: b25fbd09c9259fc1375c4854122bc24a795f4532c36b1bfa0472a298db1108a5
 # spec_version: 0.2
@@ -27,9 +27,9 @@
 # S-04 规范来源声明核验（OA-D1-1 归属声明随身 → 用到执行体上）。
 #
 # 判据来源（不复写正文，只指路径）：
-#   P-1／P-2／P-3 与退出码归属 → deliverables/object-audit/references/70-provenance.md
+#   P-1／P-2／P-3 与退出码归属 → agent-skills/object-audit/references/70-provenance.md
 #     「一、审：块在不在、字段齐不齐（P-1）」「三、审：锚还指得到吗（P-2）」「四、审：那句话还是那句话吗（P-3）」
-#   退出码闭集 → deliverables/multi-collab/references/60-gates.md「六、退出码闭集」
+#   退出码闭集 → agent-skills/multi-collab/references/60-gates.md「六、退出码闭集」
 #
 # 退出码归属（照 70-provenance.md §一 与 裁-19 改判，**不照设计 v2 §2.2.4 旧配**）：
 #   块整体缺失／键集合 ≠ 七键／格式不合法 → **exit 1**（声明作者欠账）
@@ -42,7 +42,7 @@
 
 用法：
     python check-provenance.py [--root <仓根>] [--target <相对路径.py>]...
-    不给 --target 时，默认扫 <仓根>/deliverables/*/scripts/*.py（含本件自身）。
+    不给 --target 时，默认扫 <仓根>/<分类目录>/<项目>/scripts/*.py（含本件自身）。
 
 退出码（闭集，见 60-gates.md「六、退出码闭集」）：
     0 通过／1 产物侧缺声明／3 规范侧失联／2 用法错／4 基础设施错
@@ -96,7 +96,8 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
@@ -182,10 +183,12 @@ def resolve_anchor(spec_file_abs: str, anchor: str) -> "list[str]":
 
 
 def existing_providers(root: str) -> "set[str]":
-    # 五类子包（裁-38 Q2=A 路径适配）：deliverables/ 一层与 deliverables/skills/ 一层并集。
+    # 三分类目录（SWB-B2 换代）：agent-experts/agent-skills/softwares 一层并集
+    # （等价语义＝providers 枚举集换代前后成员资格全等，判据 8-1 实断言）。
     providers: "set[str]" = set()
-    for base in (os.path.join(root, "deliverables"),
-                 os.path.join(root, "deliverables", "skills")):
+    for base in (os.path.join(root, "agent-experts"),
+                 os.path.join(root, "agent-skills"),
+                 os.path.join(root, "softwares")):
         if os.path.isdir(base):
             for name in os.listdir(base):
                 if os.path.isdir(os.path.join(base, name)):
@@ -248,11 +251,11 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
             )
             raise_to(1)
 
-        # provider 必须是 deliverables/ 下现存包名（不是人名）——非现存＝提供者侧路由失效，exit 3。
+        # provider 必须是三分类目录下现存项目名（不是人名）——非现存＝提供者侧路由失效，exit 3。
         provider = block["provider"]
         if provider not in providers:
             findings.append(
-                "%s:1: %s OA-D1-1 块 %d provider %r 不是 deliverables/ 下现存包名（规范侧失联）"
+                "%s:1: %s OA-D1-1 块 %d provider %r 不是三分类目录下现存项目名（规范侧失联）"
                 % (rel, SEV_BLOCK, index, provider)
             )
             raise_to(3)
@@ -260,14 +263,14 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
         # ---- P-2：锚可解析且唯一 ----
         spec_file = block["spec_file"]
         spec_abs = os.path.normpath(os.path.join(root, spec_file.replace("/", os.sep)))
-        if not os.path.isfile(spec_abs) and spec_file.startswith("deliverables/") \
-                and not spec_file.startswith("deliverables/skills/"):
-            # 五类子包路径适配：旧式声明 `deliverables/<pkg>/…` 落空时试
-            # `deliverables/skills/<pkg>/…`（纯解析双探，声明文本与 P-3 摘要不受影响）。
-            nested = os.path.join(root, "deliverables", "skills",
-                                  *spec_file.split("/")[1:])
-            if os.path.isfile(os.path.normpath(nested)):
-                spec_abs = os.path.normpath(nested)
+        if not os.path.isfile(spec_abs) and "/" in spec_file:
+            # 三分类目录候选（SWB-B2 换代）：仓根相对落空时按分类目录重探
+            # （纯解析多探，声明文本与 P-3 摘要不受影响）。
+            for _cat in ("agent-experts", "agent-skills", "softwares"):
+                cand = os.path.join(root, _cat, *spec_file.split("/"))
+                if os.path.isfile(os.path.normpath(cand)):
+                    spec_abs = os.path.normpath(cand)
+                    break
         # 交付物包内闭环尝试（EAC-CLN·拍板㊺配套·票内预授权小改）：spec_file 为**包内
         # 相对路径**时从块所在文件的目录解析——纯解析语义扩展，P-1/P-2/P-3 判据一字未动。
         # 理由：交付物（专家/技能包）内的 provenance spec_file 只准指向包内文件
@@ -309,9 +312,9 @@ def check_file(root: str, path: str, providers: "set[str]") -> "tuple[list[str],
 def default_targets(root: str) -> "list[str]":
     # 裁-21 拍板 3：默认域由 `*.py` 扩为 `*.py`＋`*.sh`——设计 §2.5 字面只写 .py 是
     # 当时只有 .py 的产物；现 .sh 亦带七键块，扩后「脚本自身必过 S-04」对全部执行体成立。
-    # 五类子包路径适配：双域（deliverables/*/scripts/* 与 deliverables/skills/*/scripts/*）
-    patterns = [os.path.join(root, "deliverables", "*", "scripts", "*"),
-                os.path.join(root, "deliverables", "skills", "*", "scripts", "*")]
+    # 三分类目录（SWB-B2 换代）：三域 `<分类目录>/*/scripts/*`
+    patterns = [os.path.join(root, c, "*", "scripts", "*")
+                for c in ("agent-experts", "agent-skills", "softwares")]
     hits: "set[str]" = set()
     for pattern in patterns:
         hits.update(p for p in glob.glob(pattern)
@@ -326,7 +329,7 @@ def main(argv: "list[str]") -> int:
         "--target",
         action="append",
         default=[],
-        help="待核文件（相对 --root，可重复）；默认扫 deliverables/*/scripts/*.py",
+        help="待核文件（相对 --root，可重复）；默认扫 <分类目录>/*/scripts/*.py",
     )
     args = parser.parse_args(argv)
     root = find_root(args.root)
@@ -342,12 +345,12 @@ def main(argv: "list[str]") -> int:
         targets = default_targets(root)
 
     if not targets:
-        sys.stderr.write("infra error: 扫描域为空（deliverables/*/scripts/*.py 不存在）\n")
+        sys.stderr.write("infra error: 扫描域为空（<分类目录>/*/scripts/* 不存在）\n")
         return 4
 
     providers = existing_providers(root)
     if not providers:
-        sys.stderr.write("infra error: deliverables/ 下没有包目录，provider 无从校验\n")
+        sys.stderr.write("infra error: 三分类目录下没有项目目录，provider 无从校验\n")
         return 4
 
     findings: "list[str]" = []

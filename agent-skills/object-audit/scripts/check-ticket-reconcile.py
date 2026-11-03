@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-06
-# spec_file: deliverables/object-audit/references/50-document.md
+# spec_file: agent-skills/object-audit/references/50-document.md
 # spec_anchor: D6-5 | 施工票声明闭集对账
 # spec_clause_sha256: cf386cfe196ab8c3eb576b418f47879f1098c42fce1bf8b4fc3157eb724199ef
 # spec_version: 0.7
