@@ -53,6 +53,7 @@
 - **B3a 门禁随动行（主理人批准①入册·`b29bc20` 在笔）**：`check-entity.py iter_scan_files` 目录剪枝增 `.collab`/`.scratch` 两段（一行）。依据＝该脚本自注「扫描域＝规范件…仍不接受扩到记录件（.collab/** 等）」＋check-pointers 裁-23 排除 .collab 先例；目录重整＝既有语义物理化，非门禁语义变更（主理人裁定用语）。
   - 对照读数（随动条件⑴）：**开工基线＝OA-T1 族零实例（GATE PASS 648 内该族零出现）**；不剪则搬家件入三分类目录即触发 OA-T1 BLOCK 新族（date×10＋drive-path×15＋ticket-no×2 实测＝新族红→pre-commit 真拦→B3b 起机械锁死）；**剪后 B3b 起各批复跑＝四模式（date/drive-path/discipline-no/ticket-no）全 count 0·entity exit 0·门禁输出内 OA-T1 findings＝0（仅 coverage 行非发现）**——收口复跑读数在册（GATE PASS 8689 笔内 OA-T1 零发现）。
   - **B4 收账登记（随动条件⑵）**：该行＝**B3a 已落·B4 收账**（B4 票面门禁机件闭集含 check-entity 同族议题时按已落登记防双治）。
+  - **干跑实验全账（随动条件⑶·供 QA 对拍）**：开工基线 GATE PASS 648 → 未剪枝态全量 591 件复制干跑（已清理复原）＝**3988**·族签名＝EAC-L1 17→34／EAC-L2 18→36／**OA-T1 BLOCK 0→5（唯一新增族＝拟拦门族）**／OA-D6-3 88→473／OA-D6-4 19→1029／OA-D6 BLOCK 23→1473＋WATCH 15→470／MC-SOT 54/413 不变／reconcile 1。剪枝后实跑链＝B3a 后 695（NEW/GONE none）→收口 8684→复跑 8689（＝gates 证据续写微漂·族集恒等）；**OA-T1 全程零 findings**。OA-D6 BLOCK 实例 23→3773（收口值）＝全部＝案卷件换址后其内部历史指针在 check-pointers 全仓索引面下重新解析＝既有族实例增加（advisory 路由不拦·B2 BLOCK10→23 先例同口径）。
 
 ## 五、erratum 两笔照引（rev2 销账表文本）
 
