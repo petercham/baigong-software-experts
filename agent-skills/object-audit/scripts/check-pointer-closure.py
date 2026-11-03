@@ -227,7 +227,7 @@ EXPECTED = {"OA-D6-3": 4, "OA-D6-4": 1,
 
 
 def selftest(root: str) -> int:
-    fix = os.path.join(root, "deliverables", "skills", "object-audit",
+    fix = os.path.join(root, "agent-skills", "object-audit",
                        "tests", "fixtures", "pointer-closure")
     if not os.path.isdir(fix):
         sys.stderr.write("infra error: 对拍测试件不存在：%s\n" % fix)
