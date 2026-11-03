@@ -1,6 +1,6 @@
 # SWB-MERGE-V11 执行回执（工程师席·誊写批）
 
-- 票面＝`.collab/tickets/2026-11-02-SWB-MERGE-V11-formal-dual-doc-merge-ticket.md`（113 行·17865 B·sha256 前缀 `9b2a942b27bd61e2`）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V11-formal-dual-doc-merge-ticket.md`（113 行·17865 B·sha256 前缀 `9b2a942b27bd61e2`）。
 - 开工时实测 HEAD＝`0b95ad8`；完工时实测 HEAD＝`0b95ad8`（本回执单独 commit，哈希见 commit 链——执行笔只含本回执一件，合并稿不入 git）。
 - 产出＝声明闭集 2 件：
   1. `.collab/refs/external/SWB-交接件v2.8-产品设计与架构设计-2026-11-02.md`（登记面·`.gitignore` 覆盖·`git check-ignore` 实测命中＝不入 git，未 `git add`）；

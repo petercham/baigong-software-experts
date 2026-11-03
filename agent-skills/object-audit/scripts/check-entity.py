@@ -153,7 +153,10 @@ def iter_scan_files(root: str) -> "list[str]":
         if not os.path.isdir(base):
             continue
         for cur, dirs, files in os.walk(base):
-            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
+            # B3a 随动（B 批搬家后案卷桶物理入三分类目录）：扫描域仍＝规范件，
+            # 项目内 `.collab/`/`.scratch/` 记录件按本件自注划界不入面
+            # （与 check-pointers 裁-23 拍板 2 排除 .collab 同口径）。
+            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", ".collab", ".scratch")]
             for name in files:
                 if name.endswith(SCAN_EXTS):
                     out.append(os.path.join(cur, name))

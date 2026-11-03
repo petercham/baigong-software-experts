@@ -43,7 +43,7 @@
 
 - **该式实跑一遍（只读 grep·HEAD `5ffbbeb`）**：for 式可跑 ✓；命中 **185 行/112 文件**——扫描面构造已把 `.collab/evidence/`（v1 实测 974 命中且续涨）与 inbox 完全排除在扫描面外＝v1 红-2 之「千行历史 json 吞账＋账面动态漂移」根因消除 ✓；账面自此**有限且静态**（185 行全部落 receipts/qa/design/decisions/dispatch/docs/README/deliverables 申报面）。
 - 命中分解判定：史述面（receipts/qa 报告与回执内引用≈145 行）＝B3a 换锚不动的史实记录→回执史述账；活引用面（check-collab-lint 三处 EAC-SK5 票锚＝B3a 明文认领 ✓、check-ticket-reconcile 2、seat-permissions.json write_globs 3、architecture-v2.9-copy 3＝史述副本、commit-audit.py 2 等）→换锚/分账可清。
-- ⚠️ 两处瑕疵（不阻断）：①票面第二级过滤 `grep -v "^\./\.collab/tickets/"` 实测**空转**（for 式带参 grep 输出路径无 `./` 前缀，且 tickets 本不在扫描面——无害但误导）；②`commit-audit.py` L15/L35 活正则 `\.collab/tickets/[^\s...]+` 命中 2 处＝活代码旧路径，B3a 认领清单未点名、B2 桶 B/C 未列、B4 24 件闭集不含——须回执分账（换锚或史述）＝新黄③。
+- ⚠️ 两处瑕疵（不阻断）：①票面第二级过滤 `grep -v "^\./\.scratch/tickets/"` 实测**空转**（for 式带参 grep 输出路径无 `./` 前缀，且 tickets 本不在扫描面——无害但误导）；②`commit-audit.py` L15/L35 活正则 `\.scratch/tickets/[^\s...]+` 命中 2 处＝活代码旧路径，B3a 认领清单未点名、B2 桶 B/C 未列、B4 24 件闭集不含——须回执分账（换锚或史述）＝新黄③。
 
 ### R-6（B3 红3·evidence 2 支 tracked 脱库）→ B3 rev2 补丁四：✅ 闭合
 
@@ -80,8 +80,8 @@
 
 - **新黄①（B2·无斜杠 join 形态残留）**：`check-collab-lint.py` L131/L279、`check-source-of-truth.py` L507/L754、`assert-tool.py` L142 五处 `os.path.join(…, "deliverables", …)` 形态不入判据 3 grep 口径（`deliverables/` 带斜杠）＝闭集外残留。实测不破坏 GATE 链（run-gates 显式传 root；selftest 非门禁常驻）→ 黄级。建议：B2-C8 追加一行同批改，或 B4 认领（check-collab-lint 已在 B4 15 件表内、tools/check-source-of-truth 已在 B2 原票闭集内——两处顺笔即闭合）。
 - **新黄②（B2·判据 8-1 等价式必红）**：`existing_providers` 换代前后**全集合逐名相等**断言现盘推演必红（现盘含幻影名 `experts`/`skills`；换代后含 `baigong-software-team`）。真等价式＝六 provider 实名成员资格全等。一行勘正。
-- **新黄③（B3·commit-audit.py 活引用游离）**：`.collab/tickets/` 活正则 2 处＋路径口径史述 1 处无票认领＝B3a 换锚或回执史述分账须补目。
-- **新黄④（B3·补丁三第二级 grep 空转）**：`grep -v "^\./\.collab/tickets/"` 对 for 式输出（无前导 `./`）空转；无害，回执注记口径即可。
+- **新黄③（B3·commit-audit.py 活引用游离）**：`.scratch/tickets/` 活正则 2 处＋路径口径史述 1 处无票认领＝B3a 换锚或回执史述分账须补目。
+- **新黄④（B3·补丁三第二级 grep 空转）**：`grep -v "^\./\.scratch/tickets/"` 对 for 式输出（无前导 `./`）空转；无害，回执注记口径即可。
 - 随行注记：era 命中 26 需钉 `core.quotepath=off` 口径；`reference-2026-10-24/全能AIGC视频创作团队-…` 防二次误伤；B2 桶 C「21 处」→ 逐处表 14 处口径归一。
 
 ## 五、总裁决

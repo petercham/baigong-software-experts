@@ -1,6 +1,6 @@
 # TKT41 · SOP 域随动规则票 · 工程师席执行回执
 
-- 被执行票面：`.collab/tickets/2026-11-03-TKT41-SWB-sop-follow-rule-ticket.md`（105 行·sha256 前 8 `fdeca580`·起草笔 `59e2f59`）
+- 被执行票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-TKT41-SWB-sop-follow-rule-ticket.md`（105 行·sha256 前 8 `fdeca580`·起草笔 `59e2f59`）
 - 执行席＝工程师席（engineer-tk41）·S-A~S-E 全目照票·文本锚定法＋同文件行号降序落笔
 - **开端 HEAD 实测＝`a490ea1`**（TKT40/41 会师放行笔·MERGE-V13 收口链上·在票体 commit `59e2f59` 之后）
 

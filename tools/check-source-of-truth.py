@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: MC-SOT-1
-# spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
+# spec_file: agent-experts/baigong-software-team/.collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: 2. **三守门**：①单真源
 # spec_clause_sha256: e00ce57d764932edc0bb8a010046cad977bf9e35d02c5485370e59128b9b1a18
 # spec_version: 1.0
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-SOT-2
-# spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
+# spec_file: agent-experts/baigong-software-team/.collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: 2. **三守门**：①单真源
 # spec_clause_sha256: e00ce57d764932edc0bb8a010046cad977bf9e35d02c5485370e59128b9b1a18
 # spec_version: 1.0
@@ -20,7 +20,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-SKILL-LINE
-# spec_file: .collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
+# spec_file: agent-experts/baigong-software-team/.collab/research/2026-10-25-专家层与技能层架构决议-执行交接件_v1.md
 # spec_anchor: ### 2.1 N1 三层拆解案（定稿形态·第四轮三方已认可）
 # spec_clause_sha256: 51fccbbc3d42fbb0756eb698ea12f984dd63f558269df84d0ed74600f6aec882
 # spec_version: 1.0
@@ -29,7 +29,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: MC-SOT-EXEMPT
-# spec_file: .collab/decisions/2026-10-25-皮总拍板.md
+# spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-25-皮总拍板.md
 # spec_anchor: - **① 基线豁免＝转正式豁免，豁免键＝「文本＋出现文件集合」（选项 c）**
 # spec_clause_sha256: adb675e9429b2a1bce4d2876241fc50c328b1d6ea80230163f00a8747d47c2f8
 # spec_version: 1.0

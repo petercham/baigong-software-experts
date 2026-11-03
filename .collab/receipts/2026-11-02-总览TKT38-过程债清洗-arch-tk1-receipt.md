@@ -2,7 +2,7 @@
 
 - 依据＝皮总裁定㊽②「施工票禁带过程记录」；派工＝主理人第三清洗批指令（总览三目＋TKT38 随动修票＋连带核查；不清洗面遵令未动）。
 - 开工实测：HEAD＝`19e5d89`（＝开工锚，符合）；工作区 untracked 两份 2026-11-01 TKT qa 汇编件零触碰。
-- 被改两件（只改两件）：总览 `.collab/tickets/2026-11-01-SWB-ticket-pack-overview-v1.md`／TKT38 `.collab/tickets/2026-11-02-TKT38-SWB-pack-v1.5.1-hygiene-lightfix.md`。
+- 被改两件（只改两件）：总览 `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-ticket-pack-overview-v1.md`／TKT38 `agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT38-SWB-pack-v1.5.1-hygiene-lightfix.md`。
 
 ## 前后 sha 与行数（git 内容口径·sha256sum）
 
@@ -50,7 +50,7 @@
 
 - 派工预期「T01–T06 上轮已确认无命中」与实测不符，实况如下：
   - **T02 L47／L70、T04 L78**：`append-only` 命中＝**B0 账本历史纪律机制术语**（「账本历史 append-only 不回改」），非票面过程记录——建议判非债保留（与「呈报类审计事件」同类）；
-  - **TKT36 L28、TKT37 L5/L15**：「修订注（记）」命中＝两**已执行终态旧票**对其执行目标的史述（该两票自身即过程史件，住 `.collab/tickets/` 系历史票）——不在本批授权闭集，是否清洗请主理人定点；
+  - **TKT36 L28、TKT37 L5/L15**：「修订注（记）」命中＝两**已执行终态旧票**对其执行目标的史述（该两票自身即过程史件，住 `.scratch/tickets/` 系历史票）——不在本批授权闭集，是否清洗请主理人定点；
   - SOP-R1＝0 命中（已核）。
 - 本回执＝过程史留账位；总览 L3 全文快照见下附录（另可经 `git show 19e5d89:` 版本逐字追溯）。
 

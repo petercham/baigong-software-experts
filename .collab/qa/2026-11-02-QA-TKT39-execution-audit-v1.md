@@ -2,7 +2,7 @@
 
 - 席＝QA 席（独立实例·扫描实现全部本席自写·工程师自报一律不采信·未读产品席任何评审件）
 - 开工实测 HEAD＝`cffd5d1`（≥ 要求值 `cffd5d1` 成立）；`git status --short`＝仅两支 2026-11-01 TKT untracked 历史件（`.collab/qa/2026-11-01-TKT-双候裁审计过程汇总-v1.md`／`.collab/qa/2026-11-01-TKT-最终分票件全文汇编-v1.md`）＝预期基线一致。
-- 被验对象＝交付笔 `8ffa98b`（票包七件）＋回执笔 `cffd5d1`；判据唯一来源＝票面 `.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行完整直读）；裁定依据＝`.collab/decisions/2026-11-02-主理人裁定-MERGEV12-TKT39候裁.md`（`f59f8b0`）。
+- 被验对象＝交付笔 `8ffa98b`（票包七件）＋回执笔 `cffd5d1`；判据唯一来源＝票面 `agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行完整直读）；裁定依据＝`.collab/decisions/2026-11-02-主理人裁定-MERGEV12-TKT39候裁.md`（`f59f8b0`）。
 - 登记件（只读）＝`.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-02.md`：257 物理行（python split 口径）·纯 LF（无 CR·无尾换行）＝与票面§〇恒等式面自洽。
 
 ## 一、对账三方全等＋越集检查＝全绿

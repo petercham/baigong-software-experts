@@ -2,7 +2,7 @@
 
 # .collab 固定结构 · 桶索引（预登记）
 
-桶名录逐字真源＝`deliverables/experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md`（B1-D 规范件·十一桶）。
+桶名录逐字真源＝`agent-experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md`（B1-D 规范件·十一桶）。
 
 ## 桶名录（预登记·桶目录本体随 B2/B3 文件落地生成）
 

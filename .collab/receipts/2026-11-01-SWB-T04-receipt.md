@@ -1,6 +1,6 @@
 # SWB-T04 回执 · 强制机制群 B5＋B7＋B8＋B10＋B11
 
-- 票面：`.collab/tickets/2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md`
+- 票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md`
 - 开端 HEAD 实测：`2765c3f`（`git log --oneline -1` 读数原文：`2765c3f collab: tickets/README 状态行随批登记（主理人手续）：T03 转已收口＋T04 候开工消费面注记`）——与预期一致。
 - 环境注记执行：测试临时目录＝`D:/t04-tmp/`（全域一致路径，用毕已清理）；全部脚本缺省路径支持 `SWB_LEDGER_ROOT`／`--ledger`/`--leases`/`--freeze-state` 重定向；运行与自测全程重定向至 Temp，仓内零运行残留（收尾 `git status --short` 仅闭集文件＋本回执）。
 

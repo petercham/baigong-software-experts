@@ -1,6 +1,6 @@
 # TKT40 执行回执 · 票包按 v2.9 正式登记件再锚定（V12→V13）· 工程师席
 
-- 被执行票面：`.collab/tickets/2026-11-03-TKT40-SWB-ticket-pack-V13-re-anchoring.md`（修订版 136 行·sha256 前 8 `89713f16`·起草笔 `d3fc13b`＋修订笔 `7469baa`）。
+- 被执行票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-TKT40-SWB-ticket-pack-V13-re-anchoring.md`（修订版 136 行·sha256 前 8 `89713f16`·起草笔 `d3fc13b`＋修订笔 `7469baa`）。
 - 开工 HEAD 实测：`a490ea1`（`git log --oneline -3` 链上·在票面起草实测 `d3ca3ad` 之后＝开工前置成立）；MERGE-V13 三件（登记件＋回执 `a68b671`＋QA 验证件 `d3ca3ad`）在盘核验通过。
 - 性质＝纯机械誊写批·零裁量。施工法＝python 脚本化替换（读票面 §二 映射表→逐文件行内替换→写回·脚本置系统 Temp 不落仓）；token 长度降序＋非数字/非范围连接符右边界完整 token 匹配（修订注③）；内存变换＋写前断言全过再落盘（行数不变／`V12 L` 归零／`V13 L`＝94 三断言先验后写）。
 - 输出闭集＝九件（八票面文件＋本回执）·与票面 §一 声明闭集逐字一致。

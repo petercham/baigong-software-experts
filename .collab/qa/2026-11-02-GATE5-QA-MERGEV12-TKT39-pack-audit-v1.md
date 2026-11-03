@@ -1,7 +1,7 @@
 # GATE5-QA · MERGE-V12／TKT39 两票面 QA 独立审计 v1
 
 **审查席**：qa-gate4（QA 席·fresh eyes）｜**日期**：2026-11-02
-**被核**：票一＝`.collab/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行·commit `87a02ef`）；票二＝`.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行·commit `453b77a`）
+**被核**：票一＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行·commit `87a02ef`）；票二＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行·commit `453b77a`）
 
 ## 0. 开工读数
 

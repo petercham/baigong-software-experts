@@ -2,8 +2,8 @@
 
 - 开工实测 HEAD＝**`ba3fbb6`**（＝v2.9 登记生效记录笔·开工锚符合）；工作区 untracked 两份 2026-11-01 TKT qa 汇编件零触碰。
 - 起草笔两笔（各自单独 commit·`collab:` 前缀只含该票·未用 --no-verify/amend·门禁钩子全程跑过）：
-  - 票一＝`87a02ef`→`.collab/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行）
-  - 票二＝`453b77a`→`.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行）
+  - 票一＝`87a02ef`→`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行）
+  - 票二＝`453b77a`→`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行）
 
 ## 开票前实测基线读数（全部盘上直读，禁凭记忆条款履行）
 

@@ -3,7 +3,7 @@
 ## 开工/完工读数
 - 续飞开工实测 `git rev-parse --short HEAD` ＝ **7fb0724**（≥ 票面锚 643755f/登记 8d52dd5，`git merge-base` 链上合规）。
 - 写面＝票包七件（总览＋T01–T06）＋本回执；deliverables/ 零触碰（DIRRELOC 并行线写面互斥守住）；两基线登记件/.collab 其余零触碰。
-- 票面以 `.collab/tickets/2026-11-01-TKT34-票包Q-01定名随动轻修票.md` 完整直读为准（任务闭集四条照办）。
+- 票面以 `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-TKT34-票包Q-01定名随动轻修票.md` 完整直读为准（任务闭集四条照办）。
 
 ## 换写处数对照表（裸根口径＝前面非字母数字连字符守卫计数，防误换 `software-team-lead.md` 等 agent 文件名）
 

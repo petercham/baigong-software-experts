@@ -1,6 +1,6 @@
 # SWB-T08R＋T08R-A1 · 工程师完工回执：权限表数据面机械化＋增补补行（一次施工批）
 
-- 施工席＝工程师席（engineer-t08r）；票面＝`.collab/tickets/2026-11-03-SWB-T08R-seat-permissions-mechanization-rev2.md`（R2·`4082ff3` 放行链）＋`.collab/tickets/2026-11-03-SWB-T08R-A1-augment-permission-rows.md`（`e440131`·同票同批）。
+- 施工席＝工程师席（engineer-t08r）；票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-T08R-seat-permissions-mechanization-rev2.md`（R2·`4082ff3` 放行链）＋`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-T08R-A1-augment-permission-rows.md`（`e440131`·同票同批）。
 - Temp＝`D:/eng-t08r-tmp`（Windows 盘符形态·判据/探针/演练共用·仓内零运行残留）；occurrence 口径；判据命令全部自带落盘重定向。
 
 ## 0. 开工读数
@@ -56,7 +56,7 @@ A1-J1–J5 读数另见 `.collab/receipts/2026-11-03-SWB-T08R-A1-receipt.md`（�
 01 host 机械 .collab/ledger/                 02 host 机械 .collab/signatures/
 03 host 机械 .collab/dlq/                    04 host 机械 .collab/commitments/
 05 host 机械 .collab/human/intake/  ←账一②拆行  06 host 机械 .collab/human/reviews/ ←账一②拆行
-07 host 非机械 .collab/tickets/{id}/仅生命周期字段  ←账二滞留·候裁R①
+07 host 非机械 .scratch/tickets/{id}/仅生命周期字段  ←账二滞留·候裁R①
 08 host 机械 .collab/release-record/         09 host 机械 .collab/manifest/
 10 host 非机械 docs/转正代写                  ←账二滞留·候裁R②
 11 host 非机械 .archive/退役定稿落位           ←账二滞留·候裁R②
@@ -65,12 +65,12 @@ A1-J1–J5 读数另见 `.collab/receipts/2026-11-03-SWB-T08R-A1-receipt.md`（�
 16 product 机械 .collab/drafts/prd/          17 product 机械 .collab/product/
 18 product 机械 .collab/drafts/proposals/    19 architect 机械 .collab/drafts/design/ ←账一③拆行
 20 architect 机械 .collab/drafts/adr/        ←账一③拆行  21 architect 机械 .collab/architect/
-22 architect 机械 .collab/drafts/proposals/  23 architect 非机械 .collab/tickets/票面文档（起草与按修票权修订） ←账二滞留·候裁R①
+22 architect 机械 .collab/drafts/proposals/  23 architect 非机械 .scratch/tickets/票面文档（起草与按修票权修订） ←账二滞留·候裁R①
 24 architect 非机械 开发票四字段              ←账二滞留·候裁R①
 25 architect 非机械 tests/共写（增删改走 C1）  ←账二滞留·候裁R③
 26 architect 非机械 租约段签注与灰度判据（票内）←账二滞留·候裁R①
 27 architect 机械 docs/adr/                  ←Aug2.1 新增
-28 qa 机械 .collab/audits/                   29 qa 非机械 .collab/tickets/缺陷票（修票权） ←账二滞留·候裁R①
+28 qa 机械 .collab/audits/                   29 qa 非机械 .scratch/tickets/缺陷票（修票权） ←账二滞留·候裁R①
 30 qa 非机械 tests/共写                      ←账二滞留·候裁R③
 31 qa 机械 .collab/drafts/proposals/         32 engineer 机械 .collab/inbox/engineer/
 33 engineer 机械 .collab/returns/engineer/   34 engineer 机械 .collab/drafts/deploy/
@@ -80,7 +80,7 @@ A1-J1–J5 读数另见 `.collab/receipts/2026-11-03-SWB-T08R-A1-receipt.md`（�
 
 ## 5. 候裁 R①–R⑨ 逐条呈裁原文引用＋本批处置
 
-- **R①**「host/architect/qa `.collab/tickets/` 三席字段级约束…超 path_glob 表达力——展开＋注记 vs 维持现样」→本批账二滞留零动（行 07/23/24/26/29 维持现样）。
+- **R①**「host/architect/qa `.scratch/tickets/` 三席字段级约束…超 path_glob 表达力——展开＋注记 vs 维持现样」→本批账二滞留零动（行 07/23/24/26/29 维持现样）。
 - **R②**「host `docs/转正代写`／`.archive/退役定稿落位`＝promote-manifest 机械通道非席位租约写…建行/删行/改注记」→账二滞留零动（行 10/11）。
 - **R③**「architect/qa `tests/共写（增删改走 C1）` 机械化＝扩权…双席对表」→账二滞留零动（行 25/30）。
 - **R④**「human 行…不入 hooks 强制面——机械化与否」→账二滞留零动（行 36）。

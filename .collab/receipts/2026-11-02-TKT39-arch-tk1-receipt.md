@@ -1,6 +1,6 @@
 # TKT39 · SWB 票包 V12/v2.9 再锚定批 · 完工回执（执行＝工程师席 engineer-tk39）
 
-- 票面＝`.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行·sha256 前缀 `12fa30a2` 实测复现 ✓·双席四保留项修入放行态＝`616f8ae`）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行·sha256 前缀 `12fa30a2` 实测复现 ✓·双席四保留项修入放行态＝`616f8ae`）。
 - 开工实测 `git rev-parse --short HEAD` ＝ **07736c6**（≥ 票面最低锚 `07736c6` ✓）；交付 commit＝**8ffa98b**（`TKT39:` 前缀·只含票包七件）；本回执＝其后单独一笔落 `.collab/receipts/`。
 - 写面＝票包七件全部修改＋本回执一件；此外零触碰（登记面 `.collab/refs/external/` 零写入·draft3/v2.8 旧登记件零触碰·git status 实证改动面仅七票）。无 `--no-verify`、无 amend。
 - 候裁点照主理人裁定件（`.collab/decisions/2026-11-02-主理人裁定-MERGEV12-TKT39候裁.md`·commit `f59f8b0`）执行：Q-10＝三处判词 `v2.8` 字样逐字保留（判据 6 断言 5 维持）；Q-11＝人类角色列以 v2.9 实物为准（实物读数附六节）。
@@ -118,13 +118,13 @@ T03 dispatch-spec 转录行集随 v2.9 实物即得（票面规格）；本回�
 ## 七、完整写入清单（commit name-only 对账口径）
 
 - 交付 commit `8ffa98b`（`TKT39:` 前缀·只含票包七件）：
-  1. `.collab/tickets/2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md`
-  2. `.collab/tickets/2026-11-01-SWB-T02-ledger-state-lease-core.md`
-  3. `.collab/tickets/2026-11-01-SWB-T03-injection-dispatch-gate.md`
-  4. `.collab/tickets/2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md`
-  5. `.collab/tickets/2026-11-01-SWB-T05-expert-pack-assembly-b6.md`
-  6. `.collab/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md`
-  7. `.collab/tickets/2026-11-01-SWB-ticket-pack-overview-v1.md`
+  1. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md`
+  2. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T02-ledger-state-lease-core.md`
+  3. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T03-injection-dispatch-gate.md`
+  4. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md`
+  5. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T05-expert-pack-assembly-b6.md`
+  6. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md`
+  7. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-ticket-pack-overview-v1.md`
   （`git show --name-only` 读数＝上述七件·与声明闭集§一前七项全等；7 files changed, 64 insertions(+), 64 deletions(-)）
 - 本回执 commit＝单独一笔落 `.collab/receipts/2026-11-02-TKT39-arch-tk1-receipt.md`（名照票面§一闭集第八项·体例随 TKT36 回执）。
 - 除上述外零写入；施工中间脚本/表件（临时）已删除未入库；git status 终态＝除他人未跟踪 qa 两件（非本席物）外清洁。

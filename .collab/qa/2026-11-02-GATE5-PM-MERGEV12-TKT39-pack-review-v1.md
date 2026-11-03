@@ -1,7 +1,7 @@
 # GATE5-PM · MERGE-V12＋TKT39 两机械票票面 · 产品席独立评审 v1
 
 - 评审席：pm-gate4（产品席·fresh eyes·未读 QA 席任何评审件·只调研评审零施工）
-- 被核对象：票一＝`.collab/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行·commit `87a02ef`）；票二＝`.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行·commit `453b77a`）
+- 被核对象：票一＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（74 行·commit `87a02ef`）；票二＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（100 行·commit `453b77a`）
 - 计数口径：一律 occurrence 口径（`grep -o … | wc -l` 或等价 python `str.count`/`re.findall`）；行号＝各文件物理行号
 
 ## §0 开工读数
@@ -80,7 +80,7 @@
 
 ### 5A-1 存量对位（票二 47 锚旧串 ↔ 现盘实物·词组级）
 
-- 现盘口径＝TKT36 换锚后 `.collab/tickets/2026-11-01-SWB-*` 七件＋总览（`git status` 复测七件均 tracked 无未提交改动——现盘存量＝HEAD 存量 ✓）。
+- 现盘口径＝TKT36 换锚后 `.scratch/tickets/2026-11-01-SWB-*` 七件＋总览（`git status` 复测七件均 tracked 无未提交改动——现盘存量＝HEAD 存量 ✓）。
 - 独立复算：映射表 47 对锚（双列全解析·pairs=47·处数合计 94）与盘上锚集（逐文件 `re.findall 'V11 L\d+(?:[–-]\d+)?'`）对表——**47/47 旧串全部在现盘可定位（形制逐字一致·破折号体亦符）；表锚集↔盘锚集双向差集＝∅；逐锚处数 vs 盘 occurrence 失配＝0**。
 - **判定：存量对位全闭合，零映射失实红项。**
 

@@ -1,6 +1,6 @@
 # SWB-T08R-A1 · 工程师完工回执（增补补行·随 T08R 同批施工笔）
 
-- 票面＝`.collab/tickets/2026-11-03-SWB-T08R-A1-augment-permission-rows.md`（起草笔 `e440131`）；施工＝与 SWB-T08R 同票同批一次 commit（交付笔同 T08R 回执 §6，闭集 6 件零扩员）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-T08R-A1-augment-permission-rows.md`（起草笔 `e440131`）；施工＝与 SWB-T08R 同票同批一次 commit（交付笔同 T08R 回执 §6，闭集 6 件零扩员）。
 - Temp＝`D:/eng-t08r-tmp`（＝`$T08R_A1_TMP` 同目录·Windows 盘符形态）；开工 HEAD／基线／互锁复测读数见 `.collab/receipts/2026-11-03-SWB-T08R-receipt.md` §0（开工实测 HEAD＝`ba00a0f`，f135855／e440131 双验可达）。
 
 ## A1-J1–J5 逐条命令与实测读数

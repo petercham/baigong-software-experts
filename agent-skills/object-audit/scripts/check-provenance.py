@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-23-01
-# spec_file: .collab/decisions/2026-10-22-裁决记录.md
+# spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-22-裁决记录.md
 # spec_anchor: - **拍板 3（S-04 默认域扩至 .sh·扩判据）**
 # spec_clause_sha256: 3534eeb93e2d4514cf109dce4a00941ec9ada36ed51cba48f3cae83dd1756b66
 # spec_version: 0.3

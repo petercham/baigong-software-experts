@@ -2,7 +2,7 @@
 
 - QA 席＝qa-mv12（独立实例·工程师自报一律不采信·全部读数本席独立实跑·扫描/哈希实现本席自写 python）
 - 核验时间＝2026-11-02｜开工实测 HEAD＝`07736c6`（≥ 票面要求·主理人指令要求 ✓）｜`git status --short` 仅两支 2026-11-01 TKT untracked 历史件（在案·与本批无关）✓
-- 被验对象＝MERGE-V12 剥壳落盘批：票面 `.collab/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（75 行·本席实测 sha256 前缀 `acd176f9` 与回执申报相符）；产出登记件 `.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-02.md`；源件 draft3；回执 `.collab/receipts/2026-11-02-SWB-MERGE-V12-receipt.md`（commit `07736c6`）。
+- 被验对象＝MERGE-V12 剥壳落盘批：票面 `agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（75 行·本席实测 sha256 前缀 `acd176f9` 与回执申报相符）；产出登记件 `.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-02.md`；源件 draft3；回执 `.collab/receipts/2026-11-02-SWB-MERGE-V12-receipt.md`（commit `07736c6`）。
 - 口径＝本席自写 python：occurrence 计数＝`str.count` 段内逐字；哈希＝段切 LF join 无尾换行 UTF-8 sha256；行数＝`split('\n')` 口径（无尾换行）。
 
 ## 总裁决＝**认可（全绿·零保留）**
@@ -57,7 +57,7 @@
 
 - 源件 draft3：sha256 复算逐字命中票面钉死值（最强零触碰证明）·mtime 16:48:52 早于新件落盘 19:50:53 ✓。
 - v2.8 正式件及其余旧登记面（draft1/draft2/v2.7/v2.6/v2.4 等）：mtime 均早于本批开工窗口、未入 diff ✓。
-- 票包七件（`.collab/tickets/2026-11-01-SWB-*`）：`git diff f59f8b0..07736c6` 该 glob＝**0 文件**（f59f8b0 前后零 diff）✓。
+- 票包七件（`.scratch/tickets/2026-11-01-SWB-*`）：`git diff f59f8b0..07736c6` 该 glob＝**0 文件**（f59f8b0 前后零 diff）✓。
 - `.collab/` 其余全域／`docs/`／`deliverables/`／`tools/`／`workbuddy/`／README／`.gitignore`：commit 面 diff 仅回执一件兜底零触碰 ✓；本审计批亦仅写 `.collab/qa/` 本件。
 
 ## 七、红黄绿总表

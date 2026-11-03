@@ -7,7 +7,7 @@ version: 4.10
 
 <!-- spec-provenance v1
 spec_id: ADR-2026-10-22-12
-spec_file: .collab/decisions/2026-10-22-裁决记录.md
+spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-22-裁决记录.md
 spec_anchor: 裁-12 改名 tri-collab → multi-collab
 spec_clause_sha256: d77dc7661dd0fbe65da589fb8da02538e4efdffb82e6ae2c9aff5ac57cfd6912
 spec_version: 4.1

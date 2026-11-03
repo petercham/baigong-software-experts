@@ -1,6 +1,6 @@
 # SWB-T01 平台能力实测包 P1–P10 回执（工程师席 Kou Douma）
 
-- 票面：`.collab/tickets/2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md`（58 行·V13 锚）
+- 票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md`（58 行·V13 锚）
 - 开工时实测 HEAD：`e6f3647`（`git log --oneline -3` 读数：e6f3647 → 4823eba → 5a25ad6；4823eba 链上其后成立）。
 - 开工前置核验：登记件三哈希复算——`.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-03.md` 纯 LF（CRLF=0）；产品本体段（落盘物理 L29–84＝V13 L1–56·无尾换行）sha256 前缀 `7214ad14` 命中；架构本体段（物理 L85–260＝V13 L57–232·无尾换行）sha256 前缀 `efb4f765` 命中；全段（物理 L29–260）sha256 前缀 `3f335333` 命中。与票面 L4 声称值逐字相等，落文成立。
 - §10 词条原句真源核验：设计件物理 L196（V13 L168）＝「P1 席位间文件外共享状态｜P2 主理人 md 注入恒常性与上限｜P3 工具声明生效范围｜P4 PreToolUse stdin 字段完整性[代码层已证，待运行时]｜P5 事件并发时序｜P6 deny 跨席位一致性｜P7 git 独立服务可建性｜P8 MCP auth 形态（问句，无预设）｜P9 派发记录导出｜P10 第三方插件 hooks 同权性」——十脚本头部注逐号摘录对原文。§19 锚点＝物理 L250（buildAgentTrigger·codebuddy-lite-wb.mjs·grep 复现）与物理 L251（git 原生能力·P7 验可建性）。

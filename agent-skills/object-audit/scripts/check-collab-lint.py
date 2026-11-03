@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-01
-# spec_file: .collab/tickets/2026-10-30-EAC-SK5-机检票.md
+# spec_file: agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md
 # spec_anchor: ### T1 
 # spec_clause_sha256: b5cd89d8a987283e98ba20c40336c8b2973640a31573b6fa621cbdd98fbdadef
 # spec_version: 1.0
@@ -11,7 +11,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-02
-# spec_file: .collab/tickets/2026-10-30-EAC-SK5-机检票.md
+# spec_file: agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md
 # spec_anchor: ### T2 
 # spec_clause_sha256: dee69ec37a407100bec7983a54851a1fae11d6bc2aef38a37f760dde295a3725
 # spec_version: 1.0
@@ -20,7 +20,7 @@
 # --- /spec-provenance ---
 # --- spec-provenance v1 ---
 # spec_id: ADR-2026-10-30-03
-# spec_file: .collab/tickets/2026-10-30-EAC-SK5-机检票.md
+# spec_file: agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md
 # spec_anchor: ### T3 
 # spec_clause_sha256: 61766d1e265ddb2168a79734f10818f5c3632fde3b9264799a5652721cead3f6
 # spec_version: 1.0
@@ -128,7 +128,9 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "deliverables")):
+        # 仓根判定（B3a 随动·B2 收口登记候裁②）：deliverables 旧域灭，改同侪同款判定
+        if os.path.isdir(os.path.join(cur, "tools")) and any(
+                os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
@@ -276,7 +278,8 @@ EXPECTED = {"EAC-L1": 3, "EAC-L2": 6, "EAC-L3": 2,
 
 
 def selftest(root: str) -> int:
-    fix = os.path.join(root, "deliverables", "skills", "object-audit",
+    # 对拍件落位（B3a 随动·B2 收口登记候裁②）：deliverables 旧域灭→三分类目录新树
+    fix = os.path.join(root, "agent-skills", "object-audit",
                        "tests", "fixtures", "collab-lint")
     if not os.path.isdir(fix):
         sys.stderr.write("infra error: 对拍测试件不存在：%s\n" % fix)

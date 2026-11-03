@@ -2,7 +2,7 @@
 
 - 审票性质＝独立审票·只读·零写权·未改任何文件·未 commit。回执由主理人逐字誊录登记（原席 inline 提交·原件不落）。
 - **开工 HEAD 实测＝`0154528`**（与预期读数一致；`git log -5` 链上：0154528 MERGE-V13 起草笔 → 7927737 R13 会师 → 1c5a209 PM-R13 → 7342f2f → ef6784b）。
-- 被核件＝`.collab/tickets/2026-11-03-SWB-MERGE-V13-v2.9-draft6.1-shell-strip-formal-registration-ticket.md`（84 行·commit 0154528）。所有计数均为 occurrence 口径·python 实跑复测。
+- 被核件＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-MERGE-V13-v2.9-draft6.1-shell-strip-formal-registration-ticket.md`（84 行·commit 0154528）。所有计数均为 occurrence 口径·python 实跑复测。
 
 ## 逐项判定
 

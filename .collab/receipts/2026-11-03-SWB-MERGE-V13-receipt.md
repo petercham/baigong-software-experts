@@ -1,6 +1,6 @@
 # SWB-MERGE-V13 剥壳落盘票 · 执行回执（誊写批·L3·工程师席执行）
 
-- 票面＝`.collab/tickets/2026-11-03-SWB-MERGE-V13-v2.9-draft6.1-shell-strip-formal-registration-ticket.md`（起草笔 `0154528`）；双席审票会师放行件＝`53b7d44`（双席均认可放行·无保留）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-MERGE-V13-v2.9-draft6.1-shell-strip-formal-registration-ticket.md`（起草笔 `0154528`）；双席审票会师放行件＝`53b7d44`（双席均认可放行·无保留）。
 - 执行席＝工程师席（誊写批·零文风裁量）；登记时刻＝2026-11-03 GMT+8。
 
 ## 〇、开工 HEAD 与前置核验

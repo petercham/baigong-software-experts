@@ -78,7 +78,7 @@
 | G5 | `.../scripts/check-ticket-reconcile.py` | L101,317,526–527,542,551 | `COLLAB_PREFIX = "." + "collab" + "/"`；缺省票目录 `.collab/tickets` | 票目录改 `{project}/.collab/tickets` 后缺省扫描面落空＝对账哑火（exit 0 假绿，**危险形态**） |
 | G6 | `.../scripts/check-pointer-closure.py` | L63,77 | P1 形态正则 `\.collab/`；`DEFAULT_PKG_FACES = ("deliverables/skills/external-advisor-collab", "deliverables/experts")` | 两包面字面随新树重写 |
 | G7 | `.../scripts/run-gates.sh` | L4,13,22,137 | spec 锚 `deliverables/multi-collab/references/60-gates.md`×3＋SCRIPTS 清单（含 `ROOT/tools/check-source-of-truth` 仓根 tools 字面） | 60-gates 搬家→三 spec 锚重写；tools 归属裁后 SCRIPTS 行随动 |
-| G8 | `.../scripts/check-collab-lint.py` | L5,14,23 | spec 锚 `.collab/tickets/2026-10-30-EAC-SK5-机检票.md`（**锚在 .collab 过程域**） | EAC 案卷迁 `{project}/.collab/tickets/` 后 spec_file 行重写 |
+| G8 | `.../scripts/check-collab-lint.py` | L5,14,23 | spec 锚 `agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md`（**锚在 .collab 过程域**） | EAC 案卷迁 `{project}/.scratch/tickets/` 后 spec_file 行重写 |
 | G9 | `.../scripts/install-hooks.sh` | L4,73,85 | spec 锚 60-gates；`RUNNER="$SELF_DIR/run-gates.sh"`（相对自身＝搬家自洽）；注释路标行 | 仅注释/spec 随动，机制面低风险 |
 | G10 | `tools/check-source-of-truth.py` | L41–45,104–107 | spec 锚 handoff-discipline 路径；用法注释 `--pkg deliverables/experts/baigong-software-team` | bundle 搬家→注释用法＋调用方（run-gates 调用参数）随动 |
 | G11 | `deliverables/experts/baigong-software-team/bundle.lock` | L7 | `"path": "deliverables/experts/baigong-software-team"` | 注册字面随新树重写（纪律④产物不可手改→须经装配口径 bump） |
@@ -86,7 +86,7 @@
 | G13 | `.../config/seat-permissions-hooks-map.json` | L7,12,16,20,24,28–29 | deny_globs 仓根字面＋路径锚定注记「读作仓根字面」 | 同 G12 换代；hooks 安装面（平台 settings）路径同步 |
 | G14 | `.../skills/sop/scripts/ledger-init.sh` | L15 | `LEDGER_ROOT="${SWB_LEDGER_ROOT:-$PWD/.collab/ledger}"` | 账本根随项目根走 |
 | G15 | `.../skills/sop/scripts/shadow-replay.py` | L39,43,124,163 | 白名单正则 `\.collab/(ledger|decisions|tickets|receipts|refs|manifest|human)/`；PROCESS_ARCHIVE_DIRS 四串；`.collab/` 排除判定 | 白名单正则随子包路径形态改（`.collab/` 中段匹配可保形，前缀加项目层则需扩形） |
-| G16 | `.../skills/sop/scripts/commit-audit.py` | L35 | 票 ID 正则 `\.collab/tickets/[^\s"']+` | 票路径形态改→正则随动 |
+| G16 | `.../skills/sop/scripts/commit-audit.py` | L35 | 票 ID 正则 `\.scratch/tickets/[^\s"']+` | 票路径形态改→正则随动 |
 | G17 | `.../skills/sop/scripts/write-guard.py` | L283 | 哨兵路径 `.collab/liveness/sentinel-write` | 随项目根 |
 | G18 | `.../skills/sop/scripts/sign-verify.py`／`promote-manifest.py` | L5,6,14,105／L7 | `.collab/signatures/`／`.collab/human/reviews/`／`.collab/manifest/` 语义注释＋入参形态注释 | 注释与缺省形态随动 |
 | G19 | `.gitignore` | L6,9,13,17,24,27,30,33,37–39,42–44 | `.collab/*` 系 12 条款＋`!.collab/research/` 负向防御 | 全表按新树重写（两制区分先例保留：判词进 git／流水不进） |

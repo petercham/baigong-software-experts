@@ -1,6 +1,6 @@
 # SWB-MERGE-V12 执行回执（工程师席·誊写批·剥壳落盘）
 
-- 票面＝`.collab/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（75 行·sha256 前缀 `acd176f9`）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-MERGE-V12-v2.9-shell-strip-formal-registration-ticket.md`（75 行·sha256 前缀 `acd176f9`）。
 - 开工实测 HEAD＝`f59f8b0`（＝主理人裁定件 commit·票面要求 ANCHOR 成立）；完工回执单独 commit（`collab:` 前缀·只含本回执一件·无 `--no-verify`、无 amend）。
 - 候裁点 Q-09 已裁＝照票串形制逐字执行（裁定件 `.collab/decisions/2026-11-02-主理人裁定-MERGEV12-TKT39候裁.md`·commit `f59f8b0`）；本批按票串落，零自调。
 - 产出＝声明闭集 2 件：

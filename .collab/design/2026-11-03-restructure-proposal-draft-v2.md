@@ -31,7 +31,7 @@ D:\multi-agent-collab-devkits\
 | 件类 | 性质 | 落位 |
 |---|---|---|
 | 产品/架构文档、正式基线登记件（如 SWB 交接件 v2.9）、README、PRODUCT/ARCHITECTURE | 持久·可分发 | 项目 `docs/` |
-| 分票票包（T 系/TKT 系/SOP 系票面） | 高频迭代·非持久 | **推荐＝项目 `.scratch/tickets/`**（Matt Pocock 式：一票一文件、编号、Status/Blocked-by 行）；备选＝项目 `.collab/tickets/`（现行） |
+| 分票票包（T 系/TKT 系/SOP 系票面） | 高频迭代·非持久 | **推荐＝项目 `.scratch/tickets/`**（Matt Pocock 式：一票一文件、编号、Status/Blocked-by 行）；备选＝项目 `.scratch/tickets/`（现行） |
 | 审票件/判词/回执/会师登记/收口报告 | 裁决史实锚 | 项目 `.collab/qa|receipts|decisions/`（维持入库） |
 | 拍板/裁定 | 跨案权威 | 项目 `.collab/decisions/`＋仓级 README 索引 |
 | 研究底稿/外部参照 | 判词依据·第三方 | 归项目 `.collab/research|refs/`；视频团 era 件移交 experts 仓 |

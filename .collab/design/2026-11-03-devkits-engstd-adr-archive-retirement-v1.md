@@ -67,7 +67,7 @@ E-ADR-5 三族分族计数对账：`git ls-files .collab/decisions/` 按族前�
 
 ## B.2 本仓约束实测（决定性证据）
 
-1. **引用在册依赖重**：票面互引 26 处（`.collab/tickets/` 内对票文件路径引用 occurrence）；交付面→票面活引用 15 处；**spec-provenance 锚直接指票面件**＝check-collab-lint.py L5/L14/L23 三处 `spec_file: .collab/tickets/2026-10-30-EAC-SK5-机检票.md`——票面被删＝门禁头块断链（check-provenance 族 BLOCK）。
+1. **引用在册依赖重**：票面互引 26 处（`.scratch/tickets/` 内对票文件路径引用 occurrence）；交付面→票面活引用 15 处；**spec-provenance 锚直接指票面件**＝check-collab-lint.py L5/L14/L23 三处 `spec_file: agent-skills/external-advisor-collab/.scratch/tickets/2026-10-30-EAC-SK5-机检票.md`——票面被删＝门禁头块断链（check-provenance 族 BLOCK）。
 2. **check-ticket-reconcile 缺省扫描面＝票目录在册件**（现仓 L317；重组后＝`.collab/tickets` 或 `.scratch/tickets` 按裁项②）——票面消失即对账链断（已登记「假绿」危险形态见 T09 输入件 G5）。
 3. **git 寻回成本实测**：`git log --follow` 定点查已迁件（DIRRELOC 票）＝**0.15 秒**返回；本仓体量（tracked ~800 件）下寻回零门槛。
 4. **裁定三框架约束**：`.collab` 固定结构闭集不含归档桶；仓根白名单不含归档目录——**自建归档面＝规范分叉／白名单违例**，除非皮总临时裁定（§二点六.2「其他公共需要临时决定」）。
@@ -84,7 +84,7 @@ E-ADR-5 三族分族计数对账：`git ls-files .collab/decisions/` 按族前�
 
 ```
 E-ARC-1 移除资格判据（负例 exit≠0）：
-  对待移除票路径 P：grep -rno "$P" deliverables/ .collab/decisions/ .collab/tickets/ tools/ | grep -v "^$P" | wc -l == 0
+  对待移除票路径 P：grep -rno "$P" deliverables/ .collab/decisions/ .scratch/tickets/ tools/ | grep -v "^$P" | wc -l == 0
   且 grep -rn "spec_file: $P" deliverables/ tools/ == 0；任一非 0 → 移除被拒。
 E-ARC-2 移除笔三要素：commit 前缀 `retire:`＋消息含 `RETIRE <票ID>`＋该批 HEAD 有 tag `archive-*`；
   git log --grep 与 git tag --contains 双查，缺项 exit 1。

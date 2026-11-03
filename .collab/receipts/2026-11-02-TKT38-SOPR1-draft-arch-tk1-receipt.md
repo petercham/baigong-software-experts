@@ -5,8 +5,8 @@
 
 ## 一、交付两票面
 
-1. `.collab/tickets/2026-11-02-TKT38-SWB-pack-v1.5.1-hygiene-lightfix.md`（37 行·sha256 `c5b77d8a…afb5a`）——放行门①：H1 总览 L34 行内改＋H2 T05 L71 行内改态（㊿ 出处串）＋H3 T02 L77 含 7a＋修订注 v1.5.1 新增行；判据五条全机检（含防自咬条款＋occurrence 口径残留归零断言）；H4/H5 按主笔席口径不入票。
-2. `.collab/tickets/2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`（94 行·sha256 `d016fe46…edc09`）——放行门②：声明闭集 12 件；S-A 两卷退役头注（逐字措辞起草席出）＋S-B lead L34 豁免句 20 字符整串删除＋S-C §20.1①–⑥ 过渡口径八落点（逐落点路径:行＋替代句逐字·③ 无直接成文句落 qa MD Test Writing Standards 节头后＝起草裁量已具名）＋S-D SKILL.md 索引两行＋1.1.2→1.1.3＋S-E 版本账三同源 0.1.14（plugin.json 实物在 `.codebuddy-plugin/` 已按盘上实况落）；判据六条全机械；候裁点 R1＝两族席位卡顺位（随 CR-7 呈）。**本票只起草落盘，执行候皮总放行。**
+1. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT38-SWB-pack-v1.5.1-hygiene-lightfix.md`（37 行·sha256 `c5b77d8a…afb5a`）——放行门①：H1 总览 L34 行内改＋H2 T05 L71 行内改态（㊿ 出处串）＋H3 T02 L77 含 7a＋修订注 v1.5.1 新增行；判据五条全机检（含防自咬条款＋occurrence 口径残留归零断言）；H4/H5 按主笔席口径不入票。
+2. `agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`（94 行·sha256 `d016fe46…edc09`）——放行门②：声明闭集 12 件；S-A 两卷退役头注（逐字措辞起草席出）＋S-B lead L34 豁免句 20 字符整串删除＋S-C §20.1①–⑥ 过渡口径八落点（逐落点路径:行＋替代句逐字·③ 无直接成文句落 qa MD Test Writing Standards 节头后＝起草裁量已具名）＋S-D SKILL.md 索引两行＋1.1.2→1.1.3＋S-E 版本账三同源 0.1.14（plugin.json 实物在 `.codebuddy-plugin/` 已按盘上实况落）；判据六条全机械；候裁点 R1＝两族席位卡顺位（随 CR-7 呈）。**本票只起草落盘，执行候皮总放行。**
 
 ## 二、起草前盘上直读核证（全部实测入票面）
 
@@ -24,4 +24,4 @@
 
 ## 四、纪律自查
 
-只写 `.collab/tickets/` 两件＋本回执；交付面/登记面/票包七件零触碰（两票面规格所指施工面均未执行）；两份 2026-11-01 TKT qa 汇编件仍 untracked 零触碰；append-only（票一只含点名面＋注记新增行；SOP-R1 全加性）。
+只写 `.scratch/tickets/` 两件＋本回执；交付面/登记面/票包七件零触碰（两票面规格所指施工面均未执行）；两份 2026-11-01 TKT qa 汇编件仍 untracked 零触碰；append-only（票一只含点名面＋注记新增行；SOP-R1 全加性）。

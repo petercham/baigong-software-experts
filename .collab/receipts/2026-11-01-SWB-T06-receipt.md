@@ -1,6 +1,6 @@
 # SWB-T06 回执（验收双臂与触发判据 B9 职能承载票·交付笔 9a3013c）
 
-- 票面＝`.collab/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md`；执行席＝工程师席（交付面唯一写权席位）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md`；执行席＝工程师席（交付面唯一写权席位）。
 - 计数口径声明：本回执全部计数＝occurrence 口径（`grep -o … | wc -l` 或逐项计数），非 `grep -c` 行数口径。
 - 本回执＝过程记录居治理域（P-Ⅲ）；交付件正文纯度自适（本件不收留交付件正文）。
 
@@ -40,7 +40,7 @@
    - 自测行输出 `MIX_ISOLATION_OK: 两判定路径代码分离·两读数互斥`。两判定路径＝两独立函数（judge_metric_anomaly / judge_fuse）。
 4. **drill-runner**：`bash …/tests/acceptance/drill-runner.sh`（T06_TMP 注入仓外 Temp）→ **exit 0** 且输出 **SIX_DRILLS_GREEN**（读数见第四节）。
 5. **演练脚本数**：`ls …/tests/acceptance/drills/*.sh | wc -l` ＝ **6**。
-6. **count-assert 自咬**：`count-assert.py --mode1 .collab/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md --expect 11` → `申报=11 实数(实现A)=11 交叉(实现B)=11 cross_ok=True` → **exit 0**（本票申报 11＝实数 11）。
+6. **count-assert 自咬**：`count-assert.py --mode1 agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T06-acceptance-system-b9.md --expect 11` → `申报=11 实数(实现A)=11 交叉(实现B)=11 cross_ok=True` → **exit 0**（本票申报 11＝实数 11）。
 7. **差异率分子三分量构造样例**：`--construct-sample` 逐分量对仓外 Temp 账本各构造一样例，三行读数各 `count_before=0 count_after=1 delta=+1`；汇总计数行 `metric2_diff_rate: numerator=3 by_component={'agent_id_mismatch': 1, 'whitelist_superset': 1, 'pack_hash_mismatch': 1}`（三分量各 +1）。
 
 补充实测（票面施工规格内非判据项）：count-assert 模式2 对五席位卡裸纪律计数＝**0**（纪律行 3/8/8/8/9）exit 0；模式3 对总览四映射表行数 10/12/16/7 全 OK、六票实物计数 13/11/7/10/13/11 全 OK、闭集总件数 65＝65 OK（两实现交叉验），exit 0——即总览 §七 申报「交叉验第二实现」由本票闭合。

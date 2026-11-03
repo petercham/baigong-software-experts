@@ -8,7 +8,7 @@ status: 草稿（装配注册工序第一版·待审计器交叉验证）
 
 <!-- spec-provenance v1
 spec_id: 2026-10-26-皮总拍板（本件无 ADR 号·以文件自然标识为 id·不虚构编号）
-spec_file: .collab/decisions/2026-10-26-皮总拍板.md
+spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-26-皮总拍板.md
 spec_anchor: 口径登记段（第 79 行）末句：注册＝装配面整体复制部署面（产物不可手改，升级＝整体替换）
 spec_clause_sha256: c340531b4189287924fb62c2cd1435300b2406d6756e29c9a736a04d05ad05b5
 spec_version: 0.1

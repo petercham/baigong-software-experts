@@ -84,12 +84,12 @@ E-ADR-5′ 三族分桶对账（与 E-ARC-3′ 并件，见 B.3）：decisions �
 
 | # | 读数 | 命令（落盘重定向省略） | 本次实测 | 会师登记数（复跑来源＝PM/QA 审件） |
 |---|---|---|---|---|
-| R1 | 票目录内对票文件全路径互引 | `grep -rno "tickets/2026-[0-9]*-[A-Za-z0-9._-]*\.md" .collab/tickets/ \| wc -l` | **26**（排自引 **24**） | 复跑 39（排自引 37）——口径差＝会师席正则含无日期前缀票名形态；两式并存登记，判据取 E-ARC-1′ 全式 |
-| R2 | deliverables→票全路径活引 | `grep -rno "\.collab/tickets/[^ )\`\"']*" deliverables/ \| wc -l` | **15** | 4（会师席全式路径口径）／67（裸基名族） |
+| R1 | 票目录内对票文件全路径互引 | `grep -rno "tickets/2026-[0-9]*-[A-Za-z0-9._-]*\.md" .scratch/tickets/ \| wc -l` | **26**（排自引 **24**） | 复跑 39（排自引 37）——口径差＝会师席正则含无日期前缀票名形态；两式并存登记，判据取 E-ARC-1′ 全式 |
+| R2 | deliverables→票全路径活引 | `grep -rno "\.scratch/tickets/[^ )\`\"']*" deliverables/ \| wc -l` | **15** | 4（会师席全式路径口径）／67（裸基名族） |
 | R3 | deliverables 裸票名 token 族 | `grep -rEo "(ENG\|EAC\|FUXI\|SWB\|SOP\|GH\|MC)-[A-Z]?[A-Za-z0-9]+[0-9]+[A-Za-z]*\|TKT[0-9]+\|DIRRELOC" deliverables/ \| wc -l` | **217**（含 SKILL/changelog 史述与检查器 ID 引用） | 67（会师席窄口径＝活引用分账后）——**量级确证：裸基名族远大于全路径族，扫描面必须覆盖** |
-| R4 | receipts→票面活引 | `grep -rno "\.collab/tickets/[2E][^ )\`\"',，]*" .collab/receipts/ \| wc -l` | **42**（窄式） | 88 处/29 票（会师席全式） |
-| R5 | qa/design/dispatch/docs/README→票面活引 | `grep -rno "\.collab/tickets/[^ )\`\"',，]*" .collab/qa/ .collab/design/ .collab/dispatch/ docs/ README.md \| wc -l` | **101** | 107（会师席全式） |
-| R6 | spec_file 锚指 tickets（去重） | `grep -rh "spec_file: \.collab/tickets/" deliverables/ tools/ \| sort -u` | **1 名**（EAC-SK5-机检票×3 处） | 同 |
+| R4 | receipts→票面活引 | `grep -rno "\.scratch/tickets/[2E][^ )\`\"',，]*" .collab/receipts/ \| wc -l` | **42**（窄式） | 88 处/29 票（会师席全式） |
+| R5 | qa/design/dispatch/docs/README→票面活引 | `grep -rno "\.scratch/tickets/[^ )\`\"',，]*" .collab/qa/ .collab/design/ .collab/dispatch/ docs/ README.md \| wc -l` | **101** | 107（会师席全式） |
+| R6 | spec_file 锚指 tickets（去重） | `grep -rh "spec_file: \.scratch/tickets/" deliverables/ tools/ \| sort -u` | **1 名**（EAC-SK5-机检票×3 处） | 同 |
 | R7 | spec_file 锚指 decisions（去重） | `grep -rh "spec_file: \.collab/decisions/" deliverables/ tools/ \| sort -u` | **3 名**（裁决记录/2026-10-25/2026-10-26）/13 名 | 3/13 同 |
 
 > 结论性读数：R3/R4/R5 证会师席红-①指认属实——面外活引用体量大于面内；v1 申报数（26/15）按会师裁语**作废为本表 R1/R2 口径化重出值**。check-pointers 缺省不扫 `.collab`（L68 裁-23 排除）＝断链无声面，由 E-ARC-1′ 自带扫描补偿。
@@ -161,7 +161,7 @@ E-RET-1′ 退役手续四查（词形闭集对齐）：对每个退役对象—
   词形闭集 W = 「退役[：:]」 ∪ 「物理清退」 ∪ 「清退」（先例词族·实测现盘
     「退役：」=7 处（.collab+deliverables）、「物理清退」=6 处（tickets）→
     上线首日不误判 T07 系先例）；
-  (a) 宣告件存在：grep -rEo "$W" .collab/decisions/ .collab/tickets/ 命中对象名；
+  (a) 宣告件存在：grep -rEo "$W" .collab/decisions/ .scratch/tickets/ 命中对象名；
   (b) 版本账行存在：README grep "$W" 命中对象名（与 (a) 同词形集，不再单挂「退役：」）；
   (c) 旧路径族引用清零：活面 grep occurrence==0（口径同 E-ARC-1′ (a)(b)）；
   (d) version bump 读数三同源。

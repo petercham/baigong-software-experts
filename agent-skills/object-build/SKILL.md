@@ -8,7 +8,7 @@ status: 草稿（构建期拆分第一版·待审计器交叉验证）
 
 <!-- spec-provenance v1
 spec_id: ADR-2026-10-22-09
-spec_file: .collab/decisions/2026-10-22-裁决记录.md
+spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-22-裁决记录.md
 spec_anchor: - **定形**：构建侧＝统一方法论
 spec_clause_sha256: 238414e88e05dbbc4a4867c2efae0178ac329deae8808c5c6000cb8d1e21e6bb
 spec_version: 0.4

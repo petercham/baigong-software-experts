@@ -1,6 +1,6 @@
 # SWB-T07 · 工程师回执（reconcile 读侧容 cleared 行＋旧五席位卡物理清退＋回流四型标签机械化）
 
-- 施工席＝工程师席（engineer-t07·新鲜实例）；被执行票面＝`.collab/tickets/2026-11-03-SWB-T07-reconcile-cleared-oldcards-returntype.md`（全文直读·逐字施工）。
+- 施工席＝工程师席（engineer-t07·新鲜实例）；被执行票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-03-SWB-T07-reconcile-cleared-oldcards-returntype.md`（全文直读·逐字施工）。
 - 开工 HEAD 实测＝`f135855`（`git rev-parse --short HEAD`·工作仓 `D:\multi-agent-collab-devkits`·main）——票面 ANCHOR `6d40ece` 之可达后继 ✓（放行裁定件 `f135855` 即开工锚）。
 - 开工 `git status --porcelain` 读数＝仅两条 2026-11-01 TKT untracked 旧件（`.collab/qa/2026-11-01-TKT-双审批计件汇总-v1.md`／`.collab/qa/2026-11-01-TKT-最终分票全文汇编-v1.md`）＝与指派相符 ✓。
 - 完工 HEAD＝交付笔 `006d149`（回执笔随后单独笔）；`git log -1` 确认落笔（pre-commit 门禁 GATE PASS 存量 BLOCK/WATCH 告警不阻断口径）。

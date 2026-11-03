@@ -25,7 +25,7 @@
 ## 一、总则核验（五票共性·审①③⑤面）
 
 1. **三附注照载齐全**（审③）：誊写禁令（`f5a0d96`·仓内 `git mv`／跨仓字节级复制＋删源·判据「新位与原位 diff 仅申报剥壳段／字节一致」）、票面落位 `.scratch/tickets`（`f135855`）、era 跨仓口径（字节复制两笔对账）——**五票票头全部照载齐全**，且各票按自身辖域做了自察声明（B1「新建创作类辖域外自察」、B4「原位代码文本随动批非搬家批·照注自察」、B5「gitignore/README 重写＝创作类辖域外」）。此自察分层与裁定 `f5a0d96` §二.3「新建创作类件不属辖域」口径一致，未借自察规避搬家目。✓
-2. **票面落位合规**：五票本体均在 `.scratch/tickets/` ✓；B1-F 建 `.scratch/tickets/README.md`；B3 含 `.collab/tickets/`→`.scratch/tickets/` 搬家目＋E-ARC-1′ 换锚先行硬线（B3a 跑绿前 B3b 禁启动）——B0 附注②照位。✓
+2. **票面落位合规**：五票本体均在 `.scratch/tickets/` ✓；B1-F 建 `.scratch/tickets/README.md`；B3 含 `.collab/tickets`→`.scratch/tickets/` 搬家目＋E-ARC-1′ 换锚先行硬线（B3a 跑绿前 B3b 禁启动）——B0 附注②照位。✓
 3. **B 批判据四目对位**（审②）：
    - 目①（tickets 搬家 git mv＋换锚先行＋落位形态）→ B3a/B3b ✓；
    - 目②（check-ticket-reconcile 缺省票目录按 `.scratch/tickets` 实装＋扫描面非空正断言防假绿）→ B4-A1/A2（枚举为空 `SystemExit(4)`）✓；

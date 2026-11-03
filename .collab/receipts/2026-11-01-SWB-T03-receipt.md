@@ -1,6 +1,6 @@
 # SWB-T03 回执 · 注入构造与派发闸（B3＋B4）· engineer-t03
 
-- 票面：`.collab/tickets/2026-11-01-SWB-T03-injection-dispatch-gate.md`（59 行·V13 锚现行态）
+- 票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T03-injection-dispatch-gate.md`（59 行·V13 锚现行态）
 - 开工 HEAD 实测读数：`git rev-parse HEAD` = `3a0c06226331afce949c940fb675e92c6ae1a742`（＝放行读数 3a0c062，一致）
 - 完工 HEAD：见本回执随同一笔 commit（`collab:` 前缀·name-only＝下述 8 件＝声明闭集 7 件＋本回执）
 

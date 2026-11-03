@@ -2,7 +2,7 @@
 
 - 依据＝皮总裁定㊽「修票责任分界＋施工票禁带过程记录」（登记件 `.collab/decisions/2026-11-02-皮总拍板.md` ㊽ 节·登记笔 `43c3967`）；派工＝主理人清洗批指令（四处删除规格逐字照派工执行）。
 - 开工实测：HEAD＝`43c3967`（＝开工锚，符合）；工作区 untracked 两份 2026-11-01 TKT qa 汇编件零触碰。
-- 清洗对象＝`.collab/tickets/2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`（只改本票一件；TKT38 经主理人巡检无残留，未触碰）。
+- 清洗对象＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-SWB-SOP-legacy-quickmode-bugfix-retirement-rule-ticket.md`（只改本票一件；TKT38 经主理人巡检无残留，未触碰）。
 
 ## 前后 sha 与行数（git 内容口径·与派工读数同基准）
 

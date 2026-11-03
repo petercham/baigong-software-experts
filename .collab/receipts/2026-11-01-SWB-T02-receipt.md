@@ -1,6 +1,6 @@
 # SWB-T02 账本与状态核心（B0＋B1＋B2 含租约段实例化）回执（工程师席 Kou Douma）
 
-- 票面：`.collab/tickets/2026-11-01-SWB-T02-ledger-state-lease-core.md`（77 行·V13 换锚后现行态）
+- 票面：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T02-ledger-state-lease-core.md`（77 行·V13 换锚后现行态）
 - 开工时实测 HEAD：`14c9c6b023347eb588c24522723ed15a07239906`（`git rev-parse HEAD` 读数·落笔前无新笔即此值）。
 - 前置读数：T01 探针 P7（git 独立服务可建性）＝**pass**（`deliverables/experts/baigong-software-team/tests/probes/results/probe-results.json` P7 行实读）→ 按票面 T02-A 主路形态施工；退路形态实现为 ledger-init.sh 的 negative 分支（默认取数走主路）。P7=pass ⇒ 候裁 Q-02 未触发、未拍任何候裁点。
 - 设计真源核验（开工前置）：登记件 `.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-03.md` 纯 LF·split 口径 260 行；产品本体段（物理 L29–84＝V13 L1–56·56 行）sha256 实算＝`7214ad14259b175fd6912806e2b3a7bb3655ff35053098f9ed5df66c2d9691f3` 命中票面声称值；架构本体段（物理 L85–260＝V13 L57–232·176 行）sha256 实算＝`efb4f7658c1e5555fcf310cdf4ae91ecbf6ce5cfe19c420c293e0e62cc1078c4` 命中。表2-1 六席位行（物理 L99–106＝V13 L71–78 区）与表注三条款（V13 L80–82＝物理 L108–110）直读转录。

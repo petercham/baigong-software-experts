@@ -1,6 +1,6 @@
 # TKT37 · 票包 Q-07 已裁行内改态随动 · 完工回执（执行＝工程师席 engineer-tk36）
 
-- 票面＝`.collab/tickets/2026-11-02-TKT37-SWB-pack-Q07-adjudicated-status-sync.md`（commit `f9d2789`·31 行）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT37-SWB-pack-Q07-adjudicated-status-sync.md`（commit `f9d2789`·31 行）。
 - 开工实测 `git rev-parse --short HEAD` ＝ **f9d2789**（＝票面起草笔本身＝「`ae0c86d` 或其后」合格）。
 - 写面＝总览＋T02 两件＋本回执一件；单笔 commit `collab:` 前缀；无 amend、无 --no-verify。
 

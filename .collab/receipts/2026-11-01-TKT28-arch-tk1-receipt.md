@@ -2,7 +2,7 @@
 
 ## 开工/完工读数
 - 开工实测 `git rev-parse --short HEAD` ＝ **d624db7**（TKT28 登记件，符合"当前 d624db7"）。
-- 写面＝`.collab/tickets/` 七件全部修改＋本回执一件；其余零触碰（含两 v2.7 基线登记件、`.collab/qa/`、docs/、deliverables/、tools/、workbuddy/、.gitignore）。
+- 写面＝`.scratch/tickets/` 七件全部修改＋本回执一件；其余零触碰（含两 v2.7 基线登记件、`.collab/qa/`、docs/、deliverables/、tools/、workbuddy/、.gitignore）。
 
 ## 前验读数（必做项·实跑）
 登记件＝`.collab/refs/external/SWB-交接件v2.7-产品设计与架构设计-2026-11-01.md`（实测 278 行·CR 计数＝0 纯 LF）。

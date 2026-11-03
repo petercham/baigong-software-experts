@@ -6,7 +6,7 @@
 
 ## 〇、被核对象与总体判定
 
-- 票面（放行态判据来源）＝`.collab/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行·完整直读 ✓）。
+- 票面（放行态判据来源）＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT39-SWB-ticket-pack-V12-re-anchoring.md`（101 行·完整直读 ✓）。
 - 交付＝commit **`8ffa98b`**（`TKT39:` 前缀·七件 64 增 64 删·`git show --name-status` 恰七件 M·零越集 ✓）；回执＝**`cffd5d1`**（`.collab/receipts/2026-11-02-TKT39-arch-tk1-receipt.md` 单独一笔 A ✓）；HEAD 链上 cffd5d1 直压 8ffa98b ✓。
 - 新基线登记件＝`.collab/refs/external/SWB-交接件v2.9-产品设计与架构设计-2026-11-02.md`（只读对读）。
 

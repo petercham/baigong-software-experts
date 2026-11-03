@@ -7,7 +7,7 @@ version: 0.8
 
 <!-- spec-provenance v1
 spec_id: ADR-2026-10-22-09
-spec_file: .collab/decisions/2026-10-22-裁决记录.md
+spec_file: agent-experts/baigong-software-team/.collab/decisions/2026-10-22-裁决记录.md
 spec_anchor: 裁-09 build/audit 分工定形
 spec_clause_sha256: e47a88f8e8a7caac959803edbc950136039e4ad65ac0236e82fe39d26ee435e4
 spec_version: 0.5

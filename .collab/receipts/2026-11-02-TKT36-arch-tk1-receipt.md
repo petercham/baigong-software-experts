@@ -1,6 +1,6 @@
 # TKT36 · SWB 票包 v2.8／V11 基线再锚定＋随动批六目 · 完工回执（执行＝工程师席 engineer-tk36）
 
-- 票面＝`.collab/tickets/2026-11-02-TKT36-SWB-ticket-pack-V11-re-anchoring.md`（79 行·14040 B·sha256 前缀 `f32eecbe10996ab6` 实测复现 ✓）。
+- 票面＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-02-TKT36-SWB-ticket-pack-V11-re-anchoring.md`（79 行·14040 B·sha256 前缀 `f32eecbe10996ab6` 实测复现 ✓）。
 - 开工实测 `git rev-parse --short HEAD` ＝ **d01bdaf**（＝票面预期锚）；完工 HEAD 见本回执 commit 链。
 - 写面＝票包七件全部修改＋本回执一件；此外零触碰。commit 单笔 `collab:` 前缀只含本票写入件（七件＋本回执·TKT28 先例体例）；无 `--no-verify`、无 amend。
 
@@ -144,7 +144,7 @@
 
 ## 五、§四六项实测读数（完工落盘后本机实跑·occurrence 口径声明随票面 R3/R4）
 
-1. 票文件数 `ls .collab/tickets/2026-11-01-SWB-T*.md | wc -l` ＝ **6** ✓（申报 6）
+1. 票文件数 `ls agent-experts/baigong-software-team/.scratch/tickets/2026-11-01-SWB-T*.md | wc -l` ＝ **6** ✓（申报 6）
 2. 各票 `- 声明闭集：` 锚行后裸 `- ` 路径行计数＝**13/11/7/10/13/11**（和＝65）✓（与申报逐一相等；锚行解析＝python 逐票实测）
 3. 四表体行数＝**10/12/16/7**（和＝45）✓（消费面 9→10 系 ① 新增行；违纪表体 16 零触碰；候裁表 7 零触碰）
 4. kebab 正则命中＝**7** ✓
