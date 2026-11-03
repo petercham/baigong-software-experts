@@ -54,3 +54,12 @@ Desktop.ini
 # Python 字节码缓存（编译检查产物）
 __pycache__/
 *.pyc
+
+# B1 过渡增补（B5 全重写前）：任意层级项目 .collab 排除桶
+/**/.collab/refs/
+/**/.collab/evidence/
+/**/.collab/inbox/
+/**/.collab/process/
+/**/.collab/dispatch/
+/**/.collab/backup/
+/**/.collab/tmp-*.txt
