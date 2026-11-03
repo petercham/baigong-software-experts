@@ -126,3 +126,7 @@ architect/product/qa/engineer 四件各在其纪律段（engineer＝「## 席位
 落 `agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-CD1-receipt.md`：开端 HEAD＋name-only 11 件全等＋判据 1–8 逐条读数＋token 前后表（四要素）＋席位行落位行号表＋object-audit 边界注记＋engineer 语义重复登记行（如触发）。交付笔单独 commit（`collab:` 前缀）；禁 `--no-verify`、禁 amend；门禁真拦如实报告不绕闸。
 
 ——arch-swbreloc 起草（新建创作类·誊写禁令辖域外自察）。
+
+## 增补注记（append-only·2026-11-04·票面设计注记 1 裁定落笔）
+
+- **object-audit 不入题＝主理人裁定·判据 §七 收口口径**（案内程序裁定·不入拍板台账）：终态裁定原话「只需要纪律限定不允许同席多实例并发就够了」＋§七自述「收口·覆盖前述范围外延」＋YAGNI 无实证缺口不动面（object-audit 现面无派席程序面，挂引用行＝无问题推演造面）；§八「两面」措辞按 §七 读——**不补 rev2、object-audit 零触碰维持**（本票禁动面首行语义自此定案，回执边界注记按此行落）。
