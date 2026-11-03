@@ -48,7 +48,7 @@ D:\multi-agent-collab-devkits\
                                       bundle.lock/avatars/settings.json）；技能＝SKILL.md+references
 ```
 
-票面落位二选一（`.scratch/tickets` vs `.collab/tickets`）＝待裁项①（§六现唯一待裁）；下表按推荐态写。
+票面落位＝`.scratch/tickets`（已决·裁定件 `f135855` §二.1·架构席推荐采纳）；下表按此终态写。
 
 ## 三、现状→归宿全账（实测口径）
 
@@ -57,7 +57,7 @@ D:\multi-agent-collab-devkits\
 | `deliverables/experts/baigong-software-team/` | bundle 全树 | → `agent-experts\baigong-software-team\`（交付面原位语义）；PRODUCT/ARCHITECTURE 两件→其 `docs\`（§二点八随动＋引用锚更新） |
 | `deliverables/skills/<六包>` | 203 件（deliverables 面）| → `agent-skills\<各包>\`；`deliverables/README.md` 删除（表并入仓根 README） |
 | `deliverables/experts/baigong.../tests/probes` 等 SWB 机制面 | — | 留 bundle 内（本就是百工交付物·无独立 SWB 项目） |
-| `.collab/tickets/` 84 件 | 混线 | 按票号归项目：SWB/SWBFIX/SWB-T/T07-T08R→百工；TKT/FUXI→fuxi-skill；EAC/SOP→external-advisor-collab 或百工（按票主项目）；落位按裁项② |
+| `.collab/tickets/` 84 件 | 混线 | 按票号归项目：SWB/SWBFIX/SWB-T/T07-T08R→百工；TKT/FUXI→fuxi-skill；EAC/SOP→external-advisor-collab 或百工（按票主项目）；落位＝`.scratch/tickets`（已决·注记三） |
 | `.collab/qa/` 150／`receipts/` 48／`board/` 1 | 混线 | 同上按项目归 `.collab\qa|receipts|board\` |
 | `.collab/decisions/` 13 件 | 跨项目 | 按裁决涉及面归项目 `.collab\decisions\`；纯仓级（远端/入库策略类）归百工；仓根 README 建一本账索引 |
 | `.collab/` 根 10 散件 | 无桶 | 6 FUXI→fuxi-skill；2 SWBFIX＋脏文件处置＋呈拍简报→百工 |
@@ -78,20 +78,21 @@ D:\multi-agent-collab-devkits\
 
 ## 五、批次切分（架构席出票骨架）
 
-- **B0** 本方案裁定冻结（含裁项①②③落定）。
+- **B0** 本方案裁定冻结（原裁项①②③＝拼写/票面落位/era 已全部落定·见 §六注记一/二/三）。
 - **B1** 空壳：三分类目录＋7 项目固定 `.collab` 骨架＋约定 md 落位（含 B4 前的旧门禁不误跑处置）。
 - **B2** 交付面搬家：bundle＋六技能包逐笔 git mv，203 件对账双向清零＋GATE PASS 对拍；PRODUCT/ARCHITECTURE→docs 随动改锚。
-- **B3** 过程域搬家：按 §三表分桶，前后分桶计数相等；票面按裁项②落位形态迁移（含 Matt Pocock 式头部转换与否随裁）。
+- **B3** 过程域搬家：按 §三表分桶，前后分桶计数相等；票面按 `.scratch/tickets` 落位形态迁移（已决·注记三；含 Matt Pocock 式头部转换与否随裁）。
 - **B4** 门禁/票面锚定随动：check-ticket-reconcile 缺省票目录改造＋票目录新旧双清零硬判据＋run-gates `ROOT/tools` 上溯化＋hooks-map/write-guard 路径锚两级化＋T08R 枚举行按 D1 名录填充。**前置＝T07/T08R 收口＋R⑧过渡态处置先行**（PM 黄-3 硬前置）。
 - **B5** 收尾：gitignore 重写＋仓根 README 重写（结构＋名录＋跨项目案卷索引）＋D7 登记件入库。
 
 每批单独 commit＋可机械验证判据（对账清零/计数相等/门禁零回归对拍）。
 
-## 六、待裁清单（终版·一项·拼写项与 era 项已销账）
+## 六、待裁清单（终版·清零·三项全销账）
 
-1. 票面落位：`.scratch/tickets`（推荐·高频迭代语义）vs `.collab/tickets`（现行·机检改造量小）——皮总原话给了两选项未择一，候裁有效。
+（无待裁项。拼写项／era 项销账见下方清残注记一/二；票面落位项销账见注记三。）
 
 > 清残注记一（2026-11-03·主理人指令）：原「拼写：agent-experts vs 原话 agent-expers」＝无效候裁项，按裁定件㊺（`.collab/decisions/2026-11-03-皮总裁定-项目自由分层与collab固定结构及docs约定md.md` L46 名录明文＝agent-experts／agent-skills／softwares）判定销账＝拼写定夺 `agent-experts`，无待裁语义；B1+ 迁移票闭集目录名一律 `agent-experts`。
 > 清残注记二（2026-11-03·主理人指令）：原「视频团 era 研究件移交 experts 仓：可否」＝无效候裁项（残留回流）——皮总 2026-11-03 原话已定性＝执行层事项（「视频团时代研究件移交 experts 仓、T07（含旧五卡退役），这不都是执行层面的事情么？……为什么要我裁呢？」），早前已从候裁队列撤回降为执行项。**改登记为执行项**：落点＝B 批随移动作或独立微批；跨仓搬运遵守誊写禁令（裁定 `f5a0d96`）＝git mv／字节级复制＋删源，experts 仓 `D:\multi-agent-collab-experts` 侧接收。
+> 清残注记三（2026-11-03·裁定投放）：原「票面落位：`.scratch/tickets` vs `.collab/tickets`」已决＝**`.scratch/tickets`**（裁定件 `.collab/decisions/2026-11-03-皮总裁定-票面落位scratch与T07T08R放行.md`·`f135855` §二.1·架构席推荐采纳）；B 批迁移施工含 `.collab/tickets/`→`.scratch/tickets/` 搬家目（git mv 保历史＋E-ARC-1′ 全引用族换锚先行·跑绿前禁启动硬线不变）＋check-ticket-reconcile 缺省票目录按 `.scratch/tickets` 目标落位改造（B4 既有议程对齐）。§六至此清零。
 
 （版本线 0.1.14 续 bump 已裁；排程序列＝T07 放行→T08R 施工→B0→B1+ 不变。）
