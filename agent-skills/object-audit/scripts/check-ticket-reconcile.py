@@ -45,7 +45,7 @@
     --ticket 可重复（相对仓根的票面路径）；缺省＝按项目枚举票目录（SWB-B4 B4-A 新树两级锚）：
     仓根过渡票目录 `<仓根>/.scratch/tickets/` ＋ 三分类目录 `{agent-experts,agent-skills,softwares}/<项目>/.scratch/tickets/`
     双候选，取各目录内首行无「HOLD：」标记且未标「已结案」的票（HOLD 票不施工＝不对账）；
-    旧域单目录回落已灭（B3b 灭旧域）——票目录枚举结果为空＝门禁哑火形态→exit 4（防假绿）。
+    旧过程域票目录单址回落已灭（B3b 灭旧域）——票目录枚举结果为空＝门禁哑火形态→exit 4（防假绿）。
     --selftest：临时 git 仓＋合成票/回执跑三段 fixture 自咬，与内嵌预期对拍。
 
 退出码（闭集，见 60-gates.md「六、退出码闭集」）：
