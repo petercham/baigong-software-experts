@@ -41,7 +41,7 @@ python "$SCRIPTS/state-transition.py" --ticket DRILL02 --from 2 --to 3 --ticket-
 python "$SCRIPTS/state-transition.py" --ticket DRILL02 --from 3 --to 4 --ticket-type 开发 \
   --sign 架构生成签 --sign 产品范围签 --sign QA充分性签 --ledger "$LED" --states "$ST" >/dev/null 2>&1 || fail "3→4 迁移被拒"
 python "$SCRIPTS/state-transition.py" --ticket DRILL02 --from 4 --to 5 --kind signoff --ticket-type 开发 \
-  --sign 工程师交付签 --sign QA审计签 --ledger "$LED" --states "$ST" >"$TMP/r1.txt" 2>&1 \
+  --sign 工程师交付签 --sign QA审计签 --return-type 完成 --ledger "$LED" --states "$ST" >"$TMP/r1.txt" 2>&1 \
   || fail "4→5 回流迁移入账 exit≠0: $(cat "$TMP/r1.txt")"
 say "回流入账读数(完成型经 4→5 迁移登记): $(cat "$TMP/r1.txt")"
 

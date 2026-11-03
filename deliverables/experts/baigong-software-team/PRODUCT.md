@@ -29,7 +29,7 @@
 
 ## 3. 能力地图（工作流路由）
 
-主理人收到请求后**首先判档**，判档表内置于主理人席位 MD（`agents/software-company-team-lead.md`「工作流路由」节），各档细则下沉在 `skills/software-orchestration/references/` 对应分件，判定命中后第一件事读对应分件。五档：
+主理人收到请求后**首先判档**，判档表内置于主理人席位 MD（`agents/software-team-lead.md`「工作流路由」节），各档细则下沉在 `skills/software-orchestration/references/` 对应分件，判定命中后第一件事读对应分件。五档：
 
 | 档位 | 适用判定（一句话） | 细则卷 |
 |---|---|---|

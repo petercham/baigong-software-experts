@@ -92,7 +92,10 @@ def reconcile(ledger_file: str, leases_file: str, states_file: str, repo_root: s
         with open(leases_file, encoding="utf-8") as f:
             for line in f:
                 if line.strip():
-                    lease_ticket_ids.add(json.loads(line)["lease"]["ticket_id"])
+                    e = json.loads(line)
+                    if e.get("cleared") or not isinstance(e.get("lease"), dict):
+                        continue  # freeze cleared 行（无 lease 键）跳过租约字段（SWB-T07 方案甲·读侧容行）
+                    lease_ticket_ids.add(e["lease"]["ticket_id"])
     orphan_leases = sorted(lease_ticket_ids - tickets_in_states)
     if orphan_leases:
         diffs.append(f"租约台账存在无在册票据票ID: {orphan_leases}")

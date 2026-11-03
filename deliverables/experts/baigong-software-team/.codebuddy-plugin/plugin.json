@@ -1,17 +1,17 @@
 {
   "name": "baigong-software-team",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Baigong Software Team - multi-role SOP workflow for auditable software delivery",
   "author": {
     "name": "peter",
     "email": "petercham@users.noreply.github.com"
   },
   "agents": [
-    "./agents/software-company-team-lead.md",
-    "./agents/software-product-manager.md",
-    "./agents/software-architect.md",
-    "./agents/software-engineer.md",
-    "./agents/software-qa-engineer.md"
+    "./agents/software-team-lead.md",
+    "./agents/software-team-product.md",
+    "./agents/software-team-architect.md",
+    "./agents/software-team-qa.md",
+    "./agents/software-team-engineer.md"
   ],
   "skills": [
     "./skills/software-orchestration",
@@ -20,14 +20,14 @@
   ],
 
   "expertType": "team",
-  "agentName": "software-company-team-lead",
+  "agentName": "software-team-lead",
   "teamInfo": {
-    "leadAgent": "software-company-team-lead",
+    "leadAgent": "software-team-lead",
     "memberAgents": [
-      "software-product-manager",
-      "software-architect",
-      "software-engineer",
-      "software-qa-engineer"
+      "software-team-product",
+      "software-team-architect",
+      "software-team-qa",
+      "software-team-engineer"
     ]
   },
 
@@ -71,35 +71,35 @@
   ],
   "members": [
     {
-      "id": "software-company-team-lead",
+      "id": "software-team-lead",
       "displayName": { "en": "Qi", "zh": "齐活林" },
       "profession": { "en": "Delivery Director", "zh": "交付总监" },
       "avatar": "avatars/software-company-team-lead.png",
       "role": "lead"
     },
     {
-      "id": "software-product-manager",
+      "id": "software-team-product",
       "displayName": { "en": "Xu", "zh": "许清楚" },
       "profession": { "en": "Product Manager", "zh": "产品经理" },
       "avatar": "avatars/software-product-manager.png",
       "role": "member"
     },
     {
-      "id": "software-architect",
+      "id": "software-team-architect",
       "displayName": { "en": "Gao", "zh": "高见远" },
       "profession": { "en": "Software Architect", "zh": "架构师" },
       "avatar": "avatars/software-architect.png",
       "role": "member"
     },
     {
-      "id": "software-engineer",
+      "id": "software-team-engineer",
       "displayName": { "en": "Kou", "zh": "寇豆码" },
       "profession": { "en": "Software Engineer", "zh": "工程师" },
       "avatar": "avatars/software-engineer.png",
       "role": "member"
     },
     {
-      "id": "software-qa-engineer",
+      "id": "software-team-qa",
       "displayName": { "en": "Yan", "zh": "严过关" },
       "profession": { "en": "QA Engineer", "zh": "QA工程师" },
       "avatar": "avatars/software-qa-engineer.png",

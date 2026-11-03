@@ -9,6 +9,7 @@
 - 席位 ID：〔engineer 实例 Agent ID〕
 - 实例 ID：〔本次新鲜实例标识（一票一新鲜实例）〕
 - 回流态：〔完成｜部分完成｜受阻｜异常〕四取一
+- 迁移登记：state-transition.py --return-type 取同一型值（完成→"完成"，四值逐字同；4→5 缺值状态机拒）
 - 完工 HEAD：`git rev-parse --short HEAD` 实测读数
 - commit：〔交付笔 hash〕
 

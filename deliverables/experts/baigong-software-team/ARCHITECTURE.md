@@ -12,11 +12,11 @@
 
 ```mermaid
 graph TD
-    U[用户] <--> L["主理人 · 齐活林（交付总监）<br/>software-company-team-lead"]
-    L -->|派工| PM["产品经理 · 许清楚<br/>software-product-manager"]
-    L -->|派工| AR["架构师 · 高见远<br/>software-architect"]
-    L -->|派工| EN["工程师 · 寇豆码<br/>software-engineer"]
-    L -->|派工| QA["QA 工程师 · 严过关<br/>software-qa-engineer"]
+    U[用户] <--> L["主理人 · 齐活林（交付总监）<br/>software-team-lead"]
+    L -->|派工| PM["产品经理 · 许清楚<br/>software-team-product"]
+    L -->|派工| AR["架构师 · 高见远<br/>software-team-architect"]
+    L -->|派工| EN["工程师 · 寇豆码<br/>software-team-engineer"]
+    L -->|派工| QA["QA 工程师 · 严过关<br/>software-team-qa"]
     PM -.->|SendMessage 回传| L
     AR -.->|SendMessage 回传| L
     EN -.->|SendMessage 回传| L
@@ -71,11 +71,11 @@ graph TD
 
 | 席位 | 文件 | 身份层职责 | 守则层要点 |
 |---|---|---|---|
-| 主理人 齐活林 | `agents/software-company-team-lead.md` | SOP 编排、工作流档位判定、成员调度与中转汇编 | 写权＝过程域；派工合规硬门；拒写权自指句；收口自检＋派工件干净度自指句 |
-| 产品经理 许清楚 | `agents/software-product-manager.md` | PRD（简单/完整两档）＋市场调研报告 | 写权＝过程域，交付面拒写；收口五件套自指句 |
-| 架构师 高见远 | `agents/software-architect.md` | 系统设计＋任务分解合体产出（九节：方案/文件表/类图/时序图/任务表/包/共享知识/依赖图） | 同上 |
-| 工程师 寇豆码 | `agents/software-engineer.md` | 批量实现代码＋全局一致性审查（IS_PASS）＋增量开发最小变更 | **交付面唯一写权席**；写入集＝票面声明闭集；完工回执逐项列写入集 |
-| QA 工程师 严过关 | `agents/software-qa-engineer.md` | 测试编写＋运行＋智能路由（Engineer/QA/NoOne）＋≤2 轮硬限 | 写权＝过程域；收口判定前逐件核对回执清单与交付面纯净性 |
+| 主理人 齐活林 | `agents/software-team-lead.md` | SOP 编排、工作流档位判定、成员调度与中转汇编 | 写权＝过程域；派工合规硬门；拒写权自指句；收口自检＋派工件干净度自指句 |
+| 产品经理 许清楚 | `agents/software-team-product.md` | PRD（简单/完整两档）＋市场调研报告 | 写权＝过程域，交付面拒写；收口五件套自指句 |
+| 架构师 高见远 | `agents/software-team-architect.md` | 系统设计＋任务分解合体产出（九节：方案/文件表/类图/时序图/任务表/包/共享知识/依赖图） | 同上 |
+| 工程师 寇豆码 | `agents/software-team-engineer.md` | 批量实现代码＋全局一致性审查（IS_PASS）＋增量开发最小变更 | **交付面唯一写权席**；写入集＝票面声明闭集；完工回执逐项列写入集 |
+| QA 工程师 严过关 | `agents/software-team-qa.md` | 测试编写＋运行＋智能路由（Engineer/QA/NoOne）＋≤2 轮硬限 | 写权＝过程域；收口判定前逐件核对回执清单与交付面纯净性 |
 
 ### 2.3 写权闭集模型（两域 + 唯一写权 + 双闸）
 

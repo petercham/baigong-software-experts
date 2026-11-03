@@ -43,6 +43,9 @@ GRADES_REQUIRING_CONFIRM = {"P0", "P1"}      # 定级权限归 QA 双复核＋�
 # ---- 触发源六闭集（§4/§13）----
 TRIGGER_SOURCES = ["租约越界deny", "对账差≠0", "活性自检失败", "引用扫描命中", "超期", "熔断"]
 
+# ---- 回流件四型闭集（§3）----
+RETURN_TYPES = ["完成", "部分完成", "受阻", "异常"]  # §3 回流件四型闭集（V13 L113·物理 L141）
+
 # ---- timeouts 缺省（§13；未配置项＝不适用）----
 TIMEOUT_DEFAULTS = {"工程师票": 48.0, "呈报": 24.0}
 
@@ -105,7 +108,8 @@ def load_timeouts(timeouts_file: str | None) -> dict:
 def transition(ticket_id: str, src, dst, *, kind: str, signs: list[str],
                ticket_type: str | None, severity: str | None, severity_confirmed: bool,
                human_direct: bool, ledger_file: str, states_file: str,
-               trigger_source: str | None = None) -> int:
+               trigger_source: str | None = None,
+               return_type: str | None = None) -> int:
     """合法迁移→写对应记录类（派发/签字）并回显；非法迁移→写「呈报」类审计事件并 exit≠0。"""
     states = load_states(states_file)
     timeouts = load_timeouts(os.environ.get("SWB_TIMEOUTS_FILE"))
@@ -168,12 +172,21 @@ def transition(ticket_id: str, src, dst, *, kind: str, signs: list[str],
     if missing:
         return _reject(ledger_file, ticket_id, src, dst, f"签字集合缺席：{missing}", trigger_source)
 
+    # 回流四型标签校验（§3 闭集机械化·SWB-T07-C）：4→5 必填、非回流迁移禁挂
+    if (src, dst) == (4, 5) and return_type is None:
+        return _reject(ledger_file, ticket_id, src, dst,
+                       "4→5 回流迁移缺 return_type（回流四型闭集 {完成,部分完成,受阻,异常}·§3）", trigger_source)
+    if (src, dst) != (4, 5) and return_type is not None:
+        return _reject(ledger_file, ticket_id, src, dst,
+                       "return_type 只许挂 4→5 回流迁移（防误挂·回流四型闭集 {完成,部分完成,受阻,异常}·§3）", trigger_source)
+
     states[ticket_id] = {"state": dst, "ticket_type": current.get("ticket_type")}
     save_states(states_file, states)
     rtype = "签字" if kind == "signoff" else "派发"
     rec = append_record(ledger_file, rtype, "state-transition.py",
                         {"event": "transition", "ticket_id": ticket_id, "from": src, "to": dst,
                          "kind": kind, "signs": signs,
+                         "return_type": return_type if (src, dst) == (4, 5) else None,
                          "grade_confirm": (severity or "") if (ticket_type == DEFECT_TICKET_TYPE and (src, dst) in DEFECT_CHAIN) else None,
                          "severity_confirmed": severity_confirmed if (ticket_type == DEFECT_TICKET_TYPE and (src, dst) in DEFECT_CHAIN) else None})
     print(f"OK transition ticket={ticket_id} {src}({NODES.get(src, src)})→{dst}({NODES.get(dst, dst)}) record_type={rtype} ledger_hash={rec['hash']}")
@@ -205,6 +218,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--severity-confirmed", action="store_true", help="定级确认前置签收字段在位（§18⑩）")
     ap.add_argument("--human-direct", action="store_true", help="人类直通入口标记（挂起/解冻专用）")
     ap.add_argument("--trigger-source", default=None, help="审计事件触发源（六闭集内）")
+    ap.add_argument("--return-type", default=None, choices=RETURN_TYPES, help="回流四型标签（4→5 必填·§3 闭集）")
     ap.add_argument("--ledger", default=os.path.join(default_ledger_root(), "ledger.jsonl"))
     ap.add_argument("--states", default=os.path.join(default_ledger_root(), "states.json"))
     a = ap.parse_args(argv)
@@ -215,7 +229,8 @@ def main(argv: list[str] | None = None) -> int:
     return transition(a.ticket, norm(a.src), norm(a.dst), kind=a.kind, signs=a.sign,
                       ticket_type=a.ticket_type, severity=a.severity,
                       severity_confirmed=a.severity_confirmed, human_direct=a.human_direct,
-                      ledger_file=a.ledger, states_file=a.states, trigger_source=a.trigger_source)
+                      ledger_file=a.ledger, states_file=a.states, trigger_source=a.trigger_source,
+                      return_type=a.return_type)
 
 
 if __name__ == "__main__":
