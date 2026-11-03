@@ -108,6 +108,8 @@ B2 回执桶 C 标「C→**B4 rev2**」的 tests 行＝5 登记行（ledger-init
 
 check-entity.py `iter_scan_files` 剪 `.collab`/`.scratch`＝B3 已落（`b29bc20` 在笔·B3 收口登记候裁①正式追认）＝**本票零触碰零重复治**；本票 scan 面变化全在 reconcile 自身（票目录枚举），无 check-entity 随动目。防双治行在册（＝B3 回执 c282aef 已登）。
 
+**黄-1 收账行（qa-b3v2 报告路由·报告位 `.collab/qa/2026-11-03-QA-B3-独立验证-v2.md`·笔 `1e3b811`）**：`tools/check-source-of-truth.py` 4 处 `spec_file` 锚行改写系 B3a 批次先行落地（`b29bc20`「spec_file 锚 8 处改写」目内·定性 Y-7 闭环化机械前置＝不改则 provenance exit 3 必红），超出 B3a 票面申报扫描面字面＝登记级。据此按本席路由将「tools 内 spec_file 锚行」**显式并入 B4 改锚面**＝与 B3a 剪枝防双治同例收账；本票对该件**零触碰零改写**（开工直读复验 4 锚行现位＝`agent-experts/baigong-software-team/.collab/research|decisions/…` 新树位与真源实物 test -f 全在＝判据 4 missing 0 覆盖面内），登记不再治，防占 B3a 已落件成双治。
+
 ## 十、边界注记＋不自行拍目
 
 - 补丁六：run-gates `SPEC_ID_HOME`/`pkg_dir` 段 B4 期**零触碰**（归 B2 rev2 补丁一已落）＝边界注记防双改。
