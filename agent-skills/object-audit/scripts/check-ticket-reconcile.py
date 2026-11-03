@@ -42,8 +42,10 @@
 
 用法：
     python check-ticket-reconcile.py [--root <仓根>] [--ticket <path>]... [--selftest]
-    --ticket 可重复（相对仓根的票面路径）；缺省＝扫 `.collab/tickets/` 内
-    首行无「HOLD：」标记且未标「已结案」的票（HOLD 票不施工＝不对账）。
+    --ticket 可重复（相对仓根的票面路径）；缺省＝按项目枚举票目录（SWB-B4 B4-A 新树两级锚）：
+    仓根过渡票目录 `<仓根>/.scratch/tickets/` ＋ 三分类目录 `{agent-experts,agent-skills,softwares}/<项目>/.scratch/tickets/`
+    双候选，取各目录内首行无「HOLD：」标记且未标「已结案」的票（HOLD 票不施工＝不对账）；
+    旧域单目录回落已灭（B3b 灭旧域）——票目录枚举结果为空＝门禁哑火形态→exit 4（防假绿）。
     --selftest：临时 git 仓＋合成票/回执跑三段 fixture 自咬，与内嵌预期对拍。
 
 退出码（闭集，见 60-gates.md「六、退出码闭集」）：
@@ -99,6 +101,16 @@ CLOSED_RE = re.compile(r"已结案")
 # 注：字面量**拆段拼接**——本件位于交付包扫描域（deliverables/**）内，完整字面量裸写
 #   于句中即算 OA-D6-3 P1 形态自咬（机械形态规避·判据一字未动，先例＝run-gates 项目名拆段）。
 COLLAB_PREFIX = "." + "collab" + "/"
+# SWB-B4 B4-A：票目录前缀判定随新树＝`.scratch/`（过渡票目录＝过程域，交付面排除同等待遇；
+# 同样拆段规避 OA-D6-3 P1 形态自咬，判据一字未动）。
+SCRATCH_PREFIX = "." + "scratch" + "/"
+
+
+def _is_process_domain(rel: str) -> bool:
+    """过程域判定：仓根/任意层级 `.collab/` 或 `.scratch/` 前缀段＝非交付面。"""
+    if rel.startswith(COLLAB_PREFIX) or rel.startswith(SCRATCH_PREFIX):
+        return True
+    return ("/" + COLLAB_PREFIX) in rel or ("/" + SCRATCH_PREFIX) in rel
 
 
 def die_usage(msg: str) -> None:
@@ -276,12 +288,13 @@ def git_name_only(root: str, commit: str) -> "list[str] | None":
 
 def delivery_listing(root: str) -> "set[str]":
     """段二/段三基面＝交付面文件系统 listing（与纯净扫描同面：生成件与未提交
-    文件不逃逸；`.collab/` 过程域不进面）。"""
+    文件不逃逸；过程域不进面——SWB-B4 B4-A 随新树：任意层级 `.collab/` 与
+    票目录 `.scratch/` 均属过程域）。"""
     out: "set[str]" = set()
     for cur, dirs, files in os.walk(root):
         dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", "node_modules")]
         rel_dir = os.path.relpath(cur, root).replace(os.sep, "/")
-        if rel_dir == COLLAB_PREFIX[:-1] or rel_dir.startswith(COLLAB_PREFIX):
+        if rel_dir != "." and _is_process_domain(rel_dir + "/"):
             dirs[:] = []
             continue
         for name in files:
@@ -308,24 +321,54 @@ def git_dirty_paths(root: str) -> "set[str]":
     for line in proc.stdout.split("\n"):
         if len(line) > 3:
             p = line[3:].strip().strip('"').replace("\\", "/")
-            if p and not p.startswith(COLLAB_PREFIX):
+            if p and not _is_process_domain(p):
                 out.add(p)
     return out
 
 
+# SWB-B4 B4-A：缺省票目录枚举＝新树两级锚（按项目 `.scratch/tickets/` 双候选）。
+# 旧域单目录回落已灭（B3b 灭旧域）；枚举结果为空＝门禁哑火形态→exit 4（防假绿·
+# T09 输入件 G5 危险形态款）。仓根过渡票目录＋三分类目录候选＝票目录在位判据面。
+TICKET_DIR_SUFFIX = os.path.join(".scratch", "tickets")
+CATEGORY_DIRS = ("agent-experts", "agent-skills", "softwares")
+
+
+def ticket_dirs(root: str) -> "list[str]":
+    """票目录候选枚举（仓根过渡面＋按项目面）：存在的目录才入列。"""
+    dirs: "list[str]" = []
+    root_td = os.path.join(root, TICKET_DIR_SUFFIX)
+    if os.path.isdir(root_td):
+        dirs.append(root_td)
+    for cat in CATEGORY_DIRS:
+        cat_dir = os.path.join(root, cat)
+        if not os.path.isdir(cat_dir):
+            continue
+        for proj in sorted(os.listdir(cat_dir)):
+            cand = os.path.join(cat_dir, proj, TICKET_DIR_SUFFIX)
+            if os.path.isdir(cand):
+                dirs.append(cand)
+    return dirs
+
+
 def default_tickets(root: str) -> "list[str]":
-    tdir = os.path.join(root, ".collab", "tickets")
-    if not os.path.isdir(tdir):
-        return []
+    dirs = ticket_dirs(root)
+    if not dirs:
+        # 扫描面非空正断言（防假绿）：无任何票目录候选＝门禁哑火，如实 exit 4
+        sys.stderr.write("infra error: 票目录枚举为空（门禁哑火形态）\n")
+        raise SystemExit(4)
     out: "list[str]" = []
-    for name in sorted(os.listdir(tdir)):
-        if not name.endswith(".md") or "TEMPLATE" in name:
-            continue
-        path = os.path.join(tdir, name)
-        head = read_text(path).split("\n", 1)[0]
-        if HOLD_RE.search(head) or CLOSED_RE.search(read_text(path)[:400]):
-            continue
-        out.append(os.path.relpath(path, root).replace(os.sep, "/"))
+    for tdir in dirs:
+        for name in sorted(os.listdir(tdir)):
+            if not name.endswith(".md") or "TEMPLATE" in name:
+                continue
+            path = os.path.join(tdir, name)
+            head = read_text(path).split("\n", 1)[0]
+            if HOLD_RE.search(head) or CLOSED_RE.search(read_text(path)[:400]):
+                continue
+            out.append(os.path.relpath(path, root).replace(os.sep, "/"))
+    if not out:
+        sys.stderr.write("infra error: 票目录枚举为空（门禁哑火形态）\n")
+        raise SystemExit(4)
     return out
 
 
@@ -335,6 +378,10 @@ def default_tickets(root: str) -> "list[str]":
 #      归一化（反斜杠→斜杠、仓根前缀大小写不敏感比对）后落在本仓过程域内
 #      ＝合法回执指针；仓外绝对路径＝不算回执指针（现状保持）。
 ABS_RECEIPT_PTR_RE = re.compile(r"`([A-Za-z]:[^\s`]*回执[^\s`]*\.md)`")
+# SWB-B4 B4-A 形态③候选（新树回执命名体例＝文件名 `-receipt.md`／`回执` 双词式）：
+# 反引号内任意位置含过程域尾段（COLLAB_PREFIX 拼接式，防 P1 自咬）＋文件名含回执标记。
+RECEIPT_TAIL_PTR_RE = re.compile(
+    r"`([^`\s]*" + re.escape(COLLAB_PREFIX) + r"[^\s`]*?(?:回执|[Rr]eceipt)[^\s`]*\.md)`")
 
 
 def abs_ptr_to_rel(root: str, raw: str) -> "str | None":
@@ -351,22 +398,64 @@ def abs_ptr_to_rel(root: str, raw: str) -> "str | None":
     return rel
 
 
+def _candidate_bases(root: str, ticket_rel: str) -> "list[str]":
+    """回执指针解析基面（SWB-B4 B4-A 随新树换锚）：票据所在项目根优先、仓根次之、
+    其余分类项目根殿后（回执实体按项目归宿＝B3 语义；票内指针尾段 `.collab/…` 稳定＝
+    换锚只加基面候选、指针判据两形态零动）。去重·保序。"""
+    bases: "list[str]" = []
+    parts = ticket_rel.split("/")
+    if len(parts) >= 4 and parts[0] in CATEGORY_DIRS:
+        bases.append(os.path.join(root, *parts[:3]))
+    bases.append(root)
+    for cat in CATEGORY_DIRS:
+        cat_dir = os.path.join(root, cat)
+        if not os.path.isdir(cat_dir):
+            continue
+        for proj in sorted(os.listdir(cat_dir)):
+            cand = os.path.join(cat_dir, proj)
+            if os.path.isdir(cand) and cand not in bases:
+                bases.append(cand)
+    seen: "list[str]" = []
+    for b in bases:
+        if b not in seen:
+            seen.append(b)
+    return seen
+
+
 def find_receipt(root: str, ticket_text: str, ticket_rel: str) -> "str | None":
     """配对键＝票内回执指针行（反引号包裹的过程域回执件路径·两形态见
-    ABS_RECEIPT_PTR_RE 注）。缺＝None（未绿项）。"""
+    ABS_RECEIPT_PTR_RE 注）。缺＝None（未绿项）。B4-A：两形态指针尾段均在
+    「项目根→仓根」基面序列上逐一尝试存在性（先项目根后仓根·确定性序）。"""
+    bases = _candidate_bases(root, ticket_rel)
     cand = re.findall(r"`(" + re.escape(COLLAB_PREFIX) + r"[^\s`]*回执[^\s`]*\.md)`", ticket_text)
     for rel in cand:
-        full = os.path.normpath(os.path.join(root, rel.replace("/", os.sep)))
-        if os.path.isfile(full):
-            return rel
+        for base in bases:
+            full = os.path.normpath(os.path.join(base, rel.replace("/", os.sep)))
+            if os.path.isfile(full):
+                if base == root:
+                    return rel
+                return os.path.relpath(full, root).replace(os.sep, "/")
     # ENG-S7 形态②：绝对盘符路径指针，归一落仓内过程域＝合法，仓外不算。
     for raw in ABS_RECEIPT_PTR_RE.findall(ticket_text):
         rel = abs_ptr_to_rel(root, raw)
         if rel is None:
             continue
-        full = os.path.normpath(os.path.join(root, rel.replace("/", os.sep)))
-        if os.path.isfile(full):
-            return rel
+        for base in bases:
+            full = os.path.normpath(os.path.join(base, rel.replace("/", os.sep)))
+            if os.path.isfile(full):
+                if base == root:
+                    return rel
+                return os.path.relpath(full, root).replace(os.sep, "/")
+    # SWB-B4 B4-A 形态③（随新树换锚）：票内反引号内含 `.collab/` 尾段且文件名含
+    # 「回执」或 `-receipt`（新树回执命名体例）的指针＝候选，尾段在基面序列上解析。
+    # 只扩解析面、不动配对判据语义（缺回执仍＝证据缺 WATCH）。
+    for m3 in RECEIPT_TAIL_PTR_RE.finditer(ticket_text):
+        raw = m3.group(1).replace("\\", "/")
+        tail = raw[raw.lower().find(COLLAB_PREFIX):]
+        for base in bases:
+            full = os.path.normpath(os.path.join(base, tail.replace("/", os.sep)))
+            if os.path.isfile(full):
+                return os.path.relpath(full, root).replace(os.sep, "/")
     return None
 
 
@@ -423,15 +512,15 @@ def check_pair(root: str, ticket_rel: str) -> "tuple[list[str], int]":
     # --- 段三 回执↔交付面（基面＝交付面文件系统 listing） ---
     face = delivery_listing(root)
     for p in sorted(declared_set):
-        if p.startswith(COLLAB_PREFIX):
-            continue  # 过程域声明项不在交付面存在性范围
+        if _is_process_domain(p):
+            continue  # 过程域声明项不在交付面存在性范围（B4-A：含票目录 .scratch/）
         if p not in face:
             findings.append("%s:1: %s 声明集内交付面路径不存在（声明与交付面对不上）：%s"
                             % (ticket_rel, SEV_WATCH, p))
     # 未声明生成件检出：git status 交付面脏路径中不属于声明集者
     dirty = git_dirty_paths(root)
     undeclared = sorted(p for p in dirty if p not in declared_set
-                        and not p.startswith(COLLAB_PREFIX))
+                        and not _is_process_domain(p))
     if undeclared:
         findings.append("%s:1: %s 未声明生成件（交付面脏路径∉声明闭集）：%s"
                         % (ticket_rel, SEV_WATCH, "、".join(undeclared[:8])))
@@ -523,7 +612,7 @@ def selftest(root: str) -> int:
             run_git("commit", "-q", "-m", "synthetic %s" % name)
             head = subprocess.run(["git", "-C", repo, "rev-parse", "HEAD"],
                                   capture_output=True, text=True).stdout.strip()
-            os.makedirs(os.path.join(repo, ".collab", "tickets"), exist_ok=True)
+            os.makedirs(os.path.join(repo, ".scratch", "tickets"), exist_ok=True)
             os.makedirs(os.path.join(repo, ".collab", "research"), exist_ok=True)
             ticket_lines = ["# synthetic ticket %s" % name]
             if decl_mode == "multiline":
@@ -548,7 +637,7 @@ def selftest(root: str) -> int:
                 ticket_lines.append("回执：`%s`" % p)
             else:
                 ticket_lines.append("回执：`%sresearch/%s`" % (COLLAB_PREFIX, receipt_fname))
-            with open(os.path.join(repo, ".collab", "tickets", "%s.md" % name),
+            with open(os.path.join(repo, ".scratch", "tickets", "%s.md" % name),
                       "w", encoding="utf-8") as handle:
                 handle.write("\n".join(ticket_lines) + "\n")
             rl = ["# synthetic receipt %s" % name,
@@ -582,7 +671,8 @@ def selftest(root: str) -> int:
                 rpath = os.path.join(repo, ".collab", "research", receipt_fname)
             with open(rpath, "w", encoding="utf-8") as handle:
                 handle.write("\n".join(rl) + "\n")
-            findings, skips = check_pair(repo, "%stickets/%s.md" % (COLLAB_PREFIX, name))
+            findings, skips = check_pair(repo, "%s/%s.md" % (
+                TICKET_DIR_SUFFIX.replace(os.sep, "/"), name))
             return len(findings), skips
 
         results = {}
@@ -633,7 +723,7 @@ def selftest(root: str) -> int:
         results["case11_ticketface_notcommit"] = case(
             "case11", ["deliverables/a.md"], ["deliverables/a.md"],
             ["deliverables/a.md"], receipt_extra_lines=[
-                "- 票面：`.collab/tickets/case11.md`（开票笔 `72c0a97`）。",
+                "- 票面：`.scratch/tickets/case11.md`（开票笔 `72c0a97`）。",
                 "- 开端 HEAD：`1fb47f45ed36ee8297c2316a9ad52660cd630dd2`（票 commit，开工实测）。",
             ])
         # case12 声明列表夹叙述行（`- 背景…`／`- HOLD…`）：声明集只收路径形态条目
