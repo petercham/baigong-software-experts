@@ -31,7 +31,7 @@ D:\multi-agent-collab-devkits\
 ```
 <project>\
 ├── docs\
-│   ├── collab-project-structure.md  ← 约定 md（项目根/交付路径声明·T08R 提案·字段项目根相对字面
+│   ├── STRUCTURE.md  ← 约定 md（项目根/交付路径声明·T08R 提案·字段项目根相对字面
 │   │                                   ＋YAML 围栏块＋schema_version＋delivery_paths 拒 docs 前缀行）
 │   └── <当前存活的干净交接件>        ← 产品设计/架构设计等持久分发级文档（§二点八）
 │                                       例：百工 docs\PRODUCT.md、ARCHITECTURE.md（从包根迁移）

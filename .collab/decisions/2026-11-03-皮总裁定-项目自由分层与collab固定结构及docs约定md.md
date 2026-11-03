@@ -62,3 +62,11 @@
 1. 项目根不放 PRODUCT.md／ARCHITECTURE.md 这类活文档——它们是交接件，落 `docs/`（与 §二点七"持久/分发级进 docs"同轨）。
 2. `docs/` 的内容标准＝**当前存活的干净交接件**：现行有效的产品设计、架构设计文档（如百工 PRODUCT/ARCHITECTURE、SWB 交接件 v2.9 正式登记件——后者呼应 D7 入库后落点＝docs）；历史版本/沿革态不进 docs（归 .collab 过程域或归档）。
 3. 连带：ENG-D1 誊入批把两件放包根＝旧口径落点，重组批须随动迁移 docs/ 并更新引用锚（plugin.json 未声明此两件＝纯人读文档，包内迁移平台面安全）。
+
+## 二点九、补充裁定 · docs 约定文档命名去 collab 前缀（同日 19:33·皮总原话）
+
+「collab-project-structure.md 的命名明显错误啊，collab 只是我们开发这种多专家协作的 agent-experts 项目才会叫 collab，docs 下面的就是 STRUCTURE/PRODUCT/ARCHITECTURE 这几个文档」
+
+口径：
+1. docs 内约定 md 定名＝`STRUCTURE.md`（描述项目分层目录方案与写域声明）；活文档定名＝`PRODUCT.md`／`ARCHITECTURE.md`。通用大写名词，不带 collab 前缀——collab 语义只属多专家协作开发域（`.collab` 目录名不变，其为固定结构规范名）。
+2. 连带更正：T08R 候裁 R⑤ 提案文件名 `docs/collab-project-structure.md` 作废→改 `docs/STRUCTURE.md`；方案 v3 §二同步更正；B 批约定 md 落地票按此定名。
