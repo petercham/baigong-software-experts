@@ -48,7 +48,7 @@ D:\multi-agent-collab-devkits\
                                       bundle.lock/avatars/settings.json）；技能＝SKILL.md+references
 ```
 
-票面落位二选一（`.scratch/tickets` vs `.collab/tickets`）＝待裁项②；下表按推荐态写。
+票面落位二选一（`.scratch/tickets` vs `.collab/tickets`）＝待裁项①（§六现唯一待裁）；下表按推荐态写。
 
 ## 三、现状→归宿全账（实测口径）
 
@@ -62,7 +62,7 @@ D:\multi-agent-collab-devkits\
 | `.collab/decisions/` 13 件 | 跨项目 | 按裁决涉及面归项目 `.collab\decisions\`；纯仓级（远端/入库策略类）归百工；仓根 README 建一本账索引 |
 | `.collab/` 根 10 散件 | 无桶 | 6 FUXI→fuxi-skill；2 SWBFIX＋脏文件处置＋呈拍简报→百工 |
 | `.collab/design/` 17 件 | 混线 | 按案线归项目 `.collab\design\`（设计稿属过程域；其中现行有效设计稿若属交接件性质→docs，按 §二点八 存活判据逐件分） |
-| `.collab/research/` 242 件 | 视频团 era 大头 | 判词依据类按项目归位；**视频团 era 外部参照件整体移交 experts 仓**（待裁项③）；devkits 相关留各项目 |
+| `.collab/research/` 242 件 | 视频团 era 大头 | 判词依据类按项目归位；**视频团 era 外部参照件整体移交 experts 仓**（执行项·清残注记见§六）；devkits 相关留各项目 |
 | `.collab/refs/` 8,835／`evidence/` 3,577 | 未入库 | 迁各项目对应桶（gitignore 两制随动重写） |
 | `.collab/inbox/` 9／`dispatch/` 10／`process/` 0 | 运行流水 | 迁各项目同名桶（不入库不变）；旧流水可径归档 |
 | `docs/` 8 件（process/research 子桶） | 空壳横切 | 内容归各项目 docs 或 `.collab` |
@@ -87,11 +87,11 @@ D:\multi-agent-collab-devkits\
 
 每批单独 commit＋可机械验证判据（对账清零/计数相等/门禁零回归对拍）。
 
-## 六、待裁清单（终版·两项·拼写项已销账）
+## 六、待裁清单（终版·一项·拼写项与 era 项已销账）
 
-1. 票面落位：`.scratch/tickets`（推荐·高频迭代语义）vs `.collab/tickets`（现行·机检改造量小）；
-2. 视频团 era 研究件移交 experts 仓：可否。
+1. 票面落位：`.scratch/tickets`（推荐·高频迭代语义）vs `.collab/tickets`（现行·机检改造量小）——皮总原话给了两选项未择一，候裁有效。
 
-> 清残注记（2026-11-03·主理人指令）：原第 1 项「拼写：agent-experts vs 原话 agent-expers」＝无效候裁项，按裁定件㊺（`.collab/decisions/2026-11-03-皮总裁定-项目自由分层与collab固定结构及docs约定md.md` L46 名录明文＝agent-experts／agent-skills／softwares）判定销账＝拼写定夺 `agent-experts`，无待裁语义；B1+ 迁移票闭集目录名一律 `agent-experts`。
+> 清残注记一（2026-11-03·主理人指令）：原「拼写：agent-experts vs 原话 agent-expers」＝无效候裁项，按裁定件㊺（`.collab/decisions/2026-11-03-皮总裁定-项目自由分层与collab固定结构及docs约定md.md` L46 名录明文＝agent-experts／agent-skills／softwares）判定销账＝拼写定夺 `agent-experts`，无待裁语义；B1+ 迁移票闭集目录名一律 `agent-experts`。
+> 清残注记二（2026-11-03·主理人指令）：原「视频团 era 研究件移交 experts 仓：可否」＝无效候裁项（残留回流）——皮总 2026-11-03 原话已定性＝执行层事项（「视频团时代研究件移交 experts 仓、T07（含旧五卡退役），这不都是执行层面的事情么？……为什么要我裁呢？」），早前已从候裁队列撤回降为执行项。**改登记为执行项**：落点＝B 批随移动作或独立微批；跨仓搬运遵守誊写禁令（裁定 `f5a0d96`）＝git mv／字节级复制＋删源，experts 仓 `D:\multi-agent-collab-experts` 侧接收。
 
 （版本线 0.1.14 续 bump 已裁；排程序列＝T07 放行→T08R 施工→B0→B1+ 不变。）
