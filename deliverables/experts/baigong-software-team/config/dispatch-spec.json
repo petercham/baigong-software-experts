@@ -1,0 +1,99 @@
+{
+  "derived_from": "表2-3",
+  "source": "架构 v2.9 表2-3 审查权与签字矩阵（V13 L99–109＝落盘物理 L127–137）七行逐行转录＝六节点行＋维护行；审查注入面条款 V13 L109；轻签点表注 V13 L110",
+  "ticket_types_ref": "config/ticket-types.json",
+  "ticket_types_note": "票类清单引用 ticket-types.json 同源（§3 席位-票-租约同源配置·同源校验断言＝T03 验收判据2）",
+  "injection_clause": "审查注入面（表2-3 表注·V13 L109 逐字）：QA 审计切片显式列明；产品含已登记 intake 只读＋架构触发项命中件草稿态；工程师只见本票＋上游内容副本。dispatch-spec 构造注入包/决策包时剥除过程痕迹段（源头即纯，P-Ⅰ 前置；构造断言：注入包/决策包成品对过程痕迹词族零命中）；已转正外部件按其级列入注入闭集，未转正件不入。审查者看什么由 dispatch-spec 机械定义，不许自选。",
+  "table_notes": {
+    "轻签点表注（V13 L110 逐字引文）": "轻签点＝合法签收形态，不构成产品 §4 违纪行 4（V10 L54）之跳过环节；未达准入判据（§17 维护票词条）而走维护票→转流程变更票重审"
+  },
+  "nodes": [
+    {
+      "node": 1,
+      "name": "需求",
+      "signoffs": ["产品交付签", "架构PRD接收签", "QA可验收性签"],
+      "human_role": "呈报知悉·异议窗口（倒推模式下同族需求不再逐件上行；异常走保险丝）",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": 2,
+      "name": "设计",
+      "signoffs": ["架构交付签", "QA质量属性审计签"],
+      "signoffs_note": "产品草稿态无签字权（表2-3 节点2 行逐字括注）",
+      "human_role": "不在场",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": 3,
+      "name": "拆票",
+      "signoffs": ["架构生成签", "产品范围签", "QA充分性签"],
+      "human_role": "可选",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": 4,
+      "name": "执行",
+      "signoffs": ["工程师交付签", "QA审计签"],
+      "human_role": "不在场",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": 5,
+      "name": "发布",
+      "signoffs": ["产品签", "release-qa签", "集成验收结论", "引用继承"],
+      "human_role": "体验终裁·硬门禁二＝门二·上线交付前放行",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": 6,
+      "name": "灰度",
+      "signoffs": ["full-rollout（QA按声明判据单签）"],
+      "human_role": "异常被通知",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": "维护·节点1-3",
+      "name": "维护（节点 1–3 轻签点）",
+      "signoffs": ["产品席", "架构席（合签）"],
+      "signoffs_note": "签字集合＝产品席＋架构席（合签）（V13 L108 逐字）；轻签点表注见 table_notes",
+      "human_role": "按主表",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
+        {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
+        {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    }
+  ],
+  "same_origin_declaration": "本文件与 config/seat-permissions.json、config/ticket-types.json、config/ticket-authors.json 同一票类清单派生（§3 席位-票-租约同源配置）；票类清单引用 config/ticket-types.json 同源不另立清单。"
+}

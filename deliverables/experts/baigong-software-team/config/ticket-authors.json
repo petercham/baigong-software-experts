@@ -1,0 +1,24 @@
+{
+  "derived_from": "表2-1 表注修票权映射（V13 L79·六映射逐字转录）＋§3 票类清单同源（V13 L113）",
+  "clause": "修票权＝票类作者权：开发票→架构修｜缺陷票→QA 修｜部署票三字段→工程师部署域重写｜生产票目标字段→状态机依放行记录机械派生｜规则票→提案席位｜维护票→架构席修（表2-1 表注·V13 L79 逐字）",
+  "authors": {
+    "产品需求": "产品席（提案）",
+    "开发": "架构席（开发票→架构修）",
+    "缺陷": "QA席（缺陷票→QA 修）",
+    "部署": "工程师（三字段→工程师部署域重写）",
+    "规则": "提案席位（规则票→提案席位）",
+    "流程变更": "提案席位（表注六映射未直列·按规则票同类条款归提案席位）",
+    "验收": "QA席（表2-2 票级验收结论/QA 出结论·验收类票作者权同类归 QA）",
+    "维护": "架构席（维护票→架构席修）"
+  },
+  "table_six_mappings_verbatim": [
+    {"mapping": "开发票→架构修", "ticket_class": "开发", "amender": "架构席", "source": "表注六映射直列（开发票＝拆票节点生成之票·总览 SWB-T01..T06 票包实践＝架构席起草）"},
+    {"mapping": "缺陷票→QA 修", "ticket_class": "缺陷", "amender": "QA席", "source": "表注六映射直列"},
+    {"mapping": "部署票三字段→工程师部署域重写", "ticket_class": "部署", "amender": "工程师", "source": "表注六映射直列"},
+    {"mapping": "生产票目标字段→状态机依放行记录机械派生", "ticket_class": "生产票（表注载体词·非票型八类行）", "amender": "状态机（机械派生）", "source": "表注六映射直列（生产票＝部署/生产类票表注载体词，派生执行者＝状态机脚本，表2-2 生产部署票派生行）"},
+    {"mapping": "规则票→提案席位", "ticket_class": "规则", "amender": "提案席位", "source": "表注六映射直列"},
+    {"mapping": "维护票→架构席修", "ticket_class": "维护", "amender": "架构席", "source": "表注六映射直列"}
+  ],
+  "same_origin_closure_note": "票类清单∈ticket-types.json 同一集合（§3 票型八类）：表注六映射覆盖票型八类中五类＋维护；其余三类（产品需求/流程变更/验收）按上表 authors 附源注归位以闭合 authors 键集＝types 集（T03 验收判据2 同源断言）。归位注记入回执呈核，不新增候裁。",
+  "same_origin_declaration": "本文件与 config/seat-permissions.json、config/dispatch-spec.json、config/ticket-types.json 同一票类清单派生（§3 席位-票-租约同源配置）。"
+}
