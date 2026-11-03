@@ -8,8 +8,8 @@
 |---|---|
 | `2026-11-01-SWB-ticket-pack-overview-v1.md` | 票包总览＝票目录（v1.5.1·含依赖序/候裁账/基线锚） |
 | `2026-11-01-SWB-T01-platform-capability-probes-p1-p10.md` | 施工票 T01（**已收口**：放行 `e6f3647`·执行 `c38d77c`·QA 验证绿 `.collab/qa/2026-11-03-QA-T01-独立验证-v1.md`·判据 2 语义判据为准） |
-| `2026-11-01-SWB-T02-ledger-state-lease-core.md` | 施工票 T02（候开工呈报） |
-| `2026-11-01-SWB-T03-injection-dispatch-gate.md` | 施工票 T03 |
+| `2026-11-01-SWB-T02-ledger-state-lease-core.md` | 施工票 T02（**已收口**：执行 `ba0c785`·QA 验证绿 `.collab/qa/2026-11-03-QA-T02-独立验证-v1.md`·首派席别错挂已改派 expert 工程师席） |
+| `2026-11-01-SWB-T03-injection-dispatch-gate.md` | 施工票 T03（候开工） |
 | `2026-11-01-SWB-T04-enforcement-hooks-b5-b7-b8-b10-b11.md` | 施工票 T04 |
 | `2026-11-01-SWB-T05-expert-pack-assembly-b6.md` | 施工票 T05 |
 | `2026-11-01-SWB-T06-acceptance-system-b9.md` | 施工票 T06 |
