@@ -45,15 +45,28 @@ def pack_root() -> str:
     return d
 
 
-def repo_root() -> str:
-    # 交付树件上溯六级＝仓根（scripts→sop→skills→baigong→experts→deliverables→根）
+def project_root() -> str:
+    """SWB-B4 B4-B 两级锚换代＝项目根锚：自包根位置上溯首个含 `docs/STRUCTURE.md` 的目录
+    ＝项目根（B1-C STRUCTURE 探针锚）。权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。
+    SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；探针缺位＝退回落包根（fail-safe·
+    非仓根猜算——权限面读空即租约不命中＝deny，不开 fail-open 窗口）。"""
     env = os.environ.get("SWB_REPO_ROOT")
     if env:
         return env
     d = pack_root()
-    for _ in range(3):
-        d = os.path.dirname(d)
-    return d
+    while True:
+        if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            return pack_root()
+        d = parent
+
+
+def repo_root() -> str:
+    """兼容名保留＝现读项目根（两级锚换代后权限面/账本面锚均项目根；
+    仓根仅供交付 listing 与 git 子命令，不由本函数提供）。"""
+    return project_root()
 
 
 def default_ledger_root() -> str:

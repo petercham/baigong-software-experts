@@ -4,29 +4,29 @@
   "_anchors": {
     "实例化源": "config/seat-permissions.json（表2-1 V13 L70–79 六席位行逐行转录·T02 已收口件 ba0c785）；本文件不新增判据，只转成 hooks/write-guard 消费形态",
     "席位覆盖说明": "本映射收录五机械席位（host/product/architect/qa/engineer）⊆ 源六席位集。人类行不收录：表2-1 人类行载体＝「平台外签名工具」、表2-2「冻结/解冻/吊销发起＝人类直通触点」——hooks 强制面不作用于人类席位（人类直通＝设计语义）。与源件一致性断言（席位集⊆源席位集且每席位非空）在 tests/s4/test_enforcement.py 内（票面判据9）。新五卡 frontmatter name（`software-team-*`）与旧五名双载；旧名＝legacy 别名，其清退随 B 批身份面收敛。",
-    "路径锚定": "deny_globs 一律读作仓根字面（表2-1 表注路径锚定款）；交付树内路径（deliverables/**）不受「不可写」列约束，其写入经当票租约 path_globs 授权（表注）——engineer 行 deliverables 可写性由租约面授权、非由 deny_globs 豁免"
+    "路径锚定": "deny_globs 一律读作项目根字面（SWB-B4 B4-B 两级锚换代·表2-1 表注路径锚定款语义随迁：项目根＝含 docs/STRUCTURE.md 之探针锚目录）；交付面路径（delivery_paths 桶·真源＝本项目 docs/STRUCTURE.md）不受「不可写」列约束，其写入经当票租约 path_globs 授权（表注）——engineer 行交付面可写性由租约面授权、非由 deny_globs 豁免；非交付席 deny 换代＝delivery_paths 六目录行入各席枚举（B4 rev2 补丁三·五席同批随源件清零）"
   },
   "seats": [
     {
       "seat_id": "host",
-      "deny_globs": ["deliverables/**", "tests/**", "docs/*（除转正代写通道）"]
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/*（除转正代写通道）"]
     },
     {
       "seat_id": "product",
-      "deny_globs": ["docs/**", ".archive/**", "deliverables/**", "tests/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", ".collab/audits/**"]
+      "deny_globs": ["docs/**", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", ".collab/audits/**"]
     },
     {
       "seat_id": "architect",
-      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", "docs/STRUCTURE.md", ".archive/**", "deliverables/**", ".collab/audits/**"]
+      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", "docs/STRUCTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/audits/**"]
     },
     {
       "seat_id": "qa",
-      "deny_globs": ["deliverables/**", "docs/**", ".archive/**", ".collab/drafts/prd/**", ".collab/drafts/design/**", ".collab/drafts/adr/**"]
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/drafts/prd/**", ".collab/drafts/design/**", ".collab/drafts/adr/**"]
     },
     {
       "seat_id": "engineer",
-      "deny_globs": ["docs/**", ".collab/**"],
-      "deny_globs_note": "`.archive/`、仓根 `tests/` 出 deny 列系裁定一唯二排除落实（2026-11-03 ff72b92）；其防护由租约签发面承载——不在 engineer write_globs 域即不可签发，写侧『路径∉当席租约』deny 兜底（起草探针 P-c 实测）；仓根 `tests/` 真源域双层双址条款随 B4 票包再锚与重组批重释。"
+      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/qa/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**"],
+      "deny_globs_note": "SWB-B4 B4-C R⑧(i) 向精化随动（与源件 seat-permissions.json engineer 行逐字同源·t13 派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十一桶闭集（grep 引用不复写名录）。"
     }
   ],
   "agent_type_to_seat": {

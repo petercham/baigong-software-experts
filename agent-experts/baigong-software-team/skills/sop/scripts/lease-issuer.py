@@ -29,8 +29,22 @@ def pack_root() -> str:
     return d
 
 
+def project_root() -> str:
+    """SWB-B4 B4-B 两级锚换代＝项目根锚（与 write-guard.py 同款 helper）：
+    自包根上溯首个含 `docs/STRUCTURE.md` 的目录＝项目根；探针缺位退回落包根（fail-safe）。"""
+    d = pack_root()
+    while True:
+        if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            return pack_root()
+        d = parent
+
+
 def default_ledger_root() -> str:
-    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(os.getcwd(), ".collab", "ledger"))
+    # 账本根缺省＝<项目根>/.collab/ledger（SWB_LEDGER_ROOT 覆写语义零动）
+    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(project_root(), ".collab", "ledger"))
 
 
 def load_seats(config_path: str) -> list[dict]:
@@ -66,7 +80,8 @@ def issue_lease(ticket_id: str, seat_id: str, countersign: str | None, config_pa
     if requested_globs is None:
         path_globs = list(domain)
     else:
-        # 零裁量子集校验：请求路径集每一项须命中该席位写域行（仓根字面锚定·表注路径锚定款）
+        # 零裁量子集校验：请求路径集每一项须命中该席位写域行（项目根字面锚定·表注路径锚定款
+        # 随 SWB-B4 B4-B 两级锚换代；行为零变化款：描述行在旧式 `d in g` 比对下亦恒不命中）
         for g in requested_globs:
             if not any(g == d or g.startswith(d.rstrip("/")) or d in g for d in domain):
                 print(f"REJECT: 请求路径 {g!r} 越出席位 {seat_id} 写域行（表2-1 实例化源），拒签发", file=sys.stderr)
