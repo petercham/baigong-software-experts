@@ -96,6 +96,7 @@ B2 回执桶 C 标「C→**B4 rev2**」的 tests 行＝5 登记行（ledger-init
 - **NEW＝none**（无新族名）。
 - **GONE→回归（预期 NEW 读数·B4-A）**：reconcile `commit` 族 GONE→**×8**＝票目录枚举回归后对账族自证在位（B3 预告窗口态如期闭合）。
 - 计数漂移（同族内实例）：BLOCK OA-D6 3774→3771（黄-3 灭 5＋B4-D 尾追加新增 2→回执落位后复跑再灭）；OA-D6-3 1006→1044（两 config 新 deny 枚举行 `.collab/<桶>/**` 字面＝交付包面出包案面引用命中＝OA-D6-3 既有族实例增加·deny 字面＝权限声明非指针语义＝同 seat-permissions 既有 `.collab/` 写域行同族形态·advisory 不拦·登记在册）。
+  - OA-D6-3 增目逐字分账（QA-B4 黄-3 随正·照该报告 §黄-3/§目10 Temp 三仓并排复算口径 483→528＝Δ+45 构成）：两 config 新 deny/写域枚举行命中 **37**＋receipts 桶 judoca.py 自身命中 **5**＋write-guard/lease-issuer 新注释行命中 **2**（三项计 44，Δ+45 之差 1＝该报告未逐项列明）；本回执上行 1006→1044（Δ+38）＝真仓直跑口径，与 Temp 口径环境不同不互比。定性同主线＝既有族实例·advisory 不拦。
 - 其余族恒等：EAC-L1 17／EAC-L2 18／MC-SOT-1 54／MC-SOT-2 413／OA-D6 1365／OA-D6-4 2042。
 
 ## 八、R①②③ 处置/在册（rev2 补丁七·回执级）
@@ -108,7 +109,7 @@ B2 回执桶 C 标「C→**B4 rev2**」的 tests 行＝5 登记行（ledger-init
 
 check-entity.py `iter_scan_files` 剪 `.collab`/`.scratch`＝B3 已落（`b29bc20` 在笔·B3 收口登记候裁①正式追认）＝**本票零触碰零重复治**；本票 scan 面变化全在 reconcile 自身（票目录枚举），无 check-entity 随动目。防双治行在册（＝B3 回执 c282aef 已登）。
 
-**黄-1 收账行（qa-b3v2 报告路由·报告位 `.collab/qa/2026-11-03-QA-B3-独立验证-v2.md`·笔 `1e3b811`）**：`tools/check-source-of-truth.py` 4 处 `spec_file` 锚行改写系 B3a 批次先行落地（`b29bc20`「spec_file 锚 8 处改写」目内·定性 Y-7 闭环化机械前置＝不改则 provenance exit 3 必红），超出 B3a 票面申报扫描面字面＝登记级。据此按本席路由将「tools 内 spec_file 锚行」**显式并入 B4 改锚面**＝与 B3a 剪枝防双治同例收账；本票对该件**零触碰零改写**（开工直读复验 4 锚行现位＝`agent-experts/baigong-software-team/.collab/research|decisions/…` 新树位与真源实物 test -f 全在＝判据 4 missing 0 覆盖面内），登记不再治，防占 B3a 已落件成双治。
+**黄-1 收账行（qa-b3v2 报告路由·报告位 `.collab/qa/2026-11-03-QA-B3-独立验证-v2.md`·笔 `1e3b811`）**：`tools/check-source-of-truth.py` 5 行 `spec_file` 锚行改写系 B3a 批次先行落地（QA-B4 实测头块 spec_file 行现存 5 行＝三处交接件锚＋一处皮总拍板锚＋一处 handoff-discipline 锚）（`b29bc20`「spec_file 锚 8 处改写」目内·定性 Y-7 闭环化机械前置＝不改则 provenance exit 3 必红），超出 B3a 票面申报扫描面字面＝登记级。据此按本席路由将「tools 内 spec_file 锚行」**显式并入 B4 改锚面**＝与 B3a 剪枝防双治同例收账；本票对该件**零触碰零改写**（开工直读复验 4 锚行现位＝`agent-experts/baigong-software-team/.collab/research|decisions/…` 新树位与真源实物 test -f 全在＝判据 4 missing 0 覆盖面内），登记不再治，防占 B3a 已落件成双治。
 
 ## 十、边界注记＋不自行拍目
 
