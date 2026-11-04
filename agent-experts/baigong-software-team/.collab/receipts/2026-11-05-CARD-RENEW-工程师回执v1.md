@@ -29,15 +29,15 @@
 | 15 | `agent-experts/baigong-software-team/docs/ARCHITECTURE.md` |
 | 16 | `agent-experts/baigong-software-team/README.md` |
 
-改名（5·`git mv`·R100 图像字节零动·old/new 双列）：
+改名（5·`git mv`·R100 图像字节零动·old/new 双列。对账口径注：old 侧＝改名件 old 侧（R100，name-status 见 3c38fef），git name-only 改名笔只列新名、旧名不出现在任何 name-only 面，故 old 列以裸文标注不入清单路径集；new 列＝commit name-only 实际列名）：
 
-| # | old | new |
+| # | old（改名件 old 侧·R100） | new |
 |---|---|---|
-| 17 | `agent-experts/baigong-software-team/avatars/software-company-team-lead.png` | `agent-experts/baigong-software-team/avatars/software-team-lead.png` |
-| 18 | `agent-experts/baigong-software-team/avatars/software-product-manager.png` | `agent-experts/baigong-software-team/avatars/software-team-product.png` |
-| 19 | `agent-experts/baigong-software-team/avatars/software-architect.png` | `agent-experts/baigong-software-team/avatars/software-team-architect.png` |
-| 20 | `agent-experts/baigong-software-team/avatars/software-engineer.png` | `agent-experts/baigong-software-team/avatars/software-team-engineer.png` |
-| 21 | `agent-experts/baigong-software-team/avatars/software-qa-engineer.png` | `agent-experts/baigong-software-team/avatars/software-team-qa.png` |
+| 17 | avatars/software-company-team-lead.png | `agent-experts/baigong-software-team/avatars/software-team-lead.png` |
+| 18 | avatars/software-product-manager.png | `agent-experts/baigong-software-team/avatars/software-team-product.png` |
+| 19 | avatars/software-architect.png | `agent-experts/baigong-software-team/avatars/software-team-architect.png` |
+| 20 | avatars/software-engineer.png | `agent-experts/baigong-software-team/avatars/software-team-engineer.png` |
+| 21 | avatars/software-qa-engineer.png | `agent-experts/baigong-software-team/avatars/software-team-qa.png` |
 
 回执自身＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-05-CARD-RENEW-工程师回执v1.md`（回执笔，非交付笔，不入 21 件闭集）。
 
@@ -125,3 +125,7 @@
 - 开工 HEAD＝`5c7c4cc`
 - 施工 commit＝`3c38fef`（main）
 - 回执 commit＝本笔 `collab: CARD-RENEW 工程师回执v1（A1-A8逐条读数·21件闭集全等）`（pathspec 限定＝本回执件一件）
+
+## 七、修单笔登记（主理人小修单·改名件 old 侧标注）
+
+架构席补挂票面回执指针（6272e63）后，对账机检段一/段二对回执改名表 old 列出 2 WATCH（机理＝git R100 改名笔 name-only 只列新名，旧名不入任何 name-only 面）。按主理人小修单处置：直读 `check-ticket-reconcile.py` 断言①②实现（段一 L483–503／段二 L506–509＋清单行解析 RECEIPT_PATH_RE L87）确认既有口径＝**只收反引号包裹路径 token 入清单集**，据此把改名表 old 列改为裸文标注「改名件 old 侧（R100，name-status 见 3c38fef）」（不带反引号＝不入清单路径集），new 列保留反引号＝commit name-only 实际列名。修后实跑读数：`票 1（对账 1／SKIP 缺声明 0）｜发现 0｜exit 0`＝对账全绿。改笔＝本回执件一件单独 commit（collab: 前缀·pathspec 限定），票面/交付面零触碰。
