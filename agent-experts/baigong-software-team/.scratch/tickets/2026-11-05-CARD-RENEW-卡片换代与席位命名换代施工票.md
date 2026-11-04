@@ -2,7 +2,7 @@
 
 **HOLD：审票意见处置中——工程师见 HOLD 不开工**（主理人挂·双席审票＝产品席＋QA席并行独立·候裁八条已由主理人裁定在册 `bda4fec`）
 
-- 开端读数：devkits HEAD 以本票 commit 实测为准（起草时实测 `4d52e88`）。
+- 开端读数：devkits HEAD 以本票 commit 实测为准（起草时实测 `4d52e88`；审票清账修正轮开工实测 `4e4731f`，双席审票在链 a4144c9/7f8f39f/78ffa5b）。
 - 背景（决策依据·自包含）：卡片名字表态轮实锤五席花名／职业标签／头像引用文件名与市场参照产品 software-company v1.1.0 注册卡逐字全撞（五席意见件在链：341fcb6／dd14821／c3dde2f+db99a6b／ddf0755+6d4610b／4fa464b+ce6b060+20d7aea；卡片审查提案件在链 0678816）。皮总终裁（裁定登记件 `.collab/decisions/2026-11-05-皮总裁定-席位职业标签与花名换代.md`，commit 4d52e88）：职业标签 zh 换代＝交付总监→项目负责人、产品经理不变、架构师→架构工程师、工程师→开发工程师、QA工程师→质量审计师；花名换代＝齐活林→包好用、许清楚→姜通透、高见远→顾长远、寇豆码→柯会码、严过关→沈得严；en 默认随动＝Bao/Jiang/Gu/Ke/Shen＋Project Lead/Product Manager 不变/Architect Engineer/Development Engineer/QA Auditor；头像文件名换代随票、图像不重制；席位 id 与席位卡文件名不动；历史链不改写。卡片文案同票换代（提案 §三 候选＋五席意见定稿，定稿文本见本票 T 节，工程师逐字照录）。
 - 换代映射总表（本票一切替换的唯一真源）：
 
@@ -42,7 +42,8 @@
   20. `agent-experts/baigong-software-team/avatars/software-engineer.png` → `avatars/software-team-engineer.png`
   21. `agent-experts/baigong-software-team/avatars/software-qa-engineer.png` → `avatars/software-team-qa.png`
 
-- 声明闭集（OA-D6-5 机检源，逐行）：
+<!-- 声明闭集＝OA-D6-5 机检源，逐行（括注移出声明行本体，R1 修正：DECL_LINE_RE 要求「声明闭集」紧邻冒号） -->
+- 声明闭集：
   - agent-experts/baigong-software-team/.codebuddy-plugin/plugin.json
   - agent-experts/baigong-software-team/plugin.json
   - agent-experts/baigong-software-team/bundle.lock
@@ -272,7 +273,7 @@ L5 `"version": "0.1.22",` → `"version": "0.1.23",`（其余行零动；三同�
    - L50 行首格：`| 架构工程师（顾长远） |`
    - L51 行首格：`| 开发工程师（柯会码） |`
    - L52 行首格：`| 质量审计师（沈得严） |`
-   - L8「一句话」行替换为 README L3 同文（见 T7.1，两卡一句口径统一）。
+   - L8「一句话」行整行替换（逐字定稿＝本票 T7.1 新句全文内联，Y1 修正；同值注记：两处一句口径统一）：`**一句话**：百工软件团队专家团：项目负责人统筹产品经理、架构工程师、开发工程师、质量审计师四席，按固定 SOP 把需求推到可验收交付，每步留证据与判定级别。`
 2. `docs/ARCHITECTURE.md`：
    - L15：`    U[用户] <--> L["主理人 · 包好用（项目负责人）<br/>software-team-lead"]`
    - L16：`    L -->|派工| PM["产品经理 · 姜通透<br/>software-team-product"]`
@@ -301,7 +302,15 @@ L5 `"version": "0.1.22",` → `"version": "0.1.23",`（其余行零动；三同�
 - 这份设计／交付请做独立复审：按三态覆盖矩阵逐项给结论，列出必补项——生成方不自判，终裁归我。
 ```
 
-4. 出身节版本账**追加一行**（append-only，既有史实行含旧花名者不回改——L61 v1.2.3 行即豁免样例）：
+4. 「头像」节（现 L68 段，产品席审票黄-1 补位）整段替换（逐字）：
+
+```
+`avatars/` 六件 PNG 在位（team＝团队图，五席各一；v1.3.1 版本账在册补齐批）。替换规格：PNG/JPG、512×512 px、单张 ≤500KB，文件名对应 plugin.json members[].avatar（team.png / software-team-lead.png / software-team-product.png / software-team-architect.png / software-team-engineer.png / software-team-qa.png）。
+```
+
+（旧句「盘上无头像素材，`avatars/` 仅 `.gitkeep` 占位」与盘面实态不符（六 png 实测在位）——本票随动改正；五席文件名按映射总表换新名，team.png 不动。该节旧头像文件名不在 A1/A2 归零断言串内（断言串＝花名/职业标签，不含文件名），无判据冲突。）
+
+5. 出身节版本账**追加一行**（append-only，既有史实行含旧花名者不回改——L61 v1.2.3 行即豁免样例）：
 
 ```
 - **版本账 v0.1.23**（2026-11-05·CARD-RENEW 卡片文案＋席位命名换代批）：依皮总裁定（`.collab/decisions/2026-11-05-皮总裁定-席位职业标签与花名换代.md`）五席花名换代（包好用/姜通透/顾长远/柯会码/沈得严）＋职业标签换代（项目负责人/产品经理不变/架构工程师/开发工程师/质量审计师）＋en 随动；头像五件改名与席位 id 同族（图像本体不重制）；卡片文案换代＝displayDescription/defaultInitPrompt/quickPrompts(5+1)/tags/description 对齐提案＋五席意见定稿，注册卡与包装卡口径分裂消除；README 功能/使用示例两节换代（旧「快速模式」档位与五段旧链口径随此退役）。三同源 0.1.22→0.1.23。
@@ -320,7 +329,7 @@ L5 `"version": "0.1.22",` → `"version": "0.1.23",`（其余行零动；三同�
 
 - **A1 旧花名归零**：`grep -roE "齐活林|许清楚|高见远|寇豆码|严过关" agent-experts/baigong-software-team/ --include="*.md" --include="*.json"` 在**豁免白名单外**命中＝0。白名单（史实/登记豁免，逐路径封闭）：`README.md` 出身节版本账行（L61 v1.2.3 行等既有史实行）、`docs/SWB-交接件v2.9-*.md`（登记件零触碰）、`.collab/**`、`.scratch/tickets/**`（本票面与历史票引用裁定原文）、git 历史面（不属盘上 grep 射程）。
 - **A2 旧职业标签归零（断言串口径）**：断言串闭集＝`交付总监`、`Delivery Director`、`QA工程师`、`QA 工程师`、`QA Engineer`、`Software Architect`、`Software Engineer`——同 grep 口径白名单外命中＝0。裸「架构师」「工程师」「产品经理」不入断言串（席位简称豁免，口径②/③）；「架构工程师」「开发工程师」「质量审计师」内部含「架构师/工程师」子串，对撞时按 SUBSTR 三分账登记不判违例。
-- **A3 新名成对在位**：五新花名逐一 `grep -c` 断言 ≥1 且分布＝两卡 members＋对应席位卡 frontmatter＋标题行（架构席 4 处、其余同构；lead 卡路由表等正文无花名＝实测 4 处为满）；五新 profession.en/en 成对＝两卡各 1＋席位卡 frontmatter 1＝每席 ≥3；五新 avatar 引用各 2（两卡）＋改名后文件在位各 1（`ls avatars/` 读数）。
+- **A3 新名成对在位（结构式判据，Y3 修正）**：每个新花名须同时命中以下**结构位**即绿，不以固定总数判——①注册卡 members 条目 `displayName` 恰 1；②包装卡 members 条目 `name`＋`displayName` 双键各 1（合计 2）；③对应席位卡 frontmatter `zh:` 恰 1＋正文标题行恰 1（合计 2）。逐席命令形如 `grep -c "顾长远" .codebuddy-plugin/plugin.json plugin.json agents/software-team-architect.md`，按文件读数为 1/2/2 即绿（回执附三文件逐文件读数；总数随正文命中浮动不作判据）。profession：五新职业 zh/en 按映射表在两卡 members＋席位卡 frontmatter 成对出现（每文件逐字段读数入回执）；avatar：五新引用名在两卡各 1（计 10）＋改名后文件在位各 1（`ls avatars/` 读数）。
 - **A4 三同源同值**：`grep -n '"version"' bundle.lock plugin.json .codebuddy-plugin/plugin.json` 三读数全等＝`0.1.23`（F7：前后值各附实测，前值 0.1.22）。
 - **A5 门禁**：`bash agent-skills/object-audit/scripts/run-gates.sh`（仓内在册实体，开票侧 `find` 实测换代后路径＝`agent-skills/object-audit/scripts/run-gates.sh`）GATE PASS，输出存证入回执。
 - **A6 引用闭环**：`check-pointer-closure` 缺省两包面读数与前值对比不新增（附前后读数）。
@@ -349,7 +358,7 @@ L5 `"version": "0.1.22",` → `"version": "0.1.23",`（其余行零动；三同�
 
 - 开工读数＝本票 commit 后 HEAD（票面起草读数 4d52e88）；
 - run-gates GATE PASS（附输出载体路径）；check-pointer-closure 前后对比（附读数）；version 前后值各附实测 grep 读数（F7）；A1/A2 归零断言附命令与读数原文；
-- 禁列过程痕迹自检 grep 用 F11 终式 `见?第\s*\d+\s*轮|轮次戳|〔[^〕]*·轮〕|轮次号[：:]`——票面所引五席意见件名与裁定来历句均不含该词族，预期零命中；命中按三分账如实登记上报（H6：票面预期与实测冲突时按实测登记，不得改文凑数）；
+- 禁列过程痕迹自检 grep 用 F11 终式 `见?第\s*\d+\s*轮|轮次戳|〔[^〕]*·轮〕|轮次号[：:]`——**票面自登记自指命中（Y4 修正）**：本行自身含该终式字面＝自指命中，F11 读数预期＝1（即本行）；回执期 H6 读数按此对账，读数>1 才按三分账升级登记（H6：票面预期与实测冲突时按实测登记，不得改文凑数）；
 - 回执落 `.collab/research/`：开端 HEAD＋完整写入/修改/改名文件清单（与 commit name-only 全等）＋全部机制断言附实测载体（N4）。
 - 传导链（四段，禁跳段）：本票收口→①装配（publish.py --assemble 产物三件套对账）→②预览（本地市场源注册挂预览卡＋quickPrompts 槽数宿主实测）→③人类闸（皮总验卡片展示＋新名实感，明示通过）→④转正（marketplace.json 条目 description 随装配产物更新）。
 
