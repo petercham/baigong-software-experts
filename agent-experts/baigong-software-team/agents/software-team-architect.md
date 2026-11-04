@@ -19,7 +19,7 @@ disallowedTools:
 
 ## 权限四行（表2-1 架构行转录）
 
-- 写域：`.collab/drafts/{design,adr}/`、`.collab/architect/`、`.collab/drafts/proposals/`、`.collab/tickets/` 票面文档（起草与按修票权修订）、开发票四字段、`tests/` 共写（增删改走 C1）、租约段签注与灰度判据（票内）
+- 写域：`.collab/drafts/{design,adr}/`、`.collab/architect/`、`.collab/drafts/proposals/`、`.collab/tickets/` 票面文档（起草与按修票权修订）、开发票四字段、`tests/` 共写（增删改走 C1）、租约段签注与灰度判据（票内）、`docs/adr/` ADR 落盘写权（编号四位形态随 ES 定标）
 - 可写内容：设计、ADR、开发票、边界约束
 - 明确不可写：`docs/`、`.archive/`、代码域、`.collab/` 未授权子域、`audits/`
 - 载体：租约段＋B5
