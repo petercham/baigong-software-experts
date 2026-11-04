@@ -1,7 +1,7 @@
 {
   "name": "software-team",
-  "version": "0.1.22",
-  "description": "Baigong Software Team (SWB v2.9 assembly): five-seat SOP-driven software delivery team with ledger-as-truth, lease-gated writes and mechanical gates.",
+  "version": "0.1.23",
+  "description": "Baigong Software Team: five-seat SOP-driven software delivery — six-node flow with ledger-as-truth state machine, lease-gated writes, dual-seat independent review, built-in advisor-meeting and deep-research skills, four-stage deploy chain.",
   "author": {
     "name": "baigong",
     "email": "baigong@example.invalid"
@@ -37,60 +37,81 @@
     "zh": "百工软件团队"
   },
   "displayDescription": {
-    "en": "SOP-driven five-seat software team: product, architect, engineer, QA under a lead, with ledger as single source of truth and mechanical write gates.",
-    "zh": "SOP驱动五席软件团队：主理人统辖产品、架构、工程、QA四席，账本为唯一真相，租约写侧校验与机械门禁执法。"
+    "en": "Auditable five-seat software delivery team: a Project Lead orchestrates Product, Architect Engineer, Development Engineer and QA Auditor. Work starts from requirements and acceptance criteria and runs the six-node flow (requirement, design, ticket breakdown, execution, release, grayscale) serially. Ledger as single source of truth, lease-gated writes and mechanical gates; Product and QA seats review every output independently — the producer never self-verdicts, the human keeps final call. Built-in advisor-meeting facilitation and evidence-based deep research; releases go through the four-stage gate chain: assemble, preview, human verification, deploy.",
+    "zh": "五席协作的可审计软件交付专家团：项目负责人统筹产品、架构、工程、质量审计四席，从需求与验收标准出发，沿六节点流程（需求→设计→拆票→执行→发布→灰度）串行推进；账本为唯一真相、租约写侧校验与机械门禁执法；产品席＋QA席对产出做独立复审（生成方不自判，人类保留终裁）；内置外部顾问讨论会主持与证据型深度调研能力，上线走『装配→预览→人工验证→部署』四段闸口链。"
   },
   "avatar": "avatars/team.png",
   "plugin": "software-team",
   "tags": [
-    { "en": "Software Delivery", "zh": "软件交付" },
-    { "en": "SOP Orchestration", "zh": "SOP编排" },
-    { "en": "Multi-Agent Governance", "zh": "多席治理" }
+    { "en": "Software Delivery (SOP)", "zh": "软件交付（SOP）" },
+    { "en": "Ledger & Write Gates", "zh": "账本与写侧门禁" },
+    { "en": "Independent Review & Audit", "zh": "独立复审与审计" }
   ],
   "quickPrompts": [
-    { "en": "Start a standard SOP delivery for my requirement", "zh": "按标准 SOP 流程启动我的开发需求" },
-    { "en": "Maintain the existing project with a maintenance ticket", "zh": "用维护票对既有项目做轻量维护" },
-    { "en": "Review current ticket status from the ledger", "zh": "从账本核对当前票据与流程状态" }
+    {
+      "en": "I have a development requirement — run the standard flow: PRD, system design, ticket breakdown, serial execution, independent acceptance, with verdict evidence at every step.",
+      "zh": "我有一个开发需求，请按标准流程走一遍：出 PRD、出设计、拆票、串行执行、独立验收，每步留判定证据。"
+    },
+    {
+      "en": "Independently review this design or delivery against a three-state coverage matrix item by item, list the must-fill gaps — the producer never self-verdicts, and the final call stays with me.",
+      "zh": "这份设计／交付请做独立复审：按三态覆盖矩阵逐项给结论，列出必补项——生成方不自判，终裁归我。"
+    },
+    {
+      "en": "Host an external advisor meeting: prepare the topic pack, run multiple rounds of written exchange, and converge into a resolution document.",
+      "zh": "组织一场外部顾问讨论会：帮我编制议题包，多轮书面交流后收敛出决议件。"
+    },
+    {
+      "en": "Research this tech choice, competitor or market: multi-source with citations and falsifiable conditions — lock the question before acting.",
+      "zh": "调研这个技术选型／竞品／市场：要多源带引用、给出可推翻条件，先锁问题再动手。"
+    },
+    {
+      "en": "When changes to this team's own package or system go live: take the four-stage chain — assemble first, mount a preview card, and after my manual verification approve the formal deploy.",
+      "zh": "本专家团自身的包／系统改动要上线时：按四段链上到预览——先装配、挂预览卡，我人工验证通过后再批准正式部署。"
+    },
+    {
+      "en": "Make one interface-preserving lightweight change to this existing project via a maintenance ticket: requirements, design and ticket breakdown merge into a light sign-off, while acceptance, release and grayscale stay intact — reconcile the change list item by item.",
+      "zh": "给这个已有项目做一处不改接口的轻量变更，走维护票：需求／设计／拆票合轻签，验收、发布、灰度不减免，改动清单逐项对账。"
+    }
   ],
   "members": [
     {
       "id": "software-team-lead",
-      "name": { "en": "Qi", "zh": "齐活林" },
-      "displayName": { "en": "Qi", "zh": "齐活林" },
-      "profession": { "en": "Delivery Director", "zh": "交付总监" },
-      "avatar": "avatars/software-company-team-lead.png",
+      "name": { "en": "Bao", "zh": "包好用" },
+      "displayName": { "en": "Bao", "zh": "包好用" },
+      "profession": { "en": "Project Lead", "zh": "项目负责人" },
+      "avatar": "avatars/software-team-lead.png",
       "role": "lead"
     },
     {
       "id": "software-team-product",
-      "name": { "en": "Xu", "zh": "许清楚" },
-      "displayName": { "en": "Xu", "zh": "许清楚" },
+      "name": { "en": "Jiang", "zh": "姜通透" },
+      "displayName": { "en": "Jiang", "zh": "姜通透" },
       "profession": { "en": "Product Manager", "zh": "产品经理" },
-      "avatar": "avatars/software-product-manager.png",
+      "avatar": "avatars/software-team-product.png",
       "role": "member"
     },
     {
       "id": "software-team-architect",
-      "name": { "en": "Gao", "zh": "高见远" },
-      "displayName": { "en": "Gao", "zh": "高见远" },
-      "profession": { "en": "Architect", "zh": "架构师" },
-      "avatar": "avatars/software-architect.png",
+      "name": { "en": "Gu", "zh": "顾长远" },
+      "displayName": { "en": "Gu", "zh": "顾长远" },
+      "profession": { "en": "Architect Engineer", "zh": "架构工程师" },
+      "avatar": "avatars/software-team-architect.png",
       "role": "member"
     },
     {
       "id": "software-team-qa",
-      "name": { "en": "Yan", "zh": "严过关" },
-      "displayName": { "en": "Yan", "zh": "严过关" },
-      "profession": { "en": "QA Engineer", "zh": "QA工程师" },
-      "avatar": "avatars/software-qa-engineer.png",
+      "name": { "en": "Shen", "zh": "沈得严" },
+      "displayName": { "en": "Shen", "zh": "沈得严" },
+      "profession": { "en": "QA Auditor", "zh": "质量审计师" },
+      "avatar": "avatars/software-team-qa.png",
       "role": "member"
     },
     {
       "id": "software-team-engineer",
-      "name": { "en": "Kou", "zh": "寇豆码" },
-      "displayName": { "en": "Kou", "zh": "寇豆码" },
-      "profession": { "en": "Software Engineer", "zh": "工程师" },
-      "avatar": "avatars/software-engineer.png",
+      "name": { "en": "Ke", "zh": "柯会码" },
+      "displayName": { "en": "Ke", "zh": "柯会码" },
+      "profession": { "en": "Development Engineer", "zh": "开发工程师" },
+      "avatar": "avatars/software-team-engineer.png",
       "role": "member"
     }
   ]
