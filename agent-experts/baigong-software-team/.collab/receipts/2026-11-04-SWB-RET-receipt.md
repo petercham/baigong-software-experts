@@ -81,3 +81,15 @@ RET-A0（`e11dbc0`）→ 判据 9 跑绿（涉票 BLOCK 0＋occ 0·双验）→ 
 交付面全域零触碰（三同源零 bump）／两 config＋全部 scripts 零触碰／`.collab/` 除 RET-A0 豁免 20 文件 22 行外零触碰／项目级 85 支历史票零触碰／`tools/`、`.gitignore`、仓根 README 零触碰。本回执＝RET 批唯一追加过程域写件。
 
 ——engineer-ret1 回执（SWB-RET 施工毕·RET-C 停闸候裁项在册）。
+
+## 回执修订·append（2026-11-04·主理人候裁①裁定落地·RET-C 补执行）
+
+- **闸口径定案行**：safe-delete 批量闸计数口径定案＝按 find 文件数计（66＞阈值 50），非顶层条目数——候裁①自此销账（主理人裁·入 RET 收口账）。
+- 执行路径照裁定＝分次删除·禁递归一把梭·禁绕过闸手段：
+  - 批 1＝19 顶层条目（j1×2／j2×3／j3／j5×3／j6×3／j7／j8／neg／neg2／seat-lines／token×2）＝find 23 文件＜50 阈内 ✓；
+  - 批 2＝tmp-drill 单条目＝42 文件＜50 阈内 ✓（单条目内部未再触闸）；
+  - 两批零触闸、零绕过。
+- 判据 6 后置读数（清灭达成）：`ls .scratch/cd1`＝目不存在（末级空目 rmdir 收口）／`find .scratch/cd1 -type f`＝**0**／`git status --porcelain` cd1 行＝**0**／tracked 恒 **0**（前后三验全 0）。
+- 判据 6 状态由「停闸候裁」转**绿**；本修订笔仅追加，原文（含停闸呈报段）不回改＝append-only 史实两立。
+
+——engineer-ret1 回执修订笔（候裁①销账·RET-C 补执行毕）。
