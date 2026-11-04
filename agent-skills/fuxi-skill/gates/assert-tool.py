@@ -774,11 +774,11 @@ def non_regression_shrunk(current: "tuple[str, ...] | int", baseline: "tuple[str
 
 
 def _repo_root() -> str:
-    return os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    return os.path.dirname(os.path.dirname(_SKILL_ROOT))
 
 
 def _active_pool_dir() -> str:
-    return os.path.join(_repo_root(), *_PRODUCTS_SUBPATH)
+    return os.path.join(_SKILL_ROOT, *_PRODUCTS_SUBPATH)
 
 
 def _product_entries() -> "list[tuple[str, str]]":
@@ -1203,7 +1203,7 @@ def fc_4_state_vocab_board() -> "tuple[str, str]":
     vocab_hits = state_token_scan(ac_text, VOCAB_LINE_KEY, STATE_WORDS, exact=True)
     if vocab_hits:
         return (READ_FAIL, "AC-5 词表声明句私扩/缺值：%s" % "；".join(vocab_hits))
-    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    repo_root = _repo_root()
     board_dir = os.path.normpath(os.path.join(repo_root, ".collab", "board"))
     ok_board, detail = board_files_ok(board_dir)
     if not ok_board:
@@ -1246,7 +1246,7 @@ def _verification_records() -> "tuple[list[dict], list[str]]":
 
     返回 (记录列表, 读取问题列表)；目录不在场＝空扫描合法态（读取问题空）。
     """
-    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    repo_root = _repo_root()
     rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
     records: "list[dict]" = []
     problems: "list[str]" = []
@@ -1370,7 +1370,7 @@ def gs_4_calibration_kappa() -> "tuple[str, str]":
     对账 κ 点值/区间下界 ↔ calibration_state；任一不一致＝FAIL 逐条列明细；
     全对＝PASS（读数含元组数）。
     """
-    repo_root = os.path.dirname(os.path.dirname(os.path.dirname(_SKILL_ROOT)))
+    repo_root = _repo_root()
     rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
     tuple_paths: "list[str]" = []
     if os.path.isdir(rec_dir):

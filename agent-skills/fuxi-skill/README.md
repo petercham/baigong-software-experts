@@ -24,7 +24,7 @@
 | `adapters/` | 双轨填料＋对象分类器（S2 建） | `adapters/person.md`（persona 轨 adapter·六节闭集）／`adapters/method.md`（technique 轨 adapter·六节闭集）／`adapters/classifier.md`（对象分类器·四值闭集＋决策序＋判例表＋混淆表规程） |
 | `rejected/` | 淘汰留档区（可枚举基面） | `rejected/README.md`（留档约定＋coverage-audit 三问口径） |
 
-产物生效池在交付面同级路径 `deliverables/products/`（active 池约定件＝该目录 README；未生效留档走隔离归档区约定名 `archive/`）。
+产物生效池在包内路径 `products/`（active 池约定件＝该目录 README；未生效留档走隔离归档区约定名 `archive/`）。
 
 ## 边界速览（详情各归本件）
 
@@ -35,7 +35,7 @@
 
 ## 使用口径
 
-对象登记 → `adapters/classifier.md` 分类（四值闭集＋决策序）→ 对应 adapter 蒸馏（`adapters/person.md`／`adapters/method.md`）→ validator 门禁（method 轨 `gates/validator-source-anchor.py` 硬门／person 轨 `gates/validator-public-anchor.py` 软门；结构层断言＝`gates/assert-tool.py`）→ 产物入 active 生效池 `deliverables/products/`（**人工确认前置**：入池须人工确认＋独立提案＋版本审计，确认前落隔离归档区，见池约定件）→ 装载口径按宿主显式注册制（分卷注册期预编译，装载期仅从已注册分卷选择）。
+对象登记 → `adapters/classifier.md` 分类（四值闭集＋决策序）→ 对应 adapter 蒸馏（`adapters/person.md`／`adapters/method.md`）→ validator 门禁（method 轨 `gates/validator-source-anchor.py` 硬门／person 轨 `gates/validator-public-anchor.py` 软门；结构层断言＝`gates/assert-tool.py`）→ 产物入 active 生效池 `products/`（**人工确认前置**：入池须人工确认＋独立提案＋版本审计，确认前落隔离归档区，见池约定件）→ 装载口径按宿主显式注册制（分卷注册期预编译，装载期仅从已注册分卷选择）。
 
 术语表（六词）：
 

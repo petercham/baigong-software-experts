@@ -189,12 +189,12 @@ def record_skeleton() -> "dict[str, str]":
 def evidence_harness_dir(base_dir: str = "") -> str:
     """验证记录与对照组构成表落盘路径定位＝<仓根>/.collab/evidence/harness/。
 
-    base_dir 缺省＝自本件位置静态上溯三级（交付面 gates/→fuxi-skill→skills→deliverables→仓根）。
+    base_dir 缺省＝自本件位置静态上溯三级（交付面 gates/→fuxi-skill→agent-skills→仓根）。
     """
     if base_dir:
         return os.path.join(base_dir, ".collab", "evidence", "harness")
     here = os.path.dirname(os.path.abspath(__file__))
-    repo_root = os.path.normpath(os.path.join(here, os.pardir, os.pardir, os.pardir, os.pardir))
+    repo_root = os.path.normpath(os.path.join(here, os.pardir, os.pardir, os.pardir))
     return os.path.join(repo_root, ".collab", "evidence", "harness")
 
 

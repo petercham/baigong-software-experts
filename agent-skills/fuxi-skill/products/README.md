@@ -1,14 +1,14 @@
 # fuxi-skill · active 生效池（产物存放约定件）
 
-> 性质＝交付件约定面（自包含成文）。本目录＝`-perspective`／`-technique`／`-bundle` 产物的 active 生效池注册路径；约定件与留档区约定件（`deliverables/skills/fuxi-skill/rejected/README.md`）同款留档约定。
-> 记法：R<n>＝决策清单条款；AC-<n>＝`deliverables/skills/fuxi-skill/contracts/artifact-contract.md` 节号；ST/FC/BW/GS-<n>＝`deliverables/skills/fuxi-skill/gates/assertion-catalog.md` 断言编号。正文零过程域指针；命名英文 kebab。
+> 性质＝交付件约定面（自包含成文）。本目录＝`-perspective`／`-technique`／`-bundle` 产物的 active 生效池注册路径；约定件与留档区约定件（`../rejected/README.md`）同款留档约定。
+> 记法（以下路径＝包根相对）：R<n>＝决策清单条款；AC-<n>＝`contracts/artifact-contract.md` 节号；ST/FC/BW/GS-<n>＝`gates/assertion-catalog.md` 断言编号。正文零过程域指针；命名英文 kebab。
 
 ## 一、生效池定义（R16 落盘约定）
 
-- active 生效池＝产物目录注册路径＝`deliverables/products/`（与 `deliverables/skills/` 同级的交付面路径；产物＝独立 skill 本体，不与工具包目录混放，隔离扫描基面干净）。
+- active 生效池＝产物目录注册路径＝包内 `products/`（产物＝独立 skill 本体目录，不与工具包其余目录混放，隔离扫描基面干净）。
 - 每产物＝独立 skill 本体目录，目录名＝`<对象名kebab>-perspective`／`<对象名kebab>-technique`／`<对象名kebab>-bundle`（kebab 纪律）。
 - 入池前置（自动调整产物处置三定义域口径照引）：写入本池必须经**人工确认＋独立提案＋版本审计**；确认前产物落待确认暂存区（约定名 `pending/`）；`archive/`＝历史记录区（过程留痕／工具运行证据），免产物级机检，装载不被触及。
-- 判别口径双证据＝生效区字节哈希＋装载记录（R16），缺一即视为改动生效产物；装载记录侧当期环境实证不可得（缺口在册＝`deliverables/skills/fuxi-skill/gates/validator-catalog.md` §5.1，不重复造桩）。
+- 判别口径双证据＝生效区字节哈希＋装载记录（R16），缺一即视为改动生效产物；装载记录侧当期环境实证不可得（缺口在册＝`gates/validator-catalog.md` §5.1，不重复造桩）。
 
 ## 二、当期读数口径
 
