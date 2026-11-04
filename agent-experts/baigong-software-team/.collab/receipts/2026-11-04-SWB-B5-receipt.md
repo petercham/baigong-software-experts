@@ -1,6 +1,6 @@
 # SWB-B5 · 收尾批（gitignore/README 重写＋D7 入库＋旧壳清灭）· 工程师回执 v1
 
-- 回执席＝engineer-b5；票＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-B5-收口登记-v1.md`（票面 `8f5efa9`＋rev2 `cccc0b7`·已退役·寻回见 SWB-RET 退役名录·冲突以 rev2 为准）。
+- 回执席＝engineer-b5；票＝`.collab/2026-11-04-SWB-B5-收口登记-v1.md`（票面 `8f5efa9`＋rev2 `cccc0b7`·已退役·寻回见 SWB-RET 退役名录·冲突以 rev2 为准）。
 - 开工实测 HEAD＝`9f6675e`（≥B4 回执随正笔）；开工 `git status --short` 基线读数＝**空**（干净）；开工 `git ls-files` 计数基线＝**866**。
 - 开工门禁族集签名＝`GATE PASS`（发现 8745·BLOCK OA-D6 族大头＝案卷换址既有实例·reconcile 票 96/对账 34/SKIP 62 全 WATCH exit 1＝B4 后常态）＝与 OA-D6 族大头＝案卷换址既有实例先例同态在册。
 

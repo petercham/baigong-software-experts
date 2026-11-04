@@ -1,6 +1,6 @@
 # SWB-CD1 施工回执 v1（engineer-cd1）
 
-- 票面真源＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-CD1-收口登记-v1.md`（票面定稿链 `b2f95aa`→`20d35a1`→`51002b5`→`ec71dcf`·已退役·寻回见 SWB-RET 退役名录）。
+- 票面真源＝`.collab/2026-11-04-SWB-CD1-收口登记-v1.md`（票面定稿链 `b2f95aa`→`20d35a1`→`51002b5`→`ec71dcf`·已退役·寻回见 SWB-RET 退役名录）。
 - 开工实测 HEAD＝`ec71dcf`（≥票面 ANCHOR `3b03738`，读数附此）；收口施工笔 HEAD＝`19b313a`（本回执单独次笔）。
 - 计数口径＝occurrence；token 申报四要素见判据 4；负例 exit≠0 体例照票。
 - 施工续飞说明：首轮现场＝闭集 11 件全落盘零 commit（会话中断非门禁拦红）；本笔经 pre-commit 门禁 GATE PASS 干净入库，禁 `--no-verify` 未用、amend 未用。
