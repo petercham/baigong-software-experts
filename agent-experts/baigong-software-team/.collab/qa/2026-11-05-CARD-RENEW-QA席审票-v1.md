@@ -2,7 +2,7 @@
 
 > 【来源】QA席·双席独立审票（B 席）＋ 2026-11-05。A 席＝产品席并发独立审，本席未读其任何产出（fresh eyes）。
 > 性质：审票件（只读审查，零施工，唯一写入＝本件）。
-> 开工读数：`git rev-parse --short HEAD` 实测 `da25666`（CARD-RENEW 挂 HOLD 笔）。
+> 开工读数：`git rev-parse --short HEAD` 实测 `da25666`（CARD-RENEW 挂 HOLD 笔）。被核票面 commit＝起草笔 `94ed2ec`＋HOLD 挂位笔 `da25666`（帽头补录，随催办轮追认笔 78ffa5b 后 amend-free 追加）。
 > 被核件：`agent-experts/baigong-software-team/.scratch/tickets/2026-11-05-CARD-RENEW-卡片换代与席位命名换代施工票.md`（实测 357 行；派工书称 356 行，差一行为末行换行计数口径差，不构成判项）。
 > 裁定真源：`.collab/decisions/2026-11-05-皮总裁定-席位职业标签与花名换代.md`（4d52e88）＋ `.collab/decisions/2026-11-05-主理人裁定-CARD-RENEW候裁八条.md`（bda4fec）。
 > 计数口径：本件全部 grep 计数为 occurrence 口径（`grep -ro/-rn`），逐项就地附命令与读数原文。
