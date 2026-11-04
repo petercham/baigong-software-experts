@@ -37,7 +37,7 @@
 | agent-experts | `baigong-software-team` | 百工软件团队专家包（五席 SOP 驱动·账本为真相·租约写门·机检门禁） | v0.1.18（plugin.json＋bundle.lock＋.codebuddy-plugin 三同源·纪律①每变必 bump） |
 | agent-skills | `multi-collab` | 协作纪律（权限分级版：唯一写权＋开放读权席位＋md 交接件机制） | v4.10 |
 | agent-skills | `object-audit` | 对象审计总入口（骨架＋对象判据分件＋仓级门禁脚本族） | v0.8 |
-| agent-skills | `object-build` | 对象构建总入口（三问＋六步＋分件：skill/装订/角色/票/文档/发布） | v0.5 |
+| agent-skills | `object-build` | 对象构建总入口（三问＋六步＋分件：skill/装订/角色/票/文档/发布） | v0.6 |
 | agent-skills | `bundle-assembly-registration` | 专家包装配＋注册工序（T 步骤型·运行时挂载·不持发布器能力） | v0.1 |
 | agent-skills | `external-advisor-collab` | 外部顾问讨论会治理（席位职权闭集·轮次程序·决议规则） | v1.1.1 |
 | agent-skills | `fuxi-skill` | 伏羲 perspective-pack-builder（人格/技法双轨蒸馏工具链·产物住本包 `products/`） | 批受控（S4 定稿·包 README 随批版本号递增） |

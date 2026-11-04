@@ -673,6 +673,7 @@ def git_clean_or_die(repo: str, label: str) -> "None":
     """纪律⑤ 前置①：clean worktree——判定面＝**已跟踪文件零改动**（`-uno`）。
     理由（实现选择·如实标注）：装配取源走 `git archive <ref>`＝只读 committed blob，
     未跟踪文件（各仓 .collab/ 治理流水常态）根本不进装配面、也不影响 ref 解析；
+    （PUB-EXCL 补注防误读：本句只讲「未跟踪文件」这一类；已跟踪过程域段自 PUB-EXCL 批起另由取料成员层排除，两事两条码。）
     已跟踪文件有未提交改动才让「source_commit 账」说谎——那才是本闸要拦的。
     未跟踪文件只报告不拦（信息行）。不过＝exit 3（前提不成立）。"""
     proc = run_git(repo, ["status", "--porcelain", "-uno"])
@@ -726,6 +727,8 @@ def git_archive_blobs(repo: str, ref: str, prefix: str) -> "dict[str, bytes]":
         rel = rel.replace("\\", "/")
         if "__pycache__/" in rel or rel.endswith(".pyc"):
             continue  # 编译缓存件不入装配面
+        if any(seg in (".collab", ".scratch") for seg in rel.split("/")):
+            continue  # 过程域段不入交付面（PUB-EXCL·皮总 2026-11-05「补」·㊺交付物纯度）
         result[rel] = tar.extractfile(member).read()
     if not result:
         sys.stderr.write("prerequisite failed: %s 在 %s 下无文件（path 写错或该 ref 无此组件）\n"
