@@ -9,7 +9,8 @@
     "规则": "提案席位（规则票→提案席位）",
     "流程变更": "提案席位（表注六映射未直列·按规则票同类条款归提案席位）",
     "验收": "QA席（表2-2 票级验收结论/QA 出结论·验收类票作者权同类归 QA）",
-    "维护": "架构席（维护票→架构席修）"
+    "维护": "架构席（维护票→架构席修）",
+    "ADR": "架构席（终写段＝纯誊写·条款甲）"
   },
   "table_six_mappings_verbatim": [
     {"mapping": "开发票→架构修", "ticket_class": "开发", "amender": "架构席", "source": "表注六映射直列（开发票＝拆票节点生成之票·总览 SWB-T01..T06 票包实践＝架构席起草）"},
@@ -19,6 +20,6 @@
     {"mapping": "规则票→提案席位", "ticket_class": "规则", "amender": "提案席位", "source": "表注六映射直列"},
     {"mapping": "维护票→架构席修", "ticket_class": "维护", "amender": "架构席", "source": "表注六映射直列"}
   ],
-  "same_origin_closure_note": "票类清单∈ticket-types.json 同一集合（§3 票型八类）：表注六映射覆盖票型八类中五类＋维护；其余三类（产品需求/流程变更/验收）按上表 authors 附源注归位以闭合 authors 键集＝types 集（T03 验收判据2 同源断言）。归位注记入回执呈核，不新增候裁。",
+  "same_origin_closure_note": "票类清单∈ticket-types.json 同一集合（§3 票型八类）：表注六映射覆盖票型八类中五类＋维护；其余三类（产品需求/流程变更/验收）按上表 authors 附源注归位以闭合 authors 键集＝types 集（T03 验收判据2 同源断言）。归位注记入回执呈核，不新增候裁。ADR＝九类增员·作者权直列架构席（非表注六映射来源）。",
   "same_origin_declaration": "本文件与 config/seat-permissions.json、config/dispatch-spec.json、config/ticket-types.json 同一票类清单派生（§3 席位-票-租约同源配置）。"
 }

@@ -1,6 +1,6 @@
 {
   "derived_from": "表2-3",
-  "source": "架构 v2.9 表2-3 审查权与签字矩阵（V13 L99–109＝落盘物理 L127–137）七行逐行转录＝六节点行＋维护行；审查注入面条款 V13 L109；轻签点表注 V13 L110",
+  "source": "架构 v2.9 表2-3 审查权与签字矩阵（V13 L99–109＝落盘物理 L127–137）七行逐行转录＝六节点行＋维护行；审查注入面条款 V13 L109；轻签点表注 V13 L110＋ADR·落盘行（2026-11-04 已确认链执行类新增·基线表2-3 随行候裁①②落位）",
   "ticket_types_ref": "config/ticket-types.json",
   "ticket_types_note": "票类清单引用 ticket-types.json 同源（§3 席位-票-租约同源配置·同源校验断言＝T03 验收判据2）",
   "injection_clause": "审查注入面（表2-3 表注·V13 L109 逐字）：QA 审计切片显式列明；产品含已登记 intake 只读＋架构触发项命中件草稿态；工程师只见本票＋上游内容副本。dispatch-spec 构造注入包/决策包时剥除过程痕迹段（源头即纯，P-Ⅰ 前置；构造断言：注入包/决策包成品对过程痕迹词族零命中）；已转正外部件按其级列入注入闭集，未转正件不入。审查者看什么由 dispatch-spec 机械定义，不许自选。",
@@ -92,6 +92,17 @@
         {"seat": "architect", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "已登记intake只读", "kind": "pointer"}, {"name": "架构触发项命中件草稿态", "kind": "pointer"}]},
         {"seat": "qa", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "QA审计切片显式列明", "kind": "pointer"}]},
         {"seat": "engineer", "entries": [{"name": "本票票面副本", "kind": "literal"}, {"name": "上游内容副本", "kind": "literal"}]}
+      ]
+    },
+    {
+      "node": "ADR·落盘",
+      "name": "ADR 工序（人类决策→誊录登记→会签→终写）",
+      "signoffs": ["产品会签签", "QA 会签签", "架构会签签＋终写签（终写＝条款甲纯誊写）"],
+      "human_role": "输入决策＋（登记件誊录经主理人）",
+      "injection_faces": [
+        {"seat": "product", "entries": [{"name": "裁决登记件（誊录态只读）", "kind": "pointer"}, {"name": "收口草案（四方会签中）", "kind": "literal"}]},
+        {"seat": "qa", "entries": [{"name": "裁决登记件（誊录态只读）", "kind": "pointer"}, {"name": "收口草案（四方会签中）", "kind": "literal"}]},
+        {"seat": "architect", "entries": [{"name": "裁决登记件（誊录态只读）", "kind": "pointer"}, {"name": "收口草案（会签终稿）", "kind": "literal"}]}
       ]
     }
   ],

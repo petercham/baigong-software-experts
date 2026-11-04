@@ -54,10 +54,10 @@ def seed_states(states_file: str, mapping: dict) -> None:
         json.dump(mapping, f, ensure_ascii=False)
 
 
-def t01_spec_seven_rows_signoffs_nonempty(tmp: str) -> None:
+def t01_spec_eight_rows_signoffs_nonempty(tmp: str) -> None:
     with open(SPEC_PATH, encoding="utf-8") as f:
         spec = json.load(f)
-    assert len(spec["nodes"]) == 7, f"dispatch-spec 行数={len(spec['nodes'])} ≠ 7（六节点＋维护行）"
+    assert len(spec["nodes"]) == 8, f"dispatch-spec 行数={len(spec['nodes'])} ≠ 8（六节点＋维护行＋ADR·落盘行）"
     assert all(len(n["signoffs"]) > 0 for n in spec["nodes"]), "存在签字集合为空的行"
     assert spec.get("derived_from") == "表2-3"
     maint = [n for n in spec["nodes"] if str(n["node"]).startswith("维护")]
@@ -154,7 +154,7 @@ def t07_serial_gate_cli_smoke(tmp: str) -> None:
 
 
 def run_self() -> int:
-    tests = [t01_spec_seven_rows_signoffs_nonempty,
+    tests = [t01_spec_eight_rows_signoffs_nonempty,
              t02_serial_gate_active_nonzero_rejects_with_exactly_one_report,
              t03_dispatch_ok_writes_package_hash_record,
              t04_superset_rejected_with_diff_set,

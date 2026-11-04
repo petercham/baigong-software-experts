@@ -62,8 +62,8 @@ def pack_root() -> str:
 def load_spec(spec_path: str) -> dict:
     with open(spec_path, encoding="utf-8") as f:
         spec = json.load(f)
-    if len(spec.get("nodes", [])) != 7:
-        raise SystemExit(f"FATAL: dispatch-spec 行数={len(spec.get('nodes', []))} ≠ 表2-3 七行（六节点＋维护行）")
+    if len(spec.get("nodes", [])) != 8:
+        raise SystemExit(f"FATAL: dispatch-spec 行数={len(spec.get('nodes', []))} ≠ 表2-3 八行（六节点＋维护行＋ADR·落盘行）")
     return spec
 
 
@@ -158,7 +158,7 @@ def dispatch(ticket_meta: dict, spec: dict, ledger_file: str, states_file: str,
 
     node_cfg = spec_node(spec, node)
     if node_cfg is None:
-        print(f"REJECT: 节点 {node!r} 不在 dispatch-spec 七行内", file=sys.stderr)
+        print(f"REJECT: 节点 {node!r} 不在 dispatch-spec 声明行集内", file=sys.stderr)
         return EXIT_SUPERSET
 
     # ③ 白名单超集检测：展开请求 ⊖ spec 声明面 ≠ ∅ → exit≠0 回显差异集（违纪行15「注入包超集」）
