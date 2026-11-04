@@ -359,7 +359,7 @@ L5 `"version": "0.1.22",` → `"version": "0.1.23",`（其余行零动；三同�
 - 开工读数＝本票 commit 后 HEAD（票面起草读数 4d52e88）；
 - run-gates GATE PASS（附输出载体路径）；check-pointer-closure 前后对比（附读数）；version 前后值各附实测 grep 读数（F7）；A1/A2 归零断言附命令与读数原文；
 - 禁列过程痕迹自检 grep 用 F11 终式 `见?第\s*\d+\s*轮|轮次戳|〔[^〕]*·轮〕|轮次号[：:]`——**票面自登记自指命中（Y4 修正）**：本行自身含该终式字面＝自指命中，F11 读数预期＝1（即本行）；回执期 H6 读数按此对账，读数>1 才按三分账升级登记（H6：票面预期与实测冲突时按实测登记，不得改文凑数）；
-- 回执落 `.collab/research/`：开端 HEAD＋完整写入/修改/改名文件清单（与 commit name-only 全等）＋全部机制断言附实测载体（N4）。
+- 回执落 `.collab/receipts/`（落点更正登记：起草时票面原写 `.collab/research/`，工程师实落＝`.collab/receipts/2026-11-05-CARD-RENEW-工程师回执v1.md`，主理人已追认该落位——更正缘由＝回执族件居 receipts 桶为新树体例，起草时误写 research 桶）：回执指针行＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-05-CARD-RENEW-工程师回执v1.md`。回执内容＝开端 HEAD＋完整写入/修改/改名文件清单（与 commit name-only 全等）＋全部机制断言附实测载体（N4）。
 - 传导链（四段，禁跳段）：本票收口→①装配（publish.py --assemble 产物三件套对账）→②预览（本地市场源注册挂预览卡＋quickPrompts 槽数宿主实测）→③人类闸（皮总验卡片展示＋新名实感，明示通过）→④转正（marketplace.json 条目 description 随装配产物更新）。
 
 ## 红线
