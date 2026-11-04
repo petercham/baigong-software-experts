@@ -1,6 +1,6 @@
 # SWB-B2 · 交付面搬家回执（施工席 engineer-b2）
 
-- 规格源＝原票 `.scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket.md`（`f017a51`）＋ rev2 定点增补 `...-rev2.md`（`843784a`·冲突处以 rev2 为准）。
+- 规格源＝原票 `agent-experts/baigong-software-team/.collab/receipts/2026-11-03-SWB-B2-收口登记-v1.md`（票面 `f017a51`＋rev2 `843784a`·已退役·寻回见 SWB-RET 退役名录·冲突处以 rev2 为准）。
 - 开工 HEAD 实测＝`6c17e64`（B1 收口登记笔≥要求）；开工前 `git status --short` 仅见两支 2026-11-01 TKT untracked 旧件（未触碰·收口时依旧在位）。
 - 开工 tag＝`archive-pre-B2-20261104`→`6c17e64`（D6 既裁·判据7 读数＝tag 在册 1）。
 - 落位说明：主理人指令落仓根 `.collab/receipts/`（原票新桶落位行与指令冲突处以指令为准·随 B1 回执先例同桶）。

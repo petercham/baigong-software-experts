@@ -1,6 +1,6 @@
 # SWB-B5 · 收尾批（gitignore/README 重写＋D7 入库＋旧壳清灭）· 工程师回执 v1
 
-- 回执席＝engineer-b5；票＝`.scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket.md`（`8f5efa9`）＋rev2（`cccc0b7`·冲突以 rev2 为准）。
+- 回执席＝engineer-b5；票＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-B5-收口登记-v1.md`（票面 `8f5efa9`＋rev2 `cccc0b7`·已退役·寻回见 SWB-RET 退役名录·冲突以 rev2 为准）。
 - 开工实测 HEAD＝`9f6675e`（≥B4 回执随正笔）；开工 `git status --short` 基线读数＝**空**（干净）；开工 `git ls-files` 计数基线＝**866**。
 - 开工门禁族集签名＝`GATE PASS`（发现 8745·BLOCK OA-D6 族大头＝案卷换址既有实例·reconcile 票 96/对账 34/SKIP 62 全 WATCH exit 1＝B4 后常态）＝与 OA-D6 族大头＝案卷换址既有实例先例同态在册。
 
@@ -80,7 +80,7 @@
 - **黄-2（B4 回执自咬指针 3 条）收账**：`receipt.md:54` path_globs 字面／`receipt.md:3` 票面指针＝回执史述 append-only **不改写**（史实锚纪律）；`README.md:58` 旧行＝旧仓根 README 行随 B5-B 重写**自然消解**（新 README 无该行·check-pointers 现面该格消失在册）。三条＝登记面清理口径收账完毕。
 - **README 表行读数差**：B2 回执待并入行记「skills 表 6 行」vs 旧件取证实测数据行＝**5**（表头 1 另计；external-advisor-collab 未列旧表＝其出生在新树）；新 README 并入段＝旧 5 行照录＋现名录 6 技能项目全在名录表＝读数差登记于此不自行抹平。
 - `tmp-w7-msg.txt`＝新行 `/.collab/tmp-*.txt` 仍覆盖＝ignore 态留置随判在册（B3 回执承接口径闭合）。
-- ESC1 未执行＝rev2 A2-补2 两态口径取「后于 B5」态＝仓根三桶行维持·era 索引标「待移交」✓；ESC1 实体票引用已随动入 README 四节（`.scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md`）。
+- ESC1 未执行＝rev2 A2-补2 两态口径取「后于 B5」态＝仓根三桶行维持·era 索引标「待移交」✓；ESC1 实体票引用已随动入 README 四节（`2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket`）（票面已退役·SWB-RET）。
 
 ## 六、红项史述（B5-C 曾拦·候裁后放行）
 

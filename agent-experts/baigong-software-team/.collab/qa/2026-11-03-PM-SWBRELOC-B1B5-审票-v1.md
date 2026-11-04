@@ -6,7 +6,7 @@
 - 被审五票 commit 读数（`git log --oneline` 实测）：
   | 票 | 文件 | commit |
   |---|---|---|
-  | B1 骨架票 | `.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md` | `b5fd2b4` |
+  | B1 骨架票 | `agent-experts/baigong-software-team/.collab/receipts/2026-11-03-SWB-B1-收口登记-v1.md`（票面 `b5fd2b4`·已退役·寻回见 SWB-RET 退役名录） | `b5fd2b4` |
   | B2 交付面搬家票 | `...-B2-delivery-tree-migration-ticket.md` | `f017a51` |
   | B3 过程域搬家票 | `...-B3-process-domain-migration-ticket.md` | `d584d7b` |
   | B4 门禁票面锚定随动票 | `...-B4-gate-ticket-anchor-sync-ticket.md` | `9ae0b8a` ＋ 勘正微笔 `232bcfb` |

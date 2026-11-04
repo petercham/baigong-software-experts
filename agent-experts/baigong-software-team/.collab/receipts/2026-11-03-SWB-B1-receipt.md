@@ -1,6 +1,6 @@
 # SWB-B1 · 骨架票施工回执
 
-- 票面：`.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md`（原票 `b5fd2b4`）＋ rev2 定点增补 `.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket-rev2.md`（`721d40c`·冲突处以 rev2 为准）。
+- 票面：`agent-experts/baigong-software-team/.collab/receipts/2026-11-03-SWB-B1-收口登记-v1.md`（票面 `b5fd2b4`＋rev2 `721d40c`·已退役·寻回见 SWB-RET 退役名录·冲突处以 rev2 为准）。
 - 施工席＝工程师席施工员（engineer-b1）；交付 commit＝`c7f87e7`；回执＝本笔单独 commit。
 - 回执落位口径＝旧域 `.collab/receipts/`（B 批回执落位·收口登记统一说明）。
 
@@ -36,7 +36,7 @@
 | 2 | `ls agent-experts/ agent-skills/` | agent-experts/＝README.md＋baigong-software-team；agent-skills/＝README.md＋六技能目录（external-advisor-collab, multi-collab, object-audit, object-build, bundle-assembly-registration, fuxi-skill）；与声明名录全等；softwares/＝仅 README.md（空名录） | 绿 |
 | 3 | python 逐 7 件抽取 YAML 围栏→`schema_version==1`＋`delivery_paths` 无 `docs/` 前缀行 | 7/7 件解析通过，读数表见下节；仓外 Temp 构造含 `docs/x` 负例→命中拒判（脚本 exit 逻辑对负例返回非 0 路径）；正式跑 exit 0 | 绿 |
 | 4 | `grep -o "decisions/ qa/ receipts/ board/ design/ research/ refs/ evidence/ inbox/ process/ dispatch/" deliverables/experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md \| wc -l` | ＝1（rev2 换代串·occurrence 口径） | 绿 |
-| 5 | `git check-ignore -v agent-experts/baigong-software-team/.collab/refs/x agent-skills/fuxi-skill/.collab/evidence/y` | 两查均命中（`.gitignore:59:/**/.collab/refs/`、`.gitignore:60:/**/.collab/evidence/`）exit 0；`git check-ignore .scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md` → exit 1（票面不被 ignore＝断言满足） | 绿 |
+| 5 | `git check-ignore -v agent-experts/baigong-software-team/.collab/refs/x agent-skills/fuxi-skill/.collab/evidence/y` | 两查均命中（`.gitignore:59:/**/.collab/refs/`、`.gitignore:60:/**/.collab/evidence/`）exit 0；`git check-ignore 2026-11-03-SWB-B1-restructure-skeleton-ticket`（票面已退役·SWB-RET） → exit 1（票面不被 ignore＝断言满足） | 绿 |
 | 6 | `bash deliverables/skills/object-audit/scripts/run-gates.sh --root .` | 完工后跑＝GATE PASS exit 0（发现 631 条）；对开工基线 diff：无新增发现族——check-ticket-reconcile「未声明生成件」WATCH 实例 43→51（既有族实例增加：旧票对仓根新目录/新文件的脏路径 WATCH，均②路由不拦）、check-pointer-closure SUBSTR 分账 98→101（示例计数·非违例）；VIOLATION 族 86→86 零增 | 绿（如实报实例增量如上） |
 | 7 | `git show --name-only` vs 声明闭集 20 件 | 全等（见下节对账） | 绿 |
 

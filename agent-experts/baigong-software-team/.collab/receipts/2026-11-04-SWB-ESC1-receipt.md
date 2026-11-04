@@ -1,6 +1,6 @@
 # SWB-ESC1 · era 外部参照件跨仓移交微批 · 工程师回执 v1
 
-- 回执席＝engineer-b5；票＝`.scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md`；清单真源＝B3 回执 §七「era 移交清单·出处二次分账」＋§五 era 计数钉口径。
+- 回执席＝engineer-b5；票＝`.collab/2026-11-04-SWB-B批总收口登记-v1.md`（commit `3b03738`）（ESC1 票面已退役·收口见该件 ESC1 段）；清单真源＝B3 回执 §七「era 移交清单·出处二次分账」＋§五 era 计数钉口径。
 - 开工 HEAD 实测（两仓各附）＝devkits `50e726a`（＝B5/B 批收口登记笔✓）·工作区 clean；experts `87199fa`·工作区 clean（仅 `.collab/`/`.workbuddy/` untracked 非本票面）。
 - 计数口径＝occurrence＋`git -c core.quotepath=off`；判据自带落盘；负例 exit≠0。
 

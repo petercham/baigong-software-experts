@@ -1,6 +1,6 @@
 # SWB-B3 · 过程域搬家回执（engineer-b3 施工席）
 
-- 被回执票＝`.scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket.md`（`d584d7b`）＋rev2 补丁件（`ab8b8b9`·冲突以 rev2 为准）。
+- 被回执票＝`.collab/2026-11-03-SWB-B3-收口登记-v1.md`（仓根面·票面 `d584d7b`＋rev2 补丁件 `ab8b8b9`·已退役·寻回见 SWB-RET 退役名录·冲突以 rev2 为准）。
 - **开工 HEAD 实测＝`5b5bcf2`**（B2 收口登记笔·`git log --oneline -3` 确认）；开工 `git status --short`＝仅两支 2026-11-01 TKT untracked 旧件（随批入库✓）。
 
 ## 一、逐笔 commit 链

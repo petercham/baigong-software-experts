@@ -1,6 +1,6 @@
 # SWB-ES2 施工回执（engineer-es2 席·合并收账小票）
 
-- 票面真源＝`.scratch/tickets/2026-11-04-SWB-ES2-seatcard-gate-routing-ticket.md`（定稿链 `bc6dc73`→`ab704b4`→`78fd5bf`→`c126716`·逐字照录落盘，定稿句零改写）。
+- 票面真源＝`agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-ES2-收口登记-v1.md`（票面定稿链 `bc6dc73`→`ab704b4`→`78fd5bf`→`c126716`·已退役·寻回见 SWB-RET 退役名录·逐字照录落盘，定稿句零改写）。
 - 开端 HEAD 实测＝`c126716`（≥ ANCHOR 要求 ≥`c126716` ✓）；施工笔 HEAD＝`f6ffa26`。
 - 计数口径＝occurrence；`git -c core.quotepath=off`；负例 exit≠0。
 

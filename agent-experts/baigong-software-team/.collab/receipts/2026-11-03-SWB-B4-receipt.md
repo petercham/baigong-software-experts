@@ -1,6 +1,6 @@
 # SWB-B4 · 门禁/票面锚定随动票 · 工程师回执 v1
 
-- 回执席＝engineer-b4；票＝`.scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket.md`（`9ae0b8a`）＋rev2（`efbdcc0`·冲突以 rev2 为准）。
+- 回执席＝engineer-b4；票＝`.collab/2026-11-04-SWB-B4-收口登记-v1.md`（仓根面·票面 `9ae0b8a`＋rev2 `efbdcc0`·已退役·寻回见 SWB-RET 退役名录·冲突以 rev2 为准）。
 - 开工实测 HEAD＝`a05ed58`（≥B3 收口登记笔；engineer-b3 无追加随正笔在笔上）；`git status --short` 基线读数＝空（干净）。
 - 开工基线门禁族集（run-gates GATE PASS exit 0·发现 8689）：BLOCK OA-D6×3774／WATCH OA-D6×1365／OA-D6-3×1006／OA-D6-4×2042／MC-SOT-1×54／MC-SOT-2×413／EAC-L1×17／EAC-L2×18／**reconcile 族＝GONE 窗口态**（缺省票目录旧位空→票 0 发现 0＝B3 预告目）。
 - 开工 `git ls-files .collab .scratch`＝**40**（仓根过渡面）；全仓 `(^|/)\.(collab|scratch)/` 口径＝**635**（B3 收口守恒值 638 中 3 件＝B3 后主理人裁定登记笔新增后口径·开工落盘＝635 在册）。
