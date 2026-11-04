@@ -117,3 +117,49 @@ Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免�
 落 `agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-RET-receipt.md`：开端 HEAD＋两笔 name-only/name-status＋reconcile 三时点对拍表（含 13 支 WATCH 减项归因）＋三要素读数＋寻回实证 3 支读数＋cd1 三读数（或停闸呈报）＋RET-D 定标行＋门禁对拍读数。RET-A/RET-B 各单独 commit（`collab:`／`retire:`）＋批尾 tag；禁 `--no-verify`、禁 amend；门禁真拦如实报告不绕闸。
 
 ——arch-swbreloc 起草（新建创作类·誊写禁令辖域外自察；本票止于终态设计，严禁起草笔落改）。
+
+---
+
+## 修订笔（append-only·2026-11-04·A 席审票 `650874c` 修单·主理人裁采甲案·作者席自笔）
+
+本节覆盖原票以下段落读数/条款（其余条款照旧）：§实测 3「861 文件级／史述账零改」半段（R-1）、§实测 2 基线「票 98」与判据 2「98→85→85」（Y-1）、§禁动面「.collab 全域…史述引用零改」条款（R-1 随动）、声明闭集（扩 RET-A0 面）。
+
+### R-1 修订（采甲案·新增 RET-A0 换锚目）
+
+**机理更正（认错账）**：原票「.collab 在 check-pointers 缺省扫描排除域」断言不实——`check-pointers.py` L75 `DEFAULT_SCOPE=(agent-experts, agent-skills, softwares)`，`iter_markdown` 不排除三分类目录下 `.collab` 子桶＝**项目桶在扫描域内**；仓根 `.collab`/仓根 README 才在域外。原「交付面 0 命中＝活引用已净」口径系扫描域误设。
+
+**22 行活引用清单（作者席复核实测·与 A 席读数对账）**：`git grep -n -F -f <13全路径清单> -- agent-experts/ agent-skills/ softwares/` 复跑＝**22 行／23 occurrence／20 文件**（双命中行＝`receipts/2026-11-03-SWB-B1-receipt.md` L3＋L39、`receipts/2026-11-04-SWB-B5-receipt.md` L3＋L83）——**与 A 席 22/23/20 全等** ✓。逐处 file:line 全表（22 行·百工项目桶）：
+```
+qa/2026-11-03-PM-SWBRELOC-B1B5-审票-v1.md:9
+qa/2026-11-03-QA-B1-独立验证-v1.md:36（check-ignore 示例命令史述行）
+qa/2026-11-04-SWB-B5-QA-v1.md:6／CD1-QA-v1.md:3／CD1-PM审票-v1.md:4／CD1-QA复审-v1.md:4
+qa/2026-11-04-SWB-ES2-PM审票-v1.md:3／ES2-QA-v1.md:3／ES2-QA复审-v1.md:3／ESC1-QA-v1.md:6
+receipts/2026-11-03-SWB-B1-receipt.md:3,39／B2-receipt.md:3／B3-receipt.md:3／B4-receipt.md:3
+receipts/2026-11-04-SWB-B5-receipt.md:3,83／CD1-receipt.md:3／ES2-receipt.md:3／ESC1-receipt.md:3
+receipts/2026-11-03-SWB-B1-收口登记-v1.md:4／B2-收口登记-v1.md:4
+```
+（以上均系 `agent-experts/baigong-software-team/.collab/` 前缀下件。）
+
+**RET-A0 施工规格（置于 RET-A 之前·单独 commit `collab:`）**：对上述 20 文件 22 行逐处换锚，两式按行性质：
+- **式①（语义引用行：回执 L3 票面真源族／收口登记被收口票行／qa 头部被核物行＝18 行）**：反引号全路径 → 改指该票**收口登记件路径＋票面 commit 指针**（形如 `agent-experts/baigong-software-team/.collab/receipts/2026-11-03-SWB-B1-收口登记-v1.md`（票面 `b5fd2b4`·已退役·寻回见该件名录）——目标在位＝resolve 命中不悬空）；
+- **式②（命令/示例史述行：qa-B1 L36、B1-receipt L39、B5-receipt L83＝3 行）**：全路径串断链化＝反引号内改**裸基名**（提及嫌疑级 WATCH 容许）＋句尾「（票面已退役·SWB-RET）」注记——命令史迹语义保留，(a) 全路径机械零达成。
+
+**闭集扩（声明闭集 14 件 → 34 件）**：追加 RET-A0 二十文件（上表 20 文件全路径行，锚行 `- 声明闭集：` 下条目）；禁动面「.collab 全域」条款随动加豁免行：「**例外＝RET-A0 二十文件 22 行换锚面**（真源 v2 L101–106 换锚程序覆盖 receipts/qa 族＝有授权改锚；除此 22 行外 .collab 桶零触碰）」。
+
+**判据增（新判据 9·RET-B 启动硬线）**：RET-A0 收笔后 `python agent-skills/object-audit/scripts/check-pointers.py --root . > $RET_TMP/c9.out 2>&1` → 对 13 支全路径串 `grep -c "BLOCK OA-D6"` 涉票行＝**0**＋`git grep -o -F -f <13清单> -- agent-experts/ agent-skills/ softwares/ | wc -l`＝**0**（E-ARC-1′ (a) 机械零·真源 L113–121「修好跑绿前票面族移除禁启动」硬线＝置于 RET-B 前置断言）；(b) 裸基名族残留逐处分账写入 **RET-B commit 消息体**（乙案 (b) 款形态·机械侧仍 0）。
+
+**时序换代**：RET-A0（换锚）→ 判据 9 跑绿 → RET-A（宣告）→ RET-B（移除）→ RET-C/RET-D。
+
+### Y-1 修订（判据 2 基线行换代）
+
+判据 2 三时点换代＝「**开工实测 N → N−13 → N−13**」：开工首步 reconcile 落盘定 N（作者席起草复测＝**票 99（对账 35／SKIP 缺声明 64）｜发现 147｜exit 1**——本 RET 票自身入枚举；原票 98 系＝本票落盘前时点读数，作废）；原「98→85→85」字样由本节覆盖。其余机理（CLOSED_RE 跳过／exit≠4 防假绿）不变。
+
+### Y-2 修订（体量数换代·可复现口径）
+
+原「861 文件级命中」作废，换代为三笔可复现读数（作者席复跑·occurrence 口径·`git -c core.quotepath=off`）：①三分类扫描域内 13 支**全路径 occ＝23**（22 行/20 文件＝RET-A0 射程）；②仓根面（README＋仓根 .collab·缺省域外）全路径 occ＝**7**（不受 OA-D6 扫·不入 RET-A0·史述在册）；③tracked **裸基名 occ（排 `.scratch/` 自引）＝31**（A 席读数 30·差一未对账＝如实登记，回执以开工复跑为准）。原票 §实测 3/§禁动面「861」字样由本节覆盖。
+
+### 修订笔自查（判据扰动确认）
+
+判据 1 闭集全等数随扩（14→34·两笔读数分列：RET-A0 笔＝20 件／RET-A 笔 13 件／RET-B 笔 14 件）；判据 2 基线行换代（Y-1）；判据 3/4/5/6/7/8 **零扰动**（新增判据 9 独立条款）；三时点语义/tag/寻回链/RET-C/RET-D 条款零触碰。
+
+——arch-swbreloc 修订笔（A 席 R-1/Y-1/Y-2 销账·甲案落地·append-only）。
