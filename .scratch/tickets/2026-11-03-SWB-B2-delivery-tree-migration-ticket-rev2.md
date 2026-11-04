@@ -1,4 +1,5 @@
 # SWB-B2 · rev2 定点增补补丁件（门禁换代闭集扩全 R-2＋入壳补 `.codebuddy-plugin` 目 R-3＋判据钉值/分账重写）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 本件＝B2 票（`.scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket.md`·`f017a51`）之 **rev2 定点增补**（参 ES v3.1 体例：原票不动、补丁件另立）。原票未被本件推翻条款照旧；冲突处以本件为准。
 - 修单真源＝会师件（`3ad4d99`）§一 R-2/R-3＋§二 B2 黄三目；QA 审票 `1c72966` 红-1/红-2/黄-1/黄-2；PM 审票 `d6eef8a` B2-Y1/B2-Y2/S4。

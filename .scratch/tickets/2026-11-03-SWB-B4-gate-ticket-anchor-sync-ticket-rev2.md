@@ -1,4 +1,5 @@
 # SWB-B4 · rev2 定点增补补丁件（project_domain_md 修值目＋16/15 差一勘正＋四席 deny 旧字面随动＋B4-C 表述改写＋矩阵补 design 行＋tests fixture 承接）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 本件＝B4 票（`.scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket.md`·`9ae0b8a`＋勘正 `232bcfb`）之 **rev2 定点增补**（参 ES v3.1 体例：原票不动、补丁件另立）。原票未被本件推翻条款照旧；冲突处以本件为准。
 - 修单真源＝会师件（`3ad4d99`）§二 B4 黄四目；QA 审票 `1c72966` 黄-1/黄-2/黄-3＋另注（SPEC_ID_HOME 段——**已被 B2 rev2 补丁一认领**，B4 不重复吞并，见本件补丁六边界注记）；PM 审票 `d6eef8a` B4-Y1/Y2/Y3。

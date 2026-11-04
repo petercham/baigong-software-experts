@@ -1,4 +1,5 @@
 # SWB-B5 · rev2 定点增补补丁件（gitignore 仓根层级显式防护行＋第三方外部快照三桶重立＋点目录 find 断言）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 本件＝B5 票（`.scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket.md`·`8f5efa9`）之 **rev2 定点增补**（参 ES v3.1 体例：原票不动、补丁件另立）。原票未被本件推翻条款照旧；冲突处以本件为准。
 - 修单真源＝会师件（`3ad4d99`）§二 B5 黄两目；PM 审票 `d6eef8a` B5-Y1/Y2；QA 审票 `1c72966` B5-黄-1/黄-2。

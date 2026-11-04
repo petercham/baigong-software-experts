@@ -1,4 +1,5 @@
 # SWB-B3 · rev2 定点增补补丁件（承接旧仓根 docs 8 件 R-1＋design 桶照 §三 执行 R-4＋判据1 扫描面写死 R-5＋evidence 2 支 tracked 单列 git mv R-6＋基线两栏/域对齐）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 本件＝B3 票（`.scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket.md`·`d584d7b`）之 **rev2 定点增补**（参 ES v3.1 体例：原票不动、补丁件另立）。原票未被本件推翻条款照旧；冲突处以本件为准。
 - 修单真源＝会师件（`3ad4d99`）§一 R-1/R-4/R-5/R-6＋§二 B3 黄三目＋§三.2（TKT erratum 照引义务）；PM 审票 `d6eef8a` S2/S6/B3-Y1/Y2/Y3；QA 审票 `1c72966` 红-1/红-2/红-3。

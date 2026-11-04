@@ -1,4 +1,5 @@
 # SWB-B2 · 迁移施工票：交付面搬家（bundle＋六技能包 git mv＋PRODUCT/ARCHITECTURE→docs＋门禁扫描根同批随动）（施工票·L2·架构席起草）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 起草实测 HEAD：`b5fd2b4`（B1 票面笔）；开工 ANCHOR＝开工实测 HEAD 应为 B1 施工收口笔或其后可达后继（B1 未收口不得开工本票），读数附回执开端。
 - 施工基线真源＝方案 v3（B0 冻结态）§三表现位行＋§五 B2 行；D6 既裁＝git mv 保留历史＋**开工先打迁移前 tag `archive-pre-B2-<YYYYMMDD>`**＋fuxi 线小规模预演先行（预演目见 B2-A0）。

@@ -1,4 +1,5 @@
 # SWB-B1 · 迁移施工票：仓根骨架＋7项目固定结构空壳＋约定md落位＋.collab固定结构规范颁（施工票·L2·架构席起草）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 起草实测 HEAD：`c86a7d2`（B0 冻结登记笔）；开工 ANCHOR 义务＝开工时实测 HEAD 应为 `c86a7d2` 或其后可达后继，读数附回执开端。
 - 施工基线真源＝`.collab/design/2026-11-03-restructure-proposal-draft-v3.md`（B0 冻结态）＋B0 冻结登记 `.collab/2026-11-03-SWB-B0冻结-仓目录重整方案v3基线登记-v1.md`。批次序＝B1→B2→B3→B4→B5（＋ESC1 随 B4 后）；本票＝B1。

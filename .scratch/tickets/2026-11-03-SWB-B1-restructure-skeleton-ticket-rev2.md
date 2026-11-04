@@ -1,4 +1,5 @@
 # SWB-B1 · rev2 定点增补补丁件（design 桶扩员＋gitignore 仓根层级知悉注记）
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
 
 - 本件＝B1 票（`.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md`·`b5fd2b4`）之 **rev2 定点增补**（参 ES v3.1 体例：原票不动、补丁件另立、版本链追加）。原票全部未被本件推翻之条款照旧生效；本件条款与原文冲突处＝以本件为准（后笔覆盖前笔·append-only）。
 - 修单真源＝会师件 `.collab/2026-11-03-SWB-B1B5-双席审票会师-处置裁定-v1.md`（`3ad4d99`）§二黄路由 B1 行＋§一 R-4（design 桶裁决定向＝从 §三 表设 design 桶）。
