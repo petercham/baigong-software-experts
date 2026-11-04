@@ -1,8 +1,8 @@
 # CARD-RENEW 产品席独立审票 v1（A 席）
 
 > 【来源】产品席·独立审票轮·2026-11-05。只读审票，禁施工，件居 `.collab/qa/`。
-> 开工读数：`git rev-parse --short HEAD` 实测 `da25666`（CARD-RENEW 票面 HOLD 挂位笔）。
-> 被核件＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-05-CARD-RENEW-卡片换代与席位命名换代施工票.md`（下称「票面」，356 行完整直读）。
+> 开工读数：`git rev-parse --short HEAD` 实测 `da25666`（CARD-RENEW 票面 HOLD 挂位笔；被核票面 commit＝起笔 `94ed2ec`）。
+> 被核件＝`agent-experts/baigong-software-team/.scratch/tickets/2026-11-05-CARD-RENEW-卡片换代与席位命名换代施工票.md`（下称「票面」，356 行完整直读；票面 commit＝起笔 `94ed2ec`＋HOLD 挂位笔 `da25666`）。
 > 裁定真源＝`.collab/decisions/2026-11-05-皮总裁定-席位职业标签与花名换代.md`（4d52e88，下称「裁定」）＋`.collab/decisions/2026-11-05-主理人裁定-CARD-RENEW候裁八条.md`（bda4fec，下称「八裁」）。
 > fresh eyes 纪律：QA 席（B 席）审票件零读取；本席对照用己席意见件（commit 88df907 终态）已计入输入。
 > 口径声明：本件 occurrence 计数均为 `grep -rn` 行:列实测；判定逐项 PASS/FAIL＋文件行号。
