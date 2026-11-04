@@ -93,3 +93,18 @@ RET-A0（`e11dbc0`）→ 判据 9 跑绿（涉票 BLOCK 0＋occ 0·双验）→ 
 - 判据 6 状态由「停闸候裁」转**绿**；本修订笔仅追加，原文（含停闸呈报段）不回改＝append-only 史实两立。
 
 ——engineer-ret1 回执修订笔（候裁①销账·RET-C 补执行毕）。
+
+## 回执修订·append 二（2026-11-04·QA 独立验证红-1 销账·RET-R 定点修单批）
+
+QA 报告＝`agent-experts/baigong-software-team/.collab/qa/2026-11-04-SWB-RET-QA-v1.md`（`c0aa8f2`）总裁决＝放行带修·红1。
+
+- **红-1 认错账**：本席 RET-A0 换锚笔 `e11dbc0` 为 B5/CD1/ES2 族写的 10 行换锚目标路径不实——写成「agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-{B5,CD1,ES2}-收口登记-v1.md」，该三路径全史从未存在（三收口登记件实存落位＝仓根 `.collab/`）＝换锚反造 10 悬空指针。同构 B3/B4 行当时已用仓根裸写法（零新增 BLOCK）＝正确形态先例在位，本席未沿用＝执行层错误，径修不候裁照裁。
+- **RET-R 修笔 `68fcccc`**（`collab:`·单独 commit·index 自证 10 件＝闭集≤10 行）：十行反引号路径改仓根形态（例 `.collab/2026-11-04-SWB-B5-收口登记-v1.md`·三件同式）——落笔前 `git ls-files` 逐一确认三实存路径全名 ✓；只改该十行路径串，他面零触碰（10 files changed, 10 insertions(+), 10 deletions(-)）。
+- **验收硬线读数（实测）**：
+  1. check-pointers 修前（HEAD `c0aa8f2`）→修后 multiset 精确差集＝**新增 0／消除恰 10**（消除项全部＝该三悬空路径 BLOCK 行逐条点名·修后残留 0）＝QA 修案「归一化差集应零新增」硬线达成 ✓；读数口径注：本席主树原始 BLOCK 2739→2729（恰 −10）、去 refs 快照树归一化 2645→2635（恰 −10）——绝对值与 QA 1936→1946 系差异＝快照 untracked 面排除口径差（本席另跑 81a0da8 worktree 对照 RAW 2580 含快照缺席面），差集方向与数额（+10→全消）与 QA 三时点对拍全等闭合；
+  2. run-gates **GATE PASS** 自然笔（修笔门禁读数 8813＝修前 8819−10 悬空消项）；
+  3. 涉 13 支全路径 occ 仍 **0**（三分类域）；
+  4. 13 支寻回/退役链零扰动（寻回链抽验 ES2＝98 行 >0 ✓；tag／RET-A／RET-B 笔未触）。
+- RET-R 落位面＝`e11dbc0` 触及文件中 B5/CD1/ES2 族十行所在 10 文件（qa 七＋receipts 三）＝原 RET-A0 豁免面内收敛，不新增换锚面。
+
+——engineer-ret1 回执修订笔二（红-1 销账·RET-R `68fcccc` 在册）。
