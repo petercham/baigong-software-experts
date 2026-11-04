@@ -66,7 +66,7 @@
 
 - `skills/software-orchestration/references/standard-sop.md` 尾部 append 一节（节名「ADR 工序（决策记录链）」），五段全文：
   1. 链序：人类输入决策→主理人誊录登记（`.collab/decisions/`·append-only·逐字）→产品席＋QA席＋架构席会签→四方收口草案→架构席终写入 `docs/adr/`（编号四位·Status 闭集·头块五行照 ES E-ADR-1″）。
-  2. 会签语义：会签＝对收口草案的签署认可；会签席可出保留项——保留项未闭合前终写段禁启动（收口未成）。
+  2. 会签语义：会签＝对收口草案的签署认可；会签席可出保留项——保留项未闭合前终写段禁启动（收口未成）。**保留项闭合归位**：保留项经主理人呈人类裁定（输入决策权恒在人类侧，三席会签不替代决策）；裁定落 decisions 登记后，草案修订＝**架构席照新裁定登记件重誊草案**（誊聚权不含裁量·条款甲语义延伸及重誊；落位仍在 `.collab/drafts/adr/` 既有写域＝零新开写域）；会签席永不改草案（deny 语义不变）。重誊后全链重走会签（同序同判据），旧会签随重誊作废不入账本终态。
   3. 终写段＝条款甲全文（逐字照录·diff 空判据）。
   4. 条款乙全文（不构成自审·两链互不管辖）。
   5. 修订/supersede 归道句（G-3 方案成文）。
@@ -99,7 +99,7 @@
 3. **票型钉值**：`grep -c '"ADR"' config/ticket-types.json`＝1；ticket-authors `"ADR"` occ＝1；types 长度 8→9。
 4. **SOP/卡面钉值**：standard-sop.md `grep -c "ADR 工序"` ≥1 且条款甲/乙关键句（「纯机械誊写」「不构成自审」）各 occ ≥1；三卡各新增纪律行恰 1 行；architect 卡 L24 换代行含「docs/adr/ 除外」occ＝1、原「明确不可写：`docs/`」裸行 occ＝0。
 5. **config 零染**：seat-permissions.json、seat-permissions-hooks-map.json 两笔零出现（`git log -1 --name-only` 对账）。
-6. **基线/STRUCTURE 零染**：交接件与 STRUCTURE.md 本批 diff 零行（候裁未落）；`git ls-files docs/adr`＝0（单独批前）。
+6. **基线/STRUCTURE 零染**：交接件与 STRUCTURE.md 本批 diff 零行（候裁未落）；`git ls-files agent-experts/baigong-software-team/docs/adr/`＝0（全路径口径·与声明闭集条目对齐；单独批前）。
 7. **token 界**：三卡 `count_agent_tokens.py` 复测各 ≤2500 且增量（architect/product/qa）合计 ≤180；五值读数随回执。
 8. **负例**：构造「终写件与收口草案 diff 非空」样态跑判据 4 哈希对等断言 exit≠0（Temp 面）。
 9. **纪律**：单笔单件族 `collab:` 前缀；禁 --no-verify/禁 amend；pre-commit 门禁真跑；提交前 `git diff --cached --name-only` 自证＋提交后立即 `git show --name-status HEAD` 载体对账（双闸·防吞笔·d85ddc7 事故条款）。
@@ -117,7 +117,7 @@
 1. **候裁①**：交接件基线追加行＝全文 sha256 声明失配的文法处置——采「勘定追记」节（文末追加三行＋重算全文哈希回填追记节·原件零动）还是另立修订登记件？＋会签行＝新设签字面是否触发 §12 L206 门/保险丝（皮总「确认」登记可否代签该触发）——归决策者/产品席裁。
 2. **候裁②**：交接件与 `docs/STRUCTURE.md` 的写入授权通道（现 architect deny 枚举在列、无 write_globs 路）＝需 C1 或裁定点名，先开权后落笔。
 3. **候裁③**：docs/adr 目录初始化时机＋门禁常驻挂载＋E-ADR-3″ 等校验器实装（涉脚本）＝ES2 双前置②射程，触发批同批实装。
-4. **候裁④（开工前置）**：皮总 ADR 工序链「确认」的 decisions 誊录登记笔＝主理人义务；登记笔哈希即本票开工 ANCHOR 随动。
+4. **候裁④（开工前置）**：皮总 ADR 工序链「确认」的 decisions 誊录登记笔＝主理人义务；登记笔哈希即本票开工 ANCHOR 随动。**状态注记（修订笔随动）＝已闭合随 `b0b449d`（拍板登记笔已落链·`.collab/decisions/2026-11-04-皮总拍板-ADR工序链确认.md`）；开工 ANCHOR＝`b0b449d` 之后**（票面 L5 起草读数行＝起草时点 d85ddc7 史实如实，不改）。
 5. **候裁⑤（备选案）**：G-1 若决策者否增类案，挂靠替代＝复用「开发」票类＋票内 ADR 子型字段（authors/dispatch 零扩，基线八类句零触）——两案机检判据随案换，不夹带本票正文。
 
 ——arch-swbreloc 起草·只票面零施工·开工读数 HEAD `d85ddc7`。
