@@ -1,0 +1,119 @@
+# SWB-RET · 施工票：票面退役批（B 批＋ESC1＋CD1＋ES2 票面族退役手续 ＋ .scratch/cd1 临时面清灭 ＋ refs 快照 docs/adr 残留处置）（施工票·L2·架构席起草·审计对齐类）
+
+- 起草实测 HEAD＝`7a9b4d3`（ES2 收口登记笔）；开工 ANCHOR＝开工实测 HEAD ≥ `7a9b4d3`（其后含裁定登记笔），读数附回执开端。
+- 裁定真源＝`.collab/decisions/2026-11-04-皮总裁定-审计对齐类免拍板放行.md`（已直读）：免拍板放行类＝审计/记录/过程域对齐；**覆盖 B 批总收口登记 §六「票面保留不 retire 候业务终验」候闸口径**（原登记行史笔不回改·后生效覆盖先前）；程序链不变＝出票→双席审票→工程师施工→QA→收口。
+- 退役体例真源＝ES 案 T-B/T-C（`agent-experts/baigong-software-team/.collab/design/2026-11-03-devkits-engstd-adr-archive-retirement-v2.md` 〔v3 §效力链注：T-B/T-C 未被覆盖照常有效·指针只指不搬〕）：
+  - T-B＝**不建归档面**（`_archive/` 类落位否案）——票面移除程序不变三要素＝票首 `已结案` 标记→单独 commit `retire:` 前缀＋消息含 `RETIRE <票ID>`→批尾 tag `archive-<YYYYMMDD>`；寻回行写票目录 README：`git log --diff-filter=D --grep "RETIRE <票ID>"` → `git show <笔>^:<旧路径>`；
+  - E-ARC-1′ 换锚先行硬线＝移除前活引用清零（本批实测见下）；裸票 ID 基名族零改＝非路径语义豁免口径沿用。
+- 开工附注三项：①誊写禁令 `f5a0d96`（本票＝搬家/移除类：git rm 史实入 git 历史＋tag 承载，无誊写目；票面本体＝创作类辖域外自察）；②票面落位 `.scratch/tickets`；③era（不在本票）。
+- 计数口径＝occurrence；判据自带落盘重定向；负例 exit≠0。
+
+## 现盘落位实测（起草取证·回执附开工复测）
+
+1. **退役对象 13 支**（仓根 `.scratch/tickets/` tracked·实测枚举全列）：
+```
+.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md
+.scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket-rev2.md
+.scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket.md
+.scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket-rev2.md
+.scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket.md
+.scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket-rev2.md
+.scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket.md
+.scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket-rev2.md
+.scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket.md
+.scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket-rev2.md
+.scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md
+.scratch/tickets/2026-11-04-SWB-CD1-concurrency-discipline-ticket.md
+.scratch/tickets/2026-11-04-SWB-ES2-seatcard-gate-routing-ticket.md
+```
+（README.md 不退役＝现役索引面随动改写；`agent-*/…/.scratch/tickets/` 项目级 85 支历史票**不在本批射程**——已收口旧票退役随后续批次，本票对象＝B 批后置队列裁定点名 13 支。）
+2. **reconcile 机理与基线**（现码直读 `check-ticket-reconcile.py`）：缺省票目录枚举＝仓根 `.scratch/tickets/` ＋三分类项目级候选（`ticket_dirs` 存在才入列）；`os.listdir` 单层不递归；`CLOSED_RE=已结案`（正文前 400 字符命中）→ **跳过枚举不入对账**；枚举空→`SystemExit(4)` 防假绿。现盘基线读数＝`票 98（对账 34／SKIP 缺声明 64）｜发现 146（全 WATCH）｜exit 1`。13 支现无「已结案」字面＝在 98 计数内。
+3. **扫描面冲突核验（E-ARC-1′ 换锚先行）**：交付面（agent-experts/agent-skills/softwares 非过程域）对 13 支全路径引用＝**0 命中**（实测）＝活引用已净，移除硬线绿；过程域（.collab 桶）对 13 支票名引用＝861 文件级命中（史述账·.collab 在 check-pointers 缺省扫描排除域＝不判悬空·不改不吞）。check-pointers `iter_markdown` 缺省三分类 scope：仓根 `.scratch/` 不在扫描域（os.walk 不触）＝退役票面自身旧路径引用不产悬空（机理注记入回执）。
+4. **`.scratch/cd1/` 临时面**：untracked（tracked＝0）·顶层条目 **20**／find 文件数 **66**（CD1 验证轮 Temp 工件·两口径并报——清灭闸计数口径见候裁①）。
+5. **refs 快照 docs/adr 残留**：QA-ES2V L93 定位实测命中＝`agent-skills/external-advisor-collab/.collab/refs/skills-research-2026-10-28/AGI-Super-Team/docs/adr`＝9 文件物理在盘·该快照树 tracked＝**0**·`git check-ignore` 该面 exit **0**（已 ignore 态）；版本面断言基线＝`git ls-tree -r HEAD | grep "docs/adr/"`＝**0**。
+
+## 声明闭集（14 件·本批唯一可写 git 面）
+- 声明闭集：
+- .scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket.md
+- .scratch/tickets/2026-11-03-SWB-B1-restructure-skeleton-ticket-rev2.md
+- .scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket.md
+- .scratch/tickets/2026-11-03-SWB-B2-delivery-tree-migration-ticket-rev2.md
+- .scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket.md
+- .scratch/tickets/2026-11-03-SWB-B3-process-domain-migration-ticket-rev2.md
+- .scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket.md
+- .scratch/tickets/2026-11-03-SWB-B4-gate-ticket-anchor-sync-ticket-rev2.md
+- .scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket.md
+- .scratch/tickets/2026-11-03-SWB-B5-closure-gitignore-readme-ticket-rev2.md
+- .scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md
+- .scratch/tickets/2026-11-04-SWB-CD1-concurrency-discipline-ticket.md
+- .scratch/tickets/2026-11-04-SWB-ES2-seatcard-gate-routing-ticket.md
+- .scratch/tickets/README.md
+
+（`.scratch/cd1/` 清灭＝untracked 文件系统面不入 git 闭集（目二单独判据）；refs 快照面零动作（目三判定在册）。）
+
+## 逐条施工规格
+
+### RET-A 退役宣告先行（单独 commit·append 标记行·不移除）
+
+对 13 支票面各在**首行（标题行）之后插入一行**退役宣告（逐字统一）：
+
+```
+Status: 已结案（retire 宣告 2026-11-04·依 2026-11-04 审计对齐类免拍板放行裁定·票面退役批 SWB-RET）
+```
+
+- 体例依据＝ES 票面移除程序「票首行 `已结案` 标记」前置项＋E-ARC-1′ 裸票 ID 基名零改（宣告行不含票 ID 路径语义）；
+- 该行落位＝正文前 400 字符内＝`CLOSED_RE` 命中面＝**本笔起 reconcile 即跳过 13 支**（对账目过渡显性化，见判据 2）；
+- commit 前缀 `collab:`（宣告笔非移除笔，E-ARC-2 三要素挂 RET-B 笔）。
+
+### RET-B 票面移除（单独 commit·E-ARC-2 三要素）
+
+1. `git rm` 13 支逐名（物理移除＝史实由 git 历史承载＝ES T-B「不建归档面」定案口径；**不建任何 retired/ 子目录**＝归档面否案沿用）。
+2. commit message：前缀 `retire:` ＋消息体逐票含 `RETIRE <票ID>` ×13（票 ID＝文件名基名·`git show --name-only` 13 行 D 态）。
+3. `.scratch/tickets/README.md` 重写随动（同笔内）：现状行改＝「本目录现役票＝无（B 批后置队列 13 支已于本笔退役）」＋**退役名录 13 行**（基名＋收口登记 commit 指针）＋**寻回行**：`git log --diff-filter=D --grep "RETIRE <票ID>"` → `git show <笔>^:<旧路径>`（ES 体例逐字）。
+4. **批尾 tag**：`archive-retirement-20261104`（`archive-*` 前缀闭集形态·判据在册）。
+5. 硬线前置＝RET-A 跑绿（判据 2 宣告过渡读数）后 RET-B 方准开工（换锚先行同构时序）。
+
+### RET-C `.scratch/cd1/` 临时面清灭（untracked 文件系统面·不入 commit）
+
+1. 前置断言：`git ls-files .scratch/cd1/ | wc -l`＝0（零 git 面确认·有 tracked 即停手呈报）；
+2. 清灭动作＝`rm -rf .scratch/cd1`（**批量确认闸口径**＝顶层条目 20 逐项对照清单确认后执行；若执行器按 find 文件数 66 计触阈值闸拒＝**停本项候裁**（禁硬闯款），候裁①在册）；
+3. 后置断言：`find .scratch/cd1 -type f 2>/dev/null | wc -l`＝0；`git status --porcelain` 对 `cd1` 行＝0。
+
+### RET-D refs 快照 docs/adr 残留处置＝判定零动作·留盘（定标在册）
+
+1. **定标＝留盘不清除**：该面＝外部调研快照（refs 桶＝gitignore 两制排除面·check-ignore exit 0 实证在 ignore 态）——清除无版本面收益（本就不 tracked）且毁外部参照素材；「外部参照件不入我仓版本库」既有裁决由 ignore 态已满足；
+2. **N-2 不染色断言**（判据 5）：版本面 `git ls-tree -r HEAD | grep -c "docs/adr/"`＝**0** 前后全等；该快照树 `git ls-files | wc -l`＝0；
+3. 处置定性入回执一行（QA-ES2V 黄-2 候补池项自此核销）。
+
+## 验收判据（全部机械可判·自带落盘·负例 exit≠0）
+
+1. **闭集全等**：RET-A 笔 `git show --name-only`＝13 件；RET-B 笔＝14 件（13 D＋README M）；`git show -M --name-status` RET-B＝D 行 13／M 行 1（无 A 行＝无归档面新建断言）。
+2. **reconcile 三时点对拍**（开工基线→RET-A 后→RET-B 后·各落盘）：`python agent-skills/object-audit/scripts/check-ticket-reconcile.py --root .`——开工读数复现现盘（票 98 系）→ **RET-A 后＝98−13＝85**（13 支转 CLOSED 跳过·exit 码与 WATCH 账随 13 支退出对账面的变化逐笔入回执）→ **RET-B 后＝仍 85**（枚举零漂移＝已宣告即已跳过·移除不二次扰动）；三时点均 **exit≠4**（票目录非空恒成立＝仓根目录在位＋项目级 85 支在架＝防假绿断言）。
+3. **移除三要素断言**：RET-B commit message `grep -c "RETIRE"` ≥13 且前缀 `retire:`；`git tag -l "archive-*" | grep -c retirement` ＝1；README 寻回行 `grep -c "diff-filter=D"`＝1。
+4. **寻回可行实证**（退役≠删除史实判据）：抽 3 支（B1 原票/CD1/ES2）跑 `git show <RET-B笔>^:.scratch/tickets/<基名>` → `wc -l` >0 且首 400 字符含 Status 宣告行（＝史实链完整）。
+5. **docs/adr 版本面零染色**：判据 RET-D 前后两跑全等＝0；`git check-ignore` 快照路径 exit 0 在位。
+6. **cd1 清灭断言**：RET-C 前置/后置三读数（0/0/0）。
+7. **门禁零回归**：run-gates GATE PASS exit 0 对开工基线零新增族（13 票面退出 OA-D6-5 对账族＝该族 WATCH 读数减项归因入回执＝预期减非新增）；六演练 `SIX_DRILLS_GREEN`＝1（盘符口径）。
+8. **负例**：Temp 构造仅含空 `.scratch/tickets`（无 .md）仓骨架 → reconcile exit **4**（防假绿机理不随退役失效断言）。
+
+## 禁动面
+
+- 交付面全域（agent-experts/agent-skills/softwares 内容面）＝本批 git 闭集全在仓根 `.scratch/tickets/`＝交付面交集空；bundle 三同源＋bundle README（非涉不动＝本批零交付面变更零 bump 自声明，随收口登记追认格）；
+- seat-permissions 两 config／全部 scripts（reconcile/check-pointers 机理零触碰＝扫描面随动由 CLOSED_RE 既有语义承载，不改码）；
+- `.collab/` 全域（decisions 桶裁定件＝真源只读引用；861 处过程域史述引用零改）；
+- 项目级 `.scratch/tickets/` 85 支历史票（退役批次分离·候后续裁定）；`tools/`、`.gitignore`、仓根 README；`.scratch/cd1/` 之外的 `.scratch/` 面。
+
+## 候裁点
+
+1. **cd1 清灭闸计数口径**：顶层条目 20 vs find 文件 66——若确认闸按文件数计且拒＝停该项候主理人裁（禁硬闯）；按顶层条目计＝本票口径直接执行。
+2. （呈备）refs 快照留盘定标如主理人欲清除，收口前点名即可（RET-D 反转为单文件系统 rm 目·判据 5 不变）。
+
+## 票间关系
+
+前置＝ES2 收口（`7a9b4d3`）＋免拍板裁定登记笔。后置＝本票收口登记（主理人）＋项目级 85 支历史票退役是否另批＝收口呈裁一行（本票不吞并）。双席审票＝**串行派发**（`12a3c4a` §2 款沿用）。
+
+## 回执
+
+落 `agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-RET-receipt.md`：开端 HEAD＋两笔 name-only/name-status＋reconcile 三时点对拍表（含 13 支 WATCH 减项归因）＋三要素读数＋寻回实证 3 支读数＋cd1 三读数（或停闸呈报）＋RET-D 定标行＋门禁对拍读数。RET-A/RET-B 各单独 commit（`collab:`／`retire:`）＋批尾 tag；禁 `--no-verify`、禁 amend；门禁真拦如实报告不绕闸。
+
+——arch-swbreloc 起草（新建创作类·誊写禁令辖域外自察；本票止于终态设计，严禁起草笔落改）。
