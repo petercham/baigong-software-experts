@@ -90,3 +90,8 @@
 落 `agent-experts/baigong-software-team/.collab/receipts/2026-11-04-SWB-ES2-receipt.md`：开端 HEAD＋name-only 8 件全等＋判据 1–8 读数＋token 前后表（四要素）＋卡句落位行号表＋「承载面」择词登记行（如触发）＋N-2 判定引用面＋architect 旧代字面观察申报。交付笔单独 commit（`collab:`）；禁 `--no-verify`、禁 amend；门禁真拦如实报告不绕闸。
 
 ——arch-swbreloc 起草（新建创作类·誊写禁令辖域外自察）。
+
+## 增补注记（append-only·2026-11-04·目二出口裁定落笔）
+
+- **目二出口裁定＝缺省条件化缓挂·文档补行不采·主理人裁定**（案内程序裁定）：三重实证承重（0 条目面＋exit 4 自爆实证＋路由表不可预挂），不为空目录造面＝YAGNI；60-gates §八 补行出口**不采**（该面在禁动面内且无现役触发项）——ES2-B 之 5 出口自此关闭，闭集钉死 8 件。缓挂双前置（①首支 ADR 落 `docs/adr/`；②触发批同批实装挂载形态与 E-ADR-3″ 常驻）落主理人收口登记账。
+- 随行观察同意登记＝architect 卡 L22 `.collab/tickets/` 旧代字面＝候补池（同 CD1 收口黄-3 口径·不吞并不改笔）。
