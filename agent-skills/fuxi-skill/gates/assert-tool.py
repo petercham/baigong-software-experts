@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """fuxi-skill 结构层门禁断言工具（机械断言，不依赖人工校准）。S0a 建骨架，S1 实装共享内核 L0 执行位，S2 实装 adapter 互斥＋FC-5。
 
-断言目录＝同目录 `assertion-catalog.md`（26 项：ST-1..9／BW-1..6／FC-1..6／GS-1..5）。
+断言目录＝同目录 `assertion-catalog.md`（27 项：ST-1..10／BW-1..6／FC-1..6／GS-1..5）。
 本件与目录一一对应：每项目录断言有对应函数（当期可执行项＝实装；
 〔Sx 执行〕项＝桩＋显式 PENDING_STAGE 读数，不算 fail 不算 pass，汇总单列）。
 
@@ -18,6 +18,7 @@ S4 实装位：ST-3 转实装（产物实例节结构 diff·active 生效池空�
     ＋新增 ST-8／BW-5／BW-6／FC-6／GS-5（两规范表文件节闭集＋矛盾平滑检出＋README 置顶判据
     ＋active 池人工确认存在＋门禁不退化基线对照）。
 T11 实装位：ST-9（产物条目 registration 随件四节节闭集 diff＝∅·classifier §二 注册落点行机械化）。
+FX-U3 实装位：ST-10（六路声明↔落盘逐路存在性检＝FM-S-01「落盘核对」检出列消费位）。
 S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位；无元组＝PENDING_STAGE
     「S0b 元组未交付」如实态；在场＝逐元组挂接既有纯函数 calibration_consistent() 对账，
     判据本体零改动；κ 达标线常量 KAPPA_THRESHOLD 注册于本件供 s0b-kappa.py import 不复制）。
@@ -38,7 +39,7 @@ S0b 实装位：GS-4 转实装（注册落盘路径内 anchor-tuple*.json 定位
 同输入连跑两次退出码与逐项读数全等。
 
 用法：
-    python assert-tool.py            # 仓内执行模式：跑 26 项，当期实装项出读数，余者 PENDING_STAGE
+    python assert-tool.py            # 仓内执行模式：跑 27 项，当期实装项出读数，余者 PENDING_STAGE
     python assert-tool.py selftest   # 自证模式：内存构造正负样本，逐类断言「能咬能放」
 """
 
@@ -127,6 +128,12 @@ REGISTRATION_FILE_NAME = "registration.md"
 REGISTRATION_SECTION_CLOSEDSET = ("注册三元组", "分类器四问决策记录",
                                   "采集与蒸馏声明（六节规程逐节执行读数）", "语料门槛登记（EG-6）")
 
+# ST-10 六路声明闭集（注册常量单源＝adapters/person.md 六路条款四值原文逐字，
+# REGISTRATION_SECTION_CLOSEDSET 同款先例，不复制第二份词表）。
+SIX_ROUTE_CLOSEDSET = ("著作", "长对话", "短表达", "外部视角", "决策记录", "时间线")
+_SIX_ROUTE_ROW_RE = re.compile(r"^\|\s*六路采集\s*\|(.*)$", re.M)
+_ROUTE_LIST_RE = re.compile(r"[（(]([^（）()]+)[）)]")
+
 # BW-5 矛盾平滑检出（S4 建·坏信号④机械位）：(a) person adapter 防编护栏节条款声明行；
 # (b) 平滑句式启发式预注册词表本体（随批锁定值；中途变更走门禁面重交付程序，BW-1/BW-2 同制）。
 PERSON_CONTRADICTION_DECL_ROWS = ("内部矛盾不平滑", "矛盾是深度的重要信号")
@@ -147,7 +154,7 @@ POOL_CONFIRM_FIELDS = ("产物id", "人工确认引用", "提案件引用", "版
 # GS-5 门禁不退化基线（S4 建·坏信号③机械位）：三组注册位对基线只增不减，任一缩水＝咬。
 VALIDATOR_LAYER_NAMES = ("机械断言", "三臂对照", "诱饵测试", "留出集", "泄漏检查", "边缘诚实度",
                          "格式检查表", "盲评rubric", "绝对线", "decoy", "人工锚点卡")
-GS5_BASELINE = {"层名基数": 11, "person白名单基数": 6, "method白名单基数": 6, "断言编号基数": 26}
+GS5_BASELINE = {"层名基数": 11, "person白名单基数": 6, "method白名单基数": 6, "断言编号基数": 27}
 
 # 契约文件节闭集（EG 六节／FM 五节／AC 五节；多节/缺节/改名＝diff 非空即 fail）。
 EG_SECTIONS = ("适用范围", "三级标注", "来源三态", "三问可答口径", "候选单元记录", "语料门槛登记")
@@ -781,6 +788,11 @@ def _active_pool_dir() -> str:
     return os.path.join(_SKILL_ROOT, *_PRODUCTS_SUBPATH)
 
 
+def _corpus_batches_dir() -> str:
+    """语料批次落盘注册路径＝包内基面（FX-U2 基面明义同制）。"""
+    return os.path.join(_SKILL_ROOT, ".collab", "evidence", "corpus")
+
+
 def _product_entries() -> "list[tuple[str, str]]":
     """active 池条目列表 (目录名, 路径)：仅生效池根直接条目——池计数口径（FC-6 消费）。"""
     pool = _active_pool_dir()
@@ -839,7 +851,7 @@ def _product_md_texts(dirpath: str) -> "dict[str, str]":
 
 
 # ============================================================
-# 26 项目录断言 ↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；
+# 27 项目录断言（FX-U3 实装：ST-10）↔ 函数（S1 实装：ST-1/ST-2/ST-5/FC-1/FC-2/FC-3/FC-4；S2 实装：ST-6/ST-7/FC-5；
 # S3 实装：GS-1/GS-2/GS-3；S4 实装：ST-3/ST-8/BW-5/BW-6/FC-6/GS-5；T11 实装：ST-9；余者桩）
 # ============================================================
 
@@ -1446,6 +1458,106 @@ def registrations_problems(entry_texts: "dict[str, dict[str, str]]") -> "list[st
     return problems
 
 
+def six_route_declared_routes(reg_text: str) -> "list[str] | None":
+    """ST-10 声明面纯函数：取「六路采集」声明行内首个括号段捕路集，按 ／ / 、 切分去空白→路名列表。
+
+    声明行缺位或行内括号路集缺位＝返回 None（缺位交由问题判据成行）。
+    """
+    row = _SIX_ROUTE_ROW_RE.search(reg_text or "")
+    if not row:
+        return None
+    bracket = _ROUTE_LIST_RE.search(row.group(1))
+    if not bracket:
+        return None
+    routes = [t.strip() for t in re.split(r"[／/、]", bracket.group(1)) if t.strip()]
+    return routes or None
+
+
+def six_route_problems(name: str, reg_text: "str | None",
+                       batches: "dict[str, dict[str, set[str]]]") -> "list[str]":
+    """ST-10 单条目判据纯函数：返回问题列表（空＝放）。
+
+    `batches`＝内存形态 {批次名: {对象目录名: 该目录落盘 .md 路文件集}}（selftest 可注入，不依赖盘；
+    「含该对象的批次」＝对象目录名在该批次键集内）。四式判据：
+    ①声明行缺／括号路集缺＝问题行「缺六路采集声明行」；
+    ②声明路集（去空白归一）对 SIX_ROUTE_CLOSEDSET 集合比较越闭集（改名／私扩／缺路）＝咬；
+    ③条目名剥 _PRODUCT_DIR_SUFFIXES 后缀＝对象名，含该对象目录的批次集合为空＝「批次落盘面不在场」；
+    ④每个含该对象的批次逐路 `<路名>.md` 在场检，缺路＝列「批次 X 缺路落盘件[…]」。
+    """
+    problems: "list[str]" = []
+    routes = six_route_declared_routes(reg_text or "")
+    if routes is None:
+        problems.append("%s 缺六路采集声明行" % name)
+        return problems
+    norm = sorted(set(routes))
+    closed = sorted(SIX_ROUTE_CLOSEDSET)
+    if norm != closed:
+        problems.append("%s 声明路集越闭集多出%s 缺失%s"
+                        % (name, sorted(set(norm) - set(closed)) or "∅",
+                           sorted(set(closed) - set(norm)) or "∅"))
+    obj = name
+    for suf in _PRODUCT_DIR_SUFFIXES:
+        if name.endswith(suf):
+            obj = name[: -len(suf)]
+            break
+    hit_batches = [b for b in sorted(batches) if obj in batches[b]]
+    if not hit_batches:
+        problems.append("%s 批次落盘面不在场（对象目录 %s）" % (name, obj))
+        return problems
+    for b in hit_batches:
+        miss_routes = [r for r in SIX_ROUTE_CLOSEDSET if r + ".md" not in batches[b][obj]]
+        if miss_routes:
+            problems.append("批次 %s 缺路落盘件[%s]" % (b, "、".join(miss_routes)))
+    return problems
+
+
+def st_10_six_route_landing_diff() -> "tuple[str, str]":
+    """ST-10 六路声明↔落盘逐路存在性断言——〔FX-U3 建／FX-U3 实装〕。
+
+    实装基面＝`_product_scan_entries()` 既有产物级扫描面枚举（生效池根直接条目＋pending/ 一层；
+    archive 免检自动继承）逐条目消费 `registration.md` 六节表「六路采集」声明行，
+    ＋语料批次落盘注册路径 `_corpus_batches_dir()` listing 批次子目录（sorted）逐对象逐路在场检。
+    三态：problems 非空＝fail 列明细；扫描面 0 条目＝空扫描合法态判绿（FC-5/GS/ST-3 同款口径）；
+    逐路全在场＝PASS（读数含条目数与逐路计数）。
+    """
+    entries = _product_scan_entries()
+    corpus = _corpus_batches_dir()
+    batches: "dict[str, dict[str, set[str]]]" = {}
+    if os.path.isdir(corpus):
+        for bname in sorted(os.listdir(corpus)):
+            bpath = os.path.join(corpus, bname)
+            if not os.path.isdir(bpath):
+                continue
+            objs: "dict[str, set[str]]" = {}
+            for oname in sorted(os.listdir(bpath)):
+                opath = os.path.join(bpath, oname)
+                if os.path.isdir(opath):
+                    objs[oname] = set(n for n in os.listdir(opath) if n.endswith(".md"))
+            batches[bname] = objs
+    problems: "list[str]" = []
+    checked = 0
+    landed = 0
+    for name, path in entries:
+        reg_path = os.path.join(path, REGISTRATION_FILE_NAME)
+        reg_text = _read_text(reg_path) if os.path.isfile(reg_path) else None
+        problems.extend(six_route_problems(name, reg_text, batches))
+        obj = name
+        for suf in _PRODUCT_DIR_SUFFIXES:
+            if name.endswith(suf):
+                obj = name[: -len(suf)]
+                break
+        for b in sorted(batches):
+            if obj in batches[b]:
+                checked += len(SIX_ROUTE_CLOSEDSET)
+                landed += sum(1 for r in SIX_ROUTE_CLOSEDSET if r + ".md" in batches[b][obj])
+    if problems:
+        return (READ_FAIL, "六路声明↔落盘违例：%s" % "；".join(problems))
+    if not entries:
+        return (READ_PASS, "产物级扫描面 0 条目·空扫描合法态（FC-5/GS/ST-3 同款口径）")
+    return (READ_PASS, "产物实例 %d 条目·批次 %s 逐路存在性检 %d/%d 在场（实扫描判绿）"
+            % (len(entries), "、".join(sorted(batches)), landed, checked))
+
+
 def st_9_registration_section_diff() -> "tuple[str, str]":
     """ST-9 registration 随件四节节闭集 diff＝∅——〔S4 建／T11 实装〕。
 
@@ -1541,7 +1653,7 @@ def gs_5_gate_non_regression() -> "tuple[str, str]":
     """GS-5 门禁不退化断言（坏信号③机械位）——〔S4 建／S4 实装〕。
 
     三组注册位对基线只增不减：validator 层名注册闭集（11 值）／两 gate_source 白名单
-    （各六值）／断言编号基数（26 项）；机械断言层名（`机械断言`／`格式检查表`）在各自
+    （各六值）／断言编号基数（27 项）；机械断言层名（`机械断言`／`格式检查表`）在各自
     白名单在场。任一缩水＝咬。声明↔代码双向 diff＝validator-catalog §二 层名值注册
     与本注册常量互检（FC-1 同款手法）。
     """
@@ -1587,6 +1699,7 @@ ASSERTIONS: "list[tuple[str, str]]" = [
     ("ST-7", "st_7_method_ir_exclusion"),
     ("ST-8", "st_8_spec_tables_closed"),
     ("ST-9", "st_9_registration_section_diff"),
+    ("ST-10", "st_10_six_route_landing_diff"),
     ("BW-1", "bw_1_roleplay_vocab"),
     ("BW-2", "bw_2_blunt_vocab_tiers"),
     ("BW-3", "bw_3_bare_number_rule"),
@@ -1966,6 +2079,24 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("ST9I_empty_scan_pass", registrations_problems({}) == [], True))
     cases.append(("ST9I_bite_extra_section", registrations_problems(reg_extra) != [], True))
     cases.append(("ST9I_closedset_4", len(set(REGISTRATION_SECTION_CLOSEDSET)) == 4, True))
+
+    # ===== FX-U3 批配对咬放（ST-10 六路声明↔落盘逐路存在性·内存注入不落仓） =====
+    # 全在场放／批次缺路咬／声明改名咬／批次不在场咬＋空扫描放＋闭集基数 6 自证
+    _sr_decl = ("# reg\n\n## 采集与蒸馏声明（六节规程逐节执行读数）\n\n| 规程节 | 执行态 | 读数 |\n|---|---|---|\n"
+                "| 六路采集 | 实跑 | 六路（著作／长对话／短表达／外部视角／决策记录／时间线）各自落盘 |\n")
+    _sr_routes6 = {"著作.md", "长对话.md", "短表达.md", "外部视角.md", "决策记录.md", "时间线.md"}
+    sr_batch_ok = {"t9": {"obj-a": set(_sr_routes6)}}
+    sr_batch_missing_route = {"t9": {"obj-a": _sr_routes6 - {"时间线.md"}}}
+    sr_decl_renamed = _sr_decl.replace("时间线", "年表")
+    cases.append(("ST10_pass", six_route_problems("obj-a-perspective", _sr_decl, sr_batch_ok) == [], True))
+    cases.append(("ST10_missing_route_bite",
+                  six_route_problems("obj-a-perspective", _sr_decl, sr_batch_missing_route) != [], True))
+    cases.append(("ST10_decl_renamed_bite",
+                  six_route_problems("obj-a-perspective", sr_decl_renamed, sr_batch_ok) != [], True))
+    cases.append(("ST10_batch_absent_bite",
+                  six_route_problems("obj-a-perspective", _sr_decl, {"t9": {"other": set(_sr_routes6)}}) != [], True))
+    cases.append(("ST10_empty_entries_pass", [p for n, t in [] for p in six_route_problems(n, t, {})] == [], True))
+    cases.append(("ST10_closedset_6", len(set(SIX_ROUTE_CLOSEDSET)) == 6, True))
 
     return cases
 
