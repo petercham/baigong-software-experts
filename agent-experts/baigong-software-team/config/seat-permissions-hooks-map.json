@@ -30,11 +30,6 @@
     }
   ],
   "agent_type_to_seat": {
-    "software-company-team-lead": "host",
-    "software-product-manager": "product",
-    "software-architect": "architect",
-    "software-qa-engineer": "qa",
-    "software-engineer": "engineer",
     "software-team-lead": "host",
     "software-team-product": "product",
     "software-team-architect": "architect",

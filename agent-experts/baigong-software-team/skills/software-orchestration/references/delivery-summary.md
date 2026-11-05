@@ -14,4 +14,4 @@
 
 ### 交付总结报告（可选落盘）
 
-仅当用户**明确要求**生成交付报告文件时，才落盘到 `deliverables/software-company/<项目简称>-delivery-<YYYY-MM-DD>.md`。默认不自动生成报告文件。
+仅当用户**明确要求**生成交付报告文件时，才落盘到 `docs/delivery-<项目简称>-<YYYY-MM-DD>.md`。默认不自动生成报告文件。
