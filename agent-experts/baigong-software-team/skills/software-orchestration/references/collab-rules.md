@@ -1,6 +1,6 @@
 # 协作规则
 
-> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§协作规则 逐字下沉件·源 commit `1b52fad`·施工 commit 见 README 版本账（§3 质量关卡留 MD 未沉）
+> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§协作规则 逐字下沉件；源/施工 commit 账目由仓侧维护、不随包分发（§3 质量关卡留 MD 未沉）
 
 ## 协作规则
 

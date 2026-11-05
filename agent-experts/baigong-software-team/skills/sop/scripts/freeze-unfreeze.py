@@ -3,12 +3,12 @@
 """T04-E · B10 停刀（freeze/unfreeze/revoke·人类直通触点专用）
 
 规范锚点：架构 v2.9 §9 B10 行逐字动作链「freeze 清租约 → 全写 matcher 置 deny → 终止实例」；
-表2-2（V13 L98）「冻结/解冻/吊销发起＝人类直通触点｜B10（脚本不得自触发）」——本脚本无自动
+表2-2「冻结/解冻/吊销发起＝人类直通触点｜B10（脚本不得自触发）」——本脚本无自动
 触发路径，unfreeze/revoke 入口带人类令牌校验（校验锚缺席＝fail-closed 拒）；
-§13（V13 L186）成值时限「停刀时限＝deny−freeze≤60s（缺省，C1 可调）」——缺省 60，可配；
+§13 成值时限「停刀时限＝deny−freeze≤60s（缺省，C1 可调）」——缺省 60，可配；
 §4/§17 紧急直通三通道之首＝一键冻结→B10。
 
-P6（deny 跨席位一致性）读数＝inconclusive（tests/probes/results/probe-results.json）——
+P6（deny 跨席位一致性）读数＝inconclusive（运行时探针读数由仓侧验收体系维护，不随包分发）——
 票面纪律镜像 §10：主路（全局 freeze-state 单点 deny）与退路（逐席显式 deny 列表配置面）
 双形并列同交付、缺省走主路；退路启用候裁 Q-05，本脚本不自行拍板。
 
@@ -31,7 +31,7 @@ import sys
 import time
 from datetime import datetime, timezone
 
-DEFAULT_DENY_DEADLINE_S = 60.0  # §13 V13 L186：deny−freeze≤60s（缺省，可配但缺省即 60）
+DEFAULT_DENY_DEADLINE_S = 60.0  # §13：deny−freeze≤60s（缺省，可配但缺省即 60）
 
 EXIT_HUMAN_TOKEN_INVALID = 2  # 人类令牌校验失败/缺席（表2-2 脚本不得自触发→fail-closed）
 EXIT_DEADLINE_EXCEEDED = 3   # deny−freeze 超时限（成值时限违约如实登记）
@@ -92,7 +92,7 @@ def active_seats(map_path: str) -> list[str]:
 
 def verify_human_token(token: str | None, token_anchor: str) -> tuple[bool, str]:
     """人类令牌校验：--human-token 的 sha256 须命中人类保管的校验锚文件（锚内一行一 sha256）。
-    锚缺席/令牌缺席/不命中 → fail-closed 拒（解冻/吊销仅人类直通触点触发·表2-2 V13 L98）。"""
+    锚缺席/令牌缺席/不命中 → fail-closed 拒（解冻/吊销仅人类直通触点触发·表2-2）。"""
     if not token or not token.strip():
         return False, "人类令牌缺席（unfreeze/revoke 仅人类直通触点触发，脚本不得自触发）"
     if not os.path.exists(token_anchor):
@@ -167,7 +167,7 @@ def do_freeze(a: argparse.Namespace) -> int:
     if not ok_deadline:
         append_record(a.ledger, "呈报", "freeze-unfreeze.py", {
             "event": "freeze_deadline_exceeded", "elapsed_s": round(elapsed, 3),
-            "deadline_s": a.deny_deadline_s, "clause": "§13 V13 L186 停刀时限 deny−freeze≤60s",
+            "deadline_s": a.deny_deadline_s, "clause": "§13 停刀时限 deny−freeze≤60s",
         })
         return EXIT_DEADLINE_EXCEEDED
     return 0
@@ -189,7 +189,7 @@ def do_unfreeze(a: argparse.Namespace) -> int:
         json.dump(state, f, ensure_ascii=False, indent=2)
     append_record(a.ledger, "签字", "freeze-unfreeze.py", {
         "event": "b10_unfreeze", "human_direct": True,
-        "clause": "解冻仅人类直通触点（表2-2 V13 L98）；令牌校验通过留痕",
+        "clause": "解冻仅人类直通触点（表2-2）；令牌校验通过留痕",
     })
     print("OK unfreeze: freeze-state 解除，写侧 deny 联动撤销（人类直通触点）")
     return 0
@@ -207,7 +207,7 @@ def do_revoke(a: argparse.Namespace) -> int:
         json.dump(state, f, ensure_ascii=False, indent=2)
     append_record(a.ledger, "呈报", "freeze-unfreeze.py", {
         "event": "b10_revoke", "human_direct": True,
-        "clause": "吊销仅人类直通触点（表2-2 V13 L98）",
+        "clause": "吊销仅人类直通触点（表2-2）",
     })
     print("OK revoke: 冻结态吊销入账（人类直通触点）")
     return 0
@@ -220,7 +220,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--token-anchor", default=os.path.join(default_ledger_root(), "..", "human", "b10-token-anchors"),
                     help="令牌校验锚文件（人类保管·一行一 sha256；缺席＝fail-closed）")
     ap.add_argument("--deny-deadline-s", type=float, default=DEFAULT_DENY_DEADLINE_S,
-                    help="成值时限（§13 V13 L186 缺省 60s，C1 可调）")
+                    help="成值时限（§13 缺省 60s，C1 可调）")
     ap.add_argument("--map", default=os.path.join(pack_root(), "config", "seat-permissions-hooks-map.json"))
     ap.add_argument("--leases", default=os.path.join(default_ledger_root(), "leases.jsonl"))
     ap.add_argument("--ledger", default=os.path.join(default_ledger_root(), "ledger.jsonl"))

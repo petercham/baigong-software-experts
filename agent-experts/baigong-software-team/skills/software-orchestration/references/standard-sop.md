@@ -1,6 +1,6 @@
 # 🏗️ 标准 SOP 工作流（中大型需求）
 
-> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§🏗️ 标准 SOP 工作流（中大型需求） 逐字下沉件·源 commit `1b52fad`·施工 commit 见 README 版本账
+> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§🏗️ 标准 SOP 工作流（中大型需求） 逐字下沉件；源/施工 commit 账目由仓侧维护、不随包分发
 
 ## 🏗️ 标准 SOP 工作流（中大型需求）
 

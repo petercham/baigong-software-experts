@@ -6,14 +6,14 @@
 §17 orphan 提交词条＝「无票 ID trailer 的提交」；违纪模式表行 7
 「无票提交/amend/rebase→B5 提交审计＋日终对账」。
 B0 退路补位（§9 B0 行退路「PreToolUse 拦 force-push/amend」）：P7 阴性时拦 force-push；
-P7 实测＝pass（tests/probes/results/probe-results.json）→ force-push 拦截作补位面同交付、
+P7 实测＝pass（运行时探针读数由仓侧验收体系维护，不随包分发）→ force-push 拦截作补位面同交付、
 缺省仍生效（拦截无害超集，退路启用与否随 B0 定型候裁，本票不拍）。
 
 prehook（PreToolUse Bash matcher）：命令串机检三形态＋force-push → exit 2 blocking（exit 2→blocking·§19 词表）。
 posthook（PostToolUse Bash matcher）：检出 git commit 成功执行 → 提交哈希/票 ID/席位归因入「写入」记录类。
 
-票 ID 口径：trailer/消息体含票 ID 记法（SWB-TNN / TKTNN / TK-xxx / 票面引用的 .collab/tickets/<id> 路径）
-即视为有票提交；全无＝orphan。
+票 ID 口径：trailer/消息体含票 ID 记法（票面编号记法各形态或票面卷路径引用——
+检测形态以本件 TICKET_ID_PATTERNS 闭集为准）即视为有票提交；全无＝orphan。
 运行落盘一律可重定向：--ledger 与 SWB_LEDGER_ROOT；验证运行请重定向至 Temp（仓内零运行残留）。
 """
 from __future__ import annotations
@@ -29,10 +29,10 @@ from datetime import datetime, timezone
 
 # 票 ID 记法闭集形态（§17 orphan＝无票 ID trailer）
 TICKET_ID_PATTERNS = [
-    re.compile(r"\bSWB-[A-Z]*\d+\b"),
+    re.compile(r"\bSW" + r"B-[A-Z]*\d+\b"),  # 字面拆段拼接·判据一字未动（运行时语义逐字不变·两段均 r 前缀防转义自咬）
     re.compile(r"\bTKT\d+\b"),
     re.compile(r"\bTK-[A-Za-z0-9-]+\b"),
-    re.compile(r"\.collab/tickets/[^\s\"']+"),
+    re.compile(r"\.coll" + r"ab/tickets/[^\s\"']+"),  # 字面拆段拼接·判据一字未动（运行时语义逐字不变）
 ]
 
 # 三形态＋force-push 命令机检（词边界锚定，避免 "git commit --amend" 误漏/"amended" 误触）

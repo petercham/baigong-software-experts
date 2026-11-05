@@ -1,6 +1,6 @@
 # 🔧 BugFix 快捷路径
 
-> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§🔧 BugFix 快捷路径 逐字下沉件·源 commit `1b52fad`·施工 commit 见 README 版本账
+> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§🔧 BugFix 快捷路径 逐字下沉件；源/施工 commit 账目由仓侧维护、不随包分发
 
 > **退役声明（v2.9 §20.1⑦）**：本档「BugFix 快捷路径」工作流档位已被**维护票**替代（架构 §3 票型八类⑧／表2-3 维护行／§17 维护票词条·准入四判据：无 API 变更／无数据迁移／单域文件集／可逆回滚）。无 API 变更之轻量工作由维护票承接；涉 API 变更之轻量工作回归标准流（触接口变更不设轻量通道）。本档保留为技法参考，不作跳阶段依据。
 

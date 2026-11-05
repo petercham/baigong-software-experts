@@ -792,6 +792,34 @@ def append_assemble_block(out_dir: str, bundle_name: str, bundle_repo_commit: st
         die_infra("装配账写块失败（装配面已新、账未记；重跑装配可补账）：%s" % exc)
 
 
+def parse_assembly_exclude(lock: "dict") -> "list[str]":
+    """bundle.lock 顶层 `assembly_exclude`（CLN-PURE S1）＝过程本体裁出装配面清单。
+    条目两型＝装配面 relpath 精确全等／尾斜杠目录前缀条目（锚定装配面根，非任意子串）。
+    非法项 fail-closed（先于任何写）：值非 list／条目非字符串／含 `*` `?` `[`、以 `/` 起、
+    含 `..` 路径段 → die_usage（exit 2）。键缺席＝空清单＝行为零变化（其余 bundle 不受影响）。"""
+    if "assembly_exclude" not in lock:
+        return []
+    raw = lock["assembly_exclude"]
+    if not isinstance(raw, list):
+        die_usage("assembly_exclude 必须是字符串列表（禁通配／绝对路径／`..`）：%r" % (raw,))
+    for item in raw:
+        if not isinstance(item, str) or not item:
+            die_usage("assembly_exclude 条目须为非空字符串：%r" % (item,))
+        if any(ch in item for ch in "*?["):
+            die_usage("assembly_exclude 条目含通配字符（禁通配）：%r" % item)
+        if item.startswith("/") or item.startswith("\\"):
+            die_usage("assembly_exclude 条目以 / 起（禁绝对路径）：%r" % item)
+        if ".." in item.replace("\\", "/").split("/"):
+            die_usage("assembly_exclude 条目含 `..` 路径段（禁上溯）：%r" % item)
+    return list(raw)
+
+
+def is_assembly_excluded(rel: str, entries: "list[str]") -> bool:
+    """装配面 relpath 裁出判定（唯一谓词——装配取源 plan 构造与幂等对账同一口径共用）。
+    精确条目全等；尾斜杠条目＝目录前缀（锚定装配面根）。"""
+    return any(rel == e or (e.endswith("/") and rel.startswith(e)) for e in entries)
+
+
 def do_assemble(bundle_dir: str, out_dir: "str | None", verbose: bool) -> int:
     """--assemble：读 bundle.lock → 源一致性校验 → git archive 按 ref 取源 → 装配面
     逐字落盘＋断言 → COPY.state 记账 → ASSEMBLY.manifest.json 内嵌全账。
@@ -859,11 +887,16 @@ def do_assemble(bundle_dir: str, out_dir: "str | None", verbose: bool) -> int:
                   % (len(drifted), drifted[0]))
             return 1
     # ---- 取源（git archive＝ref 时刻 blob，逐字零变换）----
+    # assembly_exclude（CLN-PURE S1）：非法项校验先于任何写；plan 构造与幂等对账共用
+    # 同一谓词 is_assembly_excluded（新哈希＝plan 过滤后集合，天然同一口径，禁两套逻辑）。
+    assembly_exclude = parse_assembly_exclude(lock)
     plan: "list[tuple[str, bytes]]" = []          # 装配面 relpath -> bytes
     # bundle 本体（排除索引件/账本/装配元数据——它们不是注册态包成员）
     body_exclude = {LOCK_FILENAME, STATE_FILENAME, ASSEMBLY_MANIFEST}
     for rel, data in git_archive_blobs(bundle_repo, bundle_commit, bundle_prefix).items():
         if rel in body_exclude or rel.startswith(LOCK_FILENAME + "/"):
+            continue
+        if is_assembly_excluded(rel, assembly_exclude):
             continue
         plan.append((rel, data))
     for comp in components:
@@ -872,6 +905,8 @@ def do_assemble(bundle_dir: str, out_dir: "str | None", verbose: bool) -> int:
         ref_commit = component_commits[comp["component"]]
         target = comp["target"].strip("/")
         for rel, data in git_archive_blobs(comp_repo, ref_commit, comp["path"]).items():
+            if is_assembly_excluded("%s/%s" % (target, rel), assembly_exclude):
+                continue
             plan.append(("%s/%s" % (target, rel), data))
     # 装配面路径冲突检测（两个组件写同一目标＝索引写坏，fail-closed）
     seen_paths: "set[str]" = set()

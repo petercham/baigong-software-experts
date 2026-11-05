@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # T02-A · B0 账本初始化（主路/退路双形）
-# 规范锚点：架构 v2.9 §9 B0 行（V13 L154）／§3 主信任锚（V13 L141）／§11 账本 git 服务承载＝人类侧自建（V13 L174）
-# 形态取数：P7（git 独立服务可建性）实测读数——读数源＝同包 tests/probes/results/probe-results.json（交付树件）
+# 规范锚点：架构 v2.9 §9 B0 行／§3 主信任锚／§11 账本 git 服务承载＝人类侧自建
+# 形态取数：P7（git 独立服务可建性）实测读数——读数源＝仓侧运行时探针读数件（不随包分发；缺档容错落主路）
 #   P7 = pass     → 主路：独立 git 服务初始化＝远端裸仓＋receive.denyNonFastForwards=true＋receive.denyDeletes=true＋保护分支配置
 #   P7 = negative → 退路：本地裸仓＋三重保证待补位声明行（PreToolUse 拦截实体在 T04，本脚本只留配置锚）
 # 主信任锚＝git 原生哈希链（§3/§17）；记录级前向哈希 prev_hash 仅供单记录独立校验（§17 前向哈希词条）。
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PACK_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"                      # agent-experts/baigong-software-team（项目根＝含 docs/STRUCTURE.md 探针锚·SWB-B4 两级锚）
-PROBE_RESULTS="$PACK_ROOT/tests/probes/results/probe-results.json"  # P7 读数源（票面：默认取数走主路）
+PACK_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"                      # agent-experts/baigong-software-team（项目根＝含 docs/STRUCTURE.md 探针锚·两级锚）
+PROBE_RESULTS="${SWB_PROBE_RESULTS:-}"                              # P7 读数源可经环境变量显式指定；缺省＝无读数源，取数容错落主路（缺档不 FATAL）
 
 # 账本根：缺省＝仓根 .collab/ledger/（§9 B0 行「仓内镜像居 .collab/ledger/」）；测试可经环境变量重定向
 LEDGER_ROOT="${SWB_LEDGER_ROOT:-$PWD/.collab/ledger}"
@@ -36,7 +36,7 @@ if [ "$P7_STATUS" = "negative" ]; then
   cat > "$LEDGER_ROOT/fallback-config-anchor.json" <<'JSON'
 {
   "form": "fallback",
-  "clause": "架构v2.9 §9 B0 退路行（V13 L154）",
+  "clause": "架构v2.9 §9 B0 退路行",
   "pending_guarantees": [
     "PreToolUse 拦 force-push/amend（拦截实体＝T04 B5）",
     "异地镜像（承载者＝人类侧·§11，配置细节＝候裁 Q-02 呈人类）",

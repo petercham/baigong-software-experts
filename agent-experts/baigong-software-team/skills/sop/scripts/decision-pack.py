@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""T03-D · B4 决策包装配（机械计算＋异常强制呈报·§9 V13 L160）
+"""
+B4 决策包装配（机械计算＋异常强制呈报·架构 v2.9 §9 B4 行）
 
-规范锚点：架构 v2.9 §4（V13 L115）异常五类强制呈报，触发源六闭集
+规范锚点：架构 v2.9 §4 异常五类强制呈报，触发源六闭集
 ｛租约越界 deny／对账差≠0／活性自检失败／引用扫描命中／超期／熔断｝逐码实现为呈报触发枚举；
-表2-2（V13 L91）「决策包装配与呈报：状态机脚本；主理人仅投递」；
-表2-2（V13 L97）「灰度→全量＝QA 按声明判据机械门禁，不得现场裁量」→ 判据读取＝票内声明字段，
+表2-2「决策包装配与呈报：状态机脚本；主理人仅投递」；
+表2-2「灰度→全量＝QA 按声明判据机械门禁，不得现场裁量」→ 判据读取＝票内声明字段，
 脚本比对读数，不符拒出 full-rollout 决策包；
-§18⑩（V13 L213 次级承接）呈报面含缺陷定级字段：P0/P1 定级＝QA 双复核＋人类终裁，
+§18⑩（次级承接）呈报面含缺陷定级字段：P0/P1 定级＝QA 双复核＋人类终裁，
 决策包呈报面呈现定级（severity）与定级确认状态（severity_confirmed）。
 
 运行落盘一律可重定向：--ledger/--out 与 SWB_LEDGER_ROOT；验证运行请重定向至 Temp。
@@ -36,7 +37,7 @@ append_record = _gate.append_record
 canonical_json = _gate.canonical_json
 default_ledger_root = _gate.default_ledger_root
 
-# ---- 触发源六闭集（§4 V13 L115）逐码枚举·六码名与 §4 六项一一对应 ----
+# ---- 触发源六闭集（§4）逐码枚举·六码名与 §4 六项一一对应 ----
 TRIG_LEASE_DENY = "租约越界deny"        # ①租约越界 deny
 TRIG_RECONCILE_DIFF = "对账差≠0"        # ②对账差≠0
 TRIG_LIVENESS_FAIL = "活性自检失败"     # ③活性自检失败
@@ -79,7 +80,7 @@ def build_report_pack(trigger: str, ticket_id: str, evidence: dict,
             "severity_confirmed": severity_confirmed,
             "grading_authority": "QA 双复核＋人类终裁（表2-2）——本脚本呈现定级与定级确认状态，不判级",
         },
-        "delivery": "主理人仅投递（表2-2 V13 L91）；装配与呈报＝状态机脚本（B4）",
+        "delivery": "主理人仅投递（表2-2）；装配与呈报＝状态机脚本（B4）",
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
     pack["pack_hash"] = hashlib.sha256(canonical_json(
@@ -99,7 +100,7 @@ def build_report_pack(trigger: str, ticket_id: str, evidence: dict,
 
 def build_full_rollout_pack(ticket_id: str, declared_criteria: list[dict], readings: dict,
                             ledger_file: str, out_path: str | None) -> int:
-    """灰度→全量机械门禁（表2-2 V13 L97）：判据读取＝票内声明字段，脚本逐项比对读数；
+    """灰度→全量机械门禁（表2-2）：判据读取＝票内声明字段，脚本逐项比对读数；
     任一不符→拒出 full-rollout 决策包（exit≠0）并写「呈报」类审计事件；全符→出包。"""
     if not declared_criteria:
         print("REJECT rollout: 票内无声明判据字段——灰度→全量判据读取＝票内声明字段，无声明不裁量（表2-2）", file=sys.stderr)
@@ -130,7 +131,7 @@ def build_full_rollout_pack(ticket_id: str, declared_criteria: list[dict], readi
         "ticket_id": ticket_id,
         "criteria_checked": declared_criteria,
         "readings": readings,
-        "gate": "QA 按声明判据机械门禁通过（表2-2 V13 L97）；单签＝full-rollout（QA按声明判据单签·表2-3 节点6）",
+        "gate": "QA 按声明判据机械门禁通过（表2-2）；单签＝full-rollout（QA按声明判据单签·表2-3 节点6）",
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
     pack["pack_hash"] = hashlib.sha256(canonical_json(

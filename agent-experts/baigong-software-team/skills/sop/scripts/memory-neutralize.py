@@ -5,7 +5,7 @@
 规范锚点：架构 v2.9 §9 B11 行「Read/Grep matcher 扫描＋下游件引用扫描」；对应 U6/G1-G2、
 违纪模式表行 1（B11 面）与行 6「检索自救→U7＋B11 读侧扫描（P3 能力面未验证，只作辅助面不作假设）」、
 行 11「过程件被用作引用目标→B8 引用可达性扫描＋B11 下游件引用扫描」。
-诚实边界（票面 T04-F 明示）：U7 保证＝「P3[未验证]＋G5 辅助面」（§7 V13 L139）——
+诚实边界（当票面明示）：U7 保证＝「P3[未验证]＋G5 辅助面」（§7 对应行）——
 本脚本只实现读侧检出面，不声明阻断性能力面保证。
 
 两面：
@@ -121,7 +121,7 @@ def prehook(a: argparse.Namespace, payload: dict) -> int:
     rec = append_record(a.ledger, "呈报", "memory-neutralize.py", {
         "event": "memory_read_flagged", "target": target, "matched_glob": hit,
         "decision": a.read_decision,
-        "clause": "§9 B11 行读侧扫描；诚实边界＝只实现读侧检出面，不声明阻断性能力面保证（§7 V13 L139）",
+        "clause": "§9 B11 行读侧扫描；诚实边界＝只实现读侧检出面，不声明阻断性能力面保证（§7 对应行）",
     })
     decision = json.dumps({
         "hookSpecificOutput": {

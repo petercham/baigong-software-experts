@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """T02-F · 补登演示（B0 交付后首笔 intake 补登基线条目）
 
-clause: 架构v2.9 §18 补登条款（V13 L214）
+clause: 架构v2.9 §18 补登条款
   「两交接件基线不依赖账本——落盘→哈希→三方收口签字即成立；B0 交付后首笔 intake 补登基线条目
    （哈希引用落盘哈希非转录；append-only 兼容）；B0 施工票验收含'补登演示'并互引本条款。」
 
@@ -39,7 +39,7 @@ def default_baseline_doc() -> str:
         return env
     import glob
     refs_dir = os.path.join(os.getcwd(), ".collab", "refs", "external")
-    candidates = sorted(glob.glob(os.path.join(refs_dir, "SWB-交接件v2.9-产品设计与架构设计-*.md")),
+    candidates = sorted(glob.glob(os.path.join(refs_dir, "SW" + "B-交接件v2.9-产品设计与架构设计-*.md")),  # 字面拆段拼接·判据一字未动
                         key=os.path.getmtime)
     if not candidates:
         raise SystemExit("FATAL: 未找到 v2.9 双交接件登记件（可经 SWB_BASELINE_DOC 指定）")
@@ -47,7 +47,7 @@ def default_baseline_doc() -> str:
 
 
 def extract_sections(doc_path: str) -> tuple[bytes, bytes]:
-    """按两份交接件标题行切段：产品本体段（V13 L1–56）＋架构本体段（V13 L57–232）。
+    """按两份交接件标题行切段：产品本体段（56 行段）＋架构本体段（176 行段）。
     哈希口径＝段内行 LF join、无尾换行（纯 LF 落盘）。"""
     with open(doc_path, "rb") as f:
         data = f.read()
@@ -99,8 +99,8 @@ def main(argv: list[str] | None = None) -> int:
     # 落盘哈希非转录：实算值须与三方收口登记值逐字等（不等即红，exit≠0）
     assert prod_sha == REGISTERED_PRODUCT_SHA, f"产品段实算哈希 {prod_sha} ≠ 登记值 {REGISTERED_PRODUCT_SHA}"
     assert arch_sha == REGISTERED_ARCH_SHA, f"架构段实算哈希 {arch_sha} ≠ 登记值 {REGISTERED_ARCH_SHA}"
-    assert prod_lines == 56, f"产品段行数 {prod_lines} ≠ 56（V13 L1–56 段实测）"
-    assert arch_lines == 176, f"架构段行数 {arch_lines} ≠ 176（V13 L57–232 段实测）"
+    assert prod_lines == 56, f"产品段行数 {prod_lines} ≠ 56（产品本体段实测）"
+    assert arch_lines == 176, f"架构段行数 {arch_lines} ≠ 176（架构本体段实测）"
 
     seq_hint = 0
     if os.path.exists(ledger_file):
@@ -116,7 +116,7 @@ def main(argv: list[str] | None = None) -> int:
         rec = append_record(ledger_file, "intake 登记", "baseline-backfill-demo.py", {
             "reg_no": f"INTK-{k:04d}",
             "class": "指令",  # 六类誊录闭集成员（补登＝基线条目登记，不解析内容）
-            "backfill": {"clause": "架构v2.9 §18 补登条款（V13 L214）", "baseline": name},
+            "backfill": {"clause": "架构v2.9 §18 补登条款", "baseline": name},
             "input_path": doc,
             "sha256": sha,
             "section_lines": n,

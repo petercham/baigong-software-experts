@@ -44,7 +44,7 @@ GRADES_REQUIRING_CONFIRM = {"P0", "P1"}      # 定级权限归 QA 双复核＋�
 TRIGGER_SOURCES = ["租约越界deny", "对账差≠0", "活性自检失败", "引用扫描命中", "超期", "熔断"]
 
 # ---- 回流件四型闭集（§3）----
-RETURN_TYPES = ["完成", "部分完成", "受阻", "异常"]  # §3 回流件四型闭集（V13 L113·物理 L141）
+RETURN_TYPES = ["完成", "部分完成", "受阻", "异常"]  # §3 回流件四型闭集
 
 # ---- timeouts 缺省（§13；未配置项＝不适用）----
 TIMEOUT_DEFAULTS = {"工程师票": 48.0, "呈报": 24.0}
@@ -172,7 +172,7 @@ def transition(ticket_id: str, src, dst, *, kind: str, signs: list[str],
     if missing:
         return _reject(ledger_file, ticket_id, src, dst, f"签字集合缺席：{missing}", trigger_source)
 
-    # 回流四型标签校验（§3 闭集机械化·SWB-T07-C）：4→5 必填、非回流迁移禁挂
+    # 回流四型标签校验（§3 闭集机械化）：4→5 必填、非回流迁移禁挂
     if (src, dst) == (4, 5) and return_type is None:
         return _reject(ledger_file, ticket_id, src, dst,
                        "4→5 回流迁移缺 return_type（回流四型闭集 {完成,部分完成,受阻,异常}·§3）", trigger_source)

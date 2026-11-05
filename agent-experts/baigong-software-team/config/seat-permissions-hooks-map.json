@@ -1,10 +1,10 @@
 {
   "derived_from": "seat-permissions.json (表2-1)",
-  "_spec": "SWB-T04-I · seat-permissions.json deny_globs 的 hooks 消费形态（表2-1「明确不可写」列）",
+  "_spec": "seat-permissions.json deny_globs 的 hooks 消费形态（表2-1「明确不可写」列）",
   "_anchors": {
-    "实例化源": "config/seat-permissions.json（表2-1 V13 L70–79 六席位行逐行转录·T02 已收口件 ba0c785）；本文件不新增判据，只转成 hooks/write-guard 消费形态",
-    "席位覆盖说明": "本映射收录五机械席位（host/product/architect/qa/engineer）⊆ 源六席位集。人类行不收录：表2-1 人类行载体＝「平台外签名工具」、表2-2「冻结/解冻/吊销发起＝人类直通触点」——hooks 强制面不作用于人类席位（人类直通＝设计语义）。与源件一致性断言（席位集⊆源席位集且每席位非空）在 tests/s4/test_enforcement.py 内（票面判据9）。新五卡 frontmatter name（`software-team-*`）与旧五名双载；旧名＝legacy 别名，其清退随 B 批身份面收敛。",
-    "路径锚定": "deny_globs 一律读作项目根字面（SWB-B4 B4-B 两级锚换代·表2-1 表注路径锚定款语义随迁：项目根＝含 docs/STRUCTURE.md 之探针锚目录）；交付面路径（delivery_paths 桶·真源＝本项目 docs/STRUCTURE.md）不受「不可写」列约束，其写入经当票租约 path_globs 授权（表注）——engineer 行交付面可写性由租约面授权、非由 deny_globs 豁免；非交付席 deny 换代＝delivery_paths 六目录行入各席枚举（B4 rev2 补丁三·五席同批随源件清零）"
+    "实例化源": "config/seat-permissions.json（表2-1 六席位行逐行转录·已收口件）；本文件不新增判据，只转成 hooks/write-guard 消费形态",
+    "席位覆盖说明": "本映射收录五机械席位（host/product/architect/qa/engineer）⊆ 源六席位集。人类行不收录：表2-1 人类行载体＝「平台外签名工具」、表2-2「冻结/解冻/吊销发起＝人类直通触点」——hooks 强制面不作用于人类席位（人类直通＝设计语义）。与源件一致性断言（席位集⊆源席位集且每席位非空）＝仓内当期验收测试实体（不随包分发）（票面判据9）。新五卡 frontmatter name（`software-team-*`）与旧五名双载；旧名＝legacy 别名，其清退随身份面收敛批进行。",
+    "路径锚定": "deny_globs 一律读作项目根字面（两级锚换代·表2-1 表注路径锚定款语义随迁：项目根＝含 docs/STRUCTURE.md 之探针锚目录）；交付面路径（delivery_paths 桶·真源＝本项目 docs/STRUCTURE.md）不受「不可写」列约束，其写入经当票租约 path_globs 授权（表注）——engineer 行交付面可写性由租约面授权、非由 deny_globs 豁免；非交付席 deny 换代＝delivery_paths 六目录行入各席枚举（交付面路径换代补丁·五席同批随源件清零）"
   },
   "seats": [
     {
@@ -26,7 +26,7 @@
     {
       "seat_id": "engineer",
       "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/qa/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**"],
-      "deny_globs_note": "SWB-B4 B4-C R⑧(i) 向精化随动（与源件 seat-permissions.json engineer 行逐字同源·t13 派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十一桶闭集（grep 引用不复写名录）。"
+      "deny_globs_note": "deny 向精化随动款（与源件 seat-permissions.json engineer 行逐字同源·派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十一桶闭集（grep 引用不复写名录）。"
     }
   ],
   "agent_type_to_seat": {
@@ -41,5 +41,5 @@
     "software-team-qa": "qa",
     "software-team-engineer": "engineer"
   },
-  "same_origin_declaration": "本文件与 config/seat-permissions.json 同源派生（§3 同源配置）；一致性断言实体＝tests/s4/test_enforcement.py（票面判据9），消费方＝write-guard.py（deny_globs）与 freeze-unfreeze.py（agent_type_to_seat·逐席 deny 列表退路配置面）。"
+  "same_origin_declaration": "本文件与 config/seat-permissions.json 同源派生（§3 同源配置）；一致性断言实体＝仓内当期验收测试（不随包分发）（票面判据9），消费方＝write-guard.py（deny_globs）与 freeze-unfreeze.py（agent_type_to_seat·逐席 deny 列表退路配置面）。"
 }

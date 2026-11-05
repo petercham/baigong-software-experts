@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 """T04-B · B5 写侧校验（消费面声明②「写侧校验规则←表2-1 不可写列」落点）
 
-规范锚点：架构 v2.9 §9 B5 行（V13 L153–166 内）「PreToolUse stdin 直读 agent_id/agent_type
+规范锚点：架构 v2.9 §9 B5 行「PreToolUse stdin 直读 agent_id/agent_type
 查租约[实证: buildAgentTrigger，§19；运行时完整性＝未验证:P4]」；表2-1「明确不可写」列
-（V13 L70–79，经 config/seat-permissions-hooks-map.json 消费）；违纪模式表行 2
+（表2-1 六席位行转录，经 config/seat-permissions-hooks-map.json 消费）；违纪模式表行 2
 「越租约路径写入→U2＋B5 deny」。
-票面纪律镜像 §10：P4 运行时读数＝inconclusive（tests/probes/results/probe-results.json）——
+票面纪律镜像 §10：P4 运行时读数＝inconclusive（运行时探针读数由仓侧验收体系维护，不随包分发）——
 不把 stdin 完整性当已成立闸前提：主路（PreToolUse stdin 直读）与退路（SubagentStart 状态文件）
 双形并列同交付、缺省走主路不启用退路；择路由候裁 Q-04，本脚本不自行拍板。
 
@@ -46,7 +46,7 @@ def pack_root() -> str:
 
 
 def project_root() -> str:
-    """SWB-B4 B4-B 两级锚换代＝项目根锚：自包根位置上溯首个含 `docs/STRUCTURE.md` 的目录
+    """两级锚换代＝项目根锚：自包根位置上溯首个含 `docs/STRUCTURE.md` 的目录
     ＝项目根（B1-C STRUCTURE 探针锚）。权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。
     SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；探针缺位＝退回落包根（fail-safe·
     非仓根猜算——权限面读空即租约不命中＝deny，不开 fail-open 窗口）。"""
@@ -184,7 +184,7 @@ def load_leases(leases_file: str) -> list[dict]:
 
 
 def deny_output(reason: str) -> str:
-    """PreToolUse 决策词表（§19 V13 L224：permissionDecision deny/ask）——deny 输出。"""
+    """PreToolUse 决策词表（§19：permissionDecision deny/ask）——deny 输出。"""
     return json.dumps({
         "hookSpecificOutput": {
             "hookEventName": "PreToolUse",
