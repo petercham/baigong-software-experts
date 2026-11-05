@@ -131,7 +131,9 @@ F5. 我方装配器＝`agent-skills/object-build/scripts/publish.py`（`--assemb
 
 ## §F 版本线建议
 
-整改落地＝`0.1.27 → 0.1.28` bump 口径：仓根 plugin.json、市场源部署面 `.codebuddy-plugin/plugin.json`、（上架后）市场条目三同源。三同源纪律在册（publish.py 逐字发布＋`--check` 漂移检测机械保证），bump 随 RP-TK2 回执登记前后值各附实测 grep 读数。
+整改落地＝`0.1.27 → 0.1.29` bump 口径：仓根 plugin.json、市场源部署面 `.codebuddy-plugin/plugin.json`、（上架后）市场条目三同源。三同源纪律在册（publish.py 逐字发布＋`--check` 漂移检测机械保证），bump 随 RP-TK2 回执登记前后值各附实测 grep 读数。
+
+> 版本号口径修正（2026-11-05 22:0x 皮总裁定头像文字换代＝AV-FIX 票·BugFix 快捷路径，0.1.28 由该批三同源先行占用）：本票 F 段原「0.1.28」顺延 **0.1.29**——真源对账/字段族/hooks/pre_publish 整改批一律按 **0.1.29** 记账。〔v1.1 修正笔，依主理人通知〕
 
 ---
 
