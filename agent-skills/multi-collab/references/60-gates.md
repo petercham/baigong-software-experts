@@ -57,7 +57,12 @@
     "OA-D6-3": {"commit": "advisory"},
     "OA-D6-4": {"commit": "advisory"},
     "MC-SEAT-DECL": {"commit": "advisory"},
-    "OA-D6-5": {"commit": "advisory"}
+    "OA-D6-5": {"commit": "advisory"},
+    "OA-E-ADR-1": {"commit": "advisory"},
+    "OA-E-ADR-2": {"commit": "advisory"},
+    "OA-E-ADR-3": {"commit": "advisory"},
+    "OA-E-ADR-4": {"commit": "advisory"},
+    "OA-E-ADR-5": {"commit": "advisory"}
   }
 }
 ```
@@ -103,6 +108,11 @@
 | `OA-D6-4` 交付包内指针可达性 | `advisory` | 同上 D6-4 行（同上） | **足**（同上·首跑读数见交付回执，跨技能引用面命中属另案候裁项信号） |
 | `MC-SEAT-DECL` 席位自指短声明形式约束 | `advisory` | `deliverables/experts/baigong-software-team/skills/software-orchestration/references/handoff-discipline.md` §十（条款正文已落盘·ENG-H1） | **足**（首挂 advisory＝整合清单 §六；升 block 候实跑零误报读数入 evidence 后另拍） |
 | `OA-D6-5` 施工票声明闭集对账 | `advisory` | `object-audit/references/50-document.md` D6 表 D6-5 行（条款正文先落·同票先行 commit） | **足**（首挂 advisory＝整合清单 §六；存量不回扫豁免复核挂事件锚·§八-5） |
+| `OA-E-ADR-1` ADR 头块断言（docs/adr 族） | `advisory` | `object-audit/references/50-document.md` E-ADR 节 E-ADR-1″ 行（条款正文随 ADR-L0 同批先落 provider 包） | **足**（首挂 advisory＝ADR 工序放行裁定候裁③既批射程；升 block 候实跑零误报读数入 evidence 后另拍） |
+| `OA-E-ADR-2` ADR 编号正断言＋唯一＋递增 | `advisory` | 同上 E-ADR 节 E-ADR-2‴ 行（同上） | **足**（同上） |
+| `OA-E-ADR-3` ADR 双向 supersede 全向校验 | `advisory` | 同上 E-ADR 节 E-ADR-3″ 行（同上） | **足**（同上） |
+| `OA-E-ADR-4` ADR accepted 不可变 | `advisory` | 同上 E-ADR 节 E-ADR-4″ 行（同上） | **足**（同上） |
+| `OA-E-ADR-5` ADR 三面对账（桶互斥和式） | `advisory` | 同上 E-ADR 节 E-ADR-5‴ 行（同上） | **足**（同上） |
 
 > 注（批 5-③ W6 留痕·覆盖批 5-② 同处留痕）：上表四条规范依据的**正文已落本包** `70-charter.md` §四（4.1／4.2／4.3），读表规则 5 由「id 串出现在本件 json 围栏内」的**自指式满足**转为**条款级真满足**（四条 id 均可在 `70-charter.md` 解析到，非仅在本件 json 围栏内出现）。`mode` 一律维持 `advisory` 不变——依 decisions §九·②「先挂 advisory 取信号」；升 block 须先有条款级依据再由治理改本表（配套规则 2）。
 

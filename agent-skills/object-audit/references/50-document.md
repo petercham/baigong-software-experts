@@ -83,6 +83,40 @@
 | D9-3 | 重复目录 | 两目录职责声明相同/高度重叠（README 边界一句话对撞） | 合并，留一个真源目录 |
 | D9-4 | 内容重复 | 两份现行件大段重复（grep 重复段落可机检）＝D2-3 第二真源的机检面 | 留一处正文，其余改指针 |
 
+## E-ADR ADR 族机检断言（docs/adr 面）
+
+> 出处＝ES 定标设计件终态（`ES v2 A.3 → v3 §一-B → v3.1 三修点`，后生效覆盖先前·冲突序 v3.1＞v3＞v2·原件 append-only 在册）。条款名保留 ES 原名（″/‴ 后缀）；进表与机检输出 spec_id 形态＝`OA-E-ADR-1`…`OA-E-ADR-5`（ADR-L0 修订笔 R-1 换代·只辖机件命名面）。对账扫描根锚＝bundle 项目根（挂载态经 bundle.lock 自解·四序 fail-closed）。
+
+E-ADR-1″ 头块断言：适用面＝`docs/adr/*.md`（项目内）；头 12 行内必含
+  `^- Status：(Proposed|Accepted|Rejected|Deprecated|Superseded by .+)$`
+  ＋`^- Deciders：`＋`^- Date：`＋`^- Author：`＋`^- Registrar：` 五行；缺任一行 exit 1。
+  Date 行匹配口径注：日期可反引号包裹载体（协议强制日期载体合法），校验器遮反引号后按 `YYYY-MM-DD` 实值匹配（匹配语义不变·OA-T1 载体口径同旨）。
+E-ADR-2‴ 编号正断言＋唯一＋递增（v3.1 修）：
+  (0) 正断言：`docs/adr/` 目录内全部 `*.md` 文件名必匹配 `^(\d{4})-[A-Za-z0-9._-]+\.md$`，
+      否则 exit 1（封 `use-pg-0001.md` 编号非首位、`12345-five.md`/`001-three.md` 非四位逃账）；
+  (1) 提取集 `^(\d{4})-` 重复 occurrence>1 exit 1；
+  (2) 新落盘编号＝既有最大＋1（跳号/复用 exit 1）。
+E-ADR-3″ 双向 supersede 全向校验（适用域＝docs/adr/ 集）：
+  (a) 旧→新向：Status 含 `Superseded by X` 的件，X 必在盘（缺＝悬空 supersede exit 1）
+      且 X 头块含 `^- Supersedes：` 行并指回该案名；
+  (b) 新→旧向：任何含 `Supersedes：Y` 的件，Y 必在盘且 Y 的 Status 行必含本件引用；
+  双向图边缺一 exit 1（python 逐边校验）。
+  补偿断言：adr 件内对 `.collab/…` 案卷面的引用属活引用（adr 永不删→断链风险常驻），
+  随本断言逐条 test 存在性，缺件读数入回执（advisory 起步）。
+E-ADR-4″ accepted 不可变：适用域＝docs/adr 族限定（`docs/adr/*.md` 目录族——限定语义＝「只辖 ADR 族，不辖裁定登记族史实注记」）；
+  diff 白名单＝Status 行＋Supersedes 行＋文末追加注记行；
+  注记行内容约束（v3.1 修）：必含 `YYYY-MM-DD` 日期戳＋触发件引用——引用式闭集＝
+  `^\d{4}-`（docs/adr 现行 NNNN 制）∪ `ADR-\d{3}`（历史制残留兼容）∪ 案件路径形态
+  （`.collab/…` 或 `docs/…` 全路径）；三式皆不命中＝注记不合格 exit 1；
+  且不得与既有行文本重合改写（行级 diff 判定：追加＝新增行 only）。
+E-ADR-5‴ 三面对账（v3.1 修·桶互斥）：
+  桶1＝`git ls-files docs/adr/` 逐名 test -f 全存在（缺名 exit 1）；
+  桶2＝`.collab/decisions/` 逐名清单对账（v2 E-ARC-3′ 原式）**排除 verdicts.md**
+       （排除式：ls-files 结果过滤 `grep -v 'decisions/verdicts\.md$'`）；
+  桶3＝verdicts.md 单件在盘 test -f；
+  和式断言＝桶1＋桶2＋桶3 ＝ `git ls-files docs/adr/ .collab/decisions/ | wc -l`；
+  删除行 BLOCK 断言：任何 commit diff 出现 `D docs/adr/` ∪ `D .collab/decisions/` 行＝BLOCK（git show --name-status 过滤·零新构件）。
+
 ## 判定要点
 
 - D1-1 归属缺、D2-1 正文复制、D2-3 第二真源 ＝ **阻断**（文档失去可溯性或产生双真源）。
