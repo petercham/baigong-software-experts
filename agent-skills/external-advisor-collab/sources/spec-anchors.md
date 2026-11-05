@@ -5,5 +5,5 @@
 ## 二、PM 草案（外部顾问协作机制产品化）
 
 - **皮总原话**：「2、PM 草案 Q1/Q2：确认」
-- **Q2 生效口径**：载体选**选项 A**——立项 `external-advisor-collab` skill，落点 `deliverables/skills/`，形态＝SKILL.md ＋ references 平铺分件（与 multi-collab／object-audit／object-build 同族）。
+- **Q2 生效口径**：载体选**选项 A**——立项 `external-advisor-collab` skill，落点＝独立技能包目录（按现行仓内技能包落位规范落位），形态＝SKILL.md ＋ references 平铺分件（与仓内其余治理族技能包同形态）。
 - **Q1 生效口径**：按**兼容口径**——GLM 机制建议「今后任何确认轮的补稿基准一律取三方清单并集」**照入案**；**挂载位置留白**（A-17 附则／交付轮章程，皮总未拍，不代落）。
