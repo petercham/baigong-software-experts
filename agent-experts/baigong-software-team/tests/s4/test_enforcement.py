@@ -64,7 +64,7 @@ def t02_deny_smoke_no_lease(tmp: str) -> None:
         [sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
          "--path", "docs/should-not-write.md", "--ledger", led, "--leases", leases,
          "--freeze-state", os.path.join(tmp, "freeze-state.json")],
-        input=json.dumps({"agent_type": "software-engineer", "agent_id": "eng-x",
+        input=json.dumps({"agent_type": "software-team-engineer", "agent_id": "eng-x",
                           "tool_input": {"file_path": "docs/should-not-write.md"}}),
         capture_output=True, text=True)
     assert '"permissionDecision":"deny"' in r.stdout, r.stdout + r.stderr
@@ -82,7 +82,7 @@ def t03_lease_allow_and_deny_globs(tmp: str) -> None:
         f.write(json.dumps({"ts": "t", "lease": {"ticket_id": "SWB-T99", "seat_id": "engineer",
                                                  "path_globs": ["agents/**"], "hash": "h"}},
                             ensure_ascii=False) + "\n")
-    env_in = json.dumps({"agent_type": "software-engineer", "agent_id": "eng-x"})
+    env_in = json.dumps({"agent_type": "software-team-engineer", "agent_id": "eng-x"})
     r_allow = subprocess.run(
         [sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
          "--path", "agents/x.py",
@@ -104,7 +104,7 @@ def t04_statefile_fallback_same_decision(tmp: str) -> None:
     led, leases = os.path.join(tmp, "led.jsonl"), os.path.join(tmp, "leases.jsonl")
     sf = os.path.join(tmp, "subagent-state.json")
     with open(sf, "w", encoding="utf-8") as f:
-        json.dump({"sess-1": {"agent_id": "eng-1", "agent_type": "software-engineer"}}, f)
+        json.dump({"sess-1": {"agent_id": "eng-1", "agent_type": "software-team-engineer"}}, f)
     r = subprocess.run(
         [sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
          "--identity-source", "statefile", "--state-file", sf,
@@ -179,7 +179,7 @@ def t08_freeze_chain_within_60s(tmp: str) -> None:
     w = subprocess.run([sys.executable, os.path.join(SCRIPTS, "write-guard.py"),
                         "--path", "agents/a.py",
                         "--ledger", led, "--leases", leases, "--freeze-state", fs],
-                       input=json.dumps({"agent_type": "software-engineer"}),
+                       input=json.dumps({"agent_type": "software-team-engineer"}),
                        capture_output=True, text=True)
     assert '"permissionDecision":"deny"' in w.stdout
     # 解冻无人类令牌→拒（脚本不得自触发·表2-2 V13 L98）

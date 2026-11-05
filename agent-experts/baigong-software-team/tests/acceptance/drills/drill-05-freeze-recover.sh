@@ -27,7 +27,7 @@ say "预置租约读数: $(cat "$TMP/l1.txt")"
 python "$SCRIPTS/write-guard.py" --path ".collab/drafts/prd/tmp-drill05.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$FS" \
   <<'JSON' >"$TMP/w0.txt" 2>&1
-{"agent_type": "software-product-manager", "agent_id": "product-drill05"}
+{"agent_type": "software-team-product", "agent_id": "product-drill05"}
 JSON
 grep -q '"permissionDecision"' "$TMP/w0.txt" && fail "冻结前租约内写被误拦（应放行）"
 say "冻结前租约内写＝放行（ALLOW 读数在 stderr）"
@@ -49,7 +49,7 @@ say "清租约读数: leases.jsonl cleared 行在册"
 python "$SCRIPTS/write-guard.py" --path ".collab/drafts/prd/tmp-drill05.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$FS" \
   <<'JSON' >"$TMP/w1.txt" 2>&1
-{"agent_type": "software-product-manager", "agent_id": "product-drill05"}
+{"agent_type": "software-team-product", "agent_id": "product-drill05"}
 JSON
 grep -q '"permissionDecision":"deny"' "$TMP/w1.txt" || fail "freeze 态全写 deny 未生效"
 grep -q 'B10 freeze 态全写 deny' "$TMP/w1.txt" || fail "deny 原因非 freeze 联动"

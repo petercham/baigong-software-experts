@@ -29,7 +29,7 @@ grep -q 'verify_fail' "$LED" || fail "验签失败记录未入账（签字记录
 python "$SCRIPTS/write-guard.py" --path "agents/x.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$TMP/freeze-state.json" \
   <<'JSON' >"$TMP/wg.txt" 2>&1
-{"agent_type": "software-engineer", "agent_id": "engineer-drill03",
+{"agent_type": "software-team-engineer", "agent_id": "engineer-drill03",
  "tool_input": {"file_path": "agents/x.md"}}
 JSON
 say "write-guard 输出: $(cat "$TMP/wg.txt")"
