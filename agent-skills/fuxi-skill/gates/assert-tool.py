@@ -9,7 +9,7 @@
 S1 实装位（共享内核 L0 落盘后）：ST-1／ST-2／ST-5／FC-1／FC-2／FC-3／FC-4。
 S2 实装位：ST-6／ST-7（两 adapter 互斥 IR 字段互检）＋FC-5（bundle 两层命名空间互借检出）
     ＋FC-4 黄-2 收口扩展（看板实例正文状态 token 扫描＋AC-5 词表声明句私扩扫描）。
-S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·`.collab/evidence/harness/` 内
+S3 实装位：GS-1／GS-2／GS-3（实装基面＝验证记录目录·包内 `.collab/evidence/harness/` 内
     *.jsonl 全部记录的 所属轨×gate_source 白名单双向 diff，不匹配数＝0 才绿；
     记录目录由两 validator 判分段写出，字段注册表＝`validator-catalog.md` §二）。
     S3 白名单扩值：PERSON_GATE_WHITELIST 扩「格式检查表」六值（门禁面重交付·AC-5 扩词程序同族），
@@ -1242,12 +1242,11 @@ def fc_5_bundle_ns_isolation() -> "tuple[str, str]":
 
 
 def _verification_records() -> "tuple[list[dict], list[str]]":
-    """读验证记录目录（validator-catalog 顶部注册落盘路径＝.collab/evidence/harness/ 递归 *.jsonl）。
+    """读验证记录目录（validator-catalog 顶部注册落盘路径＝.collab/evidence/harness/（包内基面） 递归 *.jsonl）。
 
     返回 (记录列表, 读取问题列表)；目录不在场＝空扫描合法态（读取问题空）。
     """
-    repo_root = _repo_root()
-    rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
+    rec_dir = os.path.join(_SKILL_ROOT, *_HARNESS_SUBPATH)
     records: "list[dict]" = []
     problems: "list[str]" = []
     if not os.path.isdir(rec_dir):
@@ -1363,15 +1362,14 @@ def _gs4_tuple_obj_problems(name: str, obj: "dict") -> "list[str]":
 def gs_4_calibration_kappa() -> "tuple[str, str]":
     """GS-4 calibration_state 与 κ 报告一致性校验器——〔S0a 建／S0b 实装〕。
 
-    实装基面＝validator-catalog 注册落盘路径（`.collab/evidence/harness/` 递归）内全部
+    实装基面＝validator-catalog 注册落盘路径（包内 `.collab/evidence/harness/` 递归）内全部
     `anchor-tuple*.json`（复用 `_HARNESS_SUBPATH` 注册路径）：
     无元组＝PENDING_STAGE「S0b 元组未交付」（当期如实态，不算 fail 不算 pass）；
     元组在场＝逐元组跑既有纯函数 calibration_consistent()（判据零改动，仅挂接）
     对账 κ 点值/区间下界 ↔ calibration_state；任一不一致＝FAIL 逐条列明细；
     全对＝PASS（读数含元组数）。
     """
-    repo_root = _repo_root()
-    rec_dir = os.path.join(repo_root, *_HARNESS_SUBPATH)
+    rec_dir = os.path.join(_SKILL_ROOT, *_HARNESS_SUBPATH)
     tuple_paths: "list[str]" = []
     if os.path.isdir(rec_dir):
         for dirpath, _dirnames, filenames in os.walk(rec_dir):
