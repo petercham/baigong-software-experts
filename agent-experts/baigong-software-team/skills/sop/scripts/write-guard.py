@@ -20,7 +20,7 @@ B10 联动：freeze-state（freeze-unfreeze.py 落盘）deny_all_writes 在位�
 U7/诚实边界：退路形态仅状态文件读取，不声明平台阻断性能力面保证。
 
 运行落盘一律可重定向：--ledger/--leases/--map/--freeze-state 与 SWB_LEDGER_ROOT；
-验证运行请重定向至 Temp（仓内零运行残留）。
+验证运行请重定向至所属项目仓根 .scratch/<票号>/（批毕即删·仓内零运行残留）。
 """
 from __future__ import annotations
 

@@ -11,7 +11,7 @@ B4 决策包装配（机械计算＋异常强制呈报·架构 v2.9 §9 B4 行�
 §18⑩（次级承接）呈报面含缺陷定级字段：P0/P1 定级＝QA 双复核＋人类终裁，
 决策包呈报面呈现定级（severity）与定级确认状态（severity_confirmed）。
 
-运行落盘一律可重定向：--ledger/--out 与 SWB_LEDGER_ROOT；验证运行请重定向至 Temp。
+运行落盘一律可重定向：--ledger/--out 与 SWB_LEDGER_ROOT；验证运行请重定向至所属项目仓根 .scratch/<票号>/（批毕即删）。
 """
 from __future__ import annotations
 

@@ -63,6 +63,8 @@ Team 型（多角色协作团队）
 - **版本账 v1.2.1**（2026-10-26）：lead 席位 MD 结构化瘦身（软开 fork lead 瘦身批）——新建包内 `skills/software-orchestration/` 域（SKILL.md 索引＋references 七件·附录 A 逐字照录），lead MD 沉 7 块 1,874 tok＋⛓ 指针节 343 tok，留后 2,216 tok（≤2,350 目标线）；plugin.json 加 `skills` 数组＋版本升 1.2.1（结构变更＋逼宿主刷新缓存）。主持人小节逐字不动；协作规则 §3 质量关卡留 MD（皮总拍板②）。**fork 已结构性分叉**：与市场 1.1.x 对账基准改＝「市场版 vs 附录 A＋留块合集」重构态（设计件 §2.7 R-2）。
 - **基线发现数 79→83（+4 OA-D6 advisory，fork 照录区＋出身段文件名，设计内）**（主理人 2026-10-26 拍 A：判据语义＝BLOCK 级新命中 0＋GATE PASS；先例＝批 2d 判词九；供后续批次对账不误报漂移）。
 - **版本账 v0.1.23**（2026-11-05·CARD-RENEW 卡片文案＋席位命名换代批）：依皮总裁定（`.collab/decisions/2026-11-05-皮总裁定-席位职业标签与花名换代.md`）五席花名换代（包好用/姜通透/顾长远/柯会码/沈得严）＋职业标签换代（项目负责人/产品经理不变/架构工程师/开发工程师/质量审计师）＋en 随动；头像五件改名与席位 id 同族（图像本体不重制）；卡片文案换代＝displayDescription/defaultInitPrompt/quickPrompts(5+1)/tags/description 对齐提案＋五席意见定稿，注册卡与包装卡口径分裂消除；README 功能/使用示例两节换代（旧「快速模式」档位与五段旧链口径随此退役）。三同源 0.1.22→0.1.23。
+- **版本账 v0.1.24**（2026-11-05·CLN-PURE 装配净化批·补记）：publish.py 支持 bundle.lock 顶层 `assembly_exclude`（五类过程本体件裁出装配面）＋装配面存量非法指针全数自包含化＋EAC 组件 ref 换钉 `external-advisor-collab@v1.1.3`（组件版本 1.1.2→1.1.3）＋config/hooks/脚本注释面案号行号锚自包含化。三同源 0.1.23→0.1.24。补记：本行系 TMP-DISC 批发现上批漏登记版本账，据既有 commit 回补。
+- **版本账 v0.1.25**（2026-11-05·TMP-DISC 临时工作物落位与清理纪律批）：决策者（2026-11-05）四款口径成文——`skills/software-orchestration/references/dev-discipline.md` 新增 §八（一切临时工作物唯一落点＝所属项目仓根 `.scratch` 区／收口登记票必含清理判据零残留／派工件禁仓外临时路径模板＋席位拒指权）；SKILL.md 索引＋触发词随动 1.1.4→1.1.5；sop 四脚本 docstring 旧 Temp 重定向措辞改仓根 `.scratch` 落点措辞；五席位卡守则节各补一行落位自指短声明。三同源 0.1.24→0.1.25（纪律①每变必 bump·三同源）。
 
 ## 头像
 

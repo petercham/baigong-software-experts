@@ -16,7 +16,7 @@ agent_id→seat 唯一；中文名禁）→不符计差异（§13 分子口径�
 ⑥注入包哈希写账本「注入包哈希」记录类（§3 六类）。
 
 运行落盘一律可重定向：--ledger/--states/--agents/--out 与 SWB_LEDGER_ROOT；缺省仓根类路径，
-验证运行请重定向至 Temp，不得在仓内留运行残留。
+验证运行请重定向至所属项目仓根 .scratch/<票号>/（批毕即删·不得留运行残留）。
 """
 from __future__ import annotations
 

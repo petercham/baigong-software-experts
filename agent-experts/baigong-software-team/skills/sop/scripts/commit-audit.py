@@ -14,7 +14,7 @@ posthook（PostToolUse Bash matcher）：检出 git commit 成功执行 → 提�
 
 票 ID 口径：trailer/消息体含票 ID 记法（票面编号记法各形态或票面卷路径引用——
 检测形态以本件 TICKET_ID_PATTERNS 闭集为准）即视为有票提交；全无＝orphan。
-运行落盘一律可重定向：--ledger 与 SWB_LEDGER_ROOT；验证运行请重定向至 Temp（仓内零运行残留）。
+运行落盘一律可重定向：--ledger 与 SWB_LEDGER_ROOT；验证运行请重定向至所属项目仓根 .scratch/<票号>/（批毕即删·仓内与仓外公共区零残留）。
 """
 from __future__ import annotations
 
