@@ -150,4 +150,32 @@
 - 只动声明闭集 15 件；混席段（S4）按席位归属执行，工程师不入终写段、架构席不入机件段；
 - 定稿句有异议＝停手上报（判据四款＋三辅线文本＝决策者裁案 a 所定调研 v2 成文，不得改写）；
 - ADR-0001 会签实体不经本席自签——草案成笔即交主理人路由；
-- append-only：不改本票既有行；实测与预期冲突按实测登记（H6）。
+- append-only：不改本票既有行；实测与预期冲突按实测登记（H6）。例外＝本票「修订笔 v1」段＝双席审票清账后作者席亲笔修订（主理人修单授权·append-only 修订段体例），工程师以「原笔＋修订笔覆盖后」的终态文本为唯一施工依据。
+
+## 修订笔 v1（双席审票清账后·作者席亲笔·append-only 修订段）
+
+开工 HEAD 实测＝`d934b27`（修订笔落链前链顶）。双席审票件＝产品席 `b0e9fb9`（红0黄6绿12）＋QA席 `d934b27`（红1黄6绿8·`.collab/qa/2026-11-05-ADR-L0-QA审票-v1.md`）。本段逐项**覆盖**原笔对应文本；原笔体例零改写。开票侧对修单全部断言已独立复现（复现代数附各目）。
+
+### R-1（红·必修）spec_id 换代＝`OA-E-ADR-1`…`OA-E-ADR-5`（去 ″/‴）
+
+原笔 S3c①②／S3b 输出格式句／A3 钉值中以 ″/‴ 形态入 60-gates 表与 check-adr 输出的 spec_id，**全部换代为 `OA-E-ADR-1`／`OA-E-ADR-2`／`OA-E-ADR-3`／`OA-E-ADR-4`／`OA-E-ADR-5`**。作者席复现双炸线：①run-gates.sh SPEC_ID_HOME（实测 L208-214）闭集前缀＝OA/OB/MC/PUB/EAC，"E" 不在集→spec_id_resolvable（L252 起 def）fail→exit 3 全仓 pre-commit 自锁；②FINDING_RE（实测 L189-191）spec 组＝`[A-Za-z0-9.-]+` 不含 ″/‴，旧字面发现行被吞（正则复测：`E-ADR-1″` 不匹配＝False，`OA-E-ADR-1` 匹配＝True）。换代后解析链复测：local_re 词边界在 50-document 新节 `E-ADR-1″` 字面上命中 `E-ADR-1`＝True（读表规则 5 可过）。**50-document 新节内条款正文的 `E-ADR-1″…5‴` 字面保持 ES 原名零动**（条款名≠进表 spec_id；换代只辖机件命名面，不违判据正文红线）。60-gates 说明段五行行首 spec 名列同步＝`OA-E-ADR-1`…形态（反引号包裹循族例）。
+
+**A3 口径写死（并 PM黄2）**：①per_spec 行读数命令＝`grep -c '"OA-E-ADR[0-9]": {' 60-gates.md`＝**5**；②说明段行读数命令＝`grep -c "^| \`OA-E-ADR" 60-gates.md`＝**5**（两式分离，反引号行首不计入 JSON 式＝歧义消除）；check-adr 输出行 spec 组逐条＝`OA-E-ADR-n`（A2 负例族读数同步）。
+
+### 黄随修（两席合并·逐项覆盖）
+
+1. **L24 实体核验句更正**（原句「除 `docs/adr/0001-…` 外 14 件」不实——`check-adr.py` 亦本票新建）：覆盖为＝「闭集内除 `docs/adr/0001-…` 与 `agent-skills/object-audit/scripts/check-adr.py` **两件新建**外 13 件 `git ls-files` 实测在位（138e39a）」。
+2. **object-audit SKILL 版本锚更正**：L6→**L5**（实测 `head -6` 行号编列＝`version: 0.8` 在 L5；值不变）。
+3. **根锚一句定死（PM黄3＋QA-Y3 合流·实质缺陷）**：原笔 S3b「项目根锚＝自脚本位置上溯探针」句覆盖为——`check-adr.py` 定位闭集四序＝①`--bundle-root` 显式覆写 > ②`--root` 参数目录内含 `bundle.lock` 即直用 > ③缺省挂载态（run-gates 固定传 `--root`＝仓根·run-gates.sh L147 实测在位）自解 `agent-experts/baigong-software-team/bundle.lock`、读其 `bundle.path` 字段定为 bundle 根 > ④四序皆空＝**fail-closed exit 4**（infra error，不降级不计绿）。四断言（含 E-ADR-5 三面对账）一律按 bundle 根算——挂载态对仓根真空真之「摆设」路径被封；覆写优先级句如上，QA 方案（bundle.lock 定位）与 PM 方案（探针缺位 fail-closed）合并采行。
+4. **申诉线句补三字**（S1 块内）：「按入线四词 grep」→「按入线四词的关键词 grep」（＝调研 v2 L31 成文逐字恢复，票面自设「＝调研成文」等式修复）。
+5. **ES2 票指针注明锚层**：背景段 `.scratch/tickets/2026-11-04-SWB-ADR-process-ticket.md`＝**仓根锚**（实体实测＝仓根 `.scratch/tickets/`，bundle 层无此件）——引用处按仓根读，非 bundle 根相对。
+6. **候裁③因由句随正**（射程裁量本身不动）：原「ES 文本先于仓根 decisions 面而生」不实（git 溯源：289a55c 仓根 `.collab/decisions/`＝13 已在盘、31cf6c1＝14，均早于/同期于 ES 定标）；因由更正＝**ES 与 ADR 工序链以 bundle 项目根为锚**（工序执行面＝bundle 项目根探针锚），E-ADR-5 桶2 语义定标时即锚 bundle 层 decisions；仓根 decisions 面（现七件＝搬家批后新登记）属项目边界外治理层，不在桶2 射程——裁量向不变（扩否另微票候裁），因由句按本句读。
+
+### 不修登记（回执对账用）
+
+- PM黄1（案 a 裁定登记原件缺位）＝主理人已补登 `c8bc6b9`（皮总拍板登记——ADR 案 a＋新校验器先 advisory 升 BLOCK 另拍＋黄-1 还账笔），票面零动，回执注记对账该笔即可；候裁④与 c8bc6b9「升 block 时点另拍」口径一致零修。
+- PM 逐字 diff 之 T2 句反引号加注（`.scratch` 落位处）＝§口径1 载体纪律所需之有意出入（check-entity 口径），回执注明理据，不算偏离。
+
+### 修订笔后闭合读数义务（工程师段同步）
+
+A0 基线补一项＝修订笔后票面 `grep -c "OA-E-ADR" <本票面>` ≥5（进表位全换代无漏）；旧口径 `grep -c '"E-ADR' 60-gates.md` 不作判据退役。链序不变：修订笔先于工程师开工（预授权径行呈放行段·不回双席）。
