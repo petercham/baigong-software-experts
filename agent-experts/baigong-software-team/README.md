@@ -66,6 +66,7 @@ Team 型（多角色协作团队）
 - **版本账 v0.1.24**（2026-11-05·CLN-PURE 装配净化批·补记）：publish.py 支持 bundle.lock 顶层 `assembly_exclude`（五类过程本体件裁出装配面）＋装配面存量非法指针全数自包含化＋EAC 组件 ref 换钉 `external-advisor-collab@v1.1.3`（组件版本 1.1.2→1.1.3）＋config/hooks/脚本注释面案号行号锚自包含化。三同源 0.1.23→0.1.24。补记：本行系 TMP-DISC 批发现上批漏登记版本账，据既有 commit 回补。
 - **版本账 v0.1.25**（2026-11-05·TMP-DISC 临时工作物落位与清理纪律批）：决策者（2026-11-05）四款口径成文——`skills/software-orchestration/references/dev-discipline.md` 新增 §八（一切临时工作物唯一落点＝所属项目仓根 `.scratch` 区／收口登记票必含清理判据零残留／派工件禁仓外临时路径模板＋席位拒指权）；SKILL.md 索引＋触发词随动 1.1.4→1.1.5；sop 四脚本 docstring 旧 Temp 重定向措辞改仓根 `.scratch` 落点措辞；五席位卡守则节各补一行落位自指短声明。三同源 0.1.24→0.1.25（纪律①每变必 bump·三同源）。
 - **版本账 v0.1.26**（2026-11-05·ADR-L0 判据成文＋首支点火批）：standard-sop ADR 工序节增第 6 款立项触发判据（T1-T4 入线/N1-N3 不入线＋混合拆分/覆盖链/申诉线）＋SKILL 索引触发词随动 1.1.5→1.1.6＋ADR-0001 首支落 docs/adr/（案 a 自指点火·ES2 双前置①②闭合）＋跨包随动（object-audit 0.8→0.9 E-ADR 五断言实装挂线／multi-collab 4.10→4.11 五 spec 进路由表）。三同源 0.1.25→0.1.26（纪律①每变必 bump·三同源）。
+- **版本账 v0.1.27**（2026-11-05·STRUCT-FIX 声明面对位修正批）：七份 STRUCTURE 声明面↔实态对位——fuxi 声明按实态重写（七条目，旧 SKILL/references 虚宣删·git 全史零落笔实证）＋EAC sources/ 补声明＋object-build scripts/ 补声明＋「非枚举面」统一惯例句七份落位（COPY.state×3 与 bundle 顶层元数据豁免成文·C-3 机检豁免依据）；依据＝架构席清查 v1（f199c30）；纯声明面批零代码零 SKILL 动。三同源 0.1.26→0.1.27（纪律①每变必 bump·三同源）。
 
 ## 头像
 

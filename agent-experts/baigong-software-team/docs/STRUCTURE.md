@@ -12,6 +12,9 @@
 
 交付面＝上述 bundle 面六目录；`docs/` 为项目文档面，不属于交付路径。
 
+非枚举面＝生成物与装配元数据（COPY.state、bundle.lock、plugin.json、settings.json、仓侧 README.md）不逐件枚举，声明面对其零覆盖属既成惯例（STRUCT-FIX 成文·C-3 机检据此豁免）。
+点号名顶层面（`.collab/`、`.scratch/`、`.codebuddy-plugin/` 等）不入声明射程，机检对账对其零覆盖属既成惯例。
+
 ```yaml
 schema_version: 1
 project_root: "."
