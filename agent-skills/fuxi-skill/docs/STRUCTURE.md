@@ -3,6 +3,8 @@
 本项目＝伏羲（fuxi-skill）perspective-pack-builder 技能。分层如下：
 
 - `README.md` — 包级详细件（性质自注＝交付件本体·相近工具对照表置顶）
+- `SKILL.md` — 技能入口主件
+- `references/` — 旧代处置映射卷
 - `adapters/` — 对象分类适配件（person/method/classifier 三型）
 - `contracts/` — 契约真源（artifact-contract／evidence-grading／failure-modes）
 - `gates/` — 机检闸面（assert-tool／harness／validator 族）
@@ -20,6 +22,8 @@ schema_version: 1
 project_root: "."
 delivery_paths:
   - README.md
+  - SKILL.md
+  - references/
   - adapters/
   - contracts/
   - gates/
