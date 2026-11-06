@@ -8,7 +8,6 @@
 
 | 条目目录 | 轨别 | 登记快照日 |
 |---|---|---|
-| `mrbeast-perspective/` | `person` | `2026-10-31` |
 | `miyazaki-hayao-perspective/` | `person` | `2026-10-31` |
 | `elements-of-style-technique/` | `method` | `2026-11-06` |
 
