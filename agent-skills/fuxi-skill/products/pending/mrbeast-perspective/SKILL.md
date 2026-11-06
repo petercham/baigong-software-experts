@@ -31,7 +31,7 @@
 - **概念先行·包装闸**：立项先看缩略图能否一秒传达赌注；包装不成立则概念不立项（Thumbnail-First）。`证据等级`=`跨文本推断`·`来源态`=`第三方转述`·source_id=`https://www.positioniseverything.net/?p=637175/`·位置＝"if the thumbnail cannot communicate the stakes… less likely to be greenlit" 段·`abstain_tier`=`有限定`
 - **观众脱敏论**：奇观与撒钱会边际递减（"numb to spectacles"），故事是唯一不脱敏的品类——供给要跑在自身成功前头。`证据等级`=`原文可证实`·`来源态`=`本人原文`·source_id=`https://www.businessinsider.com/mrbeast-shifting-strategy-on-youtube-fans-tire-spectacle-giveaway-videos-2025-12`·位置＝「DealBook Summit 发言段」·`abstain_tier`=`有支持`
 - **IP 重于个人出镜**：增长归因于可复制的概念与频道矩阵，而非个人魅力；主动降低内容对本人面孔的依赖。`证据等级`=`原文可证实`·`来源态`=`本人原文`·source_id=`https://www.businessinsider.com/mrbeast-shifting-strategy-on-youtube-fans-tire-spectacle-giveaway-videos-2025-12`·位置＝「other channels and other IP 引语段」·`abstain_tier`=`有支持`
-- **留存是一票否决的裁判**：任何变现/包装动作不得杀死留存；连 AI 配音这种「质量略降」的替换也要用留存读数裁决（+1% 即采用）。`证据等级`=`原文可证实`·`来源态`=`本人原文`·source_id=`https://www.creatorspotlight.com/p/minimizing-media`·位置＝「AI dubs retention 引语段」·`abstain_tier`=`有支持`
+- **留存是一票否决的裁判**：任何变现/包装动作不得杀死留存；连 AI 配音这种「质量略降」的替换也要用留存读数裁决（转述态：留存只要上升即采用·该实验增益幅度与三件套随转述源未得＝按转述引用标注不补口径）。`证据等级`=`原文可证实`·`来源态`=`本人原文`·source_id=`https://www.creatorspotlight.com/p/minimizing-media`·位置＝「AI dubs retention 引语段」·`abstain_tier`=`有支持`
 
 ## 决策启发式
 
@@ -59,7 +59,7 @@
 
 维度级结论头：`abstain_tier`=`有支持`（本节内容＝对自身证据状况的直接陈述）
 
-- 外部请求计数=`3`（本对象六路检索批）；语料 14 要素条目，一手占比读数 57.1（统计口径：本人原文态条目数/要素条目总数；样本量 14）过 EG-6 门槛 50；新鲜度窗口内条目占多数＝窗口过。
+- 外部请求计数=`3`（本对象六路检索批）；语料 14 要素条目，一手占比读数 57.1（统计口径：本人原文态条目数/要素条目总数；样本量 14；一致性系数 κ=0.801887＝s0c-anchors-b1 软门锚点元组读数（封印在册；本对象不在该批次预注册对象集＝对象级锚覆盖缺位，此值为批级元组读数非对象级读数））过 EG-6 门槛 50；新鲜度窗口内条目占多数＝窗口过。
 - 部分转写源（中文转写站/播客聚合）无原始视频回查＝相关条目证据等级降为跨文本推断并逐条标注，不冒充原文可对拍。
 - 商业数字（估值 $5B、亏损额、订阅数）＝第三方转述态引用，具体数额随报道时点漂移，涉未采到的财务细节＝证据不足，不补全。
 - 「数据裁决」与「故事转向」两口径的先后权重与内部决策过程无一手语料＝证据不足，不补全（矛盾按原样入档）。
