@@ -7,6 +7,8 @@
 - 版本咬合＝本批核心矛盾：三面现值均已是 0.1.30，PROJINIT 改动系 0.1.30 版本号之下的仓面增量（零 bump 口径）——**版本择案候裁（§七 J-1），票面全部版本钉值留白待裁，不自行钉号**。
 - 纪律真源＝`agent-experts/baigong-software-team/skills/software-orchestration/references/deploy-gate.md` §二（独立票＋获批两条件）、§五（四段链①装配→②预览→③人类闸→④部署＋「获批范围按段界定／验证不过回修重走①②／市场源备份一键回滚」要点）。本票各段验收判据即引该件条款为据。
 - 体例参照＝GWP-DEPLOY 先例票（`.scratch/tickets/2026-11-06-GWP-DEPLOY-0.1.30-四段链部署票-v1.md`，含 rev1 消化面），本票逐节参照；差异面（版本基线／被部署内容／③清单／锚定区间基准）按本批实况改写。
+- **rev1 修订笔（2026-11-07·作者席 arch-pjdep1 原位修订·开工 HEAD 实测 `8f98033`）**：双席独立审票会师＝双席一致放行·红 0 无对立分歧——产品席审件 `69a3a7f`（放行带修·黄2）＋QA 席审件 `8f98033`（放行·黄3）。本笔消化五黄（PM Y1 过渡口径对账段补写／PM Y2 ③判据4 注入形制钉死／QA Y1 ③判据5 human 行断言限定口径／QA Y2 组件面锚定命令形制改 skills 仓 tag sha 比对／QA Y3 还原命令以回执实际备份路径读数为准）。修订面＝判据补强/登记文字级；**获批登记、四段结构、候裁节两案框架（钉值继续留白）、禁动面、③清单六条框架零动**。
+- **过渡口径对账（rev1·PM Y1）**：deploy-gate.md L33 自带过渡口径注（v2.9 §20.1⑤：独立 deploy-gate 四段卷→发布硬门禁二＋灰度机械门禁＋转正代写，**四段流程保留为装配运维面**）——本批＝本地装配运维面四段链＋开工登记件（2026-11-07 皮总指令）批准载体，对账成立。deploy-gate §五①段前置括注「票面写清目标段＝只到预览」＝**默认示例非本票约束**；本票获批段界＝以登记件＋皮总最终明示为准（0.1：默认全程批到④止，段界未明示前执行席只到②收口即停）。
 
 ## 〇、获批登记与写集闭集
 
@@ -47,7 +49,8 @@
 - **缺省输出**＝仓外同级 `-build`（publish.py `--out` help 实证「缺省＝仓外同级 -build」；开工登记件 §二.2 实证缺省落点即皮总指定交付面 `D:\multi-agent-collab-devkits-build`）。**禁带 `--out`**——先例教训：0.1.29 装配首跑误用 `--out` 指 build 根＝平铺污染（0.1.29 回执在册）。
 - 装配前置（publish.py 纪律⑤自带闸）：源仓已跟踪面 clean＋ref 可解析。开工复测项 **M0**＝起草取证读数复核：仓面三同源 `grep -n '"version"' agent-experts/baigong-software-team/plugin.json agent-experts/baigong-software-team/bundle.lock agent-experts/baigong-software-team/.codebuddy-plugin/plugin.json` → 三读数；**预期值随 J-1**：批 (b)＝0.1.30（起草实测在案）；批 (a)＝bump 笔先行落链后三读数＝裁定版本号，现值仍 0.1.30 且 bump 笔不在案＝停手上报（bump＝仓面改动，归另案微票先行，非本部署票射程——见 §五.1）。另复测 `git status --porcelain -uno`＝空（起草实测空）。任一不符＝停手上报（他席先行污染真源＝停止条件）。
 - 装配锚定 commit＝开工实测 HEAD（回执开端登记，≥`8c07f24`）。
-- **锚定区间停手判据**：开工时跑 `git diff --name-only 03bb0fe..<开工HEAD>`（基准＝PROJINIT 收口登记笔 `03bb0fe`，非先例的 d3c0071）——读数对 **bundle 跟踪面**（`agent-experts/baigong-software-team/` 除 `.collab/`／`.scratch/` 段）／**组件面**（本仓 `agent-skills/external-advisor-collab/`＋skills 仓 `D:\multi-agent-collab-skills` 的 `skills/deep-research/` 对应 ref 区间）任一有 diff＝**停手复核呈主理人**（防未获批内容随锚定进装配——M0 clean 只覆盖未提交脏面，本条覆盖已提交增量）。起草实测：`03bb0fe..8c07f24` 区间 bundle 面 diff＝空、组件面（external-advisor-collab 段）diff＝空，其余增量全系 `agent-skills/fuxi-skill/` 他项目面＋两治理面（＝绿，读数照登回执）。
+- **锚定区间停手判据**：开工时在主仓跑 `git diff --name-only 03bb0fe..<开工HEAD>`（基准＝PROJINIT 收口登记笔 `03bb0fe`，非先例的 d3c0071）——读数对 **bundle 跟踪面**（`agent-experts/baigong-software-team/` 除 `.collab/`／`.scratch/` 段）／**组件面·本仓段**（`agent-skills/external-advisor-collab/`）任一有 diff＝**停手复核呈主理人**（防未获批内容随锚定进装配——M0 clean 只覆盖未提交脏面，本条覆盖已提交增量）。起草实测：`03bb0fe..8c07f24` 区间 bundle 面 diff＝空、本仓组件段 diff＝空，其余增量全系 `agent-skills/fuxi-skill/` 他项目面＋根 `.collab/` 治理面（＝绿，读数照登回执）。
+  - **组件面·skills 仓段（rev1·QA Y2 改形制）**：跨仓组件真源＝skills 仓 `D:\multi-agent-collab-skills` 的 `skills/deep-research/`——主仓基准 sha `03bb0fe` 在 skills 仓不存在，**禁以主仓 sha 硬套字面直跑**（实跑报错）。机械形制＝以 bundle.lock 组件 ref 钉值比对：`grep -n '"ref"' agent-experts/baigong-software-team/bundle.lock` → L15 `external-advisor-collab@v1.1.3`＋**L25 `deep-research@v1.0.2`**（ref_kind＝tag，起草核实行号在案）；在 skills 仓跑 `git rev-list -n1 deep-research@v1.0.2`（tag sha 读数）＋与上次装配（GWP-DEPLOY ①段回执）登记的 tag sha 读数比对——ref 钉值未变＋tag sha 相等＝绿；ref 变更或 tag sha 漂移＝停手复核呈主理人。两读数照登回执。基线读数（起草实测在册）＝前批 GWP-DEPLOY 回执 L16 登记 tag 指向 `730962e`，skills 仓 `git rev-list -n1 deep-research@v1.0.2` 现值＝`730962e160bcf5b25f549c21f17c2c36848f4dfe` 相等＝起草段该面已绿。
 
 **段①验收判据（全部机械可跑·读数附回执）**：
 
@@ -86,8 +89,8 @@
 1. **env 覆写路**：cwd＝`FP\src`（自建）＋`SWB_REPO_ROOT` 覆写＝`FP` 绝对路径→逐件打 `project_root()`。钉值＝四读数**逐字一致＝覆写值原字面**（不做 abspath 归一·PROJINIT §3.1 条款1a）＝env 值生效。
 2. **锚定声明件路**：无 `SWB_REPO_ROOT`；建 `FP\.workbuddy\swb-anchor`（内容首行 `project_root: .`）→cwd＝`FP\src`→逐件打 `project_root()`。钉值＝四读数逐字一致＝`FP` 绝对路径（锚件命中＝权威锚）。
 3. **双缺位回落路（GWP-P1-1 探针序保持）**：删 `FP` 锚件、`FP` 无 STRUCTURE、无 env→逐件打 `project_root()`。钉值＝四读数逐字一致＝**包根**绝对路径（fail-safe＝与修前语义同＝降档路零回归）；随后造 `FP\docs\STRUCTURE.md`（无锚）复跑＝四读数翻正＝`FP`（事后校验路在位）。
-4. **deny 面不破（fail-safe 不开窗）**：未锚态 `FP` 内跑 `write-guard.py --path <FP内某在册路径>`（无租约注入·stdin 喂合法 payload）→钉值＝deny JSON 在场＋exit 非放行形态（锚未成＝无 allow 通道＝deny，安全态）。
-5. **config 两片成文在位**：装配态两 config `python -c` json 可载＋断言＝architect `deny_globs` 不含 `docs/STRUCTURE.md`＋源件 architect `write_globs` 含 `docs/STRUCTURE.md`＋五席（host/product/architect/engineer/qa）`deny_globs` 含 `sources/**`（两文件十处）＋human 行零动＋两文件 architect `deny_globs` 逐行全等（t13 等价口径现场复核）。
+4. **deny 面不破（fail-safe 不开窗）**：**注入形制钉死（rev1·PM Y2·参照先例 rev1·PM Y4 钉形制体例，按本判据＝正常 deny 路非 fail-closed 异常路取形）**：cwd＝未锚态 `FP`（无 env、无锚件、无 STRUCTURE——即判据3 场景）；跑 `python <装配态包根>\skills\sop\scripts\write-guard.py --path "<FP内任一路径，如 FP\docs\X.md>"`，stdin 喂合法 payload JSON 样例 `{"hook_event_name":"PreToolUse","tool_input":{"file_path":"<同上路径>"}}`（`--path` 为测试注入面·优先于 payload.tool_input——write-guard L316 实证；无租约注入＝payload 不含可归因身份字段）。钉值四项：① `--map` 缺省解析读数＝未锚态下 `--map` 缺省落**装配态包根** `config\seat-permissions-hooks-map.json`（pack_root fail-safe 降档路，回执登记该读数）；② stdout 逐字含 deny JSON（`hookSpecificOutput`＋`"permissionDecision":"deny"`＋`permissionDecisionReason` 非空——deny_output() L232-240 形制，ensure_ascii 转义中文属已知形制）；③ reason 含「席位不可归因」字样（身份缺位路 L259）；④ **exit＝0**（PreToolUse 决策经 JSON 表达，deny 正常路 exit 0——勿与先例 GWP 判据 6a 异常注入 fail-closed exit 2 形制混用，那条测的是坏 `--map` 异常路，本条测的是缺锚缺身份的正常 deny 路）。四读数任一不达＝红（fail-safe 落包根却开出 allow 通道＝开窗回归）。
+5. **config 两片成文在位**：装配态两 config `python -c` json 可载＋断言＝architect `deny_globs` 不含 `docs/STRUCTURE.md`＋源件 architect `write_globs` 含 `docs/STRUCTURE.md`＋五席（host/product/architect/engineer/qa）`deny_globs` 含 `sources/**`（两文件十处）＋human 行零动（**rev1·QA Y1 限定口径**：该断言仅源件面 seat-permissions.json 可跑——六席含 human；hooks-map 面 `seats` 实况**无 human 行**（五席 host/product/architect/engineer/qa）系既成事实，回执照登「hooks-map 无 human 行＝既成事实非缺陷」，禁在 hooks-map 面跑该断言致假红）＋两文件 architect `deny_globs` 逐行全等（t13 等价口径现场复核）。
 6. **建档工序可读（S1b 在册）**：装配态 `grep -c '进场建档'`、`grep -c 'S1b'`、`grep -c 'swb-anchor'` 对 `skills\software-orchestration\references\dev-discipline.md` 三读数各 ≥1（§十 S1-S6＋S1b 补行成文）；`skills\software-orchestration\SKILL.md` grep `swb-anchor` ≥1（触发词＋索引行随动）＝工序文书随装配可达。
 
 **H-4 挂钩注记（不列③判据）**：钩子进程 cwd 实态取数属**部署后另票实测**（PROJINIT H-4 候裁在册·回执 5d6c7a8 已登记「钩子现盘未落痕呈裁」）——本票票面登记为后程，③段清单零含；「SWB_REPO_ROOT 注入载体落定或 hooks cwd ∈ 宿主树」条件未落定前，判据 2 场景在 hooks 相对命令形制下的边界读数（落包根＝fail-safe）系已知行为非本闸红项。
@@ -117,7 +120,7 @@
 ## 六、回滚条款
 
 - **触发场景枚举**：① **③不过**（主判据场景）；② **②段中途失败**＝MIR 同步已完成／注册报错／核验读数不达（市场源已处新内容中间态）→ 两条处置路径＝**还原**（下方同一命令直接复用）或**留置候主理人裁**（回执登记现象后停手），执行席不得自行择路续跑④。
-- **③不过/②失败还原**：市场源还原＝`MSYS_NO_PATHCONV=1 robocopy /MIR "C:\Users\peter\.workbuddy\backup\market-src-baigong-0.1.30-pre-deploy-20261107" "C:\Users\peter\.workbuddy\plugins\marketplaces\my-experts\plugins\baigong-software-team"` 一键还原（deploy-gate §五要点4）；随后 `register_expert.py` 刷新使 marketplace.json 条目回 0.1.30；**缓存面回滚口径随 J-1**：批 (a)＝缓存保持 0.1.30 不动（②段不动缓存，④未执行则无需回滚）；批 (b)＝同版本场景缓存是否已被覆写**未实证**→还原判据＝市场源三 version 读数回 0.1.30＋与备份目录全量哈希对账全等，缓存面现象如实呈报，禁手动向缓存目录写文件（W5＝宿主自写面）。按现象开票回修，修后重走①②。
+- **③不过/②失败还原**：市场源还原＝`MSYS_NO_PATHCONV=1 robocopy /MIR "<段②步3 回执登记的实际备份路径>" "C:\Users\peter\.workbuddy\plugins\marketplaces\my-experts\plugins\baigong-software-team"` 一键还原（deploy-gate §五要点4）。**还原路径耦合注（rev1·QA Y3）**：W4 备份名含日期 `20261107`，票面命令源串写死与实际创建名存在跨日错位风险——**还原一律以段②步3 回执实际备份路径逐字读数为准**，禁按票面字面另拼路径（同日内执行则两者一致）。随后 `register_expert.py` 刷新使 marketplace.json 条目回 0.1.30；**缓存面回滚口径随 J-1**：批 (a)＝缓存保持 0.1.30 不动（②段不动缓存，④未执行则无需回滚）；批 (b)＝同版本场景缓存是否已被覆写**未实证**→还原判据＝市场源三 version 读数回 0.1.30＋与备份目录全量哈希对账全等，缓存面现象如实呈报，禁手动向缓存目录写文件（W5＝宿主自写面）。按现象开票回修，修后重走①②。
 - 还原基准注记＝备份以段②步1 实况件数（起草实测 80 件·含 `settings.json` 缺失面差集登记）为准，还原后件数＝备份件数，回执登记读数。
 - 装配面 W1＝仓外预览面非真源，还原时无需回滚（留待下批重装配）。
 
