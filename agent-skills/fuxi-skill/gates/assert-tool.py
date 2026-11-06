@@ -310,23 +310,29 @@ def declared_field_names(blocks: "list[dict]") -> "set[str]":
 
 
 def value_decl_diff(blocks: "list[dict]", registries: "dict[str, tuple[str, ...]]") -> "list[str]":
-    """契约声明值 ↔ 工具注册值 diff：逐字段并集与注册元组逐字全等才算过。"""
+    """契约声明值 ↔ 工具注册值 diff：逐声明点位与注册元组逐字全等才算过（每点位独立对账·任一点位缺值/替换即咬·跨点位互补不算过；在册字段全点位未声明亦咬）。"""
     problems: "list[str]" = []
-    merged: "dict[str, set]" = {}
-    for block in blocks:
+    declared_fields: "set[str]" = set()
+    for bi, block in enumerate(blocks, 1):
         vals = block.get("值注册")
         if not isinstance(vals, dict):
             continue
         for field, allowed in vals.items():
-            if isinstance(allowed, list):
-                merged.setdefault(str(field), set()).update(str(v) for v in allowed)
+            if not isinstance(allowed, list):
+                continue
+            fname = str(field)
+            if fname not in registries:
+                continue
+            declared_fields.add(fname)
+            want = set(registries[fname])
+            got = set(str(v) for v in allowed)
+            extra = got - want
+            missing = want - got
+            if extra or missing:
+                problems.append("点位#%d %s 多出%s 缺失%s" % (bi, fname, sorted(extra) or "∅", sorted(missing) or "∅"))
     for field, registry in registries.items():
-        want = set(registry)
-        got = merged.get(field, set())
-        extra = got - want
-        missing = want - got
-        if extra or missing:
-            problems.append("%s 多出%s 缺失%s" % (field, sorted(extra) or "∅", sorted(missing) or "∅"))
+        if field not in declared_fields:
+            problems.append("%s 全点位均未声明 缺失%s" % (field, sorted(set(registry))))
     return problems
 
 
@@ -1985,6 +1991,23 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("FC1V_pass", value_decl_diff(good_block, fc1_pair) == [], True))
     cases.append(("FC1V_bite_extra_value", value_decl_diff(bad_block, fc1_pair) != [], True))
     cases.append(("FC1V_bite_missing_decl", value_decl_diff(partial_block, fc1_pair) != [], True))
+
+    # D-13 逐点位配对（夹具＝qa/S1 P5 放型／P16 咬型两探针形态）：单点缺值必咬·两点缺咬·全齐绿
+    full_pair = [{"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                             "calibration_state": list(CALIBRATION_STATES)}},
+                 {"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                             "calibration_state": list(CALIBRATION_STATES)}}]
+    one_missing = [{"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                               "calibration_state": list(CALIBRATION_STATES)}},
+                   {"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                               "calibration_state": ["校准态"]}}]   # P5 型：单点缺「待校准」，别处有同值
+    both_missing = [{"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                                "calibration_state": ["校准态"]}},
+                    {"值注册": {"evidence_grade": list(EVIDENCE_GRADES),
+                                "calibration_state": ["校准态"]}}]  # P16 型：两点同缺
+    cases.append(("D13V_all齐_pass", value_decl_diff(full_pair, fc1_pair) == [], True))
+    cases.append(("D13V_单点缺值咬", value_decl_diff(one_missing, fc1_pair) != [], True))
+    cases.append(("D13V_两点缺值咬", value_decl_diff(both_missing, fc1_pair) != [], True))
 
     # FM 条目纪律：合法放／不确定措辞咬／轨别错挂咬
     good_rows = [
