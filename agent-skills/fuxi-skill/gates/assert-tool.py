@@ -133,6 +133,10 @@ REGISTRATION_SECTION_CLOSEDSET = ("注册三元组", "分类器四问决策记�
 SIX_ROUTE_CLOSEDSET = ("著作", "长对话", "短表达", "外部视角", "决策记录", "时间线")
 _SIX_ROUTE_ROW_RE = re.compile(r"^\|\s*六路采集\s*\|(.*)$", re.M)
 _ROUTE_LIST_RE = re.compile(r"[（(]([^（）()]+)[）)]")
+# ST-10 轨界豁免闭集（FX-U9 S3 随裁案甲·产品裁决件 PM-U3 `54a2ee8` §2.4 约束四项）：
+# 豁免闭集恰含单值 `-technique`（目录名后缀判定），`-bundle` 不豁免（bundle 含 persona 层，
+# 六路声明义务随 person 层在场）；新注册常量单源，禁复用 _PRODUCT_DIR_SUFFIXES（含 -perspective＝豁免面私扩）。
+ST10_ROUTE_EXEMPT_SUFFIXES = ("-technique",)
 
 # BW-5 矛盾平滑检出（S4 建·坏信号④机械位）：(a) person adapter 防编护栏节条款声明行；
 # (b) 平滑句式启发式预注册词表本体（随批锁定值；中途变更走门禁面重交付程序，BW-1/BW-2 同制）。
@@ -1123,8 +1127,49 @@ def bw_3_bare_number_rule() -> "tuple[str, str]":
 
 
 def bw_4_b_segment_decl() -> "tuple[str, str]":
-    """BW-4 technique 卡 B 段边界声明存在——〔S0a 建／S1 执行〕。"""
-    return (READ_PENDING, "S1")
+    """BW-4 technique 卡 B 段边界声明存在——〔S0a 建／FX-U9 实装〕（产物级扫描面 technique 条目逐本体件实扫：卡块B段＋五字段边界非空＋ST-3咬面注明行；technique 条目零＝空扫描合法态标注；转正批次起实扫 N≥1）。"""
+    hits: "list[str]" = []
+    entries = [(n, p) for n, p in _product_scan_entries() if n.endswith("-technique")]
+    tech_files = _entry_texts(entries)
+    cards_total = 0
+    for name in sorted(tech_files):
+        for fname in sorted(tech_files[name]):
+            if fname != _PRODUCT_BODY_FILE:
+                continue
+            text = tech_files[name][fname]
+            heads = tuple(m.group(1) for m in _H2_SEC_RE.finditer(text))
+            card_heads = tuple(h for h in heads if _SEG_HEAD_RE.match(h.strip()))
+            extra, missing, bad = technique_segment_normalize(card_heads)
+            seg_bad = sorted(extra) + sorted(missing) + list(bad)
+            blocks, _bad = md_json_blocks(text)
+            cards = [b for b in blocks if set(str(k) for k in b) & set(TECHNIQUE_CARD_FIELDS)]
+            sec_ms = list(_H2_SEC_RE.finditer(text))
+            b_bodies = []
+            for si, m in enumerate(sec_ms):
+                hm = _SEG_HEAD_RE.match(m.group(1).strip())
+                if not hm or hm.group(1) != "B":
+                    continue
+                end = sec_ms[si + 1].start() if si + 1 < len(sec_ms) else len(text)
+                b_bodies.append(text[m.end():end].partition("\n---")[0])
+            if cards:
+                cards_total += len(cards)
+                if len(b_bodies) != len(cards):
+                    hits.append("%s/%s 卡级H2 B节头数%d≠卡数%d（逐卡B段缺位）"
+                                % (name, fname, len(b_bodies), len(cards)))
+                elif not b_segment_ok([{"B": b} for b in b_bodies]):
+                    hits.append("%s/%s 卡集存在B段缺位/空占位（逐卡全量判）" % (name, fname))
+            for bi, b in enumerate(cards, 1):
+                if not str(b.get("边界", "")).strip():
+                    hits.append("%s/%s 卡%d 五字段边界空占位" % (name, fname, bi))
+            if seg_bad:
+                hits.append("%s/%s 六段diff/描述名漂移越ST-3咬面（BW-4注明不重复咬）：%s"
+                            % (name, fname, seg_bad))
+    if hits:
+        return (READ_FAIL, "technique 卡B段违例 %d 处：%s" % (len(hits), "；".join(hits)))
+    if not entries:
+        return (READ_PASS, "technique 条目 0·卡 0·B段检出=0（空扫描合法态）")
+    return (READ_PASS, "technique 条目 %d·扫描 %d 卡·B段检出=0（实扫描判绿）"
+            % (len(entries), cards_total))
 
 
 def fc_1_two_field_closedset() -> "tuple[str, str]":
@@ -1529,10 +1574,15 @@ def st_10_six_route_landing_diff() -> "tuple[str, str]":
     实装基面＝`_product_scan_entries()` 既有产物级扫描面枚举（生效池根直接条目＋pending/ 一层；
     archive 免检自动继承）逐条目消费 `registration.md` 六节表「六路采集」声明行，
     ＋语料批次落盘注册路径 `_corpus_batches_dir()` listing 批次子目录（sorted）逐对象逐路在场检。
-    三态：problems 非空＝fail 列明细；扫描面 0 条目＝空扫描合法态判绿（FC-5/GS/ST-3 同款口径）；
+    FX-U9 S3 随裁案甲（产品裁决件 PM-U3 在册）＝判据面按目录后缀豁免 `ST10_ROUTE_EXEMPT_SUFFIXES`
+    单值闭集（`-technique`；`-bundle` 不豁免），豁免计数入读数行注记禁隐形；
+    扫描面全为豁免条目＝空扫描合法态标注（FC-5/GS/ST-3/ST-9 三态同制）。
+    三态：problems 非空＝fail 列明细；判据面 0 条目＝空扫描合法态判绿（FC-5/GS/ST-3 同款口径）；
     逐路全在场＝PASS（读数含条目数与逐路计数）。
     """
     entries = _product_scan_entries()
+    exempt = sum(1 for n, _p in entries if n.endswith(ST10_ROUTE_EXEMPT_SUFFIXES))
+    judged = [(n, p) for n, p in entries if not n.endswith(ST10_ROUTE_EXEMPT_SUFFIXES)]
     corpus = _corpus_batches_dir()
     batches: "dict[str, dict[str, set[str]]]" = {}
     if os.path.isdir(corpus):
@@ -1549,7 +1599,7 @@ def st_10_six_route_landing_diff() -> "tuple[str, str]":
     problems: "list[str]" = []
     checked = 0
     landed = 0
-    for name, path in entries:
+    for name, path in judged:
         reg_path = os.path.join(path, REGISTRATION_FILE_NAME)
         reg_text = _read_text(reg_path) if os.path.isfile(reg_path) else None
         problems.extend(six_route_problems(name, reg_text, batches))
@@ -1562,12 +1612,14 @@ def st_10_six_route_landing_diff() -> "tuple[str, str]":
             if obj in batches[b]:
                 checked += len(SIX_ROUTE_CLOSEDSET)
                 landed += sum(1 for r in SIX_ROUTE_CLOSEDSET if r + ".md" in batches[b][obj])
+    exempt_note = "·method 轨豁免 %d 条目（%s）" % (exempt, "、".join(ST10_ROUTE_EXEMPT_SUFFIXES)) if exempt else ""
     if problems:
         return (READ_FAIL, "六路声明↔落盘违例：%s" % "；".join(problems))
-    if not entries:
-        return (READ_PASS, "产物级扫描面 0 条目·空扫描合法态（FC-5/GS/ST-3 同款口径）")
-    return (READ_PASS, "产物实例 %d 条目·批次 %s 逐路存在性检 %d/%d 在场（实扫描判绿）"
-            % (len(entries), "、".join(sorted(batches)), landed, checked))
+    if not judged:
+        return (READ_PASS, "产物级扫描面判据面 0 条目%s·空扫描合法态（FC-5/GS/ST-3 同款口径）"
+                % exempt_note)
+    return (READ_PASS, "产物实例 %d 条目·批次 %s 逐路存在性检 %d/%d 在场（实扫描判绿）%s"
+            % (len(judged), "、".join(sorted(batches)), landed, checked, exempt_note))
 
 
 def st_9_registration_section_diff() -> "tuple[str, str]":
@@ -1780,6 +1832,78 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     cases.append(("BW3I_metric_form",
                   bare_number_hits("一致率 75%") != [] and bare_number_hits("占比 58.3") != []
                   and bare_number_hits("一致率 75%（统计口径：单臂；样本量 10；一致性系数 0.9）") == [], True))
+
+    # BW-4 实装层（technique 本体件内存注入口配对·注入形态＝H2 正文映射面，与挂接体喂参形态同构）：
+    # 全卡 B 节正文非空放／首卡 B 节正文清空咬（节头在场）／首卡 B 节整节删咬（节头数≠卡数）／空条目集空扫描合法态标注
+    def bw4_card_body(solo_body: str) -> str:
+        return (
+            "### t-01 一段一题成块法\n\n"
+            "```json\n" + json.dumps({"出处": "位置=L1", "触发": "多话题混段", "步骤": "列清单→拆段",
+                                      "边界": "适用切块不适用清单体", "验证状态": "未验"}, ensure_ascii=False) + "\n```\n\n"
+            "## R 原文\n\n原文引文。\n\n## I 诠释\n\n诠释段。\n\n## A1 案例\n\n案例段。\n\n"
+            "## A2 触发场景\n\n触发段。\n\n## E 执行步骤\n\n步骤段。\n\n"
+            + ("## B 边界\n\n" + solo_body if solo_body is not None else "") + "\n---\n")
+
+    def bw4_scan_inject(entry_texts: "dict[str, dict[str, str]]"):
+        # 挂接体同构复刻：扫描装配＋逐卡对拍＋三态读数构造（判绿读数/空扫描合法态标注逐字同制）
+        inj_hits: "list[str]" = []
+        inj_cards_total = 0
+        for nm in sorted(entry_texts):
+            for fn in sorted(entry_texts[nm]):
+                if fn != _PRODUCT_BODY_FILE:
+                    continue
+                text = entry_texts[nm][fn]
+                heads = tuple(m.group(1) for m in _H2_SEC_RE.finditer(text))
+                card_heads = tuple(h for h in heads if _SEG_HEAD_RE.match(h.strip()))
+                extra, missing, bad = technique_segment_normalize(card_heads)
+                seg_bad = sorted(extra) + sorted(missing) + list(bad)
+                blocks, _bad = md_json_blocks(text)
+                cards = [b for b in blocks if set(str(k) for k in b) & set(TECHNIQUE_CARD_FIELDS)]
+                sec_ms = list(_H2_SEC_RE.finditer(text))
+                b_bodies = []
+                for si, m in enumerate(sec_ms):
+                    hm = _SEG_HEAD_RE.match(m.group(1).strip())
+                    if not hm or hm.group(1) != "B":
+                        continue
+                    end = sec_ms[si + 1].start() if si + 1 < len(sec_ms) else len(text)
+                    b_bodies.append(text[m.end():end].partition("\n---")[0])
+                if cards:
+                    inj_cards_total += len(cards)
+                    if len(b_bodies) != len(cards):
+                        inj_hits.append("%s/%s 卡级H2 B节头数%d≠卡数%d（逐卡B段缺位）"
+                                        % (nm, fn, len(b_bodies), len(cards)))
+                    elif not b_segment_ok([{"B": b} for b in b_bodies]):
+                        inj_hits.append("%s/%s 卡集存在B段缺位/空占位（逐卡全量判）" % (nm, fn))
+                for bi, b in enumerate(cards, 1):
+                    if not str(b.get("边界", "")).strip():
+                        inj_hits.append("%s/%s 卡%d 五字段边界空占位" % (nm, fn, bi))
+                if seg_bad:
+                    inj_hits.append("%s/%s 六段diff/描述名漂移越ST-3咬面（BW-4注明不重复咬）：%s"
+                                    % (nm, fn, seg_bad))
+        if inj_hits:
+            return (READ_FAIL, "technique 卡B段违例 %d 处：%s" % (len(inj_hits), "；".join(inj_hits)))
+        if not entry_texts:
+            return (READ_PASS, "technique 条目 0·卡 0·B段检出=0（空扫描合法态）")
+        return (READ_PASS, "technique 条目 %d·扫描 %d 卡·B段检出=0（实扫描判绿）"
+                % (len(entry_texts), inj_cards_total))
+
+    bw4i_inj_ok = {"obj-t-technique": {"SKILL.md": bw4_card_body("适用切块场景；不适用清单体。")}}
+    bw4i_inj_blank = {"obj-t-technique": {"SKILL.md": bw4_card_body("   ")}}
+    bw4i_inj_delb = {"obj-t-technique": {"SKILL.md": bw4_card_body(None)}}
+    bw4i_pass_state, bw4i_pass_read = bw4_scan_inject(bw4i_inj_ok)
+    bw4i_blank_state, bw4i_blank_read = bw4_scan_inject(bw4i_inj_blank)
+    bw4i_delb_state, bw4i_delb_read = bw4_scan_inject(bw4i_inj_delb)
+    bw4i_empty_state, bw4i_empty_read = bw4_scan_inject({})
+    cases.append(("BW4I_pass",
+                  bw4i_pass_state == READ_PASS and "扫描 1 卡·B段检出=0（实扫描判绿）" in bw4i_pass_read, True))
+    cases.append(("BW4I_bite_blank",
+                  bw4i_blank_state == READ_FAIL
+                  and "卡集存在B段缺位/空占位（逐卡全量判）" in bw4i_blank_read, True))
+    cases.append(("BW4I_bite_missing",
+                  bw4i_delb_state == READ_FAIL
+                  and "卡级H2 B节头数0≠卡数1（逐卡B段缺位）" in bw4i_delb_read, True))
+    cases.append(("BW4I_empty_pass",
+                  bw4i_empty_state == READ_PASS and "空扫描合法态" in bw4i_empty_read, True))
 
     # FC-1 两字段闭集：合法放／越界咬
     registry = {"evidence_grade": EVIDENCE_GRADES, "calibration_state": CALIBRATION_STATES}
@@ -2132,6 +2256,17 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
                   six_route_problems("obj-a-perspective", _sr_decl, {"t9": {"other": set(_sr_routes6)}}) != [], True))
     cases.append(("ST10_empty_entries_pass", [p for n, t in [] for p in six_route_problems(n, t, {})] == [], True))
     cases.append(("ST10_closedset_6", len(set(SIX_ROUTE_CLOSEDSET)) == 6, True))
+
+    # ===== FX-U9 S3 批配对咬放（HR-1 案甲轨界豁免·挂接层按 ST10_ROUTE_EXEMPT_SUFFIXES 过滤·内存注入不落仓） =====
+    # -technique 条目缺六路行→豁免放（判据面过滤后无问题行）；-bundle 条目缺六路行→存续咬；豁免闭集单值自证
+    def st10_judge_inject(items: "list[tuple[str, str | None]]"):
+        judged = [(n, t) for n, t in items if not n.endswith(ST10_ROUTE_EXEMPT_SUFFIXES)]
+        return [p for n, t in judged for p in six_route_problems(n, t, sr_batch_ok)]
+
+    cases.append(("ST10I_technique_exempt_pass",
+                  st10_judge_inject([("obj-t-technique", None)]) == [], True))
+    cases.append(("ST10I_bundle_still_bite",
+                  st10_judge_inject([("obj-b-bundle", None)]) != [], True))
 
     return cases
 
