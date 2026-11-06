@@ -96,10 +96,36 @@
    `sources/**`＝越界（deny_globs 五席覆盖＋租约签发面写域子集校验双拦）。
    本节 `sources/`＝宿主项目根四区之 sources 区，与本卷 §二.5/§二.6 交付包内
    `sources/` 子包（自包含料源）为两域，读侧勿混。
-3. `deliverables/{project_id}`＝宿主工作空间下每个项目真正的工作空间；
-   `deliverables/` 只是 {root} 的末尾段，不是专家团包内自有子包。本包及基线副本
-   文档内 `deliverables/` 字样一律读作宿主 {root} 末尾段之概念引用，非包内路径。
+3. 双根模型（皮总裁定 2026-11-06·deliverables/ 双根）：开发面＝`{dev_root}/{project_id}`
+   （本节四区之根，`{root}` 读作 `{dev_root}`）；交付面＝`{del_root}/deliverables/{project_id}`
+   ＝装配-清理编译后干净可交付件存放路径，另归独立 git 集中管理，不入四区建档与写保护面。
+   本包及基线副本文档内 `deliverables/` 字样一律读作交付面概念引用，非包内路径。
 4. 历史引文不回改：旧文书中 `Sources\...` 旧径引用＝历史引文（append-only）；
    今后新文书一律 `sources/` 新路径。
 5. 出处＝宿主裁定登记件（2026-11-06·「皮总拍板-sources四区写权限与
    deliverables语义校正」）；本卷载纪律条款不复写裁定本体。
+
+## 十 项目进场建档工序（锚定→四区→STRUCTURE 产物→结构说明誊录）
+
+1. 本卷 §九 四区与 `docs/STRUCTURE.md` 等规范＝专家团自身治理规范，**永不对人类用户构成约束**，
+   只能配合用户：一切机制不得以「用户预置合规件」为前提。本节「项目根」＝开发面根
+   `{dev_root}/{project_id}`（双根裁定 2026-11-06），交付面另根不入本节。
+2. 新部署/空白项目进场序（S1–S6，仅一次；已有锚定＋四区者跳 S1–S3）：
+   S1 锚定＝用户指定开发面根由主理人记明后，主理人经非 hooks 拦截写径落
+   `<开发面根>/.workbuddy/swb-anchor`（首行 `project_root: .`·自指闭合）；
+   环境变量 `SWB_REPO_ROOT` 在场＝同效且优先；
+   S1b 平台域运行时确认（判定序见 TK-PROJINIT 票面 rev5 段·注册两件套／不注册如实登记）＝探针实测平台当时指定的 memory 路径落位（禁预设现值），落位在开发面根内→当场注册两件套（config 写权表平台域键·按当时实测路径生成 glob 字面·两 config 同批＋STRUCTURE 面登记该域注＝平台域·写权由平台定义下放），不在项目根内→不注册、如实登记读数；
+   S2 四区建档＝按 §九 建 `sources/ docs/ .collab/ .archive/` 骨架（交付面不预建）；
+   S3 账本骨架＝`<开发面根>/.collab/ledger/`；
+   S4 结构说明收集＝用户任意自由形式件（`*.md`/`*.txt`）或聊天附件/口述＝原件经人类通道
+   入 `sources/`（用户本人落笔或人类代行注 source_role；机械席只引导只读）；
+   S5 誊录＋规范校验＝架构席按 STRUCTURE 规范六目成稿（四区枚举完备／delivery_paths 块／
+   `project_root: "."` 行／未声明目录询问不判违规／声明未建补建／原件格式不作要求）；
+   S6 迁移落笔＝校验通过稿落 `<开发面根>/docs/STRUCTURE.md`。
+3. 校验不通过＝反馈引导用户澄清；**不代改原件、不要求用户按规范重写**。
+4. `docs/STRUCTURE.md`＝建档步 S6 产物，非用户预置前提；探针以
+   `.workbuddy/swb-anchor`（权威锚）→STRUCTURE.md（事后校验）→fail-safe 包根（deny）序解析，
+   四脚本（write-guard/lease-issuer/commit-audit/memory-neutralize）逐字同款。
+5. 交付面 `{del_root}/deliverables/{project_id}`＝开发期不预建不引导，收用户交付指令时
+   按用户指定目录构建＋引导（lazy·独立 git 另管，不入本票写保护/租约/账本面）。
+6. 出处＝决策者裁定四款＋deliverables 双根裁定两则（2026-11-06）；条款本体见 TK-PROJINIT 票面 §三。

@@ -45,34 +45,60 @@ def pack_root() -> str:
     return d
 
 
+ANCHOR_FILE = os.path.join(".workbuddy", "swb-anchor")  # PROJINIT-P1 显式锚定声明件（开发面根相对字面·四脚本同款）
+
+
+def _anchor_hit(d: str, pack: str) -> bool:
+    """锚定命中：d≠包根 ∧ d/.workbuddy/swb-anchor 存在 ∧ 首个 `project_root:` 行解析值
+    （相对值按 d 解析）经 normcase 后＝d 自身（自指闭合＝锚件不得指向他处，防跨项目劫持）。"""
+    if os.path.normcase(d) == os.path.normcase(pack):
+        return False
+    ap = os.path.join(d, ANCHOR_FILE)
+    if not os.path.isfile(ap):
+        return False
+    try:
+        with open(ap, encoding="utf-8") as f:
+            text = f.read()
+    except OSError:
+        return False
+    for line in text.splitlines():
+        if line.strip().startswith("project_root:"):
+            val = line.split(":", 1)[1].strip().strip("\"'")
+            if not val:
+                return False
+            target = val if os.path.isabs(val) else os.path.join(d, val)
+            return os.path.normcase(os.path.abspath(target)) == os.path.normcase(d)
+    return False
+
+
+def _structure_hit(d: str, pack: str) -> bool:
+    """事后校验路：d≠包根 ∧ d/docs/STRUCTURE.md 存在（旧 ②③ 文件溯源语义降档保持·不再作判定前提）。"""
+    return (os.path.normcase(d) != os.path.normcase(pack)
+            and os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")))
+
+
 def project_root() -> str:
-    """GWP-P1-1 探针序换代：① SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；
-    ② 自 cwd 上溯首个含 `docs/STRUCTURE.md` 且≠包根之目录＝项目根（装配态宿主项目根优先——
-    包自带 docs/STRUCTURE.md＝包 bundle 自声明 project_root:"."，不得劫持宿主项目根，
-    命中＝包根本身即跳过续溯）；③ 缺位回退自包根上溯（同样跳过包根自身）；
+    """PROJINIT-P1 锚定换代（裁定①＋双根裁定：本函数返回值＝开发面根 {dev_root}/{project_id}）：
+    探测序（与代码循环序严格同构·R-2）：
+    ① SWB_REPO_ROOT 覆写（测试重定向＋部署态正式锚定·覆写语义零动·值原样返回不做 abspath 归一）在场即回；
+    ② 锚定声明件路：先自 cwd 上溯、后自包根上溯——首个 `.workbuddy/swb-anchor` 自指闭合命中目录＝项目根（权威锚）；
+    ③ STRUCTURE.md 事后校验路：先自 cwd 上溯、后自包根上溯——首个含 `docs/STRUCTURE.md` 且≠包根目录（降档保持）；
     ④ 全缺位＝落回包根（fail-safe·权限面读空即租约不命中＝deny，不开 fail-open 窗口——旧语义保持）。
-    权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。"""
+    权限字面一律读作开发面根相对（表2-1 路径锚定款随迁）。"""
     env = os.environ.get("SWB_REPO_ROOT")
     if env:
         return env
     pack = pack_root()
-    d = os.getcwd()
-    while True:
-        if os.path.normcase(d) != os.path.normcase(pack) and os.path.isfile(
-                os.path.join(d, "docs", "STRUCTURE.md")):
-            return d
-        parent = os.path.dirname(d)
-        if parent == d:
-            break
-        d = parent
-    d = os.path.dirname(pack)
-    while True:
-        if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
-            return d
-        parent = os.path.dirname(d)
-        if parent == d:
-            break
-        d = parent
+    for probe in (_anchor_hit, _structure_hit):
+        for d0 in (os.getcwd(), os.path.dirname(pack)):
+            d = d0
+            while True:
+                if probe(d, pack):
+                    return d
+                parent = os.path.dirname(d)
+                if parent == d:
+                    break
+                d = parent
     return pack
 
 
