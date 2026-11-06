@@ -41,8 +41,40 @@ def pack_root() -> str:
     return d
 
 
+def project_root() -> str:
+    """GWP-P1-1 探针序换代：① SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；
+    ② 自 cwd 上溯首个含 `docs/STRUCTURE.md` 且≠包根之目录＝项目根（装配态宿主项目根优先——
+    包自带 docs/STRUCTURE.md＝包 bundle 自声明 project_root:"."，不得劫持宿主项目根，
+    命中＝包根本身即跳过续溯）；③ 缺位回退自包根上溯（同样跳过包根自身）；
+    ④ 全缺位＝落回包根（fail-safe·权限面读空即租约不命中＝deny，不开 fail-open 窗口——旧语义保持）。
+    权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。"""
+    env = os.environ.get("SWB_REPO_ROOT")
+    if env:
+        return env
+    pack = pack_root()
+    d = os.getcwd()
+    while True:
+        if os.path.normcase(d) != os.path.normcase(pack) and os.path.isfile(
+                os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    d = os.path.dirname(pack)
+    while True:
+        if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    return pack
+
+
 def default_ledger_root() -> str:
-    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(os.getcwd(), ".collab", "ledger"))
+    # GWP-P1-2 缺省锚统一＝<project_root()>/.collab/ledger（四脚本同源·§3.2）
+    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(project_root(), ".collab", "ledger"))
 
 
 def canonical_json(obj: object) -> str:

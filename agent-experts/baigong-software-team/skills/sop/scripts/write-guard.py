@@ -46,21 +46,34 @@ def pack_root() -> str:
 
 
 def project_root() -> str:
-    """两级锚换代＝项目根锚：自包根位置上溯首个含 `docs/STRUCTURE.md` 的目录
-    ＝项目根（B1-C STRUCTURE 探针锚）。权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。
-    SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；探针缺位＝退回落包根（fail-safe·
-    非仓根猜算——权限面读空即租约不命中＝deny，不开 fail-open 窗口）。"""
+    """GWP-P1-1 探针序换代：① SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；
+    ② 自 cwd 上溯首个含 `docs/STRUCTURE.md` 且≠包根之目录＝项目根（装配态宿主项目根优先——
+    包自带 docs/STRUCTURE.md＝包 bundle 自声明 project_root:"."，不得劫持宿主项目根，
+    命中＝包根本身即跳过续溯）；③ 缺位回退自包根上溯（同样跳过包根自身）；
+    ④ 全缺位＝落回包根（fail-safe·权限面读空即租约不命中＝deny，不开 fail-open 窗口——旧语义保持）。
+    权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。"""
     env = os.environ.get("SWB_REPO_ROOT")
     if env:
         return env
-    d = pack_root()
+    pack = pack_root()
+    d = os.getcwd()
+    while True:
+        if os.path.normcase(d) != os.path.normcase(pack) and os.path.isfile(
+                os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    d = os.path.dirname(pack)
     while True:
         if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
             return d
         parent = os.path.dirname(d)
         if parent == d:
-            return pack_root()
+            break
         d = parent
+    return pack
 
 
 def repo_root() -> str:
@@ -70,7 +83,8 @@ def repo_root() -> str:
 
 
 def default_ledger_root() -> str:
-    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(os.getcwd(), ".collab", "ledger"))
+    # GWP-P1-2 缺省锚统一＝<project_root()>/.collab/ledger（四脚本同源·§3.2）
+    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(project_root(), ".collab", "ledger"))
 
 
 def canonical_json(obj: object) -> str:
@@ -155,9 +169,15 @@ def load_map(map_path: str) -> dict:
 
 
 def seat_of(agent_type: str | None, agent_id: str | None, mapping: dict) -> str | None:
-    """席位归因：agent_type 精确→agent_id 前缀近似（状态文件退路可能只带 agent_type）。"""
+    """席位归因：agent_type 精确→续尾剥离（`-数字` 尾缀）→agent_id 前缀近似。
+    GWP-P5-1：平台续体席 agent_type＝`software-team-<席>-<数字>` 型不在映射闭集——
+    剥离尾缀 `-\\d+` 后重查；config 五键闭集零动、agent_id 近似路零动。"""
     if agent_type and agent_type in mapping:
         return mapping[agent_type]
+    if agent_type:
+        base = re.sub(r"-\d+$", "", agent_type)
+        if base != agent_type and base in mapping:
+            return mapping[base]
     if agent_id:
         for k, v in mapping.items():
             if k and (str(agent_id).startswith(k) or k in str(agent_id)):
@@ -191,7 +211,7 @@ def deny_output(reason: str) -> str:
             "permissionDecision": "deny",
             "permissionDecisionReason": reason,
         }
-    }, ensure_ascii=False, separators=(",", ":"))
+    }, ensure_ascii=True, separators=(",", ":"))
 
 
 def decide(identity: dict, file_path: str, map_path: str, leases_file: str,
@@ -315,4 +335,26 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    for _s in (sys.stdout, sys.stderr):
+        try:
+            _s.reconfigure(encoding="utf-8", errors="backslashreplace")
+        except Exception:
+            pass
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except BaseException as _e:
+        # GWP-P3-1 fail-closed：守卫异常即阻断（exit 2→blocking·§19 词表）；deny 决策照出＋留痕尽人事
+        try:
+            print(deny_output(f"write-guard 异常 fail-closed：{type(_e).__name__}: {_e}"))
+        except Exception:
+            pass
+        try:
+            append_record(os.path.join(default_ledger_root(), "ledger.jsonl"), "呈报",
+                          "write-guard.py",
+                          {"event": "guard_fail_closed", "error": f"{type(_e).__name__}: {_e}",
+                           "clause": "GWP-P3-1 守卫失效语义＝fail-closed（exit 2→blocking）"})
+        except Exception:
+            pass
+        sys.exit(EXIT_USAGE)

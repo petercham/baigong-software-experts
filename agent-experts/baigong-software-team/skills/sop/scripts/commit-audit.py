@@ -33,6 +33,7 @@ TICKET_ID_PATTERNS = [
     re.compile(r"\bTKT\d+\b"),
     re.compile(r"\bTK-[A-Za-z0-9-]+\b"),
     re.compile(r"\.coll" + r"ab/tickets/[^\s\"']+"),  # 字面拆段拼接·判据一字未动（运行时语义逐字不变）
+    re.compile(r"\b[A-Z][A-Z0-9]{1,9}-\d{3,4}-[A-Z][A-Z0-9]{1,14}\b"),  # GWP-P6-1 项目票号 XXX-NNNN-WORD 型（大写三段·中段三至四位数字）
 ]
 
 # 三形态＋force-push 命令机检（词边界锚定，避免 "git commit --amend" 误漏/"amended" 误触）
@@ -52,8 +53,40 @@ def pack_root() -> str:
     return d
 
 
+def project_root() -> str:
+    """GWP-P1-1 探针序换代：① SWB_REPO_ROOT＝项目根覆写面（测试重定向·覆写语义零动）；
+    ② 自 cwd 上溯首个含 `docs/STRUCTURE.md` 且≠包根之目录＝项目根（装配态宿主项目根优先——
+    包自带 docs/STRUCTURE.md＝包 bundle 自声明 project_root:"."，不得劫持宿主项目根，
+    命中＝包根本身即跳过续溯）；③ 缺位回退自包根上溯（同样跳过包根自身）；
+    ④ 全缺位＝落回包根（fail-safe·权限面读空即租约不命中＝deny，不开 fail-open 窗口——旧语义保持）。
+    权限字面一律读作项目根相对（表2-1 路径锚定款随迁）。"""
+    env = os.environ.get("SWB_REPO_ROOT")
+    if env:
+        return env
+    pack = pack_root()
+    d = os.getcwd()
+    while True:
+        if os.path.normcase(d) != os.path.normcase(pack) and os.path.isfile(
+                os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    d = os.path.dirname(pack)
+    while True:
+        if os.path.isfile(os.path.join(d, "docs", "STRUCTURE.md")):
+            return d
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    return pack
+
+
 def default_ledger_root() -> str:
-    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(os.getcwd(), ".collab", "ledger"))
+    # GWP-P1-2 缺省锚统一＝<project_root()>/.collab/ledger（四脚本同源·§3.2）
+    return os.environ.get("SWB_LEDGER_ROOT", os.path.join(project_root(), ".collab", "ledger"))
 
 
 def canonical_json(obj: object) -> str:
@@ -190,4 +223,19 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    for _s in (sys.stdout, sys.stderr):
+        try:
+            _s.reconfigure(encoding="utf-8", errors="backslashreplace")
+        except Exception:
+            pass
+    try:
+        sys.exit(main())
+    except SystemExit:
+        raise
+    except BaseException as _e:
+        # GWP-P3-1 fail-closed：审计异常即阻断（exit 2→blocking·§19 词表）
+        try:
+            print(f"BLOCK commit-audit: 异常 fail-closed {type(_e).__name__}: {_e}", file=sys.stderr)
+        except Exception:
+            pass
+        sys.exit(EXIT_BLOCKING)
