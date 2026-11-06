@@ -1106,8 +1106,20 @@ def bw_2_blunt_vocab_tiers() -> "tuple[str, str]":
 
 
 def bw_3_bare_number_rule() -> "tuple[str, str]":
-    """BW-3 裸数字检出规则——〔S0a 建／S1 执行〕（检出器已就位＝bare_number_hits，产物报告待产物面）。"""
-    return (READ_PENDING, "S1")
+    """BW-3 裸数字检出规则——〔S0a 建／FX-U4 实装〕（产物级扫描面枚举逐正文件实扫，三件套缺任一即裸数字命中＝fail；无产物＝空扫描 0 命中平凡真）。"""
+    hits: "list[str]" = []
+    scanned = 0
+    entry_texts = _entry_texts(_product_scan_entries())
+    for name in sorted(entry_texts):
+        for fname in sorted(entry_texts[name]):
+            scanned += 1
+            for h in bare_number_hits(entry_texts[name][fname]):
+                hits.append("%s/%s %s" % (name, fname, h))
+    if hits:
+        return (READ_FAIL, "产物报告裸数字 %d 处（三件套=统计口径＋样本量＋一致性系数·缺任一即裸）：%s"
+                % (len(hits), "；".join(hits)))
+    return (READ_PASS, "产物正文实跑命中=0（扫描 %d 件·%s）"
+            % (scanned, "空扫描合法态" if not scanned else "实扫描判绿"))
 
 
 def bw_4_b_segment_decl() -> "tuple[str, str]":
@@ -1745,6 +1757,29 @@ def _selftest_cases() -> "list[tuple[str, bool, bool]]":
     without_ctx = "通过率 62%，效果显著"
     cases.append(("BW3_pass", bare_number_hits(with_ctx) == [], True))
     cases.append(("BW3_bite", bare_number_hits(without_ctx) != [], True))
+
+    # BW-3 实装层（产物级扫描面注入口配对）：全行带三件套放／裸占比行咬含条目名前缀／空条目集平凡真／两形态各触发
+    def bw3_scan_inject(entry_texts):
+        inj_hits: "list[str]" = []
+        inj_scanned = 0
+        for name in sorted(entry_texts):
+            for fname in sorted(entry_texts[name]):
+                inj_scanned += 1
+                for h in bare_number_hits(entry_texts[name][fname]):
+                    inj_hits.append("%s/%s %s" % (name, fname, h))
+        return inj_hits, inj_scanned
+
+    bw3i_all_ctx = {"obj-a-perspective": {"SKILL.md": "通过率 62%（统计口径：三臂对照；样本量 40；一致性系数见 κ 报告）\n占比 12%（统计口径：单臂对照；样本量 20；一致性系数 0.8）"}}
+    bw3i_bare = {"obj-b-perspective": {"SKILL.md": "一手占比=58.3，效果显著"}}
+    bw3i_pass_hits, bw3i_pass_n = bw3_scan_inject(bw3i_all_ctx)
+    bw3i_bite_hits, bw3i_bite_n = bw3_scan_inject(bw3i_bare)
+    bw3i_empty_hits, bw3i_empty_n = bw3_scan_inject({})
+    cases.append(("BW3I_pass", bw3i_pass_hits == [] and bw3i_pass_n == 1, True))
+    cases.append(("BW3I_bite", bw3i_bite_hits != [] and bw3i_bite_hits[0].startswith("obj-b-perspective/SKILL.md line1"), True))
+    cases.append(("BW3I_empty_pass", bw3i_empty_hits == [] and bw3i_empty_n == 0, True))
+    cases.append(("BW3I_metric_form",
+                  bare_number_hits("一致率 75%") != [] and bare_number_hits("占比 58.3") != []
+                  and bare_number_hits("一致率 75%（统计口径：单臂；样本量 10；一致性系数 0.9）") == [], True))
 
     # FC-1 两字段闭集：合法放／越界咬
     registry = {"evidence_grade": EVIDENCE_GRADES, "calibration_state": CALIBRATION_STATES}
