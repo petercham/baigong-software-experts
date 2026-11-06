@@ -7,6 +7,7 @@
 - 行号纪律＝票内行号全部起草实测（§十三开工复测逐位重打）；漂移以开工实测为准，锚文逐字命中后方可施工。
 - 计数口径＝occurrence；判据命令落盘一律重定向至仓根 `.scratch/gwp/`（批毕即删·仓内零运行残留）；负例 exit≠0 或输出形态反转即红。
 - 本票只定义施工与验收；**严禁起草段执行落改、禁改任何 scripts 真源**（本票落位＋单独 commit 即起草段全部产出）。
+- **rev1 修订笔（2026-11-06·作者席原位修订）**：双席独立审票会师＝双席一致放行带修·红 0（PM 席 5PASS/3黄＝`304615e`＋QA 席红0黄3绿13＝`7aa7cfe`）；本笔消化六黄＝QY-1（判据 3a 注入方式锁死逐件独立进程）、QY-2（判据 2a/4a 租约接线补 `--leases` 声明）、QY-3（判据 8 对面时点锁 commit 前＋措辞对齐命令强度）、PY-1（账本同源前提票注写明）、PY-2（行为表补开发态缺省账本锚迁移副作用行）、PY-3（判据 5b 追加 CVE 近miss可跑负样本）。修订面＝判据口径/登记级文字，§三实装规格实质·闭集计数·禁动面·候裁十条**零动**；候裁⑩（P3-1 失效语义口径）不预支，保持单列候决策者终确认。
 
 ## 一、问题实证（起草取证·逐文件复核行号属实·回执附开工复测）
 
@@ -97,8 +98,9 @@ def project_root() -> str:
 |---|---|---|
 | 装配态·cwd 在宿主项目子树（宿主有 docs/STRUCTURE.md） | 命中包根→零 allow | 命中宿主项目根 ✓ 解锁 |
 | 装配态·cwd＝包根（hooks.json 相对路径形制隐含） | 命中包根 | 包根命中被跳过→宿主链无 STRUCTURE 则落回包根＝与旧同不变坏；宿主经 SWB_REPO_ROOT 覆写即通（候裁⑧前置） |
-| 本仓开发态（仓根无 docs/STRUCTURE.md·起草实测 Glob＝无命中） | 命中包根（包自带） | 跳过包根→仓根无 STRUCTURE→落回包根＝**与旧同·零回归** |
+| 本仓开发态（仓根无 docs/STRUCTURE.md·起草实测 Glob＝无命中） | 命中包根（包自带） | 跳过包根→仓根无 STRUCTURE→落回包根＝**与旧同·零回归**（注：零回归仅覆盖 deny 形态面；缺省账本锚副作用见下行） |
 | `SWB_REPO_ROOT` 在场 | 直接采用 | 直接采用（零动） |
+| **副作用登记行（rev1·PY-2）**：本仓开发态缺省账本锚迁移 | 三脚本（write-guard/commit-audit/memory-neutralize）缺省账本锚＝`os.getcwd()`（开发态 cwd 惯例＝仓根→落仓根 `.collab/ledger/`） | 随 §3.2 迁至 `project_root()`＝**包根**`.collab/ledger/`；未随迁的 9＋1 工具面仍 cwd 锚＝**开发态账本分裂面换了方向存续**（仓根↔包根两锚仍在，仅对调方向；装配态不受影响＝四脚本经③段探针同锚宿主根）。登记级副作用·不另设判据·P7 规划条③（全族随迁）为其收口面 |
 
 ### 3.2 落点二/八/十一：`write-guard.py` L72–73 ＋ `commit-audit.py` L55–56 ＋ `memory-neutralize.py` L44–45 —— `default_ledger_root()` 缺省锚统一
 
@@ -229,25 +231,29 @@ if __name__ == "__main__":
 
 预备夹具（非改动·验收工序）：`.scratch/gwp/fakeproj/` 构造假宿主项目根＝含 `docs/STRUCTURE.md`（内容含 delivery_paths 六目录 yaml 块）＋其下 `src/` 子目录；租约注入件 `.scratch/gwp/leases.jsonl`（lease-issuer 以 `SWB_REPO_ROOT=.scratch/gwp/fakeproj` 对 architect 席签 `.collab/drafts/design/` 子集租约生成）；payload 注入件 `.scratch/gwp/payload-*.json`（agent_type 字段各判据自定）。以下 `WG`／`CA`／`LI` 分别指四脚本路径全写（`agent-experts/baigong-software-team/skills/sop/scripts/…`），`FR＝SWB_REPO_ROOT=<fakeproj 绝对路径>` 前缀。
 
+**rev1·QY-2 接线写死（2a/4a 假红防线）**：夹具租约生成于 `.scratch/gwp/leases.jsonl`，而 write-guard 缺省读 `default_ledger_root()/leases.jsonl`（修后＝fakeproj/.collab/ledger/）——**2a/4a 的 WG 调用必须带 `--leases .scratch/gwp/leases.jsonl` 显式接线**（WG 缺省面与夹具面不同文件，按修前文面直放＝租约不在读面→确定 deny＝假红）。替代形制（择一即锁）：夹具段改租约经判据 9 命令直生至 fakeproj 账本面（`FR LI … --leases <fakeproj绝对路径>/.collab/ledger/leases.jsonl`，WG 缺省读恰中该文件，免逐判据带参）——两形制判据钉值不变，执行者择一后全链一致使用。
+
+**rev1·PY-1 同源前提票注**：四脚本缺省账本锚同源的结论仅在「**包装于宿主项目子树内**」装配形态下对 hooks 真实 cwd（包根或 hooks/）经③段探针续溯自动成立；判据 3a 系人为统一 cwd＝fakeproj，非 hooks 真实 cwd 形态复现。全局安装（包在宿主子树外）场景的同源性系于未施工的候裁⑧（hooks 命令绝对化/覆写注入）——本注记写明前提，判据不强制加跑。
+
 | # | 判据 | 命令口径 | 钉值 |
 |---|---|---|---|
 | 1a | 语法闸×4 | `python -m py_compile` 四脚本逐一 | 四件 exit 0 |
-| 2a | P1-1 装配态 allow | 假项目根＋租约在册＋payload（agent_type＝software-team-architect，写目标＝fakeproj 内 `.collab/drafts/design/x.md` 绝对路径，cwd＝fakeproj） | stdout deny JSON 缺席＋stderr 含 `ALLOW`＋exit 0 |
+| 2a | P1-1 装配态 allow | 假项目根＋租约在册＋payload（agent_type＝software-team-architect，写目标＝fakeproj 内 `.collab/drafts/design/x.md` 绝对路径，cwd＝fakeproj）＋**`--leases .scratch/gwp/leases.jsonl` 接线（rev1·QY-2，或采 fakeproj 账本面直生替代形制）** | stdout deny JSON 缺席＋stderr 含 `ALLOW`＋exit 0 |
 | 2b | P1-1 装配态 deny（负样本） | 同 2a 但写目标＝fakeproj 内 `docs/ARCHITECTURE.md`（租约外） | stdout deny JSON 在场＋exit 0（deny 决策面）＋ledger deny 留痕 |
 | 2c | P1-1 本仓开发态零回归 | 无 SWB_REPO_ROOT·cwd＝本仓根·跑 write-guard --sentinel | 哨兵 deny 照旧（与修前同形态） |
-| 3a | P1-2 缺省锚对拍 | 四脚本各跑一行 `python -c "import importlib.util,…;print(default_ledger_root())"`（注入面：四脚本各 exec 取 default_ledger_root）·cwd 统一＝fakeproj·无 SWB_LEDGER_ROOT | 四读数**逐字一致**（＝fakeproj/.collab/ledger） |
+| 3a | P1-2 缺省锚对拍（rev1·QY-1 注入方式锁死） | **逐件独立进程**打印四读数：每件各跑 `python -c "import runpy; print(runpy.run_path(r'<脚本全路径>')['default_ledger_root']())"`——**四件四次独立装载·禁同一命名空间串 exec**（同名 `default_ledger_root` 后载覆盖先载＝假绿通道，QA 审件 Y-1 点名坑位）；cwd 统一＝fakeproj·无 SWB_LEDGER_ROOT·注意 run_path 装载会执行脚本顶层（四脚本顶层＝def+`__main__` 守护＝零副作用确认在案） | 四读数**逐字一致**（＝fakeproj/.collab/ledger） |
 | 3b | P1-2 覆写一致 | 同 3a 加 `SWB_LEDGER_ROOT` 指 `.scratch/gwp/led` | 四读数＝覆写值 |
-| 4a | P5-1 续体归因 | payload agent_type＝`software-team-architect-2` 写租约内路径 | allow（＝归因 architect） |
+| 4a | P5-1 续体归因 | payload agent_type＝`software-team-architect-2` 写租约内路径＋**同 2a 租约接线（rev1·QY-2 同链）** | allow（＝归因 architect） |
 | 4b | P5-1 非法型仍 None（负样本） | payload agent_type＝`software-team-architect-x` 写同路径 | deny「席位不可归因」 |
 | 5a | P6-1 项目票号不冤拦 | `CA prehook --command "git commit -m 'fix: TK-GWP 修复'"` 与 `--command "git commit -m 'feat: DISP-1106-REWORK 随正'"` | 两跑 exit 0 无 orphan |
-| 5b | P6-1 无票仍拦（负样本） | `CA prehook --command "git commit -m 'fix something'"` | exit 2＋BLOCK orphan |
+| 5b | P6-1 无票仍拦（负样本·rev1·PY-3 追加近miss） | `CA prehook --command "git commit -m 'fix something'"` **＋追加 `CA prehook --command "git commit -m 'fix CVE-2024-12345 bug'"`**（第五型近miss：五位数字尾＋两段式混排文案＝防松声明的可机械读数面） | 两跑各 exit 2＋BLOCK orphan |
 | 5c | P6-1 现有四型零回归 | 现四型各一提交串（SWB-B1/TKT12/TK-X1/含 .collab/tickets/ 路径） | 四跑全 exit 0 |
 | 6a | P3-1 注入异常 fail-closed（write-guard） | `WG --map <坏JSON件> --path <任意>` stdin 喂合法 payload | **exit 2**＋stdout deny JSON（fail-closed 字样） |
 | 6b | P3-1 注入异常（commit-audit） | `CA prehook --input <坏JSON件>`（--input 指向非法 JSON 文件→json.load 抛异常） | **exit 2**＋stderr BLOCK fail-closed |
 | 7a | P4-2 deny JSON ASCII | 任一 deny 场景 stdout | JSON 可 `json.loads` 且全 ASCII（`\uXXXX` 转义还原＝原中文） |
 | 7b | P4-2 中文路径场景不炸链 | cwd＝含中文目录名夹具·deny 跑通 | exit 0＋deny JSON 完好 |
-| 8 | 禁动面哈希不变 | `git diff --name-only HEAD` 修批后 | 恰＝四脚本（config/hooks/plugin/bundle.lock/tests 零入列） |
-| 9 | 租约签发链走通 | `FR LI --ticket TK-GWP-TEST --seat architect --countersign architect:qa --path-glob .collab/drafts/design/ --leases <夹具>` | exit 0＋四字段 JSON＋账本落夹具文件 |
+| 8 | 禁动面触及对面（rev1·QY-3 时点锁死＋措辞对齐） | **四件施工完毕、commit 之前**跑双对面：`git diff --name-only`（工作树对 HEAD）＋`git add` 后 `git diff --cached --name-only`（索引对 HEAD）——时点锁 commit 前＝提交后 `git diff HEAD` 空输出假绿通道封堵；措辞改「**触及面清单对面**」（本命令强度＝触及面枚举，非内容哈希核验——对禁动面零触及目的够用） | 两跑读数各恰＝四脚本（config/hooks/plugin/bundle.lock/tests 零入列） |
+| 9 | 租约签发链走通 | `FR LI --ticket TK-GWP-TEST --seat architect --countersign architect:qa --path-glob .collab/drafts/design/ --leases <夹具>` | exit 0＋四字段 JSON＋租约条目落 `--leases` 夹具文件（rev1·措辞随正：条目＝lease entry 非 ledger 记录） |
 
 **残留纪律**：判据跑毕 `rm -rf .scratch/gwp/`，`git status --porcelain` 对 `.scratch/gwp` 零命中＝「仓内零运行残留」读数。
 
@@ -258,11 +264,11 @@ if __name__ == "__main__":
 3. 判据 2c 不过（本仓形态变化）→ 开发态回归破坏（跳过包根后回退路径写错）。
 4. 判据 3a/3b 不过 → 缺省锚仍不同源或覆写只通一脚本＝P1-2 未闭合。
 5. 判据 4b 不过（非法后缀被归因）→ 续尾剥离过宽（`-\d+` 写成了任意尾缀剥离）＝归因面放宽过度。
-6. 判据 5b 不过（无票提交放过）→ 第五型正则松化到吞并普通文案＝orphan 判据失效，重大红。
+6. 判据 5b 不过（无票提交或 CVE 近miss文案被放过）→ 第五型正则松化到吞并普通文案＝orphan 判据失效，重大红。
 7. 判据 5c 不过 → 现有闭集被改写＝判据一字未动纪律破坏。
 8. 判据 6a/6b 不过（exit 1 或无 deny 输出）→ fail-closed 兜底未生效＝口径级变更未落地。
 9. 判据 7a 不过（JSON 含裸中文或不可 loads）→ 转义面写错＝P4-2 未修。
-10. 判据 8 不过 → 越界改动＝触及禁动面，停手上报。
+10. 判据 8 不过 → 越界改动＝触及禁动面，停手上报（对面＝commit 前双跑读数，rev1·QY-3 时点锁死）。
 11. 判据 9 不过 → 租约签发链自身被 P1 换代改坏＝B2 面回归红。
 
 ## 九、停止条件（遇此停手上报，不自行处理）
@@ -275,7 +281,7 @@ git 层面：本批＝四脚本单 commit（或按主理人拆笔），`git reve
 
 ## 十一、预算
 
-改文件＝4｜改行（增删合计）≤170（write-guard ≈60：project_root 换代＋seat_of＋deny_output 转义＋__main__ 兜底／lease-issuer ≈30：同款 helper 换代／commit-audit ≈60：helper 新增＋票型一行＋锚统一＋__main__ 兜底／memory-neutralize ≈45：helper 新增＋锚统一）｜步骤≤10（复测→四件施工→py_compile→夹具→判据 2/3/4→判据 5/6→判据 7/9→哈希对面→删夹具→回执）。
+改文件＝4｜改行（增删合计）≤170（write-guard ≈60：project_root 换代＋seat_of＋deny_output 转义＋__main__ 兜底／lease-issuer ≈30：同款 helper 换代／commit-audit ≈60：helper 新增＋票型一行＋锚统一＋__main__ 兜底／memory-neutralize ≈45：helper 新增＋锚统一）｜步骤≤10（复测→四件施工→py_compile→夹具→判据 2/3/4→判据 5/6→判据 7/9→触及面双对面（commit 前）→删夹具→回执）。
 
 ## 十二、候裁清单汇总
 
