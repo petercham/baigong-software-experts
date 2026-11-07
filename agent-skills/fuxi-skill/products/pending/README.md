@@ -8,7 +8,6 @@
 
 | 条目目录 | 轨别 | 登记快照日 |
 |---|---|---|
-| `miyazaki-hayao-perspective/` | `person` | `2026-10-31` |
 | `elements-of-style-technique/` | `method` | `2026-11-06` |
 
 - 每条目＝`<对象名kebab>-perspective` 目录，随件＝`SKILL.md`＋`test-prompts.md`＋`registration.md`（对象注册三元组与分类判定轨迹）。
