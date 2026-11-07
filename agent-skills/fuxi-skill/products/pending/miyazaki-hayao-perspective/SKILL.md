@@ -10,9 +10,9 @@
 - `产物id`=`miyazaki-hayao-perspective`（与目录名逐字全等）
 - `所属轨`=`person`
 - `编译形态`=`single`
-- `快照时戳`=`2026-10-31`
-- `版本号`=`v0.2`
-- `复审到期日`=`2027-01-29`
+- `快照时戳`=`2026-11-07`
+- `版本号`=`v0.3`
+- `复审到期日`=`2027-02-05`
 - `calibration_state`=`校准态`（工具现读＝assert-tool GS-4 PASS·元组 2 在场（s0c-anchors-b1 软/硬两元组·κ 点值 0.801887/1.0）；非手写声明）
 - 准入证据卡（三栏）：`evidence_grade`=`机械断言`（当期唯一门禁位＝格式检查表侧）｜`control_arm`=`未测`（old/new/without 三臂读数缺位）｜`leakage_check`=`未检`（test-prompts 题面未对照语料——判分段批次泄漏检输入面缺位＝未验如实）
 
