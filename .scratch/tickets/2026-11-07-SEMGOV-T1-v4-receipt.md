@@ -5,9 +5,12 @@
 - 回执落点：`.scratch/tickets/2026-11-07-SEMGOV-T1-v4-receipt.md`（不在本票 `deny_globs` 任一 glob 内，与票面同域）
 - 本回执按体例**落盘为 md**，聊天消息只作导读
 
-construction_commit_sha: 430eef7
+construction_commit_sha: 19edade
+initial_commit_sha: 430eef7
 
-> 上行是本回执唯一的机器可读键，格式为**行首裸键**：无列表符号、无缩进、无引号。`§3.13` 的 `sed` 只认这一形态；写成 `- construction_commit_sha:` 或缩进或加引号，脚本一律回 `RECEIPT_NO_SHA`（票面 §3.13 已给该负样本的实测读数）。
+> 第一行是本回执唯一的机器可读键（`§3.13` 的 `sed` 只抓它），格式为**行首裸键**：无列表符号、无缩进、无引号。写成 `- construction_commit_sha:` 或缩进或加引号，脚本一律回 `RECEIPT_NO_SHA`（票面 §3.13 已给该负样本的实测读数）。
+>
+> 第二行 `initial_commit_sha` 记**初版票面**那一笔，仅供人读与追溯；它的键名不以 `construction_commit_sha:` 开头，故不被 `sed` 抓取，不影响对账口径。
 
 ---
 
@@ -30,15 +33,26 @@ construction_commit_sha: 430eef7
 
 | 项 | 读数 |
 |---|---|
-| commit | `430eef7` |
-| `git show --stat` | `1 file changed, 2882 insertions(+)` |
-| `git show --name-only` | 恰 **一件**（`".scratch/tickets/2026-11-07-SEMGOV-T1-\346\212\200\350\203\275\345\214\205\344\270\216\345\245\221\347\272\246\347\245\250-v4.md"`，此行为 git 默认 `quotePath` 转义形态——正因如此，票面 §3.13 必须 `-c core.quotepath=false`，否则与声明的中文路径永不相等） |
-| 票面字节 | **233,440**（`git show 430eef7:<path>` 取 blob 实测） |
-| 票面行数 | **2,882**（与票面 §0.7 第 5 条自述、与 `git show --stat` 的 `2882 insertions` 三处一致） |
-| 票面 sha256 | `8dac061e871a778eb1d9a70c8783245cd60282d4640a09284fd5b692477a41ae` |
-| blob 与沙箱件 | **逐字节全等**（`233,440 == 233,440`，sha256 同值） |
+| **最终态 commit** | `19edade`（v4 修笔：按主理人放行时三点提醒补写，见 §二.2） |
+| `git show --stat`（最终态） | `1 file changed, 29 insertions(+), 4 deletions(-)` |
+| 初版 commit | `430eef7`（v4 初版）；`1 file changed, 2882 insertions(+)` |
+| 票面字节（最终态） | **236,855**（`git show 19edade:<path>` 取 blob 实测） |
+| 票面行数（最终态） | **2,907**（与票面 §0.7 第 5 条自述一致） |
+| 票面 sha256（最终态） | `65baab9c8c715ab439c4916ec10ed8c58abd08b903eb5cc0f77be6b525824991` |
+| blob 与沙箱件 | **逐字节全等**（`236,855 == 236,855`，sha256 同值） |
+| `git show --name-only`（两笔各自） | 各恰 **一件**，且都是同一件票面 |
 
-**票面自述行数与实测行数一致**：票面 §0.7 第 5 条写「本票 **2,882 行**」，实测 2,882 行。字节数按票面自己声明的口径**不声明**（自指无法在一次装配内精确）。
+**票面自述行数与实测行数一致**：票面 §0.7 第 5 条写「本票 **2,907 行**」，实测 2,907 行。字节数按票面自己声明的口径**不声明**（自指无法在一次装配内精确）。
+
+### 2.2 为什么有两笔（不是 amend，是诚实修笔）
+
+主理人在放行本轮时给了三点提醒，全部关于本席三次栽过的同一模式——**声称比事实高半级**。三点都落在票面表述层，故按「不改写历史、另开一笔」的纪律处理，不 `amend`、不 `reset`：
+
+1. **`--mutate 229/229` 不许写高半级**：票面新增「这条读数的边界」段，明写 229 条是**本席自造**变异、不构成对抗性证明，并写明本席上一轮同样自测全绿、两席一造就放过去 7 条假阴。全文禁用「抗性已证明」类表述。
+2. **`id_seq 0` 空桶要交代**：§3.14 `--stats` 块后新增四段交代（桶的定义／本版为何为空／`R16`／`R17` 归到哪／桶为何保留／零值里为何不可能藏漏项）。
+3. **`--selfcheck` 的「双斜杠转义 0」要能自证怎么检的**：§0.7 第 1 条后新增检法（读自身源码、剥首个 docstring、扫七 token、断 0）＋**反向实测读数**（把一处 `\s` 改回 `//s` 后实测 FAIL 与整轮不通过）。
+
+修笔只动票面表述，**不动七件与 `verify.py`**：修笔后 `extract` 还原的七件＋夹具与冻结件仍逐字全等，`--all`／`--mutate`／`--selfcheck`／`--stats` 四条输出与出票时逐字一致。
 
 ## 三、27 项逐项处置（红 15 ＋ 黄 12，四列）
 
@@ -165,9 +179,9 @@ OK c01 … OK c25，25/25 全绿，exit 0
 
 ## 六、§3.13 真实仓对账（本仓、本回执、实测）
 
-**这是票面 §3.13 脚本在本仓的真实运行**（不是沙箱模拟）：输入就是本文件，`declared.txt` 是票面一件，`actual.txt` 由 `git diff-tree` 从 `430eef7` 取。
+**这是票面 §3.13 脚本在本仓的真实运行**（不是沙箱模拟）：输入就是本文件，`declared.txt` 是票面一件，`actual.txt` 由 `git diff-tree` 从**最终态** `19edade` 取（初版 `430eef7` 亦跑过一次，读数同为 `DECL_SET_EQUAL`；两笔的 `--name-only` 都恰一件）。
 
-实测（**本仓**、票面 commit `430eef7`、**本回执自身作为输入**）：
+实测（**本仓**、票面 commit `19edade`、**本回执自身作为输入**）：
 
 ```
 $ sh s313.sh          # 即票面 §3.13 的脚本本体，逐字提取，未改一字
@@ -193,10 +207,10 @@ exit=0
 ## 七、对账声明
 
 1. **本回执不复述票面读数**：§三／§四／§五的数字全部引自本轮出票时的实跑输出或 `--stats` 打印；票面 §3.14 是唯一全文粘贴处，本回执只摘要，故不存在「两处手写数字互相打架」的可能（v3 的病根）。
-2. **票面 commit 恰一件**：`git show --name-only 430eef7` 输出一行；`git show --stat` 输出 `1 file changed, 2882 insertions(+)`。
+2. **票面两笔各恰一件**：`git show --name-only 430eef7` 与 `git show --name-only 19edade` 各输出一行，且是同一件票面；stat 分别为 `1 file changed, 2882 insertions(+)` 与 `1 file changed, 29 insertions(+), 4 deletions(-)`。修笔未 amend、未 reset，历史两笔俱在。
 3. **v1／v2／v3 未动**：本笔 `git add` 只加票面 v4 一件；本回执另笔单件提交。
 4. **仓内零施工件**：`agent-skills/claim-commitment-governance/` 不存在；七件与 `verify.py` 只存在于票面围栏与仓外沙箱。
-5. **blob 自证已完成**：从 `430eef7` 的 blob 逆抽七件＋`verify.py`，与出票冻结件 `diff -r` **全等**；在 blob 还原件上重跑 `--all`／`--mutate`／`--selfcheck`／`--stats`，四条输出与出票时**逐字一致**（`diff` 空）。
+5. **blob 自证已完成**：从 `19edade` 的 blob 逆抽七件＋`verify.py`，与出票冻结件 `diff -r` **全等**；在 blob 还原件上重跑 `--all`／`--mutate`／`--selfcheck`／`--stats`，四条输出与出票时**逐字一致**（`diff` 空）。修笔后七件与夹具未被触碰，故该自证对最终态仍成立（已复验）。
 6. **不引用账本外状态源**：本回执全部读数来自本仓 git 与沙箱脚本输出，未使用记忆文件。
 7. **并发如实登记**：开工 HEAD 与派工声明不符一事已在本回执 §一 与票面「开工读数与并发声明」双处登记，未静默略过。
 
@@ -217,10 +231,10 @@ exit=0
 
 | 项 | 读数 |
 |---|---|
-| 票面 commit | `430eef7` |
-| `git show --name-only` 件数 | **1** |
-| `git show --stat` | `1 file changed, 2882 insertions(+)` |
-| 票面 sha256 | `8dac061e871a778eb1d9a70c8783245cd60282d4640a09284fd5b692477a41ae` |
+| 票面最终态 commit | `19edade`（初版 `430eef7`） |
+| `git show --name-only` 件数 | **1**（两笔各自皆 1） |
+| `git show --stat`（最终态） | `1 file changed, 29 insertions(+), 4 deletions(-)` |
+| 票面 sha256（最终态） | `65baab9c8c715ab439c4916ec10ed8c58abd08b903eb5cc0f77be6b525824991` |
 | 锚串自测 | **27/27**，exit 0 |
 | `--all` | 25/25，exit 0 |
 | `--mutate` | 229 咬住／0 假通过／0 失败／覆盖 25/25，exit 0 |
