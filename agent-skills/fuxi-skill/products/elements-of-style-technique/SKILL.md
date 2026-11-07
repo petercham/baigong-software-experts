@@ -13,7 +13,7 @@
 - `编译形态`=`single`
 - `快照时戳`=`2026-11-06`
 - `版本号`=`v0.1`
-- `复审到期日`=`2027-01-05`
+- `复审到期日`=`2027-02-04`
 - `calibration_state`=`待校准`（method 轨登记缺省值，无软判据层不造 κ）
 - 准入证据卡（三栏）：`evidence_grade`=`机械断言`（validator-source-anchor L1 实跑判绿＝当期唯一门禁位）｜`control_arm`=`未测`（三臂对照工件缺位）｜`leakage_check`=`未检`（test-prompts 题面未对照语料——判分段预注册件缺位＝未验如实）
 
