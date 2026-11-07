@@ -8,7 +8,7 @@
   gate-outbound --artifact <file>
 
 ════════════════════════════════════════════════════════════════════════
-判据归属映射表（静态指认·逐字照 v3 §1.2(3)／`30-gates.md` §2—§3）：
+判据归属映射表（静态指认·依包内真源 `references/30-gates.md` §2—§3）：
 
   R_ALLOCATION = {
     "validate":      R1, R2, R5, R7, R14, R16      （6 条）
@@ -1037,7 +1037,7 @@ def human_gate_outbound(art, cs, V):
 def cmd_validate(args, cs):
     kind_list = cs.artifact_kinds()
     if args.kind not in kind_list:
-        # OBS-2 钉值（裁定三十八）：闭集外取值 → 逐字行＋exit 2
+        # --kind 闭集外取值：固定 exit 2 并输出违例行（KIND-CLOSED-SET 口径）
         print(f"VIOLATION spec=KIND-CLOSED-SET field=kind value={args.kind}")
         return EXIT_USAGE
     V = Violations()
