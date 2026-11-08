@@ -118,3 +118,25 @@ exc1 骨架（三条件齐＋`authority=binding`＋source:/cite: 双自由文本
 ## 6. 收口声明
 
 判据 1–13 自验收全过；两笔封顶（施工笔 `8a41d563` 恰 6 件＋回执笔恰 1 件）。收口即停：QA fresh eyes／拆仓澄清件复跑兜底闸／对照表候裁项均不在本票射程，不越权预跑。
+
+---
+
+## 7. 追加节 · 黄-1 销重窄随动笔（QA 审件 `8ac0996` 派生·主理人指令票）
+
+**开工三读数**：开工时点 date 实测 2026-11-08 15:22:42；开工 HEAD＝`8ac0996`（QA 独立验审件笔）；tracked 净（他案 untracked 面照登不碰）。
+
+**根因登记**（QA 实证）：v2 修法 3 替换段止于「即违例；」而替换围栏尾部自带「`artifact:` 与 `authorization:` 只能附加；」——逐字照落拼接后该句连续重复两次（W1 无责，QA 字面重构==现态实证在案）。本笔＝一行级窄随动销重，不开新裁量。
+
+**写集对账（恰三件＋回执追加＝第四件如实登记）**：
+1. `references/30-gates.md`：`:19` 行内删除连续重复的第二个该句（`count(seg)==2` 断言＋`seg+seg` 定位单点替换）；diff 恰 1+/1-。
+2. `config/semantic-closed-sets.json`：校验器自身 `reextract` 同源重算，`changed` 恰 `[('g12_r1_r17_and_subcommands','r_table')]`；diff 恰 1+/1-。
+3. `.scratch/tickets/2026-11-07-SEMGOV-T1-BUILD-verify.py`：仅 `ROW_DIGESTS['c13']['R2']` 一处重算（`e48bff7b…`→`db8a021c…`）；diff 恰 1+/1-；2,100 行不变；**AST 字符串常量差集核验＝恰此一处**（new−old／old−new 各恰一个新/旧 digest 值）。
+4. 本回执追加节＝同笔第四件（按票面口径择一登记）。
+
+**验收读数**：
+- 销重后 `:19` 该句计数＝**1**；连续重复残留 False；行数 100 不变；行内其余逐字未动（替换仅 `seg+seg→seg` 单点）。
+- 校验器 `selfcheck`：34 比对 red=0＋四类变异 4/4 OK-RED exit 0。
+- 夹具四类（均带 `<pkg>`）：`--all` 28 全 OK exit 0／`--mutate` 244 全咬·假通过 0·FAILED 0·覆盖 28/28 exit 0／`--selfcheck` 自证全绿 exit 0／`--stats` exit 0（七件合计仍 **592** 行，30-gates 100 不变）。
+- exc1 三条件样本复点（`validate --kind 工作票`）：**exit 0**＝旁路不回归。
+
+**纪律**：单笔施工＋登记；双侧逐路径 pathspec；禁项零使用；未预见面零项；他案面照登不碰。
