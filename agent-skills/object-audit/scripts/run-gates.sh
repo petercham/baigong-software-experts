@@ -54,14 +54,17 @@ die_infra() { printf 'infra error: %s\n' "$*" >&2; exit 4; }
 
 # --- 参数 ---
 ROOT_ARG=""
+NO_WRITE=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --root) [ $# -ge 2 ] || die_usage "--root 需要一个目录参数"; ROOT_ARG="$2"; shift 2 ;;
+    --no-write) NO_WRITE=1; shift ;;
     -h|--help)
-      say "用法：bash run-gates.sh [--root <仓根>]"
+      say "用法：bash run-gates.sh [--root <仓根>] [--no-write]"
       say "按 S-04→S-01→S-02→S-03 顺序跑门禁；路由表运行时从 60-gates.md 的 json 围栏解析。"
       say "证据件写 .collab/evidence/gates/（该目录不入版本库，见 60-gates.md「七、接入」末条）。"
       say "绕过：ALLOW_GATE_DOWN=1（必须留痕，见 60-gates.md §六 硬规矩 4）。"
+      say "--no-write：只读模式——不建证据目录、不写证据件、不写呈拍件；汇总读数与 exit 码与写盘模式一致（FX-U21/D-86）。"
       exit 0 ;;
     *) die_usage "未知参数：$1" ;;
   esac
@@ -95,7 +98,9 @@ done
 
 # --- 出口②目录（本件是唯一写者） ---
 EVIDENCE_DIR="$ROOT/.collab/evidence/gates"
+if [ "$NO_WRITE" -eq 0 ]; then
 mkdir -p "$EVIDENCE_DIR" 2>/dev/null || die_infra "无法创建证据目录：$EVIDENCE_DIR"
+fi
 
 RUN_TS="$({ date +%Y-%m-%dT%H:%M:%S 2>/dev/null || echo unknown; })"
 RUN_DAY="${RUN_TS%%T*}"
@@ -160,6 +165,7 @@ GATE_RUN_DAY="$RUN_DAY" \
 GATE_COMMIT="$COMMIT_ID" \
 GATE_ALWAYS_REPORT="${ALWAYS_REPORT_GATE:-0}" \
 GATE_BYPASS="${ALLOW_GATE_DOWN:-}" \
+GATE_NO_WRITE="$NO_WRITE" \
 "$PY" - <<'PY'
 # -*- coding: utf-8 -*-
 """门禁裁决：解析路由表（唯一机器源）→ 决定出口①拦不拦 → 写出口②证据件 → 算出口③升级。
@@ -185,6 +191,7 @@ RUN_DAY = os.environ["GATE_RUN_DAY"]
 COMMIT = os.environ["GATE_COMMIT"]
 ALWAYS_REPORT = os.environ.get("GATE_ALWAYS_REPORT", "0") == "1"
 BYPASS = os.environ.get("GATE_BYPASS", "")
+NO_WRITE = os.environ.get("GATE_NO_WRITE", "0") == "1"
 
 FINDING_RE = re.compile(
     r"^(?P<file>[^\n]+?):(?P<line>\d+): (?P<sev>[A-Z_]+) (?P<spec>[A-Za-z0-9.-]+) (?P<msg>.*)$"
@@ -452,6 +459,8 @@ def main():
     written = []
     for name, code, _out in scripts:
         findings = per_script[name]["findings"]
+        if NO_WRITE:
+            continue  # 只读模式出口②零写（FX-U21/D-86）；written 保持空表，BLOCK 分支无证据件伴随行＝§〇-9 声明差
         if code == 0 and not findings and not ALWAYS_REPORT:
             continue  # §六 表：exit 0 且未开"总是报告" ⇒ 不写②
         short = "pass" if (code == 0 and not findings) else (
@@ -481,7 +490,7 @@ def main():
         written.append(path)
 
     # --- 出口③落盘（.collab/inbox/<主理人>/<日期>-呈拍-gates.md·最多 5 条） ---
-    if escalated:
+    if escalated and not NO_WRITE:
         already = already_escalated()
         fresh = [e for e in escalated if e[0] not in already]
         fresh.sort(key=lambda e: -e[1])
