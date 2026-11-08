@@ -8,6 +8,7 @@
 - **修单来源（v2 唯一修订条款面）**：
   - `.collab/qa/2026-11-08-COLLAB-STRUCT-双席审票会师对拍与裁定-v1.md`（`agent-experts/baigong-software-team/.collab/qa/`，commit `36dfb78`，blob 5,373B／`7843fb3bf7f9`）＝红三黄七合并清单＋裁定「两票非废票级、主票出 v2、修单只是输入作者席亲笔、候裁六项继续单列不重审、红-1/红-3 钉值终态挂候裁①」。
   - 皮总 ADR 裁定件（上 2.）随动面＝其 §三 连带影响清单（seat-permissions adr 写域改判／ADR 工序真源 `b0b449d` 链改写／一题一文档细则）。
+  - **修单③（皮总违例两项，主理人转发 2026-11-08）**＝违例A「过渡期无向前进纪律」（复核件后向落旧桶 `qa/`，致迁移射程持续增大：仓根 qa 8→10、包内桶计数漂移均此类累加实证）＋违例B「票面落位违规」（本票族三件落仓根 `.scratch/tickets/`，违反 `dev-discipline.md:83` 唯一落点＝所属项目仓根探针锚〔百工锚＝`agent-experts/baigong-software-team/docs/STRUCTURE.md`〕；历史票全住 bundle `.scratch/tickets/`＝主理人已实证归因）→落位条款成文（§3.B7）＋票族三件入 B 组迁移（§3.B8）＋§5 判据随加。
   - **修单之外零自扩射程**；工具归属/shareds 自包含议题＝另票 TOOLHOME（已径裁，不入本票）。
 - **v1 双席审票基准**：A 席 `559f2a8`（红2黄5绿11）＋B 席 `93434e0`（红2黄6绿13）——已会师对拍，本票不重审只落位。
 - **两笔封顶兑现**：本票＝主票第二笔（v1＋v2 恰封顶）；v2 回来后双席窄复核（改哪段复验哪段），不开新面、不再出 v3。
@@ -134,6 +135,8 @@
 4. **architect 补建（包内）**：`mkdir` 包内 `.collab/architect/`＋落一件 5 行内索引占位 README（桶用途一句话＋「实体随首件架构过程件落位」）——空目录不入 git，占位件＝机械断言 `git ls-files` ≥1 可验。**仓根六子集从简条款（承 v1）**：仓根＝治理史面无写权机检，本批只落有实物对象者（audits mv＋ledger 链＋README），drafts/architect 空仓不建，首件届时自然落位（理由：空目录不入链＝断言不可验＋YAGNI）。
 5. **drafts 顶层化＋归档子包（承 v1 我定形态，候裁③可推翻）**：归档子包落位＝**`drafts/archive/`**（包内）。理由三条照 v1：①归档对象与 drafts 同域同主（起草席换版＝旧版 mv 进 `drafts/archive/`＋新版落顶层，一次租约闭环，无需跨席搬件）；②`drafts/archive/` 天然被 write_globs 行 `.collab/drafts/` 前缀命中（lease-issuer `:130` startswith 校验语义），零新增配置行；③与 host `.collab/archive/`（退役定稿落位）语义分域不混。现 drafts 顶层零散件＝无需存量归位动作；条款为前向纪律。**ADR 面同规（裁定⑬）**：`.collab/adr/` 在途交接件一题一文档，过期版本去向＝`.collab/adr/` 面归档随 drafts 治理同则（届时若需机检行，随批 config 随动另笔，本票不预开）。
 6. **tests 三件样例随动（drafts/prd 废止的机械必然，承 v1）**：`drill-05` `:22/:27/:49` 三处 `.collab/drafts/prd/tmp-drill05.md` → `.collab/drafts/tmp-drill05.md`（`:17` 注释行 `drafts/prd` 字样随改）；`drill-06` `:20` 同款一处；`test_lease_instantiation.py` `:95/:96` 两处 `.collab/drafts/prd/` → `.collab/drafts/`。
+7. **过渡期向前进纪律（违例A 条款成文）**：自本票放行起至 B 组迁移收口，**一切新增记账／审票／复核／登记类件直接落目标名桶**（`audits/` 等法定新名桶，不存在则先建后落；仓根与包内两面同规）——**存量迁移归 B1 git mv，新增面禁落旧名桶**（`qa/` 等）。违例实证在册＝双席复核件后向落 `qa/` 致仓根 qa 8→10、qa 四桶计数 287→291 持续漂移＝迁移射程随过渡期每笔增大；本条款封住增量面，B1 mv 计数公式（§3.B1「开工复点」）承担残余窗口漂移。条款效力＝前向纪律（放行即生效，先于 B 组施工收口），与候裁①存量射程正交。
+8. **票面落位随批迁移（违例B 落点勘正）**：工序真源＝`skills/software-orchestration/references/dev-discipline.md:83`「唯一落点＝所属项目仓根（项目根＝含 docs/STRUCTURE.md 之探针锚目录）`.scratch/<票号>/`」——百工项目锚＝`agent-experts/baigong-software-team/docs/STRUCTURE.md`（在位实存），历史票全住 bundle `agent-experts/baigong-software-team/.scratch/tickets/`（体例实证）。本票族三件现落**仓根** `.scratch/tickets/`＝落点违规（主理人实证归因在册），随批 `git mv` 归位：仓根 `.scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v1.md`／`…-v2.md`／`…COLLAB-STRUCT-B345-工序纪律并案维护票-v1.md` 三件 → `agent-experts/baigong-software-team/.scratch/tickets/` 同名（三件均 tracked，R 行随 §5.4 计数公式另加 3）。**落位条款按 dev-discipline:83 成文承（票面＋临时工作物同规）**：本票族自归位后，后续一切本工序族票面／回执／临时工作物按 :83 落 bundle 项目根 `.scratch/` 面；票面住址成文与否＝候裁⑥既有面不重复开。〔申报：本 v2 补写时点仍住违例位＝修单令「原件补写不出 v3」与归位 mv 时序冲突，从修单令住旧位候 B 组 mv 归位，归位笔前本件路径引用一律按现路径读。〕
 
 ## 4 声明闭集（OA-D6-5 机检源·逐行完整路径）
 
@@ -152,19 +155,28 @@
 - agent-experts/baigong-software-team/tests/acceptance/drills/drill-05-freeze-recover.sh
 - agent-experts/baigong-software-team/tests/acceptance/drills/drill-06-replay-reconcile.sh
 - agent-experts/baigong-software-team/tests/s2/test_lease_instantiation.py
-- （mv 面＝仓根 qa 10＋包内 qa 233＋adr 4＝**247**〔737fc0b 复点值；施工票开工复点为准＝「两桶复点＋4」公式〕；候裁①并入态另加 48＝295；逐件新路径＝旧路径名改，回执附 `git show --name-status` 全量 R 行计数对钉）
+- （mv 面＝仓根 qa 10＋包内 qa 233＋adr 4＝**247**〔737fc0b 复点值；施工票开工复点为准＝「两桶复点＋4」公式〕；候裁①并入态另加 48＝295；**违例B 票族随批 mv 三件另加 3**〔§3.B8 点名：主票 v1／主票 v2／B345 v1 仓根 `.scratch/tickets/` → bundle `.scratch/tickets/`〕；逐件新路径＝旧路径名改，回执附 `git show --name-status` 全量 R 行计数对钉）
 - （add 面 3 件＝§1.2 ledger 三文件点名＋新建 `.collab/README.md`＋占位 `agent-experts/baigong-software-team/.collab/architect/README.md`＝共 5 新链件）
+- .scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v1.md〔违例B mv 源〕
+- .scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v2.md〔违例B mv 源〕
+- .scratch/tickets/2026-11-08-COLLAB-STRUCT-B345-工序纪律并案维护票-v1.md〔违例B mv 源〕
+- agent-experts/baigong-software-team/.scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v1.md〔违例B mv 目标〕
+- agent-experts/baigong-software-team/.scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v2.md〔违例B mv 目标〕
+- agent-experts/baigong-software-team/.scratch/tickets/2026-11-08-COLLAB-STRUCT-B345-工序纪律并案维护票-v1.md〔违例B mv 目标〕
 
 ## 5 机械可验判据（施工回执必附实测）
 
 1. **JSON 合法＋同源全等**：两 config `python -m json.tool` exit 0；两文件五席 deny_globs 数组逐席全等（SRC4Z 同批同值约束复用，host 行随 A1-10/A2 同步改后仍逐席全等）。**门禁对拍形制（黄-6 钉）**：run-gates 计数一律**同形态两读数对拍**（主盘对主盘、worktree 对 worktree），**禁跨形态比数**（worktree 形态 6,582/6,586 与主盘差一量级＝形制差非盘面差）。
 2. **grep 钉值（现值→新值 0）**：`git grep -c "drafts/prd\|drafts/design\|drafts/adr\|drafts/proposals\|drafts/deploy" -- agent-experts/baigong-software-team/config agent-experts/baigong-software-team/agents agent-experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md` ＝ **0**（现值基线＝**13 行**〔§1.2 钉〕）；`git grep -c "collab/qa" -- "agent-experts/baigong-software-team/config"` ＝ 0；「十一桶」在用面清零（黄-1 点名四处逐锚复跑）：`git grep -c "十一桶" -- agent-experts/baigong-software-team/config agent-experts/baigong-software-team/.collab/README.md` ＝ **0**（现值＝5 occurrence／4 行；历史案卷＋六外包面不在射程，禁动面登记）。
 3. **ls-files 断言（红-1 两态条件化钉·终态挂候裁①）**：`git ls-files | grep -c "/\.collab/qa/\|\.collab/qa/"` 现值＝**291**（本笔补全时点 `737fc0b` 复点＝仓根 10＋包内 233＋fuxi 46＋EAC 2；67a3462 时点口径＝8＋231＋46＋2＝287，两时点差＝窄复核两件落链随增，照登）。施工后按候裁①两态各自钉死、机械可判：**态甲（候裁①不并入＝默认射程）**钉值＝**48**（fuxi 46＋EAC 2 照登，非 FAIL）；**态乙（候裁①并入同批 mv）**钉值＝**0**。〔勘正本体＝会师红-1：v1 钉「路径面 0」把未裁选项当既成事实，默认射程下必 FAIL，废止〕。其余钉值：`.collab/audits/` tracked＝复点两桶和（67a3462 口径 8＋230＝238；737fc0b 口径 10＋233＝243；按施工开工复点钉）；`.collab/adr/` tracked＝4；`.collab/architect/` tracked≥1；ledger 三文件 tracked 态。
-4. **mv 保真**：`git show --name-status` 默认射程 R 行＝复点两桶和＋4（＝247 口径），**全 R100**（内容零变·`-M` 检测）；候裁①并入态另加 48 全 R100；抽验四件 adr 新旧 blob sha 全等（`git cat-file blob` 双点对拍）。
+4. **mv 保真**：`git show --name-status` 默认射程 R 行＝复点两桶和＋4＋票族 3（＝247＋3 口径），**全 R100**（内容零变·`-M` 检测）；候裁①并入态另加 48 全 R100；抽验四件 adr 新旧 blob sha 全等（`git cat-file blob` 双点对拍）。
 5. **门禁零回归对拍（红-3 两态改钉＋黄-6 形制）**：基线＝本票开工主盘实跑（开工时点登记，本笔补全时点参考读数＝**GATE PASS exit 0／发现 31,901**〔`737fc0b` 后主盘，含窄复核链件漂移照登；67a3462 时点 31,885〕）。判据＝**GATE PASS 不翻红**＋前后两读数**同形态**＋差值按窄口径（GATE PASS 行「发现 N 条」单一真源，参并案票 B3 条款）逐条归因。**〔红-3 勘正〕废止 v1「预期差值≈0」钉**：mv 后历史文内旧路径引用按案乙转悬空，check-pointers 类必增（QA 席隔离 worktree 模拟对拍实测 **＋12**＝pointers +20／reconcile +21／closure −8），与「≈0」互斥——改钉两态：**态甲（案乙不追改）**差值非零合法，钉「每条新增悬空命中可归因＝旧文 `.collab/qa/`／`drafts/adr` 字样（存量 209 文件/308 行＋26→46 行同族）」，禁「基本通过」式糊账；**态乙（案甲并入＋追改）**方可钉差值≈0。
 6. **drill/s2 差值口径（黄-5 改钉＋N-6 注入形制钉）**：开工基线两读数照登＝`drill-05` exit **1**／`drill-06` exit **1**（红基线＝既有缺陷〔write-guard deny 输出 ensure_ascii 转义 vs 夹具中文明文／夹具引用目标缺件〕，台账 `.collab/defects/2026-11-08-drill夹具回读编码失配与缺件引用缺陷-v1.md`〔`36dfb78`〕在册，修路另票候排＝禁动面锁死）。**〔N-6〕调用形制一行钉**：drill 两件基线与复跑一律用 **`T06_TMP` 注入形制**（drill-05 `:10` `T06_TMP:?` 契约＝仓外 Temp 由调用方注入，`T06_TMP=<仓外Temp目录> bash drill-05…`）——**裸跑 exit 1 同值不同因**（变量未设即中止，非夹具红因），读数只在注入形制下有效。验收＝改差值口径：三件随 B6 改后复跑（注入形制），drill 两笔仍 exit 1 且**红因读数与基线同型**（缺陷面不因本票恶化）＝PASS；`python agent-experts/baigong-software-team/tests/s2/test_lease_instantiation.py` exit **0** 不变（夹具租约路径随 B6 自洽）。
 7. **check-adr 命令形制一行级钉死（黄-3＋N-5 锚面措辞按实）**：验收命令＝`python agent-skills/object-audit/scripts/check-adr.py --bundle-root agent-experts/baigong-software-team`，钉 exit **0**／`docs/adr 盘上件=1｜桶1=1 桶2=20 桶3=1`（本票不动 `docs/adr/` 一字，复跑读数同值）。裸跑 exit **4**（infra error）＝非用态，不入判据（形制在册防复现误读）。锚面措辞按实（N-5）：check-adr 主锚＝`docs/adr/`（E-ADR-1″/2‴/3″ 适用域）＋**另锚两面**＝①`.collab/decisions/`（ADR_DECISIONS_SUBDIR，E-ADR-5 三面对账 diff 面）②adr 件内 `.collab/…` 案卷活引用补偿断言（E-ADR-3″ WATCH advisory 正则）——三面均不落本票 mv 射程（`docs/adr/` 禁动、`decisions/` 零迁、advisory 引用面＝历史文内字面照登不随动）＝**零随动结论不变**（措辞勘正非结论勘正）。
 8. **ADR 随动面 grep 钉值（v2 新增）**：`git grep -c "架构席终写" -- agent-experts/baigong-software-team/skills/software-orchestration/references/standard-sop.md` ＝ **0**（现值 1）；`git grep -c "docs/adr" -- agent-experts/baigong-software-team/agents/software-team-architect.md` ＝ **0**（现值 3＝`:22`/`:23`×2）；architect 卡「可写内容」行不含「ADR」＝`git grep -c "可写内容：设计、ADR" -- …architect.md` 现值 1→**0**；lead 卡 `ADR … software-team-architect` 路由行现值 1→**0**（新行含「ADR 文书…software-team-lead（本席）」命中 1）；seat-permissions.json host 行含 `".collab/adr/", "docs/adr/"`＝命中 1、architect 行含 `"docs/adr/"`＝**0**。
+9. **过渡期向前进＋票面落位核对（违例A/B 随加，v2 修单③）**：
+   - **落位核对（违例B）**：施工后 `git ls-files ".scratch/tickets/" | grep -c "COLLAB-STRUCT"` ＝ **0**（现值 3）；`git ls-files "agent-experts/baigong-software-team/.scratch/tickets/" | grep -c "COLLAB-STRUCT"` ＝ **3**（现值 0）——三件归位 bundle 项目根 `.scratch/tickets/`＝dev-discipline `:83` 唯一落点复现；mv 三件 R100 随 §5.4 计数（247＋3）对钉。
+   - **向前进核对（违例A）**：放行后至 B1 收口区间内，`git log --name-only <放行笔>..<B1收口笔> -- ".collab/qa/" "agent-experts/baigong-software-team/.collab/qa/"` 命中新增件（A 状态）＝**0**（该区间一切新增记账/审票/复核/登记类件一律落 `audits/` 目标名桶）；若区间内出现 qa/ 旧桶 A 笔＝违例照登并 B1 前整改（mv 进桶后计 R），B1 mv 计数公式随之承「开工复点」吸收窗口漂移。
 
 ## 6 禁动面闭集（点名）
 
@@ -196,7 +208,7 @@
 
 **候裁⑤ 票间互斥（SEMGV-T3 × COLLAB-STRUCT-1 席位卡写集交叠）**：承 v1 条款——实测交叠面＝席位卡写域行；T3 v2（`b4a75d5`·候皮总放行未施工）写集含五卡各追加一行挂载指针；本案 A3 改五卡写域/路由行本身。两笔落同文件相邻行＝git 可串接（不同行零冲突），真风险＝语义序。本席分析＝**先 T3 后 STRUCT**；条款＝STRUCT 施工票开工读数须复点五卡现态，若链上出现 T3 施工笔即以其为基线（v1 钉的五卡 sha 基线随之作废重取，本 v2 §1.1 钉值同承受此条款）。归裁确认序。
 
-**候裁⑥ 票面住址成文**（审计件遗留）：`.collab/tickets/`（规格名）vs `.scratch/tickets/`（实际体例）二选一入 README/规范表。本票按近期体例走 `.scratch/tickets/`；成文归裁。
+**候裁⑥ 票面住址成文**（审计件遗留）：`.collab/tickets/`（规格名）vs `.scratch/tickets/`（实际体例）二选一入 README/规范表。归裁。〔修单③后注：`.scratch` **内部归属面**（仓根 vs bundle 项目根）已随违例B 勘正归位 dev-discipline `:83`＝百工票面唯一落点＝bundle 项目根（§3.B8），候裁⑥只剩「tickets 桶名规格 vs .scratch 体例」一面未裁。〕
 
 （候裁六项之外无新增候裁；ADR 裁定⑧-⑬＝已裁既成条款不入候裁；此前「ADR 甲/乙案候裁」随 `67a3462` 销账。）
 
@@ -236,5 +248,5 @@ lease:
     - softwares/**
     - tests/**
     - "*.py"
-  note: 本票只出 COLLAB-STRUCT-1 结构名实对齐与规范成文规格票面 v2 一件（含 N-1 截断补全＋N-2/3/4 勘正），零施工；不 mv 目录、不改 seat-permissions/席位卡/config/gitignore/standard-sop 一字、不补链 ledger、不建目录、不 bump 版本。依据＝皮总裁定 b8bdadc（结构七条）＋皮总 ADR 裁定 67a3462（写权统一主理人／会签＝状态闸／人类闸分级／任意席位可发起／时序／drafts 一题一文档）＋会师裁定 36dfb78 红三黄七修单（红-1/红-3 两态钉挂候裁①、红-2 deny_globs_note 键名勘正、黄六收口）。候裁六项继续单列不自行拍。两笔封顶已兑现（v1＋v2）；落链即停候双席窄复核（改哪段复验哪段，不开新面）。TOOLHOME 另票不入射程。
+  note: 本票只出 COLLAB-STRUCT-1 结构名实对齐与规范成文规格票面 v2 一件（含 N-1 截断补全＋N-2/3/4 勘正＋修单③违例A 过渡期向前进纪律〔§3.B7＋§5.9〕＋违例B 票面落位勘正〔§3.B8 票族三件随批 mv 归位 bundle 项目根＋§4 闭集扩六行＋§5.4 计数 247＋3〕），零施工；不 mv 目录、不改 seat-permissions/席位卡/config/gitignore/standard-sop 一字、不补链 ledger、不建目录、不 bump 版本。依据＝皮总裁定 b8bdadc（结构七条）＋皮总 ADR 裁定 67a3462（写权统一主理人／会签＝状态闸／人类闸分级／任意席位可发起／时序／drafts 一题一文档）＋会师裁定 36dfb78 红三黄七修单（红-1/红-3 两态钉挂候裁①、红-2 deny_globs_note 键名勘正、黄六收口）。候裁六项继续单列不自行拍。两笔封顶已兑现（v1＋v2）；落链即停候双席窄复核（改哪段复验哪段，不开新面）。TOOLHOME 另票不入射程。
 ```
