@@ -453,9 +453,17 @@ def check_r2(art, cs, V):
                 continue
             m = re.match(r"([A-Z]{2,6})-([0-9]{3,})", body)
             if not m:
-                # S-1 降级形态支（M-3／R2 判据句）：触发条件精确限定＝kind ∈ pm 且
-                # body 非 PREFIX-digits 号形——不按前缀闭集判，改判所在行 authority；
-                # 「无冒号」「kind 未知」两支在其上方原样 return，不被本支吞（QA 黄-3）。
+                # 降级形态支（触发条件精确限定＝kind ∈ pm 且 body 非 PREFIX-digits
+                # 号形）：不按前缀闭集判，改判所在行 authority；「无冒号」「kind 未知」
+                # 两支在其上方原样 return，不被本支吞。
+                # 条件格旁路（例外）：行级三条件成立（approver 形如 human:、status 在
+                # 条件集内、expiry ≠ none）→ 本条目不判行级 authority——与条件格判据
+                # 同源复用同一组 helper，不另立判据；三条件不齐者照走现判。
+                cond_ok = (_human(rec.get("approver", ""))
+                           and rec.get("status", "") in _cond_status_set(cs)
+                           and not _none(rec.get("expiry", "")))
+                if cond_ok:
+                    continue
                 if rec.get("authority") != "unverified":
                     V.add("R2", "linked_artifacts", 2, claim_id=rec.get("claim_id", ""),
                           value="free-desc")

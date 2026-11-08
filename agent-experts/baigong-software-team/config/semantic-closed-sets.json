@@ -829,7 +829,7 @@
           ],
           [
             "R2",
-            "引用闭合：`linked_artifacts` 至少含一条 `source:` 或 `cite:` 条目（编号形态，或 `10-contract` 第 11 节无号写法的自由文本降级形态）；**编号形态条目**的前缀落在 `10-contract` 第 1 节引用前缀闭集内；**在册解析判的实施边界（不得外推）**＝`REQ-`／`CMP-` 类编号在登记表内解析判（`regids`），来源面／绑定层号（`INTK-`／`RES-`／`MSR-`／`DOC-`／`DEC-`／`AUTH-` 等）的在册性在本包机检面之外（无绑定层注入面），该面为**登记性说明**＋欠条 `30-gates` A4 人工闸承接；**降级形态条目**（`source:` 后非 `PREFIX-digits`）不参与解析判，但所在主张行 `authority` 必须为 `unverified`——判据同第 11 节正向可判条件，`authority ≠ unverified` 即违例；`artifact:` 与 `authorization:` 只能附加；`actual_environment = production` 时，`linked_artifacts` 须含至少一条 `artifact:`，且该 `artifact:` 须在表 A/B/C/D 的编号面内可解析 → §1 §11。"
+            "引用闭合：`linked_artifacts` 至少含一条 `source:` 或 `cite:` 条目（编号形态，或 `10-contract` 第 11 节无号写法的自由文本降级形态）；**编号形态条目**的前缀落在 `10-contract` 第 1 节引用前缀闭集内；**在册解析判的实施边界（不得外推）**＝`REQ-`／`CMP-` 类编号在登记表内解析判（`regids`），来源面／绑定层号（`INTK-`／`RES-`／`MSR-`／`DOC-`／`DEC-`／`AUTH-` 等）的在册性在本包机检面之外（无绑定层注入面），该面为**登记性说明**＋欠条 `30-gates` A4 人工闸承接；**降级形态条目**（`source:`／`cite:` 后非 `PREFIX-digits`）不参与解析判，但所在主张行 `authority` 必须为 `unverified`——判据同第 11 节正向可判条件，`authority ≠ unverified` 即违例；**条件格旁路（例外）**＝行级三条件成立的行（`approver` 形如 `human:<ref>` 且 `status` 在条件集内且 `expiry ≠ none`），本支不判行级 `authority`——**旁路判与该行 `authority` 取值无关**（判据同源复用，与 R7 条件格同一判据，不得另立）；旁路只免行级封顶，在册性照旧 A4 登记、证据纪律照旧 §9；`artifact:` 与 `authorization:` 只能附加；`artifact:` 与 `authorization:` 只能附加；`actual_environment = production` 时，`linked_artifacts` 须含至少一条 `artifact:`，且该 `artifact:` 须在表 A/B/C/D 的编号面内可解析 → §1 §11。"
           ],
           [
             "R3",

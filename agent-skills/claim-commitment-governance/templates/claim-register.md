@@ -42,4 +42,4 @@
 8. `status = superseded` 时保留旧行原样，新增替代行；旧行不得删除或改写，且不得再被任何工件引用。
 9. `exemption ≠ none` 时表 D 必须填 `reason`、`scope`、`fallback_criterion`、`reopen_trigger`，且 `approver` 必须为 `human:<ref>`；同一 `claim_id` 的 `reopen_trigger` 在表 A 与表 D 均非 `none` 时必须同值。
 10. 示例行中的 `org:`、`seat:`、`none` 均为格式占位；实际值由项目绑定层提供，本模板不写死任何项目值。
-11. 交付汇总的「无责任主体主张」单列区三元素齐＝条数＋`claim_id` 清单＋不可归属原因（口径见 `references/10-contract.md` 第 11 节）；单列区**不是第八桶**，该类行仍按判定序正常落七桶之一（承载＝`references/20-artifact-mapping.md` 第 1／3 节）。
+11. 交付汇总的「无责任主体主张」单列区三元素齐＝条数＋`claim_id` 清单＋不可归属原因（口径见 `references/10-contract.md` 第 11 节）；单列区**不是第八桶**，该类行仍按判定序正常落七桶之一（承载＝`references/20-artifact-mapping.md` 第 1／3 节）。机检取数口径＝单列区全区逐号计数：`claim_id` 只在清单行出现一次、原因叙述不复述 `C-` 编号、「条数」与「不可归属原因」字样原样在位（对位 `30-gates` R13⑤）。
