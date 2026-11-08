@@ -293,11 +293,11 @@ EXPECT_D_FIELDS = ['claim_id', 'original_requirement_ref', 'required_environment
 EXPECT_D_OWNER = ['生产者', '需求侧', '需求侧；生产者照录，QA 不得回写', '同上；集合语义，非全序', '需求或生产者变更要求时', '只由 QA 填', '只由 QA 填', '只由 QA 填', '生产者申请、人类批准', '`exemption ≠ none` 时', '`exemption ≠ none` 时', '`exemption ≠ none` 时', '`exemption ≠ none` 时']
 EXPECT_D_REQUIRED = ['必填', '必填', '必填', '必填', '必填', '必填', '必填', '必填', '必填', '条件必填', '条件必填', '条件必填', '条件必填']
 EXPECT_D_CLOSED = {'qa_result': {'passed_with_exemption', 'pending', 'failed', 'passed_at_actual', 'blocked'}, 'exemption': {'partial', 'full', 'none'}}
-EXPECT_D_FORMAT = {'claim_id': '`C-[0-9]{3,}`；须在表 A 已登记', 'original_requirement_ref': '`REQ-[0-9]{3,}` 或 `none`；指向表 C 的 REQ 行', 'required_environment': '`mock` / `test` / `integration` / `production` / `none`', 'required_checks': '`functional` / `security` / `performance` / `compliance` / `robustness` 的子集，以 `;` 分隔，或 `none`', 'required_change_record': '`none`，或 `<原值>→<新值>@<approver>`；`<approver>` 须与本行 `approver` 同值', 'actual_environment': '同四值，另允许 `unverified`', 'actual_checks': '同五值集合的子集，以 `;` 分隔，或 `none`', 'reason': '一句可判理由', 'scope': '受限面描述', 'fallback_criterion': '一句可判的回退判据', 'reopen_trigger': '一句可判的重开条件'}
+EXPECT_D_FORMAT = {'claim_id': '`C-[0-9]{3,}`；须在表 A 已登记', 'original_requirement_ref': '`REQ-[0-9]{3,}` 或 `none`；指向表 C 的 REQ 行', 'required_environment': '`mock` / `test` / `integration` / `production` / `none`', 'required_checks': '`functional` / `security` / `performance` / `compliance` / `robustness` 的子集，以 `;` 分隔，或 `none`', 'required_change_record': '`none`，或 `<原值>→<新值>@<approver>`；`<approver>` 须与**同 `claim_id` 表 A 行 `approver` 列**同值（跨表回指，**无论本行 `original_requirement_ref` 是否为 `none`**）；该列为 `none` 时，须先把变更行为的 `human:` 签署人补入表 A `approver` 列，再写本列（机检＝`30-gates` R4 第三支·本修法第 3 处同步扩该支）', 'actual_environment': '同四值，另允许 `unverified`', 'actual_checks': '同五值集合的子集，以 `;` 分隔，或 `none`', 'reason': '一句可判理由', 'scope': '受限面描述', 'fallback_criterion': '一句可判的回退判据', 'reopen_trigger': '一句可判的重开条件'}
 EXPECT_B_COLS = ['cmp_id', 'cmp_key', 'cmp_kind', 'cmp_value', 'completeness_mode', 'enumeration_count', 'remaining_count', 'claim_id', 'source_artifact']
 EXPECT_C_COLS = ['id_key', 'id_value', 'definition_ref', 'status', 'req_required_environment', 'req_required_checks', 'req_enumeration_base']
 MATRIX = [['legal_regulatory', '条件', '允许', '禁止', '允许'], ['contractual', '条件', '允许', '禁止', '允许'], ['approved_baseline', '条件', '允许', '禁止', '允许'], ['customer_request', '条件', '允许', '允许', '允许'], ['technical_design', '禁止', '禁止', '允许', '允许'], ['internal_assumption', '禁止', '禁止', '允许', '允许']]
-ROW_DIGESTS = {'c13': [('R1', '64490fbfca0fa7864f87388af0e94b1ee82827893b3b6686328b175e6b4ef4e3'), ('R2', '5b72948d2a4c474ceecb70731867c7c13584ffaf1085087f85749622361d8b24'), ('R3', '6b892cd6db889fef8f5800aa4a014627e438838ef9faa3c52a662c24eef3fcb2'), ('R4', '478cd5d838cd8c79f19645ab89fb6fabb6922e0f00b4b9c3641d7b4914462d56'), ('R5', 'ed241f719ffbfca6aae4c6c91cd215b9ebbbafe9b0a45c78e407f2478ea01cae'), ('R6', 'b7bb2b3817daabbf99c1c7708e51160216a570645de60920bd6d21fa9d98a2f2'), ('R7', 'd85821d31966cc6c1e242157459fd8ea4e2a735f121e900713b702a702d01243'), ('R8', '477be783d6484d8fc3768774a1e7ceab6211d8873ea572851a61394f5b33bffc'), ('R9', '47caeb096d62eb4614934496c263a69b474080786c93ec8f83460ffbc59999f5'), ('R10', 'd2c60a5fb3b934fa2619e4123b652848b27d7875f04ad61b6bf68db2c4dad43c'), ('R11', '3255672a27cb906aa6b20a5b8367ac9efb14031a1512c0fb8101eb43941042d8'), ('R12', 'a3fd99b8e11fcae2605202009755adfb4aac62ddff3d32e34c4e37e7de185486'), ('R13', 'e508549b4e65a96bb68ac014f72d75b57dec4c593d1dd57ec9afde7648e73e5a'), ('R14', 'd5bd7ea4e796dc2bc87b46fd12e41dbada7084e40daad25e3c745ddfd7476078'), ('R15', '72f0a2711dc4eed299f6d5777f7f1e816e2fc7878c67249a975c6aa8a54041a7'), ('R16', '80f24066f768fb5ae94f7e23c962f5e599717217712f00a6fce70a6b9cd2d0bf'), ('R17', '3d94cca3af47d7e3c5f4fbf120db532b2aeddfdff595ca8f10db1bcb300bac59')], 'c14': [('N1', '8cb01b1fb6e6495cfe3b669f89def347634a57122e8f2b25502c81a2c7bfcd05'), ('N2', 'f0318eb89197b3b67bc016511ae5278d8936edb63dbd858ff4f15759bb276e60'), ('N3', '6647e05b61ebb66db0ea142ebc15a9d28aa5af848339813cf0874bed37196a1d'), ('N4', '019f50c2ca23a03da9a12f8d7af607c6e843eb47139f6923c5a08a7aef855a46'), ('N5', 'b46efe402cfd7ac47e221843012dec65e31c114c25fa48f7ced0c2aca7119687'), ('N6', 'c27ef1a1cc5c59a1b82e0be3f1e06fa513fc58aed4a8cfab84e527cd1f45012f'), ('N7', '7f565336cc42e6ffe2531db1de061fdd1f4a6cbe140aa44eb25ddaa9ae54c18e'), ('N8', 'cc68aeef37f04ecb6ed8622da2c466df1997241480ef31574c84603350aed36c'), ('N9', '2a0a642907abef357bc173c55b48f08f6e4e4a6d900595d688351c9e5fbf1b32'), ('N10', 'a2e992c46d224e6e5402aa21154e4df5d5a87e309f7ec097bb65842b11c331cc')]}
+ROW_DIGESTS = {'c13': [('R1', '64490fbfca0fa7864f87388af0e94b1ee82827893b3b6686328b175e6b4ef4e3'), ('R2', '6d66ba6ac6d035131c2ddda020c41791ff7ef403575a64f52db93adf2a376077'), ('R3', '6b892cd6db889fef8f5800aa4a014627e438838ef9faa3c52a662c24eef3fcb2'), ('R4', 'c68c00180af27a7379ae92142a49218670da832f7bb521b2b9c47ac91de3d50f'), ('R5', 'ed241f719ffbfca6aae4c6c91cd215b9ebbbafe9b0a45c78e407f2478ea01cae'), ('R6', 'b7bb2b3817daabbf99c1c7708e51160216a570645de60920bd6d21fa9d98a2f2'), ('R7', 'd85821d31966cc6c1e242157459fd8ea4e2a735f121e900713b702a702d01243'), ('R8', '477be783d6484d8fc3768774a1e7ceab6211d8873ea572851a61394f5b33bffc'), ('R9', '47caeb096d62eb4614934496c263a69b474080786c93ec8f83460ffbc59999f5'), ('R10', 'd2c60a5fb3b934fa2619e4123b652848b27d7875f04ad61b6bf68db2c4dad43c'), ('R11', '3255672a27cb906aa6b20a5b8367ac9efb14031a1512c0fb8101eb43941042d8'), ('R12', 'a3fd99b8e11fcae2605202009755adfb4aac62ddff3d32e34c4e37e7de185486'), ('R13', 'a51a75c436908f23dac1f91abc82e59a1c9b77944f4e7d3a44fe52fc15caf8e6'), ('R14', 'd5bd7ea4e796dc2bc87b46fd12e41dbada7084e40daad25e3c745ddfd7476078'), ('R15', '72f0a2711dc4eed299f6d5777f7f1e816e2fc7878c67249a975c6aa8a54041a7'), ('R16', '80f24066f768fb5ae94f7e23c962f5e599717217712f00a6fce70a6b9cd2d0bf'), ('R17', '3d94cca3af47d7e3c5f4fbf120db532b2aeddfdff595ca8f10db1bcb300bac59')], 'c14': [('N1', '8cb01b1fb6e6495cfe3b669f89def347634a57122e8f2b25502c81a2c7bfcd05'), ('N2', 'f0318eb89197b3b67bc016511ae5278d8936edb63dbd858ff4f15759bb276e60'), ('N3', '6647e05b61ebb66db0ea142ebc15a9d28aa5af848339813cf0874bed37196a1d'), ('N4', '019f50c2ca23a03da9a12f8d7af607c6e843eb47139f6923c5a08a7aef855a46'), ('N5', 'b46efe402cfd7ac47e221843012dec65e31c114c25fa48f7ced0c2aca7119687'), ('N6', 'c27ef1a1cc5c59a1b82e0be3f1e06fa513fc58aed4a8cfab84e527cd1f45012f'), ('N7', '7f565336cc42e6ffe2531db1de061fdd1f4a6cbe140aa44eb25ddaa9ae54c18e'), ('N8', 'cc68aeef37f04ecb6ed8622da2c466df1997241480ef31574c84603350aed36c'), ('N9', '2a0a642907abef357bc173c55b48f08f6e4e4a6d900595d688351c9e5fbf1b32'), ('N10', 'a2e992c46d224e6e5402aa21154e4df5d5a87e309f7ec097bb65842b11c331cc')]}
 PATTERNS_PAIRS = [('数量（阿拉伯）', '(剩余|还剩|还缺|缺口|共|合计|总计|已|待|完成|核销)\\s*[0-9]+(\\.[0-9]+)?\\s*(人日|人|天|小时|分钟|次|个|条|项|处|万元|元|%)'), ('数量（中文）', '(剩余|还剩|还缺|缺口|共|合计|总计|已|待|完成|核销)\\s*[一二三四五六七八九十百千万两]+\\s*(人日|人|天|小时|分钟|次|个|条|项|处|万元|元|成|倍)'), ('时点', '(于|截至|截止|止于|完成于|清零于|定于|在)\\s*(20[0-9]{2}-[0-9]{2}-[0-9]{2}|[0-9]{1,2}月[0-9]{1,2}日)'), ('完备性', '(清零|一条不剩|无遗漏|核销完毕|关闭完毕|验收完毕)\\s*(于|之日|为止|完成)')]
 STRONG_SET = {'均已', '一律', '确保', '必须', '全覆盖', '绝不', '全部', '保证'}
 PLACEHOLDER_SET = {'暂定', 'placeholder', '待补', '待定', '待确认', 'TBD', '〔', 'TODO'}
@@ -308,13 +308,13 @@ DEP_COMPONENTS = {'sop', 'deep-research', 'object-audit', 'semantic-governance',
 EXPECT_SUBCMDS = ['validate --artifact <file> --kind <artifact-kind>', 'reconcile --artifacts <file-list>', 'gate-outbound --artifact <file>']
 EXPECT_AGG = ['total_claims', 'real_env_passed', 'mock_only', 'unverified', 'failed', 'excluded_by_approval', 'pending', 'not_required']
 EXPECT_ARTIFACTS = ['PRD', '需求解析', '工作票', '回执／回流件', 'QA 判词', '交付汇总', '对外呈报／函件']
-SEC1_MAP_DIGESTS = [('PRD', '4ed286994c5185e2de7ad8fb804b47fecb29e5c059602f20641c1576e773feea'), ('需求解析', '3b1f2030ef5fdf8feb394089a98390b3f98963570a0511ca210ed030e848504b'), ('工作票', 'e4617f038555136541bfced9c11793fad27e4aecb336f51e51924ab5d5d16724'), ('回执／回流件', 'f88593fdce07bf1ae02f17a29f34cb4c1977fc9dd153f0614999558f8bd8a9b2'), ('QA 判词', '441a6929c53fbe60c8001b18e122018f6853c3cd9fb04d86ada9734c8c75d944'), ('交付汇总', 'c3cc346846783466c9129e2206f85d239b198f4294d2f1f10cfb35c852ea931c'), ('对外呈报／函件', 'e26142a54ef707b1ebcde9fb93a79193355ec37f3c0f0a6ceed971a4d10f6bcb')]
+SEC1_MAP_DIGESTS = [('PRD', '4ed286994c5185e2de7ad8fb804b47fecb29e5c059602f20641c1576e773feea'), ('需求解析', '3b1f2030ef5fdf8feb394089a98390b3f98963570a0511ca210ed030e848504b'), ('工作票', 'e4617f038555136541bfced9c11793fad27e4aecb336f51e51924ab5d5d16724'), ('回执／回流件', 'f88593fdce07bf1ae02f17a29f34cb4c1977fc9dd153f0614999558f8bd8a9b2'), ('QA 判词', '441a6929c53fbe60c8001b18e122018f6853c3cd9fb04d86ada9734c8c75d944'), ('交付汇总', 'f79f99f584f4647f947e30fb6887b03189d7661681102c78d4c5cb05bd019c97'), ('对外呈报／函件', 'e26142a54ef707b1ebcde9fb93a79193355ec37f3c0f0a6ceed971a4d10f6bcb')]
 PASSAGE_NAMES = {'claude.dev lessons-from-building', 'agentskills.io specification', 'obra/superpowers writing-skills'}
 PARADIGM_NAMES = {'SSOT', 'URN 式命名'}
 CARRIERS = {'object-build 第 3 步', 'object-audit S5', 'object-build 第 4 步', 'external-advisor-collab 谁主张谁举证', '1859aca', '本票', 'deep-research §六 证据纪律', '9b42454', 'object-audit S3'}
 # ---- v5 新增常量（治红4-01／红4-03／红4-05／黄4-02／黄4-10）----
 # §11 编号与角色发放主体（整节摘要）
-SEC11_DIGEST = "7cc194ba7ae4b050ca65c6ef6f2409751987ab7015941c02be1f4fca287d1e06"
+SEC11_DIGEST = "b35ca98ec08ba9c6b166a8889081f88ae526a412864ab5f32e82ad0ded992fe3"
 # 30-gates §4 元规则段摘要（治红4-02：保住 229 条的机制自己也要被保住）
 GATES4_META_DIGEST = "c811aa7bd578430f7ca3a13f4238d679e4cd9f6fd4ab7defafb749a629f90cab"
 # SKILL.md 三节整节摘要（治红4-05：正文零判据绑定）
@@ -372,7 +372,7 @@ S8_TEXT = '## 8. 人工闸七类（唯一真源） 以下七类事项必须人�
 S9_TEXT = '## 9. 禁止工具自决八条 1. 不得从文本自行推断权威性。 2. 不得把 `UNKNOWN` 或 `INFERENCE` 自动升格为 `FACT`。 3. 不得把内部冻结自动转为外部确认。 4. 不得自动降级要求环境或要求检查。 5. 不得自动发送任何外发件。 6. 不得自动生成对外承诺。 7. 不得自动判定业务事实真伪。 8. 不得自动改写历史主张状态。'
 SEC2_DIGEST = "69d36db735c5d04cc009731950cd98b10fd30f84d01d8376124eded8c4db777d"
 SEC10_DIGEST = "9c93a1b67c4671a595c999bacd8039b2afa95e00dec3dfd9e16efe77e83b406d"
-SEC3_MAP_DIGEST = "aeca96f482057562b4fd874510710a8b6d5e1b11e045aae828799680da217781"
+SEC3_MAP_DIGEST = "64e47626afdc880c1fd1d740d2ff2cfda8ebf9b3771b1b3e03cab08509f1bcdc"
 SEC2_MAP_DIGEST = "df9cf469b232c89598a88fc934980a16dbbfc0cd3a0c447762cca00b094d38f9"
 GATES_S1_DIGEST = "1eb22e9ee48ff1164e14c52beb507324113757cea414472cf41b787ee306530e"
 ENV_AXIS_DIGEST = "71419bb50f2021594f04bef3c44e3e6445a58ad026075016b2e13e1134048aea"
@@ -383,7 +383,7 @@ UNIQ_SENT_DIGEST = "38aad95059f1fb21b59128da5785941cd013da88fe062d4456581584de25
 CSTATUS_DIGEST = "bbefde1da6b1e930278265c3bf9701e90990b03341fcde2012477be7fba4a5f0"
 IDKEY_DIGEST = "58488e18658f2601dba87b8f932da00e0a6ee897210301767f52588f0b48576b"
 S5SPLIT_DIGEST = "dd2ed2f1ebb37ef0e262b8e8417241e35d8faae56377985461b04d76e0c92a4e"
-ACCEPT_DIGEST = "79f28f66e2a1c42dcc1c780496dc974be84a90bdeb8ecafaf47aee0f9f5de4a3"
+ACCEPT_DIGEST = "f6868d332086663266a16c695752c2ad84503f9d4ce869dae694fcae11bbfcf8"
 BOUND_DIGEST = "98963379b1f72098275a1231641c4ba843603db1d072bbda5cd4c862811e9ea5"
 DEPWHY_DIGEST = "b84c3cd3fe54236cde7b35cd9b058ef74872d9e9ae8645df8d6cb47438805f67"
 OUTB_DIGESTS = [(('line', '- `outbound_type`：'), '51091c33251bb9a3dce43541a4d48223d37b67b92203a7fd580f03609793a40c'), (('line', '- `claims`：'), 'c5c028eeea821a9079abfb377983cbf4a032500bc84944f13c6fd40eb6e9a43d'), (('line', '- `fact_review`：'), '741a33489a62888bb6043f64008644a1a81a531016d6cb8948162cfaae5f1e69'), (('line', '- `commitment_review`：'), '66bdd7b1d3eb28247c199b53ef174aaa1e7f457f702fc84d8043000f98e81e73'), (('line', '- `authorization`：'), '90176bc75b92dc74377f6f303c9e51b0d01502bfcdf85f1ad5eaef3cf97a605d'), (('line', '- `send_channel`：'), 'ea4a5facc143cd3eae38e41d110aab3123c9c6e45bc0f39ca5d0b96bb2b00f7e'), (('line', '正文每条承重主张必须能回指'), '01da7e22f7012f4de013435d6e53d34833d1e92e8f7735300e512f9ae81a5f60'), (('line', '- 授权范围：'), '5c1a8e79f3e7b934930ee46be09ad600d2be45e6d0ccced6d29592448a953131')]
@@ -450,7 +450,7 @@ FORM_REASONS = {
     "c20": ("exact", "4 类抽取模式正则片段逐字全等为主；另含 4 例普通票零误触发与 4 例真断言全命中的双向功能测"),
     "c21": ("set_equal", "三子命令序列全等＋引用判据号落在 R1–R17 闭集内"),
     "c22": ("digest", "20-mapping §1 逐行摘要＋§2 整节摘要＋§3 整节摘要全等；另含七桶 125 组合穷举"),
-    "c23": ("digest", "承接项 A1–A2 内容摘要＋能力边界句摘要全等"),
+    "c23": ("digest", "承接项 A1–A4 内容摘要＋能力边界句摘要全等"),
     "c24": ("selftest", "不判被测件内容主张，只判夹具自身不变量（靶点 REV 后等长且必变）"),
     "c25": ("structural", "术语别名行数与非空性、指针落点存在性；不比对规范正文"),
     "c26": ("exact", "§11 整节规范化摘要全等＋引用型字段五名闭集逐字等；另含三条禁令字面在位与表 A 编号前缀闭集判定（v5 新增，治红4-01）"),
@@ -917,7 +917,9 @@ def c11(pkg):
                 if "默认" in line and any(w in line for w in ("视作", "视为", "等同", "认可")):
                     raise Red("%s 出现人工闸第 7 类的义素组合『默认＋视作/视为/等同/认可』（同义改写第二真源）" % rel)
                 for probe in HUMAN_GATE_PROBES:
-                    if probe in line:
+                    # 在途裁定（主理人件 b47709e·裁定一甲案窄化）：仅探针层行级豁免增
+                    # 「行内含『人工闸』」；BANNED／逐行全等／义素组合／词表层豁免不动
+                    if probe in line and "人工闸" not in line:
                         raise Red("%s 出现人工闸正文短语『%s』（第二真源）" % (rel, probe))
                 ns = sum(1 for w in STRONG_SET if w in line)
                 if ns >= 3:
@@ -954,7 +956,7 @@ def c13(pkg):
 
 @check("c14", "负样本表 N1–N10：编号集合强等 + 逐行摘要全等 + 应咬列可指认")
 def c14(pkg):
-    rows = parse_table(read(pkg, "references/30-gates.md"), 4, "## 4. 负样本闸 N1–N10 与人工闸承接项 A1–A2")
+    rows = parse_table(read(pkg, "references/30-gates.md"), 4, "## 4. 负样本闸 N1–N10 与人工闸承接项 A1–A4")
     body = rows[1:]
     ids = [r[0].replace("`", "").strip() for r in body]
     want = ["N%d" % i for i in range(1, 11)]
@@ -1088,9 +1090,9 @@ def c16(pkg):
 
     instr = region(reg, "## 填写说明")
     n = len(re.findall(r"^\d+\.\s", instr, re.M))
-    if n != 10:
-        raise Red("填写说明条目 %d 条 ≠ 10" % n)
-    return "四表示例行逐列合规（R7 条件格 %s×%s=%s；R13 第三支在位）；填写说明 10 条" % (sl, au, cell)
+    if n != 11:
+        raise Red("填写说明条目 %d 条 ≠ 11" % n)
+    return "四表示例行逐列合规（R7 条件格 %s×%s=%s；R13 第三支在位）；填写说明 11 条" % (sl, au, cell)
 
 
 @check("c17", "§5 词表：强断言 8 词、占位 8 词集合全等；两表分工句；§10 映射摘要全等")
@@ -1316,18 +1318,18 @@ def c22(pkg):
     return "§1 七行摘要全等；§2／§3 整节摘要全等；七桶 %d 组合穷举全落且七桶皆可达（not_required 已可达）" % total
 
 
-@check("c23", "人工闸承接项 A1–A2 表 2 行摘要全等 + 能力边界段摘要全等")
+@check("c23", "人工闸承接项 A1–A4 表 4 行摘要全等 + 能力边界段摘要全等")
 def c23(pkg):
     gates = read(pkg, "references/30-gates.md")
     rows = parse_table(gates, 3, "**人工闸承接项（明示不可机检，不冒充机检）**")
     body = rows[1:]
-    if [r[0] for r in body] != ["A1", "A2"]:
-        raise Red("承接项编号不等于 A1/A2")
+    if [r[0] for r in body] != ["A1", "A2", "A3", "A4"]:
+        raise Red("承接项编号不等于 A1/A2/A3/A4")
     if sha(norm(" || ".join("|".join(r) for r in body))) != ACCEPT_DIGEST:
-        raise Red("承接项 A1–A2 内容摘要不等于期望")
+        raise Red("承接项 A1–A4 内容摘要不等于期望")
     if sha(norm(find_line(gates, "**能力边界声明**："))) != BOUND_DIGEST:
         raise Red("能力边界声明摘要不等于期望")
-    return "承接项 A1–A2 摘要全等；能力边界声明摘要全等"
+    return "承接项 A1–A4 摘要全等；能力边界声明摘要全等"
 
 
 @check("c24", "等长反义自检：全部靶点经 REV 替换后长度相等、内容必变、摘要必变")
@@ -1381,7 +1383,7 @@ def c26(pkg):
     fields = [r[0].replace("`", "") for r in rows[1:]]
     if fields != EXPECT_REF_FIELDS:
         raise Red("引用型字段闭集不等于期望（实测 %s）" % fields)
-    for need in ("不自产编号", "禁造号", "不得留空", "不得编位号"):
+    for need in ("编号两分发放", "禁造号", "不得留空", "不得编位号"):
         if need not in sec:
             raise Red("§11 缺声明字面：%s（改义即红）" % need)
     reg = read(pkg, "templates/claim-register.md")
@@ -1695,9 +1697,9 @@ def build_mutations():
     add("c28", "D08 条款名回退为他包包内文件名『notes-format 条款「标签分级」』",
         lambda t: mut_sub(t, "（包内 `SKILL.md §六 证据纪律`「标签闭集（五标·英文）／措辞分级」）",
                           "（包内 notes-format 条款「标签分级」）"), "gates", "E")
-    add("c26", "D09 §11『不自产编号』反转为『可自造编号』（造号自证失守）",
-        lambda t: mut_sub(t, "**本技能不自产编号，也不自产角色位号**",
-                          "**本技能可自造编号与角色位号**"), "contract", "E")
+    add("c26", "D09 §11『编号两分发放』反转为『编号全部自造』（造号自证失守·锚随 M-4 改后正文重设）",
+        lambda t: mut_sub(t, "**编号两分发放**：**来源面／跨包编号**",
+                          "**编号全部自造发放**：**来源面／跨包编号**"), "contract", "E")
     add("c27", "D10 总则 4 反转为『内部接受早已等于外部确认』",
         lambda t: mut_sub(t, "4. 内部接受不等于外部确认。",
                           "4. 内部接受早就等于外部确认。"), "skill", "E")

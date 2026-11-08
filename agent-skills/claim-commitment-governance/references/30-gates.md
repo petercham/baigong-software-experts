@@ -16,9 +16,9 @@
 | 编号 | 判据 |
 |---|---|
 | R1 | 字段闭集合规：`claim_type`、`source_layer`、`evidence_tag`、`authority`、`status`、`external_effect`、`assertion_form`、`required_environment`、`required_checks`、`actual_environment`、`actual_checks`、`qa_result`、`exemption`、`completeness_mode`、`outbound_type`、`send_channel` 逐一落在 `10-contract` 第 1、3、4、6 节给定闭集内 → §1 §3 §4 §6。 |
-| R2 | 引用闭合：`linked_artifacts` 至少含一条 `source:` 或 `cite:` 引用，`artifact:` 与 `authorization:` 只能附加；全部引用的前缀落在 `10-contract` 第 1 节引用前缀闭集内，且编号可在登记表解析 → §1。`actual_environment = production` 时，`linked_artifacts` 须含至少一条 `artifact:`，且该 `artifact:` 须在表 A/B/C/D 的编号面内可解析。 |
+| R2 | 引用闭合：`linked_artifacts` 至少含一条 `source:` 或 `cite:` 条目（编号形态，或 `10-contract` 第 11 节无号写法的自由文本降级形态）；**编号形态条目**的前缀落在 `10-contract` 第 1 节引用前缀闭集内；**在册解析判的实施边界（不得外推）**＝`REQ-`／`CMP-` 类编号在登记表内解析判（`regids`），来源面／绑定层号（`INTK-`／`RES-`／`MSR-`／`DOC-`／`DEC-`／`AUTH-` 等）的在册性在本包机检面之外（无绑定层注入面），该面为**登记性说明**＋欠条 `30-gates` A4 人工闸承接；**降级形态条目**（`source:` 后非 `PREFIX-digits`）不参与解析判，但所在主张行 `authority` 必须为 `unverified`——判据同第 11 节正向可判条件，`authority ≠ unverified` 即违例；`artifact:` 与 `authorization:` 只能附加；`actual_environment = production` 时，`linked_artifacts` 须含至少一条 `artifact:`，且该 `artifact:` 须在表 A/B/C/D 的编号面内可解析 → §1 §11。 |
 | R3 | 登记闭包：每个被引 `claim_id` 必须属于唯一主张登记表已登记集合且 `status ≠ superseded`；允许真子集，禁止未登记引用与回引已作废主张。 |
-| R4 | 验证对账四支：①`actual_environment` 序位不低于 `required_environment` 序位，且 `required_checks` 为 `actual_checks` 子集，任一不满足须 `exemption ≠ none` → §3；②`unverified` 视为未达任何要求环境，配 `qa_result ∈ {passed_at_actual, passed_with_exemption}` 即违例；③`original_requirement_ref ≠ none` 时，`required_environment` 序位不得低于表 C 该 REQ 行 `req_required_environment` 序位，`required_checks` 必须包含该行 `req_required_checks` 集合，除非 `required_change_record ≠ none` 且其签署为 `human:<ref>`；④`required_environment ≠ none` 或 `required_checks ≠ none` 时，`original_requirement_ref` 不得为 `none`。 |
+| R4 | 验证对账四支：①`actual_environment` 序位不低于 `required_environment` 序位，且 `required_checks` 为 `actual_checks` 子集，任一不满足须 `exemption ≠ none` → §3；②`unverified` 视为未达任何要求环境，配 `qa_result ∈ {passed_at_actual, passed_with_exemption}` 即违例；③`original_requirement_ref ≠ none` 时，`required_environment` 序位不得低于表 C 该 REQ 行 `req_required_environment` 序位，`required_checks` 必须包含该行 `req_required_checks` 集合，除非 `required_change_record ≠ none` 且其签署为 `human:<ref>` 且该 `<ref>` 与同 `claim_id` 表 A 行 `approver` 列同值；**该同值判对本表所有行生效，无论 `original_requirement_ref` 是否为 `none`**——表 A 该列为 `none` 而记录非 `none` 即违例；④`required_environment ≠ none` 或 `required_checks ≠ none` 时，`original_requirement_ref` 不得为 `none`。 |
 | R5 | 批准与时效完整六支：①`exemption ≠ none` 须齐 `approver`、`reason`、`scope`、`expiry` 且均非 `none`；②`exemption ≠ none` 时 `fallback_criterion` 与表 D `reopen_trigger` 均不得为 `none`；③`status = frozen_assumption` 须齐 `expiry`、`review_owner`、`reopen_trigger` 且均非 `none` → §7.2；④`approver` 与 `generated_by` 均须符合 `kind:ref` 格式；⑤同一 `claim_id` 的表 A `reopen_trigger` 与表 D `reopen_trigger` 均非 `none` 时必须同值 → §3。 |
 | R6 | 外发授权与审查独立：`external_effect = outbound_authorized` 或 `send_channel = approved_send` 须有 `authorization` 且其签署人等于 `approver` 的人类主体；`fact_review` 与 `commitment_review` 的审查人不得等于 `generated_by`，两名审查人互不相同 → §6。 |
 | R7 | 来源层与权威相容：`source_layer` 与 `authority` 的组合必须落在 `10-contract` 第 2 节相容矩阵的「允许」格或已满足「条件」判据的「条件」格内；矩阵外组合一律判违例 → §2。 |
@@ -27,7 +27,7 @@
 | R10 | 历史不可回写：`superseded` 旧行保留原样，不得覆盖、删除或改写；状态变更只许新增行并记录 `claim_status_delta` → §7.5。 |
 | R11 | 同键同值：表 B 内 `cmp_key` 相同的多行，其 `cmp_value` 必须全等——`cmp_kind=quantity` 比数值，`cmp_kind=datetime` 比时点，`cmp_kind=identifier` 比被引编号，`cmp_kind=completeness` 比 `completeness_mode` 与两个计数的组合。触发条件是 `cmp_key` 相等，不以 `source_artifact` 是否相同、不以任何可选字段是否填写为条件。**附加支（`source_artifact` 的消费点）**：该列必须非 `none` 且形如 `artifact:<PREFIX>-<digits>`（前缀落在 `10-contract` 第 1 节引用前缀闭集内）；同一 `cmp_key` 下行数 ＞ 1 时，这些行的 `source_artifact` 不得全等——同键多行的意义就是「同一对象由不同工件各自给出数值」，若来源全等则不是跨件比对点，判违例 → §4。 |
 | R12 | 完备性计数三支：①`cmp_kind=completeness` 须 `enumeration_count > 0`，且 `completeness_mode=cleared` 时 `remaining_count = 0`、`completeness_mode=partial` 时 `remaining_count > 0` → §4；②`enumeration_count` 不得小于该主张 `original_requirement_ref` 所指表 C 行的 `req_enumeration_base`（该行该列为 `none` 时本支跳过）；③非 `completeness` 类断言的三列 `completeness_mode`/`enumeration_count`/`remaining_count` 必须均为 `none`。 |
-| R13 | 责任主体与依据四支：①`source_layer` ∈ 1–4 层时 `accountable_party` 不得为 `none`，且 `responsibility_basis` 不得为 `none`；②`requestee` 不得单独充当 `accountable_party`；③`decision_owner` 只对 `authority ∈ {binding, consultative}` 强制非空，`authority ∈ {internal_only, unverified}` 时允许为 `none` 并单列；`authority = binding` 时 `approver` 必须以 `human:` 起头，且其 `<ref>` 部分与 `decision_owner` 的 `<ref>` 部分相同；④编号与角色不得自产：`source_layer` ∈ 5–6 层且 `accountable_party = none` 的主张须在聚合与判词单列「无责任主体主张」，禁以硬编主体填充；引用型字段无编号时只能填自由文本并标 `unverified`，禁造号；角色引用无角色册时允许 `<role-kind>:<自由描述>`，不得留空、不得编位号 → §1 §11。 |
+| R13 | 责任主体与依据五支：①`source_layer` ∈ 1–4 层时 `accountable_party` 不得为 `none`，且 `responsibility_basis` 不得为 `none`；②`requestee` 不得单独充当 `accountable_party`；③`decision_owner` 只对 `authority ∈ {binding, consultative}` 强制非空，`authority ∈ {internal_only, unverified}` 时允许为 `none` 并单列；`authority = binding` 时 `approver` 必须以 `human:` 起头，且其 `<ref>` 部分与 `decision_owner` 的 `<ref>` 部分相同；④编号与角色不得自产：`source_layer` ∈ 5–6 层且 `accountable_party = none` 的主张须在聚合与判词单列「无责任主体主张」，禁以硬编主体填充；承载＝`20-artifact-mapping` 第 1 节交付汇总单列区；机检＝R13 第五支；引用型字段无编号时只能填自由文本并标 `unverified`，禁造号；角色引用无角色册时允许 `<role-kind>:<自由描述>`，不得留空、不得编位号；⑤单列区对账（**仅 `reconcile` 面消费**）：被校件集合同时含登记表与交付汇总时，交付汇总单列区条数须等于表 A 中 `source_layer` ∈ 5–6 层且 `accountable_party = none` 的行数，且三元素（条数／`claim_id` 清单／不可归属原因）齐；被校件集合不含交付汇总时本支跳过（机检边界如实登记，不外推）。 → §1 §11。 |
 | R14 | 断言形态自陈与语境化抽取三支：①`assertion_form = qualitative` 的主张文本不得命中 `10-contract` 第 4 节数量（阿拉伯）、数量（中文）、时点、完备性任一语境化模式；②`assertion_form ≠ qualitative` 时 `comparability_ref` 不得为 `none`；③`comparability_ref ≠ none` 时其 `CMP-` 编号必须命中表 B 某行的 `cmp_id`，且该行 `claim_id` 与本主张的 `claim_id` 相同 → §4。 |
 | R15 | 外发件主张闭集一致：外发门 `claims` 字段列出的 `claim_id` 集合，必须与主张引用区表内 `claim_id` 列集合全等；正文每条承重主张须回指表内某个 `claim_id` → §6。 |
 | R16 | 标识与需求主表可解析四支：①`assertion_form=identifier` 的主张其 `cmp_value` 必须在表 C 已登记且 `definition_ref ≠ none`；②`original_requirement_ref ≠ none` 时必须命中表 C 中以 `REQ-` 起头的 `id_value` 行，且该行 `status = defined`；③表 C 中 `id_value` 以 `REQ-` 起头的行，其 `id_key` 必须为 `需求`；④`id_value` 不以 `REQ-` 起头的行，其 `id_key` 不得为 `需求`（需求条目只认这一种识别口径）→ §4。 |
@@ -43,7 +43,7 @@
 | `reconcile --artifacts <file-list>` | 跨件：R3、R10、R11、R12、R13、R17 | exit 0 | exit≠0，输出差异集与判据号 |
 | `gate-outbound --artifact <file>` | 外发前：R4、R6、R8、R9、R15 与人工闸消费点 | exit 0 | exit≠0，且不得把工件标为可外发 |
 
-## 4. 负样本闸 N1–N10 与人工闸承接项 A1–A2
+## 4. 负样本闸 N1–N10 与人工闸承接项 A1–A4
 
 每条负样本必须让**其声明的那一支判据**变红；由别的判据顺带命中不算通过（那叫假阴）。每条须写明「变异由哪条判据的哪个比较目标生成」。
 
@@ -68,6 +68,8 @@
 |---|---|---|
 | A1 | N9：读数件时点是否晚于批准有效期。 | 读数件时间戳属外部产物，本契约无字段承载；若强行为此增设「读数件登记时点」列，等于把证据面塞进主张表，与本批反过度设计冲突。改由 `30-gates §1` 的降级/豁免消费点在人工闸 3 类处核验，并在 QA 判词人工复核清单列出。 |
 | A2 | N4 的「回退判据是否可判」（即 `fallback_criterion` 文本本身是否可判）。 | 语义可判性无可靠机检；由人工闸 4 类处核验，机检只保证该列非 `none`（R5·第二支）。 |
+| A3 | 表 A／B／C／D 主键（`claim_id`／`cmp_id`／`id_value`）**行级唯一**：同表内重复主键是否可判。 | 行级重复属登记表建行流程的内部约束。`check_r17`（`:855-875`）三支只担表头列序与计数唯一，`30-gates:34` R17 覆盖面明文亦不含主键行级唯一；为其单开 R17 支须跨被校件聚合行数据，与本次「R 号不增、R17 覆盖面不外推」边界冲突（裁定四十二 R-1 优先走人工路线）。改由建行流程（先登记后引用）保证，并由 QA 判词人工复核清单列出主键重复扫描结果。 |
+| A4 | **来源面／绑定层编号的在册性**：引用了绑定层未发放的号（`INTK-`／`RES-`／`MSR-`／`DOC-`／`DEC-`／`AUTH-`）。 | 该面真源在包外（项目绑定层／外部登记件），本包无注入面可校——`check_r2` 解析支（`:458-460`）仅对 `REQ-`／`CMP-` 查 `regids`，其余前缀落闭集即放行（自造 `INTK-9999`／`RES-0001`／`DEC-0001` 实测三例 exit 0）。契约侧相应把「可在登记表解析」明写为**登记性说明**（修法见 M-3），由人工闸 1 类（外部权威来源确认）消费点核验＋QA 判词人工复核清单登记。 |
 
 ## 5. 依赖面与能力边界
 

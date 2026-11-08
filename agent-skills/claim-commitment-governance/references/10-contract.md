@@ -80,7 +80,7 @@
 | `original_requirement_ref` | `REQ-[0-9]{3,}` 或 `none`；指向表 C 的 REQ 行 | 需求侧 | 必填 |
 | `required_environment` | `mock` / `test` / `integration` / `production` / `none` | 需求侧；生产者照录，QA 不得回写 | 必填 |
 | `required_checks` | `functional` / `security` / `performance` / `compliance` / `robustness` 的子集，以 `;` 分隔，或 `none` | 同上；集合语义，非全序 | 必填 |
-| `required_change_record` | `none`，或 `<原值>→<新值>@<approver>`；`<approver>` 须与本行 `approver` 同值 | 需求或生产者变更要求时 | 必填 |
+| `required_change_record` | `none`，或 `<原值>→<新值>@<approver>`；`<approver>` 须与**同 `claim_id` 表 A 行 `approver` 列**同值（跨表回指，**无论本行 `original_requirement_ref` 是否为 `none`**）；该列为 `none` 时，须先把变更行为的 `human:` 签署人补入表 A `approver` 列，再写本列（机检＝`30-gates` R4 第三支·本修法第 3 处同步扩该支） | 需求或生产者变更要求时 | 必填 |
 | `actual_environment` | 同四值，另允许 `unverified` | 只由 QA 填 | 必填 |
 | `actual_checks` | 同五值集合的子集，以 `;` 分隔，或 `none` | 只由 QA 填 | 必填 |
 | `qa_result` | `pending` / `passed_at_actual` / `passed_with_exemption` / `failed` / `blocked` | 只由 QA 填 | 必填 |
@@ -95,6 +95,8 @@
 **检查轴（集合，不排序）**：`required_checks` 与 `actual_checks` 按集合包含关系判定，不做大小比较。
 
 **同名双面字段**：`reopen_trigger` 在表 A（主张冻结的重开条件）与表 D（降级的重开条件）各有一面；同一 `claim_id` 两面均非 `none` 时必须同值（见 `30-gates` `R5` 第五支）。
+
+**跨表同值回指**：表 D `required_change_record` 的 `<approver>` 取值源＝同 `claim_id` 表 A 行 `approver` 列（表 A 面见第 1 节、表 D 面见第 3 节）。与 `reopen_trigger` 的区别：`reopen_trigger` 是同名两面字段，`approver` 是异名单面字段被跨表引用——两者都按 `claim_id` 解析，无第二登记处。
 
 ## 4. 可比对断言（表 B）与受限抽取模式
 
@@ -127,6 +129,8 @@
 - `status` ∈ `defined` / `draft` / `retired`；`status ≠ defined` 的 `id_value` 不得被任何主张引用。
 - `req_required_environment` ∈ 环境轴四值或 `none`；`req_required_checks` ∈ 检查轴五值子集（以 `;` 分隔）或 `none`；`req_enumeration_base` 为非负整数或 `none`（该需求的原始枚举基数）。
 - 非 `REQ-` 行的三列 `req_*` 一律写 `none`。
+
+**`req_*` 三列取值规则**：`req_required_environment`／`req_required_checks`／`req_enumeration_base` 只登记**来源材料明文**或**决策者明示拍板**的值；来源未给时填 `none`，**不得按域常识自补**——自补的要求面使 R4③ 序位对账比的是虚构基线。自补如确有必要，须以独立主张行登记（`source_layer ∈ 5–6`、责任挂补写主体），再被表 C 引用，不得直接写进 `req_*`。
 
 ## 5. 强断言词表与占位词表
 
@@ -196,7 +200,9 @@
 本技能只消费 `bundle:deep-research` 的证据标签与来源池，不重做检索，不把研究结论升格为承诺。标签本体与措辞分级以 `bundle:deep-research` 包 `SKILL.md §六 证据纪律` 的「标签闭集（五标·英文）」（`:61`）与「措辞分级」（`:63`）为真源，细则见同包 `methodology.md:52`；**两者都不在该包的笔记格式细则文件**——v4 那句同时写错了**文件名**与**条款名**（文件名＋条款名双错），本版按部署件 `0.1.30`（`version: 1.0.2`）改正。语义分级本体不在本包，本文件不复写。
 ## 11. 编号与角色的发放主体
 
-**本技能不自产编号，也不自产角色位号**：本文件出现的 `C-`／`CMP-`／`REQ-`／`INTK-`／`RES-`／`MSR-`／`DOC-`／`TKT-`／`RCP-`／`PRD-`／`QAV-`／`DLV-`／`OUT-`／`AUTH-`／`DEC-` 等编号，均由本技能之外的登记件或项目绑定层发放；本技能只**消费**其形态与可解析性，不生成、不续号、不补位。
+**编号两分发放**：**来源面／跨包编号**（`INTK-`／`RES-`／`MSR-`／`DOC-`／`TKT-`／`RCP-`／`PRD-`／`QAV-`／`DLV-`／`OUT-`／`AUTH-`／`DEC-`）由本技能之外的登记件或项目绑定层发放；本技能只**消费**其形态与可解析性，不生成、不续号、不补位——**禁造号禁令对本类一字不变**（造一个绑定层未发的号＝伪造可解析闭包，违本节禁造号；**在册解析判的实施边界见第 11 节编号两分发放段末**——现态机检只对 `REQ-`／`CMP-` 查在册，来源面在册性经 `30-gates` **A4** 承接）。
+
+**表主键编号**（`C-`／`REQ-`／`CMP-`）由**唯一主张登记表的建行流程**发放：登记一行即发一号，先登记后被引用；发放动作属登记流程本身（谁建行谁发号），不属本技能包，也不属任何仓内脚本。本包只断言其形态（`C-[0-9]{3,}`／`REQ-`／`CMP-[0-9]{3,}`，现态闭集不变）；**主键行级唯一不入机检**（`30-gates` R17 三支＝表头列序逐列全等／表 B·C·D 表头在被校件集合内计数唯一／A·B·C·D 项目级计数唯一，均不判行级重复），由建行流程保证＋欠条 `30-gates` 第 4 节 **A3** 人工闸承接。
 
 **引用型字段五项闭集与无号写法**：
 
@@ -204,13 +210,15 @@
 |---|---|---|
 | `source:` | 填真实编号（`INTK`／`RES`／`MSR`／`DOC` 前缀） | 填自由文本描述，并在同行 `authority` 标 `unverified` |
 | `authorization:` | 填真实编号（`AUTH`／`DEC` 前缀） | 填自由文本描述（谁在何场合口头授权），并标 `unverified` |
-| `linked_artifacts` | 填真实编号 | 该条不计入引用；来源面写自由文本并标 `unverified` |
+| `linked_artifacts` | 填真实编号 | 该条不计入引用；来源面写自由文本并标 `unverified`（机检按 `30-gates` R2 降级形态支：不按前缀闭集判，改判同行 `authority = unverified`） |
 | `comparability_ref` | 填真实 `CMP-` 编号 | 该主张 `assertion_form` 须为 `qualitative`；不得自造 `CMP-` 号充数 |
-| `original_requirement_ref` | 填真实 `REQ-` 编号 | 填 `none`，并在 `claim` 内写明需求未成文；不得自造 `REQ-` 号 |
+| `original_requirement_ref` | 填真实 `REQ-` 编号 | 填 `none`，并在 `claim` 内写明需求未成文；不得自造 `REQ-` 号（`REQ-` 号合法性＝已在表 C 登记且 `status = defined`，见 `30-gates` R16 第二支——先登记后引用，非外部造号） |
 
 **角色引用两种合法形态**：有角色册时写 `<role-kind>:<ref>`（`role-kind` ∈ `human`／`seat`／`org`，`ref` 为角色册内的位号或人名）；**无角色册时**允许写 `<role-kind>:<自由描述>`，例如 `seat:需求侧接口人（未编位号）`。两种形态的共同下限：**不得留空**（空串、`—`、`无` 均判违例）；**不得编位号**（不得为不存在的角色自造编号）；**不得张冠李戴**（`human:` 之后不得填席位名，`seat:` 之后不得填人名）。
 
 **正向可判条件（不写黑名单）**：凡某行在引用型字段或角色引用的 `<ref>` 位填了**自由描述**（即不是 `<PREFIX>-<digits>` 编号、也不是角色册内位号），该行 `authority` **必须**为 `unverified`——机器判的是「有没有如实降格证据强度」，不是「字符串像不像编号」。自由描述 ＋ `authority ∈ {binding, consultative, internal_only}` 一律判违例（`c26` 断言）。反之，未编号时填一个自造的 `PREFIX-digits` 也判违例：其前缀必须落在已登记前缀闭集内，本技能不发放前缀。
+
+例外一支：`authorization:` 位自由文本所指批准行为**已在表 A `approver` 列以 `human:<ref>` 落人**且 `expiry ≠ none` 时，`authority` 允许按第 2 节「条件」判据取 `binding`（`approver` 落人＝批准行为的人类载体在册，编号缺失只降来源闭包强度、不封顶全行权威）；此时 `source:` 面若仍为自由文本，来源面证据强度照旧记 `unverified` 语义（既有硬规则不放松＝`10-contract` **§9 禁止工具自决八条第 2 条（行 178）**「不得把 `UNKNOWN` 或 `INFERENCE` 自动升格为 `FACT`」——按原口径引用，不写「升 `FACT` 之外」这类闭集外措辞，产品 Y-4 收；节号勘正＝v3 N-1：v2 误挂「第 7 节第 2 条」，§7 区实为状态语义硬规则族（`:155` 起 frozen_assumption／accepted 族），引句逐字真身＝`:178` §9 第 2 条——裁定四十六，双席独立同判＋主理人认领源头＝裁定四十三 Y-4 原笔「§7:178」节号＋行号混写随带入）。机检：`30-gates` R7 相容矩阵判据不动，`c26` 族随 S-5 重算。
 
 **无责任主体主张的单列口径**：`source_layer` ∈ 5–6 层且 `accountable_party = none` 的主张，在交付汇总与 QA 判词中**单列为一类**（「无责任主体主张」：条数 ＋ `claim_id` 清单 ＋ 不可归属的原因），不得摊进「未绿项」冲抵，也不得靠硬编一个主体让它消失。`decision_owner` 同理：`authority ∈ {binding, consultative}` 时不得为 `none`；`authority ∈ {internal_only, unverified}` 时允许为 `none` 并同样单列。
 

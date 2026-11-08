@@ -11,7 +11,7 @@
 | 工作票 | 表 A 的 `claim_id`／`claim`／`claim_type`／`source_layer`／`evidence_tag`／`authority`／`status`／`external_effect`／`generated_by`／`linked_artifacts`／`assertion_form`／`comparability_ref`；表 D 的 `claim_id`／`original_requirement_ref`／`required_environment`／`required_checks`／`required_change_record`／`actual_environment`／`actual_checks`／`qa_result`／`exemption` ＋ 降级四列 | 表 B | 节点 3 拆票；执行前校验 |
 | 回执／回流件 | 表 D 的 `actual_environment`／`actual_checks`／`qa_result`；`claim_status_delta`；完成范围对照 | 表 B | 节点 4 执行；QA 前对账 |
 | QA 判词 | 表 A 的 `claim_id`／`evidence_tag`／`authority`／`status`／`external_effect`；表 D 全列；逐条证据读数（`artifact:` 指向实测读数件） | 表 B | 节点 4／5；不得回写 `required_*` |
-| 交付汇总 | 主张摘要；验证汇总；未绿项；豁免项；补验触发；**聚合字段七桶＋分母**（见第 3 节） | 外发门（若对外） | 节点 5 发布；对外前过 `gate-outbound` |
+| 交付汇总 | 主张摘要；验证汇总；未绿项；豁免项；补验触发；**聚合字段七桶＋分母**；**无责任主体主张单列区**（见第 3 节） | 外发门（若对外） | 节点 5 发布；对外前过 `gate-outbound` |
 | 对外呈报／函件 | 外发门全字段（`outbound_type`、`claims`、`fact_review`、`commitment_review`、`authorization`、`send_channel`）；主张引用区 | 附加说明 | 外发前；人类授权后仅允许 `approved_send` 声明 |
 
 ## 2. 登记闭包
@@ -44,6 +44,8 @@
 | `not_required` | 判定序第 4 步命中数 |
 
 **守恒式（闭合，无游离项）**：`real_env_passed + mock_only + unverified + failed + excluded_by_approval + pending + not_required = total_claims`，且 `total_claims` 必须等于表 D 行数。任一行无法落入任一桶即判违例（不得默认放行，不得计入「未绿项」冲抵）。
+
+**单列区（≠桶）**：交付汇总须含「无责任主体主张」单列区，三元素齐＝条数＋`claim_id` 清单＋不可归属原因（`10-contract §11` 口径；`decision_owner = none` 单列同式同位）。单列区是**视角级交叉视图**：该类行仍按第 3 节判定序正常落七桶之一，单列区不新增桶、不改变守恒等式、不以任何桶计数替代；三元素缺一判违例。
 
 **口径说明**：上一版把 `real_env_passed + mock_only + unverified` 三项当成闭式，导致 `production + passed_with_exemption`、`production + pending` 两类正常态掉出等式并被错误列入未绿项。本版改为七桶互斥完备，分母锚定表 D 行数。
 

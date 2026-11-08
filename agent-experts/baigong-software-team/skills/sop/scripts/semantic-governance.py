@@ -452,7 +452,15 @@ def check_r2(art, cs, V):
                 V.add("R2", "linked_artifacts", 2, claim_id=rec.get("claim_id", ""), value=it)
                 continue
             m = re.match(r"([A-Z]{2,6})-([0-9]{3,})", body)
-            if not m or m.group(1) not in pm[kind]:
+            if not m:
+                # S-1 降级形态支（M-3／R2 判据句）：触发条件精确限定＝kind ∈ pm 且
+                # body 非 PREFIX-digits 号形——不按前缀闭集判，改判所在行 authority；
+                # 「无冒号」「kind 未知」两支在其上方原样 return，不被本支吞（QA 黄-3）。
+                if rec.get("authority") != "unverified":
+                    V.add("R2", "linked_artifacts", 2, claim_id=rec.get("claim_id", ""),
+                          value="free-desc")
+                continue
+            if m.group(1) not in pm[kind]:
                 V.add("R2", "linked_artifacts", 2, claim_id=rec.get("claim_id", ""), value=it)
                 continue
             # ID 解析面（20-artifact-mapping §2）：claim_id/cmp_id/REQ-/CMP- 在登记表内解析
@@ -801,6 +809,30 @@ def check_r12(arts, cs, V):
 # R13：责任主体与依据（四支）
 # ────────────────────────────────────────────────────────────────────────
 LAYER_1_4 = {"legal_regulatory", "contractual", "approved_baseline", "customer_request"}
+LAYER_5_6 = {"technical_design", "internal_assumption"}
+
+
+def _is_summary_art(art):
+    """交付汇总工件识别：存在含「交付汇总」的标题行。"""
+    return any(l.startswith("#") and "交付汇总" in l for l in art.text.split("\n"))
+
+
+def _solo_area_ids(art):
+    """交付汇总「无责任主体主张」单列区取数：标题行后到下一标题前，
+    逐条正则取 claim_id（C-[0-9]{3,}）计数（M-5 补句口径）。
+    返回 (ids, section_text)；单列区标题不在场 → (None, "")。"""
+    lines = art.text.split("\n")
+    hi = _find(lines, lambda l: "无责任主体主张" in l and l.startswith("#"))
+    if hi < 0:
+        return None, ""
+    end = len(lines)
+    for i in range(hi + 1, len(lines)):
+        if lines[i].startswith("#"):
+            end = i
+            break
+    section = "\n".join(lines[hi:end])
+    ids = [m.group(0) for m in re.finditer(r"C-[0-9]{3,}", section)]
+    return ids, section
 
 
 def check_r13(arts, cs, V):
@@ -846,6 +878,35 @@ def check_r13(arts, cs, V):
                 v = rec.get(f, "")
                 if v in ("—", "无"):
                     V.add("R13", f, 4, claim_id=cid, value=v)
+    # ⑤单列区对账（S-3·M-5 第五支）——仅 reconcile 调度接入（本函数调用点＝reconcile
+    # 归属面；validate 单件面不接入⑤）。取数口径＝单列区标题行后逐条正则取
+    # `claim_id`（C-[0-9]{3,}）计数，不解析自由叙述（M-5 补句）。
+    has_register = any(a.tables.get("A") for a in arts)
+    summaries = [a for a in arts if _is_summary_art(a)]
+    if not (has_register and summaries):
+        # 不含交付汇总（或不含登记表）→ 本支跳过，判定面照常输出（不静默）
+        V.add("RECHECK-ITEM", "r13_branch5_solo_area", None,
+              value="skipped-not-both-register-and-summary")
+        return
+    hits = {rec.get("claim_id", "")
+            for a in arts for rec in a.rows("A")
+            if rec.get("source_layer") in LAYER_5_6
+            and _none(rec.get("accountable_party", ""))}
+    for a in summaries:
+        ids, section = _solo_area_ids(a)
+        if ids is None:
+            if hits:
+                V.add("R13", "solo_claim_area", 5, value="missing-solo-area",
+                      claim_count=len(hits))
+            continue
+        if len(ids) != len(hits):
+            V.add("R13", "solo_claim_area", 5, value=f"count={len(ids)}!=hits={len(hits)}")
+        # 三元素齐＝条数／claim_id 清单／不可归属原因
+        has_reason = "不可归属原因" in section
+        has_count = bool(re.search(r"条数", section))
+        has_list = bool(ids) or not hits
+        if not (has_reason and has_count and has_list):
+            V.add("R13", "solo_claim_area", 5, value="three-elements-incomplete")
 
 
 # ────────────────────────────────────────────────────────────────────────
@@ -899,6 +960,7 @@ def check_r4(art, cs, V):
     c_rows = art.rows("C")
     c_by_req = {rec.get("id_value"): rec for rec in c_rows
                 if (rec.get("id_value") or "").startswith("REQ-")}
+    a_by_claim = {rec.get("claim_id"): rec for rec in art.rows("A")}
     for rec in art.rows("D"):
         cid = rec.get("claim_id", "")
         req_env, act_env = rec.get("required_environment", ""), rec.get("actual_environment", "")
@@ -918,6 +980,17 @@ def check_r4(art, cs, V):
         if act_env == "unverified" and rec.get("qa_result") in ("passed_at_actual",
                                                                 "passed_with_exemption"):
             V.add("R4", "actual_environment", 2, claim_id=cid)
+        # ③扩展（S-2·M-2）：同值判作用域提层——对全部 `required_change_record ≠ none`
+        # 行生效，无论 original_requirement_ref 是否为 none（H2 缺口消解）。
+        rcr = rec.get("required_change_record", "")
+        if not _none(rcr):
+            # 同值判：`@` 后签署串（须为 human: 形态）须与同 claim_id 表 A 行
+            # approver 列同值；表 A 该列 none 而记录非 none → branch=3 违例。
+            mch = re.search(r"@(.+)$", rcr)
+            a_appr = (a_by_claim.get(cid) or {}).get("approver", "")
+            if not mch or not _human(mch.group(1)) or _none(a_appr) \
+                    or mch.group(1) != a_appr:
+                V.add("R4", "required_change_record", 3, claim_id=cid)
         # ③REQ 行要求面下探
         rref = rec.get("original_requirement_ref", "")
         if not _none(rref) and rref in c_by_req:
