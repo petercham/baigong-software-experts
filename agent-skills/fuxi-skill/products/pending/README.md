@@ -22,6 +22,9 @@
 | zhang-yiming-perspective | person | `2026-11-08` |
 | steve-jobs-perspective | person | `2026-11-09` |
 | trump-perspective | person | `2026-11-09` |
+| sun-yuchen-perspective | person | `2026-11-09` |
+| zhangxuefeng-perspective | person | `2026-11-09` |
+| xu-hark-perspective | person | `2026-11-09` |
 
 - 每条目＝`<对象名kebab>-perspective` 目录，随件＝`SKILL.md`＋`test-prompts.md`＋`registration.md`（对象注册三元组与分类判定轨迹）。
 - 条目迁入 active 池的迁出条件：人工确认＋独立提案＋版本审计（`confirmation.md` 四字段随迁创建）；未满足前本区条目对装载不可见。（约定名当期未建档·非仓内指针·外部仓豁免口径注明：首份产物入池时随件创建）
