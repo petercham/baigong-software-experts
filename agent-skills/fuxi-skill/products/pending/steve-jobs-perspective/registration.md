@@ -43,6 +43,7 @@
 - 预探轮（票面 §〇-2 复点）：en.wikipedia Steve_Jobs 000／stevejobsarchive.com 200／youtube 演讲页 000（计数 `3`·两态一致）。
 - 补采轮（本对象侧）：stevejobsarchive.com 首页直取 `1`＋book.stevejobsarchive.com《Make Something Wonderful》全书正文直取 `1`＝本对象补采直取请求计数 `2`；本对象外部请求总计数=`5`。
 - 一手档案站两态注：预探 200＝可达预断·补采正文层实获＝预探→收获正例链（RB3 paulgraham/nav.al 同型）。
+- `补充调研重触发计数`=`1`（rb7-suppl 补研轮计入新规则第 1 轮·皮总 2026-11-09 裁定案内确认在册·FX-U32 补登·口径见契约 EG-6 补充调研重触发三限条款）
 
 ## 补研轮（FX-U29 定向补研）
 

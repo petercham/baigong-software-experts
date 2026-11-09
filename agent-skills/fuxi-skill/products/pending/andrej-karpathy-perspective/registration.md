@@ -42,6 +42,7 @@
 - 联网请求计数照登行（EG-6 节内随册）：
 - 预探轮（票面 §〇-2 复点）：karpathy.github.io 200／karpathy.ai 200／github.com/karpathy 200／en.wikipedia Andrej_Karpathy 000／web.archive 镜像 000（计数 `5`·两态一致·三枚 200 态正文层判定＝可取〔特征词命中＋正文 14K/33K/172K 字节级＋karpathy.ai robot 字样＝云盾脚本引用非壳页判据同 carlsagan 型〕）。
 - 补采轮（本对象侧）：karpathy.github.io 索引页直取 `1`＋署名博文直取 `5`（recipe／rnn／phd／convnet／socv 全获）＋失败面单路径 404 `1`＝本对象补采请求计数 `7`；本对象外部请求总计数=`12`＝本批最高（收获/请求比亦最高＝请求经济性正面读数随册）。
+- `补充调研重触发计数`=`1`（rb7-suppl 补研轮计入新规则第 1 轮·皮总 2026-11-09 裁定案内确认在册·FX-U32 补登·口径见契约 EG-6 补充调研重触发三限条款）
 
 ## 补研轮（FX-U29 定向补研）
 
