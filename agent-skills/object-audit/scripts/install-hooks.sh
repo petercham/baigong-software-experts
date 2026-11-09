@@ -71,6 +71,17 @@ else
   die_infra "找不到 git，且未给 --root"
 fi
 RUNNER="$(norm_path "$SELF_DIR")/run-gates.sh"
+# FX-U30 三段式随注：声明闸脚本与 RUNNER 同目录寻径（本安装器所在目录即门禁脚本目录）；
+# 与 RUNNER 存在性检查同理，找不到即基础设施错——不得生成缺闸钩子后静默降级为不拦。
+DECL="$(norm_path "$SELF_DIR")/check-staged-declaration.py"
+[ -f "$DECL" ] || die_infra "找不到暂存声明闸脚本：$DECL"
+# 钩子体行6 用显式解释器调用声明闸；解释器在安装时探测并嵌入（与 run-gates.sh 探测口径同制：
+# python3 优先、次选 python）。钩子运行环境若后续失去该命令，行6 调用失败＝非零拒提＝fail-closed。
+PY=""
+for cand in python3 python; do
+  if command -v "$cand" >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+[ -n "$PY" ] || die_infra "找不到 python3/python，声明闸无法写入钩子（不得降级为不拦）"
 
 HOOKS_DIR="$REPO_ROOT/.git/hooks"
 HOOK="$HOOKS_DIR/pre-commit"
@@ -78,12 +89,15 @@ HOOK="$HOOKS_DIR/pre-commit"
 [ -f "$RUNNER" ] || die_infra "找不到门禁入口脚本：$RUNNER"
 
 # 本器生成的钩子内容。标记行用于区分"本器装的"与"别人装的"。
+# FX-U30 三段式（票面 S2）：行6 声明闸先于 run-gates 链 fail-fast（咬住即拒提不再跑全链），
+# 行7 exec 语义一字不动；MARKER 标记行字符串零动（幂等三分支判定臂存续承此）。
 MARKER="generated-by: object-audit/scripts/install-hooks.sh"
 GATE_HOOK_BODY="#!/usr/bin/env bash
 # ${MARKER}
 # 提交前门禁（出口①）。规范来源：设计 v2 §2.5/60-gates。
 # 改判据请改路由表规范件（agent-skills/multi-collab/references/60-gates.md），不要改本文件。
 set -u
+\"$PY\" \"$DECL\" --root \"$REPO_ROOT\" || exit \$?
 exec bash \"$RUNNER\" --root \"$REPO_ROOT\"
 "
 
