@@ -92,8 +92,8 @@ def t06_path_subset_gate(tmp: str) -> None:
     except SystemExit as e:
         assert e.code != 0
     lease = lease_mod.issue_lease("TKT-S6", "product", "architect:sig-006", CONFIG, leases,
-                                  requested_globs=[".collab/drafts/prd/"])
-    assert lease["path_globs"] == [".collab/drafts/prd/"]
+                                  requested_globs=[".collab/drafts/"])
+    assert lease["path_globs"] == [".collab/drafts/"]
 
 
 def t07_promote_manifest_hash_gate(tmp: str) -> None:

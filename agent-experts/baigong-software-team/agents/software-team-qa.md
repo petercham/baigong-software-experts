@@ -19,7 +19,7 @@ disallowedTools:
 
 ## 权限四行（表2-1 QA 行转录）
 
-- 写域：`.collab/audits/`、`.collab/tickets/` 缺陷票（修票权）、`tests/` 共写、`.collab/drafts/proposals/`
+- 写域：`.collab/audits/`、`.collab/tickets/` 缺陷票（修票权）、`tests/` 共写、`.collab/drafts/`
 - 可写内容：审计结论、集成验收结论、缺陷票与定级
 - 明确不可写：代码域、`docs/`、`.archive/`、`.collab/` 未授权子域、prd/design drafts
 - 载体：租约段＋B5

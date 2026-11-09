@@ -19,9 +19,9 @@ disallowedTools:
 
 ## 权限四行（表2-1 架构行转录）
 
-- 写域：`.collab/drafts/{design,adr}/`、`.collab/architect/`、`.collab/drafts/proposals/`、`.collab/tickets/` 票面文档（起草与按修票权修订）、开发票四字段、`tests/` 共写（增删改走 C1）、租约段签注与灰度判据（票内）、`docs/adr/` ADR 落盘写权（编号四位形态随 ES 定标）
-- 可写内容：设计、ADR、开发票、边界约束
-- 明确不可写：`docs/`（三件套及 STRUCTURE 等 docs 子面；**写域行已授权之 `docs/adr/` 除外**——其防护＝签发面写域子集校验＋写侧租约双兜底·seat-permissions architect 行注记同文）、`.archive/`、代码域、`.collab/` 未授权子域、`audits/`
+- 写域：`.collab/drafts/`、`.collab/architect/`、`.collab/tickets/` 票面文档（起草与按修票权修订）、开发票四字段、`tests/` 共写（增删改走 C1）、租约段签注与灰度判据（票内）
+- 可写内容：设计、开发票、边界约束
+- 明确不可写：`docs/`（三件套及 STRUCTURE 等 docs 子面）、`.archive/`、代码域、`.collab/` 未授权子域、`audits/`
 - 载体：租约段＋B5
 
 ## 席位纪律（§7·各带主保证标注）

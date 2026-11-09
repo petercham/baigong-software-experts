@@ -9,11 +9,11 @@
   "seats": [
     {
       "seat_id": "host",
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/*（除转正代写通道）", "sources/**"]
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/*（除转正代写通道与docs/adr/）", "sources/**"]
     },
     {
       "seat_id": "product",
-      "deny_globs": ["docs/**", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", ".collab/audits/**", "sources/**"]
+      "deny_globs": ["docs/**", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/adr/**", ".collab/audits/**", "sources/**"]
     },
     {
       "seat_id": "architect",
@@ -21,12 +21,12 @@
     },
     {
       "seat_id": "qa",
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/drafts/prd/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", "sources/**"]
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"]
     },
     {
       "seat_id": "engineer",
-      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/qa/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
-      "deny_globs_note": "deny 向精化随动款（与源件 seat-permissions.json engineer 行逐字同源·派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十一桶闭集（grep 引用不复写名录）。"
+      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/audits/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
+      "deny_globs_note": "deny 向精化随动款（与源件 seat-permissions.json engineer 行逐字同源·派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十七桶闭集（grep 引用不复写名录）。"
     }
   ],
   "agent_type_to_seat": {

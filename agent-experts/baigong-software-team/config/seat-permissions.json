@@ -4,33 +4,33 @@
   "table_notes": {
     "路径锚定": "本表各行裸路径一律读作项目根字面（两级锚换代：项目根＝含 docs/STRUCTURE.md 之探针锚目录，write-guard/lease-issuer 同款解析）；交付面路径（delivery_paths 桶）不受『不可写』列约束，其写入经当票租约 path_globs 授权（表2-2）。",
     "判据真源双层双址": "包级 tests/＝当期施工与验收测试实体——工程师按表2-2 三段式经租约写入（delivery_paths 内 tests/ 桶）；跨发布验收判据真源域另设、经 C1 变更；二者各有职守、互不替代。",
-    "枚举款六类": "顶层枚举以各项目 docs/STRUCTURE.md 为真源（B1-C）；`.collab/` 固定结构桶名闭集真源＝skills/sop/references/collab-fixed-structure.md（B1-D·十一桶）。"
+    "枚举款六类": "顶层枚举以各项目 docs/STRUCTURE.md 为真源（B1-C）；`.collab/` 固定结构桶名闭集真源＝skills/sop/references/collab-fixed-structure.md（B1-D·十七桶）。"
   },
   "seats": [
     {
       "seat_id": "host",
       "seat": "主理人",
-      "write_globs": [".collab/ledger/", ".collab/signatures/", ".collab/dlq/", ".collab/commitments/", ".collab/human/intake/", ".collab/human/reviews/", ".collab/tickets/{id}/仅生命周期字段", ".collab/release-record/", ".collab/manifest/", "docs/转正代写", ".archive/退役定稿落位", ".collab/config/", ".collab/inbox/engineer/", ".collab/archive/", ".collab/decisions/"],
+      "write_globs": [".collab/ledger/", ".collab/signatures/", ".collab/dlq/", ".collab/commitments/", ".collab/human/intake/", ".collab/human/reviews/", ".collab/tickets/{id}/仅生命周期字段", ".collab/release-record/", ".collab/manifest/", "docs/转正代写", ".archive/退役定稿落位", ".collab/config/", ".collab/inbox/engineer/", ".collab/archive/", ".collab/decisions/", ".collab/adr/", "docs/adr/"],
       "writable": "账本、登记、状态迁移、配置、派发存档、呈报",
       "explicitly_not_writable": ["一切业务产出"],
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/*（除转正代写通道）", "sources/**"],
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/*（除转正代写通道与docs/adr/）", "sources/**"],
       "deny_globs_note": "交付面路径换代补丁：旧交付树字面（交付搬家后永空转）换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md delivery_paths，与 engineer 行同源对账，不复写名录）。",
       "carrier": "全经脚本，LLM 仅誊录与路由"
     },
     {
       "seat_id": "product",
       "seat": "产品",
-      "write_globs": [".collab/drafts/prd/", ".collab/product/", ".collab/drafts/proposals/"],
+      "write_globs": [".collab/drafts/", ".collab/product/"],
       "writable": "PRD、解析件（只引 intake 禁复制改写）、范围意见",
       "explicitly_not_writable": ["docs/", ".archive/", "代码域", "他人 drafts", ".collab/未授权子域"],
-      "deny_globs": ["docs/**", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", ".collab/audits/**", "sources/**"],
+      "deny_globs": ["docs/**", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/adr/**", ".collab/audits/**", "sources/**"],
       "deny_globs_note": "交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。",
       "carrier": "租约段＋B5"
     },
     {
       "seat_id": "architect",
       "seat": "架构",
-      "write_globs": [".collab/drafts/design/", ".collab/drafts/adr/", ".collab/architect/", ".collab/drafts/proposals/", ".collab/tickets/票面文档（起草与按修票权修订）", "开发票四字段", "tests/共写（增删改走 C1）", "租约段签注与灰度判据（票内）", "docs/adr/", "docs/STRUCTURE.md"],
+      "write_globs": [".collab/drafts/", ".collab/architect/", ".collab/tickets/票面文档（起草与按修票权修订）", "开发票四字段", "tests/共写（增删改走 C1）", "租约段签注与灰度判据（票内）", "docs/STRUCTURE.md"],
       "writable": "设计、ADR、开发票、边界约束",
       "explicitly_not_writable": ["docs/", ".archive/", "代码域", ".collab/未授权子域", "audits/"],
       "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/audits/**", "sources/**"],
@@ -40,23 +40,23 @@
     {
       "seat_id": "qa",
       "seat": "QA",
-      "write_globs": [".collab/audits/", ".collab/tickets/缺陷票（修票权）", "tests/共写", ".collab/drafts/proposals/"],
+      "write_globs": [".collab/audits/", ".collab/tickets/缺陷票（修票权）", "tests/共写", ".collab/drafts/"],
       "writable": "审计结论、集成验收结论、缺陷票与定级",
       "explicitly_not_writable": ["代码域", "docs/", ".archive/", ".collab/未授权子域", "prd/design drafts"],
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/drafts/prd/**", ".collab/drafts/design/**", ".collab/drafts/adr/**", "sources/**"],
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"],
       "deny_globs_note": "交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。",
       "carrier": "租约段＋B5"
     },
     {
       "seat_id": "engineer",
       "seat": "工程师",
-      "write_globs": [".collab/inbox/engineer/", ".collab/returns/engineer/", ".collab/drafts/deploy/", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**"],
+      "write_globs": [".collab/inbox/engineer/", ".collab/returns/engineer/", ".collab/drafts/", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**"],
       "write_globs_note": "项目根∪交付（编译、部署）路径可写面＝参数化承载：每项目 docs 约定 md（见 project_domain_md 键）声明，门禁/租约机件读 md 取项目根与交付路径后以具体前缀行注入当票租约——D1 名录尾账闭合批：六枚举行＝本项目 docs/STRUCTURE.md delivery_paths 同源填充（机检对账＝逐行相等断言，不复写名录）；描述行（v1 前值）与『限定当票租约路径集』入本注记（行为零变化款：两者在两层校验恒不命中）。",
       "project_domain_md": "docs/STRUCTURE.md",
       "writable": "代码、回流件、预发部署票起草",
       "explicitly_not_writable": ["docs/", ".archive/", ".collab/其余", "仓根 tests/（跨发布验收判据真源·架构/QA 共写域）", "他票票体"],
-      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/qa/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
-      "deny_globs_note": "deny 向精化款（先决真源＝skills/sop/references/collab-fixed-structure.md 十一桶闭集·grep 引用不复写名录）：`.collab/**` 基线 deny 换代＝显式枚举减授权——本席写域授权子域（`.collab/returns/engineer/`、`.collab/inbox/engineer/`、`.collab/drafts/deploy/`）对应父桶（returns/inbox/drafts）从 deny 枚举让出并以本注记对表，过渡态(III)『租约在册仍 deny』冲突面自此消除（销态读数＝`agent-experts/baigong-software-team/.collab/returns/engineer/` 下样例签发 exit 0＋写侧 allow，入回执）；让出父桶的非授权子域防护＝签发面写域子集校验＋写侧『路径∉当席租约』双兜底（纵深减层已在册）；其余非授权桶——含十一桶闭集内 board/decisions/design/dispatch/evidence/process/qa/receipts/research/refs＋host 租约面桶（ledger/signatures/dlq/commitments/human/release-record/manifest/config/archive/tickets）——维持 deny 不让；design 桶＝史实锚入库面，host 无写权外溢＝deny 维持格。`.archive/`、仓根 `tests/` 出 deny 列系裁定一唯二排除落实（2026-11-03 裁定落实批）；其防护由租约签发面承载——不在 engineer write_globs 域即不可签发，写侧『路径∉当席租约』deny 兜底（起草探针 P-c 实测）；仓根 `tests/` 真源域双层双址条款随票包再锚重释（两级锚换代后 tests/** 入本席 delivery_paths 写域）。",
+      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/audits/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
+      "deny_globs_note": "deny 向精化款（先决真源＝skills/sop/references/collab-fixed-structure.md 十七桶闭集·grep 引用不复写名录）：`.collab/**` 基线 deny 换代＝显式枚举减授权——本席写域授权子域（`.collab/returns/engineer/`、`.collab/inbox/engineer/`、`.collab/drafts/`）对应父桶（returns/inbox/drafts）从 deny 枚举让出并以本注记对表，过渡态(III)『租约在册仍 deny』冲突面自此消除（销态读数＝`agent-experts/baigong-software-team/.collab/returns/engineer/` 下样例签发 exit 0＋写侧 allow，入回执）；让出父桶的非授权子域防护＝签发面写域子集校验＋写侧『路径∉当席租约』双兜底（纵深减层已在册）；其余非授权桶——含十七桶闭集内 board/decisions/design/dispatch/evidence/process/audits/receipts/research/refs＋host 租约面桶（ledger/signatures/dlq/commitments/human/release-record/manifest/config/archive/tickets）——维持 deny 不让；design 桶＝史实锚入库面，host 无写权外溢＝deny 维持格。`.archive/`、仓根 `tests/` 出 deny 列系裁定一唯二排除落实（2026-11-03 裁定落实批）；其防护由租约签发面承载——不在 engineer write_globs 域即不可签发，写侧『路径∉当席租约』deny 兜底（起草探针 P-c 实测）；仓根 `tests/` 真源域双层双址条款随票包再锚重释（两级锚换代后 tests/** 入本席 delivery_paths 写域）。",
       "carrier": "租约＋B5 deny"
     },
     {

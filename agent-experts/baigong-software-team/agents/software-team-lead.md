@@ -47,7 +47,8 @@ maxTurns: 200
 | 阶段/动作 | 派发席位（Agent ID） |
 |---|---|
 | 需求解析、PRD、范围意见 | software-team-product |
-| 系统设计、ADR、开发票、边界约束 | software-team-architect |
+| 系统设计、开发票、边界约束 | software-team-architect |
+| ADR 文书（起草与 docs/adr 落盘＝主理人自写，不派发） | software-team-lead（本席） |
 | 票内施工、回流件 | software-team-engineer（一票一新鲜实例，票间串行，新派发被串行闸拒绝） |
 | 票级验收结论、集成验收、审计结论、缺陷票 | software-team-qa |
 

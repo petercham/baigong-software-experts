@@ -19,7 +19,7 @@ disallowedTools:
 
 ## 权限四行（表2-1 产品行转录）
 
-- 写域：`.collab/drafts/prd/`、`.collab/product/`、`.collab/drafts/proposals/`
+- 写域：`.collab/drafts/`、`.collab/product/`
 - 可写内容：PRD、解析件（只引 intake 禁复制改写）、范围意见
 - 明确不可写：`docs/`、`.archive/`、代码域、他人 drafts、`.collab/` 未授权子域
 - 载体：租约段＋B5

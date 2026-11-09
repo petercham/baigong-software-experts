@@ -19,7 +19,7 @@ disallowedTools:
 
 ## 权限四行（表2-1 工程师行转录）
 
-- 写域：（工作空间根∪部署路径）−受保护区＋`.collab/inbox/engineer/`、`.collab/returns/engineer/`、`.collab/drafts/deploy/`，限定当票租约路径集
+- 写域：（工作空间根∪部署路径）−受保护区＋`.collab/inbox/engineer/`、`.collab/returns/engineer/`、`.collab/drafts/`，限定当票租约路径集
 - 可写内容：代码、回流件、预发部署票起草
 - 明确不可写：`docs/`、`.archive/`、`.collab/` 其余、仓根 `tests/`（跨发布验收判据真源·架构/QA 共写域）、他票票体
 - 载体：租约＋B5 deny

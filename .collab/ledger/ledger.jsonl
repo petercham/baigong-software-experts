@@ -1,0 +1,1 @@
+{"seq": 1, "ts": "2026-11-05T08:26:06Z", "type": "呈报", "actor": "state-transition.py", "payload": {"event": "audit_transition_rejected", "ticket_id": "TMP-DISC", "from": 4, "to": 5, "reject_reason": "未知票据无当前状态（仅允许建立于节点1）"}, "prev_hash": "GENESIS", "hash": "c10dde7e801dc763e7d1c6235bb8958c30685fb4e3cf5e9b39437d916474db4f"}

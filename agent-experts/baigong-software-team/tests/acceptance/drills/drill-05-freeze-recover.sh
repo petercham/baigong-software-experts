@@ -14,17 +14,17 @@ say(){ echo "[drill-05] $*"; }
 fail(){ say "RED: $*"; exit 1; }
 
 # 0) 预置活跃租约（架构签注经 lease-issuer 正常签发），供 freeze 清租约读数。
-#    席位取 product（写域行含机械 glob `.collab/drafts/prd/`，可经 lease-issuer 零裁量子集校验；
+#    席位取 product（写域行含机械 glob `.collab/drafts/`，可经 lease-issuer 零裁量子集校验；
 #    该路径亦不在 product deny_globs 行内）。呈核注记（不修他票文件）：engineer 写域首行
 #    「（工作空间根∪部署路径）−受保护区」＝非机械描述行，lease-issuer 无法对交付面旧字面 deliverables/**
 #    类请求经子集校验实例化（实测读数入回执呈核段）。
 python "$SCRIPTS/lease-issuer.py" --ticket DRILL05 --seat product --countersign architect:drill05 \
-  --path-glob ".collab/drafts/prd/tmp-drill05.md" \
+  --path-glob ".collab/drafts/tmp-drill05.md" \
   --config "$CFG/seat-permissions.json" --leases "$LEASES" >"$TMP/l1.txt" 2>&1 \
   || fail "租约签发 exit≠0: $(cat "$TMP/l1.txt")"
 say "预置租约读数: $(cat "$TMP/l1.txt")"
 # 冻结前：租约内写＝放行（无决策输出＝不干预）
-python "$SCRIPTS/write-guard.py" --path ".collab/drafts/prd/tmp-drill05.md" \
+python "$SCRIPTS/write-guard.py" --path ".collab/drafts/tmp-drill05.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$FS" \
   <<'JSON' >"$TMP/w0.txt" 2>&1
 {"agent_type": "software-team-product", "agent_id": "product-drill05"}
@@ -46,7 +46,7 @@ grep -q '"cleared": true' "$LEASES" || fail "freeze 清租约 cleared 行缺席"
 say "清租约读数: leases.jsonl cleared 行在册"
 
 # 3) 全写 deny：原租约内写也必 deny（freeze-state 联动）
-python "$SCRIPTS/write-guard.py" --path ".collab/drafts/prd/tmp-drill05.md" \
+python "$SCRIPTS/write-guard.py" --path ".collab/drafts/tmp-drill05.md" \
   --ledger "$LED" --leases "$LEASES" --freeze-state "$FS" \
   <<'JSON' >"$TMP/w1.txt" 2>&1
 {"agent_type": "software-team-product", "agent_id": "product-drill05"}

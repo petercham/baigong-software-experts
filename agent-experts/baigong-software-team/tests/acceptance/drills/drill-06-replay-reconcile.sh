@@ -17,7 +17,7 @@ fail(){ say "RED: $*"; exit 1; }
 python "$SCRIPTS/state-transition.py" --ticket DRILL06 --from 1 --to 1 --ticket-type 开发 \
   --ledger "$LED" --states "$ST" >/dev/null 2>&1 || fail "票据建立 exit≠0"
 python "$SCRIPTS/lease-issuer.py" --ticket DRILL06 --seat product --countersign architect:drill06 \
-  --path-glob ".collab/drafts/prd/tmp-drill06.md" \
+  --path-glob ".collab/drafts/tmp-drill06.md" \
   --config "$PKG/config/seat-permissions.json" --leases "$LEASES" >/dev/null 2>&1 \
   || fail "租约签发 exit≠0"
 

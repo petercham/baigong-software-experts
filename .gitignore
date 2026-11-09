@@ -10,7 +10,7 @@
 # 分区键＝性质：判词/裁决/史实锚进 git；过程流水/证据/临时不进。
 
 # ── 制①：入库面（史实锚·默认不 ignore·无需正向声明）──────────────
-# 各项目 .collab/{decisions,qa,receipts,board,research}/＋项目 docs/＋项目 .scratch/tickets/
+# 各项目 .collab/{decisions,audits,receipts,board,research}/＋项目 docs/＋项目 .scratch/tickets/
 # ＋交付面（agent-experts/ agent-skills/ softwares/ 项目壳）＋仓根 README＋tools/
 # ＝不列入本文件排除面即默认入库；负向防御条款见制②尾。
 
