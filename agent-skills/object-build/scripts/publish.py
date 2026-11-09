@@ -860,6 +860,12 @@ def do_assemble(bundle_dir: str, out_dir: "str | None", verbose: bool) -> int:
         for key in ("component", "repo", "ref", "path", "target"):
             if not comp.get(key):
                 die_usage("bundle.lock 组件行缺键 %s：%s" % (key, comp.get("component", "?")))
+        # TOOLHOME S2 共享料源组件形态（material="share"）：取源语义复用 repo/path/target，
+        # 形态断言 fail-closed——path 必须指向仓根 share/ 料源目录（装配时整件复制进 target 挂载位）。
+        if comp.get("material") == "share":
+            if comp["path"].strip("/").split("/")[0] != "share":
+                die_usage("share 料源组件行 path 须指仓根 share/ 料源：%s（组件 %s）"
+                          % (comp["path"], comp["component"]))
         comp_repo = os.path.abspath(os.path.normpath(
             os.path.join(bundle_repo, comp["repo"])))
         if not os.path.isdir(comp_repo):

@@ -37,6 +37,17 @@
       "path": "agent-skills/claim-commitment-governance",
       "target": "skills/claim-commitment-governance",
       "note": "SEMGOV-T3 挂载（立项登记 §四 T3 行）：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代＝CT2 合并收口钉值·收口登记 13e27b1）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
+    },
+    {
+      "component": "devkit-tools",
+      "material": "share",
+      "repo": ".",
+      "roottag": "softdev",
+      "ref": "devkit-tools@v0.1.0",
+      "ref_kind": "tag",
+      "path": "share",
+      "target": "tools",
+      "note": "TOOLHOME 票 S2 共享料源组件行（share 料源口径·装配时自包含嵌入硬条款）：真源＝仓根 share 料源目录（18 件工具真源·票面草案 v4 ccf6383 放行 e12afd3）；material=share 形态＝publish 装配步断言 path 首段必须 share（fail-closed 形态校验·TOOLHOME S2 改造臂）；装配时整件复制进包内 tools 挂载位＝使用方包部署态自包含（官方模型同构＝装配期复制进包）；挂载后包内调用一律包内相对路径；挂载副本禁手工编辑＝改＝改料源重装配（纪律同源）。ref 锁不可变 tag devkit-tools v0.1.0（纪律②③·tag 打于含 share 18 件终态的落链笔·命名惯例拆写＝组件名与版本号分立）。专属族不在本组件（fuxi gates 断言体系专属留原包）。"
     }
   ],
   "assembly_exclude": [
