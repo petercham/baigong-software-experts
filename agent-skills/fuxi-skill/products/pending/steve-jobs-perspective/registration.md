@@ -43,3 +43,32 @@
 - 预探轮（票面 §〇-2 复点）：en.wikipedia Steve_Jobs 000／stevejobsarchive.com 200／youtube 演讲页 000（计数 `3`·两态一致）。
 - 补采轮（本对象侧）：stevejobsarchive.com 首页直取 `1`＋book.stevejobsarchive.com《Make Something Wonderful》全书正文直取 `1`＝本对象补采直取请求计数 `2`；本对象外部请求总计数=`5`。
 - 一手档案站两态注：预探 200＝可达预断·补采正文层实获＝预探→收获正例链（RB3 paulgraham/nav.al 同型）。
+
+## 补研轮（FX-U29 定向补研）
+
+> 本节＝FX-U29 补研轮 append-only 追加（原四节含 EG-6 原轮读数行一字不改）；补研策略＝一手增量补采（票面 §〇-1）；联网＝强制开启（裁决④）；语料归位批次＝rb7-suppl（evidence 面不入 git＝文件面在场可 sha 复验·封印登记件见回执族「补研批语料哈希封印登记」）。
+
+一、联网预探行（预探读数＝预探时点瞬时态·禁作施工时点承诺·R-8 条款随带；正文层可取性判定＝特征词命中＋字节级正文体量＋壳页特征三列并排）：
+- stevejobsarchive.com 首页＝200／135,070 字节／特征词命中 94／无壳页特征＝正文层可取；book.stevejobsarchive.com＝200／713,470 字节／命中 106／无壳页特征（＝rb4 基面 SJA 全书所在面·仅索引复点禁重复计入）；stevejobsarchive.com/stories 索引＝200／145,465 字节／命中 84／无壳页特征＝四新页 URL 提出。
+- 200≠正文可得两案型引注在册：baike 200 校验壳案型（U25 收口 §五①）／raybradbury 200 正文零三度时变案型（U26 收口 §五②）；本轮实测同型新案＝allaboutstevejobs.com 转录页三枚 200 但正文层零（JS 渲染空壳·见失败面行）。
+
+二、补采收获行（逐件：来源域名／正文层直取态／归位路／字节数〔来源面标注＝D-99 三态分立：外部站点面→归位后语料面→产物内标记面〕／请求计数随段末）：
+- stevejobsarchive.com/stories/40-years-of-macintosh＝200 正文层直取／归位长对话路增补段／外部站点面 145,811 字节→提净 4,991 字符→归位语料面见封印件表／来源态注＝页体为档案站策展叙事＋内嵌 Jobs 存档直引语三段（署名档案站引语态＝一手认定从严不默认直取）；
+- stevejobsarchive.com/stories/take-a-closer-look＝200 正文层直取／归位外部视角路／133,940 字节→提净 2,722 字符／来源态＝Leslie Berlin（SJA 创始执行董事）署名第三方叙事＝本对象外部视角路增补件；
+- stevejobsarchive.com/stories/pixar-early-days＝200 正文层直取（注记面）／归位外部视角路／135,650 字节→提净 2,337 字符／1996 未公开访谈视频正文层零获＝无转录面在场（策展注记按第三方转述态入面）；
+- stevejobsarchive.com/stories/on-the-origin-of-make-something-wonderful＝200 正文层直取／归位外部视角路／149,443 字节→提净 1,918 字符／含二〇〇七年十月二十三日内部员工大会 Jobs 存档直引语一段（同上从严标注态）。
+- 失败面行（000／403／404 形态分立照登）：allaboutstevejobs.com verbatim 转录三页（60_minutes_2003／charlie_rose_1996／cnbc_1997）＝200 但正文层零（JS 渲染壳＝200≠正文可得案型新增实证）；americanhistory.thepeterhayden.com＝000；computerhistory.org＝000；零获路登记＝著作／短表达／决策记录／时间线四路本批零获（文件在场含零获登记）。
+- 补采轮请求计数＝11（SJA 四页＋aasj 索引 1＋aasj 转录 3＋longview 1＋hayden 1＋computerhistory 1）；预探轮＝3；本对象补研轮外部请求总计数＝14。
+
+三、rb7-suppl 归位行＋基面禁重复计入申报行：
+- 归位＝agent-skills/fuxi-skill/.collab/evidence/corpus/rb7-suppl/steve-jobs/ 六路增补件六文件（长对话／外部视角两路含正文＋著作／短表达／决策记录／时间线四路零获登记件）＋对象 manifest（六路逐件 sha256＋字节数）＝逐件哈希封立面见回执族封印登记件（git 面）；
+- 基面禁重复计入申报＝rb4 六路（含 SJA《Make Something Wonderful》全书补采段）零重复计入本批语料面／零重复计入 EG-6 分子（book 站仅索引复点一行在册）。
+
+四、EG-6 三态并排读数行（三值各自载口径·D-100 分母节集枚举自载；EG-6 自现自查＋J-8 读数级限定句＝D-97 臂续用；三值均读数级非结论级）：
+- 原轮读数（照录不重算）＝一手占比 53.3（8/15＝本人原文态要素条目/要素条目总数；分母节集枚举自载＝表达DNA 4＋心智模型 5＋决策启发式 6＝15；样本载体＝corpus/rb4/steve-jobs/ 六路含 SJA 补采段）；自现自查＝按原行自载口径对 rb4 面 grep 逐锚复跑（补采段界内关键词命中：shit 19／own hardware 3／liberal arts 16／last day of my life 4／single best invention 4／A player 8／check after check 1／forest 2／Reason for Being 2＝九枚锚全部命中≥原登记数）→复现值 8/15＝53.3 与声称值并排全等；标记面副读数 7/15＝46.7（口径＝SKILL.md 正向三节行内「来源态＝本人原文」标记 grep 实跑＝7）自查全等。
+- 补研轮读数（rb7-suppl 语料面同口径独立计算）＝0/15＝0.0（口径＝要素行直取锚可回查于 rb7-suppl 面者计数；分母节集枚举同上＝4+5+6＝15；本轮四枚增补件来源态＝档案站策展转述＋署名档案站引语态＝零要素行直取锚指向 rb7-suppl 面→分子 0；自现自查＝对 rb7-suppl 面跑正向要素行逐行来源指向检查实跑＝命中 0 与声称全等）；
+- 合并口径读数（基面＋补采面合并重算）＝8/15＝53.3（口径＝rb4 基面＋rb7-suppl 合并语料面跑原行直取锚口径；rb7 面贡献分子 0→合并＝原轮分子不变；自现自查实跑全等）；标记面合并＝7/15＝46.7 不变（SKILL.md 本票零触＝标记面零动）。两口径跨线脸存续（53.3 过线 vs 46.7 未过线）。
+
+五、标注状态随动行＋去向行：
+- 标注状态随动＝**维持**（依据读数：合并直取面 53.3 与原轮同值未脱离敏感带；「门槛敏感·两口径跨线」标注两枚读数 53.3/46.7 原值存续；收获面＝外部视角路增补件一枚在场＋策展引语段三枚＝语料厚度增 22.6K 字节来源面但零入一手分子＝D-99 三态分立标注完备）；
+- 去向＝仍 pending·候皮总裁（收／弃入池＝皮总人工闸裁量·本席零自裁；confirmation.md 禁建照守）。
