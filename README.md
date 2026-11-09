@@ -8,7 +8,7 @@
 
 ## 一、仓性质与运行前提
 
-本仓＝多 Agent 协作**开发工具包仓**：协作技能、专家包、门禁工具（`tools/`）、治理史实锚同仓。仓根入库面白名单＝下表；其余顶层目录出现＝违例（门禁断言见 SWB-B5 回执判据 1）。
+本仓＝多 Agent 协作**开发工具包仓**：协作技能、专家包、共享料源工具（`share/`）、治理史实锚同仓。仓根入库面白名单＝下表；其余顶层目录出现＝违例（门禁断言见 SWB-B5 回执判据 1）。
 
 ## 二、仓根白名单结构表（B 批终态）
 
@@ -18,7 +18,7 @@
 | `agent-experts/` | 分类目录①：专家包项目 | ✅ | 项目壳＝交付面＋`docs/`＋`.collab/`案卷＋`.scratch/tickets/`票面 |
 | `agent-skills/` | 分类目录②：独立技能项目 | ✅ | 同上结构 |
 | `softwares/` | 分类目录③：软件工程项 | ✅ | 空名录·届时按票入册 |
-| `tools/` | 仓级门禁/工具脚本 | ✅ | 跨项目通用件（check-source-of-truth、check-truename 等）；项目级门禁脚本住各项目 `scripts/` |
+| `share/` | 仓级共享料源（门禁/工具脚本真源） | ✅ | 跨项目通用件（check-source-of-truth、check-truename、run-gates、install-hooks 等·TOOLHOME 票 share 料源口径）；使用方包装配时自包含嵌入包内 `tools/` 挂载位；项目级专属门禁脚本住各项目 `scripts/` |
 | `.scratch/tickets/`（各项目内） | 票面落位 | ✅ | 票面真源落位（皮总裁定·票面落 scratch）；仓根 `.scratch/tickets/` 仅存 B 批过渡票（退役候裁见 B 批收口登记） |
 | 各项目 `.collab/{decisions,qa,receipts,board,research,design}/` | 史实锚案卷 | ✅ | 判词/裁决/回执/核验/研究/设计稿·append-only |
 | 各项目 `docs/` | 项目级规范/活文档 | ✅ | STRUCTURE/PRODUCT/ARCHITECTURE 等 |

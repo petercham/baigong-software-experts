@@ -39,19 +39,19 @@
 
 - **条文（源＝执行交接件 §一「三守门」①·逐字照录）**：「**①单真源**（同一内容只一处全文、MD 只留骨架行、细则只在 skill、互引不双写）」。
 - 同组另两条守门（②常驻保障／③判定权不下放）同在该交接件 §一，本件不复写、只指路径：`.collab/research` 专家层与技能层架构决议执行交接件 §一「三守门」。
-- **机检落点**：`tools/check-source-of-truth.py` A1（`MC-SOT-1`·骨架-本体 ≥12 CJK 行级重合）／A2（`MC-SOT-2`·反引号 .md 指针可达性）。
+- **机检落点**：`share/check-source-of-truth.py` A1（`MC-SOT-1`·骨架-本体 ≥12 CJK 行级重合）／A2（`MC-SOT-2`·反引号 .md 指针可达性）。
 
 ### 4.2 2500 分轨（`MC-SKILL-LINE`）
 
 - **条文（源＝执行交接件 §二 状态表 #4·逐字照录）**：「**席 MD（身份层）严守 2500、SKILL.md（技能层）≤5000 token 级＋references 分卷**」。该条原文为「建议」级（§一 2.3-Q6），依皮总收口令①＋第五轮规则④**升格为已决**（除非皮总明确否决）。
-- **口径**：token 口径 script-v1（`tools/count_agent_tokens.py`：CJK≈1 token/字、非 CJK≈4 字符/token、ceil 上取整；emoji 归非 CJK 池）；读数须带口径版本＋取整方式＋commit SHA＋实测人（同交接件 W5 验收判据）。
-- **机检落点**：`tools/check-source-of-truth.py` B 段（`MC-SKILL-LINE`·技能层 SKILL.md ≤5000 线检）。
+- **口径**：token 口径 script-v1（`share/count_agent_tokens.py`：CJK≈1 token/字、非 CJK≈4 字符/token、ceil 上取整；emoji 归非 CJK 池）；读数须带口径版本＋取整方式＋commit SHA＋实测人（同交接件 W5 验收判据）。
+- **机检落点**：`share/check-source-of-truth.py` B 段（`MC-SKILL-LINE`·技能层 SKILL.md ≤5000 线检）。
 
 ### 4.3 基线豁免形态（`MC-SOT-EXEMPT`）
 
 - **条文（源＝`.collab/decisions` 皮总拍板 §九·①）**：基线豁免＝**转正式豁免**，**豁免键＝「行文本＋出现文件集合」**——仅当「该文本＋在既定文件集合内」才豁免；**同文本出现在新文件仍出 BLOCK**（不取纯文本键，以堵「同文本搬家被误标基线」的盲区）。
-- **判定口径（逐「出现处」判定）**：文本匹配且出现文件 ∈ 该文件集合 → 转 WATCH 并标「｜基线豁免（文本＋文件集合）」，不计 BLOCK；文本不在基线、或文本在基线但出现在集合外的新文件 → 照 BLOCK 并标「｜新命中」。基线快照＝`tools/baseline-sot-dup.json`（形态＝`items[]`·{text, files}·程序化生成，禁手抄）。
-- **机检落点**：`tools/check-source-of-truth.py` A1 豁免键分支。
+- **判定口径（逐「出现处」判定）**：文本匹配且出现文件 ∈ 该文件集合 → 转 WATCH 并标「｜基线豁免（文本＋文件集合）」，不计 BLOCK；文本不在基线、或文本在基线但出现在集合外的新文件 → 照 BLOCK 并标「｜新命中」。基线快照＝`share/baseline-sot-dup.json`（形态＝`items[]`·{text, files}·程序化生成，禁手抄）。
+- **机检落点**：`share/check-source-of-truth.py` A1 豁免键分支。
 
 ## 五、本件不定义什么
 

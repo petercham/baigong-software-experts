@@ -27,7 +27,7 @@
 | `object-build/scripts/publish.py` | 装配器实现（本工序第 2 步的执行体） | 否 |
 | `object-audit/references/10-skill.md` | 审计侧测项分组（本件交审的入口） | 否 |
 | `multi-collab/references/60-gates.md` | 门禁出口路由与升级判据 | 否 |
-| `tools/check-source-of-truth.py` | 真源对账（含根标记参数与基线重生成） | 否 |
+| `share/check-source-of-truth.py` | 真源对账（含根标记参数与基线重生成） | 否 |
 | 本包 `SKILL.md` 与 `references/` | **装配→注册这道工序本身**（入口条件／步骤／出口判据／产出件／负样本） | **是** |
 
 **指针纪律**：本包凡涉及发布器能力，一律只指路径；出现第二处定义即第二真源，须删。

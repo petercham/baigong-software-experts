@@ -101,7 +101,7 @@ T 型必填四项＝**入口条件／步骤（含停手条件）／出口判据�
 |---|---|
 | 复制实现、同步账本六键体例、状态对账、准入闸、退出码闭集 | `object-build/references/60-publish.md`（真源·指针） |
 | 门禁跑法、出口路由、升级判据 | `multi-collab/references/60-gates.md`（指针） |
-| 真源对账（含根标记参数与基线重生成） | `tools/check-source-of-truth.py`（指针） |
+| 真源对账（含根标记参数与基线重生成） | `share/check-source-of-truth.py`（指针） |
 | 组件内容的专业判据 | 各组件自带真源 |
 | 仓拆分与目录治理 | 本件不涉 |
 
