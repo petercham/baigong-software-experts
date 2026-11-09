@@ -44,3 +44,4 @@ disallowedTools:
 - `skills/sop/scripts/state-transition.py`：范围签/签字状态迁移登记。
 - `skills/sop/scripts/reconcile-daily.py`：日终对账（产出哈希链核验）。
 - `skills/sop/scripts/memory-neutralize.py`：记忆文件读取中立化（U6 联测面）。
+- 技能入口 claim-commitment-governance（主张—来源—验证—外发语义治理）：PRD／解析件／验收标准中每条主张的来源层、证据等级、权威取值按该技能 10-contract §1–§4 填写与追问；外部输入件来源层按该技能 10-contract §2 六层判定（判定序真身＝§2 `:41` 节标题＋`:43` 判定序；§7＝状态语义硬规则）；登记表四表（A–D）模板＝该技能 templates/claim-register.md。

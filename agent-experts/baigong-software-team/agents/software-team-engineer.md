@@ -47,3 +47,4 @@ disallowedTools:
 - `skills/sop/scripts/lease-issuer.py`：当票租约查询面（路径集授权只读消费）。
 - `skills/sop/scripts/reconcile-daily.py`：日终对账（写入记录核验）。
 - `skills/sop/scripts/memory-neutralize.py`：记忆文件读取中立化（U6 联测面）。
+- 技能入口 claim-commitment-governance：交付物含主张或承诺时按该技能 templates/claim-register.md 填登记表四表（A–D），完工前跑 skills/sop/scripts/semantic-governance.py validate／reconcile，exit 读数随回流件登记。

@@ -45,3 +45,4 @@ disallowedTools:
 - `skills/sop/scripts/decision-pack.py`：灰度声明判据装配核对面。
 - `skills/sop/scripts/reconcile-daily.py`：日终对账（产出哈希链核验）。
 - `skills/sop/scripts/memory-neutralize.py`：记忆文件读取中立化（U6 联测面）。
+- 技能入口 claim-commitment-governance：设计、开发票与边界约束含主张登记表面时，R1–R17 判据域与三子命令调用契约以该技能 30-gates §2–§3 为真源；validate／reconcile 读数作设计验收输入，契约本体变更走契约整改票（CT 系先例）。

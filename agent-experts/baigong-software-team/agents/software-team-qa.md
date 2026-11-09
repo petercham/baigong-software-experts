@@ -47,3 +47,4 @@ disallowedTools:
 - `skills/sop/scripts/shadow-replay.py`：影子重放＋过程痕迹扫描（引用可达性＋过程痕迹词族机检）。
 - `skills/sop/scripts/liveness-selfcheck.py`：活性自检（先注入必中事件再读统计）。
 - `skills/sop/scripts/reconcile-daily.py`：日终对账。
+- 技能入口 claim-commitment-governance：验收与审计消费三子命令 exit 读数与外发前闸 gate-outbound 面；判词按该技能 30-gates §2 R 判据号逐条对位（判据归属表 §3），人工闸四处（§1）证据归对应消费点。

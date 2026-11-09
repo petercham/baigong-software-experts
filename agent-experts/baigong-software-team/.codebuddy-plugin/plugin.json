@@ -16,7 +16,8 @@
   "skills": [
     "./skills/software-orchestration",
     "./skills/external-advisor-collab",
-    "./skills/deep-research"
+    "./skills/deep-research",
+    "./skills/claim-commitment-governance"
   ],
 
   "expertType": "team",

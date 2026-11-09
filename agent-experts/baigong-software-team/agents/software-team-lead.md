@@ -62,6 +62,7 @@ maxTurns: 200
 - `skills/sop/scripts/liveness-selfcheck.py`：活性自检（先注入必中事件再读统计）。
 - `skills/sop/scripts/freeze-unfreeze.py`：冻结/解冻——人类直通触点触发，主理人仅投递，脚本不得自触发。
 - `skills/sop/scripts/sign-verify.py`：验签记录落 `.collab/signatures/` 时核验。
+- 技能入口 claim-commitment-governance（主张—来源—验证—外发语义治理）：三子命令机械闸 skills/sop/scripts/semantic-governance.py 的执行与读数投递、人工闸四处证据投递归本席；判据归属与调用契约真源＝claim-commitment-governance 包 30-gates §2–§3，读数投递不解读。
 
 ## 账本句
 

@@ -24,7 +24,7 @@ version: 1.0.0
 
 ## scripts 索引（TCB 脚本·被调用时查阅其头部规范）
 
-`scripts/` 装 TCB 脚本实体（T02/T03/T04 交付）：`state-transition.py`／`lease-issuer.py`／`intake-register.py`／`reconcile-daily.py`／`promote-manifest.py`／`ledger-init.sh`／`baseline-backfill-demo.py`／`dispatch-builder.py`／`serial-gate.py`／`decision-pack.py`／`write-guard.py`／`commit-audit.py`／`liveness-selfcheck.py`／`freeze-unfreeze.py`／`memory-neutralize.py`／`shadow-replay.py`／`sign-verify.py`。
+`scripts/` 装 TCB 脚本实体（T02/T03/T04 交付）：`state-transition.py`／`lease-issuer.py`／`intake-register.py`／`reconcile-daily.py`／`promote-manifest.py`／`ledger-init.sh`／`baseline-backfill-demo.py`／`dispatch-builder.py`／`serial-gate.py`／`decision-pack.py`／`write-guard.py`／`commit-audit.py`／`liveness-selfcheck.py`／`freeze-unfreeze.py`／`memory-neutralize.py`／`shadow-replay.py`／`sign-verify.py`。另装语义治理校验脚本 `semantic-governance.py`（SEMGOV-T2 交付·判据真源＝claim-commitment-governance 包 30-gates §2–§3）：三子命令口径＝`validate --artifact <file> --kind <artifact-kind>`（单件 R1/R2/R5/R7/R14/R16）／`reconcile --artifacts <file-list>`（跨件 R3/R10/R11/R12/R13/R17）／`gate-outbound --artifact <file>`（外发前 R4/R6/R8/R9/R15＋人工闸消费点）；exit 0 通过／exit≠0 输出违例字段与判据号。
 
 ## 正反例（技法面）
 

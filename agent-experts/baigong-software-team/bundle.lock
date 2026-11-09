@@ -27,6 +27,16 @@
       "path": "skills/deep-research",
       "target": "skills/deep-research",
       "note": "跨仓组件（票 T-deepresearch-01·皮总 R-1 fork 登记）：真源＝skills 仓 skills/deep-research（MIT 派生自 staruhub/ClaudeSkills deep-research V8.1.2·克隆 hash 66e02d23642f0c63ccb07b46a88104eade402d44·登记见该技能 README）；解耦口径＝R-6：席位与编排零变化，本行为组件新增＋平台刷新载体（宿主缓存按包版本刷新），调研起手式自动路由靠技能 description 触发词，不动席位；v1.0→v1.0.1 修因＝QA-deepresearch-01 minor-a/b/c 收口（SKILL.md 四件套句删近逐字摘要改纯指针＋补 .md 后缀、methodology 中英混排修·票 T-deepresearch-02）；v1.0.1→v1.0.2 修因＝EAC-CLN 指针闭集整改（README 变更记录行消费侧仓案面指针改自包含陈述·皮总拍板㊺·skills 仓 730962e）"
+    },
+    {
+      "component": "claim-commitment-governance",
+      "repo": ".",
+      "roottag": "softdev",
+      "ref": "claim-commitment-governance@v1.2.0",
+      "ref_kind": "tag",
+      "path": "agent-skills/claim-commitment-governance",
+      "target": "skills/claim-commitment-governance",
+      "note": "SEMGOV-T3 挂载（立项登记 §四 T3 行）：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代＝CT2 合并收口钉值·收口登记 13e27b1）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
     }
   ],
   "assembly_exclude": [
