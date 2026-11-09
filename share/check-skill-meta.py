@@ -65,24 +65,24 @@ def die_usage(msg: str) -> "None":
 
 
 def find_root(explicit: str | None) -> str:
-    """定位仓根：显式 --root 优先，否则自本文件向上找「tools/ ＋三分类目录任一」的目录。"""
+    """定位仓根：显式 --root 优先，否则自本文件向上找「share/ ＋三分类目录任一」的目录。"""
     if explicit:
         if not os.path.isdir(explicit):
             die_usage("--root 不存在：%s" % explicit)
-        if not (os.path.isdir(os.path.join(explicit, "tools")) and any(
+        if not (os.path.isdir(os.path.join(explicit, "share")) and any(
                 os.path.isdir(os.path.join(explicit, c))
                 for c in ("agent-experts", "agent-skills", "softwares"))):
-            die_usage("--root 下找不到 tools/＋三分类目录：%s" % explicit)
+            die_usage("--root 下找不到 share/＋三分类目录：%s" % explicit)
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "tools")) and any(
+        if os.path.isdir(os.path.join(cur, "share")) and any(
                 os.path.isdir(os.path.join(cur, c))
                 for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)
         if parent == cur:
-            die_usage("未能自脚本位置向上定位到含 tools/＋三分类目录的仓根；请用 --root 指定")
+            die_usage("未能自脚本位置向上定位到含 share/＋三分类目录的仓根；请用 --root 指定")
         cur = parent
 
 

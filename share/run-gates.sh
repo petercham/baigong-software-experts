@@ -70,7 +70,7 @@ while [ $# -gt 0 ]; do
   esac
 done
 
-# --- 定位仓根（--root 优先；否则自脚本位置向上找「tools/ ＋三分类目录任一」） ---
+# --- 定位仓根（--root 优先；否则自脚本位置向上找「share/ ＋三分类目录任一」） ---
 if [ -n "$ROOT_ARG" ]; then
   [ -d "$ROOT_ARG" ] || die_usage "--root 不存在：$ROOT_ARG"
   ROOT="$(cd "$ROOT_ARG" && pwd)"
@@ -78,7 +78,7 @@ else
   cur="$SELF_DIR"
   ROOT=""
   while :; do
-    if [ -d "$cur/tools" ] && { [ -d "$cur/agent-experts" ] || [ -d "$cur/agent-skills" ] || [ -d "$cur/softwares" ]; }; then ROOT="$cur"; break; fi
+    if [ -d "$cur/share" ] && { [ -d "$cur/agent-experts" ] || [ -d "$cur/agent-skills" ] || [ -d "$cur/softwares" ]; }; then ROOT="$cur"; break; fi
     parent="$(dirname "$cur")"
     [ "$parent" = "$cur" ] && die_infra "未能定位仓根；请用 --root 指定"
     cur="$parent"

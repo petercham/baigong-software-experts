@@ -118,7 +118,7 @@ def find_root(explicit: str | None) -> str:
         return os.path.abspath(explicit)
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
-        if os.path.isdir(os.path.join(cur, "tools")) and any(
+        if os.path.isdir(os.path.join(cur, "share")) and any(
                 os.path.isdir(os.path.join(cur, c))
                 for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
@@ -439,7 +439,7 @@ def main(argv: "list[str]") -> int:
                for c in ("agent-experts", "agent-skills", "softwares")):
         anchor = os.path.dirname(root)
         while True:
-            if os.path.isdir(os.path.join(anchor, "tools")) and any(
+            if os.path.isdir(os.path.join(anchor, "share")) and any(
                     os.path.isdir(os.path.join(anchor, c))
                     for c in ("agent-experts", "agent-skills", "softwares")):
                 break

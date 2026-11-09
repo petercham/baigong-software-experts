@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# tools/count_agent_tokens.py · 口径 v1（CJK≈1 token/字、非 CJK≈4 字符/token）
+# share/count_agent_tokens.py · 口径 v1（CJK≈1 token/字、非 CJK≈4 字符/token）
 # 口径具名：script-v1；取整方式：ceil（上取整）。
 # 引用本脚本读数时必须申报四要素：口径版本 script-v1 ＋ 被测 commit SHA ＋ 实测人 ＋ 取整方式 ceil。
 import os, re, sys, glob

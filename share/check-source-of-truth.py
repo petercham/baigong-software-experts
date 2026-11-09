@@ -71,7 +71,7 @@
 #   on_severity 已有取值域（BLOCK／WATCH）——基线豁免项转 WATCH，不新造 SEV 词
 #   （新造词在挂入 run-gates 后会撞「未知 SEV」exit 4，属自埋雷，故不取）。
 #   **挂载状态（批 5-② 甲案已挂·此处如实记态，不夸大不缩小）**：本脚本已挂入
-#   run-gates.sh 的 SCRIPTS 清单，清单项＝`ROOT/tools/check-source-of-truth`
+#   run-gates.sh 的 SCRIPTS 清单，清单项＝`ROOT/share/check-source-of-truth`
 #   （甲案＝给清单加「显式前缀 ROOT/ ＝仓根相对路径」的解析语义，判据一字未动；
 #   `../../..` 相对段写法实测 exit 4，故不取）。60-gates.md 的 per_spec 已补
 #   本件四条 → 一律 advisory：出提示、**不拦提交**（§九·②「先 advisory 取信号」）。
@@ -83,7 +83,7 @@
 #   前缀若改 ADR-：run-gates 的 SPEC_ID_HOME 无 ADR 映射 → 逐笔提交 exit 3 自锁
 #   （实测），故维持 MC-（详见 decisions §九·② 与批 5-② 回报）。
 #
-# token 口径（MC-SKILL-LINE 用）：script-v1（tools/count_agent_tokens.py 同款实现：
+# token 口径（MC-SKILL-LINE 用）：script-v1（share/count_agent_tokens.py 同款实现：
 #   CJK 区段正则≈1 token/字、非 CJK≈4 字符/token、ceil 上取整）。
 #   **emoji 归属约定＝script-v1 现状：非 CJK 池**（区段正则不含 U+2600–27BF 等
 #   W 属性符号，emoji 按 4 字符≈1 token 计）——约定出处＝批 4 W5a 勘察报告 B3.2
@@ -116,11 +116,11 @@ T2 三仓口径（拆仓执行批·拍板六⑥）：
       照样被「集合外新文件→BLOCK」条款咬住。
 
 用法：
-    python tools/check-source-of-truth.py [--root <devkits 仓根>]
+    python share/check-source-of-truth.py [--root <devkits 仓根>]
         [--mode dual|single] [--pkg <相对仓根的包路径>] [--skills-root <相对仓根的技能真源根>]
         [--tag <roottag>] [--regen-baseline]
 
-    --regen-baseline：对**本次扫描面**全对账一次，程序化重生成 tools/baseline-sot-dup.json。
+    --regen-baseline：对**本次扫描面**全对账一次，程序化重生成 share/baseline-sot-dup.json。
       合并规则（两扫描面共一份基线文件）：本次扫描 roottag 集合内的旧 items 整体替换，
       集合外的 items 原样保留（dual 面＝{experts,skills}，single 面＝{<tag>}）。
       基线快照由本开关生成，禁手抄（旧基线由 git 史留痕）。
@@ -131,7 +131,7 @@ T2 三仓口径（拆仓执行批·拍板六⑥）：
        grep 双条件〔「本席」AND 卷名∈{dev-discipline,handoff-discipline,deploy-gate,collab-rules}〕
        ＋与所 grep 命中卷（dev/handoff 两卷条文单元池）最长连续重合 ≥12 CJK＝复写嫌疑
        （一律 WATCH·不计基线豁免）＋任一席声明块总量 ≥15 行＝回裁线（基线快照
-       tools/baseline-seat-decl.json·--regen-seat-baseline 程序化生成）。
+       share/baseline-seat-decl.json·--regen-seat-baseline 程序化生成）。
        括注豁免仅全角引号「」『』且段内 CJK ≤10（QUOTE_EXEMPT_MAX·超限照计）。
        自咬＝--selftest-seatdecl 五用例（正例／复写咬合／洗白反例／真词条不误伤／缺「本席」）。
     A1（MC-SOT-1）agents 席 MD 之间、MD 与 skills 之间 ≥12 CJK 连续段行级重合
@@ -167,7 +167,7 @@ DEFAULT_TAG_DUAL_BUNDLE = 'experts'    # 双根口径：bundle 根 roottag
 DEFAULT_TAG_DUAL_SKILLS = 'skills'     # 双根口径：技能真源根 roottag
 DEFAULT_TAG_SINGLE = 'pkg'             # 单根口径缺省 roottag（软开调项传 softdev）
 
-# 基线快照（外置 JSON＝tools/baseline-sot-dup.json·程序化生成以免手抄漂移）：
+# 基线快照（外置 JSON＝share/baseline-sot-dup.json·程序化生成以免手抄漂移）：
 #   形态＝ items[]：{text＝行文本, files＝该文本既定出现的文件集合（两段式标识）}。
 #   **豁免键＝「文本＋文件集合」**（皮总拍板 decisions §九·①，规范来源见文件头
 #   MC-SOT-EXEMPT 块）——不取纯文本键，以堵住「同文本搬家被误标基线」的盲区。
@@ -731,7 +731,7 @@ def regen_baseline(dup_items: list, tags: set) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description='W2 真源对账（骨架-本体＋技能层线检·T2 三仓口径）')
-    parser.add_argument('--root', default='', help='devkits 仓根（默认自脚本位置向上找 tools/＋三分类目录）')
+    parser.add_argument('--root', default='', help='devkits 仓根（默认自脚本位置向上找 share/＋三分类目录）')
     parser.add_argument('--mode', default='dual', choices=('dual', 'single'),
                         help='dual＝bundle 根＋技能真源根双根对账（缺省）；single＝旧包内单根口径')
     parser.add_argument('--pkg', default=DEFAULT_PKG, help='被测专家包（相对仓根）')
@@ -741,7 +741,7 @@ def main() -> int:
     parser.add_argument('--regen-baseline', action='store_true',
                         help='对本次扫描面全对账并重生成基线快照（程序化·禁手抄）')
     parser.add_argument('--regen-seat-baseline', action='store_true',
-                        help='程序化重生成席位声明基线 tools/baseline-seat-decl.json（禁手抄）')
+                        help='程序化重生成席位声明基线 share/baseline-seat-decl.json（禁手抄）')
     parser.add_argument('--selftest-seatdecl', action='store_true',
                         help='C 段五用例自咬对拍（内嵌合成件·对拍不符 exit 1）')
     args = parser.parse_args()
@@ -751,7 +751,7 @@ def main() -> int:
     if not root:
         cur = os.path.dirname(os.path.abspath(__file__))
         while True:
-            if os.path.isdir(os.path.join(cur, 'tools')) and any(
+            if os.path.isdir(os.path.join(cur, 'share')) and any(
                     os.path.isdir(os.path.join(cur, c))
                     for c in ('agent-experts', 'agent-skills', 'softwares')):
                 root = cur

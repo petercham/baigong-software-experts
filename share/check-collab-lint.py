@@ -129,7 +129,7 @@ def find_root(explicit: str | None) -> str:
     cur = os.path.dirname(os.path.abspath(__file__))
     while True:
         # 仓根判定（B3a 随动·B2 收口登记候裁②）：deliverables 旧域灭，改同侪同款判定
-        if os.path.isdir(os.path.join(cur, "tools")) and any(
+        if os.path.isdir(os.path.join(cur, "share")) and any(
                 os.path.isdir(os.path.join(cur, c)) for c in ("agent-experts", "agent-skills", "softwares")):
             return cur
         parent = os.path.dirname(cur)

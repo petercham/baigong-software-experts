@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# tools/check-truename.py · V8 真名残留机检（audit-h08·2026-10-28·设计稿 §⑤-4 口径）
+# share/check-truename.py · V8 真名残留机检（audit-h08·2026-10-28·设计稿 §⑤-4 口径）
 # 扫描面闭集：perspective 包全部真源（含 frontmatter）＋genre-library 挂载列（主件注记行＋配方条目表挂载列及其注记＝genre-recipe-entries.md 四节区）＋两壳 ⛓ 挂载指针注记行。
 # 豁免面（唯一）：各件含「来源标注」关键词的 meta 节（节名定位：从「## meta」或「## meta（来源标注…）」标题到下一同级标题或文件尾；节内须含「来源标注」四字）。
 # 词典：check-truename-names.txt（同目录）。CJK 词＝子串匹配；拉丁词＝词边界匹配。
