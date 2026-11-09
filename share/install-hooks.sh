@@ -1,0 +1,136 @@
+#!/usr/bin/env bash
+# --- spec-provenance v1 ---
+# spec_id: MC-HOOK-1
+# spec_file: agent-skills/multi-collab/references/60-gates.md
+# spec_anchor: - 安装器**幂等**
+# spec_clause_sha256: 9e568722577b7ca9b2d6cb5dae54f6115c468bfc102157e9e5d04efc0f74f797
+# spec_version: 3.9
+# spec_effective: 2026-10-23
+# provider: multi-collab
+# --- /spec-provenance ---
+#
+# 钩子安装器（幂等装 .git/hooks/pre-commit）。规范来源：设计 v2 §2.5/60-gates。
+#
+# 三条照抄规范的行为约束（不复写正文，只指路径）：
+#   幂等／不覆盖已有钩子 → agent-skills/multi-collab/references/60-gates.md「七、接入」
+#   钩子文件本身不入仓（入仓的是本安装器） → 同上「一、三个出口」段末
+#   钩子内用显式解释器调用（不依赖可执行位） → 同上「七、接入」第 2 条
+#
+# 退出码（本件是安装器，不是检查器；语义与检查脚本的闭集对齐但不含 3）：
+#   0 已安装／本来就是最新  1 已存在他人钩子，未覆盖，需人工合并
+#   2 用法错  4 基础设施错（找不到 git 仓／找不到 bash／找不到门禁入口）
+
+set -u
+
+# 显式解释器：本文件自身用 `bash` 调起，写进钩子的命令也一律带解释器名。
+SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
+RUNNER="$SELF_DIR/run-gates.sh"
+
+say() { printf '%s\n' "$*"; }
+die_usage() { printf 'usage error: %s\n' "$*" >&2; exit 2; }
+die_infra() { printf 'infra error: %s\n' "$*" >&2; exit 4; }
+
+# --- 参数：只接受 --root（其余一律用法错，不猜） ---
+ROOT_ARG=""
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --root) [ $# -ge 2 ] || die_usage "--root 需要一个目录参数"; ROOT_ARG="$2"; shift 2 ;;
+    -h|--help)
+      say "用法：bash install-hooks.sh [--root <仓根>]"
+      say "幂等安装 .git/hooks/pre-commit；已存在非本器生成的钩子时不覆盖，提示人工合并。"
+      exit 0 ;;
+    *) die_usage "未知参数：$1" ;;
+  esac
+done
+
+# --- 路径归一（修单①·裁-21 复核）---
+# 钩子内容里嵌 REPO_ROOT/RUNNER 字面量；若盘符式 `--root` 与挂载点式 `--root`
+# （或 git rev-parse 返回的盘符式路径）产出不同字面量，钩子就在两种调用方式间
+# 来回"假刷新"——幂等对调用方式敏感。归一口径：**统一成盘符正斜杠式**，
+# 优先 cygpath -m，其次 bash 内建 pwd -W，都没有再退回 pwd。
+# （本注释刻意不写两种路径的字面量——扫描器会把盘符式样例当实体命中。）
+norm_path() {
+  local p="$1" out=""
+  if command -v cygpath >/dev/null 2>&1; then
+    out="$(cygpath -m "$p" 2>/dev/null)" && [ -n "$out" ] && { printf '%s' "$out"; return; }
+  fi
+  out="$(cd "$p" 2>/dev/null && pwd -W 2>/dev/null)" && [ -n "$out" ] && { printf '%s' "$out"; return; }
+  (cd "$p" 2>/dev/null && pwd) || printf '%s' "$p"
+}
+
+# --- 定位 git 仓根 ---
+if [ -n "$ROOT_ARG" ]; then
+  [ -d "$ROOT_ARG" ] || die_usage "--root 不存在：$ROOT_ARG"
+  REPO_ROOT="$(norm_path "$ROOT_ARG")"
+elif command -v git >/dev/null 2>&1; then
+  REPO_ROOT_RAW="$(git -C "$SELF_DIR" rev-parse --show-toplevel 2>/dev/null)" \
+    || die_infra "当前目录不在 git 仓内，无法定位 .git/hooks"
+  [ -n "$REPO_ROOT_RAW" ] || die_infra "git rev-parse 未返回仓根"
+  REPO_ROOT="$(norm_path "$REPO_ROOT_RAW")"
+else
+  die_infra "找不到 git，且未给 --root"
+fi
+RUNNER="$(norm_path "$SELF_DIR")/run-gates.sh"
+# FX-U30 三段式随注：声明闸脚本与 RUNNER 同目录寻径（本安装器所在目录即门禁脚本目录）；
+# 与 RUNNER 存在性检查同理，找不到即基础设施错——不得生成缺闸钩子后静默降级为不拦。
+DECL="$(norm_path "$SELF_DIR")/check-staged-declaration.py"
+[ -f "$DECL" ] || die_infra "找不到暂存声明闸脚本：$DECL"
+# 钩子体行6 用显式解释器调用声明闸；解释器在安装时探测并嵌入（与 run-gates.sh 探测口径同制：
+# python3 优先、次选 python）。钩子运行环境若后续失去该命令，行6 调用失败＝非零拒提＝fail-closed。
+PY=""
+for cand in python3 python; do
+  if command -v "$cand" >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+[ -n "$PY" ] || die_infra "找不到 python3/python，声明闸无法写入钩子（不得降级为不拦）"
+
+HOOKS_DIR="$REPO_ROOT/.git/hooks"
+HOOK="$HOOKS_DIR/pre-commit"
+[ -d "$HOOKS_DIR" ] || die_infra "钩子目录不存在：$HOOKS_DIR"
+[ -f "$RUNNER" ] || die_infra "找不到门禁入口脚本：$RUNNER"
+
+# 本器生成的钩子内容。标记行用于区分"本器装的"与"别人装的"。
+# FX-U30 三段式（票面 S2）：行6 声明闸先于 run-gates 链 fail-fast（咬住即拒提不再跑全链），
+# 行7 exec 语义一字不动；MARKER 标记行字符串零动（幂等三分支判定臂存续承此）。
+MARKER="generated-by: object-audit/scripts/install-hooks.sh"
+GATE_HOOK_BODY="#!/usr/bin/env bash
+# ${MARKER}
+# 提交前门禁（出口①）。规范来源：设计 v2 §2.5/60-gates。
+# 改判据请改路由表规范件（agent-skills/multi-collab/references/60-gates.md），不要改本文件。
+set -u
+\"$PY\" \"$DECL\" --root \"$REPO_ROOT\" || exit \$?
+exec bash \"$RUNNER\" --root \"$REPO_ROOT\"
+"
+
+write_hook() {
+  printf '%s\n' "$GATE_HOOK_BODY" > "$HOOK" || die_infra "写入钩子失败：$HOOK"
+  # 权限位尽力而为：规范明写钩子内用显式解释器调用，**不依赖可执行位**
+  # （部分文件系统权限位不具区分力，靠它会把"装不上"伪装成"已装好"）。
+  chmod +x "$HOOK" 2>/dev/null || true
+}
+
+if [ -e "$HOOK" ]; then
+  if grep -qF "$MARKER" "$HOOK" 2>/dev/null; then
+    # 是本器装的：内容一致＝零差异（幂等判据），不一致＝刷新到当前版本。
+    CURRENT="$(cat "$HOOK")"
+    WANT="$(printf '%s\n' "$GATE_HOOK_BODY")"
+    if [ "$CURRENT" = "$WANT" ]; then
+      say "已是最新，未改动：$HOOK"
+      exit 0
+    fi
+    write_hook
+    say "本器钩子已刷新到当前版本：$HOOK"
+    exit 0
+  fi
+  # 别人装的（或手工写的）：**不覆盖**，提示人工合并。
+  say "已存在非本器生成的 pre-commit，未覆盖：$HOOK"
+  say "请人工把下面这段并进去（覆盖＝悄悄删掉别人装的东西）："
+  say "-----8<-----"
+  printf '%s\n' "$GATE_HOOK_BODY"
+  say "-----8<-----"
+  exit 1
+fi
+
+write_hook
+say "已安装 pre-commit 钩子：$HOOK"
+say "入口：bash $RUNNER"
+exit 0
