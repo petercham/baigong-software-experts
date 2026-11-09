@@ -22,8 +22,8 @@
 #   无 pathspec 提交见全共享 staged 面（含窗口期他席插入件＝卷入必咬）。
 #
 # 退出码（闭集·与检查脚本闭集对齐但不含 3）：
-#   0 放行（staged⊆声明；或无声明场景警告不拦；或 BYPASS 全转警告）
-#   1 卷入 BLOCK（存在 staged 件 ∉ 声明闭集，fail-closed）
+#   0 放行（staged⊆声明；或 BYPASS 全转警告）
+#   1 卷入 BLOCK（存在 staged 件 ∉ 声明闭集，或无声明且 staged 非空——均 fail-closed）
 #   2 用法错  4 基础设施错（git 不可用／声明文件不存在／staged 读数命令失败）
 # 未预期异常按 4（不得吞成 0）。
 # 本件只读：零写盘——不建目录、不写证据件、不碰 index（BYPASS 留痕归 run-gates 出口②职责）。
@@ -36,7 +36,7 @@
 声明源闭集（两种·环境变量优先）：
   1) 环境变量 FX_COMMIT_DECLARE：换行或逗号分隔的仓根相对路径清单；
   2) --declare 指向的文件：每行一路径（空行跳过）。
-  两者皆缺＝无声明场景（警告不拦口径＝W2 先例体例，升 fail-closed 与否＝呈裁项禁自裁）。
+  两者皆缺＝无声明场景（staged 非空即硬拦＝皮总 2026-11-09 裁定「提交闸：升」FX-U32 升格在册；唯一豁免通道＝ALLOW_GATE_DOWN=1 全转警告留痕·灰度期豁免不另设）。
 """
 
 from __future__ import annotations
@@ -149,10 +149,19 @@ def main(argv: "list[str]") -> int:
     bypass = os.environ.get("ALLOW_GATE_DOWN", "") == "1"
 
     if declared is None:
-        # 三③ 无声明场景：警告不拦＝exit 0（升 fail-closed＝呈裁项禁自裁）
+        # 三③' 无声明场景＝fail-closed 硬拦（FX-U32·承皮总裁定点②；灰度反例两枚在册 TR26 575fbba／TR27 67fc6b4）
         if staged:
-            print("STAGED-DECL-WARN 本次提交无声明闭集：staged %d 件全部入账"
-                  "（卷入风险面·见 D-58）" % len(staged))
+            view = "next-index" if "next-index" in os.path.basename(os.environ.get("GIT_INDEX_FILE", "")) else "shared-index"
+            print("STAGED-DECL-VIEW %s（GIT_INDEX_FILE 读数视图·提交侧对照可见化）" % view)
+            if bypass:
+                print("BYPASS STAGED-DECL-BLOCK 本次提交无声明闭集：staged %d 件全部入账（卷入风险面·见 D-58）" % len(staged))
+                print("BYPASS STAGED-DECL-BLOCK 声明指引：提交前设环境变量 FX_COMMIT_DECLARE=仓根相对路径清单（逗号或换行分隔）或传 --declare 声明文件；add 与 commit 紧邻无窗口·pathspec 须 add/commit 两端齐带")
+                print("BYPASS " + SUMMARY_FMT % (len(staged), 0, len(staged)))
+                return 0
+            print("STAGED-DECL-BLOCK 本次提交无声明闭集：staged %d 件全部入账（卷入风险面·见 D-58）" % len(staged))
+            print("STAGED-DECL-BLOCK 声明指引：提交前设环境变量 FX_COMMIT_DECLARE=仓根相对路径清单（逗号或换行分隔）或传 --declare 声明文件；add 与 commit 紧邻无窗口·pathspec 须 add/commit 两端齐带")
+            print(SUMMARY_FMT % (len(staged), 0, len(staged)) + "｜exit 1")
+            return 1
         return 0
 
     decl_set = set(declared)
