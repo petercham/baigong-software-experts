@@ -42,6 +42,7 @@
 - 联网请求计数照登行（EG-6 节内随册）：
 - 预探轮（票面 §〇-2 复点）：jnd.org 200／thinkingbook.org 000／en.wikipedia Don_Norman 000（计数 `3`·两态一致·200 态正文层判定＝可取〔特征词命中＋正文 69K 字节级＋无壳页特征〕）。
 - 补采轮（本对象侧）：jnd.org 首页 `1`＋essay-articles 索引页 `1`＋署名长文三篇（positive-impact／what-does-jnd-mean／how-i-taught-dbw）直取 `3`＝本对象补采直取请求计数 `5`（what-does-jnd-mean 篇属长对话路补采＝四篇正文全部在册）；本对象外部请求总计数=`8`。
+- `补充调研重触发计数`=`1`（rb7-suppl 补研轮计入新规则第 1 轮·皮总 2026-11-09 裁定案内确认在册·FX-U32 补登·口径见契约 EG-6 补充调研重触发三限条款）
 
 ## 补研轮（FX-U29 定向补研）
 
