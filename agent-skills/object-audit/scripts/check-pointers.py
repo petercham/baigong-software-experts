@@ -171,23 +171,52 @@ def looks_like_path(token: str) -> bool:
     return True
 
 
-def build_basename_index(root: str) -> "dict[str, int]":
-    """仓内文件基名 → 命中数（供「只写基名」的指针做存在性判定）。
+def build_indexes(root: str) -> "tuple[dict[str, int], list[str]]":
+    """单次仓根 walk 同建两索引（FX-U28 性能口径＝两索引合并为单次 walk）：
 
-    为什么需要它：本仓大量指针只写基名（README 索引行、分件互指、裁决记录）。
-    D6 只问「所指目标存在」，故基名在仓内命中 ≥1 即算存在；命中 0 才是悬空。
-    基名歧义（同名多份）是**另一种**失效，D6 未定义它、路由表里也没有对应
-    `spec_id`，本首批不报（不越设计 §2.5 清单扩面，不自造判据）。
+    1. 基名索引：仓内文件基名 → 命中数（供「只写基名」的指针做存在性判定）。
+       为什么需要它：本仓大量指针只写基名（README 索引行、分件互指、裁决记录）。
+       D6 只问「所指目标存在」，故基名在仓内命中 ≥1 即算存在；命中 0 才是悬空。
+       基名歧义（同名多份）是**另一种**失效，D6 未定义它、路由表里也没有对应
+       `spec_id`，本首批不报（不越设计 §2.5 清单扩面，不自造判据）。
+    2. 后缀路径索引：仓内全部文件的仓根相对路径（正斜杠形态）列表
+       （供「FX-U28 唯一命中归位层」做后缀唯一匹配计数，口径见该层注释）。
 
     索引域＝**整个仓根**（不是 md 扫描域）：指针可以指向 `.gitignore`、`package.json`
     这类扫描域外的文件；只在扫描域内建索引会把它们误判悬空。
+    剪枝目录集＝两索引共有（.git／__pycache__／node_modules）——基名索引口径照基线一字不动（零回归臂）。
+    后缀路径索引另除外仓根 `.scratch/` 族＝工序取证面非实物真源（D-94 产物级复现指针
+    禁指 .scratch 族＋本票 §〇 样本读数口径「仓根（非 scratch 面）后缀命中」写死——
+    他案 scratch 内 worktree 副本计入会把唯一命中族人为多义化，样本判据即自相矛盾）。
+    索引随单次运行构建一次复用（与基名索引同生命周期）。
     """
     index: "dict[str, int]" = {}
+    relpaths: "list[str]" = []
     for cur, dirs, files in os.walk(root):
         dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", "node_modules")]
         for name in files:
             index[name] = index.get(name, 0) + 1
-    return index
+            rp = os.path.relpath(os.path.join(cur, name), root).replace(os.sep, "/")
+            if rp == ".scratch" or rp.startswith(".scratch/"):
+                continue  # 基名索引照基线含 scratch 面；后缀索引不入 scratch 族
+            relpaths.append(rp)
+    return index, relpaths
+
+
+def strip_pointer_form(token: str) -> str:
+    """token → 相对路径段（剥 file:line 行号 → 剥尾随注解 → 剥 `./` 前缀）。
+
+    七候选层与后缀归位层共用本函数＝行号剥离口径一致（FX-U28 S1 条款四）。
+    剥完为空＝整段是注解（调用方按 annotation-only 处理）。
+    """
+    raw = token.strip()
+    match = FILE_LINE_RE.match(raw)
+    rel = match.group("path") if match else raw
+    # 剥掉路径后紧跟的中文注解（`50-document.md「判定要点」`），否则活指针误判悬空。
+    rel = ANNOTATION_RE.sub("", rel).strip()
+    if rel.startswith("./"):
+        rel = rel[2:]
+    return rel
 
 
 def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]") -> "str | None":
@@ -204,13 +233,7 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
       7. 纯基名（不含斜杠）退到全仓基名存在性判定
     **不设"外部路径豁免"规则**（理由见函数体内注释）：解析不到就照实报悬空。
     """
-    raw = token.strip()
-    match = FILE_LINE_RE.match(raw)
-    rel = match.group("path") if match else raw
-    # 剥掉路径后紧跟的中文注解（`50-document.md「判定要点」`），否则活指针误判悬空。
-    rel = ANNOTATION_RE.sub("", rel).strip()
-    if rel.startswith("./"):
-        rel = rel[2:]
+    rel = strip_pointer_form(token)
     if not rel:
         return "annotation-only"  # 剥完为空＝整段是注解，不是路径指针
     here = os.path.dirname(md_path)
@@ -273,7 +296,8 @@ def iter_markdown(root: str, scopes: "list[str]") -> "list[str]":
     return sorted(out)
 
 
-def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, int]") -> "list[str]":
+def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, int]",
+                   relpaths: "list[str]") -> "tuple[list[str], list[str]]":
     """OA-D6：反引号路径／file:line 引用目标必须存在。
 
     指针 vs 提及（裁-21·判据见 50-document.md「D6 引用完整性」划界条款）：
@@ -282,8 +306,24 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
       行内注明「外部仓」的引用＝外部提及，不入悬空判定（条款要求注明，注明即机械可判；
       未注明者照报——注明的责任在作者，不在脚本猜）。
     主观部分（论证语气）不留脚本，留人判（条款原文）。
+
+    返回 (findings, notes)：notes＝FX-U28 归位注记行，走 stdout 但不进 findings
+    （不污染 exit 码；NOTE-FXU28 不含 BLOCK／WATCH 词，run-gates FINDING_RE 不匹配＝天然不参与路由计数）。
+
+    FX-U28 后缀唯一命中解析层（插入位＝resolve 七候选层全部落空之后、悬空 BLOCK／WATCH 判定之前）：
+      触发形态＝含斜杠相对 token（file:line 先剥行号＝strip_pointer_form 与七候选层同口径）；
+      纯基名 token 不入本层（既有基名存在性层口径一字不动）。
+      归位判据＝对 token 做「仓根相对路径以／＋token 结尾」的后缀匹配计数：
+        命中恰 1＝归位放行（不再报 BLOCK，输出 NOTE 注记行）；
+        命中 0＝维持既有 BLOCK（真悬空不变）；
+        命中 ≥2＝维持既有 BLOCK 且文案不变（多义不猜＝fail-closed；多义详情不入文案＝防文案漂移破坏既有对拍）。
     """
     findings: "list[str]" = []
+    notes: "list[str]" = []
+    # 后缀匹配加速桶：基名 → 仓根相对路径列表（后缀命中必先同基名，桶外零漏）。
+    by_base: "dict[str, list[str]]" = {}
+    for rp in relpaths:
+        by_base.setdefault(rp.rsplit("/", 1)[-1], []).append(rp)
     for md in md_files:
         rel_md = os.path.relpath(md, root).replace(os.sep, "/")
         try:
@@ -306,6 +346,20 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
                 if resolve(token, root, md, basename_index) is not None:
                     continue
                 if "/" in tok:
+                    # FX-U28 后缀唯一命中归位判定（七候选层已全落空至此）：
+                    # 后缀匹配＝「仓根相对路径以／＋剥离后 token 结尾」计数（file:line 已先剥行号）。
+                    rel = strip_pointer_form(token)
+                    needle = "/" + rel
+                    hits = [rp for rp in by_base.get(rel.rsplit("/", 1)[-1], ())
+                            if rp.endswith(needle)]
+                    if len(hits) == 1:
+                        # 命中恰 1＝归位放行：不进 findings（exit 码不受影响），出注记行。
+                        notes.append(
+                            "%s:%d: NOTE-FXU28 短式指针唯一归位 `%s` → %s"
+                            % (rel_md, lineno, tok, hits[0])
+                        )
+                        continue
+                    # 命中 0（真悬空）／命中 ≥2（多义不猜＝fail-closed）＝维持既有 BLOCK，文案不变。
                     findings.append(
                         "%s:%d: %s OA-D6 指针悬空 `%s` → 目标不存在" % (rel_md, lineno, SEV_BLOCK, tok)
                     )
@@ -314,7 +368,7 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
                         "%s:%d: %s OA-D6 提及嫌疑 `%s` → 仓内无同名件（裸基名不 BLOCK，D6 裁-21 划界）"
                         % (rel_md, lineno, SEV_WATCH, tok)
                     )
-    return findings
+    return findings, notes
 
 
 def check_orphans(root: str) -> "list[str]":
@@ -396,6 +450,7 @@ def main(argv: "list[str]") -> int:
         scan_base = root
         root = anchor
 
+    basename_index, relpaths = build_indexes(root)
     if args.target:
         md_files = []
         for tgt in args.target:
@@ -405,7 +460,7 @@ def main(argv: "list[str]") -> int:
             if not os.path.isfile(full):
                 die_usage("--target 文件不存在：%s" % tgt)
             md_files.append(full)
-        findings = check_dangling(root, sorted(md_files), build_basename_index(root))
+        findings, notes = check_dangling(root, sorted(md_files), basename_index, relpaths)
     else:
         if args.scope:
             scopes = list(args.scope)
@@ -417,9 +472,14 @@ def main(argv: "list[str]") -> int:
         if not md_files:
             sys.stderr.write("infra error: 扫描域内没有任何 .md（scope=%s）\n" % ",".join(scopes))
             return 4
-        findings = check_dangling(root, md_files, build_basename_index(root)) + check_orphans(root)
+        findings, notes = check_dangling(root, md_files, basename_index, relpaths)
+        findings = findings + check_orphans(root)
 
     for line in findings:
+        print(line)
+    # FX-U28 注记行：单独 print 在 findings 之后——不进 findings 列表＝不污染 exit 码；
+    # 注记行不带 BLOCK／WATCH 词＝run-gates FINDING_RE 不匹配，天然不参与路由计数。
+    for line in notes:
         print(line)
     return 1 if findings else 0
 
