@@ -36,7 +36,7 @@
       "ref_kind": "tag",
       "path": "agent-skills/claim-commitment-governance",
       "target": "skills/claim-commitment-governance",
-      "note": "SEMGOV-T3 挂载（立项登记 §四 T3 行）：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代＝CT2 合并收口钉值·收口登记 13e27b1）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
+      "note": "SEMGOV-T3 挂载：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
     },
     {
       "component": "devkit-tools",
