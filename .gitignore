@@ -53,6 +53,15 @@
 !/.collab/research/reference-2026-10-24/.discussion/
 !/.collab/research/reference-2026-10-24/REFERENCE-SOURCES.md
 
+# ── .scratch 族（制②补充·SWB-SCRATCHG·决策者 2026-11-10 裁定：.scratch 不进 git 定义在 .gitignore）──
+# 临时开发调试落位区整体排除；唯一豁免＝票面桶 .scratch/tickets/（票面真源落位·裁定 f135855 体例承接）。
+# 体例承制②「嵌套桶级＋仓根显式」双形态配对；机理＝忽略只管未跟踪可见性，已跟踪件扫描行为零变。
+/**/.scratch/*
+/.scratch/*
+!/**/.scratch/tickets/
+!/**/.scratch/tickets/**
+!/.scratch/tickets/
+!/.scratch/tickets/**
 # ── 系统杂物／工具产物（旧 L47–L56 随迁）────────────────────────
 Thumbs.db
 Desktop.ini
