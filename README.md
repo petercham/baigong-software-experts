@@ -19,7 +19,7 @@
 | `agent-skills/` | 分类目录②：独立技能项目 | ✅ | 同上结构 |
 | `softwares/` | 分类目录③：软件工程项 | ✅ | 空名录·届时按票入册 |
 | `share/` | 仓级共享料源（门禁/工具脚本真源） | ✅ | 跨项目通用件（check-source-of-truth、check-truename、run-gates、install-hooks 等·TOOLHOME 票 share 料源口径）；使用方包装配时自包含嵌入包内 `tools/` 挂载位；项目级专属门禁脚本住各项目 `scripts/` |
-| `.scratch/tickets/`（各项目内） | 票面落位 | ✅ | 票面真源落位（皮总裁定·票面落 scratch）；仓根 `.scratch/tickets/` 仅存 B 批过渡票（退役候裁见 B 批收口登记） |
+| `.scratch/tickets/`（各项目内） | 票面落位 | ✅ | 票面真源落位（皮总裁定·票面落 scratch）；仓根 `.scratch/tickets/`＝历史留档票面桶（B 批过渡票候退役在册）；仓根及各包 `.scratch/` 其余族＝gitignore 忽略态（SWB-SCRATCHG） |
 | 各项目 `.collab/{decisions,qa,receipts,board,research,design}/` | 史实锚案卷 | ✅ | 判词/裁决/回执/核验/研究/设计稿·append-only |
 | 各项目 `docs/` | 项目级规范/活文档 | ✅ | STRUCTURE/PRODUCT/ARCHITECTURE 等 |
 | `.collab/{refs,evidence,inbox,process,dispatch,backup}/`＋`tmp-*.txt` | 过程流水/证据/运行时 | ❌（gitignore） | 仓根层级另含过渡留置面：`evidence/gates/`（run-gates 出口②现仍写仓根·过渡态在册）＋`inbox/主理人/`（出口③） |
