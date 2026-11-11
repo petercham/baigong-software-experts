@@ -128,3 +128,47 @@ SWB-SCRATCHCFG 随动段＝已裁(e) B-i 通道口径成文：B-i 型存量迁�
 - 落笔前靶检：`python share/check-pointers.py --target .scratch/tickets/2026-11-11-SWB-SCRATCHCFG-seat-config-lease-sync-ticket-v1.md` → exit 0（读数随回报）。
 - 探针面：V3 探针要求 `--ledger` 重定向至 `.scratch/SWB-SCRATCHCFG/` 族——起草轮本席未跑 write-guard 探针（零写面自证＝无需探针，机理直读 L152–200/L243–274 现文在册）；若施工席跑，完工自删附读数（§4.4-A-2 消费面沿用）。
 - 零触碰自证：两 config／守件／账本／SCRATCHG 三面全程 diff 空集；本笔面恰票面一件。
+
+---
+
+## 修订笔 v1（双席快审归集后·作者席原位 append·ES2/CD1/TMP-DISC 先例路径·R1–R5 全措辞／列面勘正级·方案本体／豁免键设计／S1 替换文本本体／S2／候裁三款框架零动）
+
+- 双席判词（本席修订轮已全文直读）：产品席 `pm-cfgrev`＝`.collab/qa/2026-11-11-SWB-SCRATCHCFG-产品席快审-v1.md`（落链 `c0f9e59`·红2黄3绿10·微型rev后可径放）；QA 席 `qa-cfgrev`＝`.collab/qa/2026-11-11-SWB-SCRATCHCFG-QA席快审-v1.md`（落链 `1331bbc`·红1黄1·窄修后可径放免复审轮）。
+- 修订笔开工读数（当轮现跑·禁抄旧数）：`date`＝2026-11-11 08:04:44／`git rev-parse --short HEAD`＝`1331bbc`（QA 判词笔本体）／tracked 面两枚他案照登零碰零带入＝`M agent-experts/baigong-software-team/.collab/ledger/ledger.jsonl`（他案脏面）＋`M agent-skills/fuxi-skill/products/pending/steve-jobs-perspective/registration.md`（FUXI 在飞 staged）。
+- 效力声明：本节与其前正文冲突处，工程师施工与 QA 验收**以本节为唯一依据**；正文既有行 append-only 不回改（v1 原件＝史实锚）。
+
+### R1（两席红面同构合流）· V3 判据勘正重写（替换正文 §五 V3 全段）
+
+**机理勘正**：write-guard deny reason 由 `write-guard.py` L266 `glob={g!r}` 嵌入 **deny_globs 原样 pattern 字面（非括注剥离后值）**——S1 措辞随动后 reason 的 glob 字段必随替换行变，v1「后跑同 reason 字符串逐字全等」按字面对正确施工必假红＝判据自锁（两席探针独立实证同果）。
+
+**V3 勘正版（写死·三条件式）**：探针两跑（前跑＝现盘 config／后跑＝S1 已替换 config），命令要素写死：
+- `--path` **包根字面**＝`.collab/receipts/2026-11-09-COLLAB-STRUCT-1-施工回执-v1.md`；
+- `--map` **全径写死**＝`agent-experts/baigong-software-team/config/seat-permissions-hooks-map.json`；
+- engineer 身份注入（payload 经 `--input` 或 stdin，形态按 write-guard `read_identity` 现文）；`--ledger`／`--leases`／`--freeze-state` 一律重定向 `.scratch/SWB-SCRATCHCFG/` 探针族（临时区合规·完工自删附读数）。
+
+**锚定环境注（R3 并入·PM 黄-1）**：本仓 devkits 根实测无 .workbuddy/swb-anchor 锚定声明件、仓根层级无 STRUCTURE 结构件（QA 现盘两缺实测）→ `project_root()` 落回**包根**、权限字面读作包根字面；照 v1 全仓根路径式直跑则 deny_globs 分支不进、reason 翻「路径∉当席租约」形态＝前跑失判别力（QA 实跑反证在册）。**A 式（主用）**＝上列包根字面跑法；**B 式（随登备选）**＝显式 SWB_REPO_ROOT 锚定仓根＋--path 全仓根式，前后读数随登另册——两式皆写死方可复现。
+
+**判据三条件（A 式）**：① 前后 reason 骨架前缀 `路径∈deny_globs（表2-1 明确不可写·seat=engineer glob=` **逐字相等**（＝归属分支不变）；② 前跑 glob 段＝`.collab/receipts/**` 字面在场（QA 以此式直跑恰复现票钉）、后跑 glob 段＝**S1-a 替换行逐字段**在场；③ 前后决策均 deny 不变。三条件全中＝零机效变化款机械判据成立；任一不中＝红。**甲裁随登**：若 §七裁甲，V3 换预登记 b 式（后跑 reason 翻「路径∉当席租约」形态＝deny 枚举不再命中·租约闸接力）——该式在包根字面跑法下判别成立无需改（QA §三在册）。
+
+### R2（PM 红-2／QA 黄-1 实证同果）· §六租约段列面勘正
+
+v1 租约段 path_globs 第二项（tickets 桶本票族 glob）**撤除**：lease-issuer 实跑＝该 glob 单项 **REJECT exit 2「越出席位 engineer 写域行」**（子集校验语义＝相等／前缀／子串三式非 glob，engineer write_globs 无 tickets 桶行）——自家租约段犯 S3 揭 SCRATCHG 的同款不自洽。勘正后请求面＝**只留 `agent-experts/baigong-software-team/config/**` 单项**（lease-issuer 实跑 exit 0 可签发＝PM 席实证）。**票附回执落笔＝不落租约面**，随 SCRATCHG 先例体例成文（SCRATCHG leases scratchg 计数 0＝先例旁证·票 §一 自钉；惯态钩子未装下可达；部署态 tickets 桶系统性不可写＝既有惯例部署态债归治理面另账＝PM Y-2 照登不入本案）。**甲裁亦不解此项**（甲加 receipts 行授权、非 .scratch 桶行）→ 入呈拍材料注（见 R5）。
+
+### R4 · S1「零机效变化」表述随 R1 随动
+
+S1 机效声明段**本体结论维持**（两席独立探针实证：替换行剥离后恒等原行→决策仍 deny；产品席完整包副本臂 s4 全批 13 PASS 零翻面——比 v1 V2 声称面更强旁证）；随动仅判据口径一处：v1「同 reason 字符串逐字全等」句**作废**，以 R1 三条件式为准。
+
+### R5 · §七候裁段呈拍材料注（候裁三款框架／留白零动·归裁仍待裁）
+
+- 注①（PM Y-3）：**甲款若裁及＝表2-1 席位行 write_globs 转录改动＝C1 级程序成本**（v1 §七甲款未列程序面，呈裁时应补）。
+- 注②：甲款**不解** R2 租约段／票附回执项（独立存在·见 R2 末句）。
+- 注③·表态归集（不入票面候裁留白·仅材料注）：产品席倾向**乙**（独立复核理由链成立：裁(e) 语义乙款已全兑现、甲款净收益＝改写历史回执恰应拦＋C1 转录成本）；起草席倾向**乙**在册（v1 §七原句）；QA 席不代裁、机效陈述实跑在册（乙款＝后续写入永久拦＋补签永久 REJECT 实证；甲款＝解锁整桶可达超单点语义）。
+
+### 观察承接（措辞注·QA 观察-1）
+
+§八「禁拆两笔防 t13 中间态红」判据**保留**（两 config 同批一笔＝声明闭集封死拆笔形态·t13 对**工作树文件**直读相等，拆笔中间态恰咬合面）；措辞注记＝run-gates 内无 s4/test_enforcement（QA grep 零命中）＝该红非门禁自动承载，系 **V2 人工跑位承载**，勿按门禁自动拦理解。
+
+### 修订笔自证
+
+- 落笔前靶检＝`python share/check-pointers.py --target .scratch/tickets/2026-11-11-SWB-SCRATCHCFG-seat-config-lease-sync-ticket-v1.md` exit 0（读数随回票）。
+- 本笔面＝恰本票面一件（修订段 append 于原件内）；v1 正文行零回改；两 config／守件／账本面／判词两件／双席产出一路零触碰；他案在飞面（FUXI 链笔群、ledger 脏面、registration staged 枚）零碰零带入。
