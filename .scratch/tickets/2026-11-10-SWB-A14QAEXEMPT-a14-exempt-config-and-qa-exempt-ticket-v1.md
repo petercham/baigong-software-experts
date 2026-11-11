@@ -9,6 +9,7 @@
 - 前案链（口径参照·零触碰）：迁册票 v1 `fb76547` → 施工 `c79dde9`（git mv R100）→ 回执 `9ebc94f` → QA 判词 `883aa68` → 收口登记 `111b67a`（碰撞面 6 枚 BLOCK 新增实证＋归因精确化：第 8 枚命中系他案回执 `9aa98ba` 自带，链面净增 0）。
 - 性质：纯规格票不变——**本席不施工**，落改归工程师席按票逐字执行（排程纪律照 `ca33b5f` §四：交付面施工单一工程师席在飞串行）。
 - 开工读数：`date`＝`Tue Nov 10 22:39:29 2026`；`git rev-parse --short HEAD`＝**`7900b07`**（＝SCRATCHG v2 落链笔，≥ 派工钉值）；`git status --porcelain --untracked-files=no`＝tracked 面净（未跟踪散件／scratch 面照登不碰）。
+- **rev 笔开工锚（arch-a14tk2 轮·登记于头部随派工要求）**：`date`＝`Wed Nov 11 08:41:42 2026`（本轮现读）；`git rev-parse --short HEAD` 首跑实测＝**`1d9ba4d`**（派工钉值 `1331bbc`，漂移链笔见修订笔 v1 段开工读数逐笔登记）；tracked 面两枚他案脏面照登零碰（ledger 枚＋registration staged 枚）。
 - **计数口径声明（承 SCRATCHG v2 写死）**：全部跟踪文件计数一律 `-c core.quotepath=off` 口径＋NUL（`-z`）式双验；默认 quotepath 口径对 CJK 路径转义漏数＝已知案型，不作计数基准。
 
 > **票面自注（落位悖论自陈）**：本票面落在 `.scratch/tickets/` 票面桶内，与该桶在 check-pointers 缺省扫描域内的 tracked 命中面自洽（SCRATCHG v2 同款自陈）；本票零碰 gitignore，忽略规则归 SWB-SCRATCHG 票面族，两票写集零交集。
@@ -156,3 +157,101 @@
 - 防自咬自查：新建面路径、旧桶路径串、qa 残留字样一律拆写或不入反引号（回执 `9ebc94f` 拆写先例）；§2.1 旧字样行号只作人读。
 - 零触碰自证：§4.5 禁动面全程 diff 空集；临时工作物＝本笔 commit 输出重定向落仓根 `.scratch/` 下 A14TK1 前缀日志件＋扫描输出两枚（A14TK1-ptr-default.txt／A14TK1-gate.txt／A14TK1-six.txt＝.scratch 临时区合规·带票号族命名·完工笔前自删附读数）。
 - commit 自证：`git log --oneline -1`＋`git show --name-only HEAD` 恰一件＝本票面。
+
+---
+
+## 修订笔 v1（双席审票判词＋SCRATCHG 收口在册归置归集后·作者席 `arch-a14tk2` 原位 append·R1–R7 全措辞／口径／列面勘正级·方案本体／豁免键设计／S1 骨架本体／S2 插入位／禁动面闭集／候①②留白框架零动）
+
+- 修订输入（本席全文直读）：产品席判词 `.collab/qa/2026-11-10-SWB-A14QAEXEMPT-产品席审票-v1.md`（落链 `cb1de00`＝红1黄4绿10）＋QA 席判词 `.collab/qa/2026-11-10-SWB-A14QAEXEMPT-QA席审票-v1.md`（落链 `498fe09`＝红1黄3绿14）；R7 扩面依据＝SWB-SCRATCHG 收口登记笔（`282f88f` message 在册归置「README 既有 8 条 BLOCK 另账并册 A14 线候补行，待 A14 双席审归集后作者席 rev 扩 items 防污染」）。
+- 前实例事件照登：`arch-a14tk1` 同任务 08:05 开跑后 400 RPC 超时崩溃，rev 未成链——本席 fresh 实例接手同一票面（续写通道失效径改 fresh＝既定纪律非代笔违例）；前席留档素材＝scratch 区 A14TK2-readme.txt／A14TK2-scan.txt 两枚（拆写不入反引号，完工随工作面自删），复用为参照、落笔前已复跑校验（复跑与素材逐行内容全等，仅行尾 CRLF/LF 形态差）。
+- 效力声明：本节与其前正文冲突处，工程师施工与 QA 验收**以本节为唯一依据**；正文既有行 append-only 不回改（v1 原件＝史实锚）。
+- 开工锚＝票面头部「rev 笔开工锚」行（首跑 HEAD 实测 `1d9ba4d`）；本席位读数复跑窗链位＝`ff24700`（`1331bbc..ff24700` 链面漂移＝FX-U39 施工笔群＋SCRATCHCFG 质量链/呈拍笔群＋QA 窄复核笔，他案笔逐笔照登不归因零触碰；本席位复跑缺省扫描对 `ff24700` 窗与开工窗两跑 cmp 全等＝盘态扫描面窗内未漂移）。
+
+### rev 起草窗复跑值表（本席现跑·链位 `ff24700` 窗·全部落 scratch 区 a14tk2 子目录取证·拆写）
+
+| 项 | 命令 | 现跑读数 | 对票钉 |
+|---|---|---|---|
+| 缺省扫描 BLOCK（SEV 字段式） | `grep -Ec '^[^:]+:[0-9]+: BLOCK '` | 18253 | 口径澄清基准（R6） |
+| 缺省扫描 BLOCK（anywhere 式） | `grep -c ' BLOCK '` | 22833 | 票钉 22831（+2＝QA 席 A2 逐笔归因在册） |
+| 缺省扫描 WATCH／NOTE-FXU28 | 两式 | 4581／1988 | 票钉逐字全等 |
+| drill token BLOCK | SEV 式 ∩ 基名段串 | **6**（5 文件·行号 30/23/66/174/200/194 逐枚全等） | §2.1 全等 |
+| README.md BLOCK（--target 入口） | `python share/check-pointers.py --target README.md`（exit 1） | **8**（SEV 字段式计数） | R7 扩面前值现跑钉 |
+| 门禁全链 | `bash share/run-gates.sh --no-write` | GATE PASS exit 0·发现 150285 | 票钉 150151（+134＝链笔+盘态混合，R1 双栏口径承接） |
+
+### R1（产品席红-1）· V0 基准归因口径勘正＋归档对拍臂
+
+缺省扫描面＝**盘上**三分类目录 md 全量 walk，含他席未跟踪包内 `.scratch` 快照副本族（fuxi 包 FX-U14/FX-U15 五副本＝裸盘噪声主源，QA 席 O-6 同根）——钉值大头系盘态面而非 tracked 链面（产品席实证：同链位 `7900b07` 归档重建 BLOCK 2026 vs 裸盘 18253/22831）。V0 兜底句「差值逐笔归因他案笔 EXEMPT」只覆盖链笔栏——按字面跑 V0＝不可归因即停＝验收闸自锁。勘正写死：
+
+1. **V0 复点以施工轮现取为唯一基准**；票面 §一 钉值 22831／GATE 150151 降为**起草窗参照值**（不作验收钉）。
+2. 差值归因分**链笔＋盘态两栏**：链笔栏＝`7900b07..HEAD` 各笔新增面 `--target` 实跑读数登记；盘态栏＝快照副本**增删路径逐笔登记**——「不归因即停」仅在两栏皆不可归因时触发。
+3. **归档对拍臂**（新增·备查钉）：`git archive <开工链位>` 解包＋`--root` 独跑＝干净链面参照读数（与 V1 前后对拍互验；归档臂 drill 命中 6/6 两态全等先例＝QA 席 A1 在册）。
+V1–V7 其余判据与方案本体零动。
+
+### R2（QA 席红-1／产品席黄-1 同果）· 损坏臂返回码写死 `SystemExit(4)`
+
+§4.1/§4.2 句「JSON 损坏/形态不符＝exit 4（两式先例文照搬）」**作废**：先例 `check-source-of-truth.py load_baseline`（L199-L214）实发行为＝`raise SystemExit('infra error: …')` 携字符串＝**exit 1**（Python 语义；双席独立探针实证同果：截断臂 exit 1·先例文案照发）——「照搬」与「exit 4」两约束不可同时满足。勘正写死：
+
+- 基础设施错臂（损坏/形态不符）**必 `raise SystemExit(4)`**，对齐 check-pointers 既有退出码闭集（L336／L381／L400／L494 四处 `SystemExit(4)` 同形制在册＝本件自身先例锚）；
+- 先例引用句改＝**只取其结构（缺失＝无豁免更严不更松／损坏＝infra 错不猜语义），不取其抛出语句**；
+- 先例脚本自身 docstring 与实现背离＝既有旧账随登候补池（非本票射程·§4.5 禁动面维持零碰）；
+- V3 钉不变：JSON 截断臂→**exit 4**。
+
+### R3（产品席黄-2）· §一 O-1 归因句＋出处句勘正
+
+v1 句「差 1＝裁定轮后 FUXI 线新笔（FX-U38 QA 件）落 qa/ 桶所致」因果不实、「实测 58」出处引错。链证勘正（本席复点）：第 59 枚落链笔＝`4d6d219`（FX-U38 QA 判词·11-10 21:07），`git merge-base --is-ancestor` 实核其为呈拍轮 HEAD `9f2d011`（21:47）与裁定登记 `ca33b5f` 之**祖先**——呈拍轮起桶内即 59，非「裁定轮后」新笔；「实测 58」出处＝呈拍简报 `27e59cc` §二（fuxi 包 qa/ 58 件），裁定件 `ca33b5f` §二-2 正文**无 58 字样**（本席 git grep 现跑复点）。计数 59/2/4 本体零动（双席三点位复点全等）。
+
+### R4（产品席黄-3＋QA 席黄-1）· §六 锚归属勘正
+
+v1 句「check-pointers 自锚系其 13 处中第 13 处已裁不开 v5」张冠。勘正照 `e12afd3` 原文写死口径：票②锚清单＝谓词反查全集 13 处＋开工对账轮反查兜底不开 v5，**第 13 处＝tools 自身件 check-source-of-truth 内嵌自锚**（随动笔 `ddc1e23` message 再证＝开工反查坐实十三处含该自锚；TOOLHOME v4 随动清单点名 check-pointers 系 L121 与 :442 **两处**谓词，非第 13 处）。「本票 S2 改锚面零涉其 13 处锚」措辞改准＝**S2 不触 13 处锚的任何谓词行**；写实补充：`share/check-pointers.py` 本身即 13 处锚文件之一（L121／L442 两处仓根谓词本席现读在场），S2 改的正是这个文件——约束实质（find_root 谓词行零触碰、不新开任何锚面 v5）不变。
+
+### R5（产品席黄-4＋QA 席黄-2）· O-2 现值随登＋tickets 计数随正（零动作面·不入判据）
+
+- O-2「另有 12 枚 BLOCK」＝起草窗参照值留史不改；**现值随登**：rev 窗 token 级现跑＝非 drill 旧字样族 SEV-BLOCK **16 枚**（三异 token：归因复盘 6／回复盘 5〔基名链上不存在〕／GWP-guard-assembly-defects 票引 5——QA 席 A1 同式现跑全等）；三 token 与豁免键 drill 全异＝不入住免射程判定不变。**环境依赖注**（QA 黄-2）：归因复盘 token 裸盘＝BLOCK 6（fuxi 包 `.scratch/FX-U14/FX-U15` 未跟踪树副本多义→后缀命中≥2 fail-closed），干净归档＝NOTE-FXU28 归位 1 枚——同 token 两态异 SEV；施工轮 V0 复点时对该字样族**现算＋归因随登**（R1 盘态栏联动）。
+- §一 tickets 桶 137＝起草窗参照值；现值 138 随正（+1＝本 A14 票面自身落链，QA 席 A6 实证；口径＝off＋NUL 桶式计数）。
+
+### R6（QA 席黄-3）· 计数口径写死 SEV 字段式＋V3 缺失臂条款升格
+
+- §一 钉 22831 系 anywhere 口径（WATCH 文案含「不 BLOCK」字样致混计——rev 窗现跑坐实 anywhere 22833 ≈ SEV 18253＋WATCH 4581 同源差）；**V0/V1/V2 计数一律写死 SEV 字段式**：`grep -Ec '^[^:]+:[0-9]+: BLOCK '`（V1 含旧字样归零式 `grep -F` 基名段串管道式不变）。
+- §4.2 豁免 WATCH 行文案写死：带「历史豁免」标记且**行内不含 BLOCK 字样**（QA 席候①附条联动，防 anywhere 式误读与 V1 不降）。
+- **V3 缺失臂条款升格**：共用工作区多席在飞窗内**禁用移开配置件臂**（share 在盘件他案门禁窗内读空风险）——缺失臂径由损坏臂替、原「后复原」步骤删。
+
+### R7（SCRATCHG 收口在册归置兑现）· README 既有 8 枚 BLOCK 入豁免 items 扩面
+
+扩面依据＝收口登记笔 `282f88f` 归置（README 存量 8 枚另账并册 A14 线，归本 rev 扩 items 防污染——防的是未来触碰 README 的笔在 `--target` 靶检被存量 BLOCK 污染）。
+
+- **现跑钉死**（rev 窗复跑，非照抄前席素材；禁入反引号防自咬，先例＝回执 `9ebc94f` 拆写）：`--target README.md` exit 1，SEV-BLOCK 恰 8 枚，行号 **L23／L25／L72／L84×2／L88×2／L92**，八枚**八异 token**（8 个不同目标串，逐条列于下围栏——token 文本＝扫描输出反引号段逐字，施工轮从现跑输出程序化摘取，禁手抄）：
+
+```json
+{
+  "items_append_readme8": [
+    { "token": ".collab/{decisions,qa,receipts,board,research,design}/", "line": 23, "files": ["README.md"] },
+    { "token": ".collab/{refs,evidence,inbox,process,dispatch,backup}/", "line": 25, "files": ["README.md"] },
+    { "token": "references/50-antipatterns.md", "line": 72, "files": ["README.md"] },
+    { "token": ".scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md", "line": 84, "files": ["README.md"] },
+    { "token": "reference-2026-10-24/{video-teams,official-cos,summoned-2026-10-24}/", "line": 84, "files": ["README.md"] },
+    { "token": ".collab/2026-11-03-SWB-B3-收口登记-v1.md", "line": 88, "files": ["README.md"] },
+    { "token": ".collab/2026-11-04-SWB-B4-收口登记-v1.md", "line": 88, "files": ["README.md"] },
+    { "token": "config/seat-permissions.json", "line": 92, "files": ["README.md"] }
+  ],
+  "note": "行号只作人读不参与豁免键（§2.1 口径同文）；豁免键＝8 新条各 (token 文本, {README.md 仓根相对})；items 总条目 1＋8＝9 条"
+}
+```
+
+- 碰撞面扩登记：5 文件 6 枚 → **6 文件 14 枚**（drill 1 条×5 文件 6 枚＋README 8 条×1 文件 8 枚）。
+- **机理写实勘正**（落笔前复跑揭出·如实登记）：README.md 不在缺省扫描域（`DEFAULT_SCOPE`＝三分类目录，§2.2 现态），8 枚只现于 `--target` 入口面（缺省扫描对 README 命中＝0，本席现跑两式坐实）——归集口径「V1 判据 −14」**不可按缺省面单式写死**，拆两式：
+  - **V1-a 缺省面**：SEV-BLOCK 计数＝V0 复点 − 6；含旧字样 BLOCK 行 → 0（原式不变）。
+  - **V1-b README target 面**：`python share/check-pointers.py --target README.md` 前后对拍＝前 8（rev 窗现跑钉）→ 后 **0**；`grep -c '历史豁免'` 该入口 → **8**。
+- 消费机理承接：豁免层置入 `check_dangling` 即三入口同口径消费（§4.2 在册＋QA 席 A3 实读）——README 8 枚经 `--target` 入口豁免，无需改扫描域（零扩面）。
+- V2/V5 随动：V2 留痕钉＝缺省面 6＋README target 面 8（两式分列）；V5 GATE 总量不变推理**零受 R7 影响**（run-gates SCRIPTS 无 `--target` 跑位＝8 枚不载 GATE 面，本席现跑坐实）。
+- 禁动面随登：`README.md` 本体入禁动面（豁免≠改 README，史笔零改字口径同文）。
+
+### 候①②呈拍材料注（表态归集·候裁留白框架／正文零动·归裁仍待裁）
+
+- 归集读数：产品席（§三）候①＝甲／候②＝甲；QA 席（§七）候①＝甲／候②＝甲；起草席 v1 推荐式已按甲成文——**三席一致取态甲/甲**，本注仅归集呈拍，不自行落定；若裁它式，V2 钉随裁改（§4.2/§七 承接句不变）。
+
+### 修订笔自证
+
+- 落笔前靶检：`python share/check-pointers.py --target .scratch/tickets/2026-11-10-SWB-A14QAEXEMPT-a14-exempt-config-and-qa-exempt-ticket-v1.md` → exit 0（读数随回票；rev 段落笔后复跑再附）。
+- 防自咬自查：R7 八 token／新面路径／旧桶字样全部入围栏或不入反引号（围栏行无反引号字符＝BACKTICK_RE 不抽取，机理实读 L78/L340 坐实）；链上引用全部既有笔。
+- 零触碰自证：本笔面＝恰本票面一件（修订段＋头部开工锚行 append，v1 正文行零回改）；判词两件／两 config／账本／租约／两包 qa／夹具／README 本体／share 两件一路零触碰；他案在飞面（ledger 脏面、registration staged 枚、FUXI/SCRATCHCFG 链笔群、仓外散件）照登零碰零带入。
+- 临时工作物＝scratch 区 a14tk2 子目录（扫描对拍件·拆写），完工自删附读数；本笔 commit 输出重定向落该目录。
