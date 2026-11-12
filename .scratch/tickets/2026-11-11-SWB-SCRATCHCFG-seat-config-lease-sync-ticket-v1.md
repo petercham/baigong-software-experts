@@ -172,3 +172,24 @@ S1 机效声明段**本体结论维持**（两席独立探针实证：替换行�
 
 - 落笔前靶检＝`python share/check-pointers.py --target .scratch/tickets/2026-11-11-SWB-SCRATCHCFG-seat-config-lease-sync-ticket-v1.md` exit 0（读数随回票）。
 - 本笔面＝恰本票面一件（修订段 append 于原件内）；v1 正文行零回改；两 config／守件／账本面／判词两件／双席产出一路零触碰；他案在飞面（FUXI 链笔群、ledger 脏面、registration staged 枚）零碰零带入。
+
+---
+
+## 九、随裁笔（2026-11-12 按乙裁定落笔·作者席续写·append-only·§六／§七及修订笔既有正文零回改）
+
+- 裁定登记件＝`.collab/decisions/2026-11-12-皮总裁定-SWB-SCRATCHCFG按乙放行.md`（落链 `dd10e9c`）。
+
+**① 候裁①留白销账**：决策者裁定原文逐字＝**「按乙」**。乙款语义自包含成文＝现状款全兑现：仅 S1 措辞随动＋rename 通道口径成文＝已裁(e) 语义最小兑现；工程师对 receipts 桶「后续写入」仍被桶级 deny 拦（拦即正确·案卷 append-only 语义承接）；补签兑现对该案维持不可达（B-i 本体已收口故无实害）；零扩面零成本、无 C1 转录改动。§七「唯一候裁＝部署态机效取态」定性随裁登记为**已裁＝乙款**，§七原文字照登零删改（史账不回改）。V3 判据取 **R1 A 式三条件式**为准；甲裁随登 b 式**不启用**。
+
+**② 呈拍注①措辞勘正行（追加于本段·非回改 §六）**：§六租约段 path_globs 的 config 项以包根权限字面形态落笔＝**`agent-experts/baigong-software-team/config/**`**（本笔逐字照登此形态为唯一准，lease-issuer 写域子集校验按 engineer 写域行 `config/**` 相对包根比对·PM 席实跑 exit 0 可签发旁证在册 R2）；与 **R1 钉形态归一**（R1 各探针／--map／--path 要素同按包根字面写死，A 式主用跑法与此一致）。租约段请求面＝该单项闭集（R2 勘正后 tickets 桶 glob 已撤＝票附回执不落租约面，随 SCRATCHG 先例体例）。
+
+**③ 归裁后四步路径登记**：
+1. 架构席随裁笔＝本节（候裁①销账＋呈拍注①措辞勘正）；
+2. 工程师席三件封顶施工（票 §六租约 path_globs 闭集＝两 config S1 替换行＋落点体例澄清行·V1 前值 0/0 未施工态；**随 SWB-A14QAEXEMPT 收口后派席**＝交付面单一工程师席串行排程红线；**两 config 同批一笔禁拆笔**防 t13 中间态断言红）；
+3. QA 验收轮 V1–V7 判据实跑（V3 走 A 式）；
+4. 收口登记。
+
+**④ 本笔自证**：
+- 开工读数（落笔前现跑·禁抄旧数）：`date '+%F %T %z'`＝`2026-11-12 18:40:07 +0800`／`git rev-parse --short HEAD`＝`740bf16`；同轮 tracked 脏面两枚他案照登零碰零带入＝`M agent-experts/baigong-software-team/.collab/ledger/ledger.jsonl`＋`M agent-skills/fuxi-skill/products/pending/carlsagan-perspective/registration.md`；他案 staged 两枚（SWB-A14QAEXEMPT 工程师席在飞）照登零带入＝`A  share/baseline-pointer-exempt.json`＋`M  share/check-pointers.py`。
+- 本笔面＝恰本票面一件（本段 append 于 v1 原件＋修订笔 v1 之后）；§一～§八及修订笔 v1 全部既有行零回改（difflib deleted_chars＝0 自证读数随回报）。
+- 落笔前靶检＝`python share/check-pointers.py --target .scratch/tickets/2026-11-11-SWB-SCRATCHCFG-seat-config-lease-sync-ticket-v1.md` → **exit 0**（NOTE-FXU28 短式指针归位一行在册）；落笔后、commit 前同式再跑一次，exit 0 读数随回报。
