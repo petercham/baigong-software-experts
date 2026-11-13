@@ -21,8 +21,8 @@
 - `date`＝`Fri Nov 13 19:29:19 2026`
 - `git rev-parse HEAD`＝`9f13b07cc552c074f8000010eb34d130b7b6ddf4`（＝A14 收口登记笔·与派工钉值全等）
 - `git status --porcelain --untracked-files=no`＝一枚他案脏面照登零碰零带入＝`M agent-experts/baigong-software-team/.collab/ledger/ledger.jsonl`（仓根 untracked 散件群照登不入）
-- 基线① s4 直跑：`python agent-experts/baigong-software-team/tests/s4/test_enforcement.py` → **exit 0**·PASS 行 13·`PASS t13_derived_consistency`＝1（输出留痕＝`.scratch/SWB-SCRATCHCFG/v0-s4-before.txt`）
-- 基线② BLOCK＝`python share/check-pointers.py 2>/dev/null | grep -c "BLOCK"` 当轮现跑＝**22827**（留痕＝`.scratch/SWB-SCRATCHCFG/v0-block-before.txt`）。对起草轮钉值 22833 窗差 **−6 EXEMPT 归因**：链窗 `282f88f..9f13b07` 共 241 笔他案笔群在册；其中 −6 定向归因＝SWB-A14QAEXEMPT 施工笔 `3715cb7`（A14 豁免层插入＝README 旧字样六枚 BLOCK 转 WATCH 留痕·其 QA 判词笔 `01c1e88` 在册 V1-a「缺省面 18247 恰减 6 旧字样 BLOCK 归零」口径·本席 BLOCK 现跑 22827 与其后链态自洽）——非本票面引入。
+- 基线① s4 直跑：`python agent-experts/baigong-software-team/tests/s4/test_enforcement.py` → **exit 0**·PASS 行 13·`PASS t13_derived_consistency`＝1（输出留痕＝.scratch／SWB-SCRATCHCFG／v0-s4-before.txt 裸文写·已随完工自删）
+- 基线② BLOCK＝`python share/check-pointers.py 2>/dev/null | grep -c "BLOCK"` 当轮现跑＝**22827**（留痕＝.scratch／SWB-SCRATCHCFG／v0-block-before.txt 裸文写·已随完工自删）。对起草轮钉值 22833 窗差 **−6 EXEMPT 归因**：链窗 `282f88f..9f13b07` 共 241 笔他案笔群在册；其中 −6 定向归因＝SWB-A14QAEXEMPT 施工笔 `3715cb7`（A14 豁免层插入＝README 旧字样六枚 BLOCK 转 WATCH 留痕·其 QA 判词笔 `01c1e88` 在册 V1-a「缺省面 18247 恰减 6 旧字样 BLOCK 归零」口径·本席 BLOCK 现跑 22827 与其后链态自洽）——非本票面引入。
 - 锚态现读（V3 环境注·R1/R3 口径）：`.workbuddy/swb-anchor` 不在场·仓根层级 docs 目录下 STRUCTURE 结构件不在场（裸文写·防 OA-D6 后缀多义悬空＝FX-U48 修法①先例体例）·包内 `agent-experts/baigong-software-team/docs/STRUCTURE.md` 在场 → `project_root()` 落回**包根**＝A 式主用跑法成立环境坐实。
 
 ### V1 替换行在位（前后各附）
@@ -70,7 +70,7 @@
 
 ### V7 门禁零回归＋靶检
 
-- 落笔前 `bash share/run-gates.sh` → **GATE PASS exit 0**（发现 151457·留痕＝`.scratch/SWB-SCRATCHCFG/v7-rungates-before-build.txt`；对 A14 QA 判词笔读数 151339 窗差 118＝链窗他案笔群 collab-lint 栏 EXEMPT 归因口径随 SCRATCHG/A14 先例·不归因即停未触发）
+- 落笔前 `bash share/run-gates.sh` → **GATE PASS exit 0**（发现 151457·留痕＝.scratch／SWB-SCRATCHCFG／v7-rungates-before-build.txt 裸文写·已随完工自删；对 A14 QA 判词笔读数 151339 窗差 118＝链窗他案笔群 collab-lint 栏 EXEMPT 归因口径随 SCRATCHG/A14 先例·不归因即停未触发）
 - 笔一落笔前靶检＝两 config `check-pointers.py --target` 各 **exit 0**；落笔后同式再跑各 **exit 0**
 - 票面靶检（回执笔前）＝`python share/check-pointers.py --target .scratch/tickets/2026-11-11-SWB-SCRATCHCFG-seat-config-lease-sync-ticket-v1.md` exit 0；回执件靶检随回执笔 commit 面执行（读数在回执笔 commit 日志）。
 
