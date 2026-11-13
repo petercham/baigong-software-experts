@@ -7,6 +7,7 @@
 - 票面落点：`.scratch/tickets/2026-11-14-SWB-CPTRACE-候补池新批规格票-v1.md`
 - 来源：SWB-SCRATCHCFG 收口登记（`5801e42`）事故照登黄-1 挂候补池＋QA 判词（`838f982`）§六建议方向 (a)
 - 候裁点：§七（本票预期零枚·闭集收紧口径见彼节）
+- 修订笔：v1 R1（双席快审归集红0黄3＝QA 7c709cf 黄2＋产品 5ea1d4e 黄1·措辞勘正三项全落＝§五 V0 括注如实归因／§二 三枚辅助读数降级为体量参考／§二 B 面定义补「指向 scratch 取证族」限定词·采纳值与 V 系判据结构零动）
 
 > **票面自注**：本票正文对一切 scratch 取证族留痕仅叙述性提及、裸文写（全角斜杠）、不落可达全径＝本票自采新条款体例·防自咬。正文反引号路径形态引用者均已实测在场。
 
@@ -40,12 +41,12 @@
 盘点口径写死两面：
 
 - **A 面＝原始字样面**（正文含反引号起手的 scratch 族路径字样·过含·checker 未必当路径解析）：起草轮现跑 git grep 对模式「反引号字符＋转义点 scratch 斜杠＋票号字符族＋斜杠」限定文件名含「回执」或 receipt 的 tracked 件 → **295 枚字样／102 枚文件**（含大量 checker 不当路径形态：命令段含空格、通配段、jsonl 等非判据扩展名·及目标仍在场者——A 面≫真射程，只作体量参考）。
-- **B 面＝机检语义真悬空面（修法射程真值）**：起草轮程序化复跑＝复用 check-pointers 自身 looks_like_path／resolve／后缀归位三层函数逐 token 判（留痕裸文落本席 scratch 票号族·完工自删）＝**7 枚悬空 token／4 枚 tracked 回执类件**：
+- **B 面＝机检语义真悬空面中「悬空 token 指向 scratch 取证族」子集（修法射程真值·限定词写死）**：起草轮程序化复跑＝复用 check-pointers 自身 looks_like_path／resolve／后缀归位三层函数逐 token 判，限定口径＝仅计入悬空且指向 scratch 取证族（各项目 scratch 下票号临时工作区族及其内工件）之 token，不含同文件内指向他物的其它悬空、亦不含票面所在 tickets 桶（scratch 下 tickets 子桶＝票面落位非取证族·其退役票面悬空归不入射程段·两剔除叠加后字面复跑应得同值·双席独立复现对上）（留痕裸文落本席 scratch 票号族·完工自删）＝**7 枚悬空 token／4 枚 tracked 回执类件**（此口径字面复跑应得同值·双席独立复现对上）：
   1. SCRATCHCFG 票附回执（仓根 tickets 桶）行 24／25／73＝**3 枚**（本票必修·§四）
   2. `agent-experts/baigong-software-team/.collab/receipts/2026-11-05-ADR-L0-工程师回执-v1.md` 行 4／48＝2 枚（指向已删 eng-adrl0 取证族·在缺省扫描域内）
   3. `agent-experts/baigong-software-team/.collab/receipts/2026-11-05-AV-FIX-工程师回执v1.md` 行 12＝1 枚（指向已删 AV-FIX 取证族）
   4. `agent-experts/baigong-software-team/.collab/receipts/2026-11-06-TK-PROJINIT-工程师回执-v1.md` 行 21＝1 枚（指向已删 projinit 取证族）
-- **不入射程面（写死）**：tickets 桶退役票面悬空引用（SWB-RET 退役批删票面所致·另一根因·由票面寻回体例承载）与 fuxi 案 scratch 内 worktree 副本树行（缺省面内数千枚·他案取证噪声·FUXI 面零碰照登）。缺省面全部 scratch 指向 BLOCK 行现跑 14833 枚、其中文件名含回执／receipt 者 3481 枚、剔 fuxi 副本树后非票面类 58 枚——大头＝退役票面指向与副本树，均不入本票射程。
+- **不入射程面（写死）**：tickets 桶退役票面悬空引用（SWB-RET 退役批删票面所致·另一根因·由票面寻回体例承载）与 fuxi 案 scratch 内 worktree 副本树行（他案取证噪声·FUXI 面零碰照登）——大头＝退役票面指向与副本树，均不入本票射程。起草轮另有三枚体量参考读数（缺省面全部 scratch 指向 BLOCK 行／其中文件名含回执或 receipt 者／剔副本树后残余·约一万四千／三千余／数十量级）**＝起草轮体量参考读数，口径未写死，不作验收判据、不要求复跑**；射程判据以 B 面列举七枚为准。
 - 他案脏面口径：仓根 untracked 散件群未 tracked 未入扫描·照登不入。
 
 **射程结论**：条款面（S1）防增量＝一切未来回执／判词／收口登记／commit message；存量必修（S2）＝本批 3 枚；上述 2–4 共 4 枚存量挂新候补行（§六）。
@@ -112,7 +113,7 @@
 - **V0 开工基线（施工／验收轮现跑·禁抄本票钉值）**：
   - 靶检 SCRATCHCFG 票附回执（命令同 §一）→ exit 1·BLOCK 计数 3
   - 缺省面 BLOCK 计数现跑＝占位钉 22827·**以验收轮现跑为准**（前后差判据见 V4）
-  - 靶检 dev-discipline 落点文件 → exit **1**·BLOCK 恰 **2**（既存基线＝两处对 STRUCTURE 结构件裸引悬空＝docs／STRUCTURE.md 字样拆写防自咬·S1 改动前既有·V2 对照面）
+  - 靶检 dev-discipline 落点文件 → exit **1**·BLOCK 恰 **2**（既存基线＝该文件行 110／126 两枚对包文档的全径悬空＝反引号可解析形态 docs／STRUCTURE.md 指向不落·双席实跑坐实系既存非拆写·S1 改动前既有·S1 改动前后计数对照不变＝V2 对照面）
 - **V1 条款落位**：
   - grep 计数「scratch 取证族可达路径不入留存工件」于 dev-discipline ＝ **1**
   - grep 计数「受 §八 第 5 项约束」于 dev-discipline ＝ **1**
