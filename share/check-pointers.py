@@ -59,6 +59,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 import sys
@@ -109,6 +110,47 @@ SCHEME_PREFIXES = ("http://", "https://", "ftp://")
 def die_usage(msg: str) -> "None":
     sys.stderr.write("usage error: %s\n" % msg)
     raise SystemExit(2)
+
+
+# A14 历史件不改字豁免（票面 SWB-A14QAEXEMPT §4.1/§4.2·裁定 ca33b5f §二-3）：
+#   外置 JSON＝share/baseline-pointer-exempt.json（同目录 HERE 式解析·外置先例
+#   share/baseline-sot-dup.json 同构）。豁免键＝「指针 token 文本＋命中文件集合」
+#   （不是纯 token 键）：仅当 token 文本匹配**且**命中文件 ∈ 该 token 既定文件集合
+#   才豁免（转 WATCH 带标记留痕·不计 BLOCK）；token 在配置但命中文件在集合外／
+#   token 不在配置 → 照 BLOCK（新命中照拦）。
+#   fail-closed：配置缺失＝无豁免（更严不更松）；JSON 损坏/形态不符＝SystemExit(4)
+#   （R2 勘正：对齐本件既有退出码闭集 L336/L381/L400/L494 同形制，只取 SOT 先例
+#   的结构、不取其抛出语句）。
+EXEMPT_SNAPSHOT = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               "baseline-pointer-exempt.json")
+
+
+def load_exempt() -> "dict[str, frozenset[str]]":
+    """读豁免快照：返回 {token 文本 -> 既定命中文件集合(frozenset)}。
+
+    快照缺失＝无豁免（全部照 BLOCK 输出，更严不更松）；损坏或形态不符＝infra 错
+    exit 4（不猜语义，与 60-gates §六一致·R2 写死 SystemExit(4)）。
+    """
+    if not os.path.isfile(EXEMPT_SNAPSHOT):
+        return {}
+    try:
+        with open(EXEMPT_SNAPSHOT, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        items = data["items"]
+        if not isinstance(items, list):
+            raise TypeError("items 不是列表")
+        out: "dict[str, frozenset[str]]" = {}
+        for item in items:
+            token = item["token"]
+            files = item["files"]
+            if not isinstance(token, str) or not isinstance(files, list):
+                raise TypeError("item 的 token/files 形态不符")
+            out[token] = frozenset(files)
+        return out
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        sys.stderr.write("infra error: 豁免快照损坏或形态不符 %s: %s\n"
+                         % (EXEMPT_SNAPSHOT, exc))
+        raise SystemExit(4)
 
 
 def find_root(explicit: str | None) -> str:
@@ -320,6 +362,9 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
     """
     findings: "list[str]" = []
     notes: "list[str]" = []
+    # A14 豁免快照（SWB-A14QAEXEMPT §4.2）：本函数内单次读取，三入口（--target／
+    # --scope／缺省）共用同一消费路径＝同口径；缺失＝空表（无豁免），损坏＝exit 4。
+    exempt = load_exempt()
     # 后缀匹配加速桶：基名 → 仓根相对路径列表（后缀命中必先同基名，桶外零漏）。
     by_base: "dict[str, list[str]]" = {}
     for rp in relpaths:
@@ -357,6 +402,18 @@ def check_dangling(root: str, md_files: "list[str]", basename_index: "dict[str, 
                         notes.append(
                             "%s:%d: NOTE-FXU28 短式指针唯一归位 `%s` → %s"
                             % (rel_md, lineno, tok, hits[0])
+                        )
+                        continue
+                    # A14 历史件不改字豁免层（SWB-A14QAEXEMPT §4.2·插入位＝FX-U28
+                    # 后缀归位层之后、含斜杠悬空 BLOCK append 之前·镜像 SOT 插入范式）：
+                    # 豁免键＝token 文本＋命中文件集合；命中＝不计 BLOCK、改出 WATCH 行
+                    # 带「｜历史豁免」标记留痕（候①采甲）。文案写死（R6）：行内不含
+                    # BLOCK 字样（防 anywhere 式误读与 V1 不降）。
+                    ex_files = exempt.get(tok)
+                    if ex_files is not None and rel_md in ex_files:
+                        findings.append(
+                            "%s:%d: %s OA-D6 历史指针豁免 `%s` ｜历史豁免（token＋文件集合）"
+                            % (rel_md, lineno, SEV_WATCH, tok)
                         )
                         continue
                     # 命中 0（真悬空）／命中 ≥2（多义不猜＝fail-closed）＝维持既有 BLOCK，文案不变。

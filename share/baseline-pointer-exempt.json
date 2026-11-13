@@ -1,0 +1,75 @@
+{
+  "note": "A14＋候裁①豁免清单（票面 SWB-A14QAEXEMPT v1·裁定 ca33b5f §二-2/§二-3）。第一段＝历史件不改字指针豁免；第二段＝collab 桶名闭集豁免（17 桶闭集只管仓根 .collab）。",
+  "exemption_key": "指针token文本＋命中文件集合（不是纯token键·MC-SOT-EXEMPT同构）",
+  "path_key_format": "仓根相对路径（正斜杠）",
+  "items": [
+    {
+      "token": ".collab/defects/2026-11-08-drill夹具回读编码失配与缺件引用缺陷-v1.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-11-08-COLLAB-STRUCT-v2窄复核-QA席-v1.md",
+        "agent-experts/baigong-software-team/.collab/audits/2026-11-09-COLLAB-STRUCT-1-施工批QA席独立验证-v1.md",
+        "agent-experts/baigong-software-team/.scratch/tickets/2026-11-08-COLLAB-STRUCT-1-结构名实对齐与规范成文票-v2.md",
+        "agent-experts/baigong-software-team/.scratch/tickets/2026-11-09-COLLAB-STRUCT-1-施工分票-v1.1.md",
+        "agent-experts/baigong-software-team/.scratch/tickets/2026-11-09-COLLAB-STRUCT-1-施工分票-v1.md"
+      ]
+    },
+    {
+      "token": ".collab/{decisions,qa,receipts,board,research,design}/",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": ".collab/{refs,evidence,inbox,process,dispatch,backup}/",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": "references/50-antipatterns.md",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": ".scratch/tickets/2026-11-03-SWB-ESC1-era-cross-repo-handover-micro-ticket.md",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": "reference-2026-10-24/{video-teams,official-cos,summoned-2026-10-24}/",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": ".collab/2026-11-03-SWB-B3-收口登记-v1.md",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": ".collab/2026-11-04-SWB-B4-收口登记-v1.md",
+      "files": [
+        "README.md"
+      ]
+    },
+    {
+      "token": "config/seat-permissions.json",
+      "files": [
+        "README.md"
+      ]
+    }
+  ],
+  "collab_bucket_exempt": [
+    {
+      "path": "agent-skills/fuxi-skill/.collab/qa/",
+      "basis": "候裁①裁甲 ca33b5f §二-2"
+    },
+    {
+      "path": "agent-skills/external-advisor-collab/.collab/qa/",
+      "basis": "候裁①裁甲 ca33b5f §二-2"
+    }
+  ]
+}
