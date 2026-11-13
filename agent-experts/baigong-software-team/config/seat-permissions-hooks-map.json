@@ -25,8 +25,8 @@
     },
     {
       "seat_id": "engineer",
-      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/audits/**", ".collab/receipts/**", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
-      "deny_globs_note": "deny 向精化随动款（与源件 seat-permissions.json engineer 行逐字同源·派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十七桶闭集（grep 引用不复写名录）。"
+      "deny_globs": ["docs/**", ".collab/board/**", ".collab/decisions/**", ".collab/design/**", ".collab/dispatch/**", ".collab/evidence/**", ".collab/process/**", ".collab/audits/**", ".collab/receipts/**（B-i 迁件目标单点除外·通道口径见 deny_globs_note SWB-SCRATCHCFG 段）", ".collab/research/**", ".collab/refs/**", ".collab/ledger/**", ".collab/signatures/**", ".collab/dlq/**", ".collab/commitments/**", ".collab/human/**", ".collab/release-record/**", ".collab/manifest/**", ".collab/config/**", ".collab/archive/**", ".collab/tickets/**", "sources/**"],
+      "deny_globs_note": "deny 向精化随动款（与源件 seat-permissions.json engineer 行逐字同源·派生一致性断言面）：`.collab/**` 基线换代＝显式枚举减授权，授权子域（returns/inbox/drafts 父桶下 engineer 行）让出并对表；先决真源＝skills/sop/references/collab-fixed-structure.md 十七桶闭集（grep 引用不复写名录）。SWB-SCRATCHCFG 随动段＝已裁(e) B-i 通道口径成文：B-i 型存量迁件经 git rename 通道执行（write-guard 消费面＝Write/Edit PreToolUse 写钩子，rename 不在其消费链＝迁件动作不被拦）；迁后件之后续写入保护维持桶级 deny 不变（案卷 append-only 语义承接）；租约签发兑现＝状态机面——leases.jsonl 只经 lease-issuer 生产（架构签注＋写域子集校验），禁手写补录。"
     }
   ],
   "agent_type_to_seat": {
