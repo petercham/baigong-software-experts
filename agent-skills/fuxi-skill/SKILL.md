@@ -29,6 +29,8 @@ agent_created: true
 - 两 IR 永不相并（persona-IR ≠ technique-IR）；混合对象＝双蒸双验 bundle（编译形态之一，非第三 IR）：`README.md` 边界速览段＋`contracts/artifact-contract.md`。
 - 输出规范：perspective／technique 各恰四节闭集＝`specs/perspective-spec.md`／`specs/technique-spec.md`。
 - 证据分级／失败模式两契约＝`contracts/evidence-grading.md`／`contracts/failure-modes.md`（共享内核 L0，双轨共用）。
+- 补研自驱执行条款系（补充调研触发后的自驱执行工序四段闭集与配套登记条款系＝八子款〔补研执行工序总则／换路径攻站序列／阻断形态如实登记／对照臂收获登记操作／补批封印体例增补／暂缓入池报告件要件／请求计数台账口径／低信息量对象确认轮短路由〕）＝`agent-skills/fuxi-skill/contracts/evidence-grading.md` EG-6 节内条款——细则归契约，本件只指不搬。
+- 暂缓入池候裁报告件要件（装配条件＝仅确认轮零获态触发＋件体四节闭集＋报告件不自裁）＝`agent-skills/fuxi-skill/contracts/evidence-grading.md` EG-6 暂缓入池报告件要件条款指针。
 - 淘汰候选留档纪律＝`rejected/README.md`。
 - 三态读数（PASS／FAIL／PENDING_STAGE）：PENDING 不算 fail 不算 pass、汇总单列，禁假绿——实现与口径见 `gates/assert-tool.py`。
 
@@ -39,3 +41,4 @@ agent_created: true
 ## 修订注记
 
 - v2.0（入口件换代批）：初版＝按包 `README.md` 使用口径重写入口主件（六步工序主线表＋真源指针制）；体量红线 ≤200 行；旧九卷处置表随批落 `references/legacy-disposition.md`。宿主装载面换代部署归注册面另工序，不在本件射程。
+- v2.1（2026-11-13·入口件指针行小笔批·FX-U48）：红线速览段增两枚指针行（补研自驱执行条款系／暂缓入池候裁报告件要件），均指 EG-6 节内契约新增条款系＝补研自驱蒸馏批八子款；工序主线表六步链骨架零触＝补研工序指针挂红线速览两契约行下（补研非第六步，属 EG-6 触发的执行分支）；真源指针制存续＝入口件零复写细则；体量红线 ≤200 行自证＝收口 44 行。
