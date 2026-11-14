@@ -18,7 +18,7 @@
 
 实测面（如实登记）：
 - 部署缓存面 `~/.workbuddy/plugins/cache/my-experts/baigong-software-team/0.1.30/hooks/hooks.json` 在位（PreToolUse 三 matcher：写侧 write-guard／读侧 memory-neutralize／Bash commit-audit·命令＝相对形制 `python "../skills/sop/scripts/…"`）。
-- 本会话工具通道写探针 `.scratch/projinit/hook-probe.txt`（Write 工具落笔）→ 包面 `.collab/ledger/ledger.jsonl` 与仓根 `.collab/ledger/` **均无对应留痕行**；缓存面 0.1.30 树下亦无 `.collab/ledger/`（find 零命中）。
+- 本会话工具通道写探针 .scratch／projinit／hook-probe.txt 裸文写·已随完工自删（Write 工具落笔）→ 包面 `.collab/ledger/ledger.jsonl` 与仓根 `.collab/ledger/` **均无对应留痕行**；缓存面 0.1.30 树下亦无 `.collab/ledger/`（find 零命中）。
 - 读数结论：本会话现盘＝钩子进程未在任何可达账本落痕＝钩子进程 cwd／账本落位＝平台未定项实态（H-4 在册项现状证据）。票面主路（`SWB_REPO_ROOT` env＋swb-anchor 双显式路）生效性不受该读数影响（判据 2a/4a 已证）；「从 cwd 上溯找锚」路现盘生效性＝H-4 归裁前维持 §二条件声明口径。呈裁随主理人。
 
 ## 三、租约面（当票租约只读消费·lease-issuer 实体签发）
