@@ -269,7 +269,7 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
       2. 相对仓根（全路径写法，如 `agent-skills/multi-collab/references/40-deployment.md`）
       3. 相对三分类分类目录（**跨包短写法**，如 `object-audit/references/70-provenance.md`；
          60-gates.md §四对账表与 60-publish.md 均用此式，不认它会把活指针全判悬空）
-      4. 相对本文件所在包根（包内跨目录引用，如 `references/20-handoff.md`）
+      4. 相对本文件所在包根（包内跨目录引用，如 references／20-handoff.md 这类写法）
       5. 本文件同级的 `references/`（SKILL.md 只写基名指分件）
       6. 同目录同名（兜底：`SKILL.md:14` 这类只写文件名的引用）
       7. 纯基名（不含斜杠）退到全仓基名存在性判定
@@ -301,7 +301,7 @@ def resolve(token: str, root: str, md_path: str, basename_index: "dict[str, int]
         return None
     # 带斜杠且全部候选落空＝照实报悬空。**不设"外部路径豁免"规则**，两条理由：
     #   ① "是不是外部路径"只能靠语义猜，脚本无权自造这种判断（60-gates.md §〇 铁律 1）；
-    #   ② 更要紧的是它会**吞掉真报**——`docs/INDEX.md` 这类指针的父目录已被删除，
+    #   ② 更要紧的是它会**吞掉真报**——docs／INDEX.md（仓根 docs／ 目录已随历史搬家消亡＝本注释所论悬空形态的真例）这类指针的父目录已被删除，
     #      按"首段不存在＝外部"就放过了，而"目标所在的目录没了"恰恰是悬空的典型形态。
     # 上游仓路径（如 `to-tickets/references/…`）因此会被报出来，这是已知噪声；
     # 路由表把 `OA-D6` 配成 advisory（不拦提交）正是为这类噪声留的出口，
