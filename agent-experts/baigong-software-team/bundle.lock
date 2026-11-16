@@ -16,7 +16,7 @@
       "ref_kind": "tag",
       "path": "agent-skills/external-advisor-collab",
       "target": "skills/external-advisor-collab",
-      "note": "软开 bundle 首个装配组件（皮总 2026-10-28 口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 agent-skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.1.3；沿革：tag v1.0（2026-10-25 决议批）→v1.0.1（改名批）→v1.1.0（20261029a 案技能升级批·十落点条款＋版本 bump SK-3·锁版本 bump＋bundle 重装配＝决策者 2026-10-30 04:11 指令授权）→v1.1.1（2026-10-30 EAC-CLN 指针闭集整改·决策者拍板㊺·程序条款语义零动）→v1.1.2（2026-11-04 治理层换钉批·B2 搬家后 ref/path 失步致装配 exit 3·决策者「纠正吧」·条款语义零动）→v1.1.3（2026-11-05 CLN-PURE 装配净化批·包面非法指针自包含化＋40-artifacts 交接判据改指装配包内 handoff-discipline §三·条款语义零动）。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含·D 项收口）"
+      "note": "软开 bundle 首个装配组件（口径：分仓＝维护/分发维度，部署到 WorkBuddy＝把相关 skills 装配进专家团）。真源＝本仓 agent-skills/external-advisor-collab（同仓组件·repo=\".\" 解析为仓根）；装配产物＝仓外 -build 预览面＝派生产物非第二真源（纪律③产物不入库）。组件版本与 SKILL.md version 同源＝1.1.3；沿革：tag v1.0→v1.0.1（改名）→v1.1.0（技能升级＝十落点条款＋版本 bump＋锁版本 bump＋bundle 重装配）→v1.1.1（指针闭集整改·程序条款语义零动）→v1.1.2（治理层搬家后 ref/path 失步致装配 exit 3 的纠正·条款语义零动）→v1.1.3（装配净化＝包面非法指针自包含化＋交接判据改指装配包内 handoff-discipline §三·条款语义零动）。lead 讨论会兼任节「加载技能 external-advisor-collab」自此命中包内装配件（部署态自包含）"
     },
     {
       "component": "deep-research",
@@ -26,7 +26,7 @@
       "ref_kind": "tag",
       "path": "skills/deep-research",
       "target": "skills/deep-research",
-      "note": "跨仓组件（票 T-deepresearch-01·皮总 R-1 fork 登记）：真源＝skills 仓 skills/deep-research（MIT 派生自 staruhub/ClaudeSkills deep-research V8.1.2·克隆 hash 66e02d23642f0c63ccb07b46a88104eade402d44·登记见该技能 README）；解耦口径＝R-6：席位与编排零变化，本行为组件新增＋平台刷新载体（宿主缓存按包版本刷新），调研起手式自动路由靠技能 description 触发词，不动席位；v1.0→v1.0.1 修因＝QA-deepresearch-01 minor-a/b/c 收口（SKILL.md 四件套句删近逐字摘要改纯指针＋补 .md 后缀、methodology 中英混排修·票 T-deepresearch-02）；v1.0.1→v1.0.2 修因＝EAC-CLN 指针闭集整改（README 变更记录行消费侧仓案面指针改自包含陈述·皮总拍板㊺·skills 仓 730962e）"
+      "note": "跨仓组件（fork 登记组件）：真源＝skills 仓 skills/deep-research（MIT 派生自 staruhub/ClaudeSkills deep-research V8.1.2·克隆 hash 66e02d23642f0c63ccb07b46a88104eade402d44·登记见该技能 README）；解耦口径＝席位与编排零变化，本行为组件新增＋平台刷新载体（宿主缓存按包版本刷新），调研起手式自动路由靠技能 description 触发词，不动席位；v1.0→v1.0.1 修因＝QA 复核收口（SKILL.md 四件套句删近逐字摘要改纯指针＋补 .md 后缀、methodology 中英混排修）；v1.0.1→v1.0.2 修因＝指针闭集整改（README 变更记录行消费侧仓案面指针改自包含陈述）"
     },
     {
       "component": "claim-commitment-governance",
@@ -36,7 +36,7 @@
       "ref_kind": "tag",
       "path": "agent-skills/claim-commitment-governance",
       "target": "skills/claim-commitment-governance",
-      "note": "SEMGOV-T3 挂载：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
+      "note": "语义治理挂载组件：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo=\".\" 解析为仓根）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。"
     },
     {
       "component": "devkit-tools",
@@ -47,7 +47,7 @@
       "ref_kind": "tag",
       "path": "share",
       "target": "tools",
-      "note": "TOOLHOME 票 S2 共享料源组件行（share 料源口径·装配时自包含嵌入硬条款）：真源＝仓根 share 料源目录（18 件工具真源·票面草案 v4 ccf6383 放行 e12afd3）；material=share 形态＝publish 装配步断言 path 首段必须 share（fail-closed 形态校验·TOOLHOME S2 改造臂）；装配时整件复制进包内 tools 挂载位＝使用方包部署态自包含（官方模型同构＝装配期复制进包）；挂载后包内调用一律包内相对路径；挂载副本禁手工编辑＝改＝改料源重装配（纪律同源）。ref 锁不可变 tag devkit-tools v0.1.0（纪律②③·tag 打于含 share 18 件终态的落链笔·命名惯例拆写＝组件名与版本号分立）。专属族不在本组件（fuxi gates 断言体系专属留原包）。"
+      "note": "共享料源组件行（share 料源口径·装配时自包含嵌入硬条款）：真源＝仓根 share 料源目录（18 件工具真源）；material=share 形态＝publish 装配步断言 path 首段必须 share（fail-closed 形态校验）；装配时整件复制进包内 tools 挂载位＝使用方包部署态自包含（官方模型同构＝装配期复制进包）；挂载后包内调用一律包内相对路径；挂载副本禁手工编辑＝改＝改料源重装配（纪律同源）。ref 锁不可变 tag devkit-tools v0.1.0（纪律②③·tag 打于含 share 18 件终态的落链笔·命名惯例拆写＝组件名与版本号分立）。专属族不在本组件（fuxi gates 断言体系专属留原包）。"
     }
   ],
   "assembly_exclude": [
