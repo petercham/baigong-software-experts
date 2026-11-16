@@ -60,6 +60,12 @@
       "files": [
         "README.md"
       ]
+    },
+    {
+      "token": ".collab/2026-11-10-SWB-SCRATCHG-双席审会师-放行呈拍简报-v1.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/qa/2026-11-10-SWB-SCRATCHG-产品席窄复核-v1.md"
+      ]
     }
   ],
   "collab_bucket_exempt": [
