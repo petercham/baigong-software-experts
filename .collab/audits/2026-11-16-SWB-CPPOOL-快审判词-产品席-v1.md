@@ -113,3 +113,13 @@
 - 判词正文防自咬＝路径裸文＋全角斜杠·零反引号路径 token·落笔前自靶 check-pointers 本件 exit 0（读数见完工回报）。
 - 单件 pathspec 两端齐带·add 紧邻 commit 零窗口·commit 前 git diff --cached --name-only 坐实仅自件·FX_COMMIT_DECLARE＝本笔仓根相对纯路径清单前置·禁 add -A／禁 amend／禁 no-verify·message collab 起头零 at 零反引号·尾标置最末位·commit 输出重定向 .scratch／cpool3pm／·撞锁有界等待零删锁·增量落盘＝判词写完立即一笔落链。
 - 本席唯一写件＝本判词；三票面／真源／门禁配置／他案脏面零触零带入。
+
+---
+
+## 附记段（append-only·判词落链笔卷入登记·b8994a0 先例同型）
+
+- 判词落链笔 6c5ba6b 的 name-only 现跑＝两件＝本判词＋同题 QA 席判词件（.collab／audits／2026-11-16-SWB-CPPOOL-快审判词-QA席-v1.md）＝QA 席 staged 面经共享 index 并发窗被本笔携入链。
+- 机理现跑取证：本笔 add 后声明闸＋门禁链检时 staged 仅自件（闸放行＝当时读数属实）；门禁链跑动窗口内 QA 席 add 落盘 index，commit 写树照 index 全量收走＝**闸检与 commit 非原子残余窗活体样本一枚**＝本判词红-1 所指残余窗的本席现场实证（非他席转述）。
+- 内容零损核验＝6c5ba6b 树内 QA 判词件 blob 07398bab 与盘上 hash-object 复算逐字节全等；本席判词件 blob c4f046f9 同法全等；QA 件正文席位归因在文件自身在册＝损面仅链笔级归因混载＝维持现状＋本登记笔不滚史（append-only 在册口径）。
+- 本笔 add 紧邻 commit 零窗口／FX_COMMIT_DECLARE 仅自件／零删锁零绕行＝工序面无违例；卷入责任面＝并发窗机理＝与票一评估对象同款＝随本判词红-1 呈主理人归账入观察样本计数候裁。
+- 续发案（反向卷入一枚·本席附记笔链段现跑在册）：附记首落链笔 f1de0b3 撞第二型窗＝本席 add 后 diff --cached 坐实仅自件、声明闸在岗放行；闸检→commit 写树窗内 QA 席 restore --staged 退本席 staged 面（该席附记自登在册句「index 内另有他席滞留 staged 一枚＝产品席判词件·M 态」）＋QA 席 add 自附记；本席 commit 写树照当时 index 收走＝f1de0b3 message 系本席（尾标 SWB-CPPOOL-PM-REV-APPEND）而 name-only 恰一＝QA 席附记件（+11）＝**本席笔携他席内容**＝反向卷入；本席附记退 M 态落盘未落链。归因＝本席 commit 端未带 pathspec＝TR27「两端齐带」未全形＝本席工序违例一枚如实自登（add 端带而 commit 端漏）。QA 附记内容零损＝blob 级该件已链可读·其席位归因文字在文件自身在册。本附记补落链承两端齐带形态＝commit 端 pathspec 限自件；此案再证红-1 残余窗＋补一消解线索＝commit 端 pathspec 系既有在册条款的未全形执行面（非新条款射程）。案型续账同呈主理人候裁。
