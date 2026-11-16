@@ -135,3 +135,71 @@ python -c "import json,subprocess;a=json.loads(subprocess.run(['git','show','HEA
 - 本票面自靶＝python share/check-pointers.py --root . --target .scratch／tickets／2026-11-16-DEBTCLN-R2-BLNOTE锁件note清理票-v1.md → **exit 0**（实跑坐实）。
 - 靶件基线双哈希＝§〇 在册（sha256 cf1fb51…／blob 9730486…）；V3 的 git show HEAD 基线以本票落链后链上态为准（本票笔不触靶件，HEAD 态靶件哈希不变）。
 - 本笔面＝恰票面一件；其余全程零触碰；他案脏面零带入。
+
+---
+
+## 八、rev1 段（作者席续笔·候裁①消解扩面·append-only·正文原段零改写）
+
+**rev 缘起**：候裁①（枚三枚四同型黑话是否扩面）经主理人自决采纳「本票扩面」——理由＝同一靶件同一操作类型同型债，拆第三票＝纯程序开销；登记点名组件一/二属登记时点所见的射程描述，扩面不改任何真源口径，属批次编排（不上楼范畴），采纳值写入放行登记留痕，不占决策者。**候裁①已随 rev 消解＝主理人放行口径扩面；rev 后候裁数＝0**（§四 原段留痕不改写，效力以本段为准）。rev 轮开工读数：HEAD＝5f616d0（本票落链态）；靶件哈希复跑＝blob 9730486…／sha256 cf1fb51… 与 §〇 基线全等（未动）；时点 2026-11-16 23:26:35 +0800。尾标闭集随 rev 增补一枚＝本 rev 笔 -TICKET-REV1（主理人派工令所载，随放行登记留痕）。
+
+### S3 · 枚三 note 替换（components[2]＝claim-commitment-governance·现文件第 39 行）
+
+现文 verbatim 全引：
+
+⟦SEMGOV-T3 挂载：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo="." 解析为仓根·体例照 EAC 先例）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件，D 项收口同构）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。⟧
+
+黑话分类登记：案批名／票号类＝SEMGOV-T3；简称先例类＝体例照 EAC 先例；拍板项编号类＝D 项收口（同构）。保留自决（口径同 §四）：「30-gates §5 明文」＝被挂载组件自家在册规范文件指针，与 S1 清理后文保留「handoff-discipline §三」同款口径；「七件／592 行世代／纪律②③」＝版本锁定理由与治理纪律编号非过程黑话，随留。
+
+清理后文（逐字可照抄规格·同 S1/S2 转义口径）：
+
+```text
+语义治理挂载组件：真源＝本仓 agent-skills/claim-commitment-governance（同仓组件·repo="." 解析为仓根）；七件＝SKILL.md＋references 四件＋templates 两件（592 行世代）。target＝装配面 skills/claim-commitment-governance/＝部署态自包含（席位卡技能入口经重新装配后命中包内装配件）。ref 锁不可变 tag claim-commitment-governance@v1.2.0（纪律②③）：tag 创建＝施工段先行动作，指向含七件 592 世代终态与 SKILL.md frontmatter version 1.2.0 的提交；七件后续演进＝SKILL.md version bump＋重打 tag＋本行 ref 随更，命名惯例 <组件名>@vX.Y.Z（conventions.ref 段既有口径）。版本一致性归装配期（30-gates §5 明文：本包不消费版本号）。
+```
+
+### S4 · 枚四 note 替换（components[3]＝devkit-tools·现文件第 50 行）
+
+现文 verbatim 全引：
+
+⟦TOOLHOME 票 S2 共享料源组件行（share 料源口径·装配时自包含嵌入硬条款）：真源＝仓根 share 料源目录（18 件工具真源·票面草案 v4 ccf6383 放行 e12afd3）；material=share 形态＝publish 装配步断言 path 首段必须 share（fail-closed 形态校验·TOOLHOME S2 改造臂）；装配时整件复制进包内 tools 挂载位＝使用方包部署态自包含（官方模型同构＝装配期复制进包）；挂载后包内调用一律包内相对路径；挂载副本禁手工编辑＝改＝改料源重装配（纪律同源）。ref 锁不可变 tag devkit-tools v0.1.0（纪律②③·tag 打于含 share 18 件终态的落链笔·命名惯例拆写＝组件名与版本号分立）。专属族不在本组件（fuxi gates 断言体系专属留原包）。⟧
+
+黑话分类登记：案名类＝TOOLHOME（两处）；票号／节点编号类＝票 S2／S2 改造臂；仓 sha 短串类＝ccf6383／e12afd3；过程版本引用类＝票面草案 v4。保留自决（口径同 §四之二）：「fuxi gates 断言体系」＝仓内现存实体制（fuxi 族断言工具），系读者所需的专属族不在位解释信息，非案批名，随留。
+
+清理后文（逐字可照抄规格）：
+
+```text
+共享料源组件行（share 料源口径·装配时自包含嵌入硬条款）：真源＝仓根 share 料源目录（18 件工具真源）；material=share 形态＝publish 装配步断言 path 首段必须 share（fail-closed 形态校验）；装配时整件复制进包内 tools 挂载位＝使用方包部署态自包含（官方模型同构＝装配期复制进包）；挂载后包内调用一律包内相对路径；挂载副本禁手工编辑＝改＝改料源重装配（纪律同源）。ref 锁不可变 tag devkit-tools v0.1.0（纪律②③·tag 打于含 share 18 件终态的落链笔·命名惯例拆写＝组件名与版本号分立）。专属族不在本组件（fuxi gates 断言体系专属留原包）。
+```
+
+### 程序化替换命令随动（四枚 note·替换 §二 原两枚式命令·原命令段留痕不再适用）
+
+四枚清理后文各落 .scratch／debt2／note1_new.txt 至 note4_new.txt（裸文本无引号）后跑：
+
+```bash
+python -c "import json;p='agent-experts/baigong-software-team/bundle.lock';d=json.load(open(p,encoding='utf-8'));[d['components'][i].update({'note':open('.scratch/debt2/note%d_new.txt'%(i+1),encoding='utf-8').read().rstrip('\n')}) for i in range(4)];open(p,'w',encoding='utf-8').write(json.dumps(d,indent=2,ensure_ascii=False)+'\n')"
+```
+
+（产物格式口径不变：两空格缩进＋非转义中文＋尾换行，V3 diff 自证；工程师其它手段须同等过 V2／V3。）
+
+### V 系随动（其余判据零变化）
+
+- **V1 扩面重列（取代 §三 V1·判据域＝四枚 note 全串·token 清单 21→28 枚＝新增七枚 SEMGOV-T3／EAC／TOOLHOME／票 S2／ccf6383／e12afd3／票面草案；原 21 枚照旧·「D 项收口」一枚同时覆盖枚一枚三）**：
+
+```bash
+python -c "import json;d=json.load(open('agent-experts/baigong-software-team/bundle.lock',encoding='utf-8'));t=''.join(c['note'] for c in d['components']);toks=['\u76ae\u603b','\u51b3\u8bae\u6279','\u6539\u540d\u6279','20261029a','SK-3','04:11','EAC-CLN','\u32ba','\u6362\u9489\u6279','\u7ea0\u6b63\u5427','CLN-PURE','40-artifacts','D \u9879\u6536\u53e3','T-deepresearch-01','R-1','QA-deepresearch','minor-a','T-deepresearch-02','R-6','730962e','\u6307\u4ee4\u6388\u6743','SEMGOV-T3','EAC','TOOLHOME','\u7968 S2','ccf6383','e12afd3','\u7968\u9762\u8349\u6848'];print([(k,t.count(k)) for k in toks]);raise SystemExit(0 if all(t.count(k)==0 for k in toks) else 1)"
+```
+
+→ **exit 0** 且打印清单全部计数 0。
+- **V3 口径随动**：git diff --numstat 于靶件＝**4／4 恰四行**（四枚 note 值行·第 19／29／39／50 行位置段）；结构化对拍改四枚 note 置等哨兵：
+
+```bash
+python -c "import json,subprocess;a=json.loads(subprocess.run(['git','show','HEAD:agent-experts/baigong-software-team/bundle.lock'],capture_output=True).stdout);b=json.load(open('agent-experts/baigong-software-team/bundle.lock',encoding='utf-8'));[c.update({'note':'X'}) for c in a['components']+b['components']];print('REST-EQUAL' if a==b else 'DRIFT')"
+```
+
+→ 打印 **REST-EQUAL**（除四枚 note 外全结构深相等；HEAD 基线以本票 rev 落链后链上笔为准）。
+- **V2／V4／V5／V6 零变化**：V2 解析 components 仍 4；V4 note 零消费方 grep 坐实面覆盖四枚 note 不变；V5 自靶不变；V6 边界仍＝施工笔 diff --cached --name-only 恰靶件一枚。禁动面随扩面收敛为：锁件其余字段（含 bundle 行 note／全部版本值／conventions／assembly_exclude）byte 零扰动——枚三枚四 note 由禁动面移入声明闭集，其余禁动面照 §二 原段不变。
+- **声明闭集条目数随 rev＝4**（S1／S2／S3／S4）。
+
+### rev 笔自证（落笔后、commit 前实跑）
+
+- 本票面自靶（rev 后全文）＝python share/check-pointers.py --root . --target .scratch／tickets／2026-11-16-DEBTCLN-R2-BLNOTE锁件note清理票-v1.md → **exit 0**（实跑坐实·读数见完工回报）。
+- rev 笔面＝恰同一票面文件一件（rev 追加）；靶件仍未触（哈希复跑全等 §〇 基线）；他案脏面零带入。
