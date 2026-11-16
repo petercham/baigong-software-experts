@@ -94,3 +94,26 @@
 - 单件 pathspec 两端齐带·add 紧邻 commit 零窗口·commit 前 git diff --cached --name-only 坐实仅自件·FX_COMMIT_DECLARE＝本笔实触仓根相对纯路径清单前置·禁 add-A／禁 amend／禁 no-verify·message collab: 起头零 at 零反引号·尾标 [SWB-BKTCLS-TICKET] 置最末位·commit 输出重定向 .scratch／cpool3／·Bash commit 类 timeout 十分钟档·撞锁有界等待零删锁；
 - 临时工作物居 .scratch／cpool3／（gates-run.txt／selfgate-*.txt／commit-*.txt）完工自删（commit 留证保留）；
 - 本起草笔只写票面一件；share／ 下零触碰（施工归后续工程师席按 §二 执行）。
+
+## 八、rev-1 更正段（append-only·作者席 arch-cpool3·双席快审会师对拍处置·已落链正文一字不改·后文读数以本段为准）
+
+- rev 轮开工读数＝git rev-parse --short HEAD 现跑（本笔 add 前现读·登记于完工回报）；前笔链顶含票一 rev 笔 f5d50c7。
+
+### 更正一（§〇 per_spec 现跑读数错登）
+
+正文 §〇「路由表现读＝…per_spec **25 条目**」错登。双席独立现跑一致＝per_spec 实为 **22 条目**（QA 席以 python 解析 json 围栏＋窗口 diff 排除读数漂移坐实）。**22 为本票链段实测数**；正文 25 作废不回改（append-only），验收轮对拍以 22＋当轮现跑为准。骨架零伤：2-1／2-5 挂载规格不依赖该计数。
+
+### 更正二（§四 V2 判据射程写死·承重修正）
+
+正文 V2 第三目「git grep 旧径受跟踪引用零命中」**字面不可机械满足**：实测全仓 collab／qa 字样命中 251 枚文件，横跨三面无合法消解路径＝①裁甲豁免面（两包 .collab／qa／＝禁动射程外）；②链上史面（append-only 不追改）；③迁移 7 枚件内文自引 5 枚（迁册内容零改约束 R100）。照跑必红＝判据自身违机械可判性。**V2 第三目作废，改写为两层射程口径（此后读数以本段为准）**：
+- 层一（路径面）＝**git ls-files 域内不再有 .collab／qa／ 前缀路径**：判据命令＝git ls-files 输出 grep -c 该前缀路径＝**0**；
+- 层二（内文面）＝迁移 7 枚件换径后**其内文指针不因迁移翻红**：判据＝对迁移后新路径逐件 python share/check-pointers.py --root . --target 新路径 各 **exit 0**（件内文零改＝内容零改约束下自引基名／相对形态仍可解析＝照豁免与内容零改约束成立）。
+- 两层皆绿＝V2 绿；全仓 grep 零命中表述**禁用**（该口径不再作为任何验收依据）。
+
+### 随注（GATE 读数钉值差归因一句话）
+
+正文 §〇 现跑 151502 与在册钉值 151508 差 6 枚：QA 席 rev 轮现跑已回钉值 **151508**（本席票一 rev 笔 commit 输出同步复见 151508＝互证坐实）；差因＝票起草时点链态差异（起草窗内他案笔涉指针面波动），不追因、不影响本闸「首跑违例预期 0」判据（V0 grep -c MC-BUCKET-1 违例行口径独立于发现数总量）。
+
+### rev 段纪律自证
+
+append-only＝本段落链笔不改正文任何既有字句（git diff 本笔＝纯尾部追加）；路径例证裸文＋全角斜杠·零反引号包径；落笔后本票自靶 exit 0 才 commit；单件 pathspec·FX_COMMIT_DECLARE 纯路径前置·尾标 [SWB-BKTCLS-REV1] 置最末位·commit 输出重定向 .scratch／cpool3／·timeout 十分钟档·撞锁有界等待零删锁。
