@@ -101,3 +101,14 @@
 - 本件防自咬＝路径裸文＋全角斜杠·引文 ⟦⟧ 标记·落笔前自靶 python share/check-pointers.py --root . --target 本件路径 exit 0（读数见完工回报）。
 - 单件 pathspec 两端齐带·add 紧邻 commit 零窗口·commit 前 git diff --cached --name-only 坐实仅自件·FX_COMMIT_DECLARE＝仓根相对纯路径清单前置·禁 add -A／amend／no-verify·message collab 起头零 at 零反引号·尾标 [SWB-CPPOOL-QA-REV] 置最末位·commit 输出重定向 .scratch／cpool3qa／·timeout 十分钟档·撞 index.lock 有界等待零删锁。
 - 只读被审三票＋取证；产品席审票产出零读（fresh eyes）；他案脏面照登零带入；判词落 .collab／audits／＝本席写域。
+
+---
+
+## 附记·卷入登记与席位归因恢复（append-only·v1 正文一字未动）
+
+- 本件 v1 正文经产品席笔 **6c5ba6b**（产品席同题快审判词落链笔）携入链：本席 add 后 staged 面坐实仅自件，commit 当轮 GATE PASS 后撞 ref 锁败北（ ⟦fatal: cannot lock ref 'HEAD': is at 6c5ba6bd… but expected 8792a97…⟧ exit 128），staged 面滞留共享 index 被该笔收走＝**D-58 同型案型·本快审轮本席亲历**（即票一评估的案件本体本身·非样本引文）。
+- 内容无损核实（本席现跑 blob 级对拍）：6c5ba6b 树内该件 blob ＝ 07398babca3acbd4d11f23c8bf68057e7b880dcc ＝ 工作树 git hash-object 全等；v1 正文一字未动。
+- 插曲随登：撞锁败北后本席发现 index 内另有他席滞留 staged 一枚（产品席判词件·M 态），按纪律 git restore --staged 仅退暂存·磁盘内容零触·不判其内容。
+- 本附记笔＝QA 席（qa-cpool3rev）对该件的首个成功落链笔，恢复席位归因（先例＝b8994a0 同型处置）；史笔不滚史（append-only 口径）。
+- 案型续账呈主理人：本案型样本再＋1（自愈·零内容损）——恰落票一观察行在册提级观察面内（内容损＝无／回滚＝无／归因不可 append 恢复＝否）＝不提级、照登续册；另票一红-1 所指「闸活性归因」面本笔补一独立实证＝本席 commit 前声明闸与门禁链全程在岗（GATE PASS 151508 在册读数后撞的是 ref 锁非闸拦）。
+- 收工读数：git rev-parse --short HEAD 开工＝8792a97；本附记笔前链顶现跑＝6c5ba6b（＋其间任何他笔以本笔 parent 为准）。
