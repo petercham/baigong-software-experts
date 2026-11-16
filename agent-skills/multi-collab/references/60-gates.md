@@ -62,7 +62,8 @@
     "OA-E-ADR-2": {"commit": "advisory"},
     "OA-E-ADR-3": {"commit": "advisory"},
     "OA-E-ADR-4": {"commit": "advisory"},
-    "OA-E-ADR-5": {"commit": "advisory"}
+    "OA-E-ADR-5": {"commit": "advisory"},
+    "MC-BUCKET-1": {"commit": "block"}
   }
 }
 ```
@@ -113,6 +114,7 @@
 | `OA-E-ADR-3` ADR 双向 supersede 全向校验 | `advisory` | 同上 E-ADR 节 E-ADR-3″ 行（同上） | **足**（同上） |
 | `OA-E-ADR-4` ADR accepted 不可变 | `advisory` | 同上 E-ADR 节 E-ADR-4″ 行（同上） | **足**（同上） |
 | `OA-E-ADR-5` ADR 三面对账（桶互斥和式） | `advisory` | 同上 E-ADR 节 E-ADR-5‴ 行（同上） | **足**（同上） |
+| `MC-BUCKET-1` 仓根 .collab 桶名闭集校验 | `block` | 判据一句话＝仓根 .collab 一级子目录名 ∈ 白名单 17 桶名录，闭集外即违例（白名单制·只管仓根单层·一级文件不判）；闸实体＝仓根 share/check-collab-buckets.py（参数与实现不复写于此）；规范依据＝.collab/README.md「17 桶名录」行（规范真源）＋皮总裁定候裁三件全按建议放行件 §二-2 裁甲（17 桶闭集只管仓根）＋移交工单 v3 A14 行在册修法列「门禁工具线」 | **足**（首挂即 block＝SWB-BKTCLS 票面 §2-1 规格写死：闭集断言零误报形态·存量违例同票先消解·白名单两源对拍自证防漂移；不同于滚动禁模式类判据无先例误报面） |
 
 > 注（批 5-③ W6 留痕·覆盖批 5-② 同处留痕）：上表四条规范依据的**正文已落本包** `70-charter.md` §四（4.1／4.2／4.3），读表规则 5 由「id 串出现在本件 json 围栏内」的**自指式满足**转为**条款级真满足**（四条 id 均可在 `70-charter.md` 解析到，非仅在本件 json 围栏内出现）。`mode` 一律维持 `advisory` 不变——依 decisions §九·②「先挂 advisory 取信号」；升 block 须先有条款级依据再由治理改本表（配套规则 2）。
 
