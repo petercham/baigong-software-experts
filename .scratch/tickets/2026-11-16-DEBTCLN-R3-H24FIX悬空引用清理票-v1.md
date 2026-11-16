@@ -132,4 +132,29 @@ python -c "import subprocess;b=open('agent-skills/multi-collab/references/20-han
 
 ---
 
-（票尾·append-only：后续修订以 rev 段位在此处续笔，正文原段零改写）
+## rev1 段（修票笔·架构席 arch-debt3rev·append-only·正文原段零改写）
+
+- 依据＝双席快审判词 blob 钉版：QA 席判词 blob fe6be3aaeee73e4745a24b41e238105d3e7da13c（.collab／audits／2026-11-16-DEBTCLN-R3-快审判词-QA席-v1.md·链＝盘 hash-object 现跑全等·经 QA 快审笔 73ca8a0 入链）＋产品席判词 blob b7cce01ef0fa42190ff5cc8ffa957f2fcc1faf58（.collab／decisions／2026-11-16-DEBTCLN-R3-快审判词-产品席-v1.md·73ca8a0 树面与盘现值全等）。双席独立同点命中红-1／黄各一枚，本段随正三处；除下述三处外票体零动。
+- 本段全部读数＝本席 rev 轮现跑复算坐实（禁照抄判词不验·复算过程与读数见下），非转述。
+
+**随正一（红-1·双席独立同点命中）·§〇「消费脚本改前基线」行与 §三 V3 的 check-collab-lint exit 钉值随正**：
+- 原段 §〇「消费脚本改前基线」行宣称 check-collab-lint／check-source-of-truth 现跑均 exit 0，其中 check-collab-lint 侧读数不实。本席现跑复算＝check-collab-lint 全扫描 **exit 1**（spec 计数 EAC-L1 2006／EAC-L2 4097／EAC-L3 0·分账 EXEMPT 0／SUBSTR 1029／VIOLATION 4097·--selftest 仍 exit 0 脚本本体健康·确定性可复现＝与双席判词读数全等）；check-source-of-truth 侧原段属实＝exit 0（模式 dual｜文件 129｜BLOCK 0（新命中 0）｜基线豁免 54｜指针 WATCH 413）。归因＝check-collab-lint 以 os.walk 扫盘面（非 tracked 面），发现大头来自 .scratch／ 取证族与 fuxi 树等历史落盘面，非本债射程、非起草笔或本 rev 笔引入；run-gates 内该 spec 路由 advisory，故 GATE PASS（exit 0·发现 151503 本席同轮现跑全等）不受影响。
+- §〇 该基线行随正为＝**check-collab-lint 基线 exit 1（读数在册：EAC-L1 2006／EAC-L2 4097／EAC-L3 0·VIOLATION 4097·--selftest exit 0）／check-source-of-truth 基线 exit 0（BLOCK 0｜豁免 54｜指针 WATCH 413）**。
+- §三 V3 该判据随正为＝**check-collab-lint 与 check-source-of-truth 现跑 exit 码与各自实测基线全等（lint 基线＝exit 1／csot 基线＝exit 0）＋计数照登对拍＋findings 差量归因零新增**；V3 其余成分（check-source-of-truth 计数照登对拍·WATCH 计数有差如实照登归因·票模板／门禁配置消费面零指该段先验）零改。V3 原段字面「均 exit 0」作废，以本行为准。
+
+**随正二（黄-1·QA 席）·§〇 靶件定位行①与包内部署面分列行、§四 观察行第三则对 evidence 备份面两枚的两处描述随正**：
+- 原段「tracked 证据备份·历史快照零触」与「备份面＝evidence／publish／backup-20261023-130728 一枚现文在册」及 §四「邻仓证据备份面两枚含旧径现文」三处描述与实测不符。本席现跑复算＝两枚 20-handoff 备份件（backup-20261023-130728 与 backup-20261023-133011）git check-ignore 命中 .gitignore 第 20 行规则 /**/.collab/evidence/ ＝ **ignored 非 tracked**；两枚内容 grep 旧径 token ＝ **0 命中**（行数 50＋52＝早期形态快照，不含行 24 指针句；grep handoff-discipline／三正面亦 0 命中）。
+- 随正口径写死＝该两面＝**ignored 早期快照·非 tracked·不含旧径 token**；§四 禁动面「邻仓证据备份面两枚零触」结论不变（照旧零触·不构成施工风险），仅登记描述以本行为准。
+
+**随正三（黄-1·产品席出处错置）·票头「来源与裁定依据」行出处随正**：
+- 原段称债登记行出自 CPPOOL 批次收口 1527653 候补池行——经产品席现读坐实该收口件候补池随动节无「20-handoff 行 24」行（本席附核＝该行原文实出自 .collab／decisions／2026-11-16-SWB-RCTPATH-R2-收口登记-v1.md 行 17 ⟦候补池行「20-handoff 行 24 B2 搬家史遗留悬空指针」＝另案候排在册（本批零处置坐实·V4′ 差量口径登基线全等）⟧·收口笔 b2b61d7）。
+- 勘正句写死＝**债登记行真源＝SWB-RCTPATH-R2 收口登记候补池随动行（收口笔 b2b61d7），非 CPPOOL 收口 1527653**；债效力三证链完整＝RCTPATH-R2 回执 V4′ 行「该枚既有悬空登记另案处置」＋RCTPATH-R3 放行登记「行 24 既有悬空仍另案不背」＋DEBTCLN-R2 收口 88c2b80「R3 H24FIX 候排」。派工令同误随此一并勘。
+
+**rev 后复验读数（本席现跑·落笔前实跑在册）**：
+- 票面自靶 python share/check-pointers.py --root . --target 本票面实路径 → exit 0（rev1 笔落笔前实跑·读数见完工回报）。
+- 缺省扫描 python share/check-pointers.py → BLOCK 22810／WATCH 4582（与 §〇 钉值全等·本 rev 笔不触靶件不变）。
+- 消费脚本基线真值自证＝lint exit 1／csot exit 0（与本段随正一读数自证全等）。
+
+**rev 笔纪律自证**：本笔面＝恰本票面一件（add／commit pathspec 两端齐带）；正文原段（含 §〇 原表、§三 V3 原段、票头原行）一字未动，全部随正在本段内；他案脏面零带入；链上史件零回改；FUXI 零碰；靶件零触（修票不施工）；防自咬体例沿票面自注（裸文＋全角斜杠·⟦⟧ 剥反引号）。
+
+（rev1 段尾·append-only：后续修订仍在此处续笔，rev 段间互不回改）
