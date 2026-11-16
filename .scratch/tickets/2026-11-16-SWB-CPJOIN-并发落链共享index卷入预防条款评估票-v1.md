@@ -86,3 +86,23 @@
 - 单件 pathspec 两端齐带·add 紧邻 commit 零窗口·commit 前 git diff --cached --name-only 坐实仅自件·FX_COMMIT_DECLARE＝本笔实触仓根相对纯路径清单前置·禁 add-A／禁 amend／禁 no-verify·message collab: 起头零 at 零反引号·尾标 [SWB-CPJOIN-TICKET] 置最末位·commit 输出重定向 .scratch／cpool3／·Bash commit 类 timeout 十分钟档·撞锁有界等待零删锁；
 - 本票面防自咬＝路径一律裸文＋全角斜杠·引文块 ⟦⟧ 标记·落笔前自靶 exit 0；
 - 临时工作物居 .scratch／cpool3／ 完工自删（commit 留证文件保留）。
+
+## 八、rev-1 更正段（append-only·作者席 arch-cpool3·双席快审会师对拍红项处置·已落链正文一字不改·后文读数以本段为准）
+
+- rev 轮开工读数＝git rev-parse --short HEAD 现跑 **2ee501d**（登记如实·晚于三票链段属他案笔照常不理）。
+
+### 更正一（§二 案②拦下主体归因失实）
+
+正文 §二 样本两例枚 2 句「一次 commit 被门禁正确拦下（check-staged-declaration exit 4→GATE BLOCK）」归因**失实**。在册施工回执原文（.collab／receipts／2026-11-16-SWB-A14H1-施工回执-工程师席-v1.md §五-3）＝「上述卷入未清前一次 commit 被门禁拦下（check-collab-lint exit 4·GATE BLOCK）」——拦下主体＝run-gates 循环体内 **check-collab-lint exit 4**，非声明闸。同点随登自相矛盾一处：正文 §二 防线清单第 1 条照录声明闸退出码闭集＝0／1（卷入 BLOCK）／2／4（基础设施错），exit 4 于该闸＝基础设施错非违例码——正文误将 4 作声明闸拦下码，两处同源错。**影响面如实登记**：案②「被门禁拦下」事实不翻（闸活性正面样本仍立），但拦下主体归 run-gates 侧；「声明闸于案②实测拦下＝活性坐实」一句**证据链失效**，声明闸自身拦下正样本在册无据（候观察行续证）。
+
+### 更正二（§三 候选三段「案①＝闸前案型」时序错登＋残余窗认账）
+
+正文候选三段句「案①（QA 面被携走）＝声明闸上线（FX-U30）前案型；闸后同型即案②拦下形态」**时序错登**。本席 rev 轮现跑日期链坐实＝声明闸落码 5f140c5（11-09·FX-U30 施工笔）与硬拦升格 9a15849（11-10）皆案①笔 2dd1d4a（11-16）之祖先（git merge-base --is-ancestor 两跑各 exit 0）＝**案①实为闸后七天案型**；且 2dd1d4a 自身曾被闸 exit 1 拦过一次、末笔仍携两件入链。由此正文「该暴露被声明闸后置兜住（他席插入 ⇒ 该笔 commit 时闸拦 exit 1）」的后置兜住断言**被案①本体证伪**：声明闸检查（pre-commit 钩子读 staged 面）与 commit 落 index **非原子**，检后至 commit 读 index 前存在**残余窗**（他席 add 携入可发生于本笔闸检通过之后）。残余窗如实认账，并补登进 §三 总结论观察行提级条件面：原三条件（内容损／需回滚／归因无法 append 恢复）逐字保留，**增第四条件＝出现任一「committer 过闸检查后仍携他席 staged 面入链」样本复发（残余窗实害再现）即提级**。
+
+### 论证补登记（§三 总结论不翻·更正后仍立）
+
+候选一／二结论不动（双席确认：6d1933d 口径逐句对上、错峰＝自行加严论证成立）。总结论「现行纪律＋既有机械面已覆盖、无需新增流程条款＋留观察行」**不翻**，论证随动补登：残余窗＝检查与 commit 原子性问题，git 层工序侧不可机械封闭（闸在 commit 前跑、index 在 commit 时读，工序无法把两步焊成一步）——新条款候选对此维度无机械抓手；现行「add 紧邻 commit 零窗口」＝压缩窗至最小＋事后归因恢复面兜底＝现状最优处置；残余窗已升格为观察行显式维度（更正二），提级路径在册。§五 候裁面效力不变：建议取态（含本段更正后形态）仍候裁呈拍。
+
+### rev 段纪律自证
+
+append-only＝本段落链笔不改正文任何既有字句（git diff 本笔＝纯尾部追加）；路径例证裸文＋全角斜杠·零反引号包径；落笔后本票自靶 exit 0 才 commit；单件 pathspec·FX_COMMIT_DECLARE 纯路径前置·尾标 [SWB-CPJOIN-REV1] 置最末位·commit 输出重定向 .scratch／cpool3／·timeout 十分钟档·撞锁有界等待零删锁。
