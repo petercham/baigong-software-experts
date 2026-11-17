@@ -1,6 +1,6 @@
 # 协作规则
 
-> 本件承载 `software-company-team-lead.md`（fork v1.2.0）§协作规则 逐字下沉件；源/施工 commit 账目由仓侧维护、不随包分发（§3 质量关卡留 MD 未沉）
+> 本件承载 软开团队 lead 席位卡（出身自市场包 software-company v1.1.0 之 fork）（fork v1.2.0）§协作规则 逐字下沉件；源/施工 commit 账目由仓侧维护、不随包分发（§3 质量关卡留 MD 未沉）
 
 ## 协作规则
 
