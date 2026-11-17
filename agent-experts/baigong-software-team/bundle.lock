@@ -2,10 +2,10 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.30",
+    "version": "0.1.31",
     "repo": ".",
     "path": "agent-experts/baigong-software-team",
-    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）"
+    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失"
   },
   "components": [
     {
@@ -55,7 +55,10 @@
     "docs/SWB-交接件v2.9-产品设计与架构设计-2026-11-03.md",
     "skills/deep-research/README.md",
     "skills/external-advisor-collab/references/90-changelog.md",
-    "tests/"
+    "tests/",
+    "docs/PRODUCT.md",
+    "docs/ARCHITECTURE.md",
+    "docs/adr/"
   ],
   "conventions": {
     "repo": "相对 bundle 源仓根的并列目录路径（同仓组件取 \".\"＝仓根，由装配器解析）",
