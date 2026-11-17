@@ -8,10 +8,11 @@
 - 起草段产出＝仅本票面一件，单独 commit；起草席零执行任何部署动作、零碰装配面／市场源／缓存
 - 纪律真源＝agent-experts/baigong-software-team/skills/software-orchestration/references/deploy-gate.md §二（独立票＋获批）、§四（用户同一指令明示含路径＝该次可直做）、§五（四段链①装配→②预览→③人类闸→④部署＋获批范围按段界定＋市场源备份一键回滚）
 - 体例参照＝两枚先例票（.scratch/tickets/2026-11-06-GWP-DEPLOY-0.1.30-四段链部署票-v1.md／.scratch/tickets/2026-11-07-PROJINIT-DEPLOY-四段链部署票-v1.md），逐节参照；差异面（获批载体＝用户选段原文／bump 在本票内／四组件面装配含 devkit-tools 挂载／段界已明示）按本批实况改写
-- 候裁点：3 枚（§七 J-1 装配 clean 闸与 ledger 他案脏面冲突取态／J-2 件数差集归因边界／J-3 docs 装配排除取态·rev1 增）——其余钉值全部本票钉死
+- 候裁点：3 枚（§七 J-1 装配 clean 闸与 ledger 他案脏面冲突取态／J-2 件数差集归因边界／J-3 docs 装配排除取态·rev1 增）——其余钉值全部本票钉死。rev2 随注：三枚已经主理人按「不上楼」过滤采纳归并（J-1 采 (b)／J-2 采归因口径照单／J-3 采甲案），落规格见 §十，票面对应停手候裁态由 §十 置换生效。
 - **rev1 修订笔（2026-11-17·作者席 arch-dep131·append-only 增段·开工 HEAD 实测 6b57304＝v1 落链笔）**：主理人增补指令＝皮总指令性问题「docs 不参与执行，不应该进装配面，对吧？」入票。取证读数／谓词能力口径／规格取态全部落 §九（新增段）；候裁 J-3 增列 §七；写集与判据随动补项同见 §九。v1 既有正文零回改（J-1／J-2 框架、获批登记、四段结构、禁动面、回滚条款全部零动）。
+- **rev2 修订笔（2026-11-17·作者席 arch-dep131·双席快审回流修票段·开工 HEAD 实测 0b54a44）**：红 1 黄 6 一次修完＋候裁三枚主理人采纳规格落 §十（K-1／K-2／K-3）。红-1＝段⓪ numstat 钉值算术错（原 3/3 与 rev1 4/3 均不实）→改逐文件钉＋夹具实测（git diff --no-index --numstat 现跑＝plugin.json 1/1＋.codebuddy-plugin/plugin.json 1/1＋bundle.lock 甲案 6/3＝合计 8/5；乙案形制 2/2 备查）；六黄落位＝W4／W6 宿主写面具名（§二 W 表）·段⓪时序钉死句（§一段⓪）·§六 与票头自注节号勘正（两处）·段①删装配面前置步入动作列（§一段①）·段②步 6 json 解析级对比口径（§二段②）·§〇.4 十六件改 13 件＋tests 三枚差集照登（§〇.4 锚定区间行）。修订形制＝实质条款原位置换（红项系数值勘正）＋§十 尾部增段；获批登记／四段结构／禁动面／回滚框架零动。
 
-> 票面自注（防自咬体例）：本票正文对仓内文件引用一律仓根相对纯路径裸文（正斜杠）；叙述性提及与仓外绝对路径用全角斜杠（／U+FF0F）；全文零 at 符号、零反引号。§六 命令块内为可照跑实文本（仓根相对段为正斜杠纯路径；仓外面命令含 Windows 绝对路径＝执行段专用，段界由执行席按命令块照跑，叙述面不落反引号）。本票成文后自靶 python share/check-pointers.py --root . --target 本票面仓根相对路径 须 exit 0（读数见 §五）。
+> 票面自注（防自咬体例）：本票正文对仓内文件引用一律仓根相对纯路径裸文（正斜杠）；叙述性提及与仓外绝对路径用全角斜杠（／U+FF0F）；全文零 at 符号、零反引号。§六 命令块内为可照跑实文本（仓根相对段为正斜杠纯路径；仓外面命令含 Windows 绝对路径＝执行段专用，段界由执行席按命令块照跑，叙述面不落反引号）。本票成文后自靶 python share/check-pointers.py --root . --target 本票面仓根相对路径 须 exit 0（读数见附节·rev2 勘正原误指 §五）。
 
 ## 〇、获批登记、开工前置与被部署内容
 
@@ -49,7 +50,7 @@
 ### 〇.4 锚定区间与上次装配读数（停手判据基准）
 
 - 上次装配实绩（装配面 ASSEMBLY.manifest.json 起草直读）＝assembled_at 2026-11-09T11:16:29、bundle_source_commit e880edb8…（短式 e880edb）、bundle_version 0.1.30、files 88、components 三枚（claim-commitment-governance tag v1.2.0 已含；devkit-tools 组件行后立）。装配面现盘 90 件（88＋ASSEMBLY.manifest.json＋COPY.state）＝既往遗留预览面，本票①段以重装配覆盖式重出（装配纪律：重装配＝删装配面重跑）。
-- 锚定区间停手判据：开工时跑 git -c core.quotepath=off diff --name-only e880edb..<开工HEAD>，对 bundle 跟踪面（agent-experts/baigong-software-team/ 除 .collab/、.scratch/、tests/、README.md、docs/SWB-交接件）／本仓组件面（agent-skills/external-advisor-collab/、agent-skills/claim-commitment-governance/）／share 料源面 逐一列读数。本批＝增量批＝diff 非空属预期（起草实测：bundle 交付面 16 件 M、share 面多件 M、EAC／CCG 组件面空）——差集须逐行归因＝全部可归因至已收口批次（PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN）＝绿；出现不可归因面（含 FUXI 线渗入 bundle 面）＝停手复核呈主理人。
+- 锚定区间停手判据：开工时跑 git -c core.quotepath=off diff --name-only e880edb..<开工HEAD>，对 bundle 跟踪面（agent-experts/baigong-software-team/ 除 .collab/、.scratch/、tests/、README.md、docs/SWB-交接件）／本仓组件面（agent-skills/external-advisor-collab/、agent-skills/claim-commitment-governance/）／share 料源面 逐一列读数。本批＝增量批＝diff 非空属预期（rev2 复算勘正读数：bundle 面按本节排除口径＝13 件 M——原登 16 件系未排除 tests 段，差集恰 tests 三枚＝tests/acceptance/drills/drill-05-freeze-recover.sh／tests/acceptance/drills/drill-06-replay-reconcile.sh／tests/s2/test_lease_instantiation.py 逐枚在册；share 面多件 M、EAC／CCG 组件面空）——差集须逐行归因＝全部可归因至已收口批次（PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN）＝绿；出现不可归因面（含 FUXI 线渗入 bundle 面）＝停手复核呈主理人。
 - 组件面·skills 仓段：跨仓组件判据＝在 skills 仓跑 git rev-list -n1 后接 deep-research tag v1.0.2 的连拼 tag 名（照 bundle.lock 行 25 字面连拼）＝起草实测 730962e160bcf5b25f549c21f17c2c36848f4dfe，与 bundle.lock 行 25 ref 钉值一致性＋与前批回执登记读数比对；ref 未变＋tag sha 相等＝绿。
 - devkit-tools 组件面：tag sha 起草实测 291ab447…（tag 建 2026-11-10＝晚于上次装配 e880edb）——本次装配预期新增 tools 挂载面＝首挂载件（上次装配面无 tools 目录＝起草实测坐实）；件数差集归因按 §七 J-2 口径。
 
@@ -62,11 +63,17 @@
   - agent-experts/baigong-software-team/plugin.json＝行 3 version 一枚
   - agent-experts/baigong-software-team/bundle.lock＝行 5 version 一枚＋行 8 note 沿革追加一处
   - agent-experts/baigong-software-team/.codebuddy-plugin/plugin.json＝行 3 version 一枚
-- 判据：numstat 恰 3 增 3 删（note 行＝同行替换仍计 1／1）；json 可载断言两 json＋bundle.lock 三件 parse-OK；改后 grep 三读数＝0.1.31 且仓内 0.1.30 于三文件零残留（bundle.lock 组件 note 沿革史文内旧版本号字样属史实锚＝不计残留，以行 5 唯一 version 键为准）；四件套门禁改前改后 exit 钉值全等（§〇.2 基线随轮照登）。
+- 判据（rev2 置换段⓪ numstat 行·红-1 勘正）：numstat 逐文件钉形制（夹具＝rev2 轮现跑 git diff --no-index --numstat 对复制件复现，禁凭推演）：
+  - agent-experts/baigong-software-team/plugin.json＝1 增 1 删
+  - agent-experts/baigong-software-team/.codebuddy-plugin/plugin.json＝1 增 1 删
+  - agent-experts/baigong-software-team/bundle.lock＝按取态分钉：J-3 甲案（rev2 已采＝现行口径）＝6 增 3 删（version 1/1＋note 同句替换 1/1＋assembly_exclude 落行＝tests/ 行逗点化 1/1＋三枚新条目行 3 增）；乙案形制备查＝2 增 2 删
+  - 合计＝甲案 8 增 5 删（夹具实测在册＝rev2 回报随登）。原 v1「3/3」与 rev1「4/3」均不实＝作废。
+- 其余判据零变：json 可载断言两 json＋bundle.lock 三件 parse-OK；改后 grep 三读数＝0.1.31 且仓内 0.1.30 于三文件零残留（bundle.lock 组件 note 沿革史文内旧版本号字样属史实锚＝不计残留，以行 5 唯一 version 键为准）；四件套门禁改前改后 exit 钉值全等（§〇.2 基线随轮照登）。
+- 时序钉死句（rev2·PM 黄-2 落规格）：assembly_exclude 三枚条目（docs/PRODUCT.md／docs/ARCHITECTURE.md／docs/adr/）落行形制＝尾追加（tests/ 行行尾逗点化＋随后三行各一枚，逐字照 §十 K-3 块），与三同源 version 改动并入段⓪同一 commit——J-3 未裁态本不得落链 bump 笔（原时序口径随注）；J-3 经主理人采纳甲案后＝规格生效，bump 笔落链前置＝本票双席审票会师放行在案。
 
 ### 段① 装配（派工程师席·一票一新鲜实例）
 
-- 动作＝python agent-skills/object-build/scripts/publish.py --assemble agent-experts/baigong-software-team
+- 动作序（rev2 补前置步·QA 黄-1）：**先删装配面** D:／multi-agent-collab-devkits-build／baigong-software-team 整目录（do_assemble 不清陈旧残留——manifest note 既有口径「重装配＝删装配面重跑」入正文动作列），再跑 python agent-skills/object-build/scripts/publish.py --assemble agent-experts/baigong-software-team。删前留装配面现盘件数读数（起草实测 90 件）随回执登记。
 - 禁带 --out（先例教训：0.1.29 首跑误带 --out 指 build 根＝平铺污染）。缺省落点＝仓外同级 D:／multi-agent-collab-devkits-build／baigong-software-team（publish.py --out help 实证＋皮总既往指定交付面同路径）。
 - 装配前置复测 M0：三同源三读数＝0.1.31（段⓪ bump 笔在案＝git log 查得；现值仍 0.1.30 或 bump 笔不在案＝停手上报）；git status --porcelain -uno 除 ledger 一枚他案 M 外空——该枚 M 与 publish.py 纪律⑤ clean 闸（行 679 实证＝-uno 非空即 exit 3）冲突取态＝§七 J-1 候裁，J-1 未裁①段不得强跑。
 - 装配锚定 commit＝开工实测 HEAD（回执开端登记，≥段⓪ bump 笔）。锚定区间停手判据按 §〇.4 跑。
@@ -92,7 +99,7 @@
 3. 备份先行：robocopy /E 市场源现目录 → 新建备份目录（命名惯例照旧＝market-src-baigong-0.1.30-pre-deploy-20261117·随现值版本与当日日期；既往备份零覆盖零删·backup 面其余目录零触）。判据＝备份件数＝备份前市场源件数。
 4. 同步：MSYS_NO_PATHCONV=1 robocopy /MIR 装配面 → 市场源包目录。判据＝全量对账非抽查：市场源与装配面文件清单 diff 空集＋逐文件哈希全量对账全等＋robocopy 失败计数 0。
 5. 注册挂卡（必步·禁纯复制替代）：python 后接 C:／Users／peter／.workbuddy／plugins／marketplaces／workbuddy-builtin／skills／expert-manager／scripts／register_expert.py 的市场源包目录实路径＋--session-id 主理人派工给出的预览会话 UUID（参数真源见 〇.3；先例教训写死＝历轮预览卡丢失系纯文件复制丢注册步，deploy-gate §五实证②）。标记观测纪律：.created-by-session 即写即读登记内容读数，约 1 秒被平台回收＝已知行为，如实登记、不强留、不伪造。
-6. 核验读数：市场源三 version 读数＝0.1.31；marketplace.json 注册前后哈希对比＝差异仅 baigong 条目；注册复跑幂等（第二轮跑后哈希不变）＝绿。
+6. 核验读数（rev2·QA 黄-2 改 json 解析级口径）：市场源三 version 读数＝0.1.31；marketplace.json 对比＝注册前后各跑一次 python json 解析（python -c 形制：json.load 后取 plugins 列表内 baigong-software-team 条目 version 值＝两值对比单独登记；他条目＝hjh-aigc-video-team／hjh-software-team 两条目 name＋version 四值注册前后逐值对拍），「差异仅 baigong 条目」判定以解析级读数为准，文件级哈希仅作幂等复跑对账（第二轮注册后哈希不变＝绿），两判定分写不禁混用。
 
 段②收口回执呈报后按获批段界进③④（本票③非停等闸，见段③）。
 
@@ -129,9 +136,9 @@
 | W1 | 仓面 bump 触点 | 段⓪写位闭集三文件（§一段⓪列位） | 单独 commit（collab: 前缀） |
 | W2 | 装配面（仓外） | D:／multi-agent-collab-devkits-build／baigong-software-team | 装配器覆盖写（删装配面重跑口径） |
 | W3 | 本地市场源包目录 | C:／Users／peter／.workbuddy／plugins／marketplaces／my-experts／plugins／baigong-software-team | robocopy /MIR 同步 |
-| W4 | marketplace.json | C:／Users／peter／.workbuddy／plugins／marketplaces／my-experts／.codebuddy-plugin／marketplace.json | 仅经 register_expert.py 写入，禁手改 |
+| W4 | marketplace.json＋.created-by-session 预览标记件 | C:／Users／peter／.workbuddy／plugins／marketplaces／my-experts／.codebuddy-plugin／marketplace.json；市场源包目录内 .created-by-session（rev2·PM 黄-1 具名并入） | 仅经 register_expert.py 写入，禁手改；.created-by-session 为脚本注册步即写物＝非独立写面，观测读数即写即读登记（约 1 秒被平台回收＝已知行为） |
 | W5 | 市场源备份目录（新建） | C:／Users／peter／.workbuddy／backup／market-src-baigong-0.1.30-pre-deploy-20261117 | robocopy /E 新建 |
-| W6 | 宿主缓存 | C:／Users／peter／.workbuddy／plugins／cache／my-experts／baigong-software-team（新增 0.1.31 子目录） | 宿主自写，执行席只读观测 |
+| W6 | 宿主缓存＋installed_plugins.json | C:／Users／peter／.workbuddy／plugins／cache／my-experts／baigong-software-team（新增 0.1.31 子目录）；C:／Users／peter／.workbuddy／plugins／installed_plugins.json（rev2·PM 黄-1 具名并入） | 两文件均宿主自写，执行席只读观测（4b 判据即读 installed_plugins.json 条目两读数前后照登） |
 | W7 | 回执件（仓内） | agent-experts/baigong-software-team/.collab/receipts/2026-11-17-BAIGONG-DEP0131-回执-v1.md（分段可加后缀分件） | 单独 commit·collab: 前缀 |
 
 ## 三、bundle.lock note 行更新口径（append-only 沿革追加）
@@ -167,7 +174,7 @@ bundle.lock 行 8 note 现文（bundle 本体版本行·纪律①④句）保持
 - 装配面 W2＝仓外预览面非真源，还原无需回滚（留待下批重装配）。
 - 仓面 bump 笔回滚＝段⓪笔 revert 另案微票（链上 revert，禁 amend／禁 reset）。
 
-## 六、命令块（执行段照跑·自靶验证在 §五读数节）
+## 六、命令块（执行段照跑·自靶验证在附节读数·rev2 勘正原误指 §五）
 
 本票所有命令已在 §〇.2／§一／§二 各判据列明命令口径；引用的验证命令起草轮已现跑：check-pointers 缺省／lint／csot／run-gates 四件（§〇.2 读数）；publish.py --help 用法面（--assemble／--out 缺省句实证）；register_expert.py docstring 与 argparse 分支实证＋--help 面差实证；git diff 锚定区间形制实证；robocopy /MIR 与 /E 形制沿用两先例部署票实跑在册形制。装配与注册两步属部署闭集动作＝起草席零跑，由执行席按本票照跑。
 
@@ -206,8 +213,32 @@ bundle.lock 行 8 note 现文（bundle 本体版本行·纪律①④句）保持
 - 装配面判据随动（J-3 裁甲）：1b 归因基线减 docs 裁出三件；新增机械判据 1f＝装配面 ls docs 目录实测＝仅 STRUCTURE.md 一枚在列（PRODUCT.md／ARCHITECTURE.md／adr 零在列）＋装配面四脚本探针夹具路复跑（夹具＝临时含 docs/STRUCTURE.md 目录·用毕即拆）读数＝夹具根翻正＝绿。
 - 回滚口径随动：assembly_exclude 追加行随 bump 笔 revert 一并回滚（§五 仓面回滚条款同笔同案，无独立还原面）；市场源／缓存还原口径零变。
 
+## 十、候裁归并落规格（rev2 增段·主理人已按「不上楼」过滤采纳·不再呈拍）
+
+双席快审回流＝产品席红 0 黄 3 绿 2（判词在链 87 行·入库笔 0bfef02 卷入案型另登不涉本票效力）＋QA 席红 1 黄 3（判词 blob 5478976d）。红-1 与六黄落位全部原位置换／随注于对应段（段⓪ numstat 行＝红-1 勘正／段①动作列＝QA 黄-1／段②步 6＝QA 黄-2／W4·W6 行注＝PM 黄-1／段⓪时序句＝PM 黄-2／§六 与票头自注节号＝PM 黄-3／§〇.4 十六件句＝QA 黄-3）。本节落三枚候裁采纳规格，置换 §七 对应候裁态：
+
+- **K-1（J-1 采 (b)）**：装配 clean 闸取态＝归属件 ledger.jsonl 那枚 M 由**归属线**（账本写入必经脚本之归属案席）在①段开工时点即时落链清闸——前置动作＝①段开工第一步跑 git status --porcelain -uno 读数，若 ledger 仍 M＝回执登记并请主理人转归属席落链，落链后复读数＝空方可进 publish.py（落链责任席＝该账本行归属案执行席·非本票任何席）；归因注记写死＝该笔系他案内容零改写零触碰仅归属落链，链上归因随①回执登记。本票各席对 ledger.jsonl 仍零写零 add（§四.4／§四.5 零变）。
+- **K-2（J-2 采归因口径照单）**：件数对账三基线＝上次装配 manifest files 88／devkit-tools 首挂载 share tag 树 18／装配面现盘 90——三读数双席快审已独立复现对钉（读数在两根判词在册）。执行口径＝①段以装配面实出 files 对「88＋18−docs 裁出三枚（K-3 生效态）」预期值差集逐行归因至已收口批次（PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN＋devkit-tools 首挂载）即绿；出现不可归因行＝停手呈报，不得以数量相近放行；归因表随①回执逐行列出。
+- **K-3（J-3 采甲案·§九.3 规格生效）**：bundle.lock assembly_exclude 五条目增至八，落行形制钉死＝列表尾追加（tests/ 行行尾逗点化＋其后三行各一枚），可照录块：
+
+```
+    "tests/",
+    "docs/PRODUCT.md",
+    "docs/ARCHITECTURE.md",
+    "docs/adr/"
+```
+
+  - docs/STRUCTURE.md 保留入包（§九.1 两处消费点不指向真空）；夹具实测 numstat（rev2 轮 git diff --no-index --numstat 对复制件复现）＝bundle.lock 6 增 3 删＝并入段⓪合计 8 增 5 删（逐文件钉值见 §一段⓪ rev2 置换行）。
+  - 随批注一行（PM 建议采纳）：bundle.lock 行 8 note 沿革句尾追加「；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失」——防部署态读者误判。§三 verbatim 块以本节追加后文本为准：
+
+```
+"note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失"
+```
+
+  - §九.3 判据 1f 生效（装配面 ls docs 仅 STRUCTURE.md 一枚在列＋四脚本探针夹具路复跑翻正）；J-3 未裁态候补句作废（乙案形制仅留 §一段⓪备查一行）。
+
 ## 附、票面自查读数（起草轮现跑）
 
-- 自靶＝python share/check-pointers.py --root . --target .scratch/tickets/2026-11-17-BAIGONG-DEP0131-装配与本地WorkBuddy四段转正票-v1.md → v1 轮 exit 0（读数随 v1 commit message 登记）；rev1 轮增补后复跑 exit 0（读数随 rev1 commit message 登记）。
+- 自靶＝python share/check-pointers.py --root . --target .scratch/tickets/2026-11-17-BAIGONG-DEP0131-装配与本地WorkBuddy四段转正票-v1.md → v1 轮 exit 0（读数随 v1 commit message 登记）；rev1 轮增补后复跑 exit 0（读数随 rev1 commit message 登记）；rev2 轮修订后复跑 exit 0（读数随 rev2 commit message 登记）。
 - 全文零 at 零反引号自查＝grep 计数 0；仓内引用仓根相对纯路径裸文、叙述与仓外路径全角斜杠自查在册。
 - 起草席 scratch 工作族＝.scratch/arch-dep131/（取证留痕·完工随族自删）。
