@@ -13,6 +13,13 @@ if __name__ == '__main__':
     #   experts 仓（video bundle）＋ devkits 仓（deliverables/experts/ 下软开 bundle）；
     #   skills 仓无 agents，不入 glob。三仓须并列同一父目录（D:\）。
     # 显式传 argv[1] 时按单 glob 覆盖（旧行为不变）。
+    # DEBTCLN-R5 红线参数化：--limit 整数值运行时覆盖红线；默认＝行 7 RED_LINE＝2500（皮总 10-25 拍板值不变）。
+    if '--limit' in sys.argv:
+        _i = sys.argv.index('--limit')
+        if _i + 1 >= len(sys.argv):
+            sys.exit('count_agent_tokens: --limit 后须整数值')
+        RED_LINE = int(sys.argv[_i + 1])
+        del sys.argv[_i:_i + 2]
     if len(sys.argv) > 1:
         pats = [sys.argv[1]]
     else:
