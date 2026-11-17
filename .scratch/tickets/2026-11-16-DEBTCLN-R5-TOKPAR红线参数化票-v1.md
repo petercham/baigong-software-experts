@@ -174,3 +174,49 @@ python -c "import subprocess,hashlib;b=open('share/count_agent_tokens.py',encodi
 ---
 
 （v1 尾·append-only：后续修订在此处续 rev 段，rev 段间互不回改）
+
+---
+
+## rev1 段（修票笔·架构席 arch-debt5rev·append-only·正文原段零改写）
+
+- 依据＝双席快审快审判词链上 blob 钉版：QA 席判词 .collab／audits／2026-11-16-DEBTCLN-R5-快审判词-QA席-v1.md（链上 blob＝e938a6cd7d9f6ee3cacd605732bf2cbb32f97404·本席现读 4bf7e87 树面·105 行·红2黄1绿8 缓放行）＋产品席判词 .collab／decisions／2026-11-16-DEBTCLN-R5-快审判词-产品席-v1.md（链上 blob＝885b604b17595a60b0ed52360437d49ba3cf10aa·本席现读 2adc99a 树面·61 行·红0黄1绿6 放行建议）。双席审后主理人会师确认随正三处（勘-1 双席同点命中／勘-2 QA 红-2 要害／勘-3 QA 黄-1）；除下述三处外票体零动。
+- 本段全部读数＝本席 rev 轮现跑复算坐实（禁照抄判词读数不验；修票不施工＝真身靶件零触，施工仿真仅在隔离副本内），非转述。
+
+**本席开工读数（rev 轮现跑·禁抄旧数）**：
+- HEAD＝git rev-parse --short HEAD → **4bf7e87**（＝QA 快审笔·链顶·与派工预期全等）；链序现跑 4bf7e87 → 2adc99a → 8eff7c2 → 94a5ac6 父子逐笔相衔·外案插笔零起。
+- 票面链上 blob＝git rev-parse 于 HEAD 树面本票面路径 → **5c352038355d69b93dc6719d7da125a9ee3f4b24** 对钉全等（＝起草笔 8eff7c2 面·176 行）。
+- index.lock＝不存在（NO_INDEX_LOCK）。
+- git status --porcelain＝tracked 脏面恰一枚 M＝agent-experts／baigong-software-team／.collab／ledger／ledger.jsonl＋?? 当轮 28 行（2026-11-12 系列平放 md＋.collab／board／＋.collab／research／＋仓根杂散群）＝全部他案照登零带入勿动（§〇 活体群禁钉死声明沿在册）。
+- 缺省指针扫描现跑＝**BLOCK 22809／WATCH 4582**（与 §〇 钉值全等·本 rev 笔仅触票面自身＝零变化）。
+
+**勘-1（双席同点命中·QA 红-1＋产品黄-1）·§〇 SCRIPTS 清单计数随正**：
+- 正文宣称 ⟦SCRIPTS 清单现读 12 项不含本靶件⟧，计数不实——**勘正为 11 项**。本席 rev 轮现读 share／run-gates.sh 行 141 SCRIPTS 赋值句逐项点名照登（空格分隔恰 11 项）＝check-provenance／check-skill-meta／check-pointers／check-entity／check-collab-lint／check-pointer-closure／ROOT／share／check-source-of-truth／check-ticket-reconcile／check-adr／check-hook-health／check-collab-buckets。
+- 「不含本靶件」定性坐实为真不变：count_agent_tokens 确不在该 11 项名单，V4「输入面先验零变化」论证根基不受影响（§〇 消费面核查行零动）；§〇 其余读数零动。
+
+**勘-2（QA 红-2 独获·要害）·§三 V2 对拍命令形态勘正·预期读数行零动**：
+- 正文 §三 V2 命令承载的缺陷两处（＝QA 判词登记）＝①块提取式 blk＝''.join（l＋chr（10） for l in b.splitlines（True）［15:22］）——splitlines（True）已保留行尾再叠 chr（10）＝行尾加倍（323≠316 字符面），算得 BLK＝77c355e4…≠钉 c2e49c06…；②CHANGED＝zip（a，b）位次对拍前 33 行——纯插入七行后既有行整体后移必判 CHANGED [16..33]，与票面预期 CHANGED [] 在该形态下不可同真。
+- 本席 fresh eyes 阶梯实跑另挖出两处更前置缺陷（正文命令在该二处即不可解析／不可运行）＝③第一个块钉值 c2e49c06… 之后闭合单引号缺失（正文字面该钉值直接接 and 续式＝引号不配对，全命令单引号计数奇数坐实）；④a 侧提取式 stdout.decode（'utf-8'，newline＝''）＝bytes.decode 不接受 newline 关键字参数（无效 kwarg）。
+- 本席隔离阶梯实跑四层读数（取证族 .scratch／debt5rev1／＝隔离 mini 仓两笔形态：改前 33 行版 commit 为 HEAD^（blob e755faef… 复现对等）→在其上逐字跑 §二 两步命令正确施工得 40 行版（产物 blob ba4d9297… 复现对等·git show --numstat 复跑＝**7／0** 对等））：
+  - 层-1＝正文命令逐字节 verbatim 直跑 → **exit 1·SyntaxError invalid decimal literal·无任何输出**（③引号不配对先触发解析失败——失败点比 QA 判词登记形态更靠前一层；QA 判词所称逐字跑出 CHANGED [16..33]＋BLK 77c355e4… 在本席层-3 复现＝QA 实跑形态推定已手工补正③④，与双席结论方向无冲突，如实登记缺陷链全貌）；
+  - 层-2＝仅补③（闭合引号配平）①②④原形态 → exit 1·TypeError：decode（）got an unexpected keyword argument 'newline'（④暴露）；
+  - 层-3＝仅补③④①②原形态 → exit 1·打印 CHANGED [16..33] LEN 33 40 BLK 77c355e422bba01b8dbdcd49b27bf67c8722cc7ff27214150f17a1d5b797ba80 DISK 2a549d22…（＝QA 红-2 登记读数在此层复现对榫）；
+  - 层-4＝修正版（verbatim 见下）→ **exit 0·打印 CHANGED [] LEN 33 40 BLK c2e49c06383fb4da9c1395c269319e2365561761733ab783264782aee3e67abe DISK 2a549d226c3704ce90296a7daa7979507faf2d4011a92eeca5fbfcecd3fd233e＝四项全达**。
+- **修正版 V2 对拍命令 verbatim（本段为准·本席层-4 在正确施工态实跑 exit 0 坐实后方可写入·非照抄判词）**：
+
+```bash
+python -c "import subprocess,hashlib as h;b=open('share/count_agent_tokens.py',encoding='utf-8',newline='').read();a=subprocess.run(['git','show','HEAD^:share/count_agent_tokens.py'],capture_output=True).stdout.decode('utf-8');blk=''.join(b.splitlines(True)[15:22]);d=[i+1 for i,(x,y) in enumerate(zip(a.splitlines(True),b.splitlines(True)[:15]+b.splitlines(True)[22:])) if x!=y];print('CHANGED',d,'LEN',len(a.splitlines()),len(b.splitlines()),'BLK',h.sha256(blk.encode('utf-8')).hexdigest(),'DISK',h.sha256(open('share/count_agent_tokens.py','rb').read()).hexdigest());raise SystemExit(0 if d==[] and len(a.splitlines())==33 and len(b.splitlines())==40 and h.sha256(blk.encode('utf-8')).hexdigest()=='c2e49c06383fb4da9c1395c269319e2365561761733ab783264782aee3e67abe' and h.sha256(open('share/count_agent_tokens.py','rb').read()).hexdigest()=='2a549d226c3704ce90296a7daa7979507faf2d4011a92eeca5fbfcecd3fd233e' else 1)"
+```
+
+- 修正形态四点说明（对应缺陷①②③④）＝块提取＝splitlines（True）keepends 直接 join 不再叠 chr（10）（316 字符面→c2e49c06… 对钉）；CHANGED 对拍＝剔除插入区间后错位对拍（a 全体 33 行 vs b 前 15 行＋第 22 行起 33 行 zip 逐位比对＝纯插入态 CHANGED []）；a 侧 decode＝仅 'utf-8'（bytes.decode 无换行翻译面无需亦不得带 newline kwarg）；引号配平＝钉值闭合单引号补齐。预期读数行零动＝**CHANGED []／LEN 33 40／BLK c2e49c06…／DISK 2a549d22…／产物 40 行／产物 blob ba4d9297…** 全部不变；HEAD^ 写法按实际施工笔父笔 sha 置换并照登（正文口径沿在册）。
+- 施工语义本体零动申明：§二 两步命令＋声明闭集＋块 sha c2e49c06…＋行为五臂预期＋§〇 仿真臂经双席隔离干跑全部为真，一字不动。
+
+**勘-3（QA 黄-1）·§二 块逐行七枚 sha 前缀钉口径注明**：
+- 正文括注 ⟦七行逐行 sha256 前缀钉＝77bc232f…⟧ 未声明口径。本席复算写死＝**逐行钉口径＝剥行尾后内容行 sha256 前缀**（无行尾口径·UTF-8）＝7／7 全部复现对榫（77bc232f／a7f427fa／e5d5e92a／332cac5f／ef708572／7db57d09／f30c539d）；按块口径自然延伸（行＋LF）则 7／7 不可复现（实算 0e313a46／bf8f2a5f／41371104／7a40ffc4／71d36dad／1e72f03b／3aad61cd）。块全文钉 c2e49c06…＝含行尾 LF 口径维持（§二 原申明属实·复算对榫）。逐行钉不在 V 系命令链（V2 用块全文哈希）＝验收链不受影响。
+
+**修订后效力声明**：
+- 本段与正文并读为准；正文原段（含 §〇 原表「12 项」行、§三 V2 原命令块、§二 括注）零改写·append-only。**§三 V2 验收以本段修正版命令为准**（或等效三件套＝错位对拍 CHANGED []＋块哈希对钉＋盘 sha 对钉）；SCRIPTS 计数以 11 项为准；§二 逐行七枚钉以无行尾口径为准。
+- 窄复核口径（后续 QA 只复核三处勘正可达性·不再全轮）＝①run-gates.sh 行 141 现读逐项点名 11 项；②修正版 V2 命令在按 §二 正确施工态实跑 exit 0 四项全达；③逐行七枚钉无行尾口径 7／7 复现。双席快审绿面不复做。
+
+**rev 笔纪律自证**：本笔面＝恰本票面一件（add／commit pathspec 两端齐带）；正文原段一字未动、全部随正在本段内；靶件零触（修票不施工）；他案脏面零带入；链上史件零回改；FUXI 零碰；账本零手写；.gitignore 零触；票面自靶 check-pointers --target 本票面实路径 exit 0 落笔前实跑（读数见完工回报）；施工仿真仅隔离副本 .scratch／debt5rev1／·用毕即拆随回报；防自咬体例＝裸文＋全角斜杠·⟦⟧·命令围栏内半角径＝程序准绳沿正文自注。
+
+（rev1 段尾·append-only：后续修订仍在此处续笔，rev 段间互不回改）
