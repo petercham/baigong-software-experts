@@ -8,7 +8,8 @@
 - 起草段产出＝仅本票面一件，单独 commit；起草席零执行任何部署动作、零碰装配面／市场源／缓存
 - 纪律真源＝agent-experts/baigong-software-team/skills/software-orchestration/references/deploy-gate.md §二（独立票＋获批）、§四（用户同一指令明示含路径＝该次可直做）、§五（四段链①装配→②预览→③人类闸→④部署＋获批范围按段界定＋市场源备份一键回滚）
 - 体例参照＝两枚先例票（.scratch/tickets/2026-11-06-GWP-DEPLOY-0.1.30-四段链部署票-v1.md／.scratch/tickets/2026-11-07-PROJINIT-DEPLOY-四段链部署票-v1.md），逐节参照；差异面（获批载体＝用户选段原文／bump 在本票内／四组件面装配含 devkit-tools 挂载／段界已明示）按本批实况改写
-- 候裁点：2 枚（§七 J-1 装配 clean 闸与 ledger 他案脏面冲突取态／J-2 件数差集归因边界）——其余钉值全部本票钉死
+- 候裁点：3 枚（§七 J-1 装配 clean 闸与 ledger 他案脏面冲突取态／J-2 件数差集归因边界／J-3 docs 装配排除取态·rev1 增）——其余钉值全部本票钉死
+- **rev1 修订笔（2026-11-17·作者席 arch-dep131·append-only 增段·开工 HEAD 实测 6b57304＝v1 落链笔）**：主理人增补指令＝皮总指令性问题「docs 不参与执行，不应该进装配面，对吧？」入票。取证读数／谓词能力口径／规格取态全部落 §九（新增段）；候裁 J-3 增列 §七；写集与判据随动补项同见 §九。v1 既有正文零回改（J-1／J-2 框架、获批登记、四段结构、禁动面、回滚条款全部零动）。
 
 > 票面自注（防自咬体例）：本票正文对仓内文件引用一律仓根相对纯路径裸文（正斜杠）；叙述性提及与仓外绝对路径用全角斜杠（／U+FF0F）；全文零 at 符号、零反引号。§六 命令块内为可照跑实文本（仓根相对段为正斜杠纯路径；仓外面命令含 Windows 绝对路径＝执行段专用，段界由执行席按命令块照跑，叙述面不落反引号）。本票成文后自靶 python share/check-pointers.py --root . --target 本票面仓根相对路径 须 exit 0（读数见 §五）。
 
@@ -173,7 +174,8 @@ bundle.lock 行 8 note 现文（bundle 本体版本行·纪律①④句）保持
 ## 七、候裁条款（票面对应点停手上报·不自行处理）
 
 - J-1 装配 clean 闸与 ledger 他案脏面冲突取态：publish.py 纪律⑤（行 679 实证）＝-uno 已跟踪面非空即 exit 3；开工前置允许 ledger.jsonl 一枚他案 M 照登豁免，两制冲突。三案供裁：(a) 主理人协调 ledger 归属案收口落链后开工（仓面真 clean）；(b) 归属案席位即时点落链该枚账本行（非本票动账本）；(c) 其他取态。J-1 未裁＝①段不得强跑（禁自行 stash／checkout／commit 他案面）。
-- J-2 件数差集归因边界：装配面 files 预期基线＝上次 88＋devkit-tools 首挂载增项（share tag 树 18 件·装配排除面后实数以 manifest 为准）。判据口径：差集全部可归因（devkit-tools 首挂载＋〇.3 增量批文件增减）＝绿；出现无法归因行＝停手呈报主理人，不得以「数量相近」放行。归因表随①回执逐行列出。
+- J-2 件数差集归因边界：装配面 files 预期基线＝上次 88＋devkit-tools 首挂载增项（share tag 树 18 件·装配排除面后实数以 manifest 为准）。判据口径：差集全部可归因（devkit-tools 首挂载＋〇.3 增量批文件增减）＝绿；出现无法归因行＝停手呈主理人，不得以「数量相近」放行。归因表随①回执逐行列出。J-3 采甲案时基线再减 docs 裁出三件（§九），归因表随动。
+- J-3 docs 装配排除取态（rev1 增·主保证＝皮总拍）：docs 族是否本批即裁出装配面（§九 取证与规格在册）。两案：(a) 本批即排＝按 §九 规格落 bundle.lock assembly_exclude 三条目（docs 族仅 STRUCTURE.md 保留入包）；(b) 本批照旧入包＋另票修路（docs 排除归后续独立微票）。J-3 未裁＝①段可跑但 assembly_exclude 维持现值五条目不动（现值即含 docs/SWB-交接件一枚＝既有排除面），装配面 docs 族按现值态出面对账。
 - 停止条款汇总（遇此即停）：三同源读数与 0.1.31 预期态不符／市场源现值≠0.1.30／批准登记读数不含本段授权／锚定区间现不可归因面／注册脚本报错（如实回报，禁另路伪造标记或手改 marketplace.json）／宿主缓存判据不达（呈报宿主侧现象）／同席多实例并发＝立即停手报告（席位守则）。
 
 ## 八、回执体例
@@ -181,8 +183,31 @@ bundle.lock 行 8 note 现文（bundle 本体版本行·纪律①④句）保持
 - 各段收口各出回执（W7·可分件：段⓪兼 bump 落链登记／①装配回执／②预览回执／④转正回执兼全链终回执），开端附开工 HEAD 读数＋批准登记读数＋J-1／J-2 裁定读数；单独 commit、collab: 前缀、pathspec 只含回执件、add 与 commit 紧邻无窗口、FX_COMMIT_DECLARE 声明挂 commit 命令侧、禁 add -A／amend／--no-verify、message 零 at 零反引号、commit 类 timeout 七分钟档。
 - 回执计数上限钉 4 件（③段收口并入②或④回执登记）；终段内容并入④回执：四段判据读数＋版本三对账（仓面／装配面／缓存＝0.1.31）＋批准出处引用＋还原基准注记（备份实况件数读数）。
 
+## 九、docs 装配排除（rev1 增段·皮总指令性问题入票·取证与规格）
+
+### 九.1 现场取证（rev1 轮现跑·禁抄旧数）
+
+- assembly_exclude 现值（bundle.lock 行 53-59 直读）＝五条目闭集：README.md／docs/SWB-交接件v2.9-产品设计与架构设计-2026-11-03.md／skills/deep-research/README.md／skills/external-advisor-collab/references/90-changelog.md／tests/。＝docs 族已有既有条目一枚（交接件·精确 relpath 型），CLN-PURE S1 机制在位坐实。
+- 装配面 docs 现态＝四件入包：ARCHITECTURE.md／PRODUCT.md／STRUCTURE.md／adr/0001-adr-initiation-trigger-criteria.md（-build 面与宿主缓存 0.1.30 两侧 ls 实测一致；仓面另有 SWB-交接件一枚已被排除＝五条目对账吻合）。
+- docs 运行时消费点（禁全排依据·实测在册）：
+  - agent-experts/baigong-software-team/skills/sop/references/collab-fixed-structure.md 行 31＝「本仓百工项目锚＝agent-experts/baigong-software-team/docs/STRUCTURE.md」——席位规范指包内 docs/STRUCTURE.md；
+  - agent-experts/baigong-software-team/skills/sop/scripts/ 四脚本 project_root 探针序③＝STRUCTURE.md 事后校验路（commit-audit.py 行 83 _structure_hit／lease-issuer.py 行 59／memory-neutralize.py 行 71／write-guard.py 同族；docstring 行 93 探测序同文）。夹具实测（rev1 轮·-build 现盘）：cwd＝含 docs/STRUCTURE.md 的夹具目录→四路探针输出翻正＝夹具根；cwd＝装配面自身→落包根（fail-safe）＝两路读数登记在案（③段判据同款形制）。
+  - 其余引用面（software-team-engineer.md 行 40／software-team-qa.md 行 39／dev-discipline.md 行 83／ledger-init.sh 行 11）均以 docs/STRUCTURE.md 为项目根探针锚语义＝保留该一枚即全覆盖；PRODUCT.md／ARCHITECTURE.md／adr 子面在包面运行时零消费点（rev1 grep 实测：仅 software-team-lead.md 行 51 提及 docs/adr＝主理人仓内落盘语义、standard-sop.md 行 58 提及 docs/ARCHITECTURE.md＝开发面路径语义，两处均不要求包内实存）。
+
+### 九.2 谓词能力口径（publish.py 源码定口径·非臆测）
+
+- parse_assembly_exclude（行 795-815）＋is_assembly_excluded（行 817-821）实证：条目两型＝装配面 relpath 精确全等／尾斜杠目录前缀条目（锚定装配面根）；禁通配（星号问号方括号即 die_usage exit 2）／禁绝对路径／禁 .. 段；键缺席＝空清单。
+- **组合能力判定＝支持**：「排目录＋豁免单文件」不可用「docs/ 前缀条目＋docs/STRUCTURE.md 反向豁免」表达（谓词无豁免语义），但可用两枚精确条目＋一枚前缀条目等效表达——不排 docs/ 整目录，改精确列出待裁三件：docs/PRODUCT.md、docs/ARCHITECTURE.md、docs/adr/（尾斜杠前缀条目）。＝机制零缺口，无需改 publish.py（发布器能力禁令守住）。
+
+### 九.3 规格取态（甲案＝本批即排的落点规格·J-3 裁甲时生效）
+
+- bundle.lock assembly_exclude 由五条目增至八条目＝追加三枚（append-only·既有条目零动）：docs/PRODUCT.md／docs/ARCHITECTURE.md／docs/adr/。docs/STRUCTURE.md 保留入包＝部署态两处消费点（collab-fixed-structure.md 行 31＋四脚本探针序③）不指向真空。
+- 写集随动：该三枚追加属 bundle.lock 行 53-59 段内追加一行改两行形态，并入 §一 段⓪ bump 笔同一 commit（W1 写位闭集随之补「bundle.lock 行 58 后追加三条目」一处；numstat 判据随动＝3 增 3 删改为 4 增 3 删·追加行为纯增行）。
+- 装配面判据随动（J-3 裁甲）：1b 归因基线减 docs 裁出三件；新增机械判据 1f＝装配面 ls docs 目录实测＝仅 STRUCTURE.md 一枚在列（PRODUCT.md／ARCHITECTURE.md／adr 零在列）＋装配面四脚本探针夹具路复跑（夹具＝临时含 docs/STRUCTURE.md 目录·用毕即拆）读数＝夹具根翻正＝绿。
+- 回滚口径随动：assembly_exclude 追加行随 bump 笔 revert 一并回滚（§五 仓面回滚条款同笔同案，无独立还原面）；市场源／缓存还原口径零变。
+
 ## 附、票面自查读数（起草轮现跑）
 
-- 自靶＝python share/check-pointers.py --root . --target .scratch/tickets/2026-11-17-BAIGONG-DEP0131-装配与本地WorkBuddy四段转正票-v1.md → exit 0（读数随 commit message 登记）。
+- 自靶＝python share/check-pointers.py --root . --target .scratch/tickets/2026-11-17-BAIGONG-DEP0131-装配与本地WorkBuddy四段转正票-v1.md → v1 轮 exit 0（读数随 v1 commit message 登记）；rev1 轮增补后复跑 exit 0（读数随 rev1 commit message 登记）。
 - 全文零 at 零反引号自查＝grep 计数 0；仓内引用仓根相对纯路径裸文、叙述与仓外路径全角斜杠自查在册。
 - 起草席 scratch 工作族＝.scratch/arch-dep131/（取证留痕·完工随族自删）。
