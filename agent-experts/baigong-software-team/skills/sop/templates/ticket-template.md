@@ -55,7 +55,7 @@
 
 ## 回执要求
 
-完工回执落 `.collab/receipts/<票ID>-receipt.md`：开端 HEAD＋完整写入文件清单＋验收标准逐条实测读数＋候裁处置单列。
+完工回执落 `.collab/receipts/` 桶，命名照现占口径＝日期-票族-施工回执-席名-vN（形制真源见 `templates/receipt-template.md` 七节骨架）：开端 HEAD＋完整写入文件清单＋验收标准逐条实测读数＋候裁处置单列。
 
 ## 工单规范规则条款面（SWB-TMPLRULE-01 并入）
 
