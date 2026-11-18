@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# ITER-W2-T2d-α post-commit 钩子本体＝J-2 甲案＝HEAD 面单与声明清单对等核验
+# 只读 git 命令闭集＝rev-parse＋show（禁 status 类全扫命令）；零写链零改 index 零碰主仓面。
+# 面单读取取 -z 防转义形态（中文径与含空格径皆原样·与声明侧裸文可比）。
+# 告警日志面＝包内 .collab/evidence/hooks/（.gitignore 在位行 /**/.collab/evidence/ 覆盖＝不入链）。
+set -u
+ROOT_DIR="$(git rev-parse --show-toplevel | tr -d '\r')"
+PKG_DIR="$ROOT_DIR/agent-experts/baigong-software-team"
+LOG_DIR="$PKG_DIR/.collab/evidence/hooks"
+LOG_FILE="$LOG_DIR/post-commit.log"
+HEAD_SHORT="$(git rev-parse --short HEAD | tr -d '\r')"
+TMP_HEAD="$ROOT_DIR/.scratch/post-commit-head-list.tmp"
+TMP_DECL="$ROOT_DIR/.scratch/post-commit-decl-list.tmp"
+git -C "$ROOT_DIR" show --name-only -z --format= HEAD | tr '\0' '\n' | sed '/^[[:space:]]*$/d' | sort > "$TMP_HEAD"
+N_HEAD="$(grep -c . "$TMP_HEAD" || true)"
+printf '%s' "${FX_COMMIT_DECLARE:-}" | tr ',' '\n' | tr '\\' '/' | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//;s/^\.\///' | sed '/^[[:space:]]*$/d' | sort > "$TMP_DECL"
+N_DECL="$(grep -c . "$TMP_DECL" || true)"
+mkdir -p "$LOG_DIR" 2>/dev/null
+TS="$(date '+%Y-%m-%dT%H:%M:%S')"
+if [ "$N_DECL" -eq 0 ]; then
+  printf '%s %s 无声明态＝非对等核验对象（声明闸已于提交前处置）HEAD面单=%s\n' "$TS" "$HEAD_SHORT" "$N_HEAD" >> "$LOG_FILE"
+elif cmp -s "$TMP_HEAD" "$TMP_DECL"; then
+  printf '%s %s POST-COMMIT-PAIR PASS HEAD面单=%s 声明=%s\n' "$TS" "$HEAD_SHORT" "$N_HEAD" "$N_DECL" >> "$LOG_FILE"
+else
+  DIFF_LIST="$(comm -3 "$TMP_HEAD" "$TMP_DECL" | tr '\n' ' ')"
+  printf '%s %s POST-COMMIT-PAIR FAIL HEAD面单=%s 声明=%s 差集=%s\n' "$TS" "$HEAD_SHORT" "$N_HEAD" "$N_DECL" "$DIFF_LIST" >> "$LOG_FILE"
+  printf '\n***** POST-COMMIT-PAIR 卷入告警 %s HEAD面单(%s)≠声明清单(%s) 差集=%s 日志=%s *****\n' "$HEAD_SHORT" "$N_HEAD" "$N_DECL" "$DIFF_LIST" "agent-experts/baigong-software-team/.collab/evidence/hooks/post-commit.log" >&2
+fi
+rm -f "$TMP_HEAD" "$TMP_DECL"
+exit 0

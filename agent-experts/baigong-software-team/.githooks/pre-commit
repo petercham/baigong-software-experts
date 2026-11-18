@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# ITER-W2-T2d-α worktree 本地快闸 pre-commit 钩子本体（包内版本面·动态根）
+# 语义等态主仓现势钩子＝声明闸＋门禁全链两行；唯一改动＝根改动态取＝当轮工作树根。
+# FX_COMMIT_DECLARE 声明闸语义与 ALLOW_GATE_DOWN 口径由 share 两脚本自持＝本件零改写。
+# 只读 git 命令闭集＝rev-parse（禁 status／diff 全扫类命令·sparse D 态零扰动）。
+set -u
+ROOT_DIR="$(git rev-parse --show-toplevel | tr -d '\r')"
+SHARE_DIR="$ROOT_DIR/share"
+[ -f "$SHARE_DIR/check-staged-declaration.py" ] || { echo "infra error: 声明闸脚本缺失：$SHARE_DIR/check-staged-declaration.py" >&2; exit 4; }
+[ -f "$SHARE_DIR/run-gates.sh" ] || { echo "infra error: 门禁链脚本缺失：$SHARE_DIR/run-gates.sh" >&2; exit 4; }
+PY=""
+for cand in python3 python; do
+  if command -v "$cand" >/dev/null 2>&1; then PY="$cand"; break; fi
+done
+[ -n "$PY" ] || { echo "infra error: 找不到 python3/python，门禁无法运行（不得降级为放行）" >&2; exit 4; }
+"$PY" "$SHARE_DIR/check-staged-declaration.py" --root "$ROOT_DIR" || exit $?
+exec bash "$SHARE_DIR/run-gates.sh" --root "$ROOT_DIR"
