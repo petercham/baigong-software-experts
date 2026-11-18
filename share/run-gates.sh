@@ -55,16 +55,19 @@ die_infra() { printf 'infra error: %s\n' "$*" >&2; exit 4; }
 # --- 参数 ---
 ROOT_ARG=""
 NO_WRITE=0
+STAGED=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --root) [ $# -ge 2 ] || die_usage "--root 需要一个目录参数"; ROOT_ARG="$2"; shift 2 ;;
     --no-write) NO_WRITE=1; shift ;;
+    --staged) STAGED=1; shift ;;
     -h|--help)
-      say "用法：bash run-gates.sh [--root <仓根>] [--no-write]"
+      say "用法：bash run-gates.sh [--root <仓根>] [--no-write] [--staged]"
       say "按 S-04→S-01→S-02→S-03 顺序跑门禁；路由表运行时从 60-gates.md 的 json 围栏解析。"
       say "证据件写 .collab/evidence/gates/（该目录不入版本库，见 60-gates.md「七、接入」末条）。"
       say "绕过：ALLOW_GATE_DOWN=1（必须留痕，见 60-gates.md §六 硬规矩 4）。"
       say "--no-write：只读模式——不建证据目录、不写证据件、不写呈拍件；汇总读数与 exit 码与写盘模式一致（FX-U21/D-86）。"
+      say "--staged：提交门靶检模式——靶集＝暂存面（git diff --cached --name-only，改名两侧天然含入）；缺省模式＝全量扫描＝周期闸执行体（SWB-GTFAST S2/S3）。"
       exit 0 ;;
     *) die_usage "未知参数：$1" ;;
   esac
@@ -83,6 +86,29 @@ else
     [ "$parent" = "$cur" ] && die_infra "未能定位仓根；请用 --root 指定"
     cur="$parent"
   done
+fi
+
+# --- 暂存面取径（SWB-GTFAST S2-b·--staged 提交门靶检模式）---
+# 靶集＝git -C "$ROOT" diff --cached --name-only（改名两侧天然含入＝票面 §〇-7 现读印证）；
+# git 不可用或非工作区＝die_infra exit 4（fail-closed：不得降级为全量也不得静默放行）；
+# 暂存集为空＝无可检靶＝GATE PASS exit 0（声明闸已在钩子链先跑零扰动）。
+STAGED_FILES=()
+if [ "$STAGED" -eq 1 ]; then
+  command -v git >/dev/null 2>&1 || die_infra "--staged 需要 git 取暂存面，git 不可用（不得降级为全量扫描）"
+  git -C "$ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1 \
+    || die_infra "--staged 需工作区：git -C $ROOT rev-parse --is-inside-work-tree 失败（非工作区）"
+  STAGED_RAW="$(git -C "$ROOT" diff --cached --name-only)" \
+    || die_infra "暂存面读数失败：git -C $ROOT diff --cached --name-only"
+  while IFS= read -r sf; do
+    sf="${sf%$'\r'}"   # CRLF 检出形制下 heredoc 展开带尾随 CR＝归一（与本仓 read_lines 归一同口径）
+    [ -n "$sf" ] && STAGED_FILES+=("$sf")
+  done <<STAGED_EOF
+$STAGED_RAW
+STAGED_EOF
+  if [ "${#STAGED_FILES[@]}" -eq 0 ]; then
+    say "GATE PASS（--staged 暂存面为空）"
+    exit 0
+  fi
 fi
 
 # 路由表定位（B2 三分类目录换代·SWB-B2 B2-C3）：分类目录候选，探到即用
@@ -149,7 +175,35 @@ for name in $SCRIPTS; do
   [ -f "$script_path" ] || die_infra "缺少检查脚本：$script_path"
   label="${name##*/}"   # 只取末段：摘要键与 out 文件名都不带目录段，路径不得逃出 WORKDIR
   out="$WORKDIR/$label.out"
-  "$PY" "$script_path" --root "$ROOT" > "$out" 2>&1
+  # --- 逐脚本取径分派（SWB-GTFAST S2-c·靶集注入＝逐文件传参·文件名含空格必带引号）---
+  # 靶化三枚按 §〇-2 实测耗时排（lint 热点直打→pointers→closure）；其余九枚＝豁免全跑
+  #   （check-ticket-reconcile 3056ms 票面自对账判据面小／check-source-of-truth 601ms 判据面＝
+  #   兄弟仓对账面＋基线豁免链与暂存面无交集／check-entity 475ms／check-adr 385ms tracked 桶
+  #   对账本身·commit 可改 tracked 面故靶检不完备／check-hook-health 301ms 钩子单件健康／
+  #   check-provenance 272ms 非整树 walk 件／check-collab-buckets 233ms 一级 listdir／
+  #   check-skill-meta 217ms listdir 单层＝单枚均 ≤3.1s 补靶入参复杂度不划算＝如实取舍写明）。
+  # S2-e 空靶跳过登记：交集为空仍调用靶检枚（走脚本侧 --target 零发现汇总 exit 0 路径）＝
+  #   判据被执行、只是靶空，「未执行的判据不得计绿」原则零违例。
+  targs=()
+  if [ "$STAGED" -eq 1 ]; then
+    case "$label" in
+      check-collab-lint|check-pointer-closure)
+        # 靶集注入交脚本侧 abspath 交集过滤（＝暂存 ∩ .md/.txt／∩ 包面在脚本内天然兑现＝S2-d 口径）
+        for sf in "${STAGED_FILES[@]}"; do
+          targs+=(--target "$ROOT/$sf")
+        done ;;
+      check-pointers)
+        # 既有 --target 逐个暂存 .md 传入（索引面不动＝判据零动天然形态）
+        for sf in "${STAGED_FILES[@]}"; do
+          case "$sf" in *.md) targs+=(--target "$ROOT/$sf") ;; esac
+        done ;;
+    esac
+  fi
+  if [ "${#targs[@]}" -gt 0 ]; then
+    "$PY" "$script_path" --root "$ROOT" "${targs[@]}" > "$out" 2>&1
+  else
+    "$PY" "$script_path" --root "$ROOT" > "$out" 2>&1
+  fi
   code=$?
   printf '%s\t%s\t%s\n' "$label" "$code" "$out" >> "$SUMMARY_FILE"
 done

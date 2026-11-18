@@ -83,22 +83,31 @@ for cand in python3 python; do
 done
 [ -n "$PY" ] || die_infra "找不到 python3/python，声明闸无法写入钩子（不得降级为不拦）"
 
-HOOKS_DIR="$REPO_ROOT/.git/hooks"
+# SWB-GTFAST S4-b 钩子目录定位制度化：git 原生旗定位（--path-format=absolute --git-path hooks＝
+# 共享 common dir 钩子目录绝对路径，主根与 worktree 根同读数＝WTGATE 票 §〇-7 现读在册）；
+# 旗失败＝fail-soft 回退旧拼径（不更松不更严·L88 存在性检查行语义不变兜底）。
+HOOKS_DIR="$(git -C "$REPO_ROOT" rev-parse --path-format=absolute --git-path hooks 2>/dev/null)" || HOOKS_DIR=""
+[ -n "$HOOKS_DIR" ] || HOOKS_DIR="$REPO_ROOT/.git/hooks"
 HOOK="$HOOKS_DIR/pre-commit"
 [ -d "$HOOKS_DIR" ] || die_infra "钩子目录不存在：$HOOKS_DIR"
 [ -f "$RUNNER" ] || die_infra "找不到门禁入口脚本：$RUNNER"
 
 # 本器生成的钩子内容。标记行用于区分"本器装的"与"别人装的"。
-# FX-U30 三段式（票面 S2）：行6 声明闸先于 run-gates 链 fail-fast（咬住即拒提不再跑全链），
-# 行7 exec 语义一字不动；MARKER 标记行字符串零动（幂等三分支判定臂存续承此）。
+# FX-U30 三段式（票面 S2）：声明闸先于 run-gates 链 fail-fast（咬住即拒提不再跑全链），
+# exec 语义一字不动；MARKER 标记行字符串零动（幂等三分支判定臂存续承此）。
+# SWB-GTFAST S4-a 钩子体动态根（票面 §二 S4-a 围栏逐字节＝钉 02d30d01）：
+# 根改随调用工作区解析（git rev-parse --show-toplevel＝去 --root 硬编码主根字面＝worktree 侧提交扫该工作区）；
+# 体内 GATE_ROOT_DIR 行含字面 $GATE_ROOT_DIR——双引号字符串内逐处转义 \$ 防安装期展开，逐字节产物对钉现算。
+# 定位落空＝fail-closed 拒提（exit 4）；末行 run-gates 带 --staged＝提交门靶检档（S2/S3 两态分工）。
 MARKER="generated-by: object-audit/scripts/install-hooks.sh"
 GATE_HOOK_BODY="#!/usr/bin/env bash
 # ${MARKER}
 # 提交前门禁（出口①）。规范来源：设计 v2 §2.5/60-gates。
 # 改判据请改路由表规范件（agent-skills/multi-collab/references/60-gates.md），不要改本文件。
 set -u
-\"$PY\" \"$DECL\" --root \"$REPO_ROOT\" || exit \$?
-exec bash \"$RUNNER\" --root \"$REPO_ROOT\"
+GATE_ROOT_DIR=\"\$(git rev-parse --show-toplevel 2>/dev/null)\" || { printf 'infra error: 钩子无法定位工作区根（fail-closed 拒提）\n' >&2; exit 4; }
+\"python3\" \"\$GATE_ROOT_DIR/share/check-staged-declaration.py\" --root \"\$GATE_ROOT_DIR\" || exit \$?
+exec bash \"\$GATE_ROOT_DIR/share/run-gates.sh\" --root \"\$GATE_ROOT_DIR\" --staged
 "
 
 write_hook() {

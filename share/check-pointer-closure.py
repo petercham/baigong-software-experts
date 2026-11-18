@@ -123,7 +123,8 @@ def iter_files(faces: "list[str]") -> "list[str]":
     out: "list[str]" = []
     for face in faces:
         for cur, dirs, files in os.walk(face):
-            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
+            # SWB-GTFAST S1-b：.workbuddy 目录名整词划界（任何深度皆剪＝运行时记忆面不入扫描域；只剪目录段恰等者）
+            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", ".workbuddy")]
             for name in files:
                 if name.endswith(SCAN_EXTS):
                     out.append(os.path.join(cur, name))
@@ -204,8 +205,14 @@ def face_of(path: str, faces: "list[str]") -> str:
     return os.path.dirname(ap)
 
 
-def scan(root: str, faces: "list[str]") -> "tuple[list[str], dict[str, int]]":
+def scan(root: str, faces: "list[str]",
+         targets: "list[str] | None" = None) -> "tuple[list[str], dict[str, int]]":
     files = iter_files(faces)
+    if targets:
+        # SWB-GTFAST S2-d 靶检：既有文件枚举结果按 abspath 交集过滤
+        # （判据函数本体零调用路径改动＝只换入参文件集；交集空＝零发现汇总 exit 0）。
+        tset = {os.path.abspath(t) for t in targets}
+        files = [p for p in files if os.path.abspath(p) in tset]
     findings: "list[str]" = []
     tally = {"EXEMPT": 0, "SUBSTR": 0, "VIOLATION": 0}
     for path in files:
@@ -261,6 +268,9 @@ def main(argv: "list[str]") -> int:
     parser.add_argument("--pkg", action="append", default=[],
                         help="交付包面（可重复；给出即取代缺省两包面）")
     parser.add_argument("--selftest", action="store_true", help="对包内对拍测试件跑两检查并与预期数比对")
+    parser.add_argument("--target", action="append", default=[],
+                        help="靶检文件（可重复；给出＝既有枚举按 abspath 交集过滤＝只换入参文件集；"
+                             "交集空＝零发现汇总 exit 0；目录参数＝用法错）")
     args = parser.parse_args(argv)
 
     root = find_root(args.root)
@@ -268,11 +278,17 @@ def main(argv: "list[str]") -> int:
         return selftest(root)
 
     faces = resolve_faces(root, args.pkg)
-    files = iter_files(faces)
-    if not files:
-        sys.stderr.write("infra error: 扫描域为空（包面下无待扫文件）\n")
-        return 4
-    findings, tally = scan(root, faces)
+    if args.target:
+        for tgt in args.target:
+            if os.path.isdir(tgt):
+                die_usage("--target 只收文件，目录请走 --pkg 扩面：%s" % tgt)
+        findings, tally = scan(root, faces, targets=args.target)
+    else:
+        files = iter_files(faces)
+        if not files:
+            sys.stderr.write("infra error: 扫描域为空（包面下无待扫文件）\n")
+            return 4
+        findings, tally = scan(root, faces)
     counts = {k: sum(1 for f in findings if " " + k + " " in f) for k in ("OA-D6-3", "OA-D6-4")}
     for key, n in counts.items():
         print("spec=%s count=%d" % (key, n))

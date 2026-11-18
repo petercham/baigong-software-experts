@@ -153,6 +153,7 @@ def iter_files(root: str, skip_fixtures: bool) -> "list[str]":
     # ① 目录名为 .collab/.scratch 且相对仓根段数>=2（包内卷宗）剪；
     # ② 根 .collab 不剪照审；③ 根 .scratch 仅 tickets 子树存续，其余剪；
     # ④ .git/__pycache__ 剪枝存续；FIXTURE_MARK 臂与判据函数本体（L1/L2/L3）零动＝只换入扫文件集。
+    # SWB-GTFAST S1-b 叠加：.workbuddy 目录名整词任何深度皆剪（运行时记忆面物理划界；只剪目录段恰等者）。
     out: "list[str]" = []
     root_abs = os.path.abspath(root)
     for cur, dirs, files in os.walk(root_abs):
@@ -160,7 +161,7 @@ def iter_files(root: str, skip_fixtures: bool) -> "list[str]":
         rel_dir = os.path.relpath(cur_abs, root_abs).replace(os.sep, "/")
         keep: "list[str]" = []
         for d in dirs:
-            if d in (".git", "__pycache__"):
+            if d in (".git", "__pycache__", ".workbuddy"):
                 continue
             if d in (".collab", ".scratch"):
                 if cur_abs == root_abs:
@@ -274,8 +275,14 @@ def check_l3(files: "list[str]", rel_map: "dict[str, str]") -> "list[str]":
     return findings
 
 
-def scan(root: str, skip_fixtures: bool) -> "tuple[list[str], dict[str, int]]":
+def scan(root: str, skip_fixtures: bool,
+         targets: "list[str] | None" = None) -> "tuple[list[str], dict[str, int]]":
     files = iter_files(root, skip_fixtures)
+    if targets:
+        # SWB-GTFAST S2-d 靶检：既有文件枚举结果按 abspath 交集过滤
+        # （判据函数本体零调用路径改动＝只换入参文件集；交集空＝零发现汇总 exit 0）。
+        tset = {os.path.abspath(t) for t in targets}
+        files = [p for p in files if os.path.abspath(p) in tset]
     rel_map = {p: os.path.relpath(p, root).replace(os.sep, "/") for p in files}
     findings: "list[str]" = []
     tally = {"EXEMPT": 0, "SUBSTR": 0, "VIOLATION": 0}
@@ -331,17 +338,26 @@ def main(argv: "list[str]") -> int:
     parser = argparse.ArgumentParser(add_help=True, description="EAC-SK5 协作纪律体裁机检")
     parser.add_argument("--root", help="仓根（默认自脚本位置向上定位）")
     parser.add_argument("--selftest", action="store_true", help="对包内对拍测试件跑三检查并与预期数比对")
+    parser.add_argument("--target", action="append", default=[],
+                        help="靶检文件（可重复；给出＝既有枚举按 abspath 交集过滤＝只换入参文件集；"
+                             "交集空＝零发现汇总 exit 0；目录参数＝用法错）")
     args = parser.parse_args(argv)
 
     root = find_root(args.root)
     if args.selftest:
         return selftest(root)
 
-    files_present = iter_files(root, skip_fixtures=True)
-    if not files_present:
-        sys.stderr.write("infra error: 扫描域为空（%s 下无 .md/.txt）\n" % root)
-        return 4
-    findings, tally = scan(root, skip_fixtures=True)
+    if args.target:
+        for tgt in args.target:
+            if os.path.isdir(tgt):
+                die_usage("--target 只收文件，目录请走缺省扫描面：%s" % tgt)
+        findings, tally = scan(root, skip_fixtures=True, targets=args.target)
+    else:
+        files_present = iter_files(root, skip_fixtures=True)
+        if not files_present:
+            sys.stderr.write("infra error: 扫描域为空（%s 下无 .md/.txt）\n" % root)
+            return 4
+        findings, tally = scan(root, skip_fixtures=True)
     counts = {k: sum(1 for f in findings if " " + k + " " in f) for k in ("EAC-L1", "EAC-L2", "EAC-L3")}
     for key, n in counts.items():
         print("spec=%s count=%d" % (key, n))

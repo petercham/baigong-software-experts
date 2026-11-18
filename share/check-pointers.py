@@ -331,7 +331,8 @@ def iter_markdown(root: str, scopes: "list[str]") -> "list[str]":
         if not os.path.isdir(base):
             continue
         for cur, dirs, files in os.walk(base):
-            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
+            # SWB-GTFAST S1-b：扫描域 walk 补 .workbuddy 整词划界（基名索引面 L238 段零动＝候裁 C-1 未裁）
+            dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", ".workbuddy")]
             for name in files:
                 if name.endswith(".md"):
                     out.append(os.path.join(cur, name))
