@@ -74,6 +74,23 @@ def find_root(explicit):
         cur = parent
 
 
+def git_hooks_dir(root):
+    """钩子目录定位＝git 原生旗（worktree 感知）。
+
+    worktree 工作区的 .git 是 gitfile 指针文件非目录，钩子物理居共享 common
+    dir 的 hooks/；rev-parse --path-format=absolute --git-path hooks 在主工作区
+    根与 worktree 根两态同读数＝共享 common dir 下钩子目录绝对路径。旗不支持
+    （git 旧形态）＝回退旧拼径 root/.git/hooks（主仓根行为零变）。
+    """
+    proc = subprocess.run(
+        ["git", "-C", root, "rev-parse", "--path-format=absolute",
+         "--git-path", "hooks"],
+        capture_output=True, text=True, encoding="utf-8")
+    if proc.returncode != 0 or not proc.stdout.strip():
+        return os.path.join(root, ".git", "hooks")
+    return os.path.normpath(proc.stdout.strip())
+
+
 def read_hookspath_readings(root):
     """core.hooksPath 全 scope 读数（带 origin）。返回 (读数行列表, 命令异常否)。"""
     proc = subprocess.run(
@@ -112,7 +129,7 @@ def main(argv):
     for ln in readings:
         snap_kv += "｜%s" % ln.replace(" ", "=")
 
-    hook = os.path.join(root, ".git", "hooks", "pre-commit")
+    hook = os.path.join(git_hooks_dir(root), "pre-commit")
     on_disk = os.path.isfile(hook)
     if on_disk:
         blob = blob_sha1(hook)

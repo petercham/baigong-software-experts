@@ -154,6 +154,7 @@ import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 
 CJK_RE = re.compile(r'[\u3400-\u4dbf\u4e00-\u9fff\u3000-\u303f\uff00-\uffef]')
@@ -222,6 +223,25 @@ def tokens(text: str) -> int:
 
 def norm(p: str) -> str:
     return p.replace(os.sep, '/')
+
+
+def resolve_sibling_root(root: str, rel: str) -> str:
+    """兄弟仓相对径（../ 起头）的解析锚＝主工作区根（worktree 感知）。
+
+    worktree 工作区根下 ../ 段相对径方向指错（兄弟仓并列于主工作区根的同父目录）；
+    解析锚改取 git rev-parse --path-format=absolute --git-common-dir 输出的父目录。
+    主工作区根下该锚＝仓根本身＝新旧行为逐字节等价。git 不可用／旗不支持／非
+    ../ 起头径＝照旧相对 root 拼接（fail-soft 回退，不更松不更严）。
+    """
+    if rel.startswith('..'):
+        proc = subprocess.run(
+            ['git', '-C', root, 'rev-parse', '--path-format=absolute',
+             '--git-common-dir'],
+            capture_output=True, text=True)
+        if proc.returncode == 0 and proc.stdout.strip():
+            anchor = os.path.dirname(os.path.normpath(proc.stdout.strip()))
+            return os.path.abspath(os.path.join(anchor, rel))
+    return os.path.abspath(os.path.join(root, rel))
 
 
 def collect_md(root_abs: str, tag: str, include_all_non_agents: bool):
@@ -764,7 +784,7 @@ def main() -> int:
 
     if args.selftest_seatdecl:
         return selftest_seatdecl(root)
-    pkg_abs = os.path.abspath(os.path.join(root, args.pkg))
+    pkg_abs = resolve_sibling_root(root, args.pkg)
     if not os.path.isdir(pkg_abs):
         sys.stderr.write('usage error: 包目录不存在：%s\n' % args.pkg)
         return 2
@@ -774,7 +794,7 @@ def main() -> int:
     skills_abs = None
     tags = set()
     if args.mode == 'dual':
-        skills_abs = os.path.abspath(os.path.join(root, args.skills_root))
+        skills_abs = resolve_sibling_root(root, args.skills_root)
         if not os.path.isdir(skills_abs):
             sys.stderr.write('usage error: 技能真源根不存在：%s\n' % args.skills_root)
             return 2
