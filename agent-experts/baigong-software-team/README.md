@@ -90,6 +90,7 @@ Team 型（多角色协作团队）
 | software-team-engineer.md | 50 | **1,261** | 绿 | script-v1 | 0 | 0 |
 | software-team-qa.md | 50 | **1,232** | 绿 | script-v1 | 0 | 0 |
 | **合计** | **274** | **6,494** | — | script-v1 | **7** | **1,874** |
+行数与 token 表自校（预置·复算口径）：行数列＝五席位卡 wc -l 随批现跑复算；token 列＝share／count_agent_tokens.py（script-v1 口径）随批现跑复算；席位卡改动＝本表随动复算。
 
 **读法（MD 是 cost center，references 是 asset）**：本表五行＝现五席位卡 script-v1 口径当轮现跑值（脚本五卡臂现跑＋wc 行数现跑，随批重算）。旧卡时代账＝前血脉沿革留档不续账：lead 瘦身前 3,777（旧基线更名前账，此后置）→ 瘦身后 2,216，净降 1,561；四成员 1,072／1,475／1,865／1,371（收编批旧账）；合计 628 行／7,999 token（旧表口径已失实，随本批现跑置换）。资产侧沿革账＝`skills/software-orchestration/` fork 瘦身批时 references 七件正文 1,874 tok（附录 A 逐字账）＋SKILL.md 索引 631 tok（≤5,000 技能层线内）。成本从「每次会话全付」移到「按档触发才付」；下沉内容在 references 中逐字承载（C3 逐字门保护），lead MD 以「⛓ 必读」硬读指针直达（确定性通道，不依赖语义匹配）。
 

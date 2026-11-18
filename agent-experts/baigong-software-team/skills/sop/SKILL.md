@@ -18,11 +18,12 @@ version: 1.0.3
 
 ## templates 索引（五件）
 
-- `templates/ticket-template.md`：票模板——票型八类清单＋票体四字段自包含结构（目标／规格／验收标准／边界约束）。
+- `templates/ticket-template.md`：票模板——票型九类清单＋票体四字段自包含结构（目标／规格／验收标准／边界约束）。
 - `templates/decision-pack-template.md`：决策包模板——呈报包／full-rollout 包字段格式（与 `scripts/decision-pack.py` 输出对齐）。
 - `templates/return-template.md`：回流件模板——回流四型（完成／部分完成／受阻／异常）。
 - `templates/receipt-template.md`：完工回执模板——实占七节骨架（开工读数／施工读数／V 系读数／禁动面坐实／取证族拆除／案型登记／纪律自证）＋receipts 桶命名现占口径。
 - `templates/closeout-template.md`：收口登记模板——实占九节骨架（开工读数／链账表／债销账／基线随动／随登随正案型／遗留随登／判据处置三态列／观察随登／批次面纪律自证）＋decisions 桶命名现占口径＋链账表生成指引。
+索引枚数自校（预置·复算口径）：两基线副本／五模板／scripts 枚数断言以现跑为准（references 以 grep v2.9-copy 子集计数为口径＝恰 2·禁以 ls 全目录计数·templates 与 scripts 以 ls 目录计数）；目录增删＝本索引与计数随动。
 
 ## scripts 索引（TCB 脚本·被调用时查阅其头部规范）
 

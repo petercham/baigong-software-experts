@@ -71,7 +71,8 @@ V 系骨架（预置固定·命令与期望由槽填）：
 - 开工现跑 HEAD＋链序照登；单 pathspec add 紧邻 commit＋FX_COMMIT_DECLARE 挂 commit 命令侧＝仓根相对路径（两端皆为声明侧卫生纪律·缩小卷入命中面·非拦截机制——c4aad87 三实验坐实提交侧拦不住他席 staged 注入）；卷入防线＝（钩子在岗时）post-commit 比对真实树当场报（HEAD 面单与声明清单对等核验·不符即醒目告警＋仓内日志一行）；commit 前先跑自靶 exit 0。
 - message 用 -F 文件承载（防引号与中断·先例在册）＝message 文件落仓根 .scratch／ 取证族·用毕即拆 ls 坐实。
 - 落链硬口径＝-F 承载＋commit 输出重定向落盘＋后台执行（中断教训先例在册）；commit 类命令 timeout 600000。
-- 体例＝裸文＋全角斜杠·零 at 零反引号·命令缩进段；尾标闭集（-TICKET／-BUILD／-RECEIPT／-QA-REV／-QAV／-GCLOSE 照段别取用）；族名随 message 内嵌。
+- 体例＝裸文＋全角斜杠·零 at 零反引号·命令缩进段；尾标闭集（-TICKET／-BUILD／-RECEIPT／-QA-REV／-QAV／-RELEASE／-GCLOSE 照段别取用·收口段一律 -GCLOSE）；族名随 message 内嵌。
+尾标闭集自校（预置·复算口径）：近 30 笔 git log --format=%s 管道 grep 尾标族计数＝新式尾标命中照列；旧链 -CLOSEOUT 存量＝沿革照登不回改。
 - 禁 add -A／禁 amend／禁 --no-verify；message 以 collab: 起头·零 at 零反引号·＝号串联关键读数。
 - 撞锁两态口径＝lock 在飞等待自然消退、实证陈旧按先例删锁留证；他案脏面照登零带入。
 - 临时工作物落仓根 .scratch／；取证族用毕即拆 ls 坐实随完工回报。
