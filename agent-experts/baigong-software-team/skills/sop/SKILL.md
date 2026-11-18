@@ -13,6 +13,7 @@ version: 1.0.3
 
 - `references/product-v2.9-copy.md`：产品设计 v2.9 本体整件副本（源件一字不改；头注含来源路径与源分段哈希）。
 - `references/architecture-v2.9-copy.md`：架构设计 v2.9 本体整件副本（同上）。
+- `references/external-ticket-spec.md`：他域工单规范卷——工单体八字段＋效力域五行＋诉求体闭集四型＋状态面闭集＋知会登记面（他域交互工单形制本体·票面形制不归本卷）。
 
 引用纪律：引用以 §号＋V13 行号锚定位；副本哈希与基线登记哈希一致方可作引用目标。
 
