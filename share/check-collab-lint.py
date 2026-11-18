@@ -149,15 +149,36 @@ def read_lines(path: str) -> "list[str]":
 
 
 def iter_files(root: str, skip_fixtures: bool) -> "list[str]":
+    # SWB-GTFAST S1-a（v2 修单）扫描域划界＝机械剪枝谓词：
+    # ① 目录名为 .collab/.scratch 且相对仓根段数>=2（包内卷宗）剪；
+    # ② 根 .collab 不剪照审；③ 根 .scratch 仅 tickets 子树存续，其余剪；
+    # ④ .git/__pycache__ 剪枝存续；FIXTURE_MARK 臂与判据函数本体（L1/L2/L3）零动＝只换入扫文件集。
     out: "list[str]" = []
-    for cur, dirs, files in os.walk(root):
-        dirs[:] = [d for d in dirs if d not in (".git", "__pycache__")]
-        rel_dir = os.path.relpath(cur, root).replace(os.sep, "/")
+    root_abs = os.path.abspath(root)
+    for cur, dirs, files in os.walk(root_abs):
+        cur_abs = os.path.abspath(cur)
+        rel_dir = os.path.relpath(cur_abs, root_abs).replace(os.sep, "/")
+        keep: "list[str]" = []
+        for d in dirs:
+            if d in (".git", "__pycache__"):
+                continue
+            if d in (".collab", ".scratch"):
+                if cur_abs == root_abs:
+                    keep.append(d)
+                    continue
+                segs = (0 if rel_dir == "." else len(rel_dir.split("/"))) + 1
+                if segs >= 2 and not (rel_dir == ".scratch" and d == "tickets"):
+                    continue
+            keep.append(d)
+        if rel_dir == ".scratch":
+            keep = [d for d in keep if d == "tickets"]
+            files = []
+        dirs[:] = keep
         if skip_fixtures and FIXTURE_MARK in "/" + rel_dir + "/":
             continue
         for name in files:
             if name.endswith(SCAN_EXTS):
-                out.append(os.path.join(cur, name))
+                out.append(os.path.join(cur_abs, name))
     return sorted(out)
 
 
