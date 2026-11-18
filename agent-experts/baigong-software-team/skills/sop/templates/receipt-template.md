@@ -6,7 +6,7 @@
 ⟪槽：时点（date 现跑）／HEAD 对钉（git rev-parse --short HEAD 与放行登记口径对拍）／链序（git log --oneline 父子逐笔相衔照登）／锁态两态（index.lock 在场＝等待消退照登·不存在＝NO_INDEX_LOCK）／脏面照登（tracked M 逐枚＋?? 当轮计数＝他案活体群禁钉死）＋票面与放行件 blob 双对钉（git rev-parse HEAD:路径＋盘 sha 现算）＋靶件基线三面（链上 blob＋wc -l＋盘 sha256）⟫
 
 ## 一、BUILD 笔施工读数（照票 §二／rev 终态 verbatim）
-⟪槽：施工步骤命令与断言读数 verbatim（逐断言名＋PASS／FAIL＋关键计数）＋落笔坐实（add 单 pathspec 紧邻 commit·commit 前 staged 恰写集枚数现跑＋钩子 STAGED-DECL 互证读数＋git show --numstat 逐枚插删读数）⟫
+⟪槽：施工步骤命令与断言读数 verbatim（逐断言名＋PASS／FAIL＋关键计数）＋落笔坐实（add 单 pathspec 紧邻 commit·commit 前 staged 恰写集枚数现跑＋钩子 STAGED-DECL 互证读数＝声明侧自检读数非拦截宣称·卷入核对以 post-commit 真实树比对告警读数为准（钩子在岗时）＋git show --numstat 逐枚插删读数）⟫
 
 ## 二、V 系全套读数（本席当轮现跑·票 §四＋rev 勘正版为准）
 ⟪槽：票 V 系逐条＝命令→实测读数成对（禁手填·禁抄票 §二 起草态基线）＋改前改后对照臂（门禁与行为面各两臂·差量逐枚归因禁遮掩）⟫

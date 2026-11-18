@@ -68,7 +68,7 @@ V 系骨架（预置固定·命令与期望由槽填）：
 
 ## 六、链衔接纪律（预置固定·不重写）
 
-- 开工现跑 HEAD＋链序照登；单 pathspec add 紧邻 commit；FX_COMMIT_DECLARE 挂 commit 命令侧＝仓根相对路径；commit 前先跑自靶 exit 0。
+- 开工现跑 HEAD＋链序照登；单 pathspec add 紧邻 commit＋FX_COMMIT_DECLARE 挂 commit 命令侧＝仓根相对路径（两端皆为声明侧卫生纪律·缩小卷入命中面·非拦截机制——c4aad87 三实验坐实提交侧拦不住他席 staged 注入）；卷入防线＝（钩子在岗时）post-commit 比对真实树当场报（HEAD 面单与声明清单对等核验·不符即醒目告警＋仓内日志一行）；commit 前先跑自靶 exit 0。
 - message 用 -F 文件承载（防引号与中断·先例在册）＝message 文件落仓根 .scratch／ 取证族·用毕即拆 ls 坐实。
 - 落链硬口径＝-F 承载＋commit 输出重定向落盘＋后台执行（中断教训先例在册）；commit 类命令 timeout 600000。
 - 体例＝裸文＋全角斜杠·零 at 零反引号·命令缩进段；尾标闭集（-TICKET／-BUILD／-RECEIPT／-QA-REV／-QAV／-GCLOSE 照段别取用）；族名随 message 内嵌。
