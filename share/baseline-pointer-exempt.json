@@ -66,6 +66,12 @@
       "files": [
         "agent-experts/baigong-software-team/.collab/qa/2026-11-10-SWB-SCRATCHG-产品席窄复核-v1.md"
       ]
+    },
+    {
+      "token": "../../software-orchestration/references/handoff-discipline.md",
+      "files": [
+        "agent-skills/external-advisor-collab/references/40-artifacts.md"
+      ]
     }
   ],
   "collab_bucket_exempt": [

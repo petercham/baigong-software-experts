@@ -73,5 +73,7 @@ Desktop.ini
 # Python 字节码缓存（编译检查产物）
 __pycache__/
 *.pyc
-/agent-skills/fuxi-skill/
-/agent-experts/baigong-software-team/
+# 三分类交付面边界（SWB 边界落链·皮总 2026-11-19 明示整面排除＝各项目自持 worktree 认领制）
+/agent-experts/
+/agent-skills/
+/softwares/
