@@ -173,4 +173,28 @@ rev-1（收尾窗随登·本笔成文窗现跑·不回改上文）：
 - 真源对钉收尾复跑（新链顶现读）＝thin 1703b610／80 不变＋check-ticket 5a9aa5fd／483 不变＋software-orchestration／SKILL.md d76785e2／40 不变（git rev-parse 三枚现跑全等）＝§三 S2 开工对钉值成立（他案 T2e 验收笔与收口在飞面不涉 software-orchestration／SKILL.md）。
 - 本票面自靶两闸收尾复跑＝check-pointers --target 本票面 exit 0 输出零行＋check-ticket --target 本票面 exit 0＝BLOCK 0／WATCH 0＝首跑即绿零违例零修（读数落 .scratch／t2fticket2／selftarget-ticket.txt＋checkticket-face.txt）。
 - 缺省扫描锚收尾复跑＝exit 1＝严格口径 BLOCK 恰 1863／WATCH 恰 1007＝对 §二.10 本窗现跑值全等零漂移（输出落 v5-pointers-default.txt）。
+
+---
+
+rev-2（快审红-1／黄-1／黄-2 回正续段·开票席 arch-iter-t2f2 现跑续写·append-only 不回改上文·回正径＝判词写死径逐条落齐）：
+
+依据＝本票票面快审判词件（真位＝agent-experts／baigong-software-team／.collab／audits／2026-11-19-ITER-W2-T2f-票面快审-v1.md＝链上 9e49e352 面·blob d26def4fe5f1f357d33473dbc5adb9adfdb0a598／51 行＝本窗链 rev-parse＋show 管道 hash-object＋show 管道 wc 三式现跑全等）§三 红-1 回正径条款＋§五 黄-1／黄-2 随正条款；两 QA 席（rev／rev2 fresh eyes）独立现跑结论面全等互证随判词落桶笔 subject 在册。
+
+- 开工读数（现跑）＝date 现跑 2026-11-19T12:39:21+08:00；git rev-parse HEAD＝9e49e35225cb9ca9b09e868b376b20dfd8c2e614＝与派工预期链顶全等（本票快审判词落桶笔）；链序现读逐枚^相衔零断＝9e49e352←2f4e45e8（他案 T2g 开票笔）←4e06a174（T2e 收口补列随登笔）←034f9f01（T2e 收口登记笔）←87795438（本票开票笔＝票面父笔坐实）←c52175d3＝本票开票笔后他案与本票快审插链四笔时序照登归因在册（照登零触碰·禁判漂移）；rev-parse --git-dir＝worktree 独立 gitdir 坐实＋NO_LOCK_FILES＋staged 零枚＋tracked M 零枚＋?? 零枚＋sparse D 态 1018 枚照登勿处理。
+- 回正① S2 开工钉更正＝software-orchestration／SKILL.md 开工钉真值＝176ec0dcefbec7bbff98512748b7d9ff75107d09／29 行。三面复钉（续写前现跑·链 rev-parse＝盘 hash-object＝show 管道 hash-object 三式＋行数两式）：
+
+        git rev-parse HEAD:agent-experts/baigong-software-team/skills/software-orchestration/SKILL.md
+        git show HEAD:agent-experts/baigong-software-team/skills/software-orchestration/SKILL.md | git hash-object --stdin
+        git hash-object agent-experts/baigong-software-team/skills/software-orchestration/SKILL.md
+        git show HEAD:agent-experts/baigong-software-team/skills/software-orchestration/SKILL.md | wc -l
+        wc -l < agent-experts/baigong-software-team/skills/software-orchestration/SKILL.md
+
+  读数＝钉值三式全等＝176ec0dcefbec7bbff98512748b7d9ff75107d09＋行数两式全等＝29 行＝与判词两席现跑值及派工面值全等；溯源现跑＝git log --all --find-object 对 176ec0dc 命中改后态入链笔＝1c772c0f（T2c BUILD 笔）＝改后态沿册成立；落点锚复核现跑＝行 28 judgment-form-spec 索引行命中＋行 29 索引自校行命中（grep 行号现跑）＝§三「行 28 后插一行」落点成立不变。§二.9／§三 S2 面值「d76785e2…四十位／40 行」自本段起作废＝开工钉以本段现跑值为准。
+- 回正② 行数预期随正＝S2 行数预期「40→41」作废，改＝29→30；numstat 预期 1／0 不变＝两账互算前置判随正后自洽成立（现势基底 29＋插一行＝30）；索引两路计数现跑＝git ls-files references 桶径 wc 13 枚 ‖ 盘 ls wc 13 枚 ‖ 现势 SKILL.md 索引行枚数 13＝三账对等（现势基数真值＝13；S1 落位后 14 对 14 自校预期成立不变）。
+- 回正③ V1 槽随正申明＝§四 V1 槽填「S2 开工＝d76785e2／40」同步随正为「S2 开工＝176ec0dc／29」＝V1 与 §二.9／§三 同笔同源，本段回正即闭；正文四处误值面＝行 77（§二.9）／行 91（§三 S2 改前钉）／行 112（V1 槽填）／行 173（rev-1 真源对钉句）＝append-only 零回改，下游施工与验收窗照本 rev-2 段取用现势口径。
+- 回正④ 误源申明＝张冠李戴归因＝两 SKILL.md 同名卷混淆：面值 d76785e223311a823d6a29b981530e689cb8f846／40 行真身＝skills／sop／SKILL.md 枚（本窗现跑＝链 rev-parse 对 sop 径全等＋show 管道 wc 40 全等；改后态入链笔＝git log --all --find-object 命中 b0870455＝T2e BUILD 笔）＝起草窗取证把 sop 卷钉值误挂 software-orchestration 卷＝面值串件；同笔算术自矛盾＝「numstat 1／0 对 40→41」与「索引自校 14 对 14（现势两路 13）」互斥＝起草窗两账互算前置判未做＝承 T2b／T2c／T2h 面值算术自矛盾案族随登。
+- 随正⑤（黄-1）＝§二.7「链面仅两枚登记引用行命中」＝起草窗真值（彼时票面未落链）；现窗具名归因口径写死＝HEAD 具名词「WorkBuddy适配条款收集清单」命中集合＝T1d 收口恰 1＋裁决登记恰 1＋本票面自指恰 3（引用行＝非本体）＝本体零枚（git grep -c 对 HEAD 现跑三件全列）；下游 V 系复跑面照此口径取用。
+- 随正⑤（黄-2）＝§七 批次位句＝起草窗真值（T2e 在飞＋验收在途）；现势随正＝T2e 已闭环三笔＝c52175d3（独立验收）＋034f9f01（收口登记）＋4e06a174（收口补列随登）＋他案 T2g 开票笔 2f4e45e8 已在链＝批次面现势＝T2d-α／T2a／T2b／T2h／T2c／T2e 六票毕＋本票 rev 段回正在途＋T2g 候裁候排；本票 BUILD 段开工时序归主理人排程窗不变。
+- 随正⑥ 案型随登＝本票案型＝面值算术自矛盾＋张冠李戴（面值串件）复现登记；T2g 席 J-3 同款串件互证＝T2g 票面（链上 2f4e45e8 面 blob 6480059419a548eec39ba1544a49d772a4acddb1／181 行＝本窗 show 管道两式现跑全等）§二.9 成对讲法＋§五 J-3 已具名本案（面值 d76785e2／40 实归位 skills／sop／SKILL.md＝该票开工钉以现势值 176ec0dc／29 写死＝照转引面值反而错＝案型随登）＝两席独立现跑同证＝互证面全等在册；本 rev 段回正与该登记口径咬合＝零触 sop／SKILL.md 禁动面＝史件票面零回改红线零触。
+- 收尾复跑与纪律＝本 rev 段落笔后票面自靶两闸复跑＝check-pointers --target 本票面 exit 0 输出零行＋check-ticket --target 本票面 exit 0＝BLOCK 0／WATCH 0（读数落 .scratch／t2fticket2／selftarget-rev2.txt＋checkticket-rev2.txt）；append-only 自查＝新面 vs 链上在册态 3b1f0f78／175 diff 现跑＝numstat 24／0＝删侧恰 0＝append 坐实＋两账互算＝新面 wc 199 行＝175＋24 成立＝插位形制＝rev-2 段插于 rev-1 末行（体例三零自查行＝无末行换行符存量面）之前＝照 4e06a174 收口补列随登先例＝末行内容零改动零回改；本席全窗 git 仅只读＝rev-parse／show／log／status／diff／hash-object／ls-tree／ls-files／cat-file／grep／merge-base／check-ignore／config 读＝零 add 零 commit 零 amend 零 stash 零 config 写·index 零触碰·链上史件零回改·他案在飞面零触碰·sparse 零处理；唯一写＝本票面 rev 段续写一枚＋.scratch／t2fticket2／取证族（selftarget-rev2＋checkticket-rev2＋style-selfcheck-rev2＋msg-revfix 载体）落 ignore 域不入 status；载体＝.scratch／t2fticket2／msg-revfix.txt＋OS tmp 根同名备份·collab: 起头单行裸文·全角斜杠·零反引号零 at·尾标 -REVFIX；体例三零自查现跑＝rev-2 段反引号 0／at 0／非缩进段半斜杠 0（读数落 style-selfcheck-rev2.txt）
 - 体例三零自查现跑＝本票面反引号计数 0／at 计数 0／非缩进段半斜杠 0／节题计数 8（七节骨架＋批次衔接尾面＝CT-1 额外节条款自指沿 T2b 先例）／槽残留 U+27EA 计数 1＝唯豁免税＝「模板使用说明（固定）」头行（CT-5 具名豁免形制在册）＝叙述面零残留；入线四词对本票面命中面＝§〇 词表枚举句＋V6 预置行本体＋§三 禁写条款枚举面＝申明面自指沿先例不在 V6 射程（复算读数入 style-selfcheck.txt）。
