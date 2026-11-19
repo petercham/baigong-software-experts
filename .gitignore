@@ -75,5 +75,13 @@ __pycache__/
 *.pyc
 # 三分类交付面边界（SWB 边界落链·皮总 2026-11-19 明示整面排除＝各项目自持 worktree 认领制）
 /agent-experts/
-/agent-skills/
+/agent-skills/*
 /softwares/
+# 公共可复用技能族回跟踪豁免（EXT-W4 R-1·皮总 21:02 裁决「唯一真源账本归主根公共账」·六包＋README 按包豁免）
+!/agent-skills/README.md
+!/agent-skills/multi-collab/
+!/agent-skills/object-audit/
+!/agent-skills/external-advisor-collab/
+!/agent-skills/object-build/
+!/agent-skills/bundle-assembly-registration/
+!/agent-skills/claim-commitment-governance/
