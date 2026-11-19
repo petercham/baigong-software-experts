@@ -2,10 +2,10 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.31",
+    "version": "0.1.32",
     "repo": ".",
     "path": "agent-experts/baigong-software-team",
-    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失"
+    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失；沿革：0.1.31→0.1.32＝ITER W1／W2 全批真源改动收口重装（ITER-W3 装配本地部署 DEP0132 票·2026-11-19·随票级放行登记 2026-11-19-ITER-W3-票级放行登记-v1 件号具名·J-1 采甲方生效）"
   },
   "components": [
     {
