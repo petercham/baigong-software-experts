@@ -1624,7 +1624,7 @@ def cmd_selfcheck(args, cs):
     """自证入口：14 组逐组 配置值 ↔ 真源再抽取 全等；随后四类变异全数造红。"""
     src_tags = cs.cfg["_meta"]["source_files"]
     root = pack_root()
-    base = os.path.dirname(os.path.dirname(root))  # 交付仓根（包根上两级）
+    base = root  # 包根级装配面基址（真源读取改指装配落位面 skills/claim-commitment-governance·随 ITER-W4）
     src_lines = {}
     for tag, rel in src_tags.items():
         p = rel if os.path.isabs(rel) else os.path.join(base, rel)

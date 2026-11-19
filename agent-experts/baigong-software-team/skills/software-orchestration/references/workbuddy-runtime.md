@@ -43,7 +43,7 @@ WorkBuddy 架构下席位＝按需 spawn 临时进程，与单笔 8～10 分钟�
 
 ### 条款本体
 
-本仓 worktree 根＝包目录，git 在册真位带嵌套前缀 agent-experts／baigong-software-team／…；同仓同时存在仓根级在册目录族（.collab／.scratch／agent-skills／share／README 等＝包化换代前史面·sparse 部分检出态下盘不可达而链面在）——两形态并存＝必现跑判定，禁按形态直觉落位：写入前必以 git ls-files／git ls-tree 具名探查两态（仓根级＋嵌套级）后落册在真位；读取链面真位一律 git show HEAD:径 口径（盘不可达≠链面 absent）。
+本仓 worktree 根＝包目录，git 在册真位带嵌套前缀 agent-experts／baigong-software-team／…；同仓同时存在仓根级在册目录族（.collab／.scratch／share／README 等＝包化换代前史面·sparse 部分检出态下盘不可达而链面在；公共技能族域随 ITER-W4 账本瘦转为装配消费形态＝真源归主根公共账·本仓账本不再在册该域，装配面 skills／ 下经组件行落位）——两形态并存＝必现跑判定，禁按形态直觉落位：写入前必以 git ls-files／git ls-tree 具名探查两态（仓根级＋嵌套级）后落册在真位；读取链面真位一律 git show HEAD:径 口径（盘不可达≠链面 absent）。
 
 ### 适用窗
 
@@ -105,7 +105,7 @@ cone-mode sparse 检出范围外索引位在 worktree 不物化＝status 报工�
 ### 判定命令
 
     git status --porcelain | grep -c "^ D"     # 本链现值＝本窗现跑 1018（存量基线面；开工／完工两跑对拍＝平即绿）
-    git status --porcelain | grep "^ D" | sed "s/^ D //" | cut -d/ -f1-2 | sort | uniq -c | sort -rn | head -5   # D 态归因抽样＝最大簇＝agent-skills/fuxi-skill 族＋仓根 .collab/decisions 族（全部落 sparse 未检出区＝非误删）
+    git status --porcelain | grep "^ D" | sed "s/^ D //" | cut -d/ -f1-2 | sort | uniq -c | sort -rn | head -5   # D 态归因抽样＝最大簇＝仓根 .collab/decisions 族（全部落 sparse 未检出区＝非误删；公共技能族域随 ITER-W4 账本瘦转为装配消费形态＝真源归主根公共账·本仓账本摘跟踪该域后 D 态归因分布随摘跟踪段现跑更新）
     git config --get core.sparseCheckout       # 本链现读＝true（主仓侧成对＝本链 true ‖ 主仓未设该键＝主仓 status D 态现跑 0 枚）
     git sparse-checkout list | head -3         # cone 范围列示现读（范围外即 D 态来源区）
 

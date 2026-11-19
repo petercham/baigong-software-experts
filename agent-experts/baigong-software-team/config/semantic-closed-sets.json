@@ -1,11 +1,11 @@
 {
   "_meta": {
-    "role": "semantic-governance 共享强制层闭集配置：一切闭集值逐字派生自真源四件（agent-skills/claim-commitment-governance 的 references/10-contract.md、references/20-artifact-mapping.md、references/30-gates.md、templates/claim-register.md）。本件不是人工维护的第二份正文：semantic-governance.py selfcheck 对每组执行「配置 ↔ 真源逐字全等／规范化摘要全等」自证；等长反义改写、值漂移、常量改义、列序互换四类变异全数造红，干净副本全绿。",
+    "role": "semantic-governance 共享强制层闭集配置：一切闭集值逐字派生自真源四件（装配面 skills/claim-commitment-governance 的 references/10-contract.md、references/20-artifact-mapping.md、references/30-gates.md、templates/claim-register.md；真源＝主根公共账 agent-skills/claim-commitment-governance 经装配落位面·ITER-W4 装配消费形态）。本件不是人工维护的第二份正文：semantic-governance.py selfcheck 对每组执行「配置 ↔ 真源逐字全等／规范化摘要全等」自证；等长反义改写、值漂移、常量改义、列序互换四类变异全数造红，干净副本全绿。",
     "source_files": {
-      "10-contract": "agent-skills/claim-commitment-governance/references/10-contract.md",
-      "20-artifact-mapping": "agent-skills/claim-commitment-governance/references/20-artifact-mapping.md",
-      "30-gates": "agent-skills/claim-commitment-governance/references/30-gates.md",
-      "claim-register": "agent-skills/claim-commitment-governance/templates/claim-register.md"
+      "10-contract": "skills/claim-commitment-governance/references/10-contract.md",
+      "20-artifact-mapping": "skills/claim-commitment-governance/references/20-artifact-mapping.md",
+      "30-gates": "skills/claim-commitment-governance/references/30-gates.md",
+      "claim-register": "skills/claim-commitment-governance/templates/claim-register.md"
     },
     "group_count": 14,
     "version_note": "组 14 值本体含真源逐字的取证口径字面（系 30-gates §5 派生，由 selfcheck 保真）；脚本代码与调用面文本不消费版本号。"
