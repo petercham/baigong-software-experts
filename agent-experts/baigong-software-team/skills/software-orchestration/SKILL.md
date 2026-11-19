@@ -15,7 +15,7 @@ version: 1.1.7
 |---|---|---|
 | `references/quick-mode.md` | ⚡ 快速模式全节（适用条件·五步流程·典型场景举例） | 技法参考（档位已退役 v2.9 §20.1⑦·轻工作量走维护票） |
 | `references/bugfix-path.md` | 🔧 BugFix 快捷路径全节（明确 Bug 的三步流程） | 技法参考（档位已退役 v2.9 §20.1⑦·轻工作量走维护票） |
-| `references/standard-sop.md` | 🏗️ 标准 SOP 逐步流程全节（五席逐步派单细则·PRD 两型·IS_PASS 与智能路由流转·ADR 工序与立项触发判据） | 判定走 🏗️ 标准 SOP 后 |
+| `references/standard-sop.md` | 🏗️ 标准 SOP 逐步流程全节（五席逐步派单细则·PRD 两型·IS_PASS 与智能路由流转·ADR 工序与立项触发判据＋分档与审法口径（SWB 审法终态）） | 判定走 🏗️ 标准 SOP 后 |
 | `references/incremental-dev.md` | 增量开发支持全节（变更需求下四席动作序） | 已有项目上的变更需求 |
 | `references/collab-rules.md` | 协作规则 §1,2,4-7（顺序流转/信息传递/反馈回路/语言/文档化/结构化；§3 质量关卡留 MD 未沉） | 任意工作流推进中 |
 | `references/partial-workflows.md` | 部分工作流支持全节（六子模式枚举） | 判定走 📋 部分工作流后 |
@@ -25,4 +25,5 @@ version: 1.1.7
 | `references/handoff-discipline.md` | 交接与协作纪律全节（交接件规格／三正面判据／append-only／收口自检五件套／验收读数分账／报告三律与核验分级／派工件干净度／机制断言须附实测／席位声明形式约束／候裁面闭集） | 交接件、收口声明、报告分级、席位声明形式约束 |
 | `references/dispatch-discipline.md` | 派席并发纪律全节（同席多实例禁令·异席并发不禁·报告路径卫生·无机件条款） | 主理人拟派席/考虑多席并发时；席位受派自查实例唯一性时 |
 | `references/thin-ticket-template.md` | 填空式薄票形制全节（七节骨架·槽位／预置二分·获批登记＋当轮取证读数＋声明闭集三块＋V 系用例唯一产出处＋分档判据读数行＋链衔接纪律预置段） | 起草席拟薄票（微档／标准档票面）前；QA 验可验收性与分档判据时 |
+| `references/judgment-form-spec.md` | QA 判词形制真源全节（快审／独立验收两制骨架·红黄计数口径·签核用语闭集·随正条款形制·体例三零申明位） | QA 落快审判词或独立验收判词前；验收席核判词件形制时 |
 references 索引自校（预置·复算口径）：本索引行枚数与 references 目录件数对等为准（目录 ls 计数现跑）；thin 七节骨架断言以 thin 节题行现跑为准。
