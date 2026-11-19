@@ -29,6 +29,8 @@ version: 1.0.3
 ## scripts 索引（TCB 脚本·被调用时查阅其头部规范）
 
 `scripts/` 装 TCB 脚本实体（T02/T03/T04 交付）：`state-transition.py`／`lease-issuer.py`／`intake-register.py`／`reconcile-daily.py`／`promote-manifest.py`／`ledger-init.sh`／`baseline-backfill-demo.py`／`dispatch-builder.py`／`serial-gate.py`／`decision-pack.py`／`write-guard.py`／`commit-audit.py`／`liveness-selfcheck.py`／`freeze-unfreeze.py`／`memory-neutralize.py`／`shadow-replay.py`／`sign-verify.py`／`check-ticket.py`。另装语义治理校验脚本 `semantic-governance.py`（SEMGOV-T2 交付·判据真源＝claim-commitment-governance 包 30-gates §2–§3）：三子命令口径＝`validate --artifact <file> --kind <artifact-kind>`（单件 R1/R2/R5/R7/R14/R16）／`reconcile --artifacts <file-list>`（跨件 R3/R10/R11/R12/R13/R17）／`gate-outbound --artifact <file>`（外发前 R4/R6/R8/R9/R15＋人工闸消费点）；exit 0 通过／exit≠0 输出违例字段与判据号。
+工具归属定版（ITER-W2-T2e·计划行 124 G7 口径）＝本包 scripts 桶为 check-ticket.py 唯一料源本体；check-bundle-parity 两仓零实体未建成（两仓 grep 零命中现证沿票面）＝归属随登归后续票；桶闸扩展料源＝仓根 share／ 面（主根窗领办）＝本包只保有随动账。入 run-gates 链与入 share 料源两动作＝他域＝EXT 知会单径（件名＝EXT-2026-11-19-T2e-G7三工具归属定版知会单-v1）；挂载判据 advisory 起步·随放行呈拍附裁（计划行 124 口径沿册）。
+tests 接线＝tests 桶入口件 run-all.sh 居 tests／ 桶（ITER-W2-T2e 交付·纯标准库零第三方依赖声明在入口件头注）。
 
 ## 正反例（技法面）
 
