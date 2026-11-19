@@ -174,6 +174,16 @@ def iter_scan_files(root: str) -> "list[str]":
             # B3a 随动（B 批搬家后案卷桶物理入三分类目录）：扫描域仍＝规范件，
             # 项目内 `.collab/`/`.scratch/` 记录件按本件自注划界不入面
             # （与 check-pointers 裁-23 拍板 2 排除 .collab 同口径）。
+            # 嵌套 git 仓根剪枝（SWB 观察记录 2026-11-19「主根闸扫面撞嵌套 worktree」）：
+            # 三分类目录树下任何含 `.git`（目录或 worktree 指针文件）的子目录＝他仓检出面，
+            # 整支不入扫＝主根闸只扫主根管辖面（皮总 2026-11-19 已裁「worktree 分立为既定·
+            # 主根只留公共面」语义物理化·非新增豁免类别）。窄修＝处方前临时口径，
+            # 全闸扫面统一排除口径归 GTBLOAT 续施射程。
+            if cur != root and (
+                    os.path.isdir(os.path.join(cur, ".git"))
+                    or os.path.isfile(os.path.join(cur, ".git"))):
+                dirs[:] = []
+                continue
             dirs[:] = [d for d in dirs if d not in (".git", "__pycache__", ".collab", ".scratch", ".workbuddy")]
             for name in files:
                 if name.endswith(SCAN_EXTS):
