@@ -2,10 +2,10 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.33",
+    "version": "0.1.34",
     "repo": ".",
     "path": "agent-experts/baigong-software-team",
-    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失；沿革：0.1.31→0.1.32＝ITER W1／W2 全批真源改动收口重装（ITER-W3 装配本地部署 DEP0132 票·2026-11-19·随票级放行登记 2026-11-19-ITER-W3-票级放行登记-v1 件号具名·J-1 采甲方生效）；沿革：0.1.32→0.1.33＝ITER-W4 账本瘦身装配改造（2026-11-19·随票级放行登记 2026-11-19-ITER-W4-票级放行登记-v1 件号具名·J-2 采甲方生效＝公共技能族真源归主根公共账·装配线改指三级上溯主根侧＋multi-collab／object-audit 两组件补装配线）"
+    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失；沿革：0.1.31→0.1.32＝ITER W1／W2 全批真源改动收口重装（ITER-W3 装配本地部署 DEP0132 票·2026-11-19·随票级放行登记 2026-11-19-ITER-W3-票级放行登记-v1 件号具名·J-1 采甲方生效）；沿革：0.1.32→0.1.33＝ITER-W4 账本瘦身装配改造（2026-11-19·随票级放行登记 2026-11-19-ITER-W4-票级放行登记-v1 件号具名·J-2 采甲方生效＝公共技能族真源归主根公共账·装配线改指三级上溯主根侧＋multi-collab／object-audit 两组件补装配线）；沿革：0.1.33→0.1.34＝ITER-W5 装配执行 DEP0132 段①②（2026-11-20·随票级放行登记 2026-11-20-ITER-W5-票级放行登记-v1 件号具名·纪律①再 bump＝ref 补钉兑现具名两枚＝multi-collab／object-audit 两组件行 ref 槽悬置标记置换实钉 tag）"
   },
   "components": [
     {
@@ -42,21 +42,21 @@
       "component": "multi-collab",
       "repo": "../../../multi-agent-collab-devkits",
       "roottag": "softdev",
-      "ref": "PENDING-E1",
+      "ref": "multi-collab@v4.11",
       "ref_kind": "tag",
       "path": "agent-skills/multi-collab",
       "target": "skills/multi-collab",
-      "note": "补装配线组件行（ITER-W4 账本瘦身装配改造票·裁决登记 2026-11-19-裁决登记-公共技能族真源归主根公共账-v1 射程六包内）：真源＝主根公共账 agent-skills/multi-collab（跨仓组件·repo 三级上溯主根工作区值随 J-4 采甲-1·E-3 当轮现跑复算落位）；ref 值置悬置标记串 PENDING-E1＝候 EXT-2026-11-19-W4 工单 R-2 主根侧组件 tag 发布后补钉（票级放行登记 rev-2 段 E-1 改判＝ref 补钉待办·先落笔后补钉形制沿票面自洽面）；装配面不跑＝DEP 装配票链射程"
+      "note": "补装配线组件行（ITER-W4 账本瘦身装配改造票·裁决登记 2026-11-19-裁决登记-公共技能族真源归主根公共账-v1 射程六包内）：真源＝主根公共账 agent-skills/multi-collab（跨仓组件·repo 三级上溯主根工作区值随 J-4 采甲-1·E-3 当轮现跑复算落位）；ref 值置悬置标记串 PENDING-E1＝候 EXT-2026-11-19-W4 工单 R-2 主根侧组件 tag 发布后补钉（票级放行登记 rev-2 段 E-1 改判＝ref 补钉待办·先落笔后补钉形制沿票面自洽面）；装配面不跑＝DEP 装配票链射程；补钉沿革：ref 槽悬置标记置换实钉 tag multi-collab@v4.11（ITER-W5 装配执行 DEP0132 段①②·2026-11-20·W4 收口挂账 E-1 补钉兑现·随票级放行登记 2026-11-20-ITER-W5-票级放行登记-v1·本 note 史面旧标记串零置换沿存）"
     },
     {
       "component": "object-audit",
       "repo": "../../../multi-agent-collab-devkits",
       "roottag": "softdev",
-      "ref": "PENDING-E1",
+      "ref": "object-audit@v0.9",
       "ref_kind": "tag",
       "path": "agent-skills/object-audit",
       "target": "skills/object-audit",
-      "note": "补装配线组件行（ITER-W4 账本瘦身装配改造票·裁决登记 2026-11-19-裁决登记-公共技能族真源归主根公共账-v1 射程六包内）：真源＝主根公共账 agent-skills/object-audit（跨仓组件·repo 三级上溯主根工作区值随 J-4 采甲-1·E-3 当轮现跑复算落位）；ref 值置悬置标记串 PENDING-E1＝候 EXT-2026-11-19-W4 工单 R-2 主根侧组件 tag 发布后补钉（票级放行登记 rev-2 段 E-1 改判＝ref 补钉待办·先落笔后补钉形制沿票面自洽面）；装配面不跑＝DEP 装配票链射程"
+      "note": "补装配线组件行（ITER-W4 账本瘦身装配改造票·裁决登记 2026-11-19-裁决登记-公共技能族真源归主根公共账-v1 射程六包内）：真源＝主根公共账 agent-skills/object-audit（跨仓组件·repo 三级上溯主根工作区值随 J-4 采甲-1·E-3 当轮现跑复算落位）；ref 值置悬置标记串 PENDING-E1＝候 EXT-2026-11-19-W4 工单 R-2 主根侧组件 tag 发布后补钉（票级放行登记 rev-2 段 E-1 改判＝ref 补钉待办·先落笔后补钉形制沿票面自洽面）；装配面不跑＝DEP 装配票链射程；补钉沿革：ref 槽悬置标记置换实钉 tag object-audit@v0.9（ITER-W5 装配执行 DEP0132 段①②·2026-11-20·W4 收口挂账 E-1 补钉兑现·随票级放行登记 2026-11-20-ITER-W5-票级放行登记-v1·本 note 史面旧标记串零置换沿存）"
     },
     {
       "component": "devkit-tools",
