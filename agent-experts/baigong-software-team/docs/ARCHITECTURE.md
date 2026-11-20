@@ -139,12 +139,16 @@ graph TD
 
 **bundle 本体行**：name＋version（semver）＋源仓路径；版本行与 `.codebuddy-plugin/plugin.json` 的 `version` 同源。
 
-**components 数组**（每项＝组件锁），现行两组件：
+**components 数组**（每项＝组件锁），现行六组件（0.1.35 起全部同仓取源 `repo: "."`＝独立仓自带对象库解析锁 tag；外仓真源演进＝工单＋补钉 tag 进本仓的显式交付形态）：
 
 | 组件 | 真源位置（仓相对） | 锁引用 | 装配目标（包内相对） | 性质 |
 |---|---|---|---|---|
-| `external-advisor-collab` | 同仓技能真源目录（`repo: "."`＝仓根解析） | 不可变 tag `external-advisor-collab@v1.1.1` | `skills/external-advisor-collab` | 同仓组件 |
-| `deep-research` | 跨仓技能仓目录（`repo: "../multi-agent-collab-skills"`） | 不可变 tag `deep-research@v1.0.2` | `skills/deep-research` | 跨仓组件（fork 登记制） |
+| `external-advisor-collab` | 同仓技能真源目录（`repo: "."`＝仓根解析） | 不可变 tag `external-advisor-collab@v1.1.3` | `skills/external-advisor-collab` | 同仓组件 |
+| `deep-research` | 同仓 tag 冻结取源（`repo: "."`；上游＝skills 仓 fork 登记） | 不可变 tag `deep-research@v1.0.2` | `skills/deep-research` | fork 登记组件（tag 已入本仓对象库） |
+| `claim-commitment-governance` | 同仓技能真源目录 | 不可变 tag `claim-commitment-governance@v1.2.0` | `skills/claim-commitment-governance` | 同仓组件 |
+| `multi-collab` | 同仓 tag 冻结取源 | 不可变 tag `multi-collab@v4.11` | `skills/multi-collab` | 公共技能族组件（tag 交付制） |
+| `object-audit` | 同仓 tag 冻结取源 | 不可变 tag `object-audit@v0.9` | `skills/object-audit` | 公共技能族组件（tag 交付制） |
+| `devkit-tools` | 仓根 `share/` 料源目录（material=share） | 不可变 tag `devkit-tools@v0.1.0` | `tools` | 共享料源组件 |
 
 关键约定（lock 内 conventions 节成文）：
 
