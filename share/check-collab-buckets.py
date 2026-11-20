@@ -4,10 +4,11 @@
 # SWB-BKTCLS：仓根 .collab 桶名闭集机检（MC-BUCKET-1）。
 #
 # 条款真源（只指路径，不复写正文）：
-#   闭集名录真源 = 仓根 .collab/README.md 「17 桶名录」行（本件运行时解析对拍自证）
+#   闭集名录真源 = 仓根 .collab/README.md 「20 桶名录」行（本件运行时解析对拍自证）
 #   规范依据 = 皮总裁定登记件 .collab/decisions/2026-11-10-皮总裁定-候裁三件全按建议放行.md
 #              §二-2 裁甲（17 桶闭集只管仓根 .collab；两包 qa 桶随批改名豁免）
 #   规格票面 = .scratch/tickets/2026-11-16-SWB-BKTCLS-桶名闭集机检规格票-v1.md §二
+#   扩册沿革 = 白名单 17→20（追加 claims/instances/qa 三枚）出处三件 = .collab/decisions/2026-11-20-ITER-B-C1-J1主理人自裁登记-v1.md ＋ .collab/architect/2026-11-20-ITER-BKTCLS-桶名闭集扩册-规则票-v1.md ＋ .collab/qa/2026-11-20-ITER-B-C1-审票判词-QA席-v1.md（qa 存量隐性违例清算出处）
 #
 # 铁律遵守（60-gates.md §〇）：本件**只输出**「严重度＋spec_id＋位置＋一句话」，
 # 不决定拦不拦——拦放由路由表定。
@@ -49,15 +50,15 @@ SEV_BLOCK = "BLOCK"
 SEV_WATCH = "WATCH"
 SPEC_ID = "MC-BUCKET-1"
 
-# 内嵌白名单 17 项闭集（frozenset·真源同步防线见 README 对拍自证——改一漏一即红）。
-# 与 .collab/README.md 「17 桶名录」行逐项同步；本处逐项裸写、不加反引号（自咬纪律）。
+# 内嵌白名单 20 项闭集（frozenset·真源同步防线见 README 对拍自证——改一漏一即红）。
+# 与 .collab/README.md 「20 桶名录」行逐项同步；本处逐项裸写、不加反引号（自咬纪律）。
 BUCKET_WHITELIST = frozenset({
     "decisions", "audits", "receipts", "board", "design", "research", "refs",
     "evidence", "inbox", "process", "dispatch", "drafts", "adr", "architect",
-    "product", "ledger", "returns",
+    "product", "ledger", "returns", "claims", "instances", "qa",
 })
 
-README_ANCHOR = "17 桶名录"
+README_ANCHOR = "20 桶名录"
 README_WINDOW = 5  # 名录行＝锚字样行之后首个含反引号段的行（现盘锚行下一非空行）
 BACKTICK_RE = re.compile(r"`([^`\n]+)`")
 
@@ -102,7 +103,7 @@ def find_root(explicit: str | None) -> str:
 
 
 def read_readme_buckets(readme_path: str) -> "frozenset[str]":
-    """README 对拍自证：解析「17 桶名录」行反引号段，得桶名集合。
+    """README 对拍自证：解析「20 桶名录」行反引号段，得桶名集合。
 
     解析不到＝对拍自证失效＝基础设施错 exit 4（fail-closed·不得静默只信内嵌集）。
     行内尾缀斜杠剥除归一（名录行以 decisions/ 这类带斜杠形态书写）。

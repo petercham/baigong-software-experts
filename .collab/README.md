@@ -23,10 +23,13 @@
 | `product/` | 产品席非交接件写权域（含会签补件） | 产品席 |
 | `ledger/` | 账本三文件（ledger／leases） | 主理人 |
 | `returns/` | 席位回流件面（returns/engineer） | 工程师席 |
+| `claims/` | 机核认领清单 jsonl（件名与行型形态＝ITER-B 协议票面 v2 R4.1 verbatim 条款号指向） | 收单席位 |
+| `instances/` | 实例码名册 roster.md（行格式＝R1.3 verbatim 指向） | 主理人投递 |
+| `qa/` | QA 席非交接件写权域（存量桶实盘清算入册·现盘判词件即在位该桶） | QA 席 |
 
-## 17 桶名录
+## 20 桶名录
 
-`decisions/ audits/ receipts/ board/ design/ research/ refs/ evidence/ inbox/ process/ dispatch/ drafts/ adr/ architect/ product/ ledger/ returns/`＋README 索引件
+`decisions/ audits/ receipts/ board/ design/ research/ refs/ evidence/ inbox/ process/ dispatch/ drafts/ adr/ architect/ product/ ledger/ returns/ claims/ instances/ qa/`＋README 索引件
 
 未列子包存续不禁，按项目阶段取用。
 
