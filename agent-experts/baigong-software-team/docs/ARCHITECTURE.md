@@ -1,7 +1,7 @@
 # 百工软件团队 · 架构设计文档
 
 > 对象：`baigong-software-team` 专家团 bundle（五席位 + 编排技能包 + 装配机制 + 仓级门禁）。
-> 现行版本态：bundle 0.1.10 ／ software-orchestration 1.1.0。
+> 版本态：bundle 0.1.36 世代（具体版本以三同源现读为准）／ software-orchestration 1.1.7 世代（具体版本以其 SKILL.md frontmatter 现读为准）。
 > 本文描述被设计对象的结构与机理；包内文件一律包内相对路径，仓级支撑工具只提名不写路径。
 
 ---
@@ -34,9 +34,10 @@ graph TD
 ```
 ┌─ 交付包（bundle 面，用户可见注册态）─────────────────────┐
 │  agents/            五席位 MD（身份 + 守则 + 路由指针）      │
-│  skills/            software-orchestration（流程域本体）     │
-│                     external-advisor-collab（装配组件）      │
-│                     deep-research（装配组件）                │
+│  skills/            software-orchestration＋sop（两技能包）  │
+│                     ＋五装配组件＋tools 挂载位（share 料源   │
+│                      嵌装）＝构成细则见 bundle.lock 与      │
+│                      SKILL 索引，行级账不复写               │
 │  avatars/           六件头像（五席位 + team）                │
 │  .codebuddy-plugin/plugin.json   注册清单（团队声明）        │
 │  bundle.lock        组件锁 + bundle 版本行                   │
@@ -48,7 +49,7 @@ graph TD
 └──────────────────────────────────────────────────────┘
 ```
 
-设计要点：**仓面＝真源，装配面＝派生产物**。交付包不是手写的第二份，而是由装配器按 `bundle.lock` 从仓面真源装配生成；注册态 bundle 内的装配组件（`skills/external-advisor-collab`、`skills/deep-research`）在部署包内自包含命中，不依赖仓外路径。
+设计要点：**仓面＝真源，装配面＝派生产物**。交付包不是手写的第二份，而是由装配器按 `bundle.lock` 从仓面真源装配生成；注册态 bundle 内的装配组件（构成见 §4.1 六组件表）在部署包内自包含命中，不依赖仓外路径。
 
 ---
 
@@ -62,7 +63,7 @@ graph TD
 |---|---|---|---|
 | **身份层** | frontmatter（name/description）＋ Core Identity（姓名/角色/目标/约束）＋ 职责与产出规格 | 各席位 MD 前段 | 五席皆有 |
 | **守则层** | 「写权边界」自指短声明 ＋「交接与收口声明」自指短声明（＋ lead 独有的「团队协作机制（铁律）」节） | 各席位 MD 后段 | 五席皆有（铁律仅 lead） |
-| **路由层** | 工作流路由判定表 ＋「⛓ 必读」下沉细则路由表 ＋ 外部顾问讨论会兼任节 | lead MD 独有 | 仅 lead |
+| **路由层** | 变更通道路由表 ＋ 席位派发路由表（lead 卡现行两表，早期「必读」下沉细则路由已退役、现跑计数零） ＋ 脚本调用清单 ＋ 账本句与纪律行 | lead MD 独有 | 仅 lead |
 
 四成员席位共享同一「团队协作（回传机制）」节：经 SendMessage 接收主理人任务 → 独立产出 → SendMessage 完整回传主理人 → 缺输入向主理人索取 → 收 shutdown_request 后收尾。
 
@@ -70,23 +71,22 @@ graph TD
 
 | 席位 | 文件 | 身份层职责 | 守则层要点 |
 |---|---|---|---|
-| 主理人 包好用 | `agents/software-team-lead.md` | SOP 编排、工作流档位判定、成员调度与中转汇编 | 写权＝过程域；派工合规硬门；拒写权自指句；收口自检＋派工件干净度自指句 |
+| 主理人 包好用 | `agents/software-team-lead.md` | SOP 编排、变更通道与席位派发两表路由、成员调度与中转汇编 | 写权＝过程域；派工合规硬门；拒写权自指句；收口自检＋派工件干净度自指句 |
 | 产品经理 姜通透 | `agents/software-team-product.md` | PRD（简单/完整两档）＋市场调研报告 | 写权＝过程域，交付面拒写；收口五件套自指句 |
 | 架构工程师 顾长远 | `agents/software-team-architect.md` | 系统设计＋任务分解合体产出（九节：方案/文件表/类图/时序图/任务表/包/共享知识/依赖图） | 同上 |
 | 开发工程师 柯会码 | `agents/software-team-engineer.md` | 批量实现代码＋全局一致性审查（IS_PASS）＋增量开发最小变更 | **交付面唯一写权席**；写入集＝票面声明闭集；完工回执逐项列写入集 |
 | 质量审计师 沈得严 | `agents/software-team-qa.md` | 测试编写＋运行＋智能路由（Engineer/QA/NoOne）＋≤2 轮硬限 | 写权＝过程域；收口判定前逐件核对回执清单与交付面纯净性 |
 
-### 2.3 写权闭集模型（两域 + 唯一写权 + 双闸）
+### 2.3 写权闭集模型（租约闸形态）
+
+现行写权模型＝租约闸形态：写必经当票租约——租约签发（lease-issuer）＋写侧事前阻断（write-guard）＋提交审计（commit-audit）三机制，席位写入集＝当票租约路径闭集，越界即被拒；席位侧拒写权与派工侧合规硬门仍是席位卡自带的两道声明闸。条文本体只提名不复写：真源＝`skills/software-orchestration/references/dev-discipline.md` 与五席位 MD 的租约节（`agents/` 五枚）。
 
 ```
-写权域划分（以过程域目录为界）：
-  过程域（.collab/ 及其子目录）……… 五席皆可写：设计稿/分析/判词/回执/票面等过程件
-  交付面（过程域以外一切）…………… 仅工程师席可写：代码、条款、交付文档
+席位侧声明面（各席位 MD 自指短声明）：
+  主理人／产品／架构／QA 四席……… 写权＝过程域；受命向交付面写入时应当拒绝并报主理人改派
+  工程师席 …………………………… 写域＝（工作空间根∪部署路径）−受保护区，限定当票租约路径集
 ```
 
-- **唯一写权**：工程师席是交付面唯一有写权限的席位；其写入集＝任务票声明的文件闭集，越集即违例；完工回执须逐项列出写入集并与提交实写面全等对账。
-- **第一道闸（派工侧）**：主理人拟票/派工时，凡含代码性质或交付面写入的任务只派工程师席——派工合规硬门对派工侧生效（lead 的 ⛓ 路由表含通用开发纪律卷加载行，触发条件＝拟票/派工含代码性质或交付面写入）。
-- **第二道闸（席位侧拒写权）**：非工程席（含主理人自己）受命向交付面写入时，有权且应当**拒绝写入＋报主理人改派工程师席**；拒绝不构成违例，执行才构成违例。该声明逐字内嵌于主理人／产品／架构／QA 四席 MD 的「写权边界」节，形成席位自带的第二道闸。
 - **细则真源分工**：席位 MD 只载自指短声明（含「本席」自指串＋真源卷名指针），条文本体在技能包纪律卷——不复写，防第二真源。
 
 ---
@@ -95,24 +95,29 @@ graph TD
 
 ### 3.1 包形态
 
-`skills/software-orchestration/`＝主理人流程域技能包：SKILL.md（触发词＋索引，不承载细则，version 1.1.0）＋ `skills/software-orchestration/references/` 分件（细则本体）。当前盘面为 SKILL.md ＋ references **十卷**（SKILL.md 索引表恰十行，与目录一一对应）。
+`skills/software-orchestration/`＝主理人流程域技能包：SKILL.md（触发词＋索引，不承载细则，version 1.1.7 世代）＋ `skills/software-orchestration/references/` 分件（细则本体）。当前盘面为 SKILL.md ＋ references **十五卷**（SKILL.md 索引表与目录枚数对等自校，索引行枚数＝目录 ls 现数）。
 
-设计动机：lead 席位 MD 是每次会话全付的 cost center，references 是按档触发才付的 asset。lead MD 结构性瘦身后只留身份、铁律、路由判定与 ⛓ 指针；执行程序本体逐字下沉分件，判定走某档后第一件事读对应分件（确定性通道，不依赖语义匹配）。
+设计动机：lead 席位 MD 是每次会话全付的 cost center，references 是按需触发才付的 asset。lead MD 结构性瘦身后只留身份、红线铁律摘要、两表路由与细则卷指针；执行程序本体逐字下沉分件，路由命中后第一件事读对应分件（确定性通道，不依赖语义匹配）。
 
 ### 3.2 references 分卷地图（职责 / 触发 / lead 路由对应）
 
-| 卷 | 职责 | 触发条件 | 对应 lead「⛓ 必读」路由行 |
+| 卷 | 职责 | 触发条件 | 对应 lead SKILL.md 索引行 |
 |---|---|---|---|
-| `skills/software-orchestration/references/quick-mode.md` | ⚡ 快速模式全节（≤10 文件小需求·跳过 PRD/架构·工程师直写＋QA 验证） | 判定走快速模式 | 有 |
-| `skills/software-orchestration/references/bugfix-path.md` | 🔧 BugFix 快捷路径全节（明确 Bug 三步流程） | 判定走 BugFix | 有 |
-| `skills/software-orchestration/references/standard-sop.md` | 🏗️ 标准 SOP 全节（五席逐步派单·IS_PASS 与智能路由流转） | 判定走标准 SOP | 有 |
+| `skills/software-orchestration/references/quick-mode.md` | ⚡ 快速模式全节（适用条件·五步流程·典型场景） | 技法参考（工作流路由判定已退役 v2.9·轻工作量走维护票） | 有 |
+| `skills/software-orchestration/references/bugfix-path.md` | 🔧 BugFix 快捷路径全节（明确 Bug 三步流程） | 技法参考（同上） | 有 |
+| `skills/software-orchestration/references/standard-sop.md` | 🏗️ 标准 SOP 全节（五席逐步派单·IS_PASS 与智能路由流转·分档与审法口径） | 判定走标准 SOP 后 | 有 |
 | `skills/software-orchestration/references/incremental-dev.md` | 增量开发全节（变更需求下四席动作序·最小变更） | 已有项目上的变更需求 | 有 |
 | `skills/software-orchestration/references/partial-workflows.md` | 部分工作流全节（六子模式枚举：仅 PRD/架构评审/代码实现/仅测试/市场调研等） | 判定走部分工作流 | 有 |
 | `skills/software-orchestration/references/collab-rules.md` | 协作规则 §1,2,4-7（顺序流转/信息传递/反馈回路/语言/文档化/结构化；§3 质量关卡留 lead MD 未沉） | 任意工作流推进中 | 有 |
 | `skills/software-orchestration/references/delivery-summary.md` | 交付总结四段式＋可选落盘报告（默认不落盘） | 工作流收尾汇编交付前 | 有 |
 | `skills/software-orchestration/references/deploy-gate.md` | 部署动作硬门闭集（装配/注册/覆盖缓存＝独立票＋获批）＋四段部署流程 | 任何环节出现部署类动作字样 | **无路由行**——经 SKILL.md description 触发词（装配、注册、部署、覆盖缓存、硬门、预览、人类闸）命中 |
-| `skills/software-orchestration/references/dev-discipline.md` | 通用开发纪律：写权闭集／代码纯度／工程师完工回执／QA 纯净职责（四闸一体） | 拟票派工含代码性质或交付面写入；回执与纯净判定前 | 有 |
+| `skills/software-orchestration/references/dev-discipline.md` | 通用开发纪律：写权闭集／代码纯度／工程师完工回执／QA 纯净职责（四闸一体）／票面起草职权／临时工作物落位／进场建档工序／产物生命周期纪律 | 拟票派工含代码性质或交付面写入；回执与纯净判定前 | 有 |
 | `skills/software-orchestration/references/handoff-discipline.md` | 交接与协作纪律：交接件规格／三正面判据／append-only／收口自检五件套／验收读数分账／报告三律／派工件干净度／机制断言须附实测／席位声明形式约束 | 交接件、收口声明、报告分级、席位声明形式 | 有 |
+| `skills/software-orchestration/references/dispatch-discipline.md` | 派席并发纪律全节（同席多实例禁令·异席并发不禁·报告路径卫生） | 拟派席/考虑多席并发时；席位自查实例唯一性时 | 有 |
+| `skills/software-orchestration/references/thin-ticket-template.md` | 填空式薄票形制全节（七节骨架·槽位／预置二分·声明闭集三块＋V 系唯一产出处） | 起草席拟薄票前；验收席核可验收性时 | 有 |
+| `skills/software-orchestration/references/judgment-form-spec.md` | QA 判词形制真源全节（快审／独立验收两制骨架·红黄计数口径·签核用语闭集） | QA 落判词前；验收席核判词件形制时 | 有 |
+| `skills/software-orchestration/references/root-cause-discipline.md` | 根因纪律条款全节（前置面值必现跑／链序机械现读／归因坐实／完工前自查硬条款） | 开工对钉与前置断言书写前；回执与收口自查前 | 有 |
+| `skills/software-orchestration/references/workbuddy-runtime.md` | WorkBuddy 运行时适配条款全节（提交权归一执行／双嵌套路径形态／两仓成对／席零 git 写可证性） | 开工对钉与落位判定前；产物涉链面投递时 | 有 |
 
 ### 3.3 两纪律卷分工与互指
 
@@ -125,7 +130,7 @@ graph TD
 
 ### 3.4 真源唯一纪律
 
-- lead MD 只留身份/铁律/路由判定＋⛓ 硬读指针；细则在 references 单点成文（「改一处漏一处」是防的对象）。
+- lead MD 只留身份/红线铁律摘要/两表路由＋细则卷硬读指针；细则在 references 单点成文（「改一处漏一处」是防的对象）。
 - 席位级权限声明真源在各席位 MD「写权边界」节；纪律条文真源在 dev-discipline；交接/收口条文真源在 handoff-discipline；机检判据参数真源在审计器侧（技能卷只指不搬）。
 - 逐字下沉件受逐字门保护：lead 原 §节逐字照录入分件，对账基准＝「市场版 vs 附录逐字件＋留块合集」的重构态。
 
@@ -154,7 +159,7 @@ graph TD
 
 1. **锁不可变引用**：组件一律锁 tag 或 commit，禁 HEAD/分支名；tag 命名 `<组件名>@vX.Y.Z`。消费者侧改锁＝换 ref 指向新不可变 tag，旧 tag 保留。
 2. **roottag 对齐门禁闭集**：组件真源根标签∈{experts, skills, softdev}，与真源唯一扫描的门禁闭集对齐。
-3. **target 对齐注册清单**：装配目标＝bundle 内相对路径，与 plugin.json `skills[]` 的引用逐项对齐（注册三技能＝software-orchestration＋两装配组件）。
+3. **target 对齐注册清单**：装配目标＝bundle 内相对路径；现行注册面＝plugin.json `skills[]` 现注册两枚（software-orchestration＋sop），装配组件经装配拼入包面但不入注册面（注册面现读以 plugin.json 为准）。
 4. **产物不入库**：装配产物不入任何仓版本库；缺省输出＝与 bundle 源仓同级的 `<仓名>-build/<bundle 名>` 预览面。
 
 ### 4.2 仓面真源 vs 装配面派生
@@ -180,6 +185,18 @@ graph TD
 2. **组件版本与 SKILL.md 同源**：组件锁 tag 的版本号＝该组件 SKILL.md 内 `version:` 值（如 external-advisor-collab 锁 v1.1.1＝其 SKILL.md 1.1.1）；升级组件＝真源升版打新 tag→lock 换 ref→bundle 双行 bump。
 3. **版本账留档**：版本账由仓侧维护、不随包分发（现行为百工 0.1.x 段；旧血脉各账行转前血脉沿革，留档不续账）。
 4. **出身账**：fork 基线＝市场包 `software-company` v1.1.0 照录；fork 后改动清单逐条登记；上游不自动追，需要时人工 diff 对账。
+
+### 4.5 SWB v2.9 治理与工序域入账（提名＋指真源）
+
+SWB v2.9 形态已为实现面主干，本票入账方式＝各域只提名＋指真源卷，不复写条文（与 §5.2 常驻机检四族表重叠处禁双处成文）：
+
+- **六节点流程（正常流）**：需求到交付的六节点工序链——真源＝产品设计 v2.9 本体副本（`skills/sop/references/product-v2.9-copy.md` 场景四族段）。
+- **账本唯一真相**：一切流程状态以账本为准，状态变更经脚本登记、零手写——机理真源＝架构设计 v2.9 本体副本（`skills/sop/references/architecture-v2.9-copy.md` 构件 B0 段），登记面机制＝state-transition（只提名）。
+- **租约·串行闸·写侧校验脚本族**：租约签发、同席串行闸、写侧事前阻断、提交审计——脚本族居 `skills/sop/scripts/`（lease-issuer／serial-gate／write-guard／commit-audit 只提名）；席侧口径真源＝五席位 MD 租约节，细则真源＝dev-discipline 卷。
+- **sop 技法域**：`skills/sop/`＝两基线副本＋五模板＋TCB 脚本族＋语义治理闸——索引与细则真源＝`skills/sop/SKILL.md`。
+- **config 门禁配置面＋hooks 门禁面**：`config/` 配置件族（枚数以目录现跑为准）＋`hooks/hooks.json`——参数真源＝各 config 件本体，本件只提名。
+- **提交权归一**：各席零 git 写、投递归唯一链面操作员——真源＝workbuddy-runtime 卷（`skills/software-orchestration/references/workbuddy-runtime.md`）。
+- **预检闸**：票面投递前机械预检——料源＝share 侧（preflight-ticket），经 devkit-tools 组件挂载进装配面 tools 位（只提名）。
 
 ---
 
@@ -216,8 +233,8 @@ graph TD
 
 ## 六 关键设计决策（择要五条）
 
-1. **SOP 驱动而非自由协作**：代码＝SOP(团队)——档位判定表先行（快速/BugFix/标准/部分四档），宁选快速不选过重；流程可预期才可审计。
-2. **流程细则下沉 references、席位 MD 不复述**：席位 MD 是每会话全付的成本面，细则是按档触发才付的资产面；下沉＋⛓ 硬读指针把成本从「全付」移到「按付」，同时消灭「改一处漏一处」的第二真源。
+1. **SOP 驱动而非自由协作**：代码＝SOP(团队)——路由先行（现行＝变更通道＋席位派发两表；技法卷保留快速/BugFix/标准/部分四路），宁选轻通道不选过重；流程可预期才可审计。
+2. **流程细则下沉 references、席位 MD 不复述**：席位 MD 是每会话全付的成本面，细则是按触发才付的资产面；下沉＋细则卷硬读指针把成本从「全付」移到「按付」，同时消灭「改一处漏一处」的第二真源。
 3. **fork 自维护不追上游**：市场包 fork 后以仓侧版本账＋改动清单为纲，上游不自动追、需要时人工 diff 对账一次——换取本地演进不受上游节奏约束。
 4. **引入装配环节**：从「真源直拷」改「bundle.lock 驱动装配」——组件锁不可变 tag、装配面派生不入库，既保住真源唯一，又让部署态自包含（技能加载命中包内件）。
 5. **身份切割、版本重起算**：新团与旧血脉间做身份切割，版本号弃续账改从 0.1.0 起算（未达正式可用资产完备度就不挂正式版号）——版本语义只对内解释自身成熟度，不背历史包袱。
@@ -228,8 +245,8 @@ graph TD
 
 | 层 | 改动对象 | 影响面 | 版本步语义（现行口径） |
 |---|---|---|---|
-| **席位层** | `agents/*.md` 五席：身份、守则短声明、⛓ 路由行 | 每席 token 预算线（≤2,500 红线）；声明形式约束机检读数；席位间引用需同步 | 席位定义行为变化→至少 **patch**；席位增删/id 更名＝结构性/破坏性变更→**major**（id 更名按身份切割另议） |
-| **技能层** | `skills/software-orchestration/`：SKILL.md 索引/触发词、references 分卷条文 | 组件自身版本独立 bump（SKILL.md `version:` 为准）；lead ⛓ 路由行与索引行须同批对齐；互指卷只放指针不搬条文 | 语义条款增改→**minor**；引用形态清理/措辞收敛（语义零动）→**patch**；卷拆分合并/索引结构变化→至少 **minor** |
+| **席位层** | `agents/*.md` 五席：身份、守则短声明、路由行与租约节 | 每席 token 预算线（≤2,500 红线）；声明形式约束机检读数；席位间引用需同步 | 席位定义行为变化→至少 **patch**；席位增删/id 更名＝结构性/破坏性变更→**major**（id 更名按身份切割另议） |
+| **技能层** | `skills/software-orchestration/`：SKILL.md 索引/触发词、references 分卷条文 | 组件自身版本独立 bump（SKILL.md `version:` 为准）；lead 路由行与索引行须同批对齐；互指卷只放指针不搬条文 | 语义条款增改→**minor**；引用形态清理/措辞收敛（语义零动）→**patch**；卷拆分合并/索引结构变化→至少 **minor** |
 | **装配层** | `bundle.lock` 组件行（增删组件、换 ref tag）、`.codebuddy-plugin/plugin.json` 注册清单 | 注册面 `skills[]`/`agents[]` 对齐；装配产物重出＋预览；宿主缓存按 bundle 版本刷新 | 分发结构变化（组件增删、注册清单变化、包 id 更名）→**minor 起步**（id 更名现行口径记 **major**覆前例）；组件内容升版→bundle 双行至少 **patch** 跟 bump |
 
 跨层联动铁律（任一批次同时触碰多文件时）：
