@@ -60,6 +60,10 @@ CMD_RE = re.compile(
     r"^(?:git|python3?|grep|egrep|ls|wc|cat|sed|awk|find|head|tail|date|od|diff|uniq|sort|cut|tr|"
     r"touch|mkdir|cp|mv|rm|tree|md5sum|sha1sum|pip[3]?|npm|npx|node)\b"
 )
+CMD_ANY_RE = re.compile(
+    r"(?:^|[\s（(＝=；;，,、])(?:git|python3?|grep|egrep|ls|wc|cat|sed|awk|find|head|tail|"
+    r"date|od|diff|uniq|sort|cut|tr|touch|mkdir|cp|mv|rm|tree|md5sum|sha1sum|pip[3]?|npm|npx|node)\b"
+)
 
 
 class InfraMiss(Exception):
@@ -175,6 +179,11 @@ def _cmd_like(stripped: str) -> bool:
     return bool(CMD_RE.match(stripped)) or SLOT_OPEN in stripped
 
 
+def _cmd_like_body(stripped: str) -> bool:
+    """形制①判据面＝V 目行自身任意位置含命令行（票 F 勘正三①文本兑现）。"""
+    return bool(CMD_ANY_RE.search(stripped)) or SLOT_OPEN in stripped
+
+
 def pf4(lines: list[str], path: str) -> list[str]:
     """PF-4 判据行可解析＝V0—V6 行起始各恰一＋各 V 目宽读达意（勘正三两形制写死）。
 
@@ -190,7 +199,7 @@ def pf4(lines: list[str], path: str) -> list[str]:
         if cnt != 1:
             findings.append("%s:1: BLOCK preflight.PF-4 V%d 行起始计数 %d ≠ 1" % (path, n, cnt))
     for k, i in enumerate(idx):
-        if _cmd_like(lines[i].strip()):
+        if _cmd_like_body(lines[i].strip()):
             continue  # 形制①＝V 目行自身含可执行命令行
         nxt = idx[k + 1] if k + 1 < len(idx) else len(lines)
         body: list[str] = []
@@ -340,6 +349,22 @@ def selftest(root: str) -> int:
     old_face = "2026-11-19-old-face-not-checked.md"
     m = NAME_DATE_RE.match(old_face)
     check("落位闸＝生效日前存量面不咬（内存干跑）", m is not None and m.group(1) < EFFECTIVE)
+
+    # ①形改正例夹具＝good 面 V3 行改自身行中嵌「git show --name-only」字样（非行首位）
+    # ＋该 V3 行紧随四空格缩进纯叙述附加行＝pf4 期望零违例（放宽前判 BLOCK 案型转正＝①支可达实证）
+    good1 = list(good)
+    i3g = good1.index("- V3 落盘坐实＝面单核验。")
+    good1[i3g] = "- V3 落盘坐实＝面单核验（投递笔现跑 git show --name-only 面单枚数对等）。"
+    good1.insert(i3g + 1, "    纯叙述附加行无命令无槽标＝形制①转正夹具")
+    check("①形改正例＝V 目行自身行中嵌命令行＋缩进纯叙述附加行＝零违例", not pf4(good1, "fx"))
+
+    # ①形制负例夹具＝good 面 V3 行原样（无命令）＋紧随四空格缩进纯叙述附加行＝pf4 期望恰一臂
+    # 归因 PF-4（放宽不过宽防回归锚＝命令词族外文本不得经①支放行）
+    bad4c = list(good)
+    i3b = bad4c.index("- V3 落盘坐实＝面单核验。")
+    bad4c.insert(i3b + 1, "    纯叙述附加行无命令无槽标＝形制①防过宽夹具")
+    f = pf4(bad4c, "fx")
+    check("①形制负例＝V 目行无命令＋缩进纯叙述附加行＝恰一臂归因 PF-4", len(f) == 1 and "PF-4" in f[0])
 
     ok = all(c for _, c in results)
     for name, c in results:
