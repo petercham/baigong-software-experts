@@ -34,7 +34,7 @@
 
 | 分类 | 项目 id | 一句话 | 版本线 |
 |---|---|---|---|
-| agent-experts | `baigong-software-team` | 百工软件团队专家包（五席 SOP 驱动·账本为真相·租约写门·机检门禁） | v0.1.35（plugin.json＋bundle.lock＋.codebuddy-plugin 三同源·纪律①每变必 bump） |
+| agent-experts | `baigong-software-team` | 百工软件团队专家包（五席 SOP 驱动·账本为真相·租约写门·机检门禁） | v0.1.36（plugin.json＋bundle.lock＋.codebuddy-plugin 三同源·纪律①每变必 bump） |
 
 （`softwares/`＝空名录·届时再入。devkits 时代技能项目六行随出仓退役，史面沿存于投递前链笔。）
 

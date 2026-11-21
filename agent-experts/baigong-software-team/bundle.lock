@@ -2,10 +2,10 @@
   "lock_version": 1,
   "bundle": {
     "name": "baigong-software-team",
-    "version": "0.1.35",
+    "version": "0.1.36",
     "repo": ".",
     "path": "agent-experts/baigong-software-team",
-    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失；沿革：0.1.31→0.1.32＝ITER W1／W2 全批真源改动收口重装（ITER-W3 装配本地部署 DEP0132 票·2026-11-19·随票级放行登记 2026-11-19-ITER-W3-票级放行登记-v1 件号具名·J-1 采甲方生效）；沿革：0.1.32→0.1.33＝ITER-W4 账本瘦身装配改造（2026-11-19·随票级放行登记 2026-11-19-ITER-W4-票级放行登记-v1 件号具名·J-2 采甲方生效＝公共技能族真源归主根公共账·装配线改指三级上溯主根侧＋multi-collab／object-audit 两组件补装配线）；沿革：0.1.33→0.1.34＝ITER-W5 装配执行 DEP0132 段①②（2026-11-20·随票级放行登记 2026-11-20-ITER-W5-票级放行登记-v1 件号具名·纪律①再 bump＝ref 补钉兑现具名两枚＝multi-collab／object-audit 两组件行 ref 槽悬置标记置换实钉 tag）；沿革：0.1.34→0.1.35＝四公共组件行解绑主根（repo 三级上溯→\".\" 同仓取源·2026-11-20·皮总裁定链「一直不就是让你解」在册＝真源口径勘正非新裁·纪律① bump·四组件行 note 同笔追加解绑沿革·两 plugin.json 同源随 bump）"
+    "note": "bundle 本体版本行（semver·每变必 bump＝纪律①；版本值与 .codebuddy-plugin/plugin.json 的 version 同源，装配步不注入版本号＝纪律④产物不可手改）。沿革：0.1.30→0.1.31＝合并批升号（裁定登记 2026-11-07·案 a）＝自 0.1.30 转正以来 PROJINIT／SEMGV／模板线／SCRATCHCFG／DEBTCLN 五批次增量合并重装；devkit-tools 组件自此批起首挂载进装配面；docs/PRODUCT.md 与 docs/ARCHITECTURE.md 与 docs/adr/ 系 assembly_exclude 裁出非缺失；沿革：0.1.31→0.1.32＝ITER W1／W2 全批真源改动收口重装（ITER-W3 装配本地部署 DEP0132 票·2026-11-19·随票级放行登记 2026-11-19-ITER-W3-票级放行登记-v1 件号具名·J-1 采甲方生效）；沿革：0.1.32→0.1.33＝ITER-W4 账本瘦身装配改造（2026-11-19·随票级放行登记 2026-11-19-ITER-W4-票级放行登记-v1 件号具名·J-2 采甲方生效＝公共技能族真源归主根公共账·装配线改指三级上溯主根侧＋multi-collab／object-audit 两组件补装配线）；沿革：0.1.33→0.1.34＝ITER-W5 装配执行 DEP0132 段①②（2026-11-20·随票级放行登记 2026-11-20-ITER-W5-票级放行登记-v1 件号具名·纪律①再 bump＝ref 补钉兑现具名两枚＝multi-collab／object-audit 两组件行 ref 槽悬置标记置换实钉 tag）；沿革：0.1.34→0.1.35＝四公共组件行解绑主根（repo 三级上溯→\".\" 同仓取源·2026-11-20·皮总裁定链「一直不就是让你解」在册＝真源口径勘正非新裁·纪律① bump·四组件行 note 同笔追加解绑沿革·两 plugin.json 同源随 bump）；沿革：0.1.35→0.1.36＝ITER E／F／G／H 四票增量合并升号（2026-11-21·DEP 装配窗统筹·皮总 19:31 明示「装配一版」授权·批至段②预览止沿 W5 先例＝E＝sparse 根治＋反摊平条款＋收编归账／F＝工序链轻量化四件＝预检闸 share/preflight-ticket.py 新建＋机检单席化＋放行并笔＋收口并笔／G＝PF-4① 放宽＋selftest 11→13／H＝roster 臂全角随正＋四元组死口径入册＝四票收口笔 d8f89291／f6cbb4d2／b5a453b0／248a4a48 具名在册·纪律① bump·两 plugin.json 同源随 bump）"
   },
   "components": [
     {
