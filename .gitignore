@@ -73,3 +73,5 @@ Desktop.ini
 # Python 字节码缓存（编译检查产物）
 __pycache__/
 *.pyc
+# 仓根 agent-skills 预览消费面（SWB-BG-06·ITER-E）：DEP 装配预览工作区＝非跟踪面（tracked 零枚现跑在册）；
+/agent-skills/

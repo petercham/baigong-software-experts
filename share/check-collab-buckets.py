@@ -23,6 +23,7 @@
 #   （收口枚举域单取本包桶；判词查询域＝并集两路＝本包 audits ∪ 仓根 audits；
 #    MC-BUCKET-1 本体扫描域照旧仓根 .collab，rev-1 已撤同步解析序括注）
 #   生效日常量 EFFECTIVE_DATE＝2026-11-18＝本票 BUILD 笔落链当日（放行登记 §一 J-5 采甲）
+#   配对段存量白名单沿革＝SWB-BG-06（ITER-E）增建 PAIR_LEGACY_EXEMPT 逐件豁免集＝缺配对判词＝历史事实不可补造＝真话入册
 #
 # 本件只读：不写任何文件。唯一写动作在 run-gates.sh（出口②）。
 """仓根 .collab 桶名闭集校验（MC-BUCKET-1·白名单制·单层射程）＋收口-验收配对机检（MC-PAIR-1）。
@@ -69,6 +70,9 @@ PAIR_SPEC_ID = "MC-PAIR-1"
 # 时间效力常量（票面 S1②＋放行登记 §一 J-5 采甲）＝本票 BUILD 笔落链当日；
 # 件名日期段严格小于本值者豁免＝存量不追溯。
 EFFECTIVE_DATE = "2026-11-18"
+# 存量归因白名单（ITER-E 族·SWB-BG-06·真话入册）：该收口登记件落笔于配对判词工序生效窗口内但 QA 判词
+# 从未产出＝缺配对＝历史事实不可补造＝白名单豁免非补造；桶名径例证与件名居注释缩进面＝各闸射程纪律兑现。
+PAIR_LEGACY_EXEMPT = frozenset({"2026-11-19-ITER-W2-T2e-收口登记-v1.md"})
 # 本包桶根段（缺省解析序用·治理正位＝项目工作空间自家桶·拆段拼接照 run-gates 先例）
 PKG_BUCKET_SEG = ("agent-experts", "baigong-" "software-team", ".collab")
 # 收口登记件名形态（日期-票族-收口登记-vN·票面 S1①）
@@ -210,6 +214,8 @@ def scan_pair(root: str, bucket_args: "list[str] | None") -> "tuple[list[str], i
         date_seg, fam = m.group(1), m.group(2)
         if date_seg < EFFECTIVE_DATE:
             continue  # 存量不追溯（票面 S1②·严格小于才豁免）
+        if name in PAIR_LEGACY_EXEMPT:
+            continue  # 存量白名单（SWB-BG-06·不可补造案型·真话入册）
         n_close += 1
         verdict_re = re.compile(r"^\d{4}-\d{2}-\d{2}-%s-QA独立验收判词-v\d+\.md$"
                                 % re.escape(fam))

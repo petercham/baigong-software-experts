@@ -66,6 +66,60 @@
       "files": [
         "agent-experts/baigong-software-team/.collab/qa/2026-11-10-SWB-SCRATCHG-产品席窄复核-v1.md"
       ]
+    },
+    {
+      "token": ".collab/research/2026-10-28-设计方案v2-deep-research施工蓝本.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-10-28-QA-deepresearch-01-判词.md"
+      ]
+    },
+    {
+      "token": ".collab/research/2026-10-28-施工蓝本v1-视频团审查整改批.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-10-28-QA-video-gate-01-判词.md"
+      ]
+    },
+    {
+      "token": "skills/aigc-video-governance/references/handoff-ledger.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-10-28-QA-video-gate-01-判词.md"
+      ]
+    },
+    {
+      "token": "skills/aigc-video-visual/references/director-self-check.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-10-28-QA-video-gate-01-判词.md"
+      ]
+    },
+    {
+      "token": "skills/aigc-video-visual/references/shot-plan-approach.md",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/audits/2026-10-28-QA-video-gate-01-判词.md"
+      ]
+    },
+    {
+      "token": ".collab/evidence/gates/2026-10-28-check-source-of-truth-findings350-at13-29-27.json",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/receipts/2026-10-28-T-deepresearch-01-施工回执.md"
+      ]
+    },
+    {
+      "token": "workbuddy/hjh-software-team/.codebuddy-plugin/plugin.json",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/receipts/2026-10-28-T-deepresearch-02-回修回执.md"
+      ]
+    },
+    {
+      "token": "skills/deep-research/SKILL.md:69",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/receipts/2026-10-28-T-deepresearch-02-回修回执.md"
+      ]
+    },
+    {
+      "token": "skills/deep-research/references/methodology.md:16",
+      "files": [
+        "agent-experts/baigong-software-team/.collab/receipts/2026-10-28-T-deepresearch-02-回修回执.md"
+      ]
     }
   ],
   "collab_bucket_exempt": [
