@@ -126,7 +126,7 @@
 3. 校验不通过＝反馈引导用户澄清；**不代改原件、不要求用户按规范重写**。
 4. `docs/STRUCTURE.md`＝建档步 S6 产物，非用户预置前提；探针以
    `.workbuddy/swb-anchor`（权威锚）→STRUCTURE.md（事后校验）→fail-safe 包根（deny）序解析，
-   四脚本（write-guard/lease-issuer/commit-audit/memory-neutralize）逐字同款。
+   四脚本（write-guard/lease-issuer/commit-audit/memory-neutralize）逐字同款。fail-safe 包根落位且租约台账目录缺位＝非管辖项目＝中立放行（惰性标记 exit 0）＝ITER-K 锚门口径；台账在场＝deny 语义存续
 5. 交付面 `{del_root}/deliverables/{project_id}`＝开发期不预建不引导，收用户交付指令时
    按用户指定目录构建＋引导（lazy·独立 git 另管，不入本票写保护/租约/账本面）。
 6. 出处＝决策者裁定四款＋deliverables 双根裁定两则（2026-11-06）；条款本体见 TK-PROJINIT 票面 §三。

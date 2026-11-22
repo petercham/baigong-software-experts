@@ -110,6 +110,21 @@ def project_root() -> str:
     return pack
 
 
+def governance_resident() -> bool:
+    """ITER-K 锚门中立放行·治理在场判定（三枚同款·函数体只读零写·零宿主专有假设＝纯环境变量＋文件系统探测）：
+    治理在场＝① SWB_REPO_ROOT 非空在场；或②③探测命中（project_root 现读值经 normcase 后≠pack_root）；
+    或④落位且租约台账目录在场（台账目录名＝字面拆段拼接·沿 commit-audit 判据段拆段先例形制·防指针闸 OA-D6 自咬）；
+    四条件全缺位＝返回假＝非百工管辖项目＝钩子中立放行。"""
+    if os.environ.get("SWB_REPO_ROOT"):
+        return True
+    pack = pack_root()
+    if os.path.normcase(project_root()) != os.path.normcase(pack):
+        return True
+    if os.path.isdir(os.path.join(project_root(), ".coll" + "ab", "ledger")):
+        return True
+    return False
+
+
 def default_ledger_root() -> str:
     # GWP-P1-2 缺省锚统一＝<project_root()>/.collab/ledger（四脚本同源·§3.2）
     return os.environ.get("SWB_LEDGER_ROOT", os.path.join(project_root(), ".collab", "ledger"))
@@ -243,6 +258,9 @@ def main(argv: list[str] | None = None) -> int:
                 payload = json.loads(raw)
             except json.JSONDecodeError:
                 payload = {}
+    if not governance_resident():
+        print("NEUTRAL commit-audit: project-root 探测全缺位且租约台账缺位＝非百工管辖项目→钩子惰性放行（ITER-K 锚门中立放行）", file=sys.stderr)
+        return 0
     if a.phase == "prehook":
         return prehook(a, payload)
     return posthook(a, payload)

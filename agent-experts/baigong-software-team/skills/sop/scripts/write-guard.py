@@ -102,6 +102,21 @@ def project_root() -> str:
     return pack
 
 
+def governance_resident() -> bool:
+    """ITER-K 锚门中立放行·治理在场判定（三枚同款·函数体只读零写·零宿主专有假设＝纯环境变量＋文件系统探测）：
+    治理在场＝① SWB_REPO_ROOT 非空在场；或②③探测命中（project_root 现读值经 normcase 后≠pack_root）；
+    或④落位且租约台账目录在场（台账目录名＝字面拆段拼接·沿 commit-audit 判据段拆段先例形制·防指针闸 OA-D6 自咬）；
+    四条件全缺位＝返回假＝非百工管辖项目＝钩子中立放行。"""
+    if os.environ.get("SWB_REPO_ROOT"):
+        return True
+    pack = pack_root()
+    if os.path.normcase(project_root()) != os.path.normcase(pack):
+        return True
+    if os.path.isdir(os.path.join(project_root(), ".coll" + "ab", "ledger")):
+        return True
+    return False
+
+
 def repo_root() -> str:
     """兼容名保留＝现读项目根（两级锚换代后权限面/账本面锚均项目根；
     仓根仅供交付 listing 与 git 子命令，不由本函数提供）。"""
@@ -323,6 +338,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--ledger", default=os.path.join(default_ledger_root(), "ledger.jsonl"))
     ap.add_argument("--freeze-state", default=os.path.join(default_ledger_root(), "freeze-state.json"))
     a = ap.parse_args(argv)
+    if not governance_resident():
+        print("NEUTRAL write-guard: project-root 探测全缺位且租约台账缺位＝非百工管辖项目→钩子惰性放行（ITER-K 锚门中立放行）", file=sys.stderr)
+        return 0
 
     payload: dict = {}
     if a.input:
