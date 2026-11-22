@@ -14,7 +14,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python \"../skills/sop/scripts/write-guard.py\"",
+            "command": "python \"${CODEBUDDY_PLUGIN_ROOT}/skills/sop/scripts/write-guard.py\"",
             "_note": "B5 主路：PreToolUse stdin 直读 agent_id/agent_type→查租约台账＋deny_globs→deny（U2/G1）；exit 2→blocking"
           }
         ]
@@ -24,7 +24,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python \"../skills/sop/scripts/memory-neutralize.py\" prehook",
+            "command": "python \"${CODEBUDDY_PLUGIN_ROOT}/skills/sop/scripts/memory-neutralize.py\" prehook",
             "_note": "B11 读侧扫描：记忆文件读取→引用记忆作流程状态即拦/标（诚实边界：只实现读侧检出面，不声明阻断性能力面保证·§7 对应行）"
           }
         ]
@@ -34,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python \"../skills/sop/scripts/commit-audit.py\" prehook",
+            "command": "python \"${CODEBUDDY_PLUGIN_ROOT}/skills/sop/scripts/commit-audit.py\" prehook",
             "_note": "B5 提交审计拦三形态（amend/rebase/orphan）＋B0 退路补位 force-push 拦截；exit 2→blocking"
           }
         ]
@@ -46,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python \"../skills/sop/scripts/commit-audit.py\" posthook",
+            "command": "python \"${CODEBUDDY_PLUGIN_ROOT}/skills/sop/scripts/commit-audit.py\" posthook",
             "_note": "B5 PostToolUse 记账：提交哈希/票 ID/席位归因入「写入」记录类（§9 B5 行）"
           }
         ]
