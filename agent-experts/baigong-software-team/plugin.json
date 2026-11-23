@@ -1,6 +1,6 @@
 {
   "name": "software-team",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "description": "Baigong Software Team: five-seat SOP-driven software delivery — six-node flow with ledger-as-truth state machine, lease-gated writes, dual-seat independent review, built-in advisor-meeting and deep-research skills, four-stage deploy chain.",
   "author": {
     "name": "baigong",
