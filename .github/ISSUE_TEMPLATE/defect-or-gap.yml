@@ -1,0 +1,55 @@
+name: 缺陷 / 纪律缺条（defect or missing-rule）
+description: 报告百工软件团队（专家包）自身的机制缺陷、守卫/钩子失效、纪律缺条或文档错误
+title: "[缺陷] "
+labels: ["external-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        体例两原则：**人话＋绝对干净**（交接给人和交接给 Agent 同标准）。
+        只写你亲眼所见的事实与读数，不猜根因、不代领办域开处方（可以建议，标〔建议〕即可）。
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: 现象（发生了什么）
+      description: 一句话到一段话讲清楚：什么操作 → 什么结果 → 预期什么。多个现场复证请逐条列。
+      placeholder: 例：hooks 四条钩子命令为相对路径，会话 cwd 展开成幻象路径，钩子静默失效无日志。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 证据读数（可复现）
+      description: 路径/commit/blob/sha256/日志行——能现跑复现的钉值；取不到的按「MISS＋原因」申报，不要留空猜值。
+      placeholder: 例：commit 9987751（仓 reflog 可复现）；hooks.json L17 现读＝python "../skills/…"
+    validations:
+      required: true
+  - type: textarea
+    id: discovery-face
+    attributes:
+      label: 发现现场（哪个项目/会话工作面）
+      description: 在哪个项目、什么任务里撞上的；同判据是否在别处复证过。
+    validations:
+      required: true
+  - type: textarea
+    id: basis
+    attributes:
+      label: 依据（可选）
+      description: 若属纪律缺条：缺哪条、你在哪份规范里找不到它；引用原文段落即可。
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: 阻塞度
+      options:
+        - 阻断（功能不可用/静默失效）
+        - 纪律失效（机制只装一半/正拦侧开）
+        - 误拦（合法操作被拒）
+        - 规范缺条（行为无据可依）
+        - 轻微（体验/提示缺失）
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 处方建议（可选·标〔建议〕）
+      description: 有可应用补丁/样件请附 blob 或 diff 钉值；无把握可不填，修不修、怎么修归领办域设计权。
