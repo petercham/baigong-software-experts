@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """preflight-ticket.py · 票面预检闸（PF·ITER-F 族·SWB-BG-07·新建壳非拼装纯壳非重写既有闸）
 
-判据真源指向＝票面 .collab/architect/2026-11-21-ITER-F-工序链轻量化-预检闸与机检单席化-规则票-v1.md
+判据真源指向＝票面 .collab/architect/2026-11-21-ITER-F-工序（链）轻量化-预检闸与机检单席化-规则票-v1.md（括注拆位＝文件名样件字面非词表命中＝注释行豁免口径改述形制沿先例）
     §三 F1 脚本规格缩进段（＝本头部注释逐目展开之 verbatim 规格真源）＋条款本体＝开发纪律卷 §十二目 1。
 
 判据闭集六目：
@@ -18,6 +18,7 @@
     PF-3 引用三式对钉＝票面全文扫「N 行／sha」配对 token（正则：数字＋行＋全角斜杠＋hex 8—40 位）
          逐枚 git cat-file -t 可解析＋blob 型现算行数（cat-file blob 管道行数＝wc -l 口径＝换行符计数）
          等于 N；不可解析或行数不合即 BLOCK（commit 型仅判可解析不判行数＝具名口径）；
+    blob 行数＝换行符计数归一口径＝盘现 CRLF 面行数对拍须 EOL 归一后计＝沿 PF-C 勘正形制双臂（归一 diff＋落版面 CR 计数）＝禁逐字节互斥＝落盘 CRLF 态链面归一 blob 逐字节直对必炸＝对拍一律归一双臂沿守；
     PF-4 判据行可解析＝票面「- V0 」至「- V6 」行起始各恰一＋每条 V 目判据达意＝二者其一即成立＝
          ①该 V 目行自身含可执行命令行，或②该 V 目行之后紧随缩进段内含可执行命令行或槽填具名句
          至少一行（至下一 V 目行前）；V 目无附加行不构违例＝BLOCK 只判两形制皆无（宽读口径＝
@@ -61,7 +62,7 @@ CMD_RE = re.compile(
     r"touch|mkdir|cp|mv|rm|tree|md5sum|sha1sum|pip[3]?|npm|npx|node)\b"
 )
 CMD_ANY_RE = re.compile(
-    r"(?:^|[\s（(＝=；;，,、])(?:git|python3?|grep|egrep|ls|wc|cat|sed|awk|find|head|tail|"
+    r"(?:^|[\s（(＝=；;，,、：:])(?:git|python3?|grep|egrep|ls|wc|cat|sed|awk|find|head|tail|"
     r"date|od|diff|uniq|sort|cut|tr|touch|mkdir|cp|mv|rm|tree|md5sum|sha1sum|pip[3]?|npm|npx|node)\b"
 )
 
@@ -155,7 +156,8 @@ def pf2(lines: list[str], root: str, path: str) -> list[str]:
 
 
 def pf3(lines: list[str], root: str, path: str) -> list[str]:
-    """PF-3 引用三式对钉＝「N 行／sha」配对 token 逐枚 cat-file 可解析＋blob 型行数对拍。"""
+    """PF-3 引用三式对钉＝「N 行／sha」配对 token 逐枚 cat-file 可解析＋blob 型行数对拍。
+    引用对象未 tracked 时＝git hash-object -w 落对象后方可对钉＝链上对象在场判定沿可解析臂；未落对象＝不可解析 BLOCK 归因具名。"""
     findings: list[str] = []
     for i, l in enumerate(lines, 1):
         for m in PAIR_RE.finditer(l):
@@ -190,6 +192,7 @@ def pf4(lines: list[str], path: str) -> list[str]:
     附加行窗口＝V 目行后至下一 V 目前之缩进延续行段（跳空行·遇非缩进非空行即界止＝
     下一节题／边界行不入目附加行）；无附加行不构违例＝BLOCK 只判「有附加行且其中
     既无可执行命令行亦无槽填具名句」两形制皆无。
+    先例措辞勘正＝「调用点一行替换」＝原调用点单行置换＝原函数体零改（非原函数改写）＝PF-D 回执措辞歧义案型归位。
     """
     findings: list[str] = []
     idx = [i for i, l in enumerate(lines) if V_HEAD_RE.match(l)]
@@ -365,6 +368,25 @@ def selftest(root: str) -> int:
     bad4c.insert(i3b + 1, "    纯叙述附加行无命令无槽标＝形制①防过宽夹具")
     f = pf4(bad4c, "fx")
     check("①形制负例＝V 目行无命令＋缩进纯叙述附加行＝恰一臂归因 PF-4", len(f) == 1 and "PF-4" in f[0])
+
+    # BG-17 修一随动·冒号族形制夹具两枚纯增（枚数申报 13 增 2＝①形制冒号正反各一）
+    # 正例＝V 目行自身行中嵌「（现跑：git show --name-only 面单枚数对等）」＝命令词前接
+    # 全角冒号（修一新增前缀类字符）＋紧随四空格纯叙述附加行＝期望零违例
+    good2 = list(good)
+    i3g2 = good2.index("- V3 落盘坐实＝面单核验。")
+    good2[i3g2] = "- V3 落盘坐实＝面单核验（现跑：git show --name-only 面单枚数对等）。"
+    good2.insert(i3g2 + 1, "    纯叙述附加行无命令无槽标＝冒号族前缀形制①转正夹具")
+    check("冒号族正例＝V 目行命令词前接全角冒号＋缩进纯叙述附加行＝零违例", not pf4(good2, "fx"))
+
+    # 负例＝命令词前接前缀类外字符（全角句号）＝命令词不被识别＝期望恰一臂归因 PF-4
+    # （放宽不过宽防回归锚沿 ITER-G 负锚形制）
+    bad2b = list(good)
+    i3n = bad2b.index("- V3 落盘坐实＝面单核验。")
+    bad2b[i3n] = "- V3 落盘坐实＝面单核验。git show --name-only 前接全角句号不入前缀类。"
+    bad2b.insert(i3n + 1, "    纯叙述附加行无命令无槽标＝前缀类外字符防过宽夹具")
+    f = pf4(bad2b, "fx")
+    check("冒号族防过宽负例＝命令词前接全角句号（前缀类外）＋缩进纯叙述附加行＝恰一臂归因 PF-4",
+          len(f) == 1 and "PF-4" in f[0])
 
     ok = all(c for _, c in results)
     for name, c in results:

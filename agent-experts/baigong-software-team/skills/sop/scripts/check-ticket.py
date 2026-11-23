@@ -31,6 +31,14 @@
          防炸基线）覆盖面判据之直译（V2 正样例 exit 0 判据随后方立＝随正后口径申明随登）
     CT-7 单面现状注（修四·SWB-BG-11 PF-D 放行段⑦采注口径）＝现执行域＝目录模式 run_ct7
          ＝单面模式从不跑 CT-7（入参段「不含 CT-6／CT-7」沿现状照登）
+    两目一行级说明（修四·SWB-BG-17）＝CT-9 回执骨架正向闸＝receipt 型新面节题行计数
+         ＜回执模板真源解析枚数即 BLOCK（J-1 采甲＝模板改闸随动）；CT-10 判词确认字段闸
+         ＝judgment 型新面零确认头行即 BLOCK（J-2 采甲＝闸侧锚先行零模板随动）＝各受
+         POSITIVE_EFFECTIVE 落位闸（面日期 ≥ 放行落链日＋1＝落链当日及既存同日面全豁免）
+
+面类型路由第三尺口径一行（修二·BG-17）＝board 桶内名不含「票」字且不含判词／回执名锚
+    面＝analysis 型＝票骨架三目停量＝CT-3／CT-5 通用目保持＝第三尺＝桶路由口径延伸非新
+    判据正文＝判据单一真源纪律沿守。
 
 面类型路由（修四·PF-D 增一行）＝单面模式按面类型选尺＝receipt／judgment 类跳 CT-1／
     CT-2／CT-4 票骨架三目＝CT-3／CT-5 无条件＋面日期入域内 CT-8 全类型保持＝ticket 类
@@ -86,9 +94,16 @@ FACE_TYPE_RECEIPT = "receipt"
 FACE_TYPE_JUDGMENT = "judgment"
 RECEIPT_BUCKET_SEG = "receipts/"      # 面径桶段锚（归一后段首／段尾皆带斜杠）
 JUDGMENT_BUCKET_SEGS = ("qa/", "product/", "audits/")
+RECEIPT_TEMPLATE = ("agent-experts/baigong-software-team/skills/"
+                    "sop/templates/receipt-template.md")
+JUDGMENT_CONFIRM_HEAD = "影响面栏确认＝"
+POSITIVE_EFFECTIVE = "2026-11-25"  # 正向闸落位闸日＝放行落链日现取＋一日（8a18d534 author 2026-11-24 现读＋1＝勘正④口径＝面日期 ≥ 本值方入 ct9／ct10 域＝落链当日及既存同日面全豁免＝禁誊起草值沿 BG-15 J-2 先例）
 NAME_RECEIPT_TOKEN = "回执"           # 文件名级锚
 NAME_JUDGMENT_TOKEN = "判词"
 NAME_TICKET_OVERRIDE_TOKEN = "票面"   # 优先级最高恒 ticket 锚（放行段 J-1 甲＋产品席修正并入）
+FACE_TYPE_ANALYSIS = "analysis"
+BOARD_BUCKET_SEG = "/.collab/board/"
+NAME_TICKET_TOKEN_ANY = "票"
 
 
 def face_type(path: str) -> str:
@@ -99,6 +114,9 @@ def face_type(path: str) -> str:
     name = norm.rsplit("/", 1)[-1]
     if NAME_TICKET_OVERRIDE_TOKEN in name:
         return FACE_TYPE_TICKET
+    if BOARD_BUCKET_SEG in "/" + norm.lstrip("/"):
+        if NAME_TICKET_TOKEN_ANY not in name and NAME_JUDGMENT_TOKEN not in name and NAME_RECEIPT_TOKEN not in name:
+            return FACE_TYPE_ANALYSIS
     padded = "/" + norm.lstrip("/")
     if ("/" + RECEIPT_BUCKET_SEG) in padded or NAME_RECEIPT_TOKEN in name:
         return FACE_TYPE_RECEIPT
@@ -325,7 +343,34 @@ def run_face_routed(path: str, since: str, ctx: tuple) -> list[str]:
     fdt = face_date(lines, path)
     if in_scope(fdt, since):
         findings += ct8(lines, path)
+        if face_type(path) == FACE_TYPE_RECEIPT and fdt >= POSITIVE_EFFECTIVE: findings += ct9_receipt_skeleton(lines, path)  # 修四c·调用点条件行一＝型为 receipt 且 fdt ≥ 落位闸 → ct9
+        if face_type(path) == FACE_TYPE_JUDGMENT and fdt >= POSITIVE_EFFECTIVE: findings += ct10_judgment_confirm(lines, path)  # 修四c·调用点条件行二＝型为 judgment 且同闸 → ct10
     return findings
+
+
+def ct9_receipt_skeleton(lines: list[str], path: str) -> list[str]:
+    """ct9 回执骨架在位核（修四·BG-17 #3＝J-1 采甲）＝现读回执模板真源解析节题闭集枚数
+    （SEC_RE 口径＝模板改闸随动＝判据单一真源纪律沿守）＝被检面节题行计数小于真源枚数
+    即 BLOCK 归因具面；受 POSITIVE_EFFECTIVE 落位闸（调用点侧）＝存量豁免沿 J-5 同制。"""
+    template_path = os.path.join(find_root(None), RECEIPT_TEMPLATE)
+    tl = read_lines(template_path, "ct9 回执模板真源")
+    n_sot = sum(1 for l in tl if SEC_RE.match(l))
+    if not n_sot:
+        raise InfraMiss("infra: 回执模板节题解析为空＝判据真源失联")
+    n_face = sum(1 for l in lines if SEC_RE.match(l))
+    if n_face < n_sot:
+        return ["%s:1: BLOCK check-ticket.CT-9 回执骨架在位核＝节题行计数 %d ＜ 真源 %d：%s"
+                % (path, n_face, n_sot, os.path.basename(path)[:48])]
+    return []
+
+
+def ct10_judgment_confirm(lines: list[str], path: str) -> list[str]:
+    """ct10 判词确认字段在场核（修四·BG-17 #3＝J-2 采甲＝闸侧锚先行零模板随动）＝
+    被检面零「JUDGMENT_CONFIRM_HEAD」头行即 BLOCK；受 POSITIVE_EFFECTIVE 落位闸（调用点侧）。"""
+    if not any(l.startswith(JUDGMENT_CONFIRM_HEAD) for l in lines):
+        return ["%s:1: BLOCK check-ticket.CT-10 判词确认字段头行缺位（%s）：%s"
+                % (path, JUDGMENT_CONFIRM_HEAD, os.path.basename(path)[:48])]
+    return []
 
 
 # --- 链判据 CT-6／CT-7 ---
@@ -581,6 +626,43 @@ def selftest(root: str, ctx: tuple, template_lines: list[str]) -> int:
     f_j = routed_findings(j_ft, judgment_skeleton, jname)
     results.append(("judgment 正样例（判词形制面）→零发现且锚判 judgment",
                     j_ft == FACE_TYPE_JUDGMENT and not f_j))
+
+    # --- BG-17 修二·第三尺路由夹具两枚（analysis 正反＝内存径面夹具零写盘沿上例） ---
+    aname = ".collab/board/2999-01-01-排程分析件-syn.md"  # 名不含票字符＝第三尺命中形制
+    a_ft = face_type(aname)
+    a_lines = ["# 分析件正样例夹具面", "", "## 一、叙述节", "", "叙述行零骨架依赖。", ""]
+    f_a = routed_findings(a_ft, a_lines, aname)
+    results.append(("第三尺正例（board 桶名不含票字）→锚判 analysis 且骨架三目零染",
+                    a_ft == FACE_TYPE_ANALYSIS and not has("CT-1", f_a)
+                    and not has("CT-2", f_a) and not has("CT-4", f_a)))
+
+    aname2 = ".collab/board/2999-01-01-样例小票-syn.md"  # 名含「票」＝防分析臂过宽吞桶内票面件
+    a_ft2 = face_type(aname2)
+    fx = [l for l in pos if not SEC_RE.match(l) or "候裁单列" not in l]
+    f_a2 = routed_findings(a_ft2, fx, aname2)
+    results.append(("第三尺防过宽负例（board 桶名含票恒 ticket）→CT-1 在场",
+                    a_ft2 == FACE_TYPE_TICKET and has("CT-1", f_a2)))
+
+    # --- BG-17 修二·勘正①负夹具一枚＝board 桶判词名锚面归 judgment 不归 analysis ---
+    jn2 = ".collab/board/2999-01-01-验收判词类-syn.md"  # 名不含票字含判词＝防 analysis 臂吞判词面
+    results.append(("勘正①负夹具（board 桶判词名锚面）→锚判 judgment 不归 analysis",
+                    face_type(jn2) == FACE_TYPE_JUDGMENT))
+
+    # --- BG-17 修四·ct9 回执骨架在位核正反两枚（真源＝receipt 模板运行时解析＝J-1 采甲） ---
+    ct9_pos = ct9_receipt_skeleton(receipt_skeleton, "2999-01-01-syn-ct9-pos.md")
+    results.append(("ct9 正例（八节回执面≥真源枚数）→零发现", not ct9_pos))
+    fx = [l for l in receipt_skeleton if not SEC_RE.match(l) or "六、案型" not in l]
+    fx = [l for l in fx if not SEC_RE.match(l) or "七、纪律" not in l]
+    ct9_neg = ct9_receipt_skeleton(fx, "2999-01-01-syn-ct9-neg.md")
+    results.append(("ct9 负例（节题缺两节＜真源枚数）→CT-9 归因",
+                    has("CT-9", ct9_neg)))
+
+    # --- BG-17 修四·ct10 判词确认字段在场核正反两枚（J-2 采甲＝闸侧锚先行） ---
+    j_pos_lines = judgment_skeleton + [JUDGMENT_CONFIRM_HEAD + "双席读数对拍全等"]
+    ct10_pos = ct10_judgment_confirm(j_pos_lines, "2999-01-01-syn-ct10-pos.md")
+    results.append(("ct10 正例（含确认头行）→零发现", not ct10_pos))
+    ct10_neg = ct10_judgment_confirm(judgment_skeleton, "2999-01-01-syn-ct10-neg.md")
+    results.append(("ct10 负例（零确认头行）→CT-10 归因", has("CT-10", ct10_neg)))
 
     ok = all(p for _, p in results)
     for msg, p in results:
