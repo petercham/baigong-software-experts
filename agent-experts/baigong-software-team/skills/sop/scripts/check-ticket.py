@@ -29,6 +29,14 @@
          （现跑／复算／管道／wc／grep／ls／计数）即 WATCH；叙述面＝排缩进段／节题行／
          表行；本目同受 --since 面适用闸＝计划行 120 扫描域条款（规范生效日后新票·
          防炸基线）覆盖面判据之直译（V2 正样例 exit 0 判据随后方立＝随正后口径申明随登）
+    CT-7 单面现状注（修四·SWB-BG-11 PF-D 放行段⑦采注口径）＝现执行域＝目录模式 run_ct7
+         ＝单面模式从不跑 CT-7（入参段「不含 CT-6／CT-7」沿现状照登）
+
+面类型路由（修四·PF-D 增一行）＝单面模式按面类型选尺＝receipt／judgment 类跳 CT-1／
+    CT-2／CT-4 票骨架三目＝CT-3／CT-5 无条件＋面日期入域内 CT-8 全类型保持＝ticket 类
+    全目沿旧行为；类型锚优先级＝文件名含「票面」恒 ticket＞桶段 receipts／或文件名含
+    「回执」＝receipt＞桶段 qa／／product／／audits／或文件名含「判词」＝judgment＞
+    默认 ticket（J-1 甲＋放行段产品席优先级修正并入）；目录模式 CT-6／CT-7 零改。
 
 入参闭集六枚：--root／--target／--ticket-dir／--since／--template／--selftest
     --root 缺省语义＝自脚本位置向上溯至含 .git（目录或文件两态皆认）之根（黄-4 写死）
@@ -48,7 +56,8 @@
 FINDING_RE 兼容）＋末行计数汇总行。本件只读零写＝脚本体禁任何写文件动作（证据件归
 调用方窗·run-gates 出口②口径）。
 
-头部注释＝判据真源指向（thin 模板路径＋本票票号 ITER-W2-T2b）＋检查项闭集八目一览。
+头部注释＝判据真源指向（thin 模板路径＋本票票号 ITER-W2-T2b＋面类型路由真源 SWB-BG-11
+PF-D 票面放行段）＋检查项闭集八目一览。
 注释与文档面禁写入线四词字面＝V6 前置保证条款。
 """
 from __future__ import annotations
@@ -70,6 +79,35 @@ CT8_STYLE_RE = re.compile(r"[0-9０-９]+\s*(%s)" % CT8_QUANT)
 NAME_DATE_RE = re.compile(r"^(\d{4}-\d{2}-\d{2})-")
 TRAILER_TOK_RE = re.compile(r"-[A-Z][A-Z-]*$")
 SEC_RE = re.compile(r"^## ")
+
+# --- 面类型闭集与识别锚（修一·SWB-BG-11 PF-D＝路由锚非判据正文·零硬编码判据沿守） ---
+FACE_TYPE_TICKET = "ticket"
+FACE_TYPE_RECEIPT = "receipt"
+FACE_TYPE_JUDGMENT = "judgment"
+RECEIPT_BUCKET_SEG = "receipts/"      # 面径桶段锚（归一后段首／段尾皆带斜杠）
+JUDGMENT_BUCKET_SEGS = ("qa/", "product/", "audits/")
+NAME_RECEIPT_TOKEN = "回执"           # 文件名级锚
+NAME_JUDGMENT_TOKEN = "判词"
+NAME_TICKET_OVERRIDE_TOKEN = "票面"   # 优先级最高恒 ticket 锚（放行段 J-1 甲＋产品席修正并入）
+
+
+def face_type(path: str) -> str:
+    """面类型识别＝两级锚优先级闭集（修一·PF-D）：文件名含「票面」恒 ticket 型（优先级最高）；
+    桶段 receipts／ 或文件名含「回执」＝receipt；桶段 qa／／product／／audits／ 或文件名含「判词」
+    ＝judgment；其余＝ticket（默认）。桶段判定＝归一径（反斜杠转斜杠）中 "／<桶名>／" 段匹配。"""
+    norm = path.replace("\\", "/")
+    name = norm.rsplit("/", 1)[-1]
+    if NAME_TICKET_OVERRIDE_TOKEN in name:
+        return FACE_TYPE_TICKET
+    padded = "/" + norm.lstrip("/")
+    if ("/" + RECEIPT_BUCKET_SEG) in padded or NAME_RECEIPT_TOKEN in name:
+        return FACE_TYPE_RECEIPT
+    for seg in JUDGMENT_BUCKET_SEGS:
+        if ("/" + seg) in padded:
+            return FACE_TYPE_JUDGMENT
+    if NAME_JUDGMENT_TOKEN in name:
+        return FACE_TYPE_JUDGMENT
+    return FACE_TYPE_TICKET
 
 
 def die(msg: str, code: int) -> None:
@@ -266,12 +304,26 @@ def ct8(lines: list[str], path: str) -> list[str]:
 
 
 def run_face(path: str, since: str, ctx: tuple) -> list[str]:
+    if face_type(path) != FACE_TYPE_TICKET:  # 修二·PF-D＝run_face 内按类型分派（插入臂）
+        return run_face_routed(path, since, ctx)
     sec_titles, preset, _ = ctx
     lines = read_lines(path, "--target 面")
     findings = ct1(sec_titles, lines, path) + ct3(lines, path) + ct4(lines, path) + ct5(lines, path)
     fdt = face_date(lines, path)
     if in_scope(fdt, since):
         findings += ct2(preset, lines, path)
+        findings += ct8(lines, path)
+    return findings
+
+
+def run_face_routed(path: str, since: str, ctx: tuple) -> list[str]:
+    """修二·PF-D＝纯增类型判据路由（receipt／judgment 类）＝跳 CT-1／CT-2／CT-4 票骨架三目
+    ＝CT-3／CT-5 无条件＋面日期入域闸内 CT-8 全类型保持（CT-2 属票骨架目随三目同跳·归因随登
+    ＝票面 §三 八目逐目适用闭集声明＝减法臂 J-3 落拍）；ticket 类不经本函数＝旧行为零漂移。"""
+    lines = read_lines(path, "--target 面")
+    findings = ct3(lines, path) + ct5(lines, path)
+    fdt = face_date(lines, path)
+    if in_scope(fdt, since):
         findings += ct8(lines, path)
     return findings
 
@@ -372,6 +424,14 @@ def selftest(root: str, ctx: tuple, template_lines: list[str]) -> int:
         f += ct8(fx_lines, name)
         return f
 
+    def routed_findings(ftype: str, fx_lines: list[str], name: str) -> list[str]:
+        """PF-D 修三夹具本地路由核（内存零写盘沿上例）＝与 run_face_routed 同口径＝
+        ticket 全目沿旧行为＝receipt／judgment 仅 CT-3／CT-5＋入域 CT-8（2999 恒入域）。"""
+        if ftype == FACE_TYPE_TICKET:
+            return face_findings(fx_lines, name)
+        f = ct3(fx_lines, name) + ct5(fx_lines, name) + ct8(fx_lines, name)
+        return f
+
     def has(ftype: str, fs: list[str]) -> bool:
         return any(ftype in x for x in fs)
 
@@ -429,6 +489,98 @@ def selftest(root: str, ctx: tuple, template_lines: list[str]) -> int:
     except InfraMiss:
         got4t = True
     results.append(("模板真源失联面→exit 4 语义（解析为空）", got4t))
+
+    # --- PF-D 修三·面类型路由夹具五枚纯增（内存夹具零写盘沿上例） ---
+    receipt_skeleton = [
+        "# 回执骨架正样例夹具面",
+        "",
+        "## 〇、开工读数",
+        "",
+        "    date 现跑时点照登",
+        "",
+        "## 一、施工读数",
+        "",
+        "施工动作逐枚现跑在册。",
+        "",
+        "## 二、V 系读数",
+        "",
+        "读数缩进段命令现跑在册。",
+        "",
+        "## 三、禁动面坐实",
+        "",
+        "钉值现跑对拍全等。",
+        "",
+        "## 四、改后终态钉值",
+        "",
+        "完工现跑随回报随附。",
+        "",
+        "## 五、取证族拆除",
+        "",
+        "拆除用毕 ls 坐实。",
+        "",
+        "## 六、案型登记",
+        "",
+        "案型随登现跑在册。",
+        "",
+        "## 七、纪律自证",
+        "",
+        "纪律逐条自证现跑。",
+    ]
+    # 夹具一·receipt 正样例（八节回执骨架面→零发现）
+    rname = "2999-01-01-selftest-回执骨架正样例.md"
+    r_ft = face_type(rname)
+    f_r = routed_findings(r_ft, receipt_skeleton, rname)
+    results.append(("receipt 正样例（八节骨架）→零发现且锚判 receipt",
+                    r_ft == FACE_TYPE_RECEIPT and not f_r))
+
+    # 夹具二·receipt 负样例（同面掺槽残留→恰 CT-5 归因＝通用目不因路由失效）
+    fx = list(receipt_skeleton)
+    fx.insert(2, "叙述段残留槽位⟪槽：未填⟫样本")
+    f_r2 = routed_findings(face_type(rname), fx, rname)
+    results.append(("receipt 负样例（掺槽残留）→恰 CT-5 归因",
+                    has("CT-5", f_r2) and not has("CT-1", f_r2)
+                    and not has("CT-2", f_r2) and not has("CT-4", f_r2)))
+
+    # 夹具三·ticket 回归夹具（票骨架面掺缺节→CT-1 归因保持＝旧行为不漂移）
+    fx = [l for l in pos if not SEC_RE.match(l) or "候裁单列" not in l]
+    tname = "2999-01-01-syn-ticket-regress.md"
+    f_t = routed_findings(face_type(tname), fx, tname)
+    results.append(("ticket 回归夹具（票骨架缺节）→CT-1 保持且锚判 ticket",
+                    face_type(tname) == FACE_TYPE_TICKET and has("CT-1", f_t)))
+
+    # 夹具四·路由锚过宽负夹具（文件名含「票面」＋含「回执」面恒判 ticket＝防锚误吞票面桶名含回执面）
+    oname = "2999-01-01-票面桶名含回执-syn.md"
+    o_ft = face_type(oname)
+    fx = [l for l in pos if not SEC_RE.match(l) or "候裁单列" not in l]
+    f_o = routed_findings(o_ft, fx, oname)
+    results.append(("路由锚过宽负夹具（名含票面＋回执恒 ticket）→CT-1 在场",
+                    o_ft == FACE_TYPE_TICKET and has("CT-1", f_o)))
+
+    # 夹具五·judgment 正样例（判词形制面→CT-1／CT-2／CT-4 零命中＝CT-3／CT-5／CT-8 正常运行零发现）
+    judgment_skeleton = [
+        "# 判词骨架正样例夹具面",
+        "",
+        "## 〇、判词对象与时点",
+        "",
+        "判词对象现跑照登。",
+        "",
+        "## 一、红面",
+        "",
+        "红面逐枚现跑照登。",
+        "",
+        "## 二、黄面",
+        "",
+        "黄面随登现跑照登。",
+        "",
+        "## 三、绿面",
+        "",
+        "绿面逐臂现跑照登。",
+    ]
+    jname = "2999-01-01-selftest-判词骨架正样例.md"
+    j_ft = face_type(jname)
+    f_j = routed_findings(j_ft, judgment_skeleton, jname)
+    results.append(("judgment 正样例（判词形制面）→零发现且锚判 judgment",
+                    j_ft == FACE_TYPE_JUDGMENT and not f_j))
 
     ok = all(p for _, p in results)
     for msg, p in results:
