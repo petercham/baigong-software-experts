@@ -44,7 +44,7 @@ SEV_BLOCK = "BLOCK"
 SPEC_ID = "FX-HOOK-1"
 MARKER = "generated-by: object-audit/scripts/install-hooks.sh"
 EXPECTED_CALL_TARGETS = ("share/check-staged-declaration.py", "share/run-gates.sh")
-EXPECTED_HOOK_BLOB = "8b7857701594264421832edd30dae7e401f85719"
+EXPECTED_HOOK_BLOB = "6bc608017756c6c505ddd086c4a25e4943402583"
 
 
 def die_usage(msg: str) -> None:
