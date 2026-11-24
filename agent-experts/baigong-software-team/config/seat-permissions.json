@@ -33,8 +33,8 @@
       "write_globs": [".collab/drafts/", ".collab/architect/", ".collab/tickets/票面文档（起草与按修票权修订）", "开发票四字段", "tests/共写（增删改走 C1）", "租约段签注与灰度判据（票内）", "docs/STRUCTURE.md"],
       "writable": "设计、ADR、开发票、边界约束",
       "explicitly_not_writable": ["docs/", ".archive/", "代码域", ".collab/未授权子域", "audits/"],
-      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/audits/**", "sources/**"],
-      "deny_globs_note": "docs deny 开口＝PM 注记③显式枚举三件套（裁定三§二点九根名录闭集）；闭集扩员＝deny 枚举同批随动（注册/配置面同批清零纪律）；三件套外 docs 子面（含 docs/adr/）不入 deny，其防护＝签发面写域子集校验＋写侧『路径∉当席租约』双兜底——起草探针 Q-b/Q-c/R-i 实证无 fail-open 窗口（QA N-1 处置，A1-J4 在位断言）。交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。",
+      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "avatars/**", ".collab/audits/**", "sources/**"],
+      "deny_globs_note": "docs deny 开口＝PM 注记③显式枚举三件套（裁定三§二点九根名录闭集）；闭集扩员＝deny 枚举同批随动（注册/配置面同批清零纪律）；三件套外 docs 子面（含 docs/adr/）不入 deny，其防护＝签发面写域子集校验＋写侧『路径∉当席租约』双兜底——起草探针 Q-b/Q-c/R-i 实证无 fail-open 窗口（QA N-1 处置，A1-J4 在位断言）。交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。SWB-B16-e K6 勘正段（沿 engineer 行 deny 向精化款枚举让出＋本注记对表先例形制）＝本席 tests／共写枚举让出：write_globs 在册「tests／共写（增删改走 C1）」行与 deny_globs「tests／**」行同面并存＝过渡态(III)『租约在册仍 deny』冲突面（BG-16 rev-1 勘正③ X3／X4 实测在册），本席 deny 枚内 tests／** 字面让出并以本注记对表＝写侧判定层（decide 判序 deny 先判存续不变）『租约在册 path_globs 命中→allow』机械面兑现；让出后非租约在册写入的防护＝写侧『路径∉当席租约』deny 双兜底存续＝不扩面；残留归口具名＝本席 write_globs 承载行为 CJK 描述行＝真签发路（lease-issuer 子集校验三判据）不可达态归 write_globs 机械枚化专项票（K6 呈签知会①在册）＝本勘正只消解写侧判定层、不消解签发面残留。",
       "carrier": "租约段＋B5"
     },
     {
@@ -43,8 +43,8 @@
       "write_globs": [".collab/audits/", ".collab/tickets/缺陷票（修票权）", "tests/共写", ".collab/drafts/"],
       "writable": "审计结论、集成验收结论、缺陷票与定级",
       "explicitly_not_writable": ["代码域", "docs/", ".archive/", ".collab/未授权子域", "prd/design drafts"],
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"],
-      "deny_globs_note": "交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。",
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"],
+      "deny_globs_note": "交付面路径换代补丁：旧交付树字面换代＝delivery_paths 六目录行（真源＝本项目 docs/STRUCTURE.md·与 engineer 行同源对账）。SWB-B16-e K6 勘正段（沿 engineer 行 deny 向精化款枚举让出＋本注记对表先例形制）＝本席 tests／共写枚举让出：write_globs 在册「tests／共写」行与 deny_globs「tests／**」行同面并存＝过渡态(III)『租约在册仍 deny』冲突面（BG-16 rev-1 勘正③ X3／X4 实测在册），本席 deny 枚内 tests／** 字面让出并以本注记对表＝写侧判定层（decide 判序 deny 先判存续不变）『租约在册 path_globs 命中→allow』机械面兑现；让出后非租约在册写入的防护＝写侧『路径∉当席租约』deny 双兜底存续＝不扩面；残留归口具名＝本席 write_globs 承载行为 CJK 描述行＝真签发路（lease-issuer 子集校验三判据）不可达态归 write_globs 机械枚化专项票（K6 呈签知会①在册）＝本勘正只消解写侧判定层、不消解签发面残留。",
       "carrier": "租约段＋B5"
     },
     {

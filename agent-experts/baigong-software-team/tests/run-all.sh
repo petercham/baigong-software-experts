@@ -31,10 +31,11 @@ run_step "s2/test_ledger_core.py" python3
 run_step "s3/test_decision_pack.py" python3
 run_step "s3/test_dispatch_gate.py" python3
 run_step "s4/test_enforcement.py" python3
+run_step "b16e/test_adversarial_guards.py" python3
 # 执行序第二段＝验收演练执行器（六演练串跑·落盘仓外 Temp 零仓内残留＝先例形制；红链指名形制沿 drill-runner 先例）
 run_step "acceptance/drill-runner.sh" bash
 # 执行序第三段＝probes 段＝默认跳跑（黄-6 乙案·申明见头注）
-if [ "$n_green" -eq "$n_total" ] && [ "$n_total" -eq 6 ]; then
+if [ "$n_green" -eq "$n_total" ] && [ "$n_total" -eq 7 ]; then
   echo "probes 段跳跑申明在册（黄-6 乙案＝原因见头注）"
   echo "RUN_ALL_GREEN"
   exit 0

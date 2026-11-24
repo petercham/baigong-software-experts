@@ -17,11 +17,13 @@
     },
     {
       "seat_id": "architect",
-      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".collab/audits/**", "sources/**"]
+      "deny_globs": ["docs/PRODUCT.md", "docs/ARCHITECTURE.md", ".archive/**", "agents/**", "skills/**", "config/**", "hooks/**", "avatars/**", ".collab/audits/**", "sources/**"],
+      "deny_globs_note": "SWB-B16-e K6 勘正随动款（与源件 seat-permissions.json architect 行逐字同源·派生一致性断言面）＝tests／共写枚举让出＋注记对表＝过渡态(III) 写侧判定层消解＝详见源件本席 deny_globs_note 勘正段（只指不搬）。"
     },
     {
       "seat_id": "qa",
-      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"]
+      "deny_globs": ["agents/**", "skills/**", "config/**", "hooks/**", "avatars/**", "docs/**", ".archive/**", ".collab/adr/**", "sources/**"],
+      "deny_globs_note": "SWB-B16-e K6 勘正随动款（与源件 seat-permissions.json qa 行逐字同源·派生一致性断言面）＝tests／共写枚举让出＋注记对表＝过渡态(III) 写侧判定层消解＝详见源件本席 deny_globs_note 勘正段（只指不搬）。"
     },
     {
       "seat_id": "engineer",
