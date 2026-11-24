@@ -50,7 +50,7 @@
     {
       "seat_id": "engineer",
       "seat": "工程师",
-      "write_globs": [".collab/inbox/engineer/", ".collab/returns/engineer/", ".collab/drafts/", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**"],
+      "write_globs": [".collab/inbox/engineer/", ".collab/returns/engineer/", ".collab/drafts/", "agents/**", "skills/**", "config/**", "hooks/**", "tests/**", "avatars/**", ".github/", "share/", "agent-experts/baigong-software-team/skills/", "agent-experts/baigong-software-team/tests/"],
       "write_globs_note": "项目根∪交付（编译、部署）路径可写面＝参数化承载：每项目 docs 约定 md（见 project_domain_md 键）声明，门禁/租约机件读 md 取项目根与交付路径后以具体前缀行注入当票租约——D1 名录尾账闭合批：六枚举行＝本项目 docs/STRUCTURE.md delivery_paths 同源填充（机检对账＝逐行相等断言，不复写名录）；描述行（v1 前值）与『限定当票租约路径集』入本注记（行为零变化款：两者在两层校验恒不命中）。",
       "project_domain_md": "docs/STRUCTURE.md",
       "writable": "代码、回流件、预发部署票起草",
