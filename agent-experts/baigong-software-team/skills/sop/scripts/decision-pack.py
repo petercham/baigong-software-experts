@@ -49,6 +49,9 @@ TRIGGER_CODES = {
     TRIG_REF_SCAN_HIT, TRIG_OVERDUE, TRIG_CIRCUIT_BREAK,
 }
 
+# SWB-B16-f 修一（纯增·呈报装配面消费侧净化随动）＝上方触发源六闭集消费面（build_report_pack 装配呈报包）前净化标注随动
+# ＝与 reconcile-daily.py 消费侧标注同口径两面对齐（生产／消费语义一致具名）；呈报码语义零变化对照申明＝六闭集成员／REJECT 判定／pack_hash 键集零触
+# ＝TRIGGER_LEASE_DENY 真源对位锚沿 write-guard 行 35 注释锚（该锚指本件六码＝本段只随动标注不触码语义）。
 # 缺陷定级面（§18⑩）：定级权＝QA 双复核＋人类终裁（表2-2），本脚本只呈现、不判级
 GRADES_REQUIRING_CONFIRM = {"P0", "P1"}
 
@@ -81,6 +84,10 @@ def build_report_pack(trigger: str, ticket_id: str, evidence: dict,
             "grading_authority": "QA 双复核＋人类终裁（表2-2）——本脚本呈现定级与定级确认状态，不判级",
         },
         "delivery": "主理人仅投递（表2-2）；装配与呈报＝状态机脚本（B4）",
+        "consumption_annotation": {                      # SWB-B16-f 修一＝evidence 按不可信输入处理＝标注态入装配面
+            "evidence_treated_as": "untrusted_input",
+            "handling": "evidence 原样承载·不清洗·不覆盖＝账本与呈报行零改写＝仅装配面标注具名（与 S1 修一同口径）",
+        },
         "built_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
     pack["pack_hash"] = hashlib.sha256(canonical_json(

@@ -373,6 +373,19 @@ def prehook(args: argparse.Namespace, payload: dict) -> int:
     return EXIT_BLOCKING
 
 
+def posthook_git_author(repo_root: str) -> str:
+    """SWB-B16-f 修一对照列读数面＝HEAD 提交 Author 名（git 身份降仅对照列＝不入采信源）；
+    读取异常回落空串＝对照列永不自引入判定面（纯增零风险纪律＝沿 B16-d git_identity_missing 形制）。"""
+    try:
+        r = subprocess.run(["git", "-C", repo_root, "log", "-1", "--pretty=%an"],
+                           capture_output=True, text=True, timeout=30)
+        if r.returncode != 0:
+            return ""
+        return r.stdout.strip()
+    except Exception:
+        return ""
+
+
 def posthook(args: argparse.Namespace, payload: dict) -> int:
     command = args.command or (payload.get("tool_input") or {}).get("command", "")
     if command and not is_commit_command(command):
@@ -390,7 +403,11 @@ def posthook(args: argparse.Namespace, payload: dict) -> int:
         })
     append_record(args.ledger, "写入", "commit-audit.py", {
         "event": "commit_record", "commit": commit_hash, "ticket_id": ticket_id,
-        "seat_id": args.seat or (payload.get("agent_type") or ""),
+        # SWB-B16-f 修一（采信序变更·A2 身份注入采信＝甲-5 选项二本体＋向甲 A2 身份注入臂合并落点＝B16-d J-1 采乙随迁入本票写集·K5 已签并笔）
+        # 采信序＝payload 注入面优先→args.seat 自报面降为仅兜底＋对照字段＝溯源不依赖可伪造面（ITER-K 红三在册缺口消解本体）
+        "seat_id": (payload.get("agent_type") or "") or (args.seat or ""),
+        "seat_selfreport": args.seat,  # 自报面降仅对照列（非采信源·在册可查）
+        "git_author_compare": posthook_git_author(args.repo),  # git 身份降仅对照列（只读·异常空串＝判定零扰动）
         "agent_type": payload.get("agent_type"), "agent_id": payload.get("agent_id"),
         "clause": "§9 B5 行 PostToolUse 记账：提交哈希/票 ID/席位归因入「写入」记录类",
     })

@@ -18,6 +18,12 @@ from datetime import datetime, timezone
 
 RECORD_TYPES = ["派发", "写入", "签字", "注入包哈希", "intake 登记", "呈报"]  # 账本六类（§3）
 
+# —— SWB-B16-f 修一（纯增·消费侧净化标注＝台账消费工序对内容外部字段按不可信输入处理＝红六破法向丙在册） ——
+EXTERNAL_CONTENT_TYPES = ("呈报", "intake 登记")  # 外部内容面条目类闭集（同件具名＝RECORD_TYPES 六类本体不动）
+EXTERNAL_CONTENT_FIELD_KEYS = frozenset({  # 外部内容字段键枚举闭集＝逐键标注不重写（不清洗不覆盖＝史实锚存续）
+    "command_excerpt", "diff_items", "note", "reason", "path", "input_path", "text", "title",
+})
+
 
 def default_ledger_root() -> str:
     return os.environ.get("SWB_LEDGER_ROOT", os.path.join(os.getcwd(), ".collab", "ledger"))
@@ -35,6 +41,19 @@ def read_records(ledger_file: str) -> list[dict]:
                 if line.strip():
                     recs.append(json.loads(line))
     return recs
+
+
+def annotate_untrusted(records: list[dict]) -> int:
+    """SWB-B16-f 修一（消费侧净化标注）＝读台账后、对账判定前＝外部内容面条目入不可信输入标注态：
+    条目级逐键枚举命中面（EXTERNAL_CONTENT_FIELD_KEYS 闭集）＝内存标注＝不清洗不覆盖＝账本数据面零触；
+    对账判定取径只取「写入」类记账字段＝外部内容字段永不参与判定＝标注态处置具名（污染台账亦防＝向丙在册）。"""
+    annotated = 0
+    for r in records:
+        if r.get("type") in EXTERNAL_CONTENT_TYPES:
+            payload = r.get("payload") or {}
+            r["_untrusted_input"] = sorted(k for k in payload if k in EXTERNAL_CONTENT_FIELD_KEYS)
+            annotated += 1
+    return annotated
 
 
 def append_report(ledger_file: str, payload: dict) -> dict:
@@ -61,6 +80,7 @@ def reconcile(ledger_file: str, leases_file: str, states_file: str, repo_root: s
     """交叉核：①「写入」类记录 vs git 提交数（写入记录不应超可归属提交面）；
     ②租约台账票ID vs 状态机票据登记（租约须有在册票据）。差≠0 →「呈报」类审计事件。"""
     records = read_records(ledger_file)
+    untrusted_annotated = annotate_untrusted(records)  # 修一＝对账前净化标注（内存态·账本零触）
     by_type = {t: 0 for t in RECORD_TYPES}
     for r in records:
         if r["type"] in by_type:
@@ -82,6 +102,19 @@ def reconcile(ledger_file: str, leases_file: str, states_file: str, repo_root: s
     if len(tagged) > len(git_commits):
         diffs.append(f"写入类记录(可归属)={len(tagged)} > git 提交={len(git_commits)}")
 
+    # SWB-B16-f 修二（判定变更·A2 台账条目绑 commit 对象）＝「写入」类条目经前向哈希主信任锚（git 原生链面＝本段已取 git_commits 复用零新读）
+    # 交叉核绑定态＝未绑定条目（commit 字段缺席／空值／unattributed／链面对象不存在）入标注态＝不列 diffs＝零回填零追炸（生效日＝放行落链笔起算）。
+    # schema 面＝RECORD_TYPES 六类闭集不动（J-1 终裁采甲在册）＝绑定态＝条目字段级扩展具名申明。
+    commit_set = set(git_commits)
+    bound_recs, unbound_annotated, unbound_seq = 0, 0, []
+    for r in write_recs:
+        c = str(r["payload"].get("commit", "")).strip().lower()
+        if c and c != "unattributed" and c in commit_set:
+            bound_recs += 1
+        else:
+            unbound_annotated += 1
+            unbound_seq.append(r.get("seq"))
+
     # ② 租约台账 vs 票据登记交叉核
     tickets_in_states: set[str] = set()
     if os.path.exists(states_file):
@@ -102,6 +135,9 @@ def reconcile(ledger_file: str, leases_file: str, states_file: str, repo_root: s
 
     result = {"counts_by_type": by_type, "git_commits": len(git_commits),
               "leases": len(lease_ticket_ids), "tickets": len(tickets_in_states),
+              "write_binding": {"bound": bound_recs, "unbound_annotated": unbound_annotated,
+                                "unbound_seq": unbound_seq},  # 修二绑定核验标注态入消费读数（标注不判红＝零追炸）
+              "untrusted_annotated": untrusted_annotated,  # 修一净化标注态入消费读数
               "diff": len(diffs), "diff_items": diffs}
     if diffs:
         rec = append_report(ledger_file, {"event": "audit_reconcile_diff",
