@@ -255,6 +255,39 @@ def deny_output(reason: str) -> str:
     }, ensure_ascii=True, separators=(",", ":"))
 
 
+# ---- SWB-B16-b 修一（纯增·deny 出路指引）＋修二（策略分层骨架·J-1 采乙＝ask 子集后置未施用） ----
+# 拦截强度零变化申明＝修一仅 reason 面纯增可执行出路文案段，deny 判定本身不变；
+# 修二判定值零变化申明＝乙态（票面放行段 J-1 终裁＝采乙在册）下分层两层现行决策值皆 deny＝ask 面零施直证。
+# 决策词面＝§19 词表既有值（deny／ask）零自造词＝hooks.json 词表锚点口径。
+EXIT_GUIDE_ANCHOR = "EXIT-GUIDE"  # 机器可判锚词＝ASCII 字面（deny_output ensure_ascii=True＝CJK 转义面，探针臂对原始输出 grep 本锚＋对解码后 reason 判指引词）
+OFFSEAT_TIER_IN = "in_repo_surface"    # 甲档＝本仓工作面内路径（deny_globs→租约→席位不可归因链上之工作面判定）
+OFFSEAT_TIER_OUT = "out_of_repo_surface"  # 乙档＝本仓工作面外路径（ask 化后置候补所辖＝候补登记两字段＝票面 §五 J-1 乙支预置·施用归后置时窗）
+OFFSEAT_ASK_SUBSET_APPLIED = False  # 乙态未施用闸＝J-1 采乙在册＝本段零施＝ask 输出形态 main 面未接入＝ask 面未装载直证
+# 分层→决策映射（现行态两层皆 deny＝判定值零变化；乙档→ask 属后置施用动作＝本票零动）：
+OFFSEAT_TIER_POLICY = {OFFSEAT_TIER_IN: "deny",
+                       OFFSEAT_TIER_OUT: ("ask" if OFFSEAT_ASK_SUBSET_APPLIED else "deny")}
+
+
+def classify_offseat_target(rel: str) -> str:
+    """SWB-B16-b 修二·工作面分层判＝对 normalize_path 输出字面做工作面内／外分档（字面比对·非存在性探测·零新增扫描面）：
+    字面残留盘符前缀（仓外绝对路径 residue 形态）或 ".." 逃逸首段＝工作面外（乙档）；其余＝工作面内（甲档）。"""
+    p = str(rel).replace("\\", "/")
+    if len(p) >= 2 and p[1] == ":":
+        return OFFSEAT_TIER_OUT
+    if p == ".." or p.startswith("../"):
+        return OFFSEAT_TIER_OUT
+    return OFFSEAT_TIER_IN
+
+
+def exit_guidance_text(rel: str) -> str:
+    """SWB-B16-b 修一（纯增）·deny 出路指引文案段＝可执行出路三条（只指不搬＝落点判据指向条款消费面，不复写条款正文）。"""
+    return (f"{EXIT_GUIDE_ANCHOR}｜出路指引＝本次写入因席位不可归因被拒，可执行出路："
+            "①如属本会话工作面内产物＝改落本会话工作面路径后经当票租约 path_globs 授权重试（租约经 lease-issuer 签发）；"
+            "②如需跨仓交接＝工单／交接件写在本会话工作面交接区，由用户或对方会话取用后在对方仓自行立案"
+            "（落点判据＝dev-discipline §十四 目 4 指向·只指不搬）；"
+            f"③当前写目标归一化字面＝{rel}，属他仓或仓外路径者按②移交路径处理，不落本仓协作目录。")
+
+
 def decide(identity: dict, file_path: str, map_path: str, leases_file: str,
            freeze_state_file: str) -> tuple[bool, str]:
     """核心判据（主路/退路同判，identity 只换身份源）：返回 (allow?, reason)。"""
@@ -271,7 +304,14 @@ def decide(identity: dict, file_path: str, map_path: str, leases_file: str,
 
     if seat is None:
         # fail-closed：席位不可归因即拒（写侧校验不猜身份）
-        return False, f"席位不可归因（agent_type={identity.get('agent_type')!r} agent_id={identity.get('agent_id')!r}）→ deny"
+        # SWB-B16-b 修二（策略分层骨架·J-1 采乙未施用＝两层现行判定值皆 deny＝判定值零变化）＋修一（reason 面纯增出路指引文案段＝deny 判定本身不变·拦截强度零变化）：
+        # 甲档＝本仓工作面内路径维持 deny；乙档＝本仓工作面外路径 ask 化随票面 §五 J-1 后置候补（未施用＝maintain deny＋指引）。
+        offseat_tier = classify_offseat_target(rel)
+        offseat_policy = OFFSEAT_TIER_POLICY[offseat_tier]
+        return False, (f"席位不可归因（agent_type={identity.get('agent_type')!r} agent_id={identity.get('agent_id')!r}）"
+                       f"｜工作面分层={offseat_tier}（{OFFSEAT_TIER_IN}＝本仓工作面内／{OFFSEAT_TIER_OUT}＝工作面外·ask 化后置候补未施用）"
+                       f"｜处置={offseat_policy}"
+                       f"｜{exit_guidance_text(rel)} → deny")
 
     # deny_globs 命中＝表2-1「明确不可写」列（U2/G1）
     for row in cfg.get("seats", []):
