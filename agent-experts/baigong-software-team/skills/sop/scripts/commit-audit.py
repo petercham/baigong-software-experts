@@ -42,6 +42,22 @@ CMD_PATTERNS = {
     "rebase": re.compile(r"\bgit\b[^|;&]*\brebase\b"),
     "force-push": re.compile(r"\bgit\b[^|;&]*\bpush\b[^|;&]*(--force(?!-with-lease)|-f\b)"),
 }
+# SWB-B16-a 修二（纯增·危险子命令词面退路族）＝CMD_PATTERNS 行族纯增＝仅「目标仓根解析失败」退路档激活（判序＝票面 rev-1 勘正①钉死：
+# 目标仓根解析命中优先→修一判定链；词面族仅解析失败退路路径激活＝fail-closed 防「解析器缺位即零拦」重演（BG-16 甲-4 荐项语义）；
+# 危险词面族在解析成功路径（本仓／跨面）零激活＝行为变化面最小＝本仓合法危险形态不入新拦＝K1 拦截阈值计数零差（V2 臂八差分臂））。
+DANGEROUS_SUBCMD_PATTERNS = {  # 闭集枚举＝reset --hard／push -f 族／checkout 丢弃形态
+    "reset-hard": re.compile(r"\bgit\b[^|;&]*\breset\b[^|;&]*--hard\b"),
+    "push-force": re.compile(r"\bgit\b[^|;&]*\bpush\b[^|;&]*(--force(?!-with-lease)|-f\b)"),
+    "checkout-discard": re.compile(r"\bgit\b[^|;&]*\bcheckout\b[^|;&]*(--\s+\S|\s--\s|-f\b|--force\b)"),
+}
+
+# SWB-B16-a 修一（纯增·目标仓根解析臂）＝写型／读型子命令族闭集枚举＋解析用词面锚（判据字面族·非决策词层·§19 三值维持）
+GIT_WRITE_SUBCMDS = frozenset({"commit", "reset", "push", "checkout"})
+GIT_READ_SUBCMDS = frozenset({"status", "log", "diff", "show"})
+_GIT_SUB_RE = re.compile(r"\bgit\b\s*(?:-{1,2}[A-Za-z][\w-]*(?:\s+(?:\"[^\"]*\"|'[^']*'|[^\s|;&]+))?)*\s+([a-z][a-z-]+)")
+_GIT_C_RE = re.compile(r"\bgit\b\s+-C\s+(\"([^\"]*)\"|'([^']*)'|([^\s|;&]+))")
+_REDIR_RE = re.compile(r"(?<![0-9A-Za-z_&])>{1,2}\s*(\"([^\"]*)\"|'([^']*)'|([^\s|;&<>]+))")  # 写形态闸＝stdout 覆盖／追加重定向；fd 复制（2＞dev－null、N＞＆、＆＞ 形态）值首含 & 或前置数字＝非文件写不入判定面（防误拦臂）
+_UNRESOLVED_VAL_RE = re.compile(r"\$\{|\$\(|\A\s*\$\S|\A\s*\Z")
 
 EXIT_BLOCKING = 2  # exit 2→blocking（§19 决策词表）
 
@@ -178,6 +194,97 @@ def is_commit_command(command: str) -> bool:
     return bool(re.search(r"\bgit\b[^|;&]*\bcommit\b", command))
 
 
+
+def _norm_cmp(p: str) -> str:
+    p = os.path.normcase(os.path.abspath(os.path.normpath(p)))
+    return p.rstrip(os.sep) or os.sep
+
+
+def _within_own_surface(root: str) -> bool:
+    """本仓面判定＝目标仓根与本仓三参考根（包根／project_root 现读／cwd）恰等同源（严格等值＝非包含关系＝他仓含本仓形态仍判跨面）。"""
+    nr = _norm_cmp(root)
+    return any(nr == _norm_cmp(ref) for ref in (pack_root(), project_root(), os.getcwd()))
+
+
+def _probe_target_root(seed: str) -> str:
+    """B16-a 修一·目标仓根解析＝经既有 project_root／_anchor_hit 同源语义探测序：
+    seed 归一→自最近存在祖先上溯，首个锚定自指命中／STRUCTURE 命中／.git 命中目录＝目标仓根；
+    三锚全缺＝落回 seed 自身归一（判定面＝路径同源比对非存在性＝非存在面路径仍入跨面判据）。"""
+    pack = pack_root()
+    seed_abs = os.path.abspath(os.path.normpath(seed))
+    d = seed_abs
+    while d and not os.path.exists(d):
+        parent = os.path.dirname(d)
+        if parent == d:
+            break
+        d = parent
+    probe = d
+    while probe:
+        if _anchor_hit(probe, pack) or _structure_hit(probe, pack):
+            return probe
+        if os.path.isdir(os.path.join(probe, ".git")) or os.path.isfile(os.path.join(probe, ".git")):
+            return probe
+        parent = os.path.dirname(probe)
+        if parent == probe:
+            break
+        probe = parent
+    return seed_abs
+
+
+def _git_subcommands(command: str) -> list[str]:
+    return _GIT_SUB_RE.findall(command)
+
+
+def _is_unresolved_value(val: str) -> bool:
+    """-C／重定向目标值不可解析态＝空值／shell 变量未展开残值（「${FX…}」类）＝解析失败入退路档（修二激活闸）。"""
+    return bool(_UNRESOLVED_VAL_RE.search(val.strip()))
+
+
+def resolve_target_surface(command: str) -> str:
+    """目标仓根解析臂·git 面（修一）：返回 own／cross／unparsed／none。
+    提取序＝git -C 值提取→缺＝cwd 推断（票面修一 verbatim）；读型豁免＝纯读族命令不入判定面（闭集＝GIT_READ_SUBCMDS）。"""
+    subs = _git_subcommands(command)
+    if not subs:
+        return "none"
+    has_write = any(s in GIT_WRITE_SUBCMDS for s in subs)
+    has_read = any(s in GIT_READ_SUBCMDS for s in subs)
+    if not has_write and has_read:
+        return "own"  # 读型子命令族豁免放行
+    if not has_write:
+        return "none"
+    m = _GIT_C_RE.search(command)
+    if m:
+        val = next((g for g in (m.group(2), m.group(3), m.group(4)) if g is not None), "")
+        if _is_unresolved_value(val):
+            return "unparsed"  # -C 值未展开／空值＝目标仓根解析失败＝修二退路档激活面
+        root = _probe_target_root(val)
+    else:
+        root = _probe_target_root(os.getcwd())
+    return "own" if _within_own_surface(root) else "cross"
+
+
+def cross_surface_findings(command: str, state: str) -> tuple[list[tuple[str, str]], list[tuple[str, str]]]:
+    """跨面命中清单＝(warn 族, confirm 族)。
+    warn 族＝跨面写型 git 子命令命中＋shell 重定向／echo 写形态目标落本仓外命中（修一第三段）；
+    confirm 族＝危险子命令形态（修二词面族同源复用）×跨面命中＝确认态三证载体（修三）。"""
+    warn_f: list[tuple[str, str]] = []
+    conf_f: list[tuple[str, str]] = []
+    if state == "cross":
+        for sub in dict.fromkeys(s for s in _git_subcommands(command) if s in GIT_WRITE_SUBCMDS):
+            warn_f.append(("git-" + sub, "git 写型子命令跨面"))
+        for name, pat in DANGEROUS_SUBCMD_PATTERNS.items():
+            if pat.search(command):
+                conf_f.append((name, "危险子命令跨面（确认态三证）"))
+    for m in _REDIR_RE.finditer(command):
+        val = next((g for g in (m.group(2), m.group(3), m.group(4)) if g is not None), "")
+        if not val or _is_unresolved_value(val):
+            continue
+        target = os.path.abspath(os.path.normpath(val if os.path.isabs(val) else os.path.join(os.getcwd(), val)))
+        if not _within_own_surface(target):
+            warn_f.append(("shell-redirect", "shell 重定向写形态目标落本仓外"))
+    return warn_f, conf_f
+
+
 def head_commit_info(repo_root: str) -> tuple[str, str]:
     """HEAD 提交哈希＋消息（记账/孤儿判定读数源）。"""
     try:
@@ -195,6 +302,34 @@ def prehook(args: argparse.Namespace, payload: dict) -> int:
     command = args.command or (payload.get("tool_input") or {}).get("command", "")
     if not command:
         return 0  # 无命令面＝不干预（决策词表内不自造额外输出）
+    # —— SWB-B16-a 修一＋修三：目标仓根解析段（纯增·居词面检查段前）＋修二退路闸（判序＝票面 rev-1 勘正①） ——
+    state = resolve_target_surface(command)
+    if state == "unparsed":
+        dang = [name for name, pat in DANGEROUS_SUBCMD_PATTERNS.items() if pat.search(command)]
+        if dang:
+            reason = f"B5 提交审计退路拦截：目标仓根解析失败＋危险子命令词面命中形态={dang}（修二退路档＝fail-closed 防解析器缺位即零拦）"
+            append_record(args.ledger, "呈报", "commit-audit.py", {
+                "event": "commit_audit_block", "decision": "block", "forms": dang,
+                "command_excerpt": command[:200],
+                "clause": "SWB-B16-a 修二退路档＝解析失败→危险词面兜底命中 exit 2＋BLOCK 行（rev-1 勘正①判序钉死）",
+            })
+            print(f"BLOCK commit-audit: {reason}", file=sys.stderr)
+            return EXIT_BLOCKING
+    warn_f, conf_f = cross_surface_findings(command, state)
+    for form, why in warn_f:  # 修三＝warn 双证载体＝台账留痕行（decision=warn 字段）＋stderr 输出行；warn 不入 §19 决策词层（三值维持）
+        append_record(args.ledger, "呈报", "commit-audit.py", {
+            "event": "commit_audit_warn", "decision": "warn", "form": form,
+            "command_excerpt": command[:200],
+            "clause": "SWB-B16-a 修一跨面目标仓根判定＋修三 warn 双证（BG-16 rev-1 勘正②钉死口径）",
+        })
+        print(f"WARN commit-audit: 跨面写形态判定命中＝{why}（{form}）＝warn 双证·非阻断", file=sys.stderr)
+    for form, why in conf_f:  # 修三确认态三证＝exit 0＋stderr 行首 CONFIRM commit-audit: 标记行＋台账 decision=confirm 字段（词表不扩）
+        append_record(args.ledger, "呈报", "commit-audit.py", {
+            "event": "commit_audit_confirm", "decision": "confirm", "form": form,
+            "command_excerpt": command[:200],
+            "clause": "SWB-B16-a 修三确认态三证载体（勘正②＝exit 0＋CONFIRM 标记行＋台账 confirm 字段）",
+        })
+        print(f"CONFIRM commit-audit: 确认态在场＝{why}（{form}）＝归宿主人类侧确认·脚本面不自阻塞", file=sys.stderr)
     hits = classify_command(command)
     ticket_id = extract_ticket_id(command)
     # orphan 判定：commit 命令且消息面（-m 引文/命令全文）无票 ID
