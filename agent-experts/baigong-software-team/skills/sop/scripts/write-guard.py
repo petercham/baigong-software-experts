@@ -279,6 +279,43 @@ def classify_offseat_target(rel: str) -> str:
     return OFFSEAT_TIER_IN
 
 
+# ---- SWB-B16-c 修一（纯增·宿主自有区白名单分流段＋白名单常量段）＋修二（判定拆分·「字段缺席」与「字段空值」两态） ----
+# 修一落位钉死申明（票面 rev-1 随登②甲 verbatim）＝白名单分流段落座＝freeze 全写 deny 判与席位归因 deny 判与
+#   deny_globs 判之后、租约匹配段之前＝白名单放行限在册席位（席位归因 deny 先判＝名册外写宿主区仍 fail-closed 存续）；
+# 白名单常量段居本脚本常量区具名＝不落 config 新面（选项三不取＝seat-permissions 域零扩面＝K2 归位）；
+# 「非仓根下」排除款＝居仓根下路径永不命中白名单（rev-1 随登②丙边界臂＝仓根自身落白名单前缀之下时排除款生效→入租约判据 deny 存续）；
+# 白名单绕道风险申明沿 BG-16 甲-2 选项一边＝防过失可接受＝对抗归 PF-F 向（B16-e／f 域）。
+# 修二语义钉死申明（票面 rev-1 随登②乙 verbatim）＝缺席＝--path 注入键＋file_path／path／target_file 三 payload 键
+#   四键形态全缺席→中性放行具名；任一键在场＝按现 fallback 取径入判据链＝空值态（有字段值为空）→维持 fail-closed deny；
+# GWP-P3-1 语义主轴保留＝拆分不违沿册语义（头部注释判据两行锚约束＝§二 GWP-P3-1 锚）。
+HOST_AREA_HOME_ENV_KEYS = ("USERPROFILE", "HOME")  # 宿主用户目录 env 锚闭集（两锚＝Windows／POSIX 宿主形态·逐枚在场者入前缀集）
+
+
+def host_area_prefixes() -> tuple:
+    """白名单前缀常量闭集＝宿主用户目录锚（env 两锚逐枚在场者）归一 posix 字面＋尾斜杠（票面 §三＝宿主用户目录内非仓根下路径＝前缀常量闭集枚举）。"""
+    out = []
+    for env in HOST_AREA_HOME_ENV_KEYS:
+        v = os.environ.get(env)
+        if not v:
+            continue
+        home = os.path.normcase(os.path.abspath(v)).replace("\\", "/").rstrip("/")
+        out.append(home + "/")
+    return tuple(out)
+
+
+def host_owned_area_hit(rel: str) -> bool:
+    """宿主自有区白名单命中判＝前缀命中 ∧ 「非仓根下」排除款（rel 居仓根下＝永不命中白名单·入租约判据）；
+    输入＝normalize_path 输出字面（仓外绝对路径形态保留小写盘符；仓根下形态已被 normalize 剥径为仓根相对＝双保险）。"""
+    p = os.path.normcase(str(rel)).replace("\\", "/")  # normcase 先行后转 posix＝防 Windows 面 normcase 反向转义致前缀比对失配
+    root = os.path.normcase(repo_root()).replace("\\", "/").rstrip("/")
+    if p == root or p.startswith(root + "/"):
+        return False  # 「非仓根下」排除款（rev-1 随登②丙＝仓根落白名单前缀之下之仓内租约外路径不命中→deny 存续）
+    for pre in host_area_prefixes():
+        if p.startswith(pre):
+            return True
+    return False
+
+
 def exit_guidance_text(rel: str) -> str:
     """SWB-B16-b 修一（纯增）·deny 出路指引文案段＝可执行出路三条（只指不搬＝落点判据指向条款消费面，不复写条款正文）。"""
     return (f"{EXIT_GUIDE_ANCHOR}｜出路指引＝本次写入因席位不可归因被拒，可执行出路："
@@ -319,6 +356,11 @@ def decide(identity: dict, file_path: str, map_path: str, leases_file: str,
             for g in row.get("deny_globs", []):
                 if glob_match(g, rel):
                     return False, f"路径∈deny_globs（表2-1 明确不可写·seat={seat} glob={g!r} path={rel}）→ deny"
+
+    # SWB-B16-c 修一·宿主自有区白名单分流段（落位＝freeze 全写 deny／席位归因 deny／deny_globs 判之后、租约匹配段之前
+    # ＝白名单放行限在册席位＝rev-1 随登②甲钉死口径兑现；命中即放行不入仓内租约判据＝留痕旁路风险申明沿甲-2 选项一边）
+    if host_owned_area_hit(rel):
+        return True, f"路径∈宿主自有区白名单（前缀常量闭集命中·非仓根下排除款通过·seat={seat} path={rel}）→ allow"
 
     # 租约面：路径须∈当席活跃租约 path_globs
     leases = [e for e in load_leases(leases_file) if e["lease"].get("seat_id") == seat]
@@ -364,6 +406,15 @@ def read_target(args: argparse.Namespace, payload: dict) -> str:
     return args.path or ti.get("file_path") or ti.get("path") or ti.get("target_file") or ""
 
 
+def target_key_present(args: argparse.Namespace, payload: dict) -> bool:
+    """SWB-B16-c 修二·四键在场探测（票面 rev-1 随登②乙钉死口径）：
+    --path 注入键（args.path 非 None）＋三 payload 键（file_path／path／target_file 按键在场检测、非按值真值检测）。
+    任一键在场＝按现 fallback 取径入判据链；四键形态全缺席＝缺席态（＝宿主自有工具无路径字段形态）。
+    键在场检测≠值真值检测＝防只认 file_path 在场性致 path／target_file 键形态被误判缺席→中性放行新旁路。"""
+    ti = payload.get("tool_input") or {}
+    return (args.path is not None) or ("file_path" in ti) or ("path" in ti) or ("target_file" in ti)
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="B5 写侧校验（PreToolUse deny·主路/退路双形并列缺省主路）")
     ap.add_argument("--input", default=None, help="stdin 不可用时的 PreToolUse payload JSON 文件（测试注入面）")
@@ -400,8 +451,15 @@ def main(argv: list[str] | None = None) -> int:
         target = ".collab/liveness/sentinel-write"  # 必中事件：哨兵路径无租约可命中→必 deny
 
     if not target:
-        print("REJECT: 写目标路径缺席（fail-closed）", file=sys.stderr)
-        print(deny_output("写目标路径缺席→deny"))
+        # SWB-B16-c 修二（判定拆分·「字段缺席」与「字段空值」两态＝票面 rev-1 随登②乙钉死口径）：
+        # 缺席态＝四键形态（--path 注入键＋file_path／path／target_file 三 payload 键）全缺席＝宿主自有工具无路径字段形态→中性放行具名；
+        # 空值态＝任一键在场但 fallback 取径值为空→维持 fail-closed deny＝GWP-P3-1 语义主轴保留（§二 锚约束＝拆分不违沿册语义）。
+        if target_key_present(a, payload):
+            # 空值态文案 verbatim 保持＝改前单态文案零回归（V2「空值态 deny 文案存续」字面兑现）
+            print("REJECT: 写目标路径缺席（fail-closed）", file=sys.stderr)
+            print(deny_output("写目标路径缺席→deny"))
+        else:
+            print("NEUTRAL write-guard: 写目标字段缺席（四键形态全缺席＝宿主自有工具无路径字段形态）→ 中性放行具名（SWB-B16-c 修二）", file=sys.stderr)
         return 0
 
     allow, reason = decide(identity, target, a.map, a.leases, a.freeze_state)
