@@ -211,3 +211,52 @@ C1 呈签前置＝无新设签字面申明在案（§〇 定性＝命中面全�
 ## 灰度→全量声明（票内具名·沿表2-2 不得现场裁量）
 
 本票无灰度臂（卫生票＝一次性全量＝缺省态即目标态）＝灰度判据＝§三 声明字段四判据齐＝decision-pack full-rollout 按声明机械比对；验收臂与声明判据对等自证＝§四 V2 探针断言族逐臂对四判据一一归位（判据一枚对一臂具名）。
+
+## rev-1 段（工单 LEAD-CONSTRAINT 三施工票 v1→rev-1·双席判词入链后修票·票尾续段·v1 原文段零回改·rev 间互不回改）
+
+rev-1 开段申明＝本段＝双席审票判词入链后按修票权续写（判词入链笔现读＝产品席判词链面 f53d132c＋QA 席判词链面 5468d358＝合议 T4 双席红同根独立同判＝不可现态放行）；修目＝红-QA1／红-QA2／红-QA3＋红-ProdA 同根／黄-QA4＋Prod 黄／随登＝六组逐条落点见下 R-1 至 R-5；本段＝修票段（架构席）＝零施工零投递零 git 写；本段起施工与验收窗以本段替换面为准（v1 对应行零回改＝只指不搬）。
+
+rev-1 窗现跑读数（禁誊 v1＝当轮现跑）＝date 2026-11-24 17:40＋链顶 5468d358（＝QA 判词入链笔＝链序 5468d358←f53d132c←f050a46b←6b2cc481 逐枚相衔零断照登）＋NO_INDEX_LOCK＋tracked 脏面 0 枚＋台账基线现跑照登＝包内 ledger 7 行／外层 ledger 1 行／leases 两址各 7 行（quarantine 副本＋双前缀地址＝v1 开工拍 7／8＋7 面活体漂移照登禁钉死＝验收窗对臂以施工窗开工现跑拍为准）；lease 探针族全部重定向 .scratch／LEAD-CONSTRAINT-REV／＝用毕即拆 ls 坐实随完工回报。
+
+R-1＝红-QA1＝B1 两枚债归因失实重写（v1 诊断段两枚归因作废替换＝锚件在场现跑直证）：
+
+    其一＝B1-a 锚件归因作废：v1 ⟦缺位锚件例＝.collab／decisions／2026-10-25-皮总拍板.md＝ls 现跑不存在⟧ ＝rev 现跑证伪＝该锚件于双前缀址 agent-experts／baigong-software-team／.collab／decisions／2026-10-25-皮总拍板.md 盘现在场＝12838 字节＋换锚笔 b29bc20d（SWB-B3a＝spec_file 锚八处改写笔＝provenance exit3→0 随笔）在链＝票面「不存在」叙述作废。
+    provenance exit 4 真因替换＝v1 现跑复现 exit 4＝stderr 行现读 ⟦infra error: 扫描域为空（〈分类目录〉／*／scripts／* 不存在）⟧＝check-provenance.py 行 348 infra 分支直读＝本仓根三分类 glob 现跑：agent-experts／*／scripts／* 零命中／agent-skills／*／scripts／* 仅 README.md（py／sh 过滤后 0）／softwares 缺位＝hits 空集→exit 4；旁证复现＝同脚本自 devkits 外层仓根跑 exit 0 直证（该根 glob 命中 object-build／scripts／publish.py）。全仓 spec_file 缺位真例现跑点名＝恰一枚＝check-pointers.py 头块行 23 指 agent-skills／object-build／references／50-directory.md＝盘现 ls 坐实缺位（v1 未点名该真例＝补登＝该枚处置入 R-3 写域随动同案面或 S2 注记面随裁具名）。
+    其二＝B1-b 归因限定替换：exit 2 复现＝⟦usage error: 包目录不存在：../multi-agent-collab-experts/workbuddy/baigong-video-team⟧＝真因＝调用锚径支＝行 164 DEFAULT_PKG 字面＋行 737 --pkg 缺省值＝仓根相对展开；自外层根跑缺省展开 exit 0 复现直证＝该支先于任何扫描与白名单消费＝v1「他仓包目录缺位案型」表述限缺省锚径在位态＝S2 注记行追加对 exit 2 支零效力（双席独立同判采纳）。
+    S5 臂重写（不达判据替换＝扫描域空集承接形态两形态随裁）＝bing-a＝check-provenance.py 扫描域空集支增零实例承接＝空集→coverage 注记行「scripts 族零实例」＋exit 0（＝TCB 行为变化一枚＝随 §〇 命中定性补目＝改动面多一枚具名）；bing-b＝脚本本体零动＝criteria 字段措辞改「exit 非4 或零实例 coverage 注记态具名在场」（填读闭集口径见 R-5）。S5 原「缺位锚件逐枚改锚」规格对 50-directory 真例一枚存续（改锚或注记随裁）。
+    J-2 补丙臂入写集声明（红-ProdA C-2 四步结论「甲乙均不达」采纳＝双席同判）＝bing-①＝check-source-of-truth.py 行 164—171 段 DEFAULT_PKG 存在性检查加降级承接＝缺位即转 single 模式并 WATCH 注记（行为变化一枚＝随 §〇 命中定性补目）；bing-②＝run-gates.sh 行 154 调用面补 --pkg 本仓 bundle 值（＝触 v1 禁动面 ⟦run-gates.sh 零触⟧ 一枚＝候裁开面具名）。两形态均须入当票租约 path_globs 随裁缩扩（bing-② 须 deny_globs 让出 run-gates.sh 行＝见 R-3 缩扩申明）＝V3 面单枚数随动；bundle 差集本体修正归后续专项两字段登记（认领方＝主理人随 BKTCLS 族）维持 v1 原荐值。
+
+R-2＝红-QA2＝§二 三行旧批次数替换＋C1／C2 登记族归因随更（v1 行 72 对应三枚条目作废替换＝rev 窗现跑读数）：
+
+    check-hook-health＝现跑 exit 0 零 BLOCK＝hooksPath-readings=0＋hook-blob 现值 6bc608017756c6c505ddd086c4a25e4943402583 与现钉全等＝v1「期望 8b785770」系 BG-15 施工笔 28b7a40f 随正前旧钉誊写（28b7a40f 系 v1 链顶 6b2cc481 祖先＝随正已在起草窗前入链）＝FX-HOOK-1 已随正。
+    check-adr＝现跑 findings 0 exit 0＝v1「OA-E-ADR-5 findings 159」仅存 2026-11-20 旧批次证据件＝旧数非当轮＝该行读数替换。
+    check-collab-buckets＝现跑 exit 0 违例 0＋.collab／quarantine NO_QUARANTINE_DIR＝MC-BUCKET-1 已迁外仓根 .collab／board／quarantine-baigong-root-copy-2026-11-20／（迁件笔链上在案）＝v1「BLOCK 命中一枚」替换。
+    C 残留登记族随更＝C1 MC-BUCKET-1＝销态（V2 全绿臂受阻叙述作废＝V2 实际受阻项＝provenance exit4＋sot exit2 两枚 infra＝与 R-1 同根）；C2 FX-HOOK-1＝销态（BG-15 已施工闭卷＝重装正钉回路已兑现＝认领行防重复处置标已自清）。
+
+R-3＝红-QA3＋红-ProdA 同根＝写域自洽缺口＝新增候裁槽 J-3（写域随动并案引用）＋先例归因改如实：
+
+    探针直证（rev 窗现跑＝countersign 形制合规 architect:值＋台账重定向 .scratch／LEAD-CONSTRAINT-REV／）＝v1 租约段 path_globs 七枚逐枚对 engineer 席 exit 2 REJECT ⟦越出席位写域行⟧（share／ 三枚＋双前缀 skills／tests 四枚＋票面本体一枚；单前缀 skills／… 具名文件同拒＝子集判定谓词对 skills／** 类 glob 行不命中具名直证）；config engineer 行现读＝write_globs 六 glob 零 share／ 行零 .github 行；leases 两址台账七行逐枚现读＝share／ 条目零。
+    先例归因替换＝v1 段界行 ⟦share／ 域写面＝FUXI-FX-U34 与 SWB-BKTCLS 两案当票租约在册先例沿守⟧＝台账面不可直证（链上笔写 share 面属实、租约台账零实例）＝归因改如实＝防投递窗对甲态可行性误判。
+    J-3＝本票写域随动候裁槽＝并案号 ⟦LEAD-CONSTRAINT-写域随动并案⟧（三票 share／＋.github／＋skills／sop／scripts／ 席位写域扩行＝同根案型＝票面互指同案号＝候裁并一窗实测防三票各自试错）＝两形态＝甲＝当票租约 path_globs 具面直纳实测先行（零 config 变更）；乙＝seat-permissions engineer 行 write_globs 扩行＝席位职权面变更归 C1 通道两级注随呈（扩面非收窄）。并案面实测枚举＝T4 本票七枚＋T1 四枚＋T2 share 四枚＋skills／sop／scripts／ 一枚＝一窗逐枚取回注入态与未注入态两态读数。建议采纳值＝甲先行实测，拒则转乙随呈（沿 T1 J-1 同制）。终裁归放行段＝本席不自拍。
+    租约段缩扩申明（v1 租约段存续待裁＝放行段裁后按本申明示扩例实例化）＝J-1 采甲＝path_globs 增 share／check-entity.py＋deny_globs 让出该枚；J-2 采 bing-①＝path_globs 增 share／check-source-of-truth.py；J-2 采 bing-②＝path_globs 增 share／run-gates.sh＋deny_globs 让出该枚；J-3 采甲＝path_globs 具名直纳＝实测面归并案窗；文件数随裁可至六至七枚＞5＝档位随动沿 v1 §〇 终裁归放行段臂。
+
+R-4＝黄-QA4＋Prod 黄＝J-1 甲态租约自斥勘正＋措辞对调勘正（口径＝rev 窗现跑对读 v1 禁动面枚行）：v1 禁动面枚行 ⟦check-entity.py（J-1 采乙态才入写集＝缺省零触）⟧ 与 J-1 定义（甲＝判定面增基线读臂＝该枚入写集侧；乙＝闸本体不动＝零触侧）方向相反＝勘正读法钉死＝check-entity.py 采甲态才入写集与租约 path_globs 且 deny_globs 让出 share／check-entity.py；采乙态（缺省）零触且 deny 存续。V3 段 ⟦J-1 采乙态则 check-entity 入面单⟧ 同款对调＝按采甲入面单取。v1 行 51（采甲态则判定面内增基线读臂具名随候裁）与定义相符＝零勘正。
+
+R-5＝随登＝其一＝C1／C2 现场已自清照登（NO_QUARANTINE_DIR＋check-collab-buckets exit 0＋check-hook-health exit 0＝R-2 读数面）＝V2「不含 infra 炸点」臂前提更新＝唯 provenance exit4＋sot exit2 两枚 infra 存续＝run-gates --no-write 现跑仍 exit 4 照登＝修复臂归 R-1。其二＝criteria 填读归一约定一行（三票同款）＝expect 首词闭集取值＝{通过，绿，红，拒，当场红，具名在场}＝读数填首词＋归因注记＝decision-pack 比对＝首词等值＝防字面传通退裁量。其三＝修目外判词黄面如实挂账＝QA 判词 T4 黄-1（S1 四字段混成第三形＝键语义放行段逐字钉死）／黄-4（V2 check-entity 探针臂须 run-gates 注入语境或显式 --project-name 实参）／黄-5（tests／b16e／run-all.sh 路径失实＝既有入口＝tests／ 根 run-all.sh）＝三枚未列本单修目＝随放行段处置具名＝禁静默丢账。
+
+rev-1 替换 criteria_json 声明字段（施工与验收窗取本块为准＝v1 §三 声明字段面零回改只指不搬）＝
+
+    criteria_json＝[
+      {"criterion": "check-entity 现跑 OA-T1 三文件违例行 grep 计数（run-gates 注入语境或显式 --project-name 实参）", "expect": "0 或豁免标注行具名在场"},
+      {"criterion": "check-provenance 现跑 exit 码", "expect": "通过（exit 非4＝零实例承接态 coverage 注记行具名在场）"},
+      {"criterion": "check-source-of-truth 现跑 exit 码", "expect": "通过（exit 非2＝丙臂降级承接或调用锚径补参后进入判定态）"},
+      {"criterion": "bash share／run-gates.sh --root . --no-write 现跑 exit 码（C1 已自清＝判据前提更新）", "expect": "通过（exit 0＝判据一/二/三经 R-1 修臂可达）"}
+    ]
+
+rev-1 闸复跑读数（修票落笔后现跑·票型面三闸对含 rev 段全票面）：
+
+    python agent-experts／baigong-software-team／skills／sop／scripts／check-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T4-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／preflight-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T4-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／check-pointers.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T4-施工票-v1.md → exit 0（零行）
+
+rev-1 尾申明＝本段六组修目落点＝R-1（红-QA1）／R-2（红-QA2）／R-3（红-QA3＋红-ProdA 同根＋J-3 并案槽）／R-4（黄-QA4＋Prod 黄）／R-5（随登三枚）＝v1 原文段零回改；租约段 v1 面存续待裁＝缩扩按 R-3 申明示扩例；档位与文件数随裁面归放行段终裁沿 v1 §〇。——架构席·修票段·零 git 写。

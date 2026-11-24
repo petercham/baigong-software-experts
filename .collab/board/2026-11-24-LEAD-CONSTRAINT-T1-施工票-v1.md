@@ -237,3 +237,29 @@ C1 呈签前置＝无新设签字面申明在案（§〇 三枚命中定性＝�
       完成判据＝无需动作＝知悉即可。
 
 （本清单＝白话语体沿呈拍三律＝每步三句内可读＝完成判据机械可回执＝T1 票验收面消费＝回执缺任一判据回执＝QA 判黄）
+
+## rev-1 段（工单 LEAD-CONSTRAINT 三施工票 v1→rev-1·双席判词入链后修票·票尾续段·v1 原文段零回改·rev 间互不回改）
+
+rev-1 开段申明＝本段＝双席审票判词入链后按修票权续写（判词入链笔现读＝产品席链面 f53d132c＋QA 席链面 5468d358＝合议 T1 红0＝带黄随 rev 后可放行）；修目＝黄六枚（黄-ProdA／黄-ProdB／黄-QA1 至黄-QA4）＝落点 R-1 至 R-3；本段＝修票段（架构席）＝零施工零投递零 git 写；施工与验收窗以本段替换面为准（v1 对应面零回改＝只指不搬）。
+
+rev-1 窗现跑读数（禁誊 v1）＝date 2026-11-24 17:4x＋链顶 5468d358＋NO_INDEX_LOCK＋tracked 脏面 0 枚；lease-issuer 探针族（countersign 形制合规＋台账重定向 .scratch／LEAD-CONSTRAINT-REV／）＝本票 path_globs 四枚写集逐枚对 engineer 席现跑＝.github／workflows／gate-replay.yml／.github／CODEOWNERS／share／gate-replay-tool-pin.txt／share／install-hooks.sh＝四枚全部 exit 2 REJECT「越出席位写域行」＝J-1 甲态实测拒直证在册（双前缀与单前缀径同拒＝子集判定谓词不命中具名）。
+
+R-1＝黄-ProdA＝§七 步骤二勾选面勘正（白话清单步骤二行替换读法）＝v1 步骤二勾选列 ⟦Restrict pushing＋Require pull request reviews before merging＋Do not allow force pushes＋Do not allow deletions＋Include administrators⟧ 中「Require pull request reviews before merging」一枚摘除＝该勾选超已签机制清单（提案包 §六甲机制(3) 已签清单＝main 禁直接 push＋禁 force push＋禁改写历史＋required status check＋admin enforcement＝无每笔 PR 须评审项）＝开启后作者不能自批＝唯一批合权账号＝决策者本人＝每笔入主干多一次决策者网页批准＝逐笔人工税＝与已签「合并归主理人机械动作」负担模型冲突＝且对 6d「改检看器须人类批准」目标零增益（6d 已由 CODEOWNERS 覆盖径承载）。勘正读法＝步骤二勾选＝Restrict pushing＋Do not allow force pushes＋Do not allow deletions＋Include administrators＝恰等于已签机制(3) 清单；若决策者明示裁可欲开全局 reviews＝单独随呈后另勾＝缺省不勾。
+
+R-2＝黄-ProdB＋黄-QA3＝写域缺口枚数如实化＋钉值件首写执行主体闭环：
+
+    写域缺口如实化＝v1 J-1 与租约射程注记只列 .github／ 两枚受写域校验面＝rev 窗实测补录＝share／gate-replay-tool-pin.txt＋share/install-hooks.sh 两枚同款 exit 2 REJECT（本窗直证如上）＝受写域校验面枚数如实化＝四枚同列（.github／ 两枚＋share／ 两枚）＝J-1 甲态实测面按四枚取＝并案引用＝并案号 ⟦LEAD-CONSTRAINT-写域随动并案⟧（三票 share／＋.github／＋skills／sop／scripts／ 席位写域扩行同根案型＝票面互指同案号＝候裁并一窗实测防三票各自试错＝甲态＝租约具面直纳实测先行；乙态＝seat-permissions 扩行＝C1 面随呈带确认＝两级注沿 v1 J-1 在册）。v1 段界行 ⟦S4 件＝share／ 域写先例在册⟧ 归因改如实＝leases 两址台账七行现读零 share／ 条目＝链上笔写 share 面属实、租约台账无在册记录＝「不可直证」如实（黄-QA2 落此）。
+    钉值件首写执行主体闭环（6c 申明改「令值＋誊写＋确认」三段具名）＝其一＝令值＝决策者本人下令并确认首写值（＝T1 施工笔链顶全式 sha＝步骤五回话「钉值确认」在册）；其二＝誊写＝经当票租约 path_globs 在册态由工程师席投递窗誊写入链（租约在册→写侧 allow 判定层兑现＝v1「host 无 share／ 写域」兜底申明对誊写笔作废替换＝机械落点闭环）＋服务端 CODEOWNERS share／ 行事前拦非授权改动双兜底存续；其三＝确认＝投递笔 message 含决策者确认字样＋钉值件在链可读（v1 步骤五完成判据沿册）。产品席 C-6 案（首写走人类网页上传＝S3 出租约）不采＝网页上传件不入本地链＝与钉值件须链上可读前提冲突＝誊写租约面具名方案为准。
+
+R-3＝黄-QA1＋黄-QA4＝两处引用如实化＋criteria 填读闭集一行：
+
+    查证项三如实化＝v1 §二·丙「主理人现用令牌权限面复核（…＝EDTA 前笔预践登记在册＝403 验证臂位）」＝预践登记件（.collab／decisions／2026-11-24-皮总亲践-签2前两步预践登记-v1.md）rev 窗现读＝⟦Administration 收窄效果（403 面）未验＝T1 落地后随哨兵日核面取证登记（本案不造假验证）⟧＝403 面＝未验非已践＝引用替换＝「EDTA 前笔＝换钥匙两步已践登记在册（读面 fetch exit 0＋ls-remote 全等）；403 面未验＝归本票判据臂四（main 直推样件＝403 拒）落地后取证」；
+    criteria 填读归一约定一行（三票同款）＝expect 首词闭集取值＝{通过，绿，红，拒，当场红，具名在场}＝读数填首词＋归因注记＝decision-pack 比对＝首词等值＝防字面传通退裁量；本票四判据 expect 首词取用＝{绿，红，红，拒} 具名对位。
+
+rev-1 闸复跑读数（修票落笔后现跑·票型面三闸对含 rev 段全票面）：
+
+    python agent-experts／baigong-software-team／skills／sop／scripts／check-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T1-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／preflight-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T1-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／check-pointers.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T1-施工票-v1.md → exit 0（零行）
+
+rev-1 尾申明＝本段修目落点＝R-1（黄-ProdA 勾选摘除）／R-2（黄-ProdB 四枚同列＋黄-QA2 先例如实＋黄-QA3 首写主体闭环）／R-3（黄-QA4 查证项三如实＋黄-QA1 criteria 闭集）＝黄六枚全落＝v1 原文段零回改；J-1 面 v1 预设去路（甲实测拒转乙随呈）经本窗四枚实测坐实＝待并案窗裁；租约段 v1 面存续待裁不自扩面硬闯。——架构席·修票段·零 git 写。

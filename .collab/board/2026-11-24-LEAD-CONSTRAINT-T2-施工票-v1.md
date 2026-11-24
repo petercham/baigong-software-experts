@@ -207,3 +207,32 @@ C1 呈签前置＝无新设签字面申明在案（§〇 定性＝签1 已签射
 ## 灰度→全量声明（票内具名·沿表2-2 不得现场裁量）
 
 灰度臂＝四形令牌样件双向断言＋闸面集成正反臂＋配对核三形臂＝§三 声明判据五枚全过＝QA 按声明判据机械门禁＝decision-pack full-rollout 机械比对；软面臂（令牌校验＋配对数据面）可先行＝硬面臂（闭卷「T1 链齐后远端绿名单终拦」验收）随 T1 收口链开卷＝两臂判据分列具名＝互锁不混裁。
+
+## rev-1 段（工单 LEAD-CONSTRAINT 三施工票 v1→rev-1·双席判词入链后修票·票尾续段·v1 原文段零回改·rev 间互不回改）
+
+rev-1 开段申明＝本段＝双席审票判词入链后按修票权续写（判词入链笔现读＝产品席链面 f53d132c＋QA 席链面 5468d358＝合议 T2 红1＝不可现态放行）；修目＝红-QA1＋黄四枚（黄-QAA／黄-QAB／黄-ProdA／黄-ProdB）＝落点 R-1 至 R-4；本段＝修票段（架构席）＝零施工零投递零 git 写；施工与验收窗以本段替换面为准（v1 对应面零回改＝只指不搬）。
+
+rev-1 窗现跑读数（禁誊 v1）＝date 2026-11-24 17:4x＋链顶 5468d358＋NO_INDEX_LOCK＋tracked 脏面 0 枚；lease-issuer 探针族（countersign 形制合规＋台账重定向 .scratch／LEAD-CONSTRAINT-REV／）＝本票 path_globs 五枚写集逐枚对 engineer 席现跑＝share／run-gates.sh／share／check-staged-declaration.py／share／gate-token-verify.py／share／gate-token-issue.py／双前缀 reconcile-daily.py＝五枚全部 exit 2 REJECT「越出席位写域行」＝甲态实测拒直证在册；config engineer 行现读＝write_globs 六 glob 零 share／ 行；leases 两址台账七行现读 share／ 条目零。
+
+R-1＝红-QA1＝share／ 四枚（S1 至 S4）写域随动无案型槽补实＝新增候裁槽 J-3＋先例归因改如实：
+
+    v1 面缺口如实化＝J-2 只覆 S5（skills／sop／scripts／ 一枚）＝S1 至 S4 share／ 四枚票内无同款候裁位＝施工窗当窗四枚必撞拒＝开工即停手＝与同日 T4 判词红-3 同根案型；v1 租约射程注记行 ⟦run-gates.sh 与 check-staged-declaration.py 两枚＝历史各案当票租约具名先例在册（FX-U34／BKTCLS／PF 族）⟧ ＝leases 台账面不可直证（两址台账全检零 share／ 条目＝链上笔写 share 面属实、租约台账无在册记录）＝归因改「不可直证」如实。
+    J-3＝本票写域随动候裁槽＝并案号 ⟦LEAD-CONSTRAINT-写域随动并案⟧（三票 share／＋.github／＋skills／sop／scripts／ 席位写域扩行同根案型＝票面互指同案号＝候裁并一窗实测防三票各自试错）＝两形态＝甲＝当票租约 path_globs 具面直纳实测先行（零 config 变更＝本窗五枚实测已拒＝甲态对 engineer 现配不可行直证在册）；乙＝seat-permissions engineer 行 write_globs 扩行＝席位职权面变更归 C1 通道两级注随呈（扩面非收窄）。建议采纳值＝并案窗一次性实测注入态／未注入态两态读数后随裁（与 T1 J-1、T4 J-3 同批）。终裁归放行段＝本席不自拍。
+    J-2（S5 一枚）维持 v1 预设去路＝本窗实测补录＝双前缀径 reconcile-daily.py 具名对 engineer exit 2 REJECT＝恰落 v1 ⟦甲先行实测拒转乙随呈⟧ 预设＝程序自洽＝J-2 面随 rev 补此实测读数一行即闭。
+
+R-2＝黄-QAA＝配对核「标注态」输出形制钉一行（S5 规格追加）＝标注态落位＝reconcile-daily 既有读数面 diff_items 载荷内增具名键 pair-gap＝值闭集 {missing-signature，missing-commit，complete} 三形逐一对位＝既存量生效日前条目值＝complete 加标注注记不判红＝输出行形制沿该件既有一行一键读数列不改＝验收「逐一对位」按此三值机械判＝放行段无需再裁输出形制。
+
+R-3＝黄-QAB＝S3 消费入账主体闭环一行（S3 规格追加）＝现有机件核读＝state-transition／sign-verify 均系六节点签字面非令牌消费通道＝「既有账本机件通道」对令牌消费无现成实体＝闭环钉定＝消费入账动作归 S1／S2 调用侧内嵌臂＝验签通过后经 reconcile 同族账本写入通道（ledger.jsonl append 行经脚本面写入＝RECORD_TYPES 六类零动＝载荷扩展字段具名）记「签字」类令牌消费记录＝S3 本体维持只读零写申明（S3 校验输出＝入账数据供给方＝写动作在调用侧脚本＝自相抵消除）＝入账写机件＝S1／S2 内嵌臂具名入 S 规格。
+
+R-4＝黄两枚：
+
+    黄-ProdA＝生效前置节补一行（升 T4 四判据全过为硬生效前置核验＝决策者签发频次护栏）＝⟦T2 硬生效（旧自助降闸形态失效＝无证即 BLOCK）前置核验＝T4 收口态四判据全过（T4 票 §三 criteria 四枚现跑绿）＝未过＝软面臂（配对数据面＋令牌校验件就位）照常先行、硬生效缓挂随放行段裁＝防 T4 带红收口时日均数十枚签发轰炸决策者（本窗现跑＝run 键去重降闸批次 334＋六运行日＝日均约 55.7 批＝v1 §二 活体读数随登不另择）⟧＝把 v1 ⟦T4 消化后本读数应趋零⟧ 前提引用升成开工闸具名；趋势护栏空窗随登如实＝频次趋势观察者 T3 挂起＝R-7 报警语体报警主体缺位＝随放行段处置（T2 收口或 reconcile 日终对账面纯计数读数一行方案＝归放行段裁非本 rev 修目＝挂账禁静默丢账）。
+    黄-ProdB＝防复用判据诚实限定补一句（v1 诚实申明面追加语义）＝⟦同码复用的账本防重＝本地可被持账本写权者拆（host 持账本机制写权）＝属防过失＋事后现形层＝远端镜像配对差分＋日终对账配对可检出异常＝兜底在远端面⟧；先例出处改如实＝v1 段界行 ⟦share／ 域写先例在册＋skills／sop／scripts／ 面写域随动见 §五 J-2⟧ 中 share／ 先例部分按 R-1 台账不可直证口径同步改如实。
+
+rev-1 闸复跑读数（修票落笔后现跑·票型面三闸对含 rev 段全票面）：
+
+    python agent-experts／baigong-software-team／skills／sop／scripts／check-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T2-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／preflight-ticket.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T2-施工票-v1.md → BLOCK 0／WATCH 0 exit 0
+    python share／check-pointers.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T2-施工票-v1.md → exit 0（零行）
+
+rev-1 尾申明＝本段修目落点＝R-1（红-QA1＋J-3 并案槽＋先例归因如实化＋J-2 实测补录）／R-2（黄-QAA 输出形制钉行）／R-3（黄-QAB 入账主体闭环）／R-4（黄-ProdA 生效前置节＋黄-ProdB 诚实限定）＝v1 原文段零回改；租约段 v1 面存续待裁＝J-3 采乙后随席位扩行重签；档位不变（写集五枚零增减＝随动面归并案窗）。——架构席·修票段·零 git 写。
