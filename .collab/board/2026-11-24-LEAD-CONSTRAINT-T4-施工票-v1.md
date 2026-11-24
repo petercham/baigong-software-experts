@@ -270,3 +270,14 @@ rev-1 尾申明＝本段六组修目落点＝R-1（红-QA1）／R-2（红-QA2）
 - 排程＝LC-EXP 扩行微票→T4→T1→T2（工程师席同席串行）；T3 挂起沿签4 另案。
 - 放行段自靶＝票面终态三闸复跑读数见投递笔。
 （放行段尾）
+
+## 验收＋收口段（2026-11-24 夜窗·append-only·并入票面尾段）
+
+- 验收判词＝.collab／audits／2026-11-24-SWB-LC-T4-验收判词-QA席-v1.md（fresh eyes 非同构臂＝QA 自造注入与对抗样件，禁照抄回执构造值在册）＝红0／黄1／绿13＝合议可收口。
+- criteria 四判据验收窗现跑全绿＝check-entity exit 0（五 pattern 全 0＋baseline-exempt 具名在场）／check-provenance exit 0＋coverage 注记在场／check-source-of-truth exit 1＋bing-① WATCH 在场（反臂 --pkg 缺位 exit 2 原语义存续）／run-gates --no-write exit 0 GATE PASS＝缺省态零降闸＝「降闸需求面趋零」票级兑现机械可判（提案包 R-7 生效句兑现臂闭合）。
+- J-1 甲态对抗四面全绿＝集合外搬家必拦（豁免键非纯文本键坐实）／损坏三形制 exit 4／基线缺位更严不更松／新违例照拦 fail-closed 未松动；基线件 13 条目四字段闭集全等＋stale 0。
+- 黄一枚登记性＝V6 四词入链笔全量面自引案型（命中面＝回执 V6 行自身枚举＝计数臂排自引沿册随登）。
+- 随登认领面（回执 §五＋判词随登）＝bundle.lock 差集本体修正归 BKTCLS 族（B16 族后首批）／sot single 态 MC-SOT-1 advisory 命中枚数＝验收窗现跑 grep 计数照登禁誊旧数（判词臂读数在册）／drill-05 存量红（freeze 联动断言）＝三枚入候补池归主理人排程。
+- 案型随登＝工程师席首实例 RPC 超时折损（PacRpcClient 5000ms·零滞留写件）＋FX_COMMIT_DECLARE 空格分隔不识别案型（脚本口径＝逗号或换行＝闸行为正确归操作侧）＝两枚入卫生池攒批。
+- T4 六笔链齐（-TICKET→双席 -QA-REV→-REV→-RELEASE→-BUILD→验收＋-GCLOSE）＝收口＝排程下一票＝T1（工程师席同席串行前置解除）；.scratch／LEAD-CONSTRAINT-T4／ 与 -T4-QA／ 临时物回收归卫生池攒批拆除。
+（收口段尾）
