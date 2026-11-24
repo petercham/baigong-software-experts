@@ -298,10 +298,37 @@ def head_commit_info(repo_root: str) -> tuple[str, str]:
         return "", ""
 
 
+# —— SWB-B16-d 修一（纯增·提交身份引导提示态）＝prehook 检出 commit 命令＋仓 git 身份缺失（user.name／user.email 任缺）
+# → stderr 附出路指引提示行＝不拦＝提示态＝零拦截强度变化＝判定值与台账面零变化（J-1 采乙在册＝修二并 B16-f＝本票写集仅修一一枚）
+# 定位申明＝防过失导向＝「报错无出路」EXT 轻目本体消解；-c 参数随手伪造身份面＝本修不拦＝伪造对抗归 B16-f 采信面域（沿 BG-16 甲-5 定位行）。
+GIT_IDENTITY_KEYS = ("user.name", "user.email")  # 仓 git 身份两键（缺失判定面＝config --get 非零退出或空值）
+EXIT_GUIDE_ANCHOR = "EXIT-GUIDE"  # 机器可判锚词（ASCII 字面＝stderr 提示面可 grep 命中＝沿 B16-b 先例形制）
+
+
+def git_identity_missing(repo: str) -> list[str]:
+    """目标仓 git 身份缺失面探测（只读 git config --get 面＝非零退出或空值＝缺失）；
+    探测异常（仓不可读／超时）＝回落空列表＝提示面永不自引入新判定面（纯增零风险纪律）。"""
+    missing: list[str] = []
+    for key in GIT_IDENTITY_KEYS:
+        try:
+            r = subprocess.run(["git", "-C", repo, "config", "--get", key],
+                               capture_output=True, text=True, timeout=10)
+        except Exception:
+            return []
+        if r.returncode != 0 or not r.stdout.strip():
+            missing.append(key)
+    return missing
+
+
 def prehook(args: argparse.Namespace, payload: dict) -> int:
     command = args.command or (payload.get("tool_input") or {}).get("command", "")
     if not command:
         return 0  # 无命令面＝不干预（决策词表内不自造额外输出）
+    # —— SWB-B16-d 修一（纯增·居词面检查段前＝提示态段）＝不拦＝零台账追加＝判定面零扰动 ——
+    if is_commit_command(command):
+        missing_ids = git_identity_missing(args.repo)
+        if missing_ids:
+            print(f"HINT commit-audit: {EXIT_GUIDE_ANCHOR} 提交身份引导（提示态·不拦）＝当仓 git 身份缺失＝{'、'.join(missing_ids)}＝commit 将因 Author identity unknown 直接失败；出路指引＝①仓级补全身份＝git config user.name 与 git config user.email 各补一键 ②单次命令级＝git -c user.name=… -c user.email=…（随手伪造面＝防过失定位申明＝伪造对抗归 B16-f 采信面域＝本修不拦）③跨仓交接＝交接件经工作面交接区由对方仓自行立案（落点判据＝dev-discipline §十四 目 4＝只指不搬）", file=sys.stderr)
     # —— SWB-B16-a 修一＋修三：目标仓根解析段（纯增·居词面检查段前）＋修二退路闸（判序＝票面 rev-1 勘正①） ——
     state = resolve_target_surface(command)
     if state == "unparsed":
