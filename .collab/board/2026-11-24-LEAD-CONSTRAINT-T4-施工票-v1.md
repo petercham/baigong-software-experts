@@ -260,3 +260,13 @@ rev-1 闸复跑读数（修票落笔后现跑·票型面三闸对含 rev 段全�
     python share／check-pointers.py --target .collab／board／2026-11-24-LEAD-CONSTRAINT-T4-施工票-v1.md → exit 0（零行）
 
 rev-1 尾申明＝本段六组修目落点＝R-1（红-QA1）／R-2（红-QA2）／R-3（红-QA3＋红-ProdA 同根＋J-3 并案槽）／R-4（黄-QA4＋Prod 黄）／R-5（随登三枚）＝v1 原文段零回改；租约段 v1 面存续待裁＝缩扩按 R-3 申明示扩例；档位与文件数随裁面归放行段终裁沿 v1 §〇。——架构席·修票段·零 git 写。
+## 放行段（2026-11-24 17:5x·主理人程序确认·append-only·并入票面尾段）
+
+- 合议＝双席判词（首轮）→rev-1→双席复审-1＝T4 红三全销（产品席红转绿＋QA红3→0）／T1 红0四黄全销／T2 红1→0全销＝红面零＝放行。
+    裁一（写域随动并案终裁）＝取**乙态**＝config engineer 行扩四行 {share/＋.github/＋agent-experts/baigong-software-team/skills/＋agent-experts/baigong-software-team/tests/}（QA 并案实测 18 枚两态枚举＝甲态 18/18 REJECT 不可行直证；乙态兜尽 15 枚施工写面；三枚票面本体不归工程师席＝归投递窗沿册）。扩行微票＝LC-EXP 前置微票先行（写面＝config／seat-permissions.json 一枚＝工程师席当票租约具名）＝射程定性＝已签 LEAD-CONSTRAINT 射程内执行面（票面预设「实测拒转乙随呈」去路＋T1 J-2 签系在册）＝主理人自裁随呈知悉；若决策者判此为 C1 签字面则一票止工作废扩行（呈报面已带此申明）。
+    裁二（T4 J-2 丙臂终裁）＝取 bing-a＋bing-① 组合（双席现跑可达性实证＝非4 直达／非2 single 旁路坐实）＝bing-b 自斥不采；bing-②（run-gates 补参）不采＝触禁面且产品席勘正（须 --pkg＋--skills-root 两参齐）成本高于①；criteria 块 provenance/sot 两枚括号注随本裁定格 bing-a／bing-① 形制＝双席随登同项闭合。
+    裁三（J 系随裁项）＝T4 J-1 甲（采甲才入写集＋deny 让出＝R-4 勘正态）；T1 J-1 乙态随裁一／J-2 甲（CODEOWNERS owner＝决策者本人账号）；T2 J-1 甲（公钥入仓 share/ 域）／J-2 随裁一。
+- 随登＝T2 硬生效前置「T4 四判据全过」入生效语义（落位＝rev 替换面承载＝语义等效随登）；趋势护栏空窗纯计数一行随 T2 S5 施工具名；QA 黄新-1 经裁二闭合；现版 diff_items 字符串列 schema 归施工回执具名。
+- 排程＝LC-EXP 扩行微票→T4→T1→T2（工程师席同席串行）；T3 挂起沿签4 另案。
+- 放行段自靶＝票面终态三闸复跑读数见投递笔。
+（放行段尾）
