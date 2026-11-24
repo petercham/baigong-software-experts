@@ -764,16 +764,35 @@ def main() -> int:
 
     if args.selftest_seatdecl:
         return selftest_seatdecl(root)
-    pkg_abs = os.path.abspath(os.path.join(root, args.pkg))
+    mode = args.mode
+    pkg_arg = args.pkg
+    tag_arg = args.tag
+    extra_watch: list = []
+    pkg_abs = os.path.abspath(os.path.join(root, pkg_arg))
     if not os.path.isdir(pkg_abs):
-        sys.stderr.write('usage error: 包目录不存在：%s\n' % args.pkg)
-        return 2
+        if mode == 'dual' and pkg_arg == DEFAULT_PKG:
+            # bing-①（SWB-LC-T4·票面 rev-1 R-1 J-2 补丙臂＋放行段裁二采 bing-①）：
+            # DEFAULT_PKG 缺位＝「三仓并列同一父目录」前提在本运行根不成立＝环境事实
+            # 非调用误用；该缺位支先于任何扫描与白名单消费，旧行为 exit 2 使判定面整体
+            # 不可达。承接形制＝缺位即转 single 模式扫本仓 bundle（roottag＝softdev，
+            # 与本仓单根调项同款）＋具名 WATCH 注记行（走路由表 on_severity WATCH＝advisory）。
+            # 显式 --pkg 指不存在目录的 exit 2 用法错语义存续（仅缺省值缺位走降级）。
+            pkg_arg = 'agent-experts/baigong-software-team'
+            tag_arg = tag_arg or 'softdev'
+            mode = 'single'
+            pkg_abs = os.path.abspath(os.path.join(root, pkg_arg))
+            extra_watch.append(('share/check-source-of-truth.py', 164, 'WATCH', 'MC-SOT-2',
+                                'DEFAULT_PKG 缺位（缺省包目录在本根不存在）＝降级 single 模式扫本仓 bundle'
+                                '（roottag＝softdev）·缺位包＝%s' % DEFAULT_PKG))
+        if not os.path.isdir(pkg_abs):
+            sys.stderr.write('usage error: 包目录不存在：%s\n' % pkg_arg)
+            return 2
 
     agents, skills = [], []
     abs_of = {}
     skills_abs = None
     tags = set()
-    if args.mode == 'dual':
+    if mode == 'dual':
         skills_abs = os.path.abspath(os.path.join(root, args.skills_root))
         if not os.path.isdir(skills_abs):
             sys.stderr.write('usage error: 技能真源根不存在：%s\n' % args.skills_root)
@@ -789,7 +808,7 @@ def main() -> int:
         abs_of.update({rel: os.path.join(pkg_abs, rel.split(':', 1)[1]) for rel in a1 + s1})
         abs_of.update({rel: os.path.join(skills_abs, rel.split(':', 1)[1]) for rel in a2 + s2})
     else:
-        tag = args.tag or DEFAULT_TAG_SINGLE
+        tag = tag_arg or DEFAULT_TAG_SINGLE
         a, s = collect_md(pkg_abs, tag, include_all_non_agents=False)
         agents, skills = a, s
         tags = {tag}
@@ -797,7 +816,7 @@ def main() -> int:
         abs_of.update({rel + '#root': pkg_abs for rel in a + s})
 
     if not agents:
-        sys.stderr.write('usage error: %s 下无 agents/ 内 md\n' % args.pkg)
+        sys.stderr.write('usage error: %s 下无 agents/ 内 md\n' % pkg_arg)
         return 2
 
     baseline = load_baseline()
@@ -816,6 +835,7 @@ def main() -> int:
             agents, skills, abs_of, skills_abs, baseline, seat_baseline)
 
     # --- 输出一行一封（run-gates FINDING_RE 兼容）＋计数行 ---
+    findings.extend(extra_watch)  # bing-① 降级 WATCH 注记行（具名在场）
     violations = 0
     for rel, i, sev, spec, msg in sorted(findings):
         print('%s:%d: %s %s %s' % (rel, i, sev, spec, msg))
@@ -825,7 +845,7 @@ def main() -> int:
     print('check-source-of-truth: 模式 %s｜文件 %d（agents %d＋skills %d）'
           '｜BLOCK %d（新命中 %d）｜基线豁免 %d（WATCH·键＝文本＋文件集合）'
           '｜指针 WATCH %d｜exit %d'
-          % (args.mode, len(agents) + len(skills), len(agents), len(skills),
+          % (mode, len(agents) + len(skills), len(agents), len(skills),
              violations, violations, n_exempt, n_watch_ptr, exit_code))
     return exit_code
 

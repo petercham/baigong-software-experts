@@ -345,8 +345,13 @@ def main(argv: "list[str]") -> int:
         targets = default_targets(root)
 
     if not targets:
-        sys.stderr.write("infra error: 扫描域为空（<分类目录>/*/scripts/* 不存在）\n")
-        return 4
+        # bing-a（SWB-LC-T4＝票面 rev-1 R-1 S5 重写＋放行段裁二采 bing-a）：扫描域空集
+        # ＝scripts 族零实例（本仓根三分类 glob 零命中＝调用面环境事实），非基础设施炸点。
+        # 承接形制＝coverage 注记行＋exit 0（零实例＝判据无可执行对象，按覆盖度记账＝与
+        # check-entity 注入类子判据 coverage 行同法；判据本体一字未动）。
+        # 显式 --target 指向不存在件仍走 die_usage＝exit 2 用法错原语义存续。
+        print("coverage: scripts 族零实例（<分类目录>/*/scripts/* 命中零）＝S-04 本次无可执行对象")
+        return 0
 
     providers = existing_providers(root)
     if not providers:

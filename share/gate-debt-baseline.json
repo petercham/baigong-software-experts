@@ -1,0 +1,110 @@
+{
+  "note": "gate-debt-baseline.json＝SWB-LC-T4 白名单基线件（只读数据件·零逻辑）。逐条目四字段闭集＝spec_id＋行文本＋出现文件集合＋债条目归因。豁免键＝「行文本＋出现文件集合」（沿 MC-SOT-EXEMPT 先例＝不取纯文本键，堵同文本搬家盲区）；仅当「行文本匹配」且「出现文件∈集合」才承接豁免，集合外新载体照 BLOCK。只收 D1 系在场条目（check-entity 现跑存量命中）；B1 系 infra 修复与 C 系登记归因不入本基线。本件条目＝施工窗开工盘点现跑取证生成（禁手抄）；新条目入库须走票增行。",
+  "exemption_key": "行文本＋出现文件集合（不是纯文本键）",
+  "items": [
+    {
+      "spec_id": "OA-T1",
+      "text": "ls \"$(git -C /d/multi-agent-collab-devkits rev-parse --git-common-dir)\" | grep -c \"next-index.*\\.lock$\"   # 主仓侧残骸只读照登＝本窗现跑 30 枚（mtime 抽样全早于本窗＝陈旧残骸归主理人删锁权）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/software-orchestration/references/workbuddy-runtime.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（project-name 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "git -C /d/multi-agent-collab-devkits rev-parse HEAD                       # 主仓链顶四十位现读（成对另一侧·只读）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/software-orchestration/references/workbuddy-runtime.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（project-name 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "git rev-parse HEAD:share/check-pointers.py; git -C /d/multi-agent-collab-devkits rev-parse HEAD:share/check-pointers.py   # 分叉例成对现跑＝本链 33781b31 开头 ‖ 主仓 d5e2cfe2 开头",
+      "files": [
+        "agent-experts/baigong-software-team/skills/software-orchestration/references/workbuddy-runtime.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（project-name 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "链内同型效力面三枚（J-1 采甲）＝①T2e 收口 行 123（WATCH 对拍前必查取证窗存量＝归因先行禁判漂移）＋②T2e 收口 行 153（存量红归因后归后续票射程＝不入本笔基线口径）＋③卷入登记-9cbe850混合笔-v1.md 行 40（blob 8ad9addb59845ebe948967859cae7283263137c7／47 行现跑命中）＝「按 YAGNI 与 11-14 皮总『立观察账径做不候拍』口径，本项只登记现象，不立项、不排程、不入候裁队列」；实名唯一＝agent-experts／baigong-software-team／.collab／decisions／2026-11-17-卷入登记-9cbe850混合笔-v1.md（票面转引名「混入登记」系一字符差＝转引名漂移案型本尊＝R-5 消费面对象＝本卷及收口 E3 一律照链上实名「卷入登记」附钉 8ad9addb／行 40）。",
+      "files": [
+        "agent-experts/baigong-software-team/skills/software-orchestration/references/root-cause-discipline.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "头注一·来源票面＝.collab／architect／2026-11-20-ITER-B-跨实例协作与认领协议-票面-v2.md（blob 钉值 89c926be7771171fb387dc6df5c7507995a839da）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/cross-instance-protocol.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "头注二·放行登记件＝.collab／decisions／2026-11-20-ITER-B-放行登记-v1.md（blob 钉值 4eb9f5bdccac7bfbd2e175292086bfed3ffcce0a）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/cross-instance-protocol.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "| 2026-11-19 | 3fea556f8854d14cbc7785934dcbc0429832e027／面单一枚（share／check-collab-lint.py） | GTFAST 主根窗（主仓链面） | lint 剪枝已落地＝我域侧 lint 基线计数待随动 | 无独立单（随 FX-HOOK-1 备案单随登） | 已登记（NOT-IN-WT-CHAIN 现跑 exit 1 在册） |",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/external-ticket-spec.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "| 2026-11-19 | 两仓成对＝本链 share／check-collab-buckets.py blob e098bd5528b257ab88f5adb88c83d2bd5768ef45／312 行 ‖ 主仓侧现势 blob 922fe2e9075978d042231881a311aa2421672b79／169 行（成对讲法·非单笔领办面） | GTFAST 主根窗（主仓链面） | 桶闸判臂两侧分叉＝MC-PAIR-1 配对段本链已施（T1c BUILD 笔 2d90ccb50fdb0f34f54cd9d90d1776ab07cfbdbe）‖ 主仓未含桶名闭闸扩展（主仓唯一笔 f530859c5fc8ab1afc927c9392b8a570f446b3dd＝MC-BUCKET-1 本体）＋计划行 122 三判据两仓均未落＝配对段以本链面为准 | EXT-2026-11-19-T2e-G7三工具归属定版知会单-v1 | 已登记（两侧分叉现跑在册＝NOT-IN-WT-CHAIN 沿册） |",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/external-ticket-spec.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "--since 缺省 2026-11-20（J-5 采甲放行定格＝存量全豁免防炸基线）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/scripts/check-ticket.py"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "DEFAULT_SINCE = \"2026-11-20\"  # J-5 采甲放行定格",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/scripts/check-ticket.py"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "POSITIVE_EFFECTIVE = \"2026-11-25\"  # 正向闸落位闸日＝放行落链日现取＋一日（8a18d534 author 2026-11-24 现读＋1＝勘正④口径＝面日期 ≥ 本值方入 ct9／ct10 域＝落链当日及既存同日面全豁免＝禁誊起草值沿 BG-15 J-2 先例）",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/scripts/check-ticket.py"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据）；租约写面外或不宜遮除处＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "| 2026-11-19 | 811bd223ce944eeab4cdf386e1ab8d4a8bbbe0a2／面单两枚（首枚 share／check-hook-health.py·末枚 share／check-source-of-truth.py） | GTFAST 主根窗（主仓链面） | share 闸族 worktree 感知改版＝我域 worktree 侧消费面待随动 | EXT-2026-11-19-T2h-FXHOOK1钉值随动对账备案单-v1 | 已登记（NOT-IN-WT-CHAIN 现跑 exit 1 在册） |",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/external-ticket-spec.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据·登记行表格行时间戳字面）；租约写面外＝基线兜底态·SWB-LC-T4 点名入册"
+    },
+    {
+      "spec_id": "OA-T1",
+      "text": "| 2026-11-19 | d93cc863b341a798c7d328f8548f87ad84093385／面单七枚（首枚 share／check-collab-lint.py·含钩子重装） | GTFAST 主根窗（主仓链面） | 主仓钩子重钉 02d30d01e53f9c7b38803dfbd1d599f9a23c4d16／9 行＝我域 worktree 侧期望钉未随动 | EXT-2026-11-19-T2h-FXHOOK1钉值随动对账备案单-v1 | 已登记（NOT-IN-WT-CHAIN 现跑 exit 1 在册） |",
+      "files": [
+        "agent-experts/baigong-software-team/skills/sop/references/external-ticket-spec.md"
+      ],
+      "debt_attribution": "D1 系在场条目＝check-entity OA-T1 开工盘点现跑存量命中（date 子判据·登记行表格行时间戳字面）；租约写面外＝基线兜底态·SWB-LC-T4 点名入册"
+    }
+  ]
+}

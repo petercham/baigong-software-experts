@@ -183,7 +183,7 @@ worktree 与主仓共享 gitdir 对象库但各持链 HEAD（本链 baigong-soft
 
 ### 依据附钉
 
-T2h 收口 7f889958／142 行行 125（知会登记台账三行首样＝NOT-IN-WT-CHAIN 判据机械可核＝供 T2f 运行时适配面消费）；T2d-α 收口 97cfda37／140 行行 52（GTFAST／WTGATE 笔 merge-base NOT-IN-WT-CHAIN 消费面如实登记）＋行 58（主仓侧零感知成对形制）；EXT-2026-11-19-T2e-G7 三工具归属定版知会单（真位＝同 decisions 桶·具名可查）三枚两侧分叉成对值；本窗四成对现跑＝链顶（241f71d5 开头 ‖ dbd144ae 开头）／check-pointers（33781b31 ‖ d5e2cfe2）／check-collab-buckets（e098bd55 ‖ 922fe2e9）／hooksPath（在位 ‖ exit 1 空）。
+T2h 收口 7f889958／142 行行 125（知会登记台账三行首样＝NOT-IN-WT-CHAIN 判据机械可核＝供 T2f 运行时适配面消费）；T2d-α 收口 97cfda37／140 行行 52（GTFAST／WTGATE 笔 merge-base NOT-IN-WT-CHAIN 消费面如实登记）＋行 58（主仓侧零感知成对形制）；`EXT-2026-11-19-T2e-G7` 三工具归属定版知会单（真位＝同 decisions 桶·具名可查）三枚两侧分叉成对值；本窗四成对现跑＝链顶（241f71d5 开头 ‖ dbd144ae 开头）／check-pointers（33781b31 ‖ d5e2cfe2）／check-collab-buckets（e098bd55 ‖ 922fe2e9）／hooksPath（在位 ‖ exit 1 空）。
 
 ## R-6 席零 git 写可证性上限
 

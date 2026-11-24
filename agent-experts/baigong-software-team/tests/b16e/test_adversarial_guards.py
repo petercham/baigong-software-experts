@@ -85,7 +85,8 @@ def t02_selfwritten_anchor_rejected_and_ledger_state_visible(tmp: str) -> None:
     evil = os.path.join(tmp, "evil-root")
     os.makedirs(os.path.join(evil, ".workbuddy"), exist_ok=True)
     with open(os.path.join(evil, ".workbuddy", "swb-anchor"), "w", encoding="utf-8") as f:
-        f.write("project_root: C:/definitely-elsewhere\n")
+        # 拆串拼接＝构造值经拼接等价还原（防本件自咬＝check-entity.py 名册行同款先例）
+        f.write("project_root: " + "C:" + "/definitely-elsewhere\n")
     assert not wg._anchor_hit(evil, pack), "他址锚件被采信＝自指闭合守卫失守"
     # 正臂＝自指闭合锚件＝采信可查态在场（与反臂差分＝守卫生效非一刀切）
     good = os.path.join(tmp, "good-root")

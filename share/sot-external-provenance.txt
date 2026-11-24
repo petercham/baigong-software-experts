@@ -10,3 +10,8 @@ drama-craft/references/continuity-checklist.md
 drama-craft/references/twist-library.md
 agents/story-architect.md
 agents/continuity-editor.md
+# SWB-LC-T4 S2 注记行（票面 rev-1 R-1 点名真例承接＝S5「改锚或注记随裁」取注记臂）：
+#   check-pointers.py 头块行 23（OB-DIR-3 spec_file）所指下列路径＝盘现缺位
+#   （agent-skills/object-build 域退役后未随动＝provenance 扫描域零实例态下不入现行判定面；
+#   本行＝产地注记承接登记＝check-source-of-truth A2 消费面具名在场＝本体修正归 BKTCLS 后续专项）。
+agent-skills/object-build/references/50-directory.md

@@ -46,6 +46,7 @@ from __future__ import annotations
 
 import argparse
 import fnmatch
+import json
 import os
 import re
 import sys
@@ -131,6 +132,36 @@ def in_registration_roster(name: str) -> bool:
     return any(fnmatch.fnmatch(name, pat) for pat in REGISTRATION_NAME_ROSTER)
 
 
+# ---- 存量债白名单基线读臂（SWB-LC-T4·票面 §五 J-1 采甲态＝放行段裁三在册）----
+# 基线件＝同目录 `gate-debt-baseline.json`（只读数据件·零逻辑＝消费臂在本件判定面内）。
+# 豁免键＝「行文本＋出现文件集合」＝与 check-source-of-truth.py 的 MC-SOT-EXEMPT
+# 既有豁免实现同构（不取纯文本键，同文本搬家到集合外新文件照计）。既有豁免类别
+# 语义物理化，非新增豁免类别。
+# 只收 D1 系在场条目（开工盘点现跑存量命中）；B1 系 infra 修复／C 系登记归因不入基线。
+# 基线件缺位＝无基线（全部照计，更严不更松）；形态不符或损坏＝exit 4（不猜语义）。
+GATE_DEBT_BASELINE = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                  "gate-debt-baseline.json")
+
+
+def load_gate_debt_baseline() -> "dict[str, frozenset]":
+    """读基线件：返回 {行文本 -> 既定出现文件集合}（逐条目四字段闭集消费其中三字段）。"""
+    if not os.path.isfile(GATE_DEBT_BASELINE):
+        return {}
+    try:
+        with open(GATE_DEBT_BASELINE, "r", encoding="utf-8") as handle:
+            data = json.load(handle)
+        return dict((item["text"], frozenset(item["files"])) for item in data["items"])
+    except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
+        sys.stderr.write("infra error: 基线件损坏或形态不符 %s: %s\n" % (GATE_DEBT_BASELINE, exc))
+        raise SystemExit(4)
+
+
+def baseline_exempt(baseline: "dict[str, frozenset]", rel: str, raw: str) -> bool:
+    """豁免判定：行文本（strip 后）命中基线且该文件 ∈ 既定出现文件集合。"""
+    allowed = baseline.get(raw.strip())
+    return allowed is not None and rel in allowed
+
+
 def die_usage(msg: str) -> "None":
     sys.stderr.write("usage error: %s\n" % msg)
     raise SystemExit(2)
@@ -202,7 +233,9 @@ def main(argv: "list[str]") -> int:
         return 4
 
     patterns = build_patterns(projects, persons)
+    baseline = load_gate_debt_baseline()
     counts: "dict[str, list[str]]" = {key: [] for key, _, _ in patterns}
+    exempted: "list[str]" = []  # 基线豁免注记（非 finding·具名在场＝criteria 判据承载行）
     first_hit: "dict[str, str]" = {}  # 每模式首个命中的 file:line（聚合 finding 的落点）
     for path in files:
         rel = os.path.relpath(path, root).replace(os.sep, "/")
@@ -236,6 +269,10 @@ def main(argv: "list[str]") -> int:
                     not in_html_block and SPECPROV_END_RE.match(raw)):
                 in_prov_block = False
                 in_html_block = False
+            # 基线兜底臂（J-1 采甲＝遮除优先后的兜底面）：命中行文本命中基线且本文件
+            # ∈ 既定出现文件集合 → 转具名豁免注记、不计 counts（判定面内消费＝豁免类别
+            # 既有语义物理化；集合外新载体照计＝同文本搬家必被抓）。
+            hit_in_baseline = baseline_exempt(baseline, rel, raw) if baseline else False
             for key, _label, pat in patterns:
                 if key == "date":
                     # 豁免①②④：provenance 块内／changelog 文件／账本 COPY.state 整行跳过
@@ -246,6 +283,9 @@ def main(argv: "list[str]") -> int:
                         # 豁免③：全角括注内的版本/决策注日期
                         if in_fullwidth_paren(masked, match.start()):
                             continue
+                        if hit_in_baseline:
+                            exempted.append("%s:%d: 基线豁免（文本＋出现文件集合）pattern=%s" % (rel, lineno, key))
+                            continue
                         counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
                         first_hit.setdefault(key, "%s:%d" % (rel, lineno))
                     continue
@@ -254,10 +294,16 @@ def main(argv: "list[str]") -> int:
                     if any(marker in raw for marker in HISTORICAL_MARKERS):
                         continue
                     for match in re.finditer(pat, raw):
+                        if hit_in_baseline:
+                            exempted.append("%s:%d: 基线豁免（文本＋出现文件集合）pattern=%s" % (rel, lineno, key))
+                            continue
                         counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
                         first_hit.setdefault(key, "%s:%d" % (rel, lineno))
                     continue
                 for match in re.finditer(pat, raw):
+                    if hit_in_baseline:
+                        exempted.append("%s:%d: 基线豁免（文本＋出现文件集合）pattern=%s" % (rel, lineno, key))
+                        continue
                     counts[key].append("%s:%d: %s" % (rel, lineno, match.group(0)))
                     first_hit.setdefault(key, "%s:%d" % (rel, lineno))
 
@@ -274,6 +320,12 @@ def main(argv: "list[str]") -> int:
                 "%s: %s OA-T1 项目实体命中 pattern=%s count=%d（规范件须换项目仍成立；名单见 pattern 行）"
                 % (first_hit[key], SEV_BLOCK, key, len(hits))
             )
+
+    # 基线豁免具名在场行（非 finding＝不新造 SEV 词、不进路由表；计数行＋逐条行＝
+    # criteria「豁免标注行具名在场」判据承载面＋T2 配对账消费面）。
+    print("baseline-exempt: count=%d（键＝行文本＋出现文件集合·基线件＝share/gate-debt-baseline.json）" % len(exempted))
+    for line in exempted:
+        print("  %s" % line)
 
     # 注入类子判据的覆盖度提示：**不是 finding**（OA-T1 在路由表里配 block，把
     # 「清单没注入」记成 OA-T1 违规＝把**配置问题**记成**产物违规**——正是
