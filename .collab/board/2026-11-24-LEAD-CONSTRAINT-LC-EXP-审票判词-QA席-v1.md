@@ -91,3 +91,33 @@
 （本件＝QA席审票判词·判词效力随签字矩阵归签字席落账；本席零 git 写＝投递归主理人）
 
 -QA-REV
+
+## 复审-1 段（LC-EXP rev-1 入链后黄面销账窄复审·本件尾 append-only 续段·v1 判词段零回改·rev 间互不回改）
+
+复审-1 窗现跑读数（禁誊 v1＝当轮现跑）＝date 2026-11-24 20:1x＋链顶 889b733a（＝LC-EXP rev-1 入链笔＝链序 889b733a←9f3fa88e←00462abd←9eb12f0e 逐枚相衔现读零断）＋NO_INDEX_LOCK＋tracked 脏面一枚＝产品席判词件（他案脏面照登零带入＝本席未触）；rev-1 靶面两式对钉现跑＝git hash-object 盘现 3843ec8cb0220a76e0a41074aa83614486e3c086＝链面 git rev-parse 889b733a:同径全等＋cat-file blob wc＝269 行＋v1 面（9eb12f0e blob）wc＝222 行＋git diff 两笔 --numstat＝47 增 0 删＝派工单「行 222 起纯插 47 行＝v1 零触」复证全等；rev-1 段行 224—269 先现读入册；三台账开工拍现跑＝外层 7／内层 8／leases 7＝7／8／7＝与前窗开工拍全等。探针族全部重定向仓根 .scratch／LEAD-CONSTRAINT-LC-EXP-QA2／＝票 ID 族 QA2-LEXP-＊＝本席本窗自造＝零照抄架构席 LC-EXP-REV 参数族＝SWB_REPO_ROOT 显式锚包根现设现跑；用毕即拆 ls 坐实随回报。
+
+黄-1 销账核（对位 R-1＝票面行 230—234）＝
+- 能力面扩围诚实申明名实相符现读＝扩行第四枚 skills／ 前缀行落笔规格 verbatim 在册（票面行 100）＋守卫族五枚恰居该径（五枚本体现定位＝agent-experts／baigong-software-team／skills／sop／scripts／）＝行 232 申明与实态对位；
+- GUARDFIRE 限界臂独立复跑＝扩展配（.scratch 内存构造＝engineer 行九枚现读＋四枚 verbatim 尾追加＝枚数 9→13 现跑）＋具名守卫单文件径签发请求 → exit 0 落账（ticket=QA2-LEXP-G1）；基线配同款请求 → exit 2「越出席位写域行」对照命中；该租约态写侧注入请求对 write-guard.py 本体 → ALLOW「路径∈租约」＝票面行 251「签发 exit 0＋写侧 ALLOW＝能力上界如实入票」两面对齐全等；
+- 存续臂 A 独立非同构复跑＝扩展配＋当票租约形制（path_globs＝config／** 不收守卫径＝T-A 签发 exit 0 直证形制可签发）＋engineer 注入态对 write-guard.py 本体写侧请求 → decision 输出 deny「路径∉当席租约 path_globs」＝票面行 248 预期臂命中＝deny 存续复证；控制臂 B 对照＝基线真配＋真租约台账（七行在册只读）＋同款请求 → deny 同靶＝行 249 复证；
+黄-1＝销账（R-1 申明如实＋限界臂两面直证存续＋存续臂 deny 存续独立复跑命中＝行 252「ALLOW 即升红」去路未触发）。
+
+黄-2 销账核（对位 R-2＝票面行 236—240）＝
+- 两层口径如实归位复证两层＝其一＝lease-issuer 落账条目真源现读＝lease 体仅四字段｛ticket_id，path_globs，seat_id，hash｝＋外层｛ts，countersign，instantiated_from｝＝deny_globs 对签发面零机械消费体（签发段只消费 write_globs 子集校验＝行 130 判定式存续）；其二＝C 臂独立复跑＝扩展配＋config／** 租约（QA2-LEXP-A1）＋config／thresholds.json 写侧请求 → write-guard ALLOW「路径∈租约」＝「写侧被拒」不成立＝票面行 238／250 名实不符直证与「签发面＋事后面」两层口径如实对位（事后面＝V3 面单恰一枚＋V5 互证承载在册）；两不采形态理由行（行 240）现读在场；
+- 灰度判据六枚替换面（票面行 256—265）可判性现跑＝python 段提取＋括号平衡＋json.loads＝恰六枚＝v1 五枚存续＋新增判据六；expect 首词六枚逐枚现读＝通过／通过／拒／通过／通过／拒＝全部 ∈ R-5 归一闭集｛通过，绿，红，拒，当场红，具名在场｝＝decision-pack 机械比对面可执行；判据六（守卫本体写侧拦截存续臂）机械可判性＝expect「拒（deny 存续＝ALLOW 即升红呈主理人）」与本窗臂 A 复跑读数 deny 机械对位＝验收窗可执行非空转槽；
+黄-2＝销账（两层口径如实归位＋判据六枚替换面机读合法＋新增臂可判）。
+
+黄-4 销账核（对位 R-4＝票面行 244—246）＝CR 73 勘正对拍现跑＝改前靶件 CR 字节计数 73（LF 73／CRLF 73 三读数成对）；S1 落笔模拟（.scratch 内存构造＝write_globs 行原位尾追加四元素＝CRLF 保形＝真件零触）＝改后 CR 现跑 73 不变＋JSON 合法 exit 0＋seats 六行不变＋枚数 9→13＋git diff --no-index --numstat＝1 增 1 删＝R-4 勘正「改前 73／改后 73 不变」「74＝增物理行案型口径非本案」「验收窗 CR 臂期望值取改后 73」三读数对拍全等（与本席 v1 窗扩展面复现 CR 73 同靶存续）；
+黄-4＝销账。
+
+（黄-3／J-1 归产品席面＝本席零表态；R-3／R-5 照登面本席不判。）
+
+结论句＝本席黄三枚对位 R-1／R-2／R-4 全部销账成立＝能力面诚实申明如实＋GUARDFIRE 限界臂两面对齐复证＋存续臂 A 独立非同构复跑 deny 存续＋两层口径名实归位＋判据六枚替换面机械可判＋CR 73 勘正对拍全等＝黄面销账、本臂零新增红黄。
+
+复审-1 纪律自证随登＝本窗全程零 git 写＝add／commit／amend／checkout／stash／rm 零调用（还原臂全用 git cat-file／rev-parse 只读）；唯一写面＝本件尾 append-only 续段（派工单点名写面＝原判词件本体＝票面零触）；禁检索自救＝无外部检索；状态零改＝三本真账未触（两拍哈希全等直证）；三账收工拍复跑＝7／8／7 枚数两拍全等＋sha256 逐本两拍全等（leases 48d95ebe…／内层 ledger 60797674…／外层 ledger ff4ae086…两拍同值）＋QA2-LEXP 字面于三本真账 grep 计数各 0＝重定向纪律兑现；产品席判词件 tracked 脏面一枚＝他案照登零带入未触；fresh eyes＝零读其他席未入链产出（rev-1 票面＝链上笔 889b733a 链上读面口径）；体例沿册＝裸文＋全角斜杠·零 at 零反引号·命令读数缩进段·40 位全钉或前八位脱配对。
+
+- 自靶归零臂现跑（落笔后）＝check-ticket --target 本判词→BLOCK 0／WATCH 0 exit 0；check-pointers --target 本判词→exit 0；preflight＝票骨架尺不归判词面＝沿 PF-H 案型申明不列臂；夹具拆后 ls 坐实＝目录不存在现跑随回报。
+
+（本段＝QA席复审-1 销账判词·判词效力随签字矩阵归签字席落账；本席零 git 写＝投递归主理人）
+
+-QA-REV
