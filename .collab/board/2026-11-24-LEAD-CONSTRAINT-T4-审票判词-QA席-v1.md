@@ -74,3 +74,35 @@ decision-pack.py full-rollout 消费体现读＝判据读取＝声明字段逐�
 - 红-2＝§二 两行旧批次数违现跑申明（hook-health 旧钉读数＋check-adr 159）＋C2 归因失效（BG-15 已闭卷）＝rev 两行刷新＋C2 销态。
 - 红-3＝写域／租约自洽缺口（全 path_globs 现配不可签发＋先例申报台账不可证＋无写域候裁槽）＝rev 补 J 槽＋先例归因改如实。
 - 总判＝不可现态放行＝rev-1 后最狭窄复核＝本席红臂复跑（provenance／sot 修案对表现跑＋lease 探针复跑）即可，无需全轮复审。
+
+## 复审-1 续段（rev-1 转绿臂·QA 席机检臂单席一次跑·append-only 追加＝v1 判词段零回改）
+
+- 复审窗读数（本席现跑）＝链顶 e5110637（＝rev-1 入链笔）＋date 2026-11-24 17:5x＋NO_INDEX_LOCK＋tracked 脏面 0 枚；三票 rev 面两式现跑全等＝T4 261 行／415334685a843e41d52292e963f8896158536cfe＋T2 237 行／6bfdafc36e419ce0b61525cf5733c9bb1dd4750e＋T1 264 行／79464e5385fda0628f31d2297419751d0466f98a（链面＝盘现＝派工预期）；三票票型面三闸对含 rev 段全票面本席现跑＝九跑各 BLOCK 0／exit 0（rev 段自引读数互证成立）。
+- 只读自证＝零 git 写；探针族全部落仓根 .scratch／QA-REV2-LC／＝台账重定向（lease 探针两态 leases 落 scratch 两枚＋pairing 样件 ledger 落 scratch）＝真账终核＝外层 1／包内 7／双前缀 8＋quarantine 副本 8＋leases 两址各 7＝开工拍终拍两式全等零染自证；探针域用毕即拆 ls 0 随完工回报。
+
+红-1 销账＝成立（R-1 重写面与本源取证逐点对拍全命中）：
+- 锚件在场＝双前缀址 agent-experts／baigong-software-team／.collab／decisions／2026-10-25-皮总拍板.md ls 现跑在场 12838 字节（单前缀址仍缺位＝v1「不存在」叙述对票面所指名址证伪）＋换锚笔 b29bc20d 链上现读在场（message 含皮总拍板×2 迁 decisions 具名）＝R-1 其一全对。
+- provenance 真因对拍＝行 348 infra 分支「扫描域为空（〈分类目录〉／*／scripts／* 不存在）」现读命中＋本席独立复跑＝自包根 --root . exit 4（stderr 该行现读）／自 devkits 外层仓根跑 exit 0（旁证复现＝外层三分类 glob 命中仅 object-build／scripts／publish.py 一枚＝本仓根空集真因坐实）＝R-1 全对。
+- sot 真因对拍＝行 164 DEFAULT_PKG 字面＋行 737 --pkg 缺省值现读＝仓根相对展开支；行 768—769 usage-error 支先于任何扫描与白名单消费现读；sister 仓在盘（D:／multi-agent-collab-experts／workbuddy／baigong-video-team ls 现跑）＋外层根跑 exit 0 复现直证＝R-1 其二全对。
+- 缺位真例独立重扫＝全仓 spec_file 锚 28 枚／缺位恰一枚＝check-pointers.py:23 → agent-skills／object-build／references／50-directory.md（包根 ls 现跑缺位）＝与 R-1「恰一枚」点名具名全等；该枚处置归 R-3 写域随动同案面或 S2 注记面随裁＝存续申明照登。
+- 新臂口径「非4／非2」可达性独立判定＝provenance 非4：bing-a 可达（空集支转 coverage 注记＋exit 0＝机械可满足）；bing-b 不可达（脚本零动则包根跑 exit 4 依旧，且 rev 替换 criteria #2 括注已绑死「＝零实例承接态 coverage 注记行具名在场」＝bing-b 态下无该行＝自斥）。sot 非2：bing-① 可达（行 164—171 存在性检查降级承接→入判定态＝判据三／四两判据均可满足）；bing-② 仅判据四可达＝判据三「现跑」按 V2 探针臂字面（python share／check-source-of-truth.py --root . 单独跑）仍 exit 2。bing-② 触 run-gates deny 让出＝与 R-3 缩扩申明互扣＝联动闭环申明照登。
+- 黄新-1＝bing-b／bing-② 两臂与替换 criteria #2／#3 配对不完备（放行段若裁此两臂则 criteria 须随动改联＝裁-据联动一行级＝不挡转绿＝随登）。
+
+红-2 销账＝成立（R-2 三行现数独立复跑对拍全等）：check-hook-health exit 0＋hooksPath-readings=0＋hook-blob 现值 6bc608017756c6c505ddd086c4a25e4943402583 与现钉全等；check-adr findings 0 exit 0（OA-E-ADR-5 命中计数现跑 0）；check-collab-buckets exit 0 违例 0＋.collab／quarantine NO_QUARANTINE_DIR 现跑。C1／C2 销态叙述成立＝V2 实际受阻项＝provenance exit4＋sot exit2 两枚 infra 本席复现（run-gates --no-write 现跑 exit 4 照登＝OA-T1 三枚 BLOCK 另面照登＝修复臂归 R-1 口径相符）。
+
+红-3 销账＝成立（R-3 三件套齐＋探针复证）：J-3 槽补列在册（并案号 LEAD-CONSTRAINT-写域随动并案＝与 T1 rev R-2／T2 rev R-1 同案号三票互指现读）；先例归因改如实（本席两址台账 grep share／ 条目零现跑复证＝「台账面不可直证」成立）；租约段缩扩申明四裁臂示扩例在位（J-1 甲→check-entity 入 path＋deny 让出／J-2 bing-①→sot／bing-②→run-gates＋deny 让出／J-3 甲→具名直纳）；本席独立复跑 T4 path_globs 七枚对 lease-issuer（engineer＋countersign 形制合规＋台账重定向 scratch）＝七枚全部 exit 2 REJECT「越出席位写域行」＝rev 窗读数复现。
+
+黄面处置清点：黄-3 销（R-4 甲乙互斥勘正读法钉死现读）；黄-4 销（criteria #1 已钉 run-gates 注入语境或显式 --project-name 实参）；黄-2 销（R-5 二首词闭集 {通过，绿，红，拒，当场红，具名在场}＝decision-pack 行 127 字符串等值比对现读复核＝闭集填读恢复机械比对语义）；黄-1／黄-5＝rev R-5 三具名挂账未销不静默丢＝随放行段处置＝随登。
+
+计数变化＝红 3→0；黄 5→3（销 3＝黄-2／黄-3／黄-4；随登 2＝黄-1／黄-5；新增 1＝黄新-1）。
+
+并案实测表（LEAD-CONSTRAINT-写域随动并案＝三票 path_globs 全集对 engineer 席 lease-issuer 两态读数＝本席并一跑枚举具名；派工全集 16 枚＝T4 七（含票面本体）＋T1 四＋T2 五（两票票面本体随登两枚＝共 18 枚）；未注入态＝config 盘现 engineer 行／注入-乙态＝scratch 注入副本 engineer 行扩四行 {share／ ＋ .github／ ＋ agent-experts／baigong-software-team／skills／ ＋ …／tests／}＝全部重定向 .scratch／QA-REV2-LC／ 用毕即拆）：
+
+    未注入态＝18／18 枚 exit 2 REJECT「越出席位写域行」（甲态零 config 直纳＝全拒＝不可行实测直证）
+    注入-乙态＝15／18 枚 exit 0 ALLOW 翻转＝T4 share／ 三枚＋双前缀 skills／ 两枚＋tests／ 一枚（六枚）＋T1 .github／ 两枚＋share／ 两枚（四枚）＋T2 share／ 四枚＋reconcile-daily 一枚（五枚）
+    注入-乙态仍 REJECT＝三枚票面本体＝.collab／board／ 三票票面（board 桶 engineer deny 未让＋扩行未含＝写侧 write-guard deny 先于租约段现读＝票面本体写入主体非工程师席）
+    并案一句话结论＝可行形态取乙＝engineer 席位行扩四行可兜尽十五枚施工写面；三枚票面本体须归投递窗／修票权席位另行租约＝具名不随扩。
+
+T4 一句话结论＝rev-1 转绿成立＝红面三枚全销（归因重写对拍全命中＋新臂口径下 bing-a＋bing-① 组合使 criteria 四枚可达）＝可放行候裁（J-1／J-2／J-3 待放行段裁＋三黄随处置）。
+
+（自靶＝本续段落笔前后 check-ticket judgment 尺＋check-pointers --target 本判词件现跑＝BLOCK 0／WATCH 0／exit 0＝judgment 尺归零；preflight 尺＝票骨架目（PF-2／PF-4）不适用判词件＝沿历轮案型不跑具名；席位纪律＝本席不写票面＝判词件唯一写面；台账三账两拍零染在册。）

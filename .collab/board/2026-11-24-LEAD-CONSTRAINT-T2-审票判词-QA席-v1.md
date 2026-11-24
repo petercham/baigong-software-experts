@@ -52,3 +52,26 @@ J-2 技术侧表态（工单第 6 项）＝skills／sop／scripts／ 面＝engin
 - 黄-1 配对核标注态输出形制钉一行；黄-2 S3 消费入账主体钉一行。
 - 总判＝不可现态放行＝rev-1 后最狭窄复核＝本席红臂复跑（share 面 lease 探针复跑＋J 槽在位核）＋配对臂输出形制对表即可，无需全轮复审。
 - 席位纪律随登＝令牌样件内存构造用毕即散；探针台账族落 .scratch／QA-REV-LEAD-CONSTRAINT／用毕即拆随完工回报；真账零染终核在册（7／8＋7 全等基线）。
+
+## 复审-1 续段（rev-1 转绿臂·QA 席机检臂单席一次跑·append-only 追加＝v1 判词段零回改）
+
+- 复审窗读数（本席现跑）＝链顶 e5110637＋date 17:5x＋NO_INDEX_LOCK＋tracked 脏面 0 枚；本票 rev 面两式现跑全等＝237 行／6bfdafc36e419ce0b61525cf5733c9bb1dd4750e（链面＝盘现＝派工预期）；三闸对含 rev 段全票面现跑 BLOCK 0／exit 0。
+- 只读自证＝零 git 写；探针落 .scratch／QA-REV2-LC／（pairing 样件 ledger／leases／states 三枚＋lease 探针两态）＝真账终核开工拍＝终拍全等零染。
+
+红-1 销账＝成立（R-1＝J-3 槽补实＋五枚 REJECT 直证对拍）：
+- rev-1 窗申明「path_globs 五枚逐枚对 engineer 现跑＝五枚全部 exit 2 REJECT」＝本席独立复跑对 engineer＋countersign 形制合规＋台账重定向 scratch＝五枚（run-gates／check-staged-declaration／gate-token-verify／gate-token-issue／双前缀 reconcile-daily）逐枚 exit 2 REJECT「越出席位写域行」＝rev 窗读数复现全等。
+- J-3 槽补列在册＝并案号 LEAD-CONSTRAINT-写域随动并案三票互指现读；甲态＝本窗五枚实测拒直证在册／乙态扩行归并案窗＝与 T4／T1 同批＝程序自洽。
+- 先例归因改如实＝两址台账 grep share／ 条目零本席现跑复证＝「不可直证」成立。
+- J-2 实测补录一行（reconcile-daily 具名 exit 2）＝恰落 v1 预设去路＝该面闭。
+
+黄-1 销账＝成立（R-2 pair-gap 键闭集可判性＝现场构造样件一枚验证）：
+- 现场构造三形样件台账（齐形＝commit 真钉／缺签字形／缺 commit 形＝--ledger／--leases／--states 三锚重定向 scratch）＝现版 reconcile-daily 跑＝diff 0 三形互不可分（复证「该臂为必要新增」）；R-2 钉值闭集 {missing-signature, missing-commit, complete} 三值对位可判性核＝键 pair-gap 落 diff_items 载荷内增具名键＝输出行形制沿既有一行一键读数列＝三值机械可判（验收「逐一对位」按三值判＝无需放行段再裁形制）＝销。随登一行＝现版 diff_items 为字符串列非键值载荷，S5 落码时「diff_items 载荷内增具名键」的具体 schema 须施工回执具名＝实现细节归施工面不判违例。
+- 黄-2 销账＝成立（R-3 入账主体闭环具名机件可指性）：R-3 钉定「消费入账动作归 S1／S2 调用侧内嵌臂＝ledger.jsonl append 行经脚本面写入」＝可指实体现读＝append_record 同款账本写入机件在 state-transition.py 行 155／sign-verify.py 行 116—141 等八件同款在册（写入类＝RECORD_TYPES 六类零动＝载荷扩展具名）；本席复核＝「签字」类记录既有实体均非令牌消费通道（六节点签字面）＝R-3 「既有账本机件通道对令牌消费无现成实体→闭环钉定调用侧内嵌」归因如实＝销。
+
+计数变化＝红 1→0；黄 2→0。
+
+并案实测表（同 T4 判词件随附全表＝本票面五枚读数为其中段＝此处不重复全表；本票段读数：未注入 5／5 REJECT＝注入-乙 5／5 ALLOW 翻转＝share／ 四枚＋skills／sop／scripts／reconcile-daily 一枚经双前缀 skills／ 扩行命中）：一句话结论＝可行形态取乙。
+
+T2 一句话结论＝rev-1 转绿成立＝红一枚销＋黄两枚全销＋并案五枚两态读数在册＝可放行候裁（J-2／J-3 待放行段裁＋黄-ProdA／B 随登面照登）。
+
+（自靶＝本续段落笔前后 check-ticket judgment 尺＋check-pointers --target 本判词件现跑＝BLOCK 0／WATCH 0／exit 0＝judgment 尺归零；preflight 尺＝票骨架目不适用判词件＝沿历轮案型不跑具名；探针族用毕即拆 ls 0 随完工回报。）
